@@ -1,4 +1,4 @@
-const Application: React.FC = () => {
+const Application = (): JSX.Element => {
   return (
     <div>
       <h1>Killer Party</h1>
