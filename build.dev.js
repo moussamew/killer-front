@@ -1,8 +1,14 @@
-const http = require('http');
-
 const esbuild = require('esbuild');
-
+const http = require('http');
 const esbuildConfig = require('./utils/config');
+
+/**
+ * Forward the response from esbuild to the client.
+ */
+const forwardResponse = (proxyRes, res) => {
+  res.writeHead(proxyRes.statusCode, proxyRes.headers);
+  proxyRes.pipe(res, { end: true });
+};
 
 esbuild
   .serve(
@@ -17,7 +23,7 @@ esbuild
       .createServer((req, res) => {
         const options = {
           hostname: host,
-          port,
+          port: port,
           path: req.url,
           method: req.method,
           headers: req.headers,
@@ -26,14 +32,12 @@ esbuild
         const proxyReq = http.request(options, (proxyRes) => {
           if (proxyRes.statusCode === 404) {
             http
-              .request({ ...options, path: '/' }, ({ statusCode, headers }) => {
-                res.writeHead(statusCode, headers);
-                proxyRes.pipe(res, { end: true });
-              })
+              .request({ ...options, path: '/' }, (proxyRes) =>
+                forwardResponse(proxyRes, res),
+              )
               .end();
           } else {
-            res.writeHead(proxyRes.statusCode, proxyRes.headers);
-            proxyRes.pipe(res, { end: true });
+            forwardResponse(proxyRes, res);
           }
         });
 
