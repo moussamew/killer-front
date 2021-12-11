@@ -1,4 +1,5 @@
 const esbuild = require('esbuild');
+
 const esbuildConfig = require('./utils/config');
 
 esbuild
