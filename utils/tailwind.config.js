@@ -22,12 +22,6 @@ module.exports = {
         brown: 'rgb(102,66,77)',
         yellow: 'rgb(248,222,126)',
       },
-      borderWidth: {
-        1: '1px',
-      },
-      width: {
-        32: '32%',
-      },
     },
   },
   variants: {
