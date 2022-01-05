@@ -53,6 +53,12 @@ module.exports = {
     'react/jsx-uses-react': 'off', // React in v17 can now be use without importing React from 'react'
     'react/react-in-jsx-scope': 'off', // React in v17 can now be use without importing React from 'react'
     '@typescript-eslint/no-use-before-define': ['error', { typedefs: false }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: true,
+      },
+    ], // Forbid the import of external modules that are not declared in the package.json's dependencies
     'react/function-component-definition': [
       2,
       { namedComponents: 'arrow-function' },
