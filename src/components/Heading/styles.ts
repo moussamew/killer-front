@@ -5,11 +5,11 @@ const Heading1 = tw.h1`
 `;
 
 const Heading2 = tw.h2`
-  text-5xl
+  text-4xl md:text-5xl font-bold
 `;
 
 const Heading3 = tw.h3`
-  text-4xl
+  text-3xl md:text-4xl font-bold
 `;
 
 export { Heading1, Heading2, Heading3 };

@@ -21,6 +21,7 @@ module.exports = {
       colors: {
         brown: 'rgb(102,66,77)',
         yellow: 'rgb(248,222,126)',
+        green: 'rgb(80,200,120)',
       },
     },
   },

@@ -9,7 +9,7 @@ const Content = tw.button<{ $buttonColor: string }>`
 `;
 
 const Text = tw.p`
-  font-bold
+  font-bold uppercase
 `;
 
 export { Content, Text };
