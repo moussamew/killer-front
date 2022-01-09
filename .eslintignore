@@ -1,4 +1,2 @@
 build/*
-build.dev.js
-build.prod.js
-utils/config.js
+utils/*

@@ -1,5 +1,5 @@
 const esbuild = require('esbuild');
-const esbuildConfig = require('./utils/config');
+const esbuildConfig = require('./esbuild.config');
 
 esbuild
   .build({ ...esbuildConfig, minify: true, format: 'esm' })

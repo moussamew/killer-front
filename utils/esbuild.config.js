@@ -1,7 +1,7 @@
 const autoprefixer = require('autoprefixer');
+const dotenv = require('dotenv');
 const postCSSPlugin = require('esbuild-plugin-postcss2');
 const tailwindcss = require('tailwindcss');
-const dotenv = require('dotenv');
 
 dotenv.config();
 
@@ -13,11 +13,11 @@ for (const environment in process.env) {
   );
 }
 
-const esbuildConfig = {
-  entryPoints: ['src/index.tsx'],
+module.exports = {
+  entryPoints: ['src/app/index.tsx'],
   bundle: true,
   sourcemap: true,
-  inject: ['./utils/react-shim.ts'],
+  inject: ['utils/react-shim.ts'],
   outfile: 'public/dist/bundle.js',
   plugins: [
     postCSSPlugin.default({
@@ -26,5 +26,3 @@ const esbuildConfig = {
   ],
   define,
 };
-
-module.exports = esbuildConfig;

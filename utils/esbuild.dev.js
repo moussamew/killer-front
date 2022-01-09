@@ -1,6 +1,6 @@
 const esbuild = require('esbuild');
 const http = require('http');
-const esbuildConfig = require('./utils/config');
+const esbuildConfig = require('./esbuild.config');
 
 /**
  * Forward the response from esbuild to the client.
