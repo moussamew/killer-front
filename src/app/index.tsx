@@ -3,6 +3,7 @@ import { Fragment, useState } from 'react';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import { H1, H3 } from '../components/Heading';
+import { t } from '../translate/helpers';
 
 import { PLAYER_API_URL } from './constants';
 import { Content, Text, PseudoSection, Input } from './styles';
@@ -27,33 +28,28 @@ const Application = (): JSX.Element => {
     <Fragment>
       <Header />
       <Content>
-        <H1>The right way to kill your friends..</H1>
-        <Text>
-          An evening with friends... How about adding a little atmosphere by
-          making all these nice people kill each other? Killer Party is a simple
-          party game that can be played throughout an evening or a meal.
-        </Text>
-
+        <H1>{t('home.title')}</H1>
+        <Text>{t('home.game_resume')}</Text>
         <PseudoSection>
-          <H3>Ooops. It appears that you did not have a pseudo yet...</H3>
+          <H3>{t('home.player_not_found')}</H3>
           <Input
             type="text"
-            placeholder="Please create your Pseudo before creating your room.."
+            placeholder={t('home.create_pseudo_placeholder')}
             autoComplete="off"
             value={currentPseudo}
             onChange={(e): void => setCurrentPseudo(e.target.value)}
           />
         </PseudoSection>
 
-        <Button buttonColor="bg-brown" onClick={createRoom}>
-          Create new room&nbsp;
+        <Button buttonColor="bg-amber-800" onClick={createRoom}>
+          {t('home.create_room')}
           {currentPseudo && (
             <Fragment>
-              as <strong>{currentPseudo}</strong>
+              {t('home.as')} <strong>{currentPseudo}</strong>
             </Fragment>
           )}
         </Button>
-        <Button buttonColor="bg-yellow">JOIN A ROOM</Button>
+        <Button buttonColor="bg-yellow-400">{t('home.join_room')}</Button>
       </Content>
     </Fragment>
   );
