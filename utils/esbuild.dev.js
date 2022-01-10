@@ -14,7 +14,7 @@ esbuild
   .serve(
     {
       servedir: 'public',
-      port: 4000,
+      port: 8080,
     },
     esbuildConfig,
   )
@@ -23,7 +23,7 @@ esbuild
       .createServer((req, res) => {
         const options = {
           hostname: host,
-          port: port,
+          port,
           path: req.url,
           method: req.method,
           headers: req.headers,
@@ -43,7 +43,7 @@ esbuild
 
         req.pipe(proxyReq, { end: true });
       })
-      .listen(port);
+      .listen(4000)
 
-    console.log(`\n> Server running on: http://localhost:${port}/`);
+    console.log(`\n> Server running on: http://localhost:4000/`);
   });
