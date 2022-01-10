@@ -18,10 +18,6 @@ module.exports = {
         9: '9rem',
         10: '10rem',
       },
-      colors: {
-        brown: 'rgb(102,66,77)',
-        yellow: 'rgb(248,222,126)',
-      },
     },
   },
   variants: {

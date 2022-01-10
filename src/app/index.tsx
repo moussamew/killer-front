@@ -1,25 +1,21 @@
-import { Fragment } from 'react';
+import { StrictMode } from 'react';
+import { render } from 'react-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import Button from '../components/Button';
-import Header from '../components/Header';
-import { H1 } from '../components/Heading';
+import Home from '../pages/home';
 
-import { Content, Text } from './styles';
+import 'tailwindcss/tailwind.css';
 
-const Application = (): JSX.Element => (
-  <Fragment>
-    <Header />
-    <Content>
-      <H1>The right way to kill your friends..</H1>
-      <Text>
-        An evening with friends... How about adding a little atmosphere by
-        making all these nice people kill each other? Killer Party is a simple
-        party game that can be played throughout an evening or a meal.
-      </Text>
-      <Button buttonColor="bg-brown">CREATE NEW ROOM</Button>
-      <Button buttonColor="bg-yellow">JOIN A ROOM</Button>
-    </Content>
-  </Fragment>
+const NODE_APP = document.getElementById('killerparty');
+
+render(
+  <StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/play" />} />
+        <Route path="/play" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+  </StrictMode>,
+  NODE_APP,
 );
-
-export default Application;
