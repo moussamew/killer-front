@@ -1,11 +1,21 @@
-import { FunctionComponent } from 'react';
+import { ReactNode } from 'react';
 
 import { Heading1, Heading2, Heading3 } from './styles';
 
-const H1: FunctionComponent = ({ children }) => <Heading1>{children}</Heading1>;
+interface Props {
+  children: ReactNode;
+}
 
-const H2: FunctionComponent = ({ children }) => <Heading2>{children}</Heading2>;
+const H1 = ({ children }: Props): JSX.Element => (
+  <Heading1>{children}</Heading1>
+);
 
-const H3: FunctionComponent = ({ children }) => <Heading3>{children}</Heading3>;
+const H2 = ({ children }: Props): JSX.Element => (
+  <Heading2>{children}</Heading2>
+);
+
+const H3 = ({ children }: Props): JSX.Element => (
+  <Heading3>{children}</Heading3>
+);
 
 export { H1, H2, H3 };
