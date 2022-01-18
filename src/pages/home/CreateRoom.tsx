@@ -1,26 +1,23 @@
 import { Fragment, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { PLAYER_API_URL } from '../../app/constants';
 import Button from '../../components/Button';
 import { H3 } from '../../components/Heading';
 import { t } from '../../translate/helpers';
 
+import { createPlayer, createRoom } from './requests';
 import { Input, PseudoSection } from './styles';
 
 const CreateRoom = (): JSX.Element => {
   const [currentPseudo, setCurrentPseudo] = useState('');
+  const navigate = useNavigate();
 
-  const createRoom = async (): Promise<void> => {
-    await fetch(PLAYER_API_URL, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      credentials: 'include',
-      body: JSON.stringify({
-        name: currentPseudo,
-      }),
-    });
+  const handleCreateRoom = async (): Promise<void> => {
+    await createPlayer(currentPseudo);
+
+    const { code } = await createRoom();
+
+    navigate(`/room/${code}`);
   };
 
   return (
@@ -35,7 +32,7 @@ const CreateRoom = (): JSX.Element => {
           onChange={(e): void => setCurrentPseudo(e.target.value)}
         />
       </PseudoSection>
-      <Button buttonColor="bg-amber-800" onClick={createRoom}>
+      <Button buttonColor="bg-amber-800" onClick={handleCreateRoom}>
         {t('home.create_room')}
         {currentPseudo && (
           <Fragment>
