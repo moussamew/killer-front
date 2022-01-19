@@ -7,6 +7,7 @@ interface Props {
   buttonColor: string;
   onClick?: () => void;
   type?: 'submit' | 'reset' | 'button';
+  disabled?: boolean;
 }
 
 const Button = ({
@@ -14,8 +15,14 @@ const Button = ({
   buttonColor,
   onClick,
   type = 'button',
+  disabled = false,
 }: Props): JSX.Element => (
-  <Content onClick={onClick} type={type} $buttonColor={buttonColor}>
+  <Content
+    onClick={onClick}
+    type={type}
+    $buttonColor={buttonColor}
+    disabled={disabled}
+  >
     <Text>{children}</Text>
   </Content>
 );

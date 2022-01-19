@@ -13,12 +13,22 @@ const PseudoSection = tw.section`
   my-2
 `;
 
-const Input = tw.input`
+const PseudoRow = tw.div`
+  mt-2 flex flex-row 
+  justify-center items-center
+`;
+
+const PseudoButton = tw.button`
+  p-1 ml-1 rounded-md bg-green-400
+  w-1/10 text-3xl text-white
+`;
+
+const PseudoInput = tw.input`
   w-full p-1 text-3xl
-  mt-2 rounded-md
+  rounded-md
   border-solid border-2 border-light-blue-500
   focus-visible:border-amber-800
   focus-visible:outline-0
 `;
 
-export { Content, Text, PseudoSection, Input };
+export { Content, Text, PseudoSection, PseudoRow, PseudoButton, PseudoInput };

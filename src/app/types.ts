@@ -1,6 +1,12 @@
 import { PlayerStatus, RoomStatus } from './constants';
 
-export interface Player {
+interface Error {
+  statusCode: number;
+  message: string;
+  error: string;
+}
+
+export interface Player extends Error {
   id: number;
   missionId: number | null;
   name: string;
@@ -9,7 +15,7 @@ export interface Player {
   status: PlayerStatus;
 }
 
-export interface Room {
+export interface Room extends Error {
   code: string;
   name: string;
   status: RoomStatus;
