@@ -1,31 +1,20 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Button from '../../components/Button';
 import Header from '../../components/Header';
 import { H1 } from '../../components/Heading';
+import { UserContext } from '../../hooks/context';
 import { t } from '../../translate/helpers';
 
 import CreatePlayer from './CreatePlayer';
-import { createRoom, getPlayerSession } from './requests';
+import { createRoom } from './requests';
 import { Content, Text } from './styles';
 
 const Home = (): JSX.Element => {
-  const [playerInput, showPlayerInput] = useState(false);
+  const { pseudo } = useContext(UserContext);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const handlePlayerSession = async (): Promise<void> => {
-      const { error, roomCode } = await getPlayerSession();
-
-      if (error) showPlayerInput(true);
-
-      if (roomCode) navigate(`/room/${roomCode}`);
-    };
-
-    handlePlayerSession();
-  }, [navigate]);
 
   const handleCreateRoom = async (): Promise<void> => {
     const { code: roomCode } = await createRoom();
@@ -39,14 +28,12 @@ const Home = (): JSX.Element => {
       <Content>
         <H1>{t('home.title')}</H1>
         <Text>{t('home.game_resume')}</Text>
-
-        {playerInput && <CreatePlayer showPlayerInput={showPlayerInput} />}
-
-        <Button disabled={playerInput} buttonColor="bg-yellow-400">
+        {!pseudo && <CreatePlayer />}
+        <Button disabled={!pseudo} buttonColor="bg-yellow-400">
           {t('home.join_room')}
         </Button>
         <Button
-          disabled={playerInput}
+          disabled={!pseudo}
           buttonColor="bg-amber-800"
           onClick={handleCreateRoom}
         >

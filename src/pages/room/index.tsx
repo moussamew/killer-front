@@ -1,13 +1,14 @@
 import { useParams } from 'react-router-dom';
 
-import { H1 } from '../../components/Heading';
+import Header from '../../components/Header';
 
 const Room = (): JSX.Element => {
   const { roomCode } = useParams();
 
   return (
     <div>
-      <H1>Welcome to the room {roomCode}</H1>
+      <Header />
+      <p>Welcome to the room {roomCode}</p>
     </div>
   );
 };

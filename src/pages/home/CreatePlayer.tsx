@@ -1,6 +1,7 @@
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 
 import { H3 } from '../../components/Heading';
+import { UserContext } from '../../hooks/context';
 import { t } from '../../translate/helpers';
 
 import { createPlayer } from './requests';
@@ -13,13 +14,10 @@ import {
   PseudoSection,
 } from './styles';
 
-interface Props {
-  showPlayerInput: (status: boolean) => void;
-}
-
-const CreatePlayer = ({ showPlayerInput }: Props): JSX.Element => {
+const CreatePlayer = (): JSX.Element => {
   const [currentPseudo, setCurrentPseudo] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const { setPseudo } = useContext(UserContext);
 
   const inputRef = useRef<HTMLElement>(null);
 
@@ -28,10 +26,9 @@ const CreatePlayer = ({ showPlayerInput }: Props): JSX.Element => {
 
     if (error && message) {
       setErrorMessage(message[0]);
-
       inputRef.current?.focus();
     } else {
-      showPlayerInput(false);
+      setPseudo(currentPseudo);
     }
   };
 
