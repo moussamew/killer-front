@@ -3,9 +3,9 @@
     "title": "The right way to kill your friends..",
     "game_resume": "An evening with friends... How about adding a little atmosphere by making all these nice people kill each other? Killer Party is a simple party game that can be played throughout an evening or a meal.",
     "player_not_found": "Ooops. It appears that you did not have a pseudo yet...",
-    "create_pseudo_placeholder": "Please choose your \"Pseudo\" before creating a room..",
+    "create_pseudo_placeholder": "Please choose a \"Pseudo\" before playing",
+    "save_pseudo": "Save Pseudo",
     "create_room": "Create new room ",
-    "as": "as",
     "join_room": "Join a room"
   }
 }

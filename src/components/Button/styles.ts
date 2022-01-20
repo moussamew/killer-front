@@ -1,7 +1,9 @@
 import tw from 'tailwind-styled-components';
 
-const Content = tw.button<{ $buttonColor: string }>`
+const Content = tw.button<{ $buttonColor: string; disabled: boolean }>`
   ${({ $buttonColor }): string => $buttonColor}
+  ${({ disabled }): string =>
+    disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
 
   transition duration-500 ease-in-out 
   p-1.5 my-0.5 rounded-lg 

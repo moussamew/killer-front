@@ -12,19 +12,16 @@ import { Content, Text } from './styles';
 
 const Home = (): JSX.Element => {
   const [playerInput, showPlayerInput] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     const handlePlayerSession = async (): Promise<void> => {
       const { error, roomCode } = await getPlayerSession();
 
-      if (error) {
-        showPlayerInput(true);
-      }
+      if (error) showPlayerInput(true);
 
-      if (roomCode) {
-        navigate(`/room/${roomCode}`);
-      }
+      if (roomCode) navigate(`/room/${roomCode}`);
     };
 
     handlePlayerSession();
@@ -33,9 +30,7 @@ const Home = (): JSX.Element => {
   const handleCreateRoom = async (): Promise<void> => {
     const { code: roomCode } = await createRoom();
 
-    if (roomCode) {
-      navigate(`/room/${roomCode}`);
-    }
+    if (roomCode) navigate(`/room/${roomCode}`);
   };
 
   return (
