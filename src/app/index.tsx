@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { render } from 'react-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { PlayerProvider } from '../hooks/context';
 import Home from '../pages/home';
@@ -25,8 +25,7 @@ render(
       <PlayerProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Navigate to="/play" />} />
-            <Route path="/play" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/room">
               <Route path=":roomCode" element={<Room />} />
             </Route>

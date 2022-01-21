@@ -1,4 +1,4 @@
-import { Fragment, useContext, useRef, useState } from 'react';
+import { Fragment, useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Button from '../../components/Button';
@@ -26,22 +26,24 @@ const Home = (): JSX.Element => {
 
   const navigate = useNavigate();
 
-  const handleCreatePlayer = async (): Promise<void> => {
-    const player = await createPlayer(currentPseudo);
-
-    if (player.error && player.message) {
-      setErrorMessage(player.message[0]);
-      inputRef.current?.focus();
-
-      throw new Error(player.message[0]);
+  useEffect(() => {
+    if (playerSession?.roomCode) {
+      navigate(`/room/${playerSession.roomCode}`);
     }
-
-    setPlayerSession(player);
-  };
+  }, [navigate, playerSession?.roomCode]);
 
   const handleCreateRoom = async (): Promise<void> => {
     if (!playerSession?.name) {
-      await handleCreatePlayer();
+      const player = await createPlayer(currentPseudo);
+
+      if (player.error && player.message) {
+        setErrorMessage(player.message[0]);
+        inputRef.current?.focus();
+
+        throw new Error(player.message[0]);
+      }
+
+      setPlayerSession(player);
     }
 
     const { code: roomCode, message: errorRoomMessage } = await createRoom();
