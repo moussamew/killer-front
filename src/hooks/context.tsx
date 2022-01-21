@@ -1,5 +1,5 @@
-import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { createContext, ReactNode, useMemo, useState } from 'react';
+import { useQuery } from 'react-query';
 
 import { getPlayerSession } from './requests';
 
@@ -16,27 +16,27 @@ const UserContext = createContext({} as Context);
 
 const UserProvider = ({ children }: Props): JSX.Element => {
   const [pseudo, setPseudo] = useState<string | null>(null);
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    const handlePlayerSession = async (): Promise<void> => {
-      const { name, roomCode } = await getPlayerSession();
+  const memoizedPseudo = useMemo(() => ({ pseudo, setPseudo }), [pseudo]);
 
-      if (name) {
-        setPseudo(name);
-      }
+  const { isLoading, data: playerSession } = useQuery(
+    'playerSession',
+    getPlayerSession,
+  );
 
-      if (roomCode) {
-        navigate(`/room/${roomCode}`);
-      }
-    };
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
 
-    handlePlayerSession();
-  }, [navigate]);
+  if (!pseudo && playerSession?.name) {
+    setPseudo(playerSession.name);
+  }
 
-  const value = useMemo(() => ({ pseudo, setPseudo }), [pseudo]);
-
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={memoizedPseudo}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export { UserContext, UserProvider };
