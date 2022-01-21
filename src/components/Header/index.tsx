@@ -1,16 +1,16 @@
 import { useContext } from 'react';
 
-import { UserContext } from '../../hooks/context';
+import { PlayerContext } from '../../hooks/context';
 
 import { Navigation, Text } from './styles';
 
 const Header = (): JSX.Element => {
-  const { pseudo } = useContext(UserContext);
+  const { playerSession } = useContext(PlayerContext);
 
   return (
     <Navigation>
       <Text>KILLER PARTY</Text>
-      {pseudo && <Text>{pseudo}</Text>}
+      {playerSession?.name && <Text>{playerSession?.name}</Text>}
     </Navigation>
   );
 };

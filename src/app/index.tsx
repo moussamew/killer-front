@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import { UserProvider } from '../hooks/context';
+import { PlayerProvider } from '../hooks/context';
 import Home from '../pages/home';
 import Room from '../pages/room';
 
@@ -22,7 +22,7 @@ const queryClient = new QueryClient({
 render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <UserProvider>
+      <PlayerProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Navigate to="/play" />} />
@@ -32,7 +32,7 @@ render(
             </Route>
           </Routes>
         </BrowserRouter>
-      </UserProvider>
+      </PlayerProvider>
     </QueryClientProvider>
   </StrictMode>,
   NODE_APP,

@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
+import { Player } from '../app/types';
+
 import { getPlayerSession } from './requests';
 
 interface Props {
@@ -8,35 +10,35 @@ interface Props {
 }
 
 interface Context {
-  pseudo: string | null;
-  setPseudo: React.Dispatch<React.SetStateAction<string | null>>;
+  playerSession: Player | null;
+  setPlayerSession: React.Dispatch<React.SetStateAction<Player | null>>;
 }
 
-const UserContext = createContext({} as Context);
+const PlayerContext = createContext({} as Context);
 
-const UserProvider = ({ children }: Props): JSX.Element => {
-  const [pseudo, setPseudo] = useState<string | null>(null);
+const PlayerProvider = ({ children }: Props): JSX.Element => {
+  const [playerSession, setPlayerSession] = useState<Player | null>(null);
 
-  const memoizedPseudo = useMemo(() => ({ pseudo, setPseudo }), [pseudo]);
-
-  const { isLoading, data: playerSession } = useQuery(
-    'playerSession',
-    getPlayerSession,
+  const memoizedPlayerSession = useMemo(
+    () => ({ playerSession, setPlayerSession }),
+    [playerSession],
   );
+
+  const { isLoading, data } = useQuery('playerSession', getPlayerSession);
 
   if (isLoading) {
     return <div>Loading</div>;
   }
 
-  if (!pseudo && playerSession?.name) {
-    setPseudo(playerSession.name);
+  if (!playerSession && data) {
+    setPlayerSession(data);
   }
 
   return (
-    <UserContext.Provider value={memoizedPseudo}>
+    <PlayerContext.Provider value={memoizedPlayerSession}>
       {children}
-    </UserContext.Provider>
+    </PlayerContext.Provider>
   );
 };
 
-export { UserContext, UserProvider };
+export { PlayerContext, PlayerProvider };
