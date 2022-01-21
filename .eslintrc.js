@@ -93,5 +93,11 @@ module.exports = {
         },
       },
     ],
+    /**
+     * Use '@typescript-eslint/no-shadow' since TS warn for enums with 'no-shadow'.
+     * @link https://github.com/typescript-eslint/typescript-eslint/issues/2483
+     */
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'error',
   },
 };

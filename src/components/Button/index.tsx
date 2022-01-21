@@ -1,20 +1,28 @@
-import { FunctionComponent } from 'react';
+import { ReactNode } from 'react';
 
 import { Content, Text } from './styles';
 
 interface Props {
+  children: ReactNode;
   buttonColor: string;
   onClick?: () => void;
   type?: 'submit' | 'reset' | 'button';
+  disabled?: boolean;
 }
 
-const Button: FunctionComponent<Props> = ({
+const Button = ({
   children,
   buttonColor,
   onClick,
   type = 'button',
-}) => (
-  <Content onClick={onClick} type={type} $buttonColor={buttonColor}>
+  disabled = false,
+}: Props): JSX.Element => (
+  <Content
+    onClick={onClick}
+    type={type}
+    $buttonColor={buttonColor}
+    disabled={disabled}
+  >
     <Text>{children}</Text>
   </Content>
 );
