@@ -22,9 +22,13 @@ const UserProvider = ({ children }: Props): JSX.Element => {
     const handlePlayerSession = async (): Promise<void> => {
       const { name, roomCode } = await getPlayerSession();
 
-      if (name) setPseudo(name);
+      if (name) {
+        setPseudo(name);
+      }
 
-      if (roomCode) navigate(`/room/${roomCode}`);
+      if (roomCode) {
+        navigate(`/room/${roomCode}`);
+      }
     };
 
     handlePlayerSession();
