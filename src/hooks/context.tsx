@@ -2,6 +2,7 @@ import { createContext, ReactNode, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { Player } from '../app/types';
+import Loader from '../components/Loader';
 
 import { getPlayerSession } from './requests';
 
@@ -27,7 +28,7 @@ const PlayerProvider = ({ children }: Props): JSX.Element => {
   const { isLoading, data } = useQuery('playerSession', getPlayerSession);
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
 
   if (!playerSession && data) {

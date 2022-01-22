@@ -40,15 +40,15 @@ const Home = (): JSX.Element => {
         setErrorMessage(player.message[0]);
         inputRef.current?.focus();
 
-        throw new Error(player.message[0]);
+        return;
       }
 
       setPlayerSession(player);
     }
 
-    const { code: roomCode, message: errorRoomMessage } = await createRoom();
+    const { code: roomCode, error } = await createRoom();
 
-    if (errorRoomMessage) {
+    if (error) {
       setErrorMessage(t('home.create_room_error'));
       inputRef.current?.focus();
     }

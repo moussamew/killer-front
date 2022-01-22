@@ -1,8 +1,8 @@
 import tw from 'tailwind-styled-components';
 
 const Content = tw.div`
-  md:mt-10 mx-auto max-w-screen-md
-  p-2
+  max-w-screen-md m-auto absolute
+  inset-0 p-2 h-1/2
 `;
 
 const Text = tw.p`
