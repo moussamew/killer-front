@@ -1,5 +1,8 @@
-import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { createContext, ReactNode, useMemo, useState } from 'react';
+import { useQuery } from 'react-query';
+
+import { Player } from '../app/types';
+import Loader from '../components/Loader';
 
 import { getPlayerSession } from './requests';
 
@@ -8,35 +11,35 @@ interface Props {
 }
 
 interface Context {
-  pseudo: string | null;
-  setPseudo: React.Dispatch<React.SetStateAction<string | null>>;
+  playerSession: Player | null;
+  setPlayerSession: React.Dispatch<React.SetStateAction<Player | null>>;
 }
 
-const UserContext = createContext({} as Context);
+const PlayerContext = createContext({} as Context);
 
-const UserProvider = ({ children }: Props): JSX.Element => {
-  const [pseudo, setPseudo] = useState<string | null>(null);
-  const navigate = useNavigate();
+const PlayerProvider = ({ children }: Props): JSX.Element => {
+  const [playerSession, setPlayerSession] = useState<Player | null>(null);
 
-  useEffect(() => {
-    const handlePlayerSession = async (): Promise<void> => {
-      const { name, roomCode } = await getPlayerSession();
+  const memoizedPlayerSession = useMemo(
+    () => ({ playerSession, setPlayerSession }),
+    [playerSession],
+  );
 
-      if (name) {
-        setPseudo(name);
-      }
+  const { isLoading, data } = useQuery('playerSession', getPlayerSession);
 
-      if (roomCode) {
-        navigate(`/room/${roomCode}`);
-      }
-    };
+  if (isLoading) {
+    return <Loader />;
+  }
 
-    handlePlayerSession();
-  }, [navigate]);
+  if (!playerSession && data) {
+    setPlayerSession(data);
+  }
 
-  const value = useMemo(() => ({ pseudo, setPseudo }), [pseudo]);
-
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+  return (
+    <PlayerContext.Provider value={memoizedPlayerSession}>
+      {children}
+    </PlayerContext.Provider>
+  );
 };
 
-export { UserContext, UserProvider };
+export { PlayerContext, PlayerProvider };
