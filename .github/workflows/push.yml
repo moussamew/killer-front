@@ -1,4 +1,4 @@
-name: Killer Web Front CI Actions
+name: Killer Web Front - Push (CI)
 on: [push]
 jobs:
   tests:
