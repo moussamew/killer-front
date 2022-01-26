@@ -2,3 +2,4 @@
 .DS_Store
 /public/dist/
 .env
+.vercel
