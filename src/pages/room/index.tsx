@@ -1,15 +1,20 @@
-import { useParams } from 'react-router-dom';
+import { Fragment } from 'react';
 
 import Header from '../../components/Header';
 
-const Room = (): JSX.Element => {
-  const { roomCode } = useParams();
+import Players from './Players';
+import Profile from './Profile';
+import { Content } from './styles';
 
+const Room = (): JSX.Element => {
   return (
-    <div>
+    <Fragment>
       <Header />
-      <p>Welcome to the room {roomCode}</p>
-    </div>
+      <Content>
+        <Profile />
+        <Players />
+      </Content>
+    </Fragment>
   );
 };
 

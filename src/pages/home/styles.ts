@@ -1,7 +1,7 @@
 import tw from 'tailwind-styled-components';
 
 const Content = tw.div`
-  max-w-screen-md m-auto absolute
+  max-w-screen-lg m-auto absolute
   inset-0 p-2 h-1/2
 `;
 
