@@ -8,6 +8,7 @@ body {
   background-color: hsl(236, 0%, 96%, 100%);
 }
 
-p {
+p,
+label {
   font-size: 1.6rem;
 }
