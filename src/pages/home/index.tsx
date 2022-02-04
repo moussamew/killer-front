@@ -1,20 +1,23 @@
 import { Fragment, useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Killerparty from '../../assets/images/killerparty.png';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
-import { H1, H3 } from '../../components/Heading';
+import { H1, H2 } from '../../components/Heading';
+import Input from '../../components/Input';
 import { PlayerContext } from '../../hooks/context';
 import { t } from '../../translate/helpers';
 
 import { createPlayer, createRoom } from './requests';
 import {
+  Actions,
   Content,
   ErrorMessage,
-  PseudoInput,
   PseudoRow,
   PseudoSection,
   Text,
+  WelcomeImage,
 } from './styles';
 
 const Home = (): JSX.Element => {
@@ -62,18 +65,19 @@ const Home = (): JSX.Element => {
     <Fragment>
       <Header />
       <Content>
+        <WelcomeImage className="m-auto" alt="welcome" src={Killerparty} />
         <H1>{t('home.title')}</H1>
         <Text>{t('home.game_resume')}</Text>
 
         {!playerSession?.name && (
           <PseudoSection>
-            <H3>{t('home.player_not_found')}</H3>
+            <H2>{t('home.player_not_found')}</H2>
             <PseudoRow>
-              <PseudoInput
+              <Input
+                id="createPseudo"
                 ref={inputRef}
                 type="text"
                 placeholder={t('home.create_pseudo_placeholder')}
-                autoComplete="off"
                 value={currentPseudo}
                 onChange={(e): void => setCurrentPseudo(e.target.value)}
               />
@@ -82,12 +86,18 @@ const Home = (): JSX.Element => {
           </PseudoSection>
         )}
 
-        <Button disabled buttonColor="bg-yellow-400">
-          {t('home.join_room')}
-        </Button>
-        <Button buttonColor="bg-amber-800" onClick={handleCreateRoom}>
-          {t('home.create_room')}
-        </Button>
+        <Actions className="mt-1">
+          <Button buttonColor="bg-red-400" onClick={handleCreateRoom}>
+            {t('home.create_room')}
+          </Button>
+          <Button
+            disabled
+            buttonColor="bg-yellow-200"
+            textColor="text-lightDark"
+          >
+            {t('home.join_room')}
+          </Button>
+        </Actions>
       </Content>
     </Fragment>
   );
