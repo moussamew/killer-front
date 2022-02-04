@@ -30,6 +30,7 @@ const Input = ({
       ref={ref}
       type={type}
       placeholder={placeholder}
+      autoComplete="off"
     />
   </Content>
 );

@@ -1,18 +1,19 @@
 import tw from 'tailwind-styled-components';
 
 const Content = tw.div`
-  mt-2 flex flex-row items-center
+  flex flex-col w-full mt-1
 `;
 
 const StyledInput = tw.input`
-  w-full p-1 text-3xl rounded-md
-  border-solid border-2 border-light-blue-500
-  focus-visible:border-amber-800
+  p-1 text-3xl rounded-md
+  border-solid border-2 border-light-blue-800
+  transition duration-100 ease-in 
+  focus-visible:border-blue-300
   focus-visible:outline-0
 `;
 
 const StyledLabel = tw.label`
-  min-w-max	mr-2
+  font-bold text-lightDark pb-1
 `;
 
 export { Content, StyledInput, StyledLabel };
