@@ -7,7 +7,7 @@ import { PlayerProvider } from '../hooks/context';
 import Home from '../pages/home';
 import Room from '../pages/room';
 
-import 'tailwindcss/tailwind.css';
+import '../assets/styles/app.css';
 
 const NODE_APP = document.getElementById('killerparty');
 

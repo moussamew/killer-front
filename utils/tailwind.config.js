@@ -4,6 +4,10 @@ module.exports = {
   content: ['./src/**/*.js', './src/**/*.ts', './src/**/*.tsx'],
   theme: {
     extend: {
+      fontSize: {
+        '2xl': '1.6rem',
+        '3xl': '1.8rem',
+      },
       spacing: {
         0.5: '0.5rem',
         1: '1rem',
@@ -17,6 +21,10 @@ module.exports = {
         8: '8rem',
         9: '9rem',
         10: '10rem',
+      },
+      colors: {
+        brand: '#FBF6F0',
+        lightDark: '#666260',
       },
     },
   },
