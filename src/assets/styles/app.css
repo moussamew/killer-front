@@ -22,7 +22,6 @@
   }
 
   input {
-    @apply text-ellipsis overflow-hidden
-    focus-visible:text-ellipsis focus-visible:overflow-hidden;
+    @apply text-ellipsis overflow-hidden;
   }
 }
