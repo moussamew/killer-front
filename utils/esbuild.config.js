@@ -14,7 +14,7 @@ for (const environment in process.env) {
 }
 
 module.exports = {
-  entryPoints: ['src/app/index.tsx'],
+  entryPoints: ['./src/app/index.tsx'],
   bundle: true,
   sourcemap: true,
   inject: ['utils/react-shim.ts'],
@@ -24,5 +24,9 @@ module.exports = {
       plugins: [autoprefixer, tailwindcss('utils/tailwind.config.js')],
     }),
   ],
+  loader: {
+    '.png': 'dataurl',
+    '.svg': 'dataurl',
+  },
   define,
 };

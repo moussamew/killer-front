@@ -1,8 +1,12 @@
 import tw from 'tailwind-styled-components';
 
 const Content = tw.div`
-  max-w-screen-md m-auto absolute
-  inset-0 p-2 h-1/2
+  max-w-screen-lg m-auto
+  inset-0 px-2
+`;
+
+const WelcomeImage = tw.img`
+  m-auto
 `;
 
 const Text = tw.p`
@@ -18,34 +22,21 @@ const PseudoRow = tw.div`
   justify-center items-center
 `;
 
-const PseudoButton = tw.button`
-  p-1 ml-1 rounded-md bg-green-400
-  w-2/3 md:w-1/3 text-3xl text-white
-`;
-
-const ButtonText = tw.p`
-  font-bold uppercase
-`;
-
-const PseudoInput = tw.input`
-  w-full p-1 text-3xl rounded-md
-  border-solid border-2 border-light-blue-500
-  focus-visible:border-amber-800
-  focus-visible:outline-0
-`;
-
 const ErrorMessage = tw.p`
-  normal-case bg-red-500 text-white 
-  p-1 mt-1 rounded-md
+  normal-case bg-red-200 text-red-500 
+  p-1 mt-1 rounded-md text-2xl font-bold
+`;
+
+const Actions = tw.div`
+  mt-1
 `;
 
 export {
   Content,
+  WelcomeImage,
   Text,
   PseudoSection,
   PseudoRow,
-  PseudoButton,
-  ButtonText,
-  PseudoInput,
   ErrorMessage,
+  Actions,
 };

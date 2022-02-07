@@ -1,10 +1,11 @@
 import { ReactNode } from 'react';
 
-import { Content, Text } from './styles';
+import { StyledButton, Text } from './styles';
 
 interface Props {
   children: ReactNode;
-  buttonColor: string;
+  buttonColor?: string;
+  textColor?: string;
   onClick?: () => void;
   type?: 'submit' | 'reset' | 'button';
   disabled?: boolean;
@@ -12,19 +13,20 @@ interface Props {
 
 const Button = ({
   children,
-  buttonColor,
+  buttonColor = 'bg-red-400',
+  textColor = 'text-white',
   onClick,
   type = 'button',
   disabled = false,
 }: Props): JSX.Element => (
-  <Content
+  <StyledButton
     onClick={onClick}
     type={type}
     $buttonColor={buttonColor}
     disabled={disabled}
   >
-    <Text>{children}</Text>
-  </Content>
+    <Text $textColor={textColor}>{children}</Text>
+  </StyledButton>
 );
 
 export default Button;

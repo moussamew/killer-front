@@ -5,7 +5,7 @@ const Navigation = tw.header`
 `;
 
 const Text = tw.p`
-  font-bold
+  font-bold text-black
 `;
 
 export { Navigation, Text };
