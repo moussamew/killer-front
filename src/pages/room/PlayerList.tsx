@@ -5,7 +5,6 @@ import tw from 'tailwind-styled-components';
 import NotReady from '../../assets/icons/not_ready.svg';
 import Knife from '../../assets/images/knife.png';
 import Player from '../../assets/images/player.png';
-import { H2 } from '../../components/Heading';
 import { t } from '../../translate/helpers';
 
 import { getPlayersInRoom } from './requests';
@@ -56,7 +55,7 @@ const PlayerList = (): JSX.Element | null => {
       <Section>
         <ListImage alt="player list" src={Knife} />
         <div>
-          <H2>{t('room.players_list')}</H2>
+          <h2>{t('room.players_list')}</h2>
           <p>{t('room.players_list_description')}</p>
         </div>
       </Section>

@@ -1,6 +1,24 @@
 import { ReactNode } from 'react';
+import tw from 'tailwind-styled-components';
 
-import { StyledButton, Text } from './styles';
+const StyledButton = tw.button<{
+  $buttonColor: string;
+  disabled: boolean;
+}>`
+  ${({ $buttonColor }): string => $buttonColor}
+  ${({ disabled }): string =>
+    disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
+    
+  transition-shadow duration-500 ease-in 
+  shadow-md hover:shadow-xl
+  p-1 my-0.5 rounded-lg 
+  w-full text-3xl
+`;
+
+const Text = tw.p<{ $textColor: string }>`
+  ${({ $textColor }): string => $textColor}
+  font-medium text-3xl
+`;
 
 interface Props {
   children: ReactNode;

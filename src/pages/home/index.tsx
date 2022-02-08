@@ -2,10 +2,7 @@ import { Fragment, useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Killerparty from '../../assets/images/killerparty.png';
-import Button from '../../components/Button';
-import Header from '../../components/Header';
-import { H1, H2 } from '../../components/Heading';
-import Input from '../../components/Input';
+import { Button, Header, Input } from '../../components';
 import { PlayerContext } from '../../hooks/context';
 import { t } from '../../translate/helpers';
 
@@ -25,7 +22,7 @@ const Home = (): JSX.Element => {
   const [currentPseudo, setCurrentPseudo] = useState('');
 
   const { playerSession, setPlayerSession } = useContext(PlayerContext);
-  const inputRef = useRef<HTMLElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
 
@@ -66,12 +63,12 @@ const Home = (): JSX.Element => {
       <Header />
       <Content>
         <WelcomeImage className="m-auto" alt="welcome" src={Killerparty} />
-        <H1>{t('home.title')}</H1>
+        <h1>{t('home.title')}</h1>
         <Text>{t('home.game_resume')}</Text>
 
         {!playerSession?.name && (
           <PseudoSection>
-            <H2>{t('home.player_not_found')}</H2>
+            <h2>{t('home.player_not_found')}</h2>
             <PseudoRow>
               <Input
                 id="createPseudo"
