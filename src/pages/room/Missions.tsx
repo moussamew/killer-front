@@ -2,9 +2,7 @@ import { useState } from 'react';
 import tw from 'tailwind-styled-components';
 
 import Idea from '../../assets/images/idea.png';
-import Button from '../../components/Button';
-import { H2 } from '../../components/Heading';
-import Input from '../../components/Input';
+import { Input, Button } from '../../components';
 import { t } from '../../translate/helpers';
 
 const Section = tw.div`
@@ -28,7 +26,7 @@ const Missions = (): JSX.Element | null => {
       <Section>
         <Image alt="missions" src={Idea} />
         <div>
-          <H2>{t('room.manage_missions')}</H2>
+          <h2>{t('room.manage_missions')}</h2>
           <p>{t('room.missions_description')}</p>
         </div>
       </Section>

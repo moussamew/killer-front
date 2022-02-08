@@ -1,8 +1,12 @@
 import { Fragment } from 'react';
+import tw from 'tailwind-styled-components';
 
-import Header from '../Header';
+import Header from './Header';
 
-import { Image } from './styles';
+const Image = tw.svg`
+  animate-spin m-auto absolute 
+  inset-0 h-4
+`;
 
 const Loader = (): JSX.Element => (
   <Fragment>

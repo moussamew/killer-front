@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Island from '../../assets/images/island.png';
-import Header from '../../components/Header';
-import { H1 } from '../../components/Heading';
+import { Header } from '../../components';
 import { t } from '../../translate/helpers';
 
 import Missions from './Missions';
@@ -43,7 +42,7 @@ const Room = (): JSX.Element => {
         <Welcome>
           <WelcomeImage alt="welcome" src={Island} />
           <RoomResume>
-            <H1>{t('room.welcome')}</H1>
+            <h1>{t('room.welcome')}</h1>
             <p>
               {/* TODO: Update the translate method to use string interpolation. */}
               The code to join this room is <strong>{roomCode}</strong>.
