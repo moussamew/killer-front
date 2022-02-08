@@ -5,7 +5,7 @@ import tw from 'tailwind-styled-components';
 import NotReady from '../../assets/icons/not_ready.svg';
 import Knife from '../../assets/images/knife.png';
 import Player from '../../assets/images/player.png';
-import { t } from '../../translate/helpers';
+import t from '../../helpers/translate';
 
 import { getPlayersInRoom } from './requests';
 

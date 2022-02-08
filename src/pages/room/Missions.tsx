@@ -3,7 +3,7 @@ import tw from 'tailwind-styled-components';
 
 import Idea from '../../assets/images/idea.png';
 import { Input, Button } from '../../components';
-import { t } from '../../translate/helpers';
+import t from '../../helpers/translate';
 
 const Section = tw.div`
   flex flex-row items-center 

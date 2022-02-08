@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components';
 
 import Island from '../../assets/images/island.png';
 import { Header } from '../../components';
-import { t } from '../../translate/helpers';
+import t from '../../helpers/translate';
 
 import Missions from './Missions';
 import PlayerList from './PlayerList';
@@ -43,10 +43,7 @@ const Room = (): JSX.Element => {
           <WelcomeImage alt="welcome" src={Island} />
           <RoomResume>
             <h1>{t('room.welcome')}</h1>
-            <p>
-              {/* TODO: Update the translate method to use string interpolation. */}
-              The code to join this room is <strong>{roomCode}</strong>.
-            </p>
+            <p>{t('room.join_room_code', { roomCode })}</p>
           </RoomResume>
         </Welcome>
         <hr />

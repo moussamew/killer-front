@@ -4,8 +4,8 @@ import tw from 'tailwind-styled-components';
 
 import Killerparty from '../../assets/images/killerparty.png';
 import { Button, Header, Input } from '../../components';
+import t from '../../helpers/translate';
 import { PlayerContext } from '../../hooks/context';
-import { t } from '../../translate/helpers';
 
 import { createPlayer, createRoom } from './requests';
 
