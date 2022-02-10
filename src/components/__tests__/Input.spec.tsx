@@ -23,4 +23,17 @@ describe('Input', () => {
 
     expect(getByLabelText('Pseudo')).toBeInTheDocument();
   });
+
+  it('should display error message if given', () => {
+    const { getByText } = render(
+      <Input
+        id="input"
+        value="John Wick"
+        onChange={(): void => {}}
+        errorMessage="This pseudo is already used"
+      />,
+    );
+
+    expect(getByText('This pseudo is already used')).toBeInTheDocument();
+  });
 });

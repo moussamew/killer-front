@@ -18,6 +18,11 @@ const StyledLabel = tw.label`
   font-bold text-lightDark pb-1
 `;
 
+const ErrorMessage = tw.p`
+  normal-case bg-red-200 text-red-500 
+  p-1 mt-1 rounded-md text-2xl font-bold
+`;
+
 interface Props {
   id: string;
   value: string;
@@ -25,10 +30,19 @@ interface Props {
   type?: string;
   placeholder?: string;
   label?: string;
+  errorMessage?: string;
 }
 
 const Input = (
-  { id, value, onChange, type = 'text', placeholder, label }: Props,
+  {
+    id,
+    value,
+    onChange,
+    type = 'text',
+    placeholder,
+    label,
+    errorMessage,
+  }: Props,
   ref: ForwardedRef<HTMLInputElement>,
 ): JSX.Element => (
   <Content>
@@ -42,6 +56,7 @@ const Input = (
       placeholder={placeholder}
       autoComplete="off"
     />
+    {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
   </Content>
 );
 
