@@ -11,6 +11,8 @@
     "react-router-dom": "6.2.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "5.16.2",
+    "@testing-library/react": "12.1.2",
     "@types/jest": "27.4.0",
     "@types/node": "17.0.8",
     "@types/react": "17.0.37",
@@ -43,11 +45,14 @@
     "build": "node ./utils/esbuild.prod.js",
     "start": "node ./utils/esbuild.dev.js",
     "lint": "eslint . --ext .ts,.tsx",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watchAll"
   },
   "scripts-info": {
     "build": "Build the application on production environment",
     "start": "Start the application on development environment",
-    "lint": "Run eslint on the project"
+    "lint": "Run eslint on the project",
+    "test": "Run unit tests on the project",
+    "test:watch": "Run unit tests on the project and listen to changes"
   }
 }

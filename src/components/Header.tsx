@@ -18,7 +18,7 @@ const Header = (): JSX.Element => {
   return (
     <Navigation>
       <HeaderText>{t('header.project_name')}</HeaderText>
-      {playerSession?.name && <HeaderText>{playerSession?.name}</HeaderText>}
+      {playerSession?.name && <HeaderText>{playerSession.name}</HeaderText>}
     </Navigation>
   );
 };

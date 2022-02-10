@@ -1,3 +1,4 @@
+import { render, RenderResult } from '@testing-library/react';
 import { createContext, ReactNode, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
@@ -42,4 +43,21 @@ const PlayerProvider = ({ children }: Props): JSX.Element => {
   );
 };
 
-export { PlayerContext, PlayerProvider };
+/**
+ * Helper that render your component with the Player Context.
+ * Used this only for unit testing purpose.
+ */
+const renderWithPlayerContext = (
+  component: ReactNode,
+  playerSession: Player | null = null,
+): RenderResult =>
+  render(
+    <PlayerContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
+      value={{ playerSession, setPlayerSession: (): void => {} }}
+    >
+      {component}
+    </PlayerContext.Provider>,
+  );
+
+export { PlayerContext, PlayerProvider, renderWithPlayerContext };
