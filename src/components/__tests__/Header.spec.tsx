@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { Header } from '..';
+import { Layout } from '..';
 import { PlayerStatus } from '../../app/constants';
 import { renderWithPlayerContext } from '../../hooks/context';
 
@@ -10,16 +10,22 @@ const dummyPlayerSession = {
   status: PlayerStatus.ALIVE,
 };
 
-describe('<Header />', () => {
-  it('should render correctly Header with application title', () => {
-    const { getByText } = render(<Header />);
+describe('<Layout />', () => {
+  it('should render correctly Layout with application title', () => {
+    const { getByText } = render(
+      <Layout>
+        <div />
+      </Layout>,
+    );
 
     expect(getByText('Killer Party')).toBeInTheDocument();
   });
 
   it('should show the name of the current player stored in the session', () => {
     const { getByText } = renderWithPlayerContext(
-      <Header />,
+      <Layout>
+        <div />
+      </Layout>,
       dummyPlayerSession,
     );
 

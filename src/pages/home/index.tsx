@@ -1,9 +1,9 @@
-import { Fragment, useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Killerparty from '../../assets/images/killerparty.png';
-import { Button, Header, Input } from '../../components';
+import { Button, Input } from '../../components';
 import t from '../../helpers/translate';
 import { PlayerContext } from '../../hooks/context';
 
@@ -82,44 +82,37 @@ const Home = (): JSX.Element => {
   };
 
   return (
-    <Fragment>
-      <Header />
-      <Content>
-        <WelcomeImage className="m-auto" alt="welcome" src={Killerparty} />
-        <h1>{t('home.title')}</h1>
-        <Text>{t('home.game_resume')}</Text>
+    <Content>
+      <WelcomeImage className="m-auto" alt="welcome" src={Killerparty} />
+      <h1>{t('home.title')}</h1>
+      <Text>{t('home.game_resume')}</Text>
 
-        {!playerSession?.name && (
-          <PseudoSection>
-            <h2>{t('home.player_not_found')}</h2>
-            <PseudoRow>
-              <Input
-                id="createPseudo"
-                ref={inputRef}
-                type="text"
-                placeholder={t('home.create_pseudo_placeholder')}
-                value={currentPseudo}
-                onChange={(e): void => setCurrentPseudo(e.target.value)}
-              />
-            </PseudoRow>
-            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-          </PseudoSection>
-        )}
+      {!playerSession?.name && (
+        <PseudoSection>
+          <h2>{t('home.player_not_found')}</h2>
+          <PseudoRow>
+            <Input
+              id="createPseudo"
+              ref={inputRef}
+              type="text"
+              placeholder={t('home.create_pseudo_placeholder')}
+              value={currentPseudo}
+              onChange={(e): void => setCurrentPseudo(e.target.value)}
+            />
+          </PseudoRow>
+          {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+        </PseudoSection>
+      )}
 
-        <Actions className="mt-1">
-          <Button buttonColor="bg-red-400" onClick={handleCreateRoom}>
-            {t('home.create_room')}
-          </Button>
-          <Button
-            disabled
-            buttonColor="bg-yellow-200"
-            textColor="text-lightDark"
-          >
-            {t('home.join_room')}
-          </Button>
-        </Actions>
-      </Content>
-    </Fragment>
+      <Actions className="mt-1">
+        <Button buttonColor="bg-red-400" onClick={handleCreateRoom}>
+          {t('home.create_room')}
+        </Button>
+        <Button disabled buttonColor="bg-yellow-200" textColor="text-lightDark">
+          {t('home.join_room')}
+        </Button>
+      </Actions>
+    </Content>
   );
 };
 
