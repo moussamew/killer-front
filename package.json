@@ -46,13 +46,15 @@
     "start": "node ./utils/esbuild.dev.js",
     "lint": "eslint . --ext .ts,.tsx",
     "test": "jest",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "prepare": "husky install"
   },
   "scripts-info": {
     "build": "Build the application on production environment",
     "start": "Start the application on development environment",
     "lint": "Run eslint on the project",
     "test": "Run unit tests on the project",
-    "test:watch": "Run unit tests on the project and listen to changes"
+    "test:watch": "Run unit tests on the project and listen to changes",
+    "prepare": "Prepare hooks after the dependencies installation"
   }
 }
