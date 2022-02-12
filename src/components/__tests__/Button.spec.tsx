@@ -1,22 +1,20 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 
 import { Button } from '..';
 
 describe('<Button />', () => {
   it('should show the text inside the button', () => {
-    const { getByText } = render(<Button>My Button</Button>);
+    render(<Button>My Button</Button>);
 
-    expect(getByText('My Button')).toBeInTheDocument();
+    expect(screen.getByText('My Button')).toBeInTheDocument();
   });
 
   it('should execute the callback passed when the button is clicked', () => {
     const spyCallback = jest.fn();
 
-    const { getByText } = render(
-      <Button onClick={spyCallback}>My Button</Button>,
-    );
+    render(<Button onClick={spyCallback}>My Button</Button>);
 
-    fireEvent.click(getByText('My Button'));
+    fireEvent.click(screen.getByText('My Button'));
 
     expect(spyCallback).toHaveBeenCalledTimes(1);
   });
@@ -24,13 +22,13 @@ describe('<Button />', () => {
   it('should not execute the callback passed in parameter when disabled is set tot rue', () => {
     const spyCallback = jest.fn();
 
-    const { getByText } = render(
+    render(
       <Button disabled onClick={spyCallback}>
         My Button
       </Button>,
     );
 
-    fireEvent.click(getByText('My Button'));
+    fireEvent.click(screen.getByText('My Button'));
 
     expect(spyCallback).not.toHaveBeenCalledTimes(1);
   });

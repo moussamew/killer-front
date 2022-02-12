@@ -1,7 +1,7 @@
-import { Method, PLAYER_ENDPOINT, ROOM_ENDPOINT } from '../../app/constants';
-import { Player, Room } from '../../app/types';
-import { request } from '../../helpers/apis';
-import { RequestError } from '../../helpers/types';
+import { Method, PLAYER_ENDPOINT, ROOM_ENDPOINT } from '../../../app/constants';
+import { Player, Room } from '../../../app/types';
+import { request } from '../../../helpers/apis';
+import { RequestError } from '../../../helpers/types';
 
 const createPlayer = async (
   playerName: string,

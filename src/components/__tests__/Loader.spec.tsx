@@ -1,11 +1,11 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { Loader } from '..';
 
-describe('Input', () => {
+describe('<Loader />', () => {
   it('should display the loader', () => {
-    const { getByTitle } = render(<Loader />);
+    render(<Loader />);
 
-    expect(getByTitle('Loader')).toBeInTheDocument();
+    expect(screen.getByTitle('Loader')).toBeInTheDocument();
   });
 });
