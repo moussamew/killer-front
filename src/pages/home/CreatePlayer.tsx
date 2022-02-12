@@ -14,14 +14,12 @@ const Pseudo = tw.div`
 `;
 
 interface Props {
-  errorMessage: string;
   inputPseudo: string;
   setInputPseudo: Dispatch<SetStateAction<string>>;
   inputPseudoRef: RefObject<HTMLInputElement>;
 }
 
 const CreatePlayer = ({
-  errorMessage,
   inputPseudo,
   setInputPseudo,
   inputPseudoRef,
@@ -41,7 +39,6 @@ const CreatePlayer = ({
           placeholder={t('home.create_pseudo_placeholder')}
           value={inputPseudo}
           onChange={(e): void => setInputPseudo(e.target.value)}
-          errorMessage={errorMessage}
         />
       </Pseudo>
     </Content>

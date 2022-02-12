@@ -23,7 +23,7 @@ const Layout = ({ children }: Props): JSX.Element => {
     <Fragment>
       <Navigation>
         <HeaderText>{t('header.project_name')}</HeaderText>
-        {playerSession?.name && <HeaderText>{playerSession.name}</HeaderText>}
+        {playerSession.name && <HeaderText>{playerSession.name}</HeaderText>}
       </Navigation>
       {children}
     </Fragment>

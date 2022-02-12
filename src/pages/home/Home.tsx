@@ -6,8 +6,9 @@ import Killerparty from '../../assets/images/killerparty.png';
 import t from '../../helpers/translate';
 import { PlayerContext } from '../../hooks/context';
 
-import Actions from './Actions';
 import CreatePlayer from './CreatePlayer';
+import CreateRoom from './CreateRoom';
+import JoinRoom from './JoinRoom';
 
 const Content = tw.div`
   max-w-screen-lg m-auto
@@ -22,26 +23,26 @@ const Text = tw.p`
   my-2
 `;
 
+const Actions = tw.div`
+  mt-1
+`;
+
 const Home = (): JSX.Element => {
-  const [errorMessage, setErrorMessage] = useState('');
   const [inputPseudo, setInputPseudo] = useState('');
 
-  const { playerSession } = useContext(PlayerContext);
+  const {
+    playerSession: { name: playerName, roomCode },
+  } = useContext(PlayerContext);
 
   const inputPseudoRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (playerSession?.roomCode) {
-      navigate(`/room/${playerSession.roomCode}`);
+    if (roomCode) {
+      navigate(`/room/${roomCode}`);
     }
-  }, [navigate, playerSession]);
-
-  const handleErrorMessage = (message: string): void => {
-    setErrorMessage(message);
-    inputPseudoRef.current?.focus();
-  };
+  }, [navigate, roomCode]);
 
   return (
     <Content>
@@ -49,16 +50,18 @@ const Home = (): JSX.Element => {
       <h1>{t('home.title')}</h1>
       <Text>{t('home.game_resume')}</Text>
 
-      {!playerSession?.name && (
+      {!playerName && (
         <CreatePlayer
-          errorMessage={errorMessage}
           inputPseudo={inputPseudo}
           setInputPseudo={setInputPseudo}
           inputPseudoRef={inputPseudoRef}
         />
       )}
 
-      <Actions inputPseudo={inputPseudo} setErrorMessage={handleErrorMessage} />
+      <Actions>
+        <CreateRoom inputPseudo={inputPseudo} inputPseudoRef={inputPseudoRef} />
+        <JoinRoom />
+      </Actions>
     </Content>
   );
 };
