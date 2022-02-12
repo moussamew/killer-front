@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-import { PLAYER_ENDPOINT, ROOM_ENDPOINT } from '../../../app/constants';
+import { PLAYER_ENDPOINT, ROOM_ENDPOINT } from '../../../constants';
 
 export const homeHandlers = [
   /**

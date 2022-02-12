@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { Player } from '../app/types';
+import { Player } from '../types';
 
 export type PlayerSession = Player | Record<string, never>;
 

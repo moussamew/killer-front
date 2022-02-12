@@ -7,7 +7,7 @@ import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
   ROOM_ENDPOINT,
-} from '../../../app/constants';
+} from '../../../constants';
 import { server } from '../../../tools/server';
 import { renderWithProviders } from '../../../tools/tests/utils';
 import CreateRoom from '../CreateRoom';
@@ -145,5 +145,35 @@ describe('<CreateRoom />', () => {
         'An error has occured while creating a new room. Please retry later.',
       ),
     ).toBeInTheDocument();
+  });
+
+  it('should focus input when the user trigger an error', async () => {
+    server.use(
+      rest.post(ROOM_ENDPOINT, (_req, res, ctx) =>
+        res(ctx.status(400), ctx.json({ error: 'Bad request' })),
+      ),
+    );
+
+    renderWithProviders(
+      <BrowserRouter>
+        <CreateRoom {...dummyProps} />
+        <input
+          ref={dummyProps.inputPseudoRef}
+          value="Morpheus"
+          onChange={jest.fn()}
+        />
+      </BrowserRouter>,
+    );
+
+    await screen.findByText('Create new room');
+
+    fireEvent.click(screen.getByText('Create new room'));
+
+    expect(
+      await screen.findByText(
+        'An error has occured while creating a new room. Please retry later.',
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByDisplayValue('Morpheus')).toHaveFocus();
   });
 });

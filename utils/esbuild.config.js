@@ -14,7 +14,7 @@ for (const environment in process.env) {
 }
 
 module.exports = {
-  entryPoints: ['./src/app/index.tsx'],
+  entryPoints: ['./src/index.tsx'],
   bundle: true,
   sourcemap: true,
   inject: ['utils/react-shim.ts'],

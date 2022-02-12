@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import { rest } from 'msw';
 
 import { Layout } from '..';
-import { PLAYER_SESSION_ENDPOINT } from '../../app/constants';
+import { PLAYER_SESSION_ENDPOINT } from '../../constants';
 import { server } from '../../tools/server';
 import { renderWithProviders } from '../../tools/tests/utils';
 
