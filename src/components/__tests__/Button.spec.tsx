@@ -30,6 +30,6 @@ describe('<Button />', () => {
 
     fireEvent.click(screen.getByText('My Button'));
 
-    expect(spyCallback).not.toHaveBeenCalledTimes(1);
+    expect(spyCallback).not.toHaveBeenCalled();
   });
 });
