@@ -1,4 +1,4 @@
-import { Method } from '../app/constants';
+import { Method } from '../constants';
 
 export interface RequestParams {
   method?: Method;

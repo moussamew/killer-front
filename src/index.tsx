@@ -3,11 +3,12 @@ import { render } from 'react-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { PlayerProvider } from '../hooks/context';
-import Home from '../pages/home';
-import Room from '../pages/room';
+import { Layout } from './components';
+import { PlayerProvider } from './hooks/context';
+import Home from './pages/home/Home';
+import Room from './pages/room/Room';
 
-import '../assets/styles/app.css';
+import './assets/styles/app.css';
 
 const NODE_APP = document.getElementById('killerparty');
 
@@ -23,14 +24,16 @@ render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <PlayerProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/room">
-              <Route path=":roomCode" element={<Room />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <Layout>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/room">
+                <Route path=":roomCode" element={<Room />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </Layout>
       </PlayerProvider>
     </QueryClientProvider>
   </StrictMode>,

@@ -1,9 +1,7 @@
-import { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Island from '../../assets/images/island.png';
-import { Header } from '../../components';
 import t from '../../helpers/translate';
 
 import Missions from './Missions';
@@ -36,23 +34,20 @@ const Room = (): JSX.Element => {
   const { roomCode } = useParams();
 
   return (
-    <Fragment>
-      <Header />
-      <Content>
-        <Welcome>
-          <WelcomeImage alt="welcome" src={Island} />
-          <RoomResume>
-            <h1>{t('room.welcome')}</h1>
-            <p>{t('room.join_room_code', { roomCode })}</p>
-          </RoomResume>
-        </Welcome>
-        <hr />
-        <RoomFeatures>
-          <Missions />
-          <PlayerList />
-        </RoomFeatures>
-      </Content>
-    </Fragment>
+    <Content>
+      <Welcome>
+        <WelcomeImage alt="welcome" src={Island} />
+        <RoomResume>
+          <h1>{t('room.welcome')}</h1>
+          <p>{t('room.join_room_code', { roomCode })}</p>
+        </RoomResume>
+      </Welcome>
+      <hr />
+      <RoomFeatures>
+        <Missions />
+        <PlayerList />
+      </RoomFeatures>
+    </Content>
   );
 };
 
