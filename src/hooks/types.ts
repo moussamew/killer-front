@@ -1,10 +1,8 @@
-import { Dispatch, SetStateAction } from 'react';
-
 import { Player } from '../types';
 
-export type PlayerSession = Player | Record<string, never>;
+export type PlayerSession = Player;
 
 export interface PlayerContextInterface {
   playerSession: PlayerSession;
-  setPlayerSession: Dispatch<SetStateAction<PlayerSession>>;
+  refreshPlayerSession: () => Promise<void>;
 }

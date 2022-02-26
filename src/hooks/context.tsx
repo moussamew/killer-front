@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useMemo, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 import { useQuery } from 'react-query';
 
 import { Loader } from '../components';
@@ -15,14 +21,23 @@ const PlayerContext = createContext({} as PlayerContextInterface);
 const PlayerProvider = ({ children }: Props): JSX.Element => {
   const [playerSession, setPlayerSession] = useState<PlayerSession>({});
 
-  const memoizedPlayerSession = useMemo(
-    () => ({ playerSession, setPlayerSession }),
-    [playerSession],
-  );
+  const {
+    isLoading,
+    data: currentSession,
+    refetch,
+  } = useQuery('playerSession', getPlayerSession);
 
-  const { isLoading, data: currentSession } = useQuery(
-    'playerSession',
-    getPlayerSession,
+  const refreshPlayerSession = useCallback(async (): Promise<void> => {
+    const { data: updatedSession } = await refetch();
+
+    if (updatedSession) {
+      setPlayerSession(updatedSession);
+    }
+  }, [refetch]);
+
+  const memoizedPlayerSession = useMemo(
+    () => ({ playerSession, refreshPlayerSession }),
+    [playerSession, refreshPlayerSession],
   );
 
   if (isLoading) {

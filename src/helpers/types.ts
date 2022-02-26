@@ -6,7 +6,7 @@ export interface RequestParams {
 }
 
 export interface RequestError {
-  statusCode?: number;
+  errorCode?: string;
   message?: string | string[];
-  error?: string;
+  statusCode?: number;
 }

@@ -1,11 +1,11 @@
 import { PlayerStatus, RoomStatus } from './constants';
 
 export interface Player {
-  id: number;
-  name: string;
-  status: PlayerStatus;
+  id?: number;
+  name?: string;
+  status?: PlayerStatus;
   missionId?: number;
-  roomCode?: number;
+  roomCode?: string;
   targetId?: number;
 }
 

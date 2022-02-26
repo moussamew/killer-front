@@ -126,7 +126,10 @@ describe('<CreateRoom />', () => {
         res(ctx.status(200), ctx.json({ name: 'Trinity' })),
       ),
       rest.post(ROOM_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(400), ctx.json({ error: 'Bad request' })),
+        res(
+          ctx.status(400),
+          ctx.json({ errorCode: 'PLAYER.FORBIDDEN.NO_USER_SESSION' }),
+        ),
       ),
     );
 
@@ -150,7 +153,10 @@ describe('<CreateRoom />', () => {
   it('should focus input when the user trigger an error', async () => {
     server.use(
       rest.post(ROOM_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(400), ctx.json({ error: 'Bad request' })),
+        res(
+          ctx.status(400),
+          ctx.json({ errorCode: 'PLAYER.FORBIDDEN.NO_USER_SESSION' }),
+        ),
       ),
     );
 
