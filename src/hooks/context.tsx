@@ -8,9 +8,10 @@ import {
 import { useQuery } from 'react-query';
 
 import { Loader } from '../components';
+import { Player } from '../types';
 
 import { getPlayerSession } from './services/requests';
-import { PlayerContextInterface, PlayerSession } from './types';
+import { PlayerContextInterface } from './types';
 
 interface Props {
   children: ReactNode;
@@ -19,7 +20,7 @@ interface Props {
 const PlayerContext = createContext({} as PlayerContextInterface);
 
 const PlayerProvider = ({ children }: Props): JSX.Element => {
-  const [playerSession, setPlayerSession] = useState<PlayerSession>({});
+  const [playerSession, setPlayerSession] = useState<Player>({});
 
   const {
     isLoading,
