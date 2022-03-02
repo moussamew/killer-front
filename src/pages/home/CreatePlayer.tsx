@@ -23,26 +23,20 @@ const CreatePlayer = ({
   inputPseudo,
   setInputPseudo,
   inputPseudoRef,
-}: Props): JSX.Element => {
-  useEffect(() => {
-    inputPseudoRef.current?.focus();
-  }, [inputPseudoRef]);
-
-  return (
-    <Content>
-      <h2>{t('home.player_not_found')}</h2>
-      <Pseudo>
-        <Input
-          id="pseudo"
-          ref={inputPseudoRef}
-          type="text"
-          placeholder={t('home.create_pseudo_placeholder')}
-          value={inputPseudo}
-          onChange={(e): void => setInputPseudo(e.target.value)}
-        />
-      </Pseudo>
-    </Content>
-  );
-};
+}: Props): JSX.Element => (
+  <Content>
+    <h2>{t('home.player_not_found')}</h2>
+    <Pseudo>
+      <Input
+        id="pseudo"
+        ref={inputPseudoRef}
+        type="text"
+        placeholder={t('home.create_pseudo_placeholder')}
+        value={inputPseudo}
+        onChange={(e): void => setInputPseudo(e.target.value)}
+      />
+    </Pseudo>
+  </Content>
+);
 
 export default CreatePlayer;
