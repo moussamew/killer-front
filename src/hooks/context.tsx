@@ -1,10 +1,17 @@
-import { createContext, ReactNode, useMemo, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 import { useQuery } from 'react-query';
 
 import { Loader } from '../components';
+import { Player } from '../types';
 
 import { getPlayerSession } from './services/requests';
-import { PlayerContextInterface, PlayerSession } from './types';
+import { PlayerContextInterface } from './types';
 
 interface Props {
   children: ReactNode;
@@ -13,16 +20,25 @@ interface Props {
 const PlayerContext = createContext({} as PlayerContextInterface);
 
 const PlayerProvider = ({ children }: Props): JSX.Element => {
-  const [playerSession, setPlayerSession] = useState<PlayerSession>({});
+  const [playerSession, setPlayerSession] = useState<Player>({});
+
+  const {
+    isLoading,
+    data: currentSession,
+    refetch,
+  } = useQuery('playerSession', getPlayerSession);
+
+  const refreshPlayerSession = useCallback(async (): Promise<void> => {
+    const { data: updatedSession } = await refetch();
+
+    if (updatedSession) {
+      setPlayerSession(updatedSession);
+    }
+  }, [refetch]);
 
   const memoizedPlayerSession = useMemo(
-    () => ({ playerSession, setPlayerSession }),
-    [playerSession],
-  );
-
-  const { isLoading, data: currentSession } = useQuery(
-    'playerSession',
-    getPlayerSession,
+    () => ({ playerSession, refreshPlayerSession }),
+    [playerSession, refreshPlayerSession],
   );
 
   if (isLoading) {

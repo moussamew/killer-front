@@ -19,39 +19,35 @@ const ErrorMessage = tw.p`
 `;
 
 const CreateRoom = ({ inputPseudo, inputPseudoRef }: Props): JSX.Element => {
-  const { playerSession, setPlayerSession } = useContext(PlayerContext);
+  const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
 
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
 
-  const handleErrorMessage = (message: string): void => {
+  const showErrorMessage = (message: string): void => {
     setErrorMessage(message);
     inputPseudoRef.current?.focus();
   };
 
   const handleRoomCreation = async (): Promise<void> => {
     if (!playerSession.name) {
-      const player = await createPlayer(inputPseudo);
+      const newPlayer = await createPlayer(inputPseudo);
 
-      if (player.message) {
-        handleErrorMessage(player.message[0]);
-      }
-
-      if (!player.error) {
-        setPlayerSession(player);
+      if (newPlayer.message) {
+        return showErrorMessage(newPlayer.message[0]);
       }
     }
 
     const newRoom = await createRoom();
 
-    if (newRoom.error) {
-      handleErrorMessage(t('home.create_room_error'));
+    if (newRoom.errorCode) {
+      return showErrorMessage(t('home.create_room_error'));
     }
 
-    if (newRoom.code) {
-      navigate(`/room/${newRoom.code}`);
-    }
+    await refreshPlayerSession();
+
+    return navigate(`/room/${newRoom.code}`);
   };
 
   return (

@@ -30,34 +30,30 @@ const Actions = tw.div`
 const Home = (): JSX.Element => {
   const [inputPseudo, setInputPseudo] = useState('');
 
-  const {
-    playerSession: { name: playerName, roomCode },
-  } = useContext(PlayerContext);
+  const { playerSession } = useContext(PlayerContext);
 
   const inputPseudoRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (roomCode) {
-      navigate(`/room/${roomCode}`);
+    if (playerSession.roomCode) {
+      navigate(`/room/${playerSession.roomCode}`);
     }
-  }, [navigate, roomCode]);
+  }, [navigate, playerSession.roomCode]);
 
   return (
     <Content>
       <WelcomeImage className="m-auto" alt="welcome" src={Killerparty} />
       <h1>{t('home.title')}</h1>
       <Text>{t('home.game_resume')}</Text>
-
-      {!playerName && (
+      {!playerSession.name && (
         <CreatePlayer
           inputPseudo={inputPseudo}
           setInputPseudo={setInputPseudo}
           inputPseudoRef={inputPseudoRef}
         />
       )}
-
       <Actions>
         <CreateRoom inputPseudo={inputPseudo} inputPseudoRef={inputPseudoRef} />
         <JoinRoom />
