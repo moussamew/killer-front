@@ -1,6 +1,7 @@
-import { Method, ROOM_ENDPOINT } from '../../../constants';
-import { request } from '../../../helpers/apis';
-import { Player } from '../../../types';
+import { ROOM_ENDPOINT } from 'constants/endpoints';
+import { Method } from 'constants/enums';
+import { request } from 'helpers/apis';
+import { Player } from 'types';
 
 const getPlayersInRoom = async (roomCode?: string): Promise<Player[]> => {
   const playersInRoom = await request<Player[]>(

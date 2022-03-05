@@ -1,10 +1,11 @@
 import { screen } from '@testing-library/react';
 import { rest } from 'msw';
 
+import { PLAYER_SESSION_ENDPOINT } from 'constants/endpoints';
+import { server } from 'tools/server';
+import { renderWithProviders } from 'tools/tests/utils';
+
 import { Layout } from '..';
-import { PLAYER_SESSION_ENDPOINT } from '../../constants';
-import { server } from '../../tools/server';
-import { renderWithProviders } from '../../tools/tests/utils';
 
 describe('<Layout />', () => {
   it('should render correctly Layout with application title', async () => {

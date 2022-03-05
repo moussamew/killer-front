@@ -1,6 +1,7 @@
-import { Method, PLAYER_ENDPOINT, ROOM_ENDPOINT } from '../../../constants';
-import { request } from '../../../helpers/apis';
-import { Player, Room } from '../../../types';
+import { PLAYER_ENDPOINT, ROOM_ENDPOINT } from 'constants/endpoints';
+import { Method } from 'constants/enums';
+import { request } from 'helpers/apis';
+import { Player, Room } from 'types';
 
 const createPlayer = async (playerName: string): Promise<Player> => {
   const player = await request<Player>(PLAYER_ENDPOINT, Method.POST, {

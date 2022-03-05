@@ -27,7 +27,7 @@ module.exports = {
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx}',
-    '!<rootDir>/src/**/{*.d,types,constants}.ts',
+    '!<rootDir>/src/**/{*.d,types,enums}.ts',
     '!<rootDir>/src/tools/tests/*',
     '!<rootDir>/src/**/handlers.ts',
     '!<rootDir>/src/index.tsx',
@@ -75,9 +75,7 @@ module.exports = {
   // maxWorkers: "50%",
 
   // An array of directory names to be searched recursively up from the requiring module's location
-  // moduleDirectories: [
-  //   "node_modules"
-  // ],
+  moduleDirectories: ['node_modules', 'src'],
 
   // An array of file extensions your modules use
   // moduleFileExtensions: [

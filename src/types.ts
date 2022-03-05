@@ -1,4 +1,4 @@
-import { PlayerStatus, RoomStatus } from './constants';
+import { PlayerStatus, RoomStatus } from 'constants/enums';
 
 export interface Player {
   id?: number;

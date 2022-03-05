@@ -1,4 +1,4 @@
-import { Method } from '../constants';
+import { Method } from 'constants/enums';
 
 import { RequestParams } from './types';
 

@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-import { PLAYER_SESSION_ENDPOINT } from '../../constants';
+import { PLAYER_SESSION_ENDPOINT } from 'constants/endpoints';
 
 export const hooksHandlers = [
   /**

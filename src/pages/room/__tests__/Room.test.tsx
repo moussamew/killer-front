@@ -1,7 +1,8 @@
 import { screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-import { renderWithProviders } from '../../../tools/tests/utils';
+import { renderWithProviders } from 'tools/tests/utils';
+
 import Room from '../Room';
 
 describe('<Room />', () => {

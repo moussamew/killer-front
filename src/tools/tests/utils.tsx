@@ -2,7 +2,7 @@ import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import { PlayerProvider } from '../../hooks/context';
+import { PlayerProvider } from 'hooks/context';
 
 const renderWithProviders = (
   component: ReactNode,
