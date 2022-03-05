@@ -1,4 +1,4 @@
-import { Dispatch, RefObject, SetStateAction, useEffect } from 'react';
+import { Dispatch, RefObject, SetStateAction } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { Input } from '../../components';

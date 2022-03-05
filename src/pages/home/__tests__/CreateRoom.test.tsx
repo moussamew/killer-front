@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { createRef } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import {
   PLAYER_ENDPOINT,
@@ -20,9 +20,9 @@ const dummyProps = {
 describe('<CreateRoom />', () => {
   it('should show the create room button', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <CreateRoom {...dummyProps} />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
 
     expect(screen.getByText('Create new room')).toBeInTheDocument();
@@ -39,15 +39,15 @@ describe('<CreateRoom />', () => {
     );
 
     renderWithProviders(
-      <BrowserRouter>
+      <MemoryRouter>
         <Routes>
+          <Route path="/" element={<CreateRoom {...dummyProps} />} />
           <Route
             path="/room/YZVB5"
             element={<p>Welcome to the room YZVB5!</p>}
           />
         </Routes>
-        <CreateRoom {...dummyProps} />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
 
     await screen.findByText('Create new room');
@@ -60,25 +60,16 @@ describe('<CreateRoom />', () => {
   });
 
   it('should create a new player with new room and redirect for a player without session', async () => {
-    server.use(
-      rest.get(PLAYER_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({})),
-      ),
-      rest.post(ROOM_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ code: 'X7BHV' })),
-      ),
-    );
-
     renderWithProviders(
-      <BrowserRouter>
+      <MemoryRouter>
         <Routes>
+          <Route path="/" element={<CreateRoom {...dummyProps} />} />
           <Route
             path="/room/X7BHV"
             element={<p>Welcome to the room X7BHV!</p>}
           />
         </Routes>
-        <CreateRoom {...dummyProps} />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
 
     await screen.findByText('Create new room');
@@ -104,9 +95,9 @@ describe('<CreateRoom />', () => {
     );
 
     renderWithProviders(
-      <BrowserRouter>
+      <MemoryRouter>
         <CreateRoom {...dummyProps} />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
 
     await screen.findByText('Create new room');
@@ -134,9 +125,9 @@ describe('<CreateRoom />', () => {
     );
 
     renderWithProviders(
-      <BrowserRouter>
+      <MemoryRouter>
         <CreateRoom {...dummyProps} />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
 
     await screen.findByText('Create new room');
@@ -161,14 +152,14 @@ describe('<CreateRoom />', () => {
     );
 
     renderWithProviders(
-      <BrowserRouter>
+      <MemoryRouter>
         <CreateRoom {...dummyProps} />
         <input
           ref={dummyProps.inputPseudoRef}
           value="Morpheus"
           onChange={jest.fn()}
         />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
 
     await screen.findByText('Create new room');

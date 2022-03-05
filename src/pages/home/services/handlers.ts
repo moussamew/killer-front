@@ -20,7 +20,7 @@ export const homeHandlers = [
     res(
       ctx.status(200),
       ctx.set('Content-Type', 'application/json'),
-      ctx.json({}),
+      ctx.json({ code: 'X7BHV' }),
     ),
   ),
 ];
