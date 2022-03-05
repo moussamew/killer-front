@@ -1,10 +1,12 @@
 import { Fragment, RefObject, useContext, useState } from 'react';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import { Button } from '../../components';
 import t from '../../helpers/translate';
 import { PlayerContext } from '../../hooks/context';
+import { Player, Room } from '../../types';
 
 import { createPlayer, createRoom } from './services/requests';
 
@@ -25,6 +27,22 @@ const CreateRoom = ({ inputPseudo, inputPseudoRef }: Props): JSX.Element => {
 
   const navigate = useNavigate();
 
+  const { refetch: queryCreatePlayer } = useQuery<Player, Error>(
+    'createPlayer',
+    () => createPlayer(inputPseudo),
+    {
+      enabled: false,
+    },
+  );
+
+  const { refetch: queryCreateRoom } = useQuery<Room, Error>(
+    'createRoom',
+    createRoom,
+    {
+      enabled: false,
+    },
+  );
+
   const showErrorMessage = (message: string): void => {
     setErrorMessage(message);
     inputPseudoRef.current?.focus();
@@ -32,16 +50,16 @@ const CreateRoom = ({ inputPseudo, inputPseudoRef }: Props): JSX.Element => {
 
   const handleRoomCreation = async (): Promise<void> => {
     if (!playerSession.name) {
-      const newPlayer = await createPlayer(inputPseudo);
+      const { error: errorPlayer } = await queryCreatePlayer();
 
-      if (newPlayer.message) {
-        return showErrorMessage(newPlayer.message[0]);
+      if (errorPlayer) {
+        return showErrorMessage(errorPlayer.message);
       }
     }
 
-    const newRoom = await createRoom();
+    const { error: errorRoom, data: newRoom } = await queryCreateRoom();
 
-    if (newRoom.errorCode) {
+    if (errorRoom || !newRoom) {
       return showErrorMessage(t('home.create_room_error'));
     }
 

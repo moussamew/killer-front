@@ -8,7 +8,13 @@ const renderWithProviders = (
   component: ReactNode,
   options?: RenderOptions,
 ): RenderResult => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
 
   return render(
     <QueryClientProvider client={queryClient}>

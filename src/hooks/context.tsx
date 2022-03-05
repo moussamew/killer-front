@@ -8,6 +8,7 @@ import {
 import { useQuery } from 'react-query';
 
 import { Loader } from '../components';
+import { isEmptyObject } from '../helpers/objects';
 import { Player } from '../types';
 
 import { getPlayerSession } from './services/requests';
@@ -25,16 +26,16 @@ const PlayerProvider = ({ children }: Props): JSX.Element => {
   const {
     isLoading,
     data: currentSession,
-    refetch,
+    refetch: queryPlayerSession,
   } = useQuery('playerSession', getPlayerSession);
 
   const refreshPlayerSession = useCallback(async (): Promise<void> => {
-    const { data: updatedSession } = await refetch();
+    const { data: updatedSession } = await queryPlayerSession();
 
     if (updatedSession) {
       setPlayerSession(updatedSession);
     }
-  }, [refetch]);
+  }, [queryPlayerSession]);
 
   const memoizedPlayerSession = useMemo(
     () => ({ playerSession, refreshPlayerSession }),
@@ -45,7 +46,7 @@ const PlayerProvider = ({ children }: Props): JSX.Element => {
     return <Loader />;
   }
 
-  if (!playerSession.name && currentSession?.name) {
+  if (isEmptyObject(playerSession) && currentSession) {
     setPlayerSession(currentSession);
   }
 

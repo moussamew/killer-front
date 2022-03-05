@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { createRef } from 'react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
@@ -18,14 +18,14 @@ const dummyProps = {
 };
 
 describe('<CreateRoom />', () => {
-  it('should show the create room button', () => {
-    render(
+  it('should show the create room button', async () => {
+    renderWithProviders(
       <MemoryRouter>
         <CreateRoom {...dummyProps} />
       </MemoryRouter>,
     );
 
-    expect(screen.getByText('Create new room')).toBeInTheDocument();
+    expect(await screen.findByText('Create new room')).toBeInTheDocument();
   });
 
   it('should create a new room and redirect to it for a player with session', async () => {
@@ -88,13 +88,15 @@ describe('<CreateRoom />', () => {
   });
 
   it('should show error while creating new player session', async () => {
+    jest.spyOn(console, 'error').mockImplementation();
+
     server.use(
       rest.post(PLAYER_ENDPOINT, (_req, res, ctx) =>
         res(
           ctx.status(400),
           ctx.json({
-            error: 'Bad request',
-            message: ['name must be longer than or equal to 1 characters'],
+            errorCode: 'PLAYER.FORBIDDEN.PSEUDO',
+            message: 'name must be longer than or equal to 1 characters',
           }),
         ),
       ),
@@ -118,15 +120,14 @@ describe('<CreateRoom />', () => {
   });
 
   it('should show error while creating new room', async () => {
+    jest.spyOn(console, 'error').mockImplementation();
+
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Trinity' })),
       ),
       rest.post(ROOM_ENDPOINT, (_req, res, ctx) =>
-        res(
-          ctx.status(400),
-          ctx.json({ errorCode: 'PLAYER.FORBIDDEN.NO_USER_SESSION' }),
-        ),
+        res(ctx.status(400), ctx.json({ errorCode: 'ROOM.INTERNAL.ERROR' })),
       ),
     );
 
@@ -148,6 +149,8 @@ describe('<CreateRoom />', () => {
   });
 
   it('should focus input when the user trigger an error', async () => {
+    jest.spyOn(console, 'error').mockImplementation();
+
     server.use(
       rest.post(ROOM_ENDPOINT, (_req, res, ctx) =>
         res(
