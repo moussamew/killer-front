@@ -60,6 +60,12 @@ describe('<CreateRoom />', () => {
   });
 
   it('should create a new player with new room and redirect for a player without session', async () => {
+    server.use(
+      rest.post(ROOM_ENDPOINT, async (_req, res, ctx) =>
+        res(ctx.status(200), ctx.json({ code: 'X7BHV' })),
+      ),
+    );
+
     renderWithProviders(
       <MemoryRouter>
         <Routes>

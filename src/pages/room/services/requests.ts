@@ -1,7 +1,7 @@
-import { Method, ROOM_ENDPOINT } from '../../constants';
-import { request } from '../../helpers/apis';
-import { RequestError } from '../../helpers/types';
-import { Player } from '../../types';
+import { Method, ROOM_ENDPOINT } from '../../../constants';
+import { request } from '../../../helpers/apis';
+import { RequestError } from '../../../helpers/types';
+import { Player } from '../../../types';
 
 const getPlayersInRoom = async (
   roomCode?: string,

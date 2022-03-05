@@ -7,7 +7,7 @@ import Knife from '../../assets/images/knife.png';
 import Player from '../../assets/images/player.png';
 import t from '../../helpers/translate';
 
-import { getPlayersInRoom } from './requests';
+import { getPlayersInRoom } from './services/requests';
 
 const Container = tw.div`
   mt-3 xl:mt-0
@@ -48,7 +48,9 @@ const PlayerList = (): JSX.Element | null => {
     getPlayersInRoom(roomCode),
   );
 
-  if (isLoading || !playersInRoom) return null;
+  if (isLoading || !playersInRoom) {
+    return null;
+  }
 
   return (
     <Container>
