@@ -9,8 +9,7 @@ import Room from './pages/room/Room';
 
 import './assets/styles/app.css';
 
-const NODE_APP =
-  document.getElementById('killerparty') || document.createElement('div');
+const NODE_APP = document.getElementById('killerparty');
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,5 +38,3 @@ const Application = (): JSX.Element => (
 );
 
 render(<Application />, NODE_APP);
-
-export default Application;
