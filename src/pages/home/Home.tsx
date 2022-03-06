@@ -40,7 +40,7 @@ const Home = (): JSX.Element => {
     if (playerSession.roomCode) {
       navigate(`/room/${playerSession.roomCode}`);
     }
-  }, [navigate, playerSession.roomCode]);
+  }, [navigate, playerSession, playerSession.roomCode]);
 
   return (
     <Content>

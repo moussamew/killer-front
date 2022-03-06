@@ -3,6 +3,11 @@
  * https://jestjs.io/docs/configuration
  */
 
+/**
+ * Inject environment variables inside Jest.
+ */
+require('dotenv').config();
+
 module.exports = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -22,8 +27,9 @@ module.exports = {
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx}',
-    '!<rootDir>/src/**/{*.d,types}.ts',
+    '!<rootDir>/src/**/{*.d,types,constants}.ts',
     '!<rootDir>/src/tools/tests/*',
+    '!<rootDir>/src/**/handlers.ts',
   ],
 
   // The directory where Jest should output its coverage files

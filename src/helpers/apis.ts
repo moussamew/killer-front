@@ -1,23 +1,25 @@
-import { RequestError, RequestParams } from './types';
+import { Method } from '../constants';
+
+import { RequestParams } from './types';
 
 export const request = async <T>(
   url: string,
+  method: Method,
   requestParams?: RequestParams,
-): Promise<T & RequestError> => {
+): Promise<T> => {
   const response = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
     },
     credentials: 'include',
-    method: requestParams?.method,
-    body: requestParams?.body,
+    method,
+    ...requestParams,
   });
 
   const result = await response.json();
 
-  if (result.statusCode < 200 || result.statusCode > 300) {
-    // eslint-disable-next-line no-console
-    console.error(`[API ${result.statusCode}] ${result.message}.`);
+  if (result?.errorCode || result?.statusCode) {
+    throw new Error(result.message);
   }
 
   return result;

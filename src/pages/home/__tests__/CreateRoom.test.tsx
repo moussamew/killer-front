@@ -1,7 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { createRef } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import {
   PLAYER_ENDPOINT,
@@ -18,14 +18,14 @@ const dummyProps = {
 };
 
 describe('<CreateRoom />', () => {
-  it('should show the create room button', () => {
-    render(
-      <BrowserRouter>
+  it('should show the create room button', async () => {
+    renderWithProviders(
+      <MemoryRouter>
         <CreateRoom {...dummyProps} />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
 
-    expect(screen.getByText('Create new room')).toBeInTheDocument();
+    expect(await screen.findByText('Create new room')).toBeInTheDocument();
   });
 
   it('should create a new room and redirect to it for a player with session', async () => {
@@ -39,15 +39,15 @@ describe('<CreateRoom />', () => {
     );
 
     renderWithProviders(
-      <BrowserRouter>
+      <MemoryRouter>
         <Routes>
+          <Route path="/" element={<CreateRoom {...dummyProps} />} />
           <Route
             path="/room/YZVB5"
             element={<p>Welcome to the room YZVB5!</p>}
           />
         </Routes>
-        <CreateRoom {...dummyProps} />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
 
     await screen.findByText('Create new room');
@@ -61,24 +61,21 @@ describe('<CreateRoom />', () => {
 
   it('should create a new player with new room and redirect for a player without session', async () => {
     server.use(
-      rest.get(PLAYER_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({})),
-      ),
-      rest.post(ROOM_ENDPOINT, (_req, res, ctx) =>
+      rest.post(ROOM_ENDPOINT, async (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ code: 'X7BHV' })),
       ),
     );
 
     renderWithProviders(
-      <BrowserRouter>
+      <MemoryRouter>
         <Routes>
+          <Route path="/" element={<CreateRoom {...dummyProps} />} />
           <Route
             path="/room/X7BHV"
             element={<p>Welcome to the room X7BHV!</p>}
           />
         </Routes>
-        <CreateRoom {...dummyProps} />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
 
     await screen.findByText('Create new room');
@@ -91,22 +88,24 @@ describe('<CreateRoom />', () => {
   });
 
   it('should show error while creating new player session', async () => {
+    jest.spyOn(console, 'error').mockImplementation();
+
     server.use(
       rest.post(PLAYER_ENDPOINT, (_req, res, ctx) =>
         res(
           ctx.status(400),
           ctx.json({
-            error: 'Bad request',
-            message: ['name must be longer than or equal to 1 characters'],
+            errorCode: 'PLAYER.FORBIDDEN.PSEUDO',
+            message: 'name must be longer than or equal to 1 characters',
           }),
         ),
       ),
     );
 
     renderWithProviders(
-      <BrowserRouter>
+      <MemoryRouter>
         <CreateRoom {...dummyProps} />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
 
     await screen.findByText('Create new room');
@@ -121,22 +120,21 @@ describe('<CreateRoom />', () => {
   });
 
   it('should show error while creating new room', async () => {
+    jest.spyOn(console, 'error').mockImplementation();
+
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Trinity' })),
       ),
       rest.post(ROOM_ENDPOINT, (_req, res, ctx) =>
-        res(
-          ctx.status(400),
-          ctx.json({ errorCode: 'PLAYER.FORBIDDEN.NO_USER_SESSION' }),
-        ),
+        res(ctx.status(400), ctx.json({ errorCode: 'ROOM.INTERNAL.ERROR' })),
       ),
     );
 
     renderWithProviders(
-      <BrowserRouter>
+      <MemoryRouter>
         <CreateRoom {...dummyProps} />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
 
     await screen.findByText('Create new room');
@@ -151,6 +149,8 @@ describe('<CreateRoom />', () => {
   });
 
   it('should focus input when the user trigger an error', async () => {
+    jest.spyOn(console, 'error').mockImplementation();
+
     server.use(
       rest.post(ROOM_ENDPOINT, (_req, res, ctx) =>
         res(
@@ -161,14 +161,14 @@ describe('<CreateRoom />', () => {
     );
 
     renderWithProviders(
-      <BrowserRouter>
+      <MemoryRouter>
         <CreateRoom {...dummyProps} />
         <input
           ref={dummyProps.inputPseudoRef}
           value="Morpheus"
           onChange={jest.fn()}
         />
-      </BrowserRouter>,
+      </MemoryRouter>,
     );
 
     await screen.findByText('Create new room');
