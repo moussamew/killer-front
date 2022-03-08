@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
-import Island from '../../assets/images/island.png';
-import t from '../../helpers/translate';
+import Island from 'assets/images/island.png';
+import t from 'helpers/translate';
 
 import Missions from './Missions';
 import PlayerList from './PlayerList';

@@ -7,9 +7,9 @@ import {
 } from 'react';
 import { useQuery } from 'react-query';
 
-import { Loader } from '../components';
-import { isEmptyObject } from '../helpers/objects';
-import { Player } from '../types';
+import { Loader } from 'components';
+import { isEmptyObject } from 'helpers/objects';
+import { Player } from 'types';
 
 import { getPlayerSession } from './services/requests';
 import { PlayerContextInterface } from './types';

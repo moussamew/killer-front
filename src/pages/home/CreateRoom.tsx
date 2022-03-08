@@ -3,10 +3,10 @@ import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
-import { Button } from '../../components';
-import t from '../../helpers/translate';
-import { PlayerContext } from '../../hooks/context';
-import { Player, Room } from '../../types';
+import { Button } from 'components';
+import t from 'helpers/translate';
+import { PlayerContext } from 'hooks/context';
+import { Player, Room } from 'types';
 
 import { createPlayer, createRoom } from './services/requests';
 

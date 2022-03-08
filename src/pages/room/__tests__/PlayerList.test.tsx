@@ -2,9 +2,10 @@ import { screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-import { ROOM_ENDPOINT } from '../../../constants';
-import { server } from '../../../tools/server';
-import { renderWithProviders } from '../../../tools/tests/utils';
+import { ROOM_ENDPOINT } from 'constants/endpoints';
+import { server } from 'tools/server';
+import { renderWithProviders } from 'tools/tests/utils';
+
 import PlayerList from '../PlayerList';
 
 describe('<PlayerList />', () => {

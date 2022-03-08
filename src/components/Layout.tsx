@@ -1,8 +1,8 @@
 import { Fragment, ReactNode, useContext } from 'react';
 import tw from 'tailwind-styled-components';
 
-import t from '../helpers/translate';
-import { PlayerContext } from '../hooks/context';
+import t from 'helpers/translate';
+import { PlayerContext } from 'hooks/context';
 
 const Navigation = tw.header`
   p-2 flex justify-between

@@ -1,8 +1,8 @@
 import { Dispatch, RefObject, SetStateAction } from 'react';
 import tw from 'tailwind-styled-components';
 
-import { Input } from '../../components';
-import t from '../../helpers/translate';
+import { Input } from 'components';
+import t from 'helpers/translate';
 
 const Content = tw.section`
   mt-2 mb-1

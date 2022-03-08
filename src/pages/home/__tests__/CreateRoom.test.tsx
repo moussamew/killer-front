@@ -7,9 +7,10 @@ import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
   ROOM_ENDPOINT,
-} from '../../../constants';
-import { server } from '../../../tools/server';
-import { renderWithProviders } from '../../../tools/tests/utils';
+} from 'constants/endpoints';
+import { server } from 'tools/server';
+import { renderWithProviders } from 'tools/tests/utils';
+
 import CreateRoom from '../CreateRoom';
 
 const dummyProps = {

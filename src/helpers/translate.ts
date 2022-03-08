@@ -1,4 +1,4 @@
-import translations from '../translations/en.json';
+import translations from 'translations/en.json';
 
 /**
  * Utility function that translates the application text.
