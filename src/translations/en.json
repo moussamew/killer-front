@@ -21,5 +21,11 @@
     "add_mission": "Add this mission in the room",
     "players_list": "Criminals in the room",
     "players_list_description": "List of all the killers who will have to kill each other."
+  },
+  "layout": {
+    "user_settings": "User Settings",
+    "leave_room": "Leave this room",
+    "update_pseudo": "Update my pseudo",
+    "save_changes": "Save changes"
   }
 }
