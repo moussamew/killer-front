@@ -5,7 +5,7 @@ import { PLAYER_SESSION_ENDPOINT } from 'constants/endpoints';
 import { server } from 'tools/server';
 import { renderWithProviders } from 'tools/tests/utils';
 
-import { Layout } from '..';
+import Layout from '../Layout';
 
 describe('<Layout />', () => {
   it('should render correctly Layout with application title', async () => {
