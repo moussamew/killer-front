@@ -11,7 +11,7 @@ const StyledButton = tw.button<{
     
   transition-shadow duration-500 ease-in 
   shadow-md hover:shadow-xl
-  p-1 my-0.5 rounded-lg 
+  p-0.5 md:p-1 mt-1 rounded-lg 
   w-full text-3xl
 `;
 

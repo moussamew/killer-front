@@ -13,7 +13,8 @@
   }
 
   label,
-  p {
+  p,
+  input::placeholder {
     @apply text-2xl md:text-3xl;
   }
 

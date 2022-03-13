@@ -14,10 +14,6 @@ const Image = tw.img`
   h-7 mr-1
 `;
 
-const Spacer = tw.div`
-  my-1
-`;
-
 const Missions = (): JSX.Element | null => {
   const [mission, createMission] = useState('');
 
@@ -39,7 +35,6 @@ const Missions = (): JSX.Element | null => {
           label={t('room.create_mission')}
           placeholder={t('room.mission_input')}
         />
-        <Spacer />
         <Button buttonColor="bg-red-400">{t('room.add_mission')}</Button>
       </div>
     </div>

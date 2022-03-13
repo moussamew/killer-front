@@ -7,7 +7,7 @@ const Content = tw.div`
 `;
 
 const StyledInput = tw.input`
-  p-1 text-3xl rounded-md
+  p-0.5 md:p-1 text-3xl rounded-md
   border-solid border-2 border-light-blue-800
   transition duration-100 ease-in 
   focus-visible:border-blue-300
