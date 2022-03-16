@@ -1,8 +1,10 @@
-import { useParams } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Island from 'assets/images/island.png';
 import t from 'helpers/translate';
+import { PlayerContext } from 'hooks/context';
 
 import Missions from './Missions';
 import PlayerList from './PlayerList';
@@ -32,6 +34,15 @@ const RoomFeatures = tw.div`
 
 const Room = (): JSX.Element => {
   const { roomCode } = useParams();
+  const { playerSession } = useContext(PlayerContext);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!playerSession.roomCode) {
+      navigate('/');
+    }
+  }, [playerSession.roomCode, navigate]);
 
   return (
     <Content>

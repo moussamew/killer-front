@@ -5,7 +5,7 @@ export interface Player {
   name?: string;
   status?: PlayerStatus;
   missionId?: number;
-  roomCode?: string;
+  roomCode?: string | null;
   targetId?: number;
 }
 
