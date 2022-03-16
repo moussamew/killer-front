@@ -24,15 +24,13 @@ interface Props {
   closeModal: () => void;
 }
 
-const Modal = ({ children, closeModal }: Props): JSX.Element => {
-  return (
-    <Background>
-      <Content>
-        <CloseIcon alt="close" src={Close} onClick={closeModal} />
-        {children}
-      </Content>
-    </Background>
-  );
-};
+const Modal = ({ children, closeModal }: Props): JSX.Element => (
+  <Background>
+    <Content>
+      <CloseIcon alt="closeModal" src={Close} onClick={closeModal} />
+      {children}
+    </Content>
+  </Background>
+);
 
 export default Modal;

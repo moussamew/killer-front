@@ -42,18 +42,15 @@ const SettingsModal = ({ closeModal }: Props): JSX.Element => {
   const [pseudo, setPseudo] = useState('');
   const [errorMessage, setErrorMessage] = useState<string>();
 
-  const refreshSessionAndCloseModal = (): Promise<void> =>
-    refreshPlayerSession().then(closeModal);
-
   const updatePseudo = (): Promise<void> =>
     updatePlayer({ name: pseudo })
-      .then(refreshSessionAndCloseModal)
+      .then(refreshPlayerSession)
       .catch((error) => setErrorMessage(error.message));
 
   const exitRoom = (): Promise<void> =>
     updatePlayer({ roomCode: null })
-      .then(refreshSessionAndCloseModal)
-      .catch((error) => setErrorMessage(error.message));
+      .then(refreshPlayerSession)
+      .then(closeModal);
 
   return (
     <Modal closeModal={closeModal}>
