@@ -10,6 +10,7 @@ describe('<Room />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/P9LDG']}>
         <Routes>
+          <Route path="/" element={<div>Home</div>} />
           <Route path="/room/:roomCode" element={<Room />} />
         </Routes>
       </MemoryRouter>,
