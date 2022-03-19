@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components';
 
 import { Button } from 'components';
 import t from 'helpers/translate';
-import { PlayerContext } from 'hooks/context';
+import { PlayerContext } from 'hooks/context/player';
 
 import { createPlayer, createRoom } from './services/requests';
 

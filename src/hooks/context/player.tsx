@@ -11,11 +11,15 @@ import { Loader } from 'components';
 import { isEmptyObject } from 'helpers/objects';
 import { Player } from 'types';
 
-import { getPlayerSession } from './services/requests';
-import { PlayerContextInterface } from './types';
+import { getPlayerSession } from '../services/requests';
 
 interface Props {
   children: ReactNode;
+}
+
+export interface PlayerContextInterface {
+  playerSession: Player;
+  refreshPlayerSession: () => Promise<void>;
 }
 
 const PlayerContext = createContext({} as PlayerContextInterface);

@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components';
 
 import Killerparty from 'assets/images/killerparty.png';
 import t from 'helpers/translate';
-import { PlayerContext } from 'hooks/context';
+import { PlayerContext } from 'hooks/context/player';
 
 import CreatePlayer from './CreatePlayer';
 import CreateRoom from './CreateRoom';

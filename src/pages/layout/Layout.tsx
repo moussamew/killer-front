@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components';
 import Settings from 'assets/icons/settings.svg';
 import { isEmptyObject } from 'helpers/objects';
 import t from 'helpers/translate';
-import { PlayerContext } from 'hooks/context';
+import { PlayerContext } from 'hooks/context/player';
 
 import SettingsModal from './SettingsModal';
 

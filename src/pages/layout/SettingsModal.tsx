@@ -6,7 +6,7 @@ import Logout from 'assets/icons/logout.svg';
 import Settings from 'assets/icons/settings.svg';
 import { Button, Input, Modal } from 'components';
 import t from 'helpers/translate';
-import { PlayerContext } from 'hooks/context';
+import { PlayerContext } from 'hooks/context/player';
 
 import { updatePlayer } from './services/requests';
 
