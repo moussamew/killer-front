@@ -3,11 +3,7 @@ import { rest } from 'msw';
 import { createRef } from 'react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-import {
-  PLAYER_ENDPOINT,
-  PLAYER_SESSION_ENDPOINT,
-  ROOM_ENDPOINT,
-} from 'constants/endpoints';
+import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from 'constants/endpoints';
 import { server } from 'tools/server';
 import { renderWithProviders } from 'tools/tests/utils';
 
@@ -16,6 +12,7 @@ import CreateRoom from '../CreateRoom';
 const dummyProps = {
   inputPseudo: '',
   inputPseudoRef: createRef<HTMLInputElement>(),
+  showInputErrorMessage: jest.fn(),
 };
 
 describe('<CreateRoom />', () => {
@@ -85,38 +82,6 @@ describe('<CreateRoom />', () => {
 
     expect(
       await screen.findByText('Welcome to the room X7BHV!'),
-    ).toBeInTheDocument();
-  });
-
-  it('should show error while creating new player session', async () => {
-    jest.spyOn(console, 'error').mockImplementation();
-
-    server.use(
-      rest.post(PLAYER_ENDPOINT, (_req, res, ctx) =>
-        res(
-          ctx.status(400),
-          ctx.json({
-            errorCode: 'PLAYER.FORBIDDEN.PSEUDO',
-            message: 'name must be longer than or equal to 1 characters',
-          }),
-        ),
-      ),
-    );
-
-    renderWithProviders(
-      <MemoryRouter>
-        <CreateRoom {...dummyProps} />
-      </MemoryRouter>,
-    );
-
-    await screen.findByText('Create new room');
-
-    fireEvent.click(screen.getByText('Create new room'));
-
-    expect(
-      await screen.findByText(
-        'name must be longer than or equal to 1 characters',
-      ),
     ).toBeInTheDocument();
   });
 

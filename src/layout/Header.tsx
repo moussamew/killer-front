@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import tw from 'tailwind-styled-components';
 
-import SettingsIcon from 'assets/icons/settings.svg';
+import Settings from 'assets/icons/settings.svg';
 import { isEmptyObject } from 'helpers/objects';
 import t from 'helpers/translate';
 import { ModalContext } from 'hooks/context/modal';
 import { PlayerContext } from 'hooks/context/player';
 
-import Settings from './modals/Settings';
+import SettingsModal from './modals/SettingsModal';
 
 const Navigation = tw.header`
   p-2 flex justify-between
@@ -27,9 +27,9 @@ const Image = tw.img`
 
 const Header = (): JSX.Element => {
   const { playerSession } = useContext(PlayerContext);
-  const { setModal } = useContext(ModalContext);
+  const { openModal } = useContext(ModalContext);
 
-  const showSettingsModal = (): void => setModal(<Settings />);
+  const showSettingsModal = (): void => openModal(<SettingsModal />);
 
   return (
     <Navigation>
@@ -37,11 +37,7 @@ const Header = (): JSX.Element => {
       {!isEmptyObject(playerSession) && (
         <PlayerInfos>
           <Text>{playerSession.name}</Text>
-          <Image
-            alt="settings"
-            src={SettingsIcon}
-            onClick={showSettingsModal}
-          />
+          <Image alt="settings" src={Settings} onClick={showSettingsModal} />
         </PlayerInfos>
       )}
     </Navigation>

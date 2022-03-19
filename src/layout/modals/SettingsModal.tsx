@@ -3,7 +3,7 @@ import tw from 'tailwind-styled-components';
 
 import Edit from 'assets/icons/edit.svg';
 import Logout from 'assets/icons/logout.svg';
-import SettingsIcon from 'assets/icons/settings.svg';
+import Settings from 'assets/icons/settings.svg';
 import { Button, Input } from 'components';
 import t from 'helpers/translate';
 import { ModalContext } from 'hooks/context/modal';
@@ -32,7 +32,7 @@ const Spacer = tw.hr`
   my-1
 `;
 
-const Settings = (): JSX.Element => {
+const SettingsModal = (): JSX.Element => {
   const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
   const { closeModal } = useContext(ModalContext);
 
@@ -53,7 +53,7 @@ const Settings = (): JSX.Element => {
   return (
     <Fragment>
       <SettingsTitle>
-        <img alt="settings" src={SettingsIcon} />
+        <img alt="settings" src={Settings} />
         <H2>{t('layout.user_settings')}</H2>
       </SettingsTitle>
       {playerSession.roomCode && (
@@ -88,4 +88,4 @@ const Settings = (): JSX.Element => {
   );
 };
 
-export default Settings;
+export default SettingsModal;

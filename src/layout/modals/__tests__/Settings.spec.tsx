@@ -9,11 +9,11 @@ import { PLAYER_SESSION_ENDPOINT } from 'constants/endpoints';
 import { server } from 'tools/server';
 import { renderWithProviders } from 'tools/tests/utils';
 
-import Settings from '../Settings';
+import SettingsModal from '../SettingsModal';
 
-describe('<Settings />', () => {
+describe('<SettingsModal />', () => {
   it('should render modal settings correctly', async () => {
-    renderWithProviders(<Settings />);
+    renderWithProviders(<SettingsModal />);
 
     expect(await screen.findByText('User Settings')).toBeInTheDocument();
   });
@@ -25,7 +25,7 @@ describe('<Settings />', () => {
       ),
     );
 
-    renderWithProviders(<Settings />);
+    renderWithProviders(<SettingsModal />);
 
     await screen.findByText('User Settings');
 
@@ -51,7 +51,7 @@ describe('<Settings />', () => {
       ),
     );
 
-    renderWithProviders(<Settings />);
+    renderWithProviders(<SettingsModal />);
 
     await screen.findByText('User Settings');
 

@@ -23,12 +23,9 @@ const Text = tw.p`
   my-2
 `;
 
-const Actions = tw.div`
-  mt-1
-`;
-
 const Home = (): JSX.Element => {
   const [inputPseudo, setInputPseudo] = useState('');
+  const [inputErrorMessage, setInputErrorMessage] = useState<string>();
 
   const { playerSession } = useContext(PlayerContext);
 
@@ -42,6 +39,11 @@ const Home = (): JSX.Element => {
     }
   }, [navigate, playerSession, playerSession.roomCode]);
 
+  const showInputErrorMessage = (message: string): void => {
+    setInputErrorMessage(message);
+    inputPseudoRef.current?.focus();
+  };
+
   return (
     <Content>
       <WelcomeImage className="m-auto" alt="welcome" src={Killerparty} />
@@ -52,12 +54,19 @@ const Home = (): JSX.Element => {
           inputPseudo={inputPseudo}
           setInputPseudo={setInputPseudo}
           inputPseudoRef={inputPseudoRef}
+          inputErrorMessage={inputErrorMessage}
         />
       )}
-      <Actions>
-        <CreateRoom inputPseudo={inputPseudo} inputPseudoRef={inputPseudoRef} />
-        <JoinRoom />
-      </Actions>
+
+      <CreateRoom
+        inputPseudo={inputPseudo}
+        inputPseudoRef={inputPseudoRef}
+        showInputErrorMessage={showInputErrorMessage}
+      />
+      <JoinRoom
+        inputPseudo={inputPseudo}
+        showInputErrorMessage={showInputErrorMessage}
+      />
     </Content>
   );
 };

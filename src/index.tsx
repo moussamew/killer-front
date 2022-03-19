@@ -23,8 +23,8 @@ const queryClient = new QueryClient({
 
 const Application = (): JSX.Element => (
   <QueryClientProvider client={queryClient}>
-    <PlayerProvider>
-      <ModalProvider>
+    <ModalProvider>
+      <PlayerProvider>
         <Layout>
           <BrowserRouter>
             <Routes>
@@ -35,8 +35,8 @@ const Application = (): JSX.Element => (
             </Routes>
           </BrowserRouter>
         </Layout>
-      </ModalProvider>
-    </PlayerProvider>
+      </PlayerProvider>
+    </ModalProvider>
   </QueryClientProvider>
 );
 

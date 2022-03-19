@@ -10,22 +10,22 @@ import {
 
 interface ModalContextInterface {
   modal: ReactNode;
-  setModal: Dispatch<SetStateAction<ReactNode>>;
+  openModal: Dispatch<SetStateAction<ReactNode>>;
   closeModal: () => void;
 }
 
 const ModalContext = createContext({} as ModalContextInterface);
 
 const ModalProvider: FunctionComponent = ({ children }) => {
-  const [modal, setModal] = useState<ReactNode>(null);
+  const [modal, openModal] = useState<ReactNode>(null);
 
   const memoizedModalComponent = useMemo(
     () => ({
       modal,
-      setModal,
-      closeModal: (): void => setModal(null),
+      openModal,
+      closeModal: (): void => openModal(null),
     }),
-    [modal, setModal],
+    [modal, openModal],
   );
 
   return (
