@@ -11,12 +11,13 @@ import { PlayerContext } from 'hooks/context/player';
 
 import { updatePlayer } from '../services/requests';
 
-const SettingsTitle = tw.div`
-  flex flex-row mb-2 items-center
+const HeadContent = tw.div`
+  flex flex-row mb-2
+  items-center
 `;
 
-const H2 = tw.h2`
-  ml-1 mb-0
+const Title = tw.h2`
+  ml-0.5 mb-0
 `;
 
 const Action = tw.div`
@@ -52,10 +53,10 @@ const SettingsModal = (): JSX.Element => {
 
   return (
     <Fragment>
-      <SettingsTitle>
-        <img alt="settings" src={Settings} />
-        <H2>{t('layout.user_settings')}</H2>
-      </SettingsTitle>
+      <HeadContent>
+        <img alt="settingsIcon" src={Settings} />
+        <Title>{t('layout.user_settings')}</Title>
+      </HeadContent>
       {playerSession.roomCode && (
         <Fragment>
           <Action onClick={exitRoom}>

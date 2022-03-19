@@ -1,12 +1,4 @@
-import {
-  Dispatch,
-  Fragment,
-  RefObject,
-  SetStateAction,
-  useContext,
-  useState,
-} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Fragment, RefObject, useContext, useState } from 'react';
 
 import { ErrorMessage } from 'assets/styles/shared';
 import { Button } from 'components';
@@ -30,8 +22,6 @@ const CreateRoom = ({
 
   const [roomErrorMessage, setRoomErrorMessage] = useState('');
 
-  const navigate = useNavigate();
-
   const showRoomErrorMessage = (errorMessage: string): void => {
     setRoomErrorMessage(errorMessage);
     inputPseudoRef.current?.focus();
@@ -39,10 +29,7 @@ const CreateRoom = ({
 
   const createNewRoom = (): Promise<void> =>
     createRoom()
-      .then(async (newRoom) => {
-        await refreshPlayerSession();
-        navigate(`/room/${newRoom.code}`);
-      })
+      .then(refreshPlayerSession)
       .catch(() => showRoomErrorMessage(t('home.create_room_error')));
 
   const handleCreateRoom = async (): Promise<void> => {

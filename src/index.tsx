@@ -8,6 +8,7 @@ import { PlayerProvider } from 'hooks/context/player';
 import Layout from './layout/Layout';
 import Home from './pages/home/Home';
 import Room from './pages/room/Room';
+
 import './assets/styles/app.css';
 
 const NODE_APP = document.getElementById('killerparty');

@@ -1,9 +1,53 @@
-const JoinRoomModal = (): JSX.Element => {
+import { Fragment, useContext, useState } from 'react';
+import tw from 'tailwind-styled-components';
+
+import Room from 'assets/icons/room.svg';
+import { Button, Input } from 'components';
+import { ModalContext } from 'hooks/context/modal';
+import { PlayerContext } from 'hooks/context/player';
+import { createPlayer } from 'pages/home/services/requests';
+
+const HeadContent = tw.div`
+  flex flex-row items-center
+`;
+
+const Title = tw.h2`
+  mb-0 ml-0.5
+`;
+
+const Icon = tw.img`
+  h-3 md:h-4
+`;
+
+const JoinRoomModal = (): JSX.Element | null => {
+  const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
+  const { closeModal } = useContext(ModalContext);
+  const [roomCode, setRoomCode] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string>();
+
+  const handleJoinRoom = (): Promise<void> =>
+    createPlayer(playerSession.name, roomCode)
+      .then(refreshPlayerSession)
+      .then(closeModal)
+      .catch((error) => setErrorMessage(error.message));
+
   return (
-    <div>
-      <h2>Join a room</h2>
-      <p>Type the code of the room to join</p>
-    </div>
+    <Fragment>
+      <HeadContent>
+        <Icon alt="roomIcon" src={Room} />
+        <Title>Join a room</Title>
+      </HeadContent>
+      <Input
+        id="joinRoom"
+        placeholder="Code of the room to join"
+        value={roomCode}
+        onChange={({ target }): void => setRoomCode(target.value)}
+        errorMessage={errorMessage}
+      />
+      <Button disabled={!roomCode} onClick={handleJoinRoom}>
+        Join this room
+      </Button>
+    </Fragment>
   );
 };
 

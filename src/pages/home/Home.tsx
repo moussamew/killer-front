@@ -37,7 +37,7 @@ const Home = (): JSX.Element => {
     if (playerSession.roomCode) {
       navigate(`/room/${playerSession.roomCode}`);
     }
-  }, [navigate, playerSession, playerSession.roomCode]);
+  }, [navigate, playerSession.roomCode]);
 
   const showInputErrorMessage = (message: string): void => {
     setInputErrorMessage(message);
@@ -57,7 +57,6 @@ const Home = (): JSX.Element => {
           inputErrorMessage={inputErrorMessage}
         />
       )}
-
       <CreateRoom
         inputPseudo={inputPseudo}
         inputPseudoRef={inputPseudoRef}

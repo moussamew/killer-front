@@ -8,6 +8,7 @@ import { server } from 'tools/server';
 import { renderWithProviders } from 'tools/tests/utils';
 
 import CreateRoom from '../CreateRoom';
+import Home from '../Home';
 
 const dummyProps = {
   inputPseudo: '',
@@ -27,61 +28,87 @@ describe('<CreateRoom />', () => {
   });
 
   it('should create a new room and redirect to it for a player with session', async () => {
+    const mockName = 'Trinity';
+    const mockRoomCode = 'YZVB5';
+
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Trinity' })),
+        res(ctx.status(200), ctx.json({ name: mockName })),
       ),
       rest.post(ROOM_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ code: 'YZVB5' })),
+        res(ctx.status(200), ctx.json({ code: mockRoomCode })),
       ),
     );
 
     renderWithProviders(
       <MemoryRouter>
         <Routes>
-          <Route path="/" element={<CreateRoom {...dummyProps} />} />
+          <Route path="/" element={<Home />} />
           <Route
-            path="/room/YZVB5"
-            element={<p>Welcome to the room YZVB5!</p>}
+            path={`/room/${mockRoomCode}`}
+            element={<p>Welcome to the room {mockRoomCode}!</p>}
           />
         </Routes>
       </MemoryRouter>,
     );
 
-    await screen.findByText('Create new room');
+    fireEvent.click(await screen.findByText('Create new room'));
 
-    fireEvent.click(screen.getByText('Create new room'));
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(
+          ctx.status(200),
+          ctx.json({ name: mockName, roomCode: mockRoomCode }),
+        ),
+      ),
+    );
 
     expect(
-      await screen.findByText('Welcome to the room YZVB5!'),
+      await screen.findByText(`Welcome to the room ${mockRoomCode}!`),
     ).toBeInTheDocument();
   });
 
   it('should create a new player with new room and redirect for a player without session', async () => {
+    const mockName = 'Morpheus';
+    const mockRoomCode = 'X7BHV';
+
     server.use(
       rest.post(ROOM_ENDPOINT, async (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ code: 'X7BHV' })),
+        res(ctx.status(200), ctx.json({ code: mockRoomCode })),
       ),
     );
 
     renderWithProviders(
       <MemoryRouter>
         <Routes>
-          <Route path="/" element={<CreateRoom {...dummyProps} />} />
+          <Route path="/" element={<Home />} />
           <Route
-            path="/room/X7BHV"
-            element={<p>Welcome to the room X7BHV!</p>}
+            path={`/room/${mockRoomCode}`}
+            element={<p>Welcome to the room {mockRoomCode}!</p>}
           />
         </Routes>
       </MemoryRouter>,
     );
 
-    await screen.findByText('Create new room');
+    await screen.findByText('To start, enter your nickname!');
+
+    fireEvent.change(screen.getByPlaceholderText('Choose a pseudo'), {
+      target: { value: mockName },
+    });
 
     fireEvent.click(screen.getByText('Create new room'));
 
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(
+          ctx.status(200),
+          ctx.json({ name: mockName, roomCode: mockRoomCode }),
+        ),
+      ),
+    );
+
     expect(
-      await screen.findByText('Welcome to the room X7BHV!'),
+      await screen.findByText(`Welcome to the room ${mockRoomCode}!`),
     ).toBeInTheDocument();
   });
 
