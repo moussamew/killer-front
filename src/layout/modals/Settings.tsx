@@ -3,12 +3,13 @@ import tw from 'tailwind-styled-components';
 
 import Edit from 'assets/icons/edit.svg';
 import Logout from 'assets/icons/logout.svg';
-import Settings from 'assets/icons/settings.svg';
-import { Button, Input, Modal } from 'components';
+import SettingsIcon from 'assets/icons/settings.svg';
+import { Button, Input } from 'components';
 import t from 'helpers/translate';
+import { ModalContext } from 'hooks/context/modal';
 import { PlayerContext } from 'hooks/context/player';
 
-import { updatePlayer } from './services/requests';
+import { updatePlayer } from '../services/requests';
 
 const SettingsTitle = tw.div`
   flex flex-row mb-2 items-center
@@ -31,12 +32,9 @@ const Spacer = tw.hr`
   my-1
 `;
 
-interface Props {
-  closeModal: () => void;
-}
-
-const SettingsModal = ({ closeModal }: Props): JSX.Element => {
+const Settings = (): JSX.Element => {
   const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
+  const { closeModal } = useContext(ModalContext);
 
   const [isPseudoInputOpen, togglePseudoInput] = useState(false);
   const [pseudo, setPseudo] = useState('');
@@ -53,9 +51,9 @@ const SettingsModal = ({ closeModal }: Props): JSX.Element => {
       .then(closeModal);
 
   return (
-    <Modal closeModal={closeModal}>
+    <Fragment>
       <SettingsTitle>
-        <img alt="settings" src={Settings} />
+        <img alt="settings" src={SettingsIcon} />
         <H2>{t('layout.user_settings')}</H2>
       </SettingsTitle>
       {playerSession.roomCode && (
@@ -86,8 +84,8 @@ const SettingsModal = ({ closeModal }: Props): JSX.Element => {
           </Button>
         </Fragment>
       )}
-    </Modal>
+    </Fragment>
   );
 };
 
-export default SettingsModal;
+export default Settings;

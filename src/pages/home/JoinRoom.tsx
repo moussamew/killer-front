@@ -2,9 +2,8 @@ import { Button } from 'components';
 import t from 'helpers/translate';
 
 const JoinRoom = (): JSX.Element => {
-  const joinRoom = (): void => {
-    console.log('hey');
-  };
+  const joinRoom = (): void => {};
+
   return (
     <Button
       buttonColor="bg-yellow-200"

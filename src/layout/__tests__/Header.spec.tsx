@@ -1,0 +1,28 @@
+import { screen } from '@testing-library/react';
+import { rest } from 'msw';
+
+import { PLAYER_SESSION_ENDPOINT } from 'constants/endpoints';
+import { server } from 'tools/server';
+import { renderWithProviders } from 'tools/tests/utils';
+
+import Header from '../Header';
+
+describe('<Header />', () => {
+  it('should render correctly Header with application title', async () => {
+    renderWithProviders(<Header />);
+
+    expect(await screen.findByText('Killer Party')).toBeInTheDocument();
+  });
+
+  it('should show the name of the current player stored in the session', async () => {
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(ctx.status(200), ctx.json({ name: 'Neo' })),
+      ),
+    );
+
+    renderWithProviders(<Header />);
+
+    expect(await screen.findByText('Neo')).toBeInTheDocument();
+  });
+});
