@@ -24,7 +24,7 @@ const CreateRoom = ({
 
   const showRoomErrorMessage = (errorMessage: string): void => {
     setRoomErrorMessage(errorMessage);
-    inputPseudoRef.current?.focus();
+    (inputPseudoRef.current as HTMLInputElement).focus();
   };
 
   const createNewRoom = (): Promise<void> =>

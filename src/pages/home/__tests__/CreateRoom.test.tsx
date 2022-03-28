@@ -112,36 +112,7 @@ describe('<CreateRoom />', () => {
     ).toBeInTheDocument();
   });
 
-  it('should show error while creating new room', async () => {
-    jest.spyOn(console, 'error').mockImplementation();
-
-    server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Trinity' })),
-      ),
-      rest.post(ROOM_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(400), ctx.json({ errorCode: 'ROOM.INTERNAL.ERROR' })),
-      ),
-    );
-
-    renderWithProviders(
-      <MemoryRouter>
-        <CreateRoom {...dummyProps} />
-      </MemoryRouter>,
-    );
-
-    await screen.findByText('Create new room');
-
-    fireEvent.click(screen.getByText('Create new room'));
-
-    expect(
-      await screen.findByText(
-        'An error has occured while creating a new room. Please retry later.',
-      ),
-    ).toBeInTheDocument();
-  });
-
-  it('should focus input when the user trigger an error', async () => {
+  it('should show error message while creating new room', async () => {
     jest.spyOn(console, 'error').mockImplementation();
 
     server.use(

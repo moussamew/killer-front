@@ -41,7 +41,7 @@ const Home = (): JSX.Element => {
 
   const showInputErrorMessage = (message: string): void => {
     setInputErrorMessage(message);
-    inputPseudoRef.current?.focus();
+    (inputPseudoRef.current as HTMLInputElement).focus();
   };
 
   return (
