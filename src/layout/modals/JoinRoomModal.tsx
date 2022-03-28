@@ -3,6 +3,7 @@ import tw from 'tailwind-styled-components';
 
 import Room from 'assets/icons/room.svg';
 import { Button, Input } from 'components';
+import t from 'helpers/translate';
 import { ModalContext } from 'hooks/context/modal';
 import { PlayerContext } from 'hooks/context/player';
 import { createPlayer } from 'pages/home/services/requests';
@@ -35,17 +36,17 @@ const JoinRoomModal = (): JSX.Element | null => {
     <Fragment>
       <HeadContent>
         <Icon alt="roomIcon" src={Room} />
-        <Title>Join a room</Title>
+        <Title>{t('join.modal_title')}</Title>
       </HeadContent>
       <Input
         id="joinRoom"
-        placeholder="Code of the room to join"
+        placeholder={t('join.modal_placeholder')}
         value={roomCode}
         onChange={({ target }): void => setRoomCode(target.value)}
         errorMessage={errorMessage}
       />
       <Button disabled={!roomCode} onClick={handleJoinRoom}>
-        Join this room
+        {t('join.room')}
       </Button>
     </Fragment>
   );
