@@ -1,6 +1,8 @@
 import { ChangeEvent, ForwardedRef, forwardRef } from 'react';
 import tw from 'tailwind-styled-components';
 
+import { ErrorMessage } from 'assets/styles/shared';
+
 const Content = tw.div`
   flex flex-col w-full 
   mt-1
@@ -16,12 +18,6 @@ const StyledInput = tw.input`
 
 const StyledLabel = tw.label`
   font-bold text-lightDark pb-1
-`;
-
-const ErrorMessage = tw.p`
-  normal-case bg-red-200 text-red-500 
-  p-1 mt-1 rounded-md text-2xl
-  font-medium md:font-bold
 `;
 
 interface Props {

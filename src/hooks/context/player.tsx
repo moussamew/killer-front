@@ -1,6 +1,6 @@
 import {
   createContext,
-  ReactNode,
+  FunctionComponent,
   useCallback,
   useMemo,
   useState,
@@ -11,16 +11,16 @@ import { Loader } from 'components';
 import { isEmptyObject } from 'helpers/objects';
 import { Player } from 'types';
 
-import { getPlayerSession } from './services/requests';
-import { PlayerContextInterface } from './types';
+import { getPlayerSession } from '../services/requests';
 
-interface Props {
-  children: ReactNode;
+interface PlayerContextInterface {
+  playerSession: Player;
+  refreshPlayerSession: () => Promise<void>;
 }
 
 const PlayerContext = createContext({} as PlayerContextInterface);
 
-const PlayerProvider = ({ children }: Props): JSX.Element => {
+const PlayerProvider: FunctionComponent = ({ children }) => {
   const [playerSession, setPlayerSession] = useState<Player>({});
 
   const {

@@ -27,5 +27,10 @@
     "leave_room": "Leave this room",
     "update_pseudo": "Update my pseudo",
     "save_changes": "Save changes"
+  },
+  "join": {
+    "modal_title": "Join a room",
+    "modal_placeholder": "Code of the room to join",
+    "room": "Join this room"
   }
 }

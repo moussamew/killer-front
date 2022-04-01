@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components';
 
 import Island from 'assets/images/island.png';
 import t from 'helpers/translate';
-import { PlayerContext } from 'hooks/context';
+import { PlayerContext } from 'hooks/context/player';
 
 import Missions from './Missions';
 import PlayerList from './PlayerList';

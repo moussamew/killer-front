@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components';
 
 import Killerparty from 'assets/images/killerparty.png';
 import t from 'helpers/translate';
-import { PlayerContext } from 'hooks/context';
+import { PlayerContext } from 'hooks/context/player';
 
 import CreatePlayer from './CreatePlayer';
 import CreateRoom from './CreateRoom';
@@ -23,12 +23,9 @@ const Text = tw.p`
   my-2
 `;
 
-const Actions = tw.div`
-  mt-1
-`;
-
 const Home = (): JSX.Element => {
   const [inputPseudo, setInputPseudo] = useState('');
+  const [inputErrorMessage, setInputErrorMessage] = useState<string>();
 
   const { playerSession } = useContext(PlayerContext);
 
@@ -40,7 +37,12 @@ const Home = (): JSX.Element => {
     if (playerSession.roomCode) {
       navigate(`/room/${playerSession.roomCode}`);
     }
-  }, [navigate, playerSession, playerSession.roomCode]);
+  }, [navigate, playerSession.roomCode]);
+
+  const showInputErrorMessage = (message: string): void => {
+    setInputErrorMessage(message);
+    (inputPseudoRef.current as HTMLInputElement).focus();
+  };
 
   return (
     <Content>
@@ -52,12 +54,18 @@ const Home = (): JSX.Element => {
           inputPseudo={inputPseudo}
           setInputPseudo={setInputPseudo}
           inputPseudoRef={inputPseudoRef}
+          inputErrorMessage={inputErrorMessage}
         />
       )}
-      <Actions>
-        <CreateRoom inputPseudo={inputPseudo} inputPseudoRef={inputPseudoRef} />
-        <JoinRoom />
-      </Actions>
+      <CreateRoom
+        inputPseudo={inputPseudo}
+        inputPseudoRef={inputPseudoRef}
+        showInputErrorMessage={showInputErrorMessage}
+      />
+      <JoinRoom
+        inputPseudo={inputPseudo}
+        showInputErrorMessage={showInputErrorMessage}
+      />
     </Content>
   );
 };

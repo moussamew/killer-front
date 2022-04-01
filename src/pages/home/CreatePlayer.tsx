@@ -1,30 +1,28 @@
-import { Dispatch, RefObject, SetStateAction } from 'react';
+import { Dispatch, Fragment, RefObject, SetStateAction } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { Input } from 'components';
 import t from 'helpers/translate';
 
-const Content = tw.section`
-  mt-2 mb-1
-`;
-
 const Pseudo = tw.div`
-  mt-2 flex flex-row 
-  justify-center items-center
+  flex flex-row justify-center 
+  items-center
 `;
 
 interface Props {
   inputPseudo: string;
   setInputPseudo: Dispatch<SetStateAction<string>>;
   inputPseudoRef: RefObject<HTMLInputElement>;
+  inputErrorMessage?: string;
 }
 
 const CreatePlayer = ({
   inputPseudo,
   setInputPseudo,
   inputPseudoRef,
+  inputErrorMessage,
 }: Props): JSX.Element => (
-  <Content>
+  <Fragment>
     <h2>{t('home.player_not_found')}</h2>
     <Pseudo>
       <Input
@@ -34,9 +32,10 @@ const CreatePlayer = ({
         placeholder={t('home.create_pseudo_placeholder')}
         value={inputPseudo}
         onChange={(e): void => setInputPseudo(e.target.value)}
+        errorMessage={inputErrorMessage}
       />
     </Pseudo>
-  </Content>
+  </Fragment>
 );
 
 export default CreatePlayer;

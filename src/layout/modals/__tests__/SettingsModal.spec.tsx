@@ -11,13 +11,9 @@ import { renderWithProviders } from 'tools/tests/utils';
 
 import SettingsModal from '../SettingsModal';
 
-const dummyProps = {
-  closeModal: jest.fn(),
-};
-
 describe('<SettingsModal />', () => {
   it('should render modal settings correctly', async () => {
-    renderWithProviders(<SettingsModal {...dummyProps} />);
+    renderWithProviders(<SettingsModal />);
 
     expect(await screen.findByText('User Settings')).toBeInTheDocument();
   });
@@ -29,7 +25,7 @@ describe('<SettingsModal />', () => {
       ),
     );
 
-    renderWithProviders(<SettingsModal {...dummyProps} />);
+    renderWithProviders(<SettingsModal />);
 
     await screen.findByText('User Settings');
 
@@ -45,7 +41,7 @@ describe('<SettingsModal />', () => {
       screen.queryByText('Leave this room'),
     );
 
-    expect(dummyProps.closeModal).toHaveBeenCalledTimes(1);
+    expect(screen.queryByText('Leave this room')).not.toBeInTheDocument();
   });
 
   it('should let the user update his pseudo', async () => {
@@ -55,7 +51,7 @@ describe('<SettingsModal />', () => {
       ),
     );
 
-    renderWithProviders(<SettingsModal {...dummyProps} />);
+    renderWithProviders(<SettingsModal />);
 
     await screen.findByText('User Settings');
 
