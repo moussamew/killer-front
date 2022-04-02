@@ -8,7 +8,9 @@ const Content = tw.div`
   mt-1
 `;
 
-const StyledInput = tw.input`
+const StyledInput = tw.input<{ $uppercase?: boolean }>`
+  ${({ $uppercase }): string => ($uppercase ? 'uppercase' : 'normal-case')}
+
   p-1 text-3xl rounded-md
   border-solid border-2 border-light-blue-800
   transition duration-100 ease-in 
@@ -28,6 +30,7 @@ interface Props {
   placeholder?: string;
   label?: string;
   errorMessage?: string;
+  uppercase?: boolean;
 }
 
 const Input = (
@@ -39,6 +42,7 @@ const Input = (
     placeholder,
     label,
     errorMessage,
+    uppercase,
   }: Props,
   ref: ForwardedRef<HTMLInputElement>,
 ): JSX.Element => (
@@ -52,6 +56,7 @@ const Input = (
       type={type}
       placeholder={placeholder}
       autoComplete="off"
+      $uppercase={uppercase}
     />
     {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
   </Content>
