@@ -18,11 +18,11 @@ const Text = tw.p`
 `;
 
 const PlayerInfos = tw.div`
-  flex flex-row
+  flex flex-row cursor-pointer
 `;
 
 const Image = tw.img`
-  ml-1 cursor-pointer
+  ml-1
 `;
 
 const Header = (): JSX.Element => {
@@ -35,9 +35,9 @@ const Header = (): JSX.Element => {
     <Navigation>
       <Text>{t('header.project_name')}</Text>
       {!isEmptyObject(playerSession) && (
-        <PlayerInfos>
+        <PlayerInfos onClick={showSettingsModal}>
           <Text>{playerSession.name}</Text>
-          <Image alt="settings" src={Settings} onClick={showSettingsModal} />
+          <Image alt="settings" src={Settings} />
         </PlayerInfos>
       )}
     </Navigation>
