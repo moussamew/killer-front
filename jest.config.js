@@ -141,6 +141,7 @@ module.exports = {
   setupFilesAfterEnv: [
     '<rootDir>/src/tools/setupFiles/react.ts',
     '<rootDir>/src/tools/setupFiles/msw.ts',
+    '<rootDir>/src/tools/setupFiles/eventsource.ts',
     'dotenv/config',
   ],
 
