@@ -8,18 +8,20 @@ export const updatePlayerList = (
     (player) => player.id === playerUpdated.id,
   );
 
+  // Add new player to the list
   if (playerIndex === -1) {
-    // Add new player to the list
     return [...playerList, playerUpdated];
   }
 
+  // Remove the player from the list
   if (!playerUpdated.roomCode) {
-    // Remove the player from the list
     playerList.splice(playerIndex, 1);
-  } else {
-    // Update the player in the list
-    playerList.splice(playerIndex, 1, playerUpdated);
+
+    return playerList;
   }
+
+  // Otherwise: Update the player in the list
+  playerList.splice(playerIndex, 1, playerUpdated);
 
   return playerList;
 };
