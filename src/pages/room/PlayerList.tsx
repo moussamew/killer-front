@@ -10,6 +10,7 @@ import { ROOM_TOPIC } from 'constants/endpoints';
 import t from 'helpers/translate';
 import { Player } from 'types';
 
+import { updatePlayerList } from './helpers';
 import { getPlayersInRoom } from './services/requests';
 
 const Container = tw.div`
@@ -40,8 +41,8 @@ const PlayerImage = tw.img`
 `;
 
 const PlayerName = tw.p`
-  text-3xl md:text-4xl font-bold 
-  text-center
+  text-2xl md:text-3xl font-bold 
+  text-center uppercase
 `;
 
 const PlayerList = (): JSX.Element | null => {
@@ -63,9 +64,11 @@ const PlayerList = (): JSX.Element | null => {
     const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomCode}`);
 
     roomEventSource.addEventListener('message', (event: MessageEvent): void => {
-      const newPlayer: Player = JSON.parse(event.data);
+      const playerUpdated: Player = JSON.parse(event.data);
 
-      setPlayers([...players, newPlayer]);
+      const newPlayerList = updatePlayerList(playerUpdated, [...players]);
+
+      return setPlayers(newPlayerList);
     });
 
     return (): void => roomEventSource.close();

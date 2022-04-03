@@ -6,7 +6,7 @@ import { Button, Input } from 'components';
 import t from 'helpers/translate';
 import { ModalContext } from 'hooks/context/modal';
 import { PlayerContext } from 'hooks/context/player';
-import { createPlayer } from 'pages/home/services/requests';
+import { updatePlayer } from 'layout/services/requests';
 
 const HeadContent = tw.div`
   flex flex-row items-center
@@ -21,13 +21,13 @@ const Icon = tw.img`
 `;
 
 const JoinRoomModal = (): JSX.Element | null => {
-  const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
+  const { refreshPlayerSession } = useContext(PlayerContext);
   const { closeModal } = useContext(ModalContext);
   const [roomCode, setRoomCode] = useState('');
   const [errorMessage, setErrorMessage] = useState<string>();
 
   const handleJoinRoom = (): Promise<void> =>
-    createPlayer(playerSession.name, roomCode)
+    updatePlayer({ roomCode })
       .then(refreshPlayerSession)
       .then(closeModal)
       .catch((error) => setErrorMessage(error.message));
