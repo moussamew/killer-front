@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components';
 import Close from 'assets/icons/close.svg';
 
 const Background = tw.div`
-  bg-disabled absolute top-0
+  bg-disabled fixed top-0
   w-full h-full
 `;
 
