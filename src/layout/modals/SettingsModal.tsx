@@ -44,6 +44,7 @@ const SettingsModal = (): JSX.Element => {
   const updatePseudo = (): Promise<void> =>
     updatePlayer({ name: pseudo })
       .then(refreshPlayerSession)
+      .then(closeModal)
       .catch((error) => setErrorMessage(error.message));
 
   const exitRoom = (): Promise<void> =>
