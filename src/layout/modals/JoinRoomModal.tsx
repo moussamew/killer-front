@@ -42,8 +42,9 @@ const JoinRoomModal = (): JSX.Element | null => {
         id="joinRoom"
         placeholder={t('join.modal_placeholder')}
         value={roomCode}
-        onChange={({ target }): void => setRoomCode(target.value)}
+        onChange={({ target }): void => setRoomCode(target.value.toUpperCase())}
         errorMessage={errorMessage}
+        uppercase
       />
       <Button disabled={!roomCode} onClick={handleJoinRoom}>
         {t('join.room')}
