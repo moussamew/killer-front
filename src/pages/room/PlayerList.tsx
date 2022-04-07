@@ -61,7 +61,9 @@ const PlayerList = (): JSX.Element | null => {
   }, [playersInRoom]);
 
   useEffect(() => {
-    const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomCode}`);
+    const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomCode}`, {
+      withCredentials: true,
+    });
 
     roomEventSource.addEventListener('message', (event: MessageEvent): void => {
       const playerUpdated: Player = JSON.parse(event.data);
