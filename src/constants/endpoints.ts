@@ -11,4 +11,4 @@ export const ROOM_ENDPOINT = `${API_ENDPOINT}/room`;
 /**
  * --- TOPICS (SSE)  ---
  */
-export const ROOM_TOPIC = `${MERCURE_ENDPOINT}?topic=${ROOM_ENDPOINT}`;
+export const ROOM_TOPIC = `${MERCURE_ENDPOINT}?topic=room`;
