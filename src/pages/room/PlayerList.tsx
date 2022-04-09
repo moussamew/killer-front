@@ -6,6 +6,7 @@ import tw from 'tailwind-styled-components';
 import NotReady from 'assets/icons/not_ready.svg';
 import Killer from 'assets/images/killer.png';
 import Knife from 'assets/images/knife.png';
+import { PROD_ENV } from 'constants/app';
 import { ROOM_TOPIC } from 'constants/endpoints';
 import t from 'helpers/translate';
 import { Player } from 'types';
@@ -62,7 +63,7 @@ const PlayerList = (): JSX.Element | null => {
 
   useEffect(() => {
     const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomCode}`, {
-      withCredentials: true,
+      withCredentials: PROD_ENV,
     });
 
     roomEventSource.addEventListener('message', (event: MessageEvent): void => {
