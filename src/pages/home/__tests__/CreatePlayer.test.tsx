@@ -25,9 +25,9 @@ describe('<CreatePlayer />', () => {
     render(<CreatePlayer {...dummyProps} setInputPseudo={spySetInputPseudo} />);
 
     fireEvent.change(screen.getByPlaceholderText('Choose a pseudo'), {
-      target: { value: 'blabla' },
+      target: { value: 'Neo' },
     });
 
-    expect(spySetInputPseudo).toHaveBeenCalledWith('blabla');
+    expect(spySetInputPseudo).toHaveBeenCalledWith('NEO');
   });
 });
