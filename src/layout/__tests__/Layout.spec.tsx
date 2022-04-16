@@ -4,8 +4,8 @@ import { rest } from 'msw';
 import Layout from '../Layout';
 
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
-import { server } from '@/tools/server';
-import { renderWithProviders } from '@/tools/tests/utils';
+import { server } from '@/tests/server';
+import { renderWithProviders } from '@/tests/utils';
 
 describe('<Layout />', () => {
   it('should render correctly Layout with its children', async () => {

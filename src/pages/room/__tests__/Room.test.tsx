@@ -3,7 +3,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import Room from '../Room';
 
-import { renderWithProviders } from '@/tools/tests/utils';
+import { renderWithProviders } from '@/tests/utils';
 
 describe('<Room />', () => {
   it('should show a room with the correct room code', async () => {

@@ -8,8 +8,8 @@ import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
-import { server } from '@/tools/server';
-import { renderWithProviders } from '@/tools/tests/utils';
+import { server } from '@/tests/server';
+import { renderWithProviders } from '@/tests/utils';
 
 describe('<Home />', () => {
   it('should correctly show the home page', async () => {

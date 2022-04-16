@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { createRef } from 'react';
+import { vi } from 'vitest';
 
 import CreatePlayer from '../CreatePlayer';
 
@@ -20,7 +21,7 @@ describe('<CreatePlayer />', () => {
   });
 
   it('should update the value inside the player pseudo input', () => {
-    const spySetInputPseudo = jest.fn();
+    const spySetInputPseudo = vi.fn();
 
     render(<CreatePlayer {...dummyProps} setInputPseudo={spySetInputPseudo} />);
 

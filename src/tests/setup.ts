@@ -1,6 +1,10 @@
 import 'whatwg-fetch';
+import '@testing-library/jest-dom';
+import EventSource from 'eventsourcemock';
 
-import { server } from '../server';
+import { server } from './server';
+
+global.EventSource = EventSource;
 
 /**
  * Enable API mocking before tests.

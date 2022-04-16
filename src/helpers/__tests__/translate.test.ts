@@ -1,21 +1,13 @@
 import t from '../translate';
 
-jest.mock('../../translations/en.json', () => ({
-  home: {
-    first_title: 'First title',
-    description: 'Description',
-    welcome_user: 'Welcome {username}',
-  },
-}));
-
 describe('Helpers > Translate', () => {
   it('should returns the correct translation for the translate key given', () => {
-    expect(t('home.first_title')).toEqual('First title');
+    expect(t('home.title')).toEqual('The right way to kill your friends..');
   });
 
   it('should returns the correct translation with a string interpolation', () => {
-    expect(t('home.welcome_user', { username: 'John' })).toEqual(
-      'Welcome John',
+    expect(t('room.join_room_code', { roomCode: 'AZ45G' })).toEqual(
+      'The code to join this room is AZ45G.',
     );
   });
 
@@ -24,8 +16,8 @@ describe('Helpers > Translate', () => {
   });
 
   it('should returns the translation with a placeholder if the string interpolation given is not accessible', () => {
-    expect(t('home.welcome_user', { unknown: 'unknown' })).toEqual(
-      'Welcome {username}',
+    expect(t('room.join_room_code', { unknown: 'unknown' })).toEqual(
+      'The code to join this room is {roomCode}.',
     );
   });
 

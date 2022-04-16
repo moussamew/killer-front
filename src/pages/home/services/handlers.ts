@@ -13,6 +13,9 @@ export const homeHandlers = [
    * Mock room creation.
    */
   rest.post(ROOM_ENDPOINT, async (_req, res, ctx) =>
-    res(ctx.status(200), ctx.json({})),
+    res(
+      ctx.status(400),
+      ctx.json({ errorCode: 'PLAYER.FORBIDDEN.NO_USER_SESSION' }),
+    ),
   ),
 ];

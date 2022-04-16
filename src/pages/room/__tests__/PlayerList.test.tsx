@@ -7,8 +7,8 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import PlayerList from '../PlayerList';
 
 import { ROOM_ENDPOINT, ROOM_TOPIC } from '@/constants/endpoints';
-import { server } from '@/tools/server';
-import { renderWithProviders } from '@/tools/tests/utils';
+import { server } from '@/tests/server';
+import { renderWithProviders } from '@/tests/utils';
 
 describe('<PlayerList />', () => {
   it('should show all the player in the room', async () => {

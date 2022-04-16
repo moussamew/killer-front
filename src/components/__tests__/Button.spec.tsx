@@ -1,4 +1,5 @@
 import { render, fireEvent, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 
 import { Button } from '..';
 
@@ -10,7 +11,7 @@ describe('<Button />', () => {
   });
 
   it('should execute the callback passed when the button is clicked', () => {
-    const spyCallback = jest.fn();
+    const spyCallback = vi.fn();
 
     render(<Button onClick={spyCallback}>My Button</Button>);
 
@@ -20,7 +21,7 @@ describe('<Button />', () => {
   });
 
   it('should not execute the callback passed in parameter when disabled is set tot rue', () => {
-    const spyCallback = jest.fn();
+    const spyCallback = vi.fn();
 
     render(
       <Button disabled onClick={spyCallback}>

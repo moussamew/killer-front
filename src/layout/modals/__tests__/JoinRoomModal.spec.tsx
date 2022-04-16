@@ -14,8 +14,8 @@ import {
 } from '@/constants/endpoints';
 import Layout from '@/layout/Layout';
 import Home from '@/pages/home/Home';
-import { server } from '@/tools/server';
-import { renderWithProviders } from '@/tools/tests/utils';
+import { server } from '@/tests/server';
+import { renderWithProviders } from '@/tests/utils';
 
 describe('<JoinRoomModal />', () => {
   it('should render JoinRoom modal', async () => {
