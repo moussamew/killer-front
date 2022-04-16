@@ -5,8 +5,10 @@ import path from 'path';
 import reactRefresh from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
+import { HotReloadJSON } from './plugins';
+
 export default defineConfig({
-  plugins: [reactRefresh()],
+  plugins: [reactRefresh(), HotReloadJSON()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src/'),
