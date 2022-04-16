@@ -1,12 +1,12 @@
 import { Fragment, useContext, useState } from 'react';
 import tw from 'tailwind-styled-components';
 
-import Room from 'assets/icons/room.svg';
-import { Button, Input } from 'components';
-import t from 'helpers/translate';
-import { ModalContext } from 'hooks/context/modal';
-import { PlayerContext } from 'hooks/context/player';
-import { updatePlayer } from 'layout/services/requests';
+import Room from '@/assets/icons/room.svg';
+import { Button, Input } from '@/components';
+import t from '@/helpers/translate';
+import { ModalContext } from '@/hooks/context/modal';
+import { PlayerContext } from '@/hooks/context/player';
+import { updatePlayer } from '@/layout/services/requests';
 
 const HeadContent = tw.div`
   flex flex-row items-center

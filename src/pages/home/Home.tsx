@@ -2,13 +2,13 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
-import Killerparty from 'assets/images/killerparty.png';
-import t from 'helpers/translate';
-import { PlayerContext } from 'hooks/context/player';
-
 import CreatePlayer from './CreatePlayer';
 import CreateRoom from './CreateRoom';
 import JoinRoom from './JoinRoom';
+
+import Killerparty from '@/assets/images/killerparty.png';
+import t from '@/helpers/translate';
+import { PlayerContext } from '@/hooks/context/player';
 
 const Content = tw.div`
   max-w-screen-lg m-auto

@@ -6,13 +6,16 @@ import {
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-import { PLAYER_ENDPOINT, PLAYER_SESSION_ENDPOINT } from 'constants/endpoints';
-import Layout from 'layout/Layout';
-import Home from 'pages/home/Home';
-import { server } from 'tools/server';
-import { renderWithProviders } from 'tools/tests/utils';
-
 import JoinRoomModal from '../JoinRoomModal';
+
+import {
+  PLAYER_ENDPOINT,
+  PLAYER_SESSION_ENDPOINT,
+} from '@/constants/endpoints';
+import Layout from '@/layout/Layout';
+import Home from '@/pages/home/Home';
+import { server } from '@/tools/server';
+import { renderWithProviders } from '@/tools/tests/utils';
 
 describe('<JoinRoomModal />', () => {
   it('should render JoinRoom modal', async () => {

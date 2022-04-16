@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import tw from 'tailwind-styled-components';
 
-import Close from 'assets/icons/close.svg';
+import Close from '@/assets/icons/close.svg';
 
 const Background = tw.div`
   bg-disabled fixed top-0

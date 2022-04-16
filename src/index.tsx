@@ -2,12 +2,12 @@ import { render } from 'react-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { ModalProvider } from 'hooks/context/modal';
-import { PlayerProvider } from 'hooks/context/player';
-
 import Layout from './layout/Layout';
 import Home from './pages/home/Home';
 import Room from './pages/room/Room';
+
+import { ModalProvider } from '@/hooks/context/modal';
+import { PlayerProvider } from '@/hooks/context/player';
 
 import './assets/styles/app.css';
 

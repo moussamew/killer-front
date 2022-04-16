@@ -75,7 +75,7 @@ module.exports = {
   // maxWorkers: "50%",
 
   // An array of directory names to be searched recursively up from the requiring module's location
-  moduleDirectories: ['node_modules', 'src'],
+  moduleDirectories: ['node_modules', '<rootDir>'],
 
   // An array of file extensions your modules use
   // moduleFileExtensions: [
@@ -91,6 +91,7 @@ module.exports = {
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/src/tools/tests/fileMock.ts',
+    '@/(.*)': '<rootDir>/src/$1',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import tw from 'tailwind-styled-components';
 
-import Settings from 'assets/icons/settings.svg';
-import { isEmptyObject } from 'helpers/objects';
-import t from 'helpers/translate';
-import { ModalContext } from 'hooks/context/modal';
-import { PlayerContext } from 'hooks/context/player';
-
 import SettingsModal from './modals/SettingsModal';
+
+import Settings from '@/assets/icons/settings.svg';
+import { isEmptyObject } from '@/helpers/objects';
+import t from '@/helpers/translate';
+import { ModalContext } from '@/hooks/context/modal';
+import { PlayerContext } from '@/hooks/context/player';
 
 const Navigation = tw.header`
   p-2 flex justify-between

@@ -1,7 +1,7 @@
 import { ChangeEvent, ForwardedRef, forwardRef } from 'react';
 import tw from 'tailwind-styled-components';
 
-import { ErrorMessage } from 'assets/styles/shared';
+import { ErrorMessage } from '@/assets/styles/shared';
 
 const Content = tw.div`
   flex flex-col w-full 

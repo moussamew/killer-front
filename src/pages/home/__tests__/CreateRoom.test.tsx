@@ -3,12 +3,12 @@ import { rest } from 'msw';
 import { createRef } from 'react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from 'constants/endpoints';
-import { server } from 'tools/server';
-import { renderWithProviders } from 'tools/tests/utils';
-
 import CreateRoom from '../CreateRoom';
 import Home from '../Home';
+
+import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
+import { server } from '@/tools/server';
+import { renderWithProviders } from '@/tools/tests/utils';
 
 const dummyProps = {
   inputPseudo: '',

@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 
-import { Button } from 'components';
-import t from 'helpers/translate';
-import { ModalContext } from 'hooks/context/modal';
-import { PlayerContext } from 'hooks/context/player';
-import JoinRoomModal from 'layout/modals/JoinRoomModal';
-
 import { createPlayer } from './services/requests';
+
+import { Button } from '@/components';
+import t from '@/helpers/translate';
+import { ModalContext } from '@/hooks/context/modal';
+import { PlayerContext } from '@/hooks/context/player';
+import JoinRoomModal from '@/layout/modals/JoinRoomModal';
 
 interface Props {
   inputPseudo: string;

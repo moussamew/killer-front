@@ -1,6 +1,6 @@
-import { Method } from 'constants/enums';
-
 import { RequestParams } from './types';
+
+import { Method } from '@/constants/enums';
 
 export const request = async <T>(
   url: string,

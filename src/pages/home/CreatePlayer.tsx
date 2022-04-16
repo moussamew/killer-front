@@ -1,8 +1,8 @@
 import { Dispatch, Fragment, RefObject, SetStateAction } from 'react';
 import tw from 'tailwind-styled-components';
 
-import { Input } from 'components';
-import t from 'helpers/translate';
+import { Input } from '@/components';
+import t from '@/helpers/translate';
 
 const Pseudo = tw.div`
   flex flex-row justify-center 
