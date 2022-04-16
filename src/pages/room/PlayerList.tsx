@@ -1,12 +1,17 @@
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import NotReady from 'assets/icons/not_ready.svg';
+import Killer from 'assets/images/killer.png';
 import Knife from 'assets/images/knife.png';
-import Player from 'assets/images/player.png';
+import { PROD_ENV } from 'constants/app';
+import { ROOM_TOPIC } from 'constants/endpoints';
 import t from 'helpers/translate';
+import { Player } from 'types';
 
+import { updatePlayerList } from './helpers';
 import { getPlayersInRoom } from './services/requests';
 
 const Container = tw.div`
@@ -37,20 +42,40 @@ const PlayerImage = tw.img`
 `;
 
 const PlayerName = tw.p`
-  text-3xl md:text-4xl font-bold 
-  text-center
+  text-2xl md:text-3xl font-bold 
+  text-center uppercase
 `;
 
 const PlayerList = (): JSX.Element | null => {
   const { roomCode } = useParams();
 
-  const { isLoading, data: playersInRoom } = useQuery('playersInRoom', () =>
+  const [players, setPlayers] = useState<Player[]>([]);
+
+  const { data: playersInRoom } = useQuery('playersInRoom', () =>
     getPlayersInRoom(roomCode),
   );
 
-  if (isLoading || !playersInRoom) {
-    return null;
-  }
+  useEffect(() => {
+    if (playersInRoom) {
+      setPlayers(playersInRoom);
+    }
+  }, [playersInRoom]);
+
+  useEffect(() => {
+    const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomCode}`, {
+      withCredentials: PROD_ENV,
+    });
+
+    roomEventSource.addEventListener('message', (event: MessageEvent): void => {
+      const playerUpdated: Player = JSON.parse(event.data);
+
+      const newPlayerList = updatePlayerList(playerUpdated, [...players]);
+
+      return setPlayers(newPlayerList);
+    });
+
+    return (): void => roomEventSource.close();
+  }, [roomCode, players]);
 
   return (
     <Container>
@@ -63,9 +88,9 @@ const PlayerList = (): JSX.Element | null => {
       </Section>
       <hr />
       <List>
-        {playersInRoom.map(({ name }) => (
+        {players.map(({ name }) => (
           <PlayerItem key={name}>
-            <PlayerImage alt={`player-${name}`} src={Player} />
+            <PlayerImage alt={`player-${name}`} src={Killer} />
             <PlayerName>{name}</PlayerName>
             <img alt="player not ready" src={NotReady} />
           </PlayerItem>
