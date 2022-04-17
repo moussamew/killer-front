@@ -1,11 +1,11 @@
 import { Fragment, RefObject, useContext, useState } from 'react';
 
-import { createPlayer, createRoom } from './services/requests';
-
 import { ErrorMessage } from '@/assets/styles/shared';
 import { Button } from '@/components';
 import t from '@/helpers/translate';
 import { PlayerContext } from '@/hooks/context/player';
+
+import { createPlayer, createRoom } from './services/requests';
 
 interface Props {
   inputPseudo: string;

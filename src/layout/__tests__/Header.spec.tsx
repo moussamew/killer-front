@@ -1,11 +1,11 @@
 import { screen } from '@testing-library/react';
 import { rest } from 'msw';
 
-import Header from '../Header';
-
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
+
+import Header from '../Header';
 
 describe('<Header />', () => {
   it('should render correctly Header with application title', async () => {

@@ -4,12 +4,12 @@ import { createRef } from 'react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { vi } from 'vitest';
 
-import CreateRoom from '../CreateRoom';
-import Home from '../Home';
-
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
+
+import CreateRoom from '../CreateRoom';
+import Home from '../Home';
 
 const dummyProps = {
   inputPseudo: '',

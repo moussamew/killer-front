@@ -1,9 +1,9 @@
 import { screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-import Room from '../Room';
-
 import { renderWithProviders } from '@/tests/utils';
+
+import Room from '../Room';
 
 describe('<Room />', () => {
   it('should show a room with the correct room code', async () => {

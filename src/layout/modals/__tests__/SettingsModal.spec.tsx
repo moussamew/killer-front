@@ -5,11 +5,11 @@ import {
 } from '@testing-library/react';
 import { rest } from 'msw';
 
-import SettingsModal from '../SettingsModal';
-
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
+
+import SettingsModal from '../SettingsModal';
 
 describe('<SettingsModal />', () => {
   it('should render modal settings correctly', async () => {

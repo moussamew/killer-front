@@ -2,12 +2,12 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { vi } from 'vitest';
 
-import JoinRoom from '../JoinRoom';
-
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import Layout from '@/layout/Layout';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
+
+import JoinRoom from '../JoinRoom';
 
 const dummyProps = {
   inputPseudo: '',

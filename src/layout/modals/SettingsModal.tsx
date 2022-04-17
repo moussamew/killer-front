@@ -1,8 +1,6 @@
 import { Fragment, useContext, useState } from 'react';
 import tw from 'tailwind-styled-components';
 
-import { updatePlayer } from '../services/requests';
-
 import Edit from '@/assets/icons/edit.svg';
 import Logout from '@/assets/icons/logout.svg';
 import Settings from '@/assets/icons/settings.svg';
@@ -10,6 +8,8 @@ import { Button, Input } from '@/components';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
+
+import { updatePlayer } from '../services/requests';
 
 const HeadContent = tw.div`
   flex flex-row mb-2

@@ -3,9 +3,6 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
-import { updatePlayerList } from './helpers';
-import { getPlayersInRoom } from './services/requests';
-
 import NotReady from '@/assets/icons/not_ready.svg';
 import Killer from '@/assets/images/killer.png';
 import Knife from '@/assets/images/knife.png';
@@ -13,6 +10,9 @@ import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
 import t from '@/helpers/translate';
 import { Player } from '@/types';
+
+import { updatePlayerList } from './helpers';
+import { getPlayersInRoom } from './services/requests';
 
 const Container = tw.div`
   mt-3 xl:mt-0

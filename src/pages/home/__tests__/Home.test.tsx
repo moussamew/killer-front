@@ -2,14 +2,14 @@ import { fireEvent, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-import Home from '../Home';
-
 import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
+
+import Home from '../Home';
 
 describe('<Home />', () => {
   it('should correctly show the home page', async () => {
