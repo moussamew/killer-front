@@ -1,7 +1,7 @@
 import { Fragment, ReactNode, useContext } from 'react';
 
-import { Modal } from 'components';
-import { ModalContext } from 'hooks/context/modal';
+import { Modal } from '@/components';
+import { ModalContext } from '@/hooks/context/modal';
 
 import Header from './Header';
 

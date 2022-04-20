@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import tw from 'tailwind-styled-components';
 
-import Idea from 'assets/images/idea.png';
-import { Input, Button } from 'components';
-import t from 'helpers/translate';
+import Idea from '@/assets/images/idea.png';
+import { Input, Button } from '@/components';
+import t from '@/helpers/translate';
 
 const Section = tw.div`
   flex flex-row items-center 

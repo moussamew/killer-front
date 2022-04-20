@@ -1,9 +1,9 @@
 import { fireEvent, screen } from '@testing-library/react';
 import { rest } from 'msw';
 
-import { PLAYER_SESSION_ENDPOINT } from 'constants/endpoints';
-import { server } from 'tools/server';
-import { renderWithProviders } from 'tools/tests/utils';
+import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
+import { server } from '@/tests/server';
+import { renderWithProviders } from '@/tests/utils';
 
 import Layout from '../Layout';
 

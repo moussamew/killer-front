@@ -1,4 +1,4 @@
-import { Method } from 'constants/enums';
+import { Method } from '@/constants/enums';
 
 export interface RequestParams {
   method?: Method;

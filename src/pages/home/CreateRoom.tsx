@@ -1,9 +1,9 @@
 import { Fragment, RefObject, useContext, useState } from 'react';
 
-import { ErrorMessage } from 'assets/styles/shared';
-import { Button } from 'components';
-import t from 'helpers/translate';
-import { PlayerContext } from 'hooks/context/player';
+import { ErrorMessage } from '@/assets/styles/shared';
+import { Button } from '@/components';
+import t from '@/helpers/translate';
+import { PlayerContext } from '@/hooks/context/player';
 
 import { createPlayer, createRoom } from './services/requests';
 

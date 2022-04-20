@@ -1,16 +1,17 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { rest } from 'msw';
+import { vi } from 'vitest';
 
-import { PLAYER_SESSION_ENDPOINT } from 'constants/endpoints';
-import Layout from 'layout/Layout';
-import { server } from 'tools/server';
-import { renderWithProviders } from 'tools/tests/utils';
+import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
+import Layout from '@/layout/Layout';
+import { server } from '@/tests/server';
+import { renderWithProviders } from '@/tests/utils';
 
 import JoinRoom from '../JoinRoom';
 
 const dummyProps = {
   inputPseudo: '',
-  showInputErrorMessage: jest.fn(),
+  showInputErrorMessage: vi.fn(),
 };
 
 describe('<JoinRoom />', () => {

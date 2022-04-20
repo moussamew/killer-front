@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-import { ROOM_ENDPOINT } from 'constants/endpoints';
+import { ROOM_ENDPOINT } from '@/constants/endpoints';
 
 export const roomHandlers = [
   /**

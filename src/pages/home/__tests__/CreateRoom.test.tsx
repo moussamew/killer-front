@@ -2,10 +2,11 @@ import { fireEvent, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { createRef } from 'react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { vi } from 'vitest';
 
-import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from 'constants/endpoints';
-import { server } from 'tools/server';
-import { renderWithProviders } from 'tools/tests/utils';
+import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
+import { server } from '@/tests/server';
+import { renderWithProviders } from '@/tests/utils';
 
 import CreateRoom from '../CreateRoom';
 import Home from '../Home';
@@ -13,7 +14,7 @@ import Home from '../Home';
 const dummyProps = {
   inputPseudo: '',
   inputPseudoRef: createRef<HTMLInputElement>(),
-  showInputErrorMessage: jest.fn(),
+  showInputErrorMessage: vi.fn(),
 };
 
 describe('<CreateRoom />', () => {
@@ -113,16 +114,7 @@ describe('<CreateRoom />', () => {
   });
 
   it('should show error message while creating new room', async () => {
-    jest.spyOn(console, 'error').mockImplementation();
-
-    server.use(
-      rest.post(ROOM_ENDPOINT, (_req, res, ctx) =>
-        res(
-          ctx.status(400),
-          ctx.json({ errorCode: 'PLAYER.FORBIDDEN.NO_USER_SESSION' }),
-        ),
-      ),
-    );
+    vi.spyOn(console, 'error').mockImplementation(() => {});
 
     renderWithProviders(
       <MemoryRouter>
@@ -130,7 +122,7 @@ describe('<CreateRoom />', () => {
         <input
           ref={dummyProps.inputPseudoRef}
           value="Morpheus"
-          onChange={jest.fn()}
+          onChange={vi.fn()}
         />
       </MemoryRouter>,
     );

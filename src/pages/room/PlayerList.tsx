@@ -3,13 +3,13 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
-import NotReady from 'assets/icons/not_ready.svg';
-import Killer from 'assets/images/killer.png';
-import Knife from 'assets/images/knife.png';
-import { PROD_ENV } from 'constants/app';
-import { ROOM_TOPIC } from 'constants/endpoints';
-import t from 'helpers/translate';
-import { Player } from 'types';
+import NotReady from '@/assets/icons/not_ready.svg';
+import Killer from '@/assets/images/killer.png';
+import Knife from '@/assets/images/knife.png';
+import { PROD_ENV } from '@/constants/app';
+import { ROOM_TOPIC } from '@/constants/endpoints';
+import t from '@/helpers/translate';
+import { Player } from '@/types';
 
 import { updatePlayerList } from './helpers';
 import { getPlayersInRoom } from './services/requests';
@@ -46,7 +46,7 @@ const PlayerName = tw.p`
   text-center uppercase
 `;
 
-const PlayerList = (): JSX.Element | null => {
+const PlayerList = (): JSX.Element => {
   const { roomCode } = useParams();
 
   const [players, setPlayers] = useState<Player[]>([]);
