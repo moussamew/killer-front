@@ -77,9 +77,10 @@ const SettingsModal = (): JSX.Element => {
           <Input
             id="editPseudo"
             value={pseudo}
-            onChange={(e): void => setPseudo(e.target.value)}
+            onChange={(e): void => setPseudo(e.target.value.toUpperCase())}
             placeholder={playerSession.name}
             errorMessage={errorMessage}
+            uppercase
           />
           <Button onClick={updatePseudo} disabled={!pseudo}>
             {t('layout.save_changes')}

@@ -31,8 +31,9 @@ const CreatePlayer = ({
         type="text"
         placeholder={t('home.create_pseudo_placeholder')}
         value={inputPseudo}
-        onChange={(e): void => setInputPseudo(e.target.value)}
+        onChange={(e): void => setInputPseudo(e.target.value.toUpperCase())}
         errorMessage={inputErrorMessage}
+        uppercase
       />
     </Pseudo>
   </Fragment>
