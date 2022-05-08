@@ -6,7 +6,7 @@ import CreatePlayer from '../CreatePlayer';
 
 const dummyProps = {
   inputPseudo: '',
-  setInputPseudo: (): void => {},
+  setInputPseudo: () => {},
   inputPseudoRef: createRef<HTMLInputElement>(),
 };
 

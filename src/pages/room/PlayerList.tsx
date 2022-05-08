@@ -74,7 +74,7 @@ const PlayerList = (): JSX.Element => {
       return setPlayers(newPlayerList);
     });
 
-    return (): void => roomEventSource.close();
+    return () => roomEventSource.close();
   }, [roomCode, players]);
 
   return (

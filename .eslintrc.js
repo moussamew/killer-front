@@ -39,9 +39,12 @@ module.exports = {
     sourceType: 'module', // Allows for the use of imports
   },
   rules: {
-    camelcase: 'off', // TODO: remove it when GroundPlacesMaster will be moved to the external package
     'prettier/prettier': ['error', prettierOptions], // Enhance prettier with custom options
-    '@typescript-eslint/explicit-function-return-type': ['error'], // Explicit types for function return
+    '@typescript-eslint/explicit-function-return-type': [
+      // Explicit types for function return
+      'error',
+      { allowExpressions: true },
+    ],
     '@typescript-eslint/no-empty-function': 'off', // Disable this rule to make empty function for testing case or default props
     '@typescript-eslint/no-var-requires': 'off', // Disable this rule to enable ES5 imports (const something = require('something');)
     'react/jsx-fragments': [2, 'element'], // Enforce the use of Fragment|React.Fragment instead of <></>

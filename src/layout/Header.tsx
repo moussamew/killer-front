@@ -29,13 +29,11 @@ const Header = (): JSX.Element => {
   const { playerSession } = useContext(PlayerContext);
   const { openModal } = useContext(ModalContext);
 
-  const showSettingsModal = (): void => openModal(<SettingsModal />);
-
   return (
     <Navigation>
       <Text>{t('header.project_name')}</Text>
       {!isEmptyObject(playerSession) && (
-        <PlayerInfos onClick={showSettingsModal}>
+        <PlayerInfos onClick={() => openModal(<SettingsModal />)}>
           <Text>{playerSession.name}</Text>
           <Image alt="settings" src={Settings} />
         </PlayerInfos>

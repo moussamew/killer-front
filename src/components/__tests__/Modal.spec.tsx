@@ -4,7 +4,7 @@ import { Modal } from '..';
 
 const dummyProps = {
   children: <div>My Modal</div>,
-  closeModal: (): void => {},
+  closeModal: () => {},
 };
 
 describe('<Modal />', () => {
