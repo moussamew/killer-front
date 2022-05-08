@@ -5,9 +5,12 @@ import { API_URL, MERCURE_URL } from './app';
  */
 export const PLAYER_ENDPOINT = `${API_URL}/player`;
 export const PLAYER_SESSION_ENDPOINT = `${API_URL}/player/me`;
+
 export const ROOM_ENDPOINT = `${API_URL}/room`;
+
 export const MISSION_ENDPOINT = `${API_URL}/mission`;
 export const PLAYER_MISSION_ENDPOINT = `${API_URL}/mission/player`;
+export const ROOM_MISSION_ENDPOINT = `${API_URL}/mission/room`;
 
 /**
  * --- TOPICS (SSE)  ---

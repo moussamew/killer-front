@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { QueryObserverResult } from 'react-query';
 
 import { Button, Input } from '@/components';
@@ -20,16 +20,13 @@ const CreateMission = ({ refetchPlayerMissions }: Props): JSX.Element => {
       .then(() => refetchPlayerMissions())
       .then(() => {
         setNewMission('');
-
-        if (errorMessage) {
-          setErrorMessage('');
-        }
+        setErrorMessage('');
       })
       .catch((error) => setErrorMessage(error.message));
   };
 
   return (
-    <div>
+    <Fragment>
       <Input
         id="createMission"
         value={newMission}
@@ -45,7 +42,7 @@ const CreateMission = ({ refetchPlayerMissions }: Props): JSX.Element => {
       >
         {t('room.add_mission')}
       </Button>
-    </div>
+    </Fragment>
   );
 };
 

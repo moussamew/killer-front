@@ -38,14 +38,46 @@ describe('<PlayerList />', () => {
     expect(await screen.findByText('Morpheus')).toBeInTheDocument();
   });
 
-  describe('RoomEventSource > Event Message (SSE)', () => {
+  it('should update the players list when SSE emits a new message', async () => {
     const mockRoomEventSource = `${ROOM_TOPIC}/X7JKL`;
 
-    beforeAll(() => {
-      sources[mockRoomEventSource].emitOpen();
+    sources[mockRoomEventSource].emitOpen();
+
+    server.use(
+      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_req, res, ctx) =>
+        res(
+          ctx.status(200),
+          ctx.json([
+            {
+              id: 0,
+              name: 'Neo',
+              passcode: null,
+              status: 'ALIVE',
+              role: 'PLAYER',
+              target: null,
+              missionId: null,
+              roomCode: 'X7JKL',
+            },
+          ]),
+        ),
+      ),
+    );
+
+    const messageEvent = new MessageEvent('message', {
+      data: '{"id":1,"name":"Oracle","passcode":null,"status":"ALIVE","role":"PLAYER","targetId":null,"missionId":null,"roomCode":"X7JKL"}',
     });
 
-    it('should update the players list when SSE emits a new message with a new player', async () => {
+    renderWithProviders(
+      <MemoryRouter initialEntries={['/room/X7JKL']}>
+        <Routes>
+          <Route path="/room/:roomCode" element={<PlayerList />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    await screen.findByText('Neo');
+
+    act(() => {
       server.use(
         rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_req, res, ctx) =>
           res(
@@ -61,45 +93,13 @@ describe('<PlayerList />', () => {
                 missionId: null,
                 roomCode: 'X7JKL',
               },
-            ]),
-          ),
-        ),
-      );
-
-      const messageEvent = new MessageEvent('message', {
-        data: '{"id":1,"name":"Oracle","passcode":null,"status":"ALIVE","role":"PLAYER","targetId":null,"missionId":null,"roomCode":"X7JKL"}',
-      });
-
-      renderWithProviders(
-        <MemoryRouter initialEntries={['/room/X7JKL']}>
-          <Routes>
-            <Route path="/room/:roomCode" element={<PlayerList />} />
-          </Routes>
-        </MemoryRouter>,
-      );
-
-      await screen.findByText('Neo');
-
-      act(() => {
-        sources[mockRoomEventSource].emit(messageEvent.type, messageEvent);
-      });
-
-      expect(await screen.findByText('Oracle')).toBeInTheDocument();
-    });
-
-    it('should update the players list when SSE emits a new message with an updated player name', async () => {
-      server.use(
-        rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_req, res, ctx) =>
-          res(
-            ctx.status(200),
-            ctx.json([
               {
-                id: 0,
-                name: 'Neo',
+                id: 1,
+                name: 'Oracle',
                 passcode: null,
                 status: 'ALIVE',
                 role: 'PLAYER',
-                target: null,
+                targetId: null,
                 missionId: null,
                 roomCode: 'X7JKL',
               },
@@ -108,68 +108,9 @@ describe('<PlayerList />', () => {
         ),
       );
 
-      const messageEvent = new MessageEvent('message', {
-        data: '{"id":0,"name":"Super Neo","passcode":null,"status":"ALIVE","role":"PLAYER","targetId":null,"missionId":null,"roomCode":"X7JKL"}',
-      });
-
-      renderWithProviders(
-        <MemoryRouter initialEntries={['/room/X7JKL']}>
-          <Routes>
-            <Route path="/room/:roomCode" element={<PlayerList />} />
-          </Routes>
-        </MemoryRouter>,
-      );
-
-      await screen.findByText('Neo');
-
-      act(() => {
-        sources[mockRoomEventSource].emit(messageEvent.type, messageEvent);
-      });
-
-      expect(screen.queryByText('Neo')).not.toBeInTheDocument();
-      expect(await screen.findByText('Super Neo')).toBeInTheDocument();
+      sources[mockRoomEventSource].emit(messageEvent.type, messageEvent);
     });
 
-    it('should update the players list when SSE emits a new message with a leaving player', async () => {
-      server.use(
-        rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_req, res, ctx) =>
-          res(
-            ctx.status(200),
-            ctx.json([
-              {
-                id: 0,
-                name: 'Neo',
-                passcode: null,
-                status: 'ALIVE',
-                role: 'PLAYER',
-                target: null,
-                missionId: null,
-                roomCode: 'X7JKL',
-              },
-            ]),
-          ),
-        ),
-      );
-
-      const messageEvent = new MessageEvent('message', {
-        data: '{"id":0,"name":"Neo","passcode":null,"status":"ALIVE","role":"PLAYER","targetId":null,"missionId":null,"roomCode":null}',
-      });
-
-      renderWithProviders(
-        <MemoryRouter initialEntries={['/room/X7JKL']}>
-          <Routes>
-            <Route path="/room/:roomCode" element={<PlayerList />} />
-          </Routes>
-        </MemoryRouter>,
-      );
-
-      await screen.findByText('Neo');
-
-      act(() => {
-        sources[mockRoomEventSource].emit(messageEvent.type, messageEvent);
-      });
-
-      expect(screen.queryByText('Neo')).not.toBeInTheDocument();
-    });
+    expect(await screen.findByText('Oracle')).toBeInTheDocument();
   });
 });

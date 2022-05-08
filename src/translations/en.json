@@ -14,6 +14,7 @@
   "room": {
     "welcome": "Welcome to the party!",
     "join_room_code": "The code to join this room is {roomCode}.",
+    "missions_in_room": "There is currently {missionsCount} missions in this room.",
     "manage_missions": "Manage my missions",
     "missions_description": "Specify your informations and add new missions to the room.",
     "create_mission": "Create a new mission to add in the room",
