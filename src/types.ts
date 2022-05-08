@@ -14,3 +14,8 @@ export interface Room {
   name: string;
   status: RoomStatus;
 }
+
+export interface Mission {
+  id: number;
+  content: string;
+}
