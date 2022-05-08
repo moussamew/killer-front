@@ -1,7 +1,6 @@
-import { screen } from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { sources } from 'eventsourcemock';
 import { rest } from 'msw';
-import { act } from 'react-dom/test-utils';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { ROOM_ENDPOINT, ROOM_TOPIC } from '@/constants/endpoints';
@@ -63,10 +62,6 @@ describe('<PlayerList />', () => {
       ),
     );
 
-    const messageEvent = new MessageEvent('message', {
-      data: '{"id":1,"name":"Oracle","passcode":null,"status":"ALIVE","role":"PLAYER","targetId":null,"missionId":null,"roomCode":"X7JKL"}',
-    });
-
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL']}>
         <Routes>
@@ -77,40 +72,18 @@ describe('<PlayerList />', () => {
 
     await screen.findByText('Neo');
 
-    act(() => {
-      server.use(
-        rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_req, res, ctx) =>
-          res(
-            ctx.status(200),
-            ctx.json([
-              {
-                id: 0,
-                name: 'Neo',
-                passcode: null,
-                status: 'ALIVE',
-                role: 'PLAYER',
-                target: null,
-                missionId: null,
-                roomCode: 'X7JKL',
-              },
-              {
-                id: 1,
-                name: 'Oracle',
-                passcode: null,
-                status: 'ALIVE',
-                role: 'PLAYER',
-                targetId: null,
-                missionId: null,
-                roomCode: 'X7JKL',
-              },
-            ]),
-          ),
-        ),
-      );
+    server.use(
+      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_req, res, ctx) =>
+        res(ctx.status(200), ctx.json([])),
+      ),
+    );
 
-      sources[mockRoomEventSource].emit(messageEvent.type, messageEvent);
-    });
+    const messageEvent = new MessageEvent('message');
 
-    expect(await screen.findByText('Oracle')).toBeInTheDocument();
+    sources[mockRoomEventSource].emit(messageEvent.type, messageEvent);
+
+    await waitForElementToBeRemoved(() => screen.queryByText('Neo'));
+
+    expect(screen.queryByText('Neo')).not.toBeInTheDocument();
   });
 });
