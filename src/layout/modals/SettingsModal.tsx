@@ -67,7 +67,7 @@ const SettingsModal = (): JSX.Element => {
           <Spacer />
         </Fragment>
       )}
-      <Action onClick={(): void => togglePseudoInput(!isPseudoInputOpen)}>
+      <Action onClick={() => togglePseudoInput(!isPseudoInputOpen)}>
         <Text>{t('layout.update_pseudo')}</Text>
         <img alt="editPseudo" src={Edit} />
       </Action>
@@ -77,7 +77,7 @@ const SettingsModal = (): JSX.Element => {
           <Input
             id="editPseudo"
             value={pseudo}
-            onChange={(e): void => setPseudo(e.target.value.toUpperCase())}
+            onChange={(e) => setPseudo(e.target.value.toUpperCase())}
             placeholder={playerSession.name}
             errorMessage={errorMessage}
             uppercase

@@ -6,8 +6,9 @@ import Island from '@/assets/images/island.png';
 import t from '@/helpers/translate';
 import { PlayerContext } from '@/hooks/context/player';
 
-import Missions from './Missions';
 import PlayerList from './PlayerList';
+import PlayerMissions from './PlayerMissions';
+import RoomMissions from './RoomMissions';
 
 const Content = tw.div`
   max-w-screen-xl p-2 m-auto
@@ -51,11 +52,12 @@ const Room = (): JSX.Element => {
         <RoomResume>
           <h1>{t('room.welcome')}</h1>
           <p>{t('room.join_room_code', { roomCode })}</p>
+          <RoomMissions />
         </RoomResume>
       </Welcome>
       <hr />
       <RoomFeatures>
-        <Missions />
+        <PlayerMissions />
         <PlayerList />
       </RoomFeatures>
     </Content>

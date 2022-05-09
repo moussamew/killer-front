@@ -23,7 +23,7 @@ const ModalProvider: FunctionComponent = ({ children }) => {
     () => ({
       modal,
       openModal,
-      closeModal: (): void => openModal(null),
+      closeModal: () => openModal(null),
     }),
     [modal, openModal],
   );

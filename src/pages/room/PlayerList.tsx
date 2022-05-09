@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
@@ -9,10 +9,8 @@ import Knife from '@/assets/images/knife.png';
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
 import t from '@/helpers/translate';
-import { Player } from '@/types';
 
-import { updatePlayerList } from './helpers';
-import { getPlayersInRoom } from './services/requests';
+import { getRoomPlayers } from './services/requests';
 
 const Container = tw.div`
   mt-3 xl:mt-0
@@ -49,33 +47,22 @@ const PlayerName = tw.p`
 const PlayerList = (): JSX.Element => {
   const { roomCode } = useParams();
 
-  const [players, setPlayers] = useState<Player[]>([]);
-
-  const { data: playersInRoom } = useQuery('playersInRoom', () =>
-    getPlayersInRoom(roomCode),
+  const { data: roomPlayers, refetch: refetchRoomPlayers } = useQuery(
+    'roomPlayers',
+    () => getRoomPlayers(roomCode),
   );
-
-  useEffect(() => {
-    if (playersInRoom) {
-      setPlayers(playersInRoom);
-    }
-  }, [playersInRoom]);
 
   useEffect(() => {
     const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomCode}`, {
       withCredentials: PROD_ENV,
     });
 
-    roomEventSource.addEventListener('message', (event: MessageEvent): void => {
-      const playerUpdated: Player = JSON.parse(event.data);
-
-      const newPlayerList = updatePlayerList(playerUpdated, [...players]);
-
-      return setPlayers(newPlayerList);
+    roomEventSource.addEventListener('message', async (): Promise<void> => {
+      await refetchRoomPlayers();
     });
 
-    return (): void => roomEventSource.close();
-  }, [roomCode, players]);
+    return () => roomEventSource.close();
+  }, [roomCode, refetchRoomPlayers]);
 
   return (
     <Container>
@@ -88,7 +75,7 @@ const PlayerList = (): JSX.Element => {
       </Section>
       <hr />
       <List>
-        {players.map(({ name }) => (
+        {roomPlayers?.map(({ name }) => (
           <PlayerItem key={name}>
             <PlayerImage alt={`player-${name}`} src={Killer} />
             <PlayerName>{name}</PlayerName>

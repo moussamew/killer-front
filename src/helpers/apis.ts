@@ -2,12 +2,12 @@ import { Method } from '@/constants/enums';
 
 import { RequestParams } from './types';
 
-export const request = async <T>(
+export const fetchRequest = (
   url: string,
   method: Method,
   requestParams?: RequestParams,
-): Promise<T> => {
-  const response = await fetch(url, {
+): Promise<Response> => {
+  return fetch(url, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -15,6 +15,14 @@ export const request = async <T>(
     method,
     ...requestParams,
   });
+};
+
+export const request = async <T>(
+  url: string,
+  method: Method,
+  requestParams?: RequestParams,
+): Promise<T> => {
+  const response = await fetchRequest(url, method, requestParams);
 
   const result = await response.json();
 
