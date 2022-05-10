@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react';
 
 import Share from '@/assets/icons/share.svg';
-import { Button } from '@/components';
+import { Button } from '@/components/Button';
 import { Message } from '@/components/Message';
 import t from '@/helpers/translate';
 

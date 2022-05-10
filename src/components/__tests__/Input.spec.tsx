@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { Input } from '..';
+import { Input } from '../Input';
 
 describe('Input', () => {
   it('should display the value inside the input', () => {

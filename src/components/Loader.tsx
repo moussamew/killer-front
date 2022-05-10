@@ -5,7 +5,7 @@ const Image = tw.svg`
   inset-0 h-4
 `;
 
-const Loader = (): JSX.Element => (
+export const Loader = (): JSX.Element => (
   <Image xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
     <title>Loader</title>
     <circle
@@ -22,5 +22,3 @@ const Loader = (): JSX.Element => (
     />
   </Image>
 );
-
-export default Loader;

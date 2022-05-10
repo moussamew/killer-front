@@ -1,7 +1,7 @@
 import { Dispatch, Fragment, RefObject, SetStateAction } from 'react';
 import tw from 'tailwind-styled-components';
 
-import { Input } from '@/components';
+import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
 
 const Pseudo = tw.div`

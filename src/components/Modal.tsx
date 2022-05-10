@@ -24,7 +24,7 @@ interface Props {
   closeModal: () => void;
 }
 
-const Modal = ({ children, closeModal }: Props): JSX.Element => (
+export const Modal = ({ children, closeModal }: Props): JSX.Element => (
   <Background>
     <Content>
       <CloseIcon alt="closeModal" src={CloseModal} onClick={closeModal} />
@@ -32,5 +32,3 @@ const Modal = ({ children, closeModal }: Props): JSX.Element => (
     </Content>
   </Background>
 );
-
-export default Modal;

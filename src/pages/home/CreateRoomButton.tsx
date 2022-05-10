@@ -1,6 +1,6 @@
 import { Fragment, RefObject, useContext, useState } from 'react';
 
-import { Button } from '@/components';
+import { Button } from '@/components/Button';
 import { Message } from '@/components/Message';
 import t from '@/helpers/translate';
 import { PlayerContext } from '@/hooks/context/player';

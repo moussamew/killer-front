@@ -1,7 +1,7 @@
 import { render, fireEvent, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { Button } from '..';
+import { Button } from '../Button';
 
 describe('<Button />', () => {
   it('should show the text inside the button', () => {

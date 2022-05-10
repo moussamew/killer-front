@@ -1,7 +1,7 @@
 import { Fragment, ReactNode, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Modal } from '@/components';
+import { Modal } from '@/components/Modal';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
 import { usePrevious } from '@/hooks/usePrevious';

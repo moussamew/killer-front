@@ -33,7 +33,7 @@ interface Props {
   uppercase?: boolean;
 }
 
-const Input = (
+const InputRef = (
   {
     id,
     value,
@@ -62,4 +62,4 @@ const Input = (
   </Content>
 );
 
-export default forwardRef(Input);
+export const Input = forwardRef(InputRef);

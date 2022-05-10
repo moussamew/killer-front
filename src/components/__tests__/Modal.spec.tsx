@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { Modal } from '..';
+import { Modal } from '../Modal';
 
 const dummyProps = {
   children: <div>My Modal</div>,

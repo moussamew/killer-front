@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { Button } from '@/components';
+import { Button } from '@/components/Button';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
