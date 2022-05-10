@@ -16,19 +16,24 @@ export const ShareRoomLink = ({ roomCode }: Props): JSX.Element => {
   const saveRoomLink = async (): Promise<void> => {
     const roomLink = `${window.location.origin}/join/${roomCode}`;
 
-    try {
-      if (!navigator.clipboard) {
-        throw new Error();
-      }
-
-      await navigator.clipboard.writeText(
-        `${window.location.origin}/join/${roomCode}`,
-      );
-
-      setSuccessMessage(t('room.share_room_link_success'));
-    } catch (error) {
-      setErrorMessage(t('room.share_room_link_error', { roomLink }));
+    if (navigator.share) {
+      return navigator.share({
+        title: 'Killerparty',
+        text: `Join the room ${roomCode}!`,
+        url: roomLink,
+      });
     }
+
+    if (!navigator.clipboard) {
+      return setErrorMessage(t('room.share_room_link_error', { roomLink }));
+    }
+
+    return navigator.clipboard
+      .writeText(`${window.location.origin}/join/${roomCode}`)
+      .then(() => setSuccessMessage(t('room.share_room_link_success')))
+      .catch(() =>
+        setErrorMessage(t('room.share_room_link_error', { roomLink })),
+      );
   };
 
   return (
