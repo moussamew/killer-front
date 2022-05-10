@@ -6,7 +6,7 @@ import { ModalProvider } from '@/hooks/context/modal';
 import { PlayerProvider } from '@/hooks/context/player';
 
 import Layout from './layout/Layout';
-import Home from './pages/home/Home';
+import { HomePage } from './pages/home/HomePage';
 import Room from './pages/room/Room';
 
 import './assets/styles/app.css';
@@ -29,7 +29,7 @@ const Application = (): JSX.Element => (
         <Layout>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<HomePage />} />
               <Route path="/room">
                 <Route path=":roomCode" element={<Room />} />
               </Route>

@@ -11,7 +11,7 @@ import {
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
 import Layout from '@/layout/Layout';
-import Home from '@/pages/home/Home';
+import { HomePage } from '@/pages/home/HomePage';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -38,7 +38,7 @@ describe('<JoinRoomModal />', () => {
             path="/"
             element={
               <Layout>
-                <Home />
+                <HomePage />
               </Layout>
             }
           />

@@ -16,7 +16,7 @@ interface Props {
   inputErrorMessage?: string;
 }
 
-const CreatePlayer = ({
+export const CreatePlayerInput = ({
   inputPseudo,
   setInputPseudo,
   inputPseudoRef,
@@ -38,5 +38,3 @@ const CreatePlayer = ({
     </Pseudo>
   </Fragment>
 );
-
-export default CreatePlayer;

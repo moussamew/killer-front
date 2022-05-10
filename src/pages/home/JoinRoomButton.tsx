@@ -13,7 +13,7 @@ interface Props {
   showInputErrorMessage: (errorMessage: string) => void;
 }
 
-const JoinRoom = ({
+export const JoinRoomButton = ({
   inputPseudo,
   showInputErrorMessage,
 }: Props): JSX.Element => {
@@ -41,5 +41,3 @@ const JoinRoom = ({
     </Button>
   );
 };
-
-export default JoinRoom;

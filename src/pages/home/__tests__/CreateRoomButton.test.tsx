@@ -8,8 +8,8 @@ import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-import CreateRoom from '../CreateRoom';
-import Home from '../Home';
+import { CreateRoomButton } from '../CreateRoomButton';
+import { HomePage } from '../HomePage';
 
 const dummyProps = {
   inputPseudo: '',
@@ -17,11 +17,11 @@ const dummyProps = {
   showInputErrorMessage: vi.fn(),
 };
 
-describe('<CreateRoom />', () => {
+describe('<CreateRoomButton />', () => {
   it('should show the create room button', async () => {
     renderWithProviders(
       <MemoryRouter>
-        <CreateRoom {...dummyProps} />
+        <CreateRoomButton {...dummyProps} />
       </MemoryRouter>,
     );
 
@@ -44,7 +44,7 @@ describe('<CreateRoom />', () => {
     renderWithProviders(
       <MemoryRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePage />} />
           <Route
             path={`/room/${mockRoomCode}`}
             element={<p>Welcome to the room {mockRoomCode}!</p>}
@@ -82,7 +82,7 @@ describe('<CreateRoom />', () => {
     renderWithProviders(
       <MemoryRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePage />} />
           <Route
             path={`/room/${mockRoomCode}`}
             element={<p>Welcome to the room {mockRoomCode}!</p>}
@@ -118,7 +118,7 @@ describe('<CreateRoom />', () => {
 
     renderWithProviders(
       <MemoryRouter>
-        <CreateRoom {...dummyProps} />
+        <CreateRoomButton {...dummyProps} />
         <input
           ref={dummyProps.inputPseudoRef}
           value="Morpheus"

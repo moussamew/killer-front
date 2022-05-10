@@ -33,7 +33,7 @@ const RoomFeatures = tw.div`
   mt-2 md:mt-4
 `;
 
-const Room = (): JSX.Element => {
+export const RoomPage = (): JSX.Element => {
   const { roomCode } = useParams();
   const { playerSession } = useContext(PlayerContext);
 
@@ -63,5 +63,3 @@ const Room = (): JSX.Element => {
     </Content>
   );
 };
-
-export default Room;

@@ -6,9 +6,9 @@ import Killerparty from '@/assets/images/killerparty.png';
 import t from '@/helpers/translate';
 import { PlayerContext } from '@/hooks/context/player';
 
-import CreatePlayer from './CreatePlayer';
-import CreateRoom from './CreateRoom';
-import JoinRoom from './JoinRoom';
+import { CreatePlayerInput } from './CreatePlayerInput';
+import { CreateRoomButton } from './CreateRoomButton';
+import { JoinRoomButton } from './JoinRoomButton';
 
 const Content = tw.div`
   max-w-screen-lg m-auto
@@ -23,7 +23,7 @@ const Text = tw.p`
   my-2
 `;
 
-const Home = (): JSX.Element => {
+export const HomePage = (): JSX.Element => {
   const [inputPseudo, setInputPseudo] = useState('');
   const [inputErrorMessage, setInputErrorMessage] = useState<string>();
 
@@ -50,24 +50,22 @@ const Home = (): JSX.Element => {
       <h1>{t('home.title')}</h1>
       <Text>{t('home.game_resume')}</Text>
       {!playerSession.name && (
-        <CreatePlayer
+        <CreatePlayerInput
           inputPseudo={inputPseudo}
           setInputPseudo={setInputPseudo}
           inputPseudoRef={inputPseudoRef}
           inputErrorMessage={inputErrorMessage}
         />
       )}
-      <CreateRoom
+      <CreateRoomButton
         inputPseudo={inputPseudo}
         inputPseudoRef={inputPseudoRef}
         showInputErrorMessage={showInputErrorMessage}
       />
-      <JoinRoom
+      <JoinRoomButton
         inputPseudo={inputPseudo}
         showInputErrorMessage={showInputErrorMessage}
       />
     </Content>
   );
 };
-
-export default Home;

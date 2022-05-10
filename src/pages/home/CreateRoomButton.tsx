@@ -13,7 +13,7 @@ interface Props {
   showInputErrorMessage: (errorMessage: string) => void;
 }
 
-const CreateRoom = ({
+export const CreateRoomButton = ({
   inputPseudo,
   inputPseudoRef,
   showInputErrorMessage,
@@ -51,5 +51,3 @@ const CreateRoom = ({
     </Fragment>
   );
 };
-
-export default CreateRoom;

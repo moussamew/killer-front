@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { vi } from 'vitest';
 
-import CreatePlayer from '../CreatePlayer';
+import { CreatePlayerInput } from '../CreatePlayerInput';
 
 const dummyProps = {
   inputPseudo: '',
@@ -10,9 +10,9 @@ const dummyProps = {
   inputPseudoRef: createRef<HTMLInputElement>(),
 };
 
-describe('<CreatePlayer />', () => {
+describe('<CreatePlayerInput />', () => {
   it('should show the input to create a new Player', () => {
-    render(<CreatePlayer {...dummyProps} />);
+    render(<CreatePlayerInput {...dummyProps} />);
 
     expect(
       screen.getByText('To start, enter your nickname!'),
@@ -23,7 +23,9 @@ describe('<CreatePlayer />', () => {
   it('should update the value inside the player pseudo input', () => {
     const spySetInputPseudo = vi.fn();
 
-    render(<CreatePlayer {...dummyProps} setInputPseudo={spySetInputPseudo} />);
+    render(
+      <CreatePlayerInput {...dummyProps} setInputPseudo={spySetInputPseudo} />,
+    );
 
     fireEvent.change(screen.getByPlaceholderText('Choose a pseudo'), {
       target: { value: 'Neo' },

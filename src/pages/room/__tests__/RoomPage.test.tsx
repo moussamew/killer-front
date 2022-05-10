@@ -3,15 +3,15 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { renderWithProviders } from '@/tests/utils';
 
-import Room from '../Room';
+import { RoomPage } from '../RoomPage';
 
-describe('<Room />', () => {
+describe('<RoomPage />', () => {
   it('should show a room with the correct room code', async () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/P9LDG']}>
         <Routes>
           <Route path="/" element={<div>Home</div>} />
-          <Route path="/room/:roomCode" element={<Room />} />
+          <Route path="/room/:roomCode" element={<RoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
