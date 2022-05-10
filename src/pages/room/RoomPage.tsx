@@ -3,8 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Island from '@/assets/images/island.png';
+import { isEmptyObject } from '@/helpers/objects';
 import t from '@/helpers/translate';
 import { PlayerContext } from '@/hooks/context/player';
+import { usePrevious } from '@/hooks/usePrevious';
+import { Layout } from '@/layout/Layout';
 
 import PlayerList from './PlayerList';
 import PlayerMissions from './PlayerMissions';
@@ -37,29 +40,36 @@ export const RoomPage = (): JSX.Element => {
   const { roomCode } = useParams();
   const { playerSession } = useContext(PlayerContext);
 
+  const previousRoomCode = usePrevious(playerSession.roomCode);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!playerSession.roomCode) {
-      navigate('/');
+    if (
+      isEmptyObject(playerSession) ||
+      (!previousRoomCode && playerSession.roomCode !== roomCode)
+    ) {
+      navigate(`/join/${roomCode}`);
     }
-  }, [playerSession.roomCode, navigate]);
+  }, [playerSession, previousRoomCode, roomCode, navigate]);
 
   return (
-    <Content>
-      <Welcome>
-        <WelcomeImage alt="welcome" src={Island} />
-        <RoomResume>
-          <h1>{t('room.welcome')}</h1>
-          <p>{t('room.join_room_code', { roomCode })}</p>
-          <RoomMissions />
-        </RoomResume>
-      </Welcome>
-      <hr />
-      <RoomFeatures>
-        <PlayerMissions />
-        <PlayerList />
-      </RoomFeatures>
-    </Content>
+    <Layout>
+      <Content>
+        <Welcome>
+          <WelcomeImage alt="welcome" src={Island} />
+          <RoomResume>
+            <h1>{t('room.welcome')}</h1>
+            <p>{t('room.join_room_code', { roomCode })}</p>
+            <RoomMissions />
+          </RoomResume>
+        </Welcome>
+        <hr />
+        <RoomFeatures>
+          <PlayerMissions />
+          <PlayerList />
+        </RoomFeatures>
+      </Content>
+    </Layout>
   );
 };

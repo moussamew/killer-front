@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { rest } from 'msw';
+import { MemoryRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
@@ -29,9 +30,11 @@ describe('<JoinRoomButton />', () => {
     );
 
     renderWithProviders(
-      <Layout>
-        <JoinRoomButton {...dummyProps} />
-      </Layout>,
+      <MemoryRouter>
+        <Layout>
+          <JoinRoomButton {...dummyProps} />
+        </Layout>
+      </MemoryRouter>,
     );
 
     fireEvent.click(await screen.findByText('Join a room'));

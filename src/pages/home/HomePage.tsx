@@ -5,6 +5,7 @@ import tw from 'tailwind-styled-components';
 import Killerparty from '@/assets/images/killerparty.png';
 import t from '@/helpers/translate';
 import { PlayerContext } from '@/hooks/context/player';
+import { Layout } from '@/layout/Layout';
 
 import { CreatePlayerInput } from './CreatePlayerInput';
 import { CreateRoomButton } from './CreateRoomButton';
@@ -45,27 +46,29 @@ export const HomePage = (): JSX.Element => {
   };
 
   return (
-    <Content>
-      <WelcomeImage className="m-auto" alt="welcome" src={Killerparty} />
-      <h1>{t('home.title')}</h1>
-      <Text>{t('home.game_resume')}</Text>
-      {!playerSession.name && (
-        <CreatePlayerInput
+    <Layout>
+      <Content>
+        <WelcomeImage className="m-auto" alt="welcome" src={Killerparty} />
+        <h1>{t('home.title')}</h1>
+        <Text>{t('home.game_resume')}</Text>
+        {!playerSession.name && (
+          <CreatePlayerInput
+            inputPseudo={inputPseudo}
+            setInputPseudo={setInputPseudo}
+            inputPseudoRef={inputPseudoRef}
+            inputErrorMessage={inputErrorMessage}
+          />
+        )}
+        <CreateRoomButton
           inputPseudo={inputPseudo}
-          setInputPseudo={setInputPseudo}
           inputPseudoRef={inputPseudoRef}
-          inputErrorMessage={inputErrorMessage}
+          showInputErrorMessage={showInputErrorMessage}
         />
-      )}
-      <CreateRoomButton
-        inputPseudo={inputPseudo}
-        inputPseudoRef={inputPseudoRef}
-        showInputErrorMessage={showInputErrorMessage}
-      />
-      <JoinRoomButton
-        inputPseudo={inputPseudo}
-        showInputErrorMessage={showInputErrorMessage}
-      />
-    </Content>
+        <JoinRoomButton
+          inputPseudo={inputPseudo}
+          showInputErrorMessage={showInputErrorMessage}
+        />
+      </Content>
+    </Layout>
   );
 };

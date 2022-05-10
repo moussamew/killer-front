@@ -11,6 +11,10 @@ describe('<RoomPage />', () => {
       <MemoryRouter initialEntries={['/room/P9LDG']}>
         <Routes>
           <Route path="/" element={<div>Home</div>} />
+          <Route
+            path="/join/P9LDG"
+            element={<div>Check user before join a room</div>}
+          />
           <Route path="/room/:roomCode" element={<RoomPage />} />
         </Routes>
       </MemoryRouter>,
