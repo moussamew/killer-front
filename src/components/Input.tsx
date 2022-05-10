@@ -1,7 +1,7 @@
 import { ChangeEvent, ForwardedRef, forwardRef } from 'react';
 import tw from 'tailwind-styled-components';
 
-import { ErrorMessage } from '@/assets/styles/shared';
+import { Message } from './Message';
 
 const Content = tw.div`
   flex flex-col w-full 
@@ -58,7 +58,7 @@ const Input = (
       autoComplete="off"
       $uppercase={uppercase}
     />
-    {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+    {errorMessage && <Message errorMessage={errorMessage} />}
   </Content>
 );
 

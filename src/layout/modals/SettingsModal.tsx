@@ -82,9 +82,11 @@ const SettingsModal = (): JSX.Element => {
             errorMessage={errorMessage}
             uppercase
           />
-          <Button onClick={updatePseudo} disabled={!pseudo}>
-            {t('layout.save_changes')}
-          </Button>
+          <Button
+            content={t('layout.save_changes')}
+            onClick={updatePseudo}
+            disabled={!pseudo}
+          />
         </Fragment>
       )}
     </Fragment>

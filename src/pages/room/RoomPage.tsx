@@ -12,6 +12,7 @@ import { Layout } from '@/layout/Layout';
 import PlayerList from './PlayerList';
 import PlayerMissions from './PlayerMissions';
 import RoomMissions from './RoomMissions';
+import { ShareRoomLink } from './ShareRoomLink';
 
 const Content = tw.div`
   max-w-screen-xl p-2 m-auto
@@ -29,6 +30,7 @@ const WelcomeImage = tw.img`
 
 const RoomResume = tw.div`
   mt-2 text-center md:text-left
+  w-full sm:w-fit
 `;
 
 const RoomFeatures = tw.div`
@@ -40,14 +42,14 @@ export const RoomPage = (): JSX.Element => {
   const { roomCode } = useParams();
   const { playerSession } = useContext(PlayerContext);
 
-  const previousRoomCode = usePrevious(playerSession.roomCode);
+  const previousRoomCode = usePrevious(playerSession?.roomCode);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (
       isEmptyObject(playerSession) ||
-      (!previousRoomCode && playerSession.roomCode !== roomCode)
+      (!previousRoomCode && playerSession?.roomCode !== roomCode)
     ) {
       navigate(`/join/${roomCode}`);
     }
@@ -62,6 +64,8 @@ export const RoomPage = (): JSX.Element => {
             <h1>{t('room.welcome')}</h1>
             <p>{t('room.join_room_code', { roomCode })}</p>
             <RoomMissions />
+            {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
+            <ShareRoomLink roomCode={roomCode!} />
           </RoomResume>
         </Welcome>
         <hr />

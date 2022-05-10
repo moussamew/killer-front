@@ -17,7 +17,7 @@ export const Layout = ({ children, hideSettings }: Props): JSX.Element => {
   const { modal, closeModal } = useContext(ModalContext);
   const { playerSession } = useContext(PlayerContext);
 
-  const previousRoomCode = usePrevious(playerSession.roomCode);
+  const previousRoomCode = usePrevious(playerSession?.roomCode);
 
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ export const Layout = ({ children, hideSettings }: Props): JSX.Element => {
     if (previousRoomCode && !playerSession.roomCode) {
       navigate('/');
     }
-  }, [navigate, previousRoomCode, playerSession.roomCode]);
+  }, [navigate, previousRoomCode, playerSession]);
 
   return (
     <Fragment>

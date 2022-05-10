@@ -36,19 +36,21 @@ const JoinRoomModal = (): JSX.Element | null => {
     <Fragment>
       <HeadContent>
         <Icon alt="roomIcon" src={Room} />
-        <Title>{t('join.modal_title')}</Title>
+        <Title>{t('modals.joinRoom.title')}</Title>
       </HeadContent>
       <Input
         id="joinRoom"
-        placeholder={t('join.modal_placeholder')}
+        placeholder={t('modals.joinRoom.placeholder')}
         value={roomCode}
         onChange={({ target }): void => setRoomCode(target.value.toUpperCase())}
         errorMessage={errorMessage}
         uppercase
       />
-      <Button disabled={!roomCode} onClick={handleJoinRoom}>
-        {t('join.room')}
-      </Button>
+      <Button
+        content={t('modals.joinRoom.button')}
+        disabled={!roomCode}
+        onClick={handleJoinRoom}
+      />
     </Fragment>
   );
 };

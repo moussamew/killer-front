@@ -1,5 +1,8 @@
-import { ReactNode } from 'react';
 import tw from 'tailwind-styled-components';
+
+const Content = tw.div`
+  flex flex-col w-full
+`;
 
 const StyledButton = tw.button<{
   $buttonColor: string;
@@ -12,7 +15,8 @@ const StyledButton = tw.button<{
   transition-shadow duration-500 ease-in 
   shadow-md hover:shadow-xl
   p-1 mt-1 rounded-lg 
-  w-full text-3xl
+  w-full text-3xl relative
+  flex justify-center item-center
 `;
 
 const Text = tw.p<{ $textColor: string }>`
@@ -20,31 +24,38 @@ const Text = tw.p<{ $textColor: string }>`
   font-medium text-3xl
 `;
 
+const Icon = tw.img`
+  h-2.5 absolute left-1.5
+`;
+
 interface Props {
-  children: ReactNode;
+  content: string;
   buttonColor?: string;
   textColor?: string;
   onClick?: () => void;
   type?: 'submit' | 'reset' | 'button';
   disabled?: boolean;
+  icon?: string;
 }
 
-const Button = ({
-  children,
+export const Button = ({
+  content,
   buttonColor = 'bg-red-400',
   textColor = 'text-white',
   onClick,
   type = 'button',
   disabled = false,
+  icon,
 }: Props): JSX.Element => (
-  <StyledButton
-    onClick={onClick}
-    type={type}
-    $buttonColor={buttonColor}
-    disabled={disabled}
-  >
-    <Text $textColor={textColor}>{children}</Text>
-  </StyledButton>
+  <Content>
+    <StyledButton
+      onClick={onClick}
+      type={type}
+      $buttonColor={buttonColor}
+      disabled={disabled}
+    >
+      {icon && <Icon alt={content} src={icon} />}
+      <Text $textColor={textColor}>{content}</Text>
+    </StyledButton>
+  </Content>
 );
-
-export default Button;

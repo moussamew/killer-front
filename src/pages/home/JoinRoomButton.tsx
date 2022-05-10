@@ -33,11 +33,10 @@ export const JoinRoomButton = ({
 
   return (
     <Button
+      content={t('home.join_room')}
       buttonColor="bg-yellow-200"
       textColor="text-lightDark"
       onClick={handleJoinRoom}
-    >
-      {t('home.join_room')}
-    </Button>
+    />
   );
 };

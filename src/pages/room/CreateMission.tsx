@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import { QueryObserverResult } from 'react-query';
 
+import Add from '@/assets/icons/add.svg';
 import { Button, Input } from '@/components';
 import t from '@/helpers/translate';
 import { Mission } from '@/types';
@@ -36,12 +37,12 @@ const CreateMission = ({ refetchPlayerMissions }: Props): JSX.Element => {
         errorMessage={errorMessage}
       />
       <Button
+        content={t('room.add_mission')}
         buttonColor="bg-red-400"
         disabled={!newMission}
         onClick={addMission}
-      >
-        {t('room.add_mission')}
-      </Button>
+        icon={Add}
+      />
     </Fragment>
   );
 };

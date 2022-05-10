@@ -12,9 +12,7 @@ export const JoinRoomPage = (): JSX.Element => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const { name: playerName, roomCode: playerRoomCode } = playerSession;
-
-    if (playerName && !playerRoomCode) {
+    if (playerSession?.name && !playerSession?.roomCode) {
       updatePlayer({ roomCode })
         .then(refreshPlayerSession)
         .then(() => navigate(`/room/${roomCode}`));

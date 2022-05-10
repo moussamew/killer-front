@@ -1,7 +1,7 @@
 import { Fragment, RefObject, useContext, useState } from 'react';
 
-import { ErrorMessage } from '@/assets/styles/shared';
 import { Button } from '@/components';
+import { Message } from '@/components/Message';
 import t from '@/helpers/translate';
 import { PlayerContext } from '@/hooks/context/player';
 
@@ -44,10 +44,12 @@ export const CreateRoomButton = ({
 
   return (
     <Fragment>
-      <Button buttonColor="bg-red-400" onClick={handleCreateRoom}>
-        {t('home.create_room')}
-      </Button>
-      {roomErrorMessage && <ErrorMessage>{roomErrorMessage}</ErrorMessage>}
+      <Button
+        content={t('home.create_room')}
+        buttonColor="bg-red-400"
+        onClick={handleCreateRoom}
+      />
+      {roomErrorMessage && <Message errorMessage={roomErrorMessage} />}
     </Fragment>
   );
 };

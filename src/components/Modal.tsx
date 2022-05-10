@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import tw from 'tailwind-styled-components';
 
-import Close from '@/assets/icons/close.svg';
+import CloseModal from '@/assets/icons/closeModal.svg';
 
 const Background = tw.div`
   bg-disabled fixed top-0
@@ -15,8 +15,8 @@ const Content = tw.div`
 `;
 
 const CloseIcon = tw.img`
-  absolute cursor-pointer h-3
-  -top-1 -right-1
+  absolute cursor-pointer h-2
+  top-0.5 right-0.5
 `;
 
 interface Props {
@@ -27,7 +27,7 @@ interface Props {
 const Modal = ({ children, closeModal }: Props): JSX.Element => (
   <Background>
     <Content>
-      <CloseIcon alt="closeModal" src={Close} onClick={closeModal} />
+      <CloseIcon alt="closeModal" src={CloseModal} onClick={closeModal} />
       {children}
     </Content>
   </Background>

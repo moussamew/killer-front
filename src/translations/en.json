@@ -21,7 +21,10 @@
     "mission_input": "Make him drink his glass dry",
     "add_mission": "Add this mission in the room",
     "players_list": "Criminals in the room",
-    "players_list_description": "List of all the killers who will have to kill each other."
+    "players_list_description": "List of all the killers who will have to kill each other.",
+    "share_room_link": "Share link to join the room",
+    "share_room_link_error": "An error occurred during the invitation.\n To manually invite new players, copy and paste the following link:\n {roomLink}",
+    "share_room_link_success": "Room invitation saved!"
   },
   "layout": {
     "user_settings": "User Settings",
@@ -29,9 +32,11 @@
     "update_pseudo": "Update my pseudo",
     "save_changes": "Save changes"
   },
-  "join": {
-    "modal_title": "Join a room",
-    "modal_placeholder": "Code of the room to join",
-    "room": "Join this room"
+  "modals": {
+    "joinRoom": {
+      "title": "Join a room",
+      "placeholder": "Code of the room to join",
+      "button": "Join this room"
+    }
   }
 }
