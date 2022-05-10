@@ -9,7 +9,7 @@ interface Props {
   children: ReactNode;
 }
 
-const Layout = ({ children }: Props): JSX.Element => {
+export const Layout = ({ children }: Props): JSX.Element => {
   const { modal, closeModal } = useContext(ModalContext);
 
   return (
@@ -20,5 +20,3 @@ const Layout = ({ children }: Props): JSX.Element => {
     </Fragment>
   );
 };
-
-export default Layout;

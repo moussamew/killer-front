@@ -5,9 +5,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ModalProvider } from '@/hooks/context/modal';
 import { PlayerProvider } from '@/hooks/context/player';
 
-import Layout from './layout/Layout';
+import { Layout } from './layout/Layout';
 import { HomePage } from './pages/home/HomePage';
-import Room from './pages/room/Room';
+import { RoomPage } from './pages/room/RoomPage';
 
 import './assets/styles/app.css';
 
@@ -31,7 +31,7 @@ const Application = (): JSX.Element => (
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/room">
-                <Route path=":roomCode" element={<Room />} />
+                <Route path=":roomCode" element={<RoomPage />} />
               </Route>
             </Routes>
           </BrowserRouter>
