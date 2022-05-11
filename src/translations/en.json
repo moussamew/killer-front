@@ -23,12 +23,12 @@
     "players_list_description": "List of all the killers who will have to kill each other.",
     "share_room_link": "Share link to join the room",
     "share_room_link_error": "An error occurred during the invitation.\n To manually invite new players,\n copy and paste the following link:\n {roomLink}",
-    "share_room_link_success": "Room invitation saved!"
+    "share_room_link_success": "Link saved in the clipboard!"
   },
-  "joinRoom": {
+  "join_room": {
     "no_pseudo": "No pseudo found yet!",
     "create_pseudo": "You must create a pseudo before joining this room.",
-    "join_the_room": "Join the room {roomCode}",
+    "join_the_room": "Continue and join the room",
     "create_room": "Create my own room",
     "already_inside_room": "Already inside the room {playerRoomCode}!",
     "careful_before_join_room": "Be careful, if you join this room, this will make you leave the previous one.",
@@ -41,7 +41,7 @@
     "save_changes": "Save changes"
   },
   "modals": {
-    "joinRoom": {
+    "join_room": {
       "title": "Join a room",
       "placeholder": "Code of the room to join",
       "button": "Join this room"

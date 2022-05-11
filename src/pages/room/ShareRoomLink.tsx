@@ -1,8 +1,9 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import Share from '@/assets/icons/share.svg';
 import { Button } from '@/components/Button';
-import { Message } from '@/components/Message';
+import { ErrorMessage } from '@/components/ErrorMessage';
+import { RESET_STATE_DELAY_MS } from '@/constants/common';
 import t from '@/helpers/translate';
 
 interface Props {
@@ -10,8 +11,17 @@ interface Props {
 }
 
 export const ShareRoomLink = ({ roomCode }: Props): JSX.Element => {
-  const [errorMessage, setErrorMessage] = useState<string>();
-  const [successMessage, setSuccessMessage] = useState<string>();
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
+  /**
+   * Remove the success message after a specific delay.
+   */
+  useEffect(() => {
+    if (successMessage) {
+      setTimeout(() => setSuccessMessage(''), RESET_STATE_DELAY_MS);
+    }
+  });
 
   const saveRoomLink = async (): Promise<void> => {
     const roomLink = `${window.location.origin}/join/${roomCode}`;
@@ -38,18 +48,12 @@ export const ShareRoomLink = ({ roomCode }: Props): JSX.Element => {
   return (
     <Fragment>
       <Button
-        content={t('room.share_room_link')}
+        content={successMessage || t('room.share_room_link')}
         icon={Share}
         onClick={saveRoomLink}
       />
-      {successMessage && (
-        <Message
-          successMessage={successMessage}
-          closeMessage={() => setSuccessMessage('')}
-        />
-      )}
       {errorMessage && (
-        <Message
+        <ErrorMessage
           errorMessage={errorMessage}
           closeMessage={() => setErrorMessage('')}
         />

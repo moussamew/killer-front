@@ -3,8 +3,8 @@ import { QueryObserverResult } from 'react-query';
 
 import Add from '@/assets/icons/add.svg';
 import { Button } from '@/components/Button';
+import { ErrorMessage } from '@/components/ErrorMessage';
 import { Input } from '@/components/Input';
-import { Message } from '@/components/Message';
 import t from '@/helpers/translate';
 import { Mission } from '@/types';
 
@@ -38,7 +38,7 @@ const CreateMission = ({ refetchPlayerMissions }: Props): JSX.Element => {
         placeholder={t('room.mission_input')}
       />
       {errorMessage && (
-        <Message
+        <ErrorMessage
           errorMessage={errorMessage}
           closeMessage={() => setErrorMessage('')}
         />

@@ -26,7 +26,7 @@ const Text = tw.p`
 
 export const HomePage = (): JSX.Element => {
   const [inputPseudo, setInputPseudo] = useState('');
-  const [inputErrorMessage, setInputErrorMessage] = useState<string>();
+  const [inputErrorMessage, setInputErrorMessage] = useState('');
 
   const { playerSession } = useContext(PlayerContext);
 
@@ -57,6 +57,7 @@ export const HomePage = (): JSX.Element => {
             setInputPseudo={setInputPseudo}
             inputPseudoRef={inputPseudoRef}
             inputErrorMessage={inputErrorMessage}
+            setInputErrorMessage={setInputErrorMessage}
           />
         )}
         <CreateRoomButton

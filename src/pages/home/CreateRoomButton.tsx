@@ -1,7 +1,7 @@
 import { Fragment, RefObject, useContext, useState } from 'react';
 
 import { Button } from '@/components/Button';
-import { Message } from '@/components/Message';
+import { ErrorMessage } from '@/components/ErrorMessage';
 import t from '@/helpers/translate';
 import { PlayerContext } from '@/hooks/context/player';
 
@@ -49,7 +49,12 @@ export const CreateRoomButton = ({
         buttonColor="bg-red-400"
         onClick={handleCreateRoom}
       />
-      {roomErrorMessage && <Message errorMessage={roomErrorMessage} />}
+      {roomErrorMessage && (
+        <ErrorMessage
+          errorMessage={roomErrorMessage}
+          closeMessage={() => setRoomErrorMessage('')}
+        />
+      )}
     </Fragment>
   );
 };
