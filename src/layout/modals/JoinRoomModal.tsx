@@ -4,6 +4,7 @@ import tw from 'tailwind-styled-components';
 import Room from '@/assets/icons/room.svg';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
+import { Message } from '@/components/Message';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
@@ -43,10 +44,15 @@ const JoinRoomModal = (): JSX.Element | null => {
         id="joinRoom"
         placeholder={t('modals.joinRoom.placeholder')}
         value={roomCode}
-        onChange={({ target }): void => setRoomCode(target.value.toUpperCase())}
-        errorMessage={errorMessage}
+        onChange={({ target }) => setRoomCode(target.value.toUpperCase())}
         uppercase
       />
+      {errorMessage && (
+        <Message
+          errorMessage={errorMessage}
+          closeMessage={() => setErrorMessage('')}
+        />
+      )}
       <Button
         content={t('modals.joinRoom.button')}
         disabled={!roomCode}

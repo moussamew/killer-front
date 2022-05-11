@@ -48,7 +48,7 @@ export const HomePage = (): JSX.Element => {
   return (
     <Layout>
       <Content>
-        <WelcomeImage className="m-auto" alt="welcome" src={Killerparty} />
+        <WelcomeImage alt="welcome" src={Killerparty} />
         <h1>{t('home.title')}</h1>
         <Text>{t('home.game_resume')}</Text>
         {!playerSession.name && (

@@ -34,7 +34,7 @@ export const CreateRoomButton = ({
 
   const handleCreateRoom = async (): Promise<void> => {
     if (!playerSession.name) {
-      return createPlayer(inputPseudo)
+      return createPlayer({ name: inputPseudo })
         .then(createNewRoom)
         .catch((error) => showInputErrorMessage(error.message));
     }

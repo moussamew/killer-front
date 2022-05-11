@@ -2,6 +2,7 @@ import { Dispatch, Fragment, RefObject, SetStateAction } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { Input } from '@/components/Input';
+import { Message } from '@/components/Message';
 import t from '@/helpers/translate';
 
 const Pseudo = tw.div`
@@ -29,12 +30,12 @@ export const CreatePlayerInput = ({
         id="pseudo"
         ref={inputPseudoRef}
         type="text"
-        placeholder={t('home.create_pseudo_placeholder')}
+        placeholder={t('generic.create_pseudo_placeholder')}
         value={inputPseudo}
         onChange={(e): void => setInputPseudo(e.target.value.toUpperCase())}
-        errorMessage={inputErrorMessage}
         uppercase
       />
+      {inputErrorMessage && <Message errorMessage={inputErrorMessage} />}
     </Pseudo>
   </Fragment>
 );

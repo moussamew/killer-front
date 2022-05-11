@@ -19,7 +19,6 @@ export const ShareRoomLink = ({ roomCode }: Props): JSX.Element => {
     if (navigator.share) {
       return navigator.share({
         title: 'Killerparty',
-        text: `Join the room ${roomCode}!`,
         url: roomLink,
       });
     }

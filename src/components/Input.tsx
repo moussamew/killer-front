@@ -1,8 +1,6 @@
 import { ChangeEvent, ForwardedRef, forwardRef } from 'react';
 import tw from 'tailwind-styled-components';
 
-import { Message } from './Message';
-
 const Content = tw.div`
   flex flex-col w-full 
   mt-1
@@ -29,7 +27,6 @@ interface Props {
   type?: string;
   placeholder?: string;
   label?: string;
-  errorMessage?: string;
   uppercase?: boolean;
 }
 
@@ -41,7 +38,7 @@ const InputRef = (
     type = 'text',
     placeholder,
     label,
-    errorMessage,
+
     uppercase,
   }: Props,
   ref: ForwardedRef<HTMLInputElement>,
@@ -58,7 +55,6 @@ const InputRef = (
       autoComplete="off"
       $uppercase={uppercase}
     />
-    {errorMessage && <Message errorMessage={errorMessage} />}
   </Content>
 );
 

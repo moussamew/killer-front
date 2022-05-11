@@ -22,7 +22,7 @@ export const JoinRoomButton = ({
 
   const handleJoinRoom = (): Promise<void> | void => {
     if (!playerSession.name) {
-      return createPlayer(inputPseudo)
+      return createPlayer({ name: inputPseudo })
         .then(refreshPlayerSession)
         .then(() => openModal(<JoinRoomModal />))
         .catch((error) => showInputErrorMessage(error.message));

@@ -14,17 +14,4 @@ describe('Input', () => {
 
     expect(screen.getByLabelText('Pseudo')).toBeInTheDocument();
   });
-
-  it('should display error message if given', () => {
-    render(
-      <Input
-        id="input"
-        value="Neo"
-        onChange={() => {}}
-        errorMessage="This pseudo is already used"
-      />,
-    );
-
-    expect(screen.getByText('This pseudo is already used')).toBeInTheDocument();
-  });
 });
