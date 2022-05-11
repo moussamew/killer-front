@@ -9,7 +9,7 @@ const Message = tw.p`
   font-medium md:font-bold text-center
 `;
 
-const CloseMessage = tw.img`
+const CloseIcon = tw.img`
   absolute h-2 
   right-0.5 top-0.5
   cursor-pointer
@@ -24,8 +24,8 @@ export const ErrorMessage = ({
   closeMessage,
 }: Props): JSX.Element => (
   <Message>
-    <CloseMessage
-      alt="close"
+    <CloseIcon
+      alt="closeErrorMessage"
       src={CloseErrorMessage}
       onClick={() => closeMessage()}
     />

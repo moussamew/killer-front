@@ -71,4 +71,31 @@ describe('<JoinRoomModal />', () => {
 
     expect(await screen.findByText('Room not found')).toBeInTheDocument();
   });
+
+  it('should let the user close error message if showed', async () => {
+    server.use(
+      rest.put(PLAYER_ENDPOINT, (_req, res, ctx) =>
+        res(
+          ctx.status(400),
+          ctx.json({ errorCode: 'ROOM.NOT_FOUND', message: 'Room not found' }),
+        ),
+      ),
+    );
+
+    renderWithProviders(<JoinRoomModal />);
+
+    await screen.findByText('Join a room');
+
+    fireEvent.change(screen.getByPlaceholderText('Code of the room to join'), {
+      target: { value: 'AABB1' },
+    });
+
+    fireEvent.click(screen.getByText('Join this room'));
+
+    await screen.findByText('Room not found');
+
+    fireEvent.click(screen.getByAltText('closeErrorMessage'));
+
+    expect(screen.queryByText('Room not found')).not.toBeInTheDocument();
+  });
 });

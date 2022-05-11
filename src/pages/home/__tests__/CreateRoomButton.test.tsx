@@ -138,4 +138,35 @@ describe('<CreateRoomButton />', () => {
     ).toBeInTheDocument();
     expect(screen.getByDisplayValue('Morpheus')).toHaveFocus();
   });
+
+  it('should let the user close error message if showed', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    renderWithProviders(
+      <MemoryRouter>
+        <CreateRoomButton {...dummyProps} />
+        <input
+          ref={dummyProps.inputPseudoRef}
+          value="Morpheus"
+          onChange={vi.fn()}
+        />
+      </MemoryRouter>,
+    );
+
+    await screen.findByText('Create new room');
+
+    fireEvent.click(screen.getByText('Create new room'));
+
+    await screen.findByText(
+      'An error has occured while creating a new room. Please retry later.',
+    );
+
+    fireEvent.click(screen.getByAltText('closeErrorMessage'));
+
+    expect(
+      screen.queryByText(
+        'An error has occured while creating a new room. Please retry later.',
+      ),
+    ).not.toBeInTheDocument();
+  });
 });

@@ -8,6 +8,7 @@ const dummyProps = {
   inputPseudo: '',
   setInputPseudo: () => {},
   inputPseudoRef: createRef<HTMLInputElement>(),
+  setInputErrorMessage: () => {},
 };
 
 describe('<CreatePlayerInput />', () => {
@@ -31,6 +32,24 @@ describe('<CreatePlayerInput />', () => {
       target: { value: 'Neo' },
     });
 
+    expect(spySetInputPseudo).toHaveBeenCalledTimes(1);
     expect(spySetInputPseudo).toHaveBeenCalledWith('NEO');
+  });
+
+  it('should let the user close error message if showed', () => {
+    const spySetInputErrorMessage = vi.fn();
+
+    render(
+      <CreatePlayerInput
+        {...dummyProps}
+        inputErrorMessage="There is an error while creating the player"
+        setInputErrorMessage={spySetInputErrorMessage}
+      />,
+    );
+
+    fireEvent.click(screen.getByAltText('closeErrorMessage'));
+
+    expect(spySetInputErrorMessage).toHaveBeenCalledTimes(1);
+    expect(spySetInputErrorMessage).toHaveBeenCalledWith('');
   });
 });
