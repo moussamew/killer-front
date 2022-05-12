@@ -1,5 +1,7 @@
 name: Killer Web Front - Push (CI)
 on: [push]
+env:
+  FRONT_URL: ${{ secrets.FRONT_URL }}
 jobs:
   tests:
     runs-on: ubuntu-latest

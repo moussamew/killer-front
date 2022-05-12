@@ -1,6 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
+import { JOIN_ROOM_ROUTE } from '@/constants/endpoints';
+
 import { ShareRoomLink } from '../ShareRoomLink';
 
 describe('<ShareRoomLink />', () => {
@@ -19,7 +21,7 @@ describe('<ShareRoomLink />', () => {
     expect(spyNavigatorShare).toHaveBeenCalledTimes(1);
     expect(spyNavigatorShare).toHaveBeenCalledWith({
       title: 'Killerparty',
-      url: 'http://localhost:4000/join/P9LDG',
+      url: `${JOIN_ROOM_ROUTE}/P9LDG`,
     });
   });
 
@@ -35,7 +37,7 @@ describe('<ShareRoomLink />', () => {
 
     expect(
       screen.getByText(
-        'Copy and paste the following link: http://localhost:4000/join/P9LDG',
+        `Copy and paste the following link: ${JOIN_ROOM_ROUTE}/P9LDG`,
       ),
     ).toBeInTheDocument();
   });
@@ -57,7 +59,7 @@ describe('<ShareRoomLink />', () => {
 
     expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
     expect(spyNavigatorClipboard).toHaveBeenCalledWith(
-      'http://localhost:4000/join/P9LDG',
+      `${JOIN_ROOM_ROUTE}/P9LDG`,
     );
     expect(
       await screen.findByText('Link saved in the clipboard!'),
@@ -81,11 +83,11 @@ describe('<ShareRoomLink />', () => {
 
     expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
     expect(spyNavigatorClipboard).toHaveBeenCalledWith(
-      'http://localhost:4000/join/P9LDG',
+      `${JOIN_ROOM_ROUTE}/P9LDG`,
     );
     expect(
       await screen.findByText(
-        'Copy and paste the following link: http://localhost:4000/join/P9LDG',
+        `Copy and paste the following link: ${JOIN_ROOM_ROUTE}/P9LDG`,
       ),
     ).toBeInTheDocument();
   });
@@ -102,7 +104,7 @@ describe('<ShareRoomLink />', () => {
 
     expect(
       screen.getByText(
-        'Copy and paste the following link: http://localhost:4000/join/P9LDG',
+        `Copy and paste the following link: ${JOIN_ROOM_ROUTE}/P9LDG`,
       ),
     ).toBeInTheDocument();
 
@@ -110,7 +112,7 @@ describe('<ShareRoomLink />', () => {
 
     expect(
       screen.queryByText(
-        'Copy and paste the following link: http://localhost:4000/join/P9LDG',
+        `Copy and paste the following link: ${JOIN_ROOM_ROUTE}/P9LDG`,
       ),
     ).not.toBeInTheDocument();
   });
