@@ -38,7 +38,7 @@ export const CreatePlayerInput = ({
       />
       {inputErrorMessage && (
         <ErrorMessage
-          errorMessage={inputErrorMessage}
+          message={inputErrorMessage}
           closeMessage={() => setInputErrorMessage('')}
         />
       )}

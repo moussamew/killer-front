@@ -31,16 +31,7 @@ interface Props {
 }
 
 const InputRef = (
-  {
-    id,
-    value,
-    onChange,
-    type = 'text',
-    placeholder,
-    label,
-
-    uppercase,
-  }: Props,
+  { id, value, onChange, type = 'text', placeholder, label, uppercase }: Props,
   ref: ForwardedRef<HTMLInputElement>,
 ): JSX.Element => (
   <Content>

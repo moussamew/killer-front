@@ -1,9 +1,9 @@
 import tw from 'tailwind-styled-components';
 
-import CloseErrorMessage from '@/assets/icons/closeErrorMessage.svg';
+import CloseAlertMessage from '@/assets/icons/closeAlertMessage.svg';
 
 const Message = tw.p`
-  border-2 border-red-300 bg-red-200 text-red-500
+  border-2 border-green-300 bg-green-200 text-green-500
   normal-case relative
   p-1 mt-1 rounded-md text-2xl
   font-medium md:font-bold text-center
@@ -19,11 +19,12 @@ interface Props {
   message: string;
   closeMessage: () => void;
 }
-export const ErrorMessage = ({ message, closeMessage }: Props): JSX.Element => (
+
+export const AlertMessage = ({ message, closeMessage }: Props): JSX.Element => (
   <Message>
     <CloseIcon
-      alt="closeErrorMessage"
-      src={CloseErrorMessage}
+      alt="closeAlertMessage"
+      src={CloseAlertMessage}
       onClick={() => closeMessage()}
     />
     {message}

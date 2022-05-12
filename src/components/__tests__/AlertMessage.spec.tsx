@@ -1,16 +1,16 @@
 import { render, fireEvent, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { ErrorMessage } from '../ErrorMessage';
+import { AlertMessage } from '../AlertMessage';
 
 const dummyProps = {
   message: 'There is an error',
   closeMessage: () => {},
 };
 
-describe('<ErrorMessage />', () => {
-  it('should show the error message', () => {
-    render(<ErrorMessage {...dummyProps} />);
+describe('<AlertMessage />', () => {
+  it('should show the message', () => {
+    render(<AlertMessage {...dummyProps} />);
 
     expect(screen.getByText('There is an error')).toBeInTheDocument();
   });
@@ -18,9 +18,9 @@ describe('<ErrorMessage />', () => {
   it('should execute closeMessage when the close icon is clicked', () => {
     const spyCloseMessage = vi.fn();
 
-    render(<ErrorMessage {...dummyProps} closeMessage={spyCloseMessage} />);
+    render(<AlertMessage {...dummyProps} closeMessage={spyCloseMessage} />);
 
-    fireEvent.click(screen.getByAltText('closeErrorMessage'));
+    fireEvent.click(screen.getByAltText('closeAlertMessage'));
 
     expect(spyCloseMessage).toHaveBeenCalledTimes(1);
   });

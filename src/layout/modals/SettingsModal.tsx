@@ -5,6 +5,7 @@ import Edit from '@/assets/icons/edit.svg';
 import Logout from '@/assets/icons/logout.svg';
 import Settings from '@/assets/icons/settings.svg';
 import { Button } from '@/components/Button';
+import { ErrorMessage } from '@/components/ErrorMessage';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
@@ -40,7 +41,7 @@ const SettingsModal = (): JSX.Element => {
 
   const [isPseudoInputOpen, togglePseudoInput] = useState(false);
   const [pseudo, setPseudo] = useState('');
-  const [errorMessage, setErrorMessage] = useState<string>();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const updatePseudo = (): Promise<void> =>
     updatePlayer({ name: pseudo })
@@ -80,9 +81,14 @@ const SettingsModal = (): JSX.Element => {
             value={pseudo}
             onChange={(e) => setPseudo(e.target.value.toUpperCase())}
             placeholder={playerSession.name}
-            errorMessage={errorMessage}
             uppercase
           />
+          {errorMessage && (
+            <ErrorMessage
+              message={errorMessage}
+              closeMessage={() => setErrorMessage('')}
+            />
+          )}
           <Button
             content={t('layout.save_changes')}
             onClick={updatePseudo}

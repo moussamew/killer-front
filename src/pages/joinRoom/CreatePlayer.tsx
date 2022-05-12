@@ -39,7 +39,7 @@ export const CreatePlayer = ({
       />
       {errorMessage && (
         <ErrorMessage
-          errorMessage={errorMessage}
+          message={errorMessage}
           closeMessage={() => setErrorMessage('')}
         />
       )}

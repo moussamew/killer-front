@@ -49,7 +49,7 @@ const JoinRoomModal = (): JSX.Element | null => {
       />
       {errorMessage && (
         <ErrorMessage
-          errorMessage={errorMessage}
+          message={errorMessage}
           closeMessage={() => setErrorMessage('')}
         />
       )}

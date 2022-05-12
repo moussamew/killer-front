@@ -33,7 +33,7 @@ export const LeaveCurrentRoom = ({
       <Button content={t('join_room.join_the_room')} onClick={handleJoinRoom} />
       {errorMessage && (
         <ErrorMessage
-          errorMessage={errorMessage}
+          message={errorMessage}
           closeMessage={() => setErrorMessage('')}
         />
       )}

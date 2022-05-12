@@ -39,7 +39,7 @@ const CreateMission = ({ refetchPlayerMissions }: Props): JSX.Element => {
       />
       {errorMessage && (
         <ErrorMessage
-          errorMessage={errorMessage}
+          message={errorMessage}
           closeMessage={() => setErrorMessage('')}
         />
       )}

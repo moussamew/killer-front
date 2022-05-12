@@ -51,7 +51,7 @@ export const CreateRoomButton = ({
       />
       {roomErrorMessage && (
         <ErrorMessage
-          errorMessage={roomErrorMessage}
+          message={roomErrorMessage}
           closeMessage={() => setRoomErrorMessage('')}
         />
       )}
