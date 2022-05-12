@@ -41,7 +41,7 @@ export const ShareRoomLink = ({ roomCode }: Props): JSX.Element => {
     }
 
     return navigator.clipboard
-      .writeText(`${window.location.origin}/join/${roomCode}`)
+      .writeText(joinRoomLink)
       .then(() => setSuccessMessage(t('room.share_room_link_success')))
       .catch(() =>
         setAlertMessage(t('room.share_room_link_copy_paste', { joinRoomLink })),

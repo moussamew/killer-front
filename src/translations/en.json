@@ -22,7 +22,7 @@
     "players_list": "Criminals in the room",
     "players_list_description": "List of all the killers who will have to kill each other.",
     "share_room_link": "Share link to join the room",
-    "share_room_link_copy_paste": "Copy and paste the following link:\n {roomLink}",
+    "share_room_link_copy_paste": "Copy and paste the following link:\n {joinRoomLink}",
     "share_room_link_success": "Link saved in the clipboard!"
   },
   "join_room": {
