@@ -4,14 +4,13 @@ import {
   waitForElementToBeRemoved,
 } from '@testing-library/react';
 import { rest } from 'msw';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
-import Layout from '@/layout/Layout';
-import Home from '@/pages/home/Home';
+import { HomePage } from '@/pages/home/HomePage';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -33,16 +32,7 @@ describe('<JoinRoomModal />', () => {
 
     renderWithProviders(
       <MemoryRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Layout>
-                <Home />
-              </Layout>
-            }
-          />
-        </Routes>
+        <HomePage />
       </MemoryRouter>,
     );
 
@@ -80,5 +70,32 @@ describe('<JoinRoomModal />', () => {
     fireEvent.click(screen.getByText('Join this room'));
 
     expect(await screen.findByText('Room not found')).toBeInTheDocument();
+  });
+
+  it('should let the user close error message if showed', async () => {
+    server.use(
+      rest.put(PLAYER_ENDPOINT, (_req, res, ctx) =>
+        res(
+          ctx.status(400),
+          ctx.json({ errorCode: 'ROOM.NOT_FOUND', message: 'Room not found' }),
+        ),
+      ),
+    );
+
+    renderWithProviders(<JoinRoomModal />);
+
+    await screen.findByText('Join a room');
+
+    fireEvent.change(screen.getByPlaceholderText('Code of the room to join'), {
+      target: { value: 'AABB1' },
+    });
+
+    fireEvent.click(screen.getByText('Join this room'));
+
+    await screen.findByText('Room not found');
+
+    fireEvent.click(screen.getByAltText('closeErrorMessage'));
+
+    expect(screen.queryByText('Room not found')).not.toBeInTheDocument();
   });
 });

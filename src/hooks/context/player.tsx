@@ -7,7 +7,7 @@ import {
 } from 'react';
 import { useQuery } from 'react-query';
 
-import { Loader } from '@/components';
+import { Loader } from '@/components/Loader';
 import { isEmptyObject } from '@/helpers/objects';
 import { Player } from '@/types';
 

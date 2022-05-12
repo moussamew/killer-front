@@ -1,11 +1,11 @@
 import { render, fireEvent, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
-import { Button } from '..';
+import { Button } from '../Button';
 
 describe('<Button />', () => {
   it('should show the text inside the button', () => {
-    render(<Button>My Button</Button>);
+    render(<Button content="My Button" />);
 
     expect(screen.getByText('My Button')).toBeInTheDocument();
   });
@@ -13,7 +13,7 @@ describe('<Button />', () => {
   it('should execute the callback passed when the button is clicked', () => {
     const spyCallback = vi.fn();
 
-    render(<Button onClick={spyCallback}>My Button</Button>);
+    render(<Button content="My Button" onClick={spyCallback} />);
 
     fireEvent.click(screen.getByText('My Button'));
 
@@ -23,11 +23,7 @@ describe('<Button />', () => {
   it('should not execute the callback passed in parameter when disabled is set tot rue', () => {
     const spyCallback = vi.fn();
 
-    render(
-      <Button disabled onClick={spyCallback}>
-        My Button
-      </Button>,
-    );
+    render(<Button content="My Button" disabled onClick={spyCallback} />);
 
     fireEvent.click(screen.getByText('My Button'));
 

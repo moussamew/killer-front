@@ -2,7 +2,9 @@ import { Fragment, useContext, useState } from 'react';
 import tw from 'tailwind-styled-components';
 
 import Room from '@/assets/icons/room.svg';
-import { Button, Input } from '@/components';
+import { Button } from '@/components/Button';
+import { ErrorMessage } from '@/components/ErrorMessage';
+import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
@@ -36,19 +38,26 @@ const JoinRoomModal = (): JSX.Element | null => {
     <Fragment>
       <HeadContent>
         <Icon alt="roomIcon" src={Room} />
-        <Title>{t('join.modal_title')}</Title>
+        <Title>{t('modals.join_room.title')}</Title>
       </HeadContent>
       <Input
         id="joinRoom"
-        placeholder={t('join.modal_placeholder')}
+        placeholder={t('modals.join_room.placeholder')}
         value={roomCode}
-        onChange={({ target }): void => setRoomCode(target.value.toUpperCase())}
-        errorMessage={errorMessage}
+        onChange={({ target }) => setRoomCode(target.value.toUpperCase())}
         uppercase
       />
-      <Button disabled={!roomCode} onClick={handleJoinRoom}>
-        {t('join.room')}
-      </Button>
+      {errorMessage && (
+        <ErrorMessage
+          message={errorMessage}
+          closeMessage={() => setErrorMessage('')}
+        />
+      )}
+      <Button
+        content={t('modals.join_room.button')}
+        disabled={!roomCode}
+        onClick={handleJoinRoom}
+      />
     </Fragment>
   );
 };

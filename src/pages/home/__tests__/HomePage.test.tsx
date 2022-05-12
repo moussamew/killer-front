@@ -9,13 +9,13 @@ import {
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-import Home from '../Home';
+import { HomePage } from '../HomePage';
 
-describe('<Home />', () => {
+describe('<HomePage />', () => {
   it('should correctly show the home page', async () => {
     renderWithProviders(
       <MemoryRouter>
-        <Home />
+        <HomePage />
       </MemoryRouter>,
     );
 
@@ -34,7 +34,7 @@ describe('<Home />', () => {
     renderWithProviders(
       <MemoryRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePage />} />
           <Route
             path="/room/Y5XJK"
             element={<p>Welcome to the room Y5XJK!</p>}
@@ -63,7 +63,7 @@ describe('<Home />', () => {
 
     renderWithProviders(
       <MemoryRouter>
-        <Home />
+        <HomePage />
       </MemoryRouter>,
     );
 

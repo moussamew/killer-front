@@ -8,8 +8,8 @@ import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-import CreateRoom from '../CreateRoom';
-import Home from '../Home';
+import { CreateRoomButton } from '../CreateRoomButton';
+import { HomePage } from '../HomePage';
 
 const dummyProps = {
   inputPseudo: '',
@@ -17,11 +17,11 @@ const dummyProps = {
   showInputErrorMessage: vi.fn(),
 };
 
-describe('<CreateRoom />', () => {
+describe('<CreateRoomButton />', () => {
   it('should show the create room button', async () => {
     renderWithProviders(
       <MemoryRouter>
-        <CreateRoom {...dummyProps} />
+        <CreateRoomButton {...dummyProps} />
       </MemoryRouter>,
     );
 
@@ -44,7 +44,7 @@ describe('<CreateRoom />', () => {
     renderWithProviders(
       <MemoryRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePage />} />
           <Route
             path={`/room/${mockRoomCode}`}
             element={<p>Welcome to the room {mockRoomCode}!</p>}
@@ -82,7 +82,7 @@ describe('<CreateRoom />', () => {
     renderWithProviders(
       <MemoryRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePage />} />
           <Route
             path={`/room/${mockRoomCode}`}
             element={<p>Welcome to the room {mockRoomCode}!</p>}
@@ -118,7 +118,7 @@ describe('<CreateRoom />', () => {
 
     renderWithProviders(
       <MemoryRouter>
-        <CreateRoom {...dummyProps} />
+        <CreateRoomButton {...dummyProps} />
         <input
           ref={dummyProps.inputPseudoRef}
           value="Morpheus"
@@ -137,5 +137,36 @@ describe('<CreateRoom />', () => {
       ),
     ).toBeInTheDocument();
     expect(screen.getByDisplayValue('Morpheus')).toHaveFocus();
+  });
+
+  it('should let the user close error message if showed', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    renderWithProviders(
+      <MemoryRouter>
+        <CreateRoomButton {...dummyProps} />
+        <input
+          ref={dummyProps.inputPseudoRef}
+          value="Morpheus"
+          onChange={vi.fn()}
+        />
+      </MemoryRouter>,
+    );
+
+    await screen.findByText('Create new room');
+
+    fireEvent.click(screen.getByText('Create new room'));
+
+    await screen.findByText(
+      'An error has occured while creating a new room. Please retry later.',
+    );
+
+    fireEvent.click(screen.getByAltText('closeErrorMessage'));
+
+    expect(
+      screen.queryByText(
+        'An error has occured while creating a new room. Please retry later.',
+      ),
+    ).not.toBeInTheDocument();
   });
 });

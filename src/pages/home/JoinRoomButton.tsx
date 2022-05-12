@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { Button } from '@/components';
+import { Button } from '@/components/Button';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
@@ -13,7 +13,7 @@ interface Props {
   showInputErrorMessage: (errorMessage: string) => void;
 }
 
-const JoinRoom = ({
+export const JoinRoomButton = ({
   inputPseudo,
   showInputErrorMessage,
 }: Props): JSX.Element => {
@@ -22,7 +22,7 @@ const JoinRoom = ({
 
   const handleJoinRoom = (): Promise<void> | void => {
     if (!playerSession.name) {
-      return createPlayer(inputPseudo)
+      return createPlayer({ name: inputPseudo })
         .then(refreshPlayerSession)
         .then(() => openModal(<JoinRoomModal />))
         .catch((error) => showInputErrorMessage(error.message));
@@ -33,13 +33,10 @@ const JoinRoom = ({
 
   return (
     <Button
+      content={t('home.join_room')}
       buttonColor="bg-yellow-200"
       textColor="text-lightDark"
       onClick={handleJoinRoom}
-    >
-      {t('home.join_room')}
-    </Button>
+    />
   );
 };
-
-export default JoinRoom;

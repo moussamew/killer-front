@@ -1,7 +1,7 @@
 import { Fragment, RefObject, useContext, useState } from 'react';
 
-import { ErrorMessage } from '@/assets/styles/shared';
-import { Button } from '@/components';
+import { Button } from '@/components/Button';
+import { ErrorMessage } from '@/components/ErrorMessage';
 import t from '@/helpers/translate';
 import { PlayerContext } from '@/hooks/context/player';
 
@@ -13,7 +13,7 @@ interface Props {
   showInputErrorMessage: (errorMessage: string) => void;
 }
 
-const CreateRoom = ({
+export const CreateRoomButton = ({
   inputPseudo,
   inputPseudoRef,
   showInputErrorMessage,
@@ -34,7 +34,7 @@ const CreateRoom = ({
 
   const handleCreateRoom = async (): Promise<void> => {
     if (!playerSession.name) {
-      return createPlayer(inputPseudo)
+      return createPlayer({ name: inputPseudo })
         .then(createNewRoom)
         .catch((error) => showInputErrorMessage(error.message));
     }
@@ -44,12 +44,17 @@ const CreateRoom = ({
 
   return (
     <Fragment>
-      <Button buttonColor="bg-red-400" onClick={handleCreateRoom}>
-        {t('home.create_room')}
-      </Button>
-      {roomErrorMessage && <ErrorMessage>{roomErrorMessage}</ErrorMessage>}
+      <Button
+        content={t('home.create_room')}
+        buttonColor="bg-red-400"
+        onClick={handleCreateRoom}
+      />
+      {roomErrorMessage && (
+        <ErrorMessage
+          message={roomErrorMessage}
+          closeMessage={() => setRoomErrorMessage('')}
+        />
+      )}
     </Fragment>
   );
 };
-
-export default CreateRoom;
