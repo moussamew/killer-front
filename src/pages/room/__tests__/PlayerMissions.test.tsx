@@ -13,14 +13,14 @@ import PlayerMissions from '../PlayerMissions';
 
 describe('<PlayerMissions />', () => {
   it('should show the input to create a new Mission', async () => {
-    renderWithProviders(<PlayerMissions />);
+    renderWithProviders(<PlayerMissions roomCode="X5VKT" />);
 
     expect(await screen.findByText('Manage my missions'));
     expect(await screen.findByPlaceholderText('Make him drink his glass dry'));
   });
 
   it('should update the mission value inside the mission input after user changes', async () => {
-    renderWithProviders(<PlayerMissions />);
+    renderWithProviders(<PlayerMissions roomCode="X5VKT" />);
 
     fireEvent.change(
       await screen.findByPlaceholderText('Make him drink his glass dry'),
@@ -42,7 +42,7 @@ describe('<PlayerMissions />', () => {
       ),
     );
 
-    renderWithProviders(<PlayerMissions />);
+    renderWithProviders(<PlayerMissions roomCode="X5VKT" />);
 
     await screen.findByText('Drink Jack Daniels');
 
