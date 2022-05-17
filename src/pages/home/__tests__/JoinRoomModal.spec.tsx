@@ -17,13 +17,7 @@ import { renderWithProviders } from '@/tests/utils';
 import { JoinRoomModal } from '../JoinRoomModal';
 
 describe('<JoinRoomModal />', () => {
-  it('should render JoinRoom modal', async () => {
-    renderWithProviders(<JoinRoomModal />);
-
-    expect(await screen.findByText('Join a room')).toBeInTheDocument();
-  });
-
-  it('should close modal after joining a room', async () => {
+  it('should close modal after joining a room with player session', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Neo' })),
@@ -37,6 +31,30 @@ describe('<JoinRoomModal />', () => {
     );
 
     fireEvent.click(await screen.findByText('Join a room'));
+
+    fireEvent.change(screen.getByPlaceholderText('Code of the room'), {
+      target: { value: 'X7B8K' },
+    });
+
+    fireEvent.click(screen.getByText('Join this room'));
+
+    await waitForElementToBeRemoved(() => screen.queryByText('Join this room'));
+
+    expect(screen.queryByText('Join this room')).not.toBeInTheDocument();
+  });
+
+  it('should close modal after joining a room without player session', async () => {
+    renderWithProviders(
+      <MemoryRouter>
+        <HomePage />
+      </MemoryRouter>,
+    );
+
+    fireEvent.click(await screen.findByText('Join a room'));
+
+    fireEvent.change(screen.getByPlaceholderText('Choose a pseudo'), {
+      target: { value: 'Neo' },
+    });
 
     fireEvent.change(screen.getByPlaceholderText('Code of the room'), {
       target: { value: 'X7B8K' },
@@ -90,9 +108,7 @@ describe('<JoinRoomModal />', () => {
 
     renderWithProviders(<JoinRoomModal />);
 
-    await screen.findByText('Join a room');
-
-    fireEvent.change(screen.getByPlaceholderText('Code of the room'), {
+    fireEvent.change(await screen.findByPlaceholderText('Code of the room'), {
       target: { value: 'AABB1' },
     });
 
