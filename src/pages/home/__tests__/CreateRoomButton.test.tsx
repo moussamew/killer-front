@@ -17,7 +17,7 @@ const dummyProps = {
   showInputErrorMessage: vi.fn(),
 };
 
-describe('<CreateRoomButton />', () => {
+describe.skip('<CreateRoomButton />', () => {
   it('should show the create room button', async () => {
     renderWithProviders(
       <MemoryRouter>

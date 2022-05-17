@@ -43,7 +43,7 @@
   "modals": {
     "join_room": {
       "title": "Join a room",
-      "placeholder": "Code of the room to join",
+      "placeholder": "Code of the room",
       "button": "Join this room"
     }
   },

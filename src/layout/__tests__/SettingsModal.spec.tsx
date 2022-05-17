@@ -12,7 +12,7 @@ import {
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-import SettingsModal from '../SettingsModal';
+import { SettingsModal } from '../SettingsModal';
 
 describe('<SettingsModal />', () => {
   it('should render modal settings correctly', async () => {

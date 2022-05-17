@@ -11,7 +11,7 @@ import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
 
-import { updatePlayer } from '../services/requests';
+import { updatePlayer } from './services/requests';
 
 const HeadContent = tw.div`
   flex flex-row mb-2
@@ -35,7 +35,7 @@ const Spacer = tw.hr`
   my-1
 `;
 
-const SettingsModal = (): JSX.Element => {
+export const SettingsModal = (): JSX.Element => {
   const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
   const { closeModal } = useContext(ModalContext);
 
@@ -99,5 +99,3 @@ const SettingsModal = (): JSX.Element => {
     </Fragment>
   );
 };
-
-export default SettingsModal;

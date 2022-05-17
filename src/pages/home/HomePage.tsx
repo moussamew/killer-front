@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Killerparty from '@/assets/images/killerparty.png';
+import { Button } from '@/components/Button';
 import t from '@/helpers/translate';
+import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
 import { Layout } from '@/layout/Layout';
 
-import { CreatePlayerInput } from './CreatePlayerInput';
 import { CreateRoomButton } from './CreateRoomButton';
-import { JoinRoomButton } from './JoinRoomButton';
+import { JoinRoomModal } from './JoinRoomModal';
 
 const Content = tw.div`
   max-w-screen-lg m-auto
@@ -29,6 +30,7 @@ export const HomePage = (): JSX.Element => {
   const [inputErrorMessage, setInputErrorMessage] = useState('');
 
   const { playerSession } = useContext(PlayerContext);
+  const { openModal } = useContext(ModalContext);
 
   const inputPseudoRef = useRef<HTMLInputElement>(null);
 
@@ -51,23 +53,16 @@ export const HomePage = (): JSX.Element => {
         <WelcomeImage alt="welcome" src={Killerparty} />
         <h1>{t('home.title')}</h1>
         <Text>{t('home.game_resume')}</Text>
-        {!playerSession.name && (
-          <CreatePlayerInput
-            inputPseudo={inputPseudo}
-            setInputPseudo={setInputPseudo}
-            inputPseudoRef={inputPseudoRef}
-            inputErrorMessage={inputErrorMessage}
-            setInputErrorMessage={setInputErrorMessage}
-          />
-        )}
         <CreateRoomButton
           inputPseudo={inputPseudo}
           inputPseudoRef={inputPseudoRef}
           showInputErrorMessage={showInputErrorMessage}
         />
-        <JoinRoomButton
-          inputPseudo={inputPseudo}
-          showInputErrorMessage={showInputErrorMessage}
+        <Button
+          content={t('home.join_room')}
+          buttonColor="bg-yellow-200"
+          textColor="text-lightDark"
+          onClick={() => openModal(<JoinRoomModal />)}
         />
       </Content>
     </Layout>
