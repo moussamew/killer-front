@@ -1,45 +1,28 @@
-import { Fragment, RefObject, useContext, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
 
 import { Button } from '@/components/Button';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import t from '@/helpers/translate';
+import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
 
-import { createPlayer, createRoom } from './services/requests';
+import { CreateRoomModal } from './CreateRoomModal';
+import { createRoom } from './services/requests';
 
-interface Props {
-  inputPseudo: string;
-  inputPseudoRef: RefObject<HTMLInputElement>;
-  showInputErrorMessage: (errorMessage: string) => void;
-}
-
-export const CreateRoomButton = ({
-  inputPseudo,
-  inputPseudoRef,
-  showInputErrorMessage,
-}: Props): JSX.Element => {
+export const CreateRoomButton = (): JSX.Element => {
   const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
+  const { openModal } = useContext(ModalContext);
 
   const [roomErrorMessage, setRoomErrorMessage] = useState('');
 
-  const showRoomErrorMessage = (errorMessage: string): void => {
-    setRoomErrorMessage(errorMessage);
-    (inputPseudoRef.current as HTMLInputElement).focus();
-  };
-
-  const createNewRoom = (): Promise<void> =>
-    createRoom()
-      .then(refreshPlayerSession)
-      .catch(() => showRoomErrorMessage(t('home.create_room_error')));
-
   const handleCreateRoom = async (): Promise<void> => {
     if (!playerSession.name) {
-      return createPlayer({ name: inputPseudo })
-        .then(createNewRoom)
-        .catch((error) => showInputErrorMessage(error.message));
+      return openModal(<CreateRoomModal />);
     }
 
-    return createNewRoom();
+    return createRoom()
+      .then(refreshPlayerSession)
+      .catch(() => setRoomErrorMessage(t('home.create_room_error')));
   };
 
   return (

@@ -50,14 +50,14 @@ export const JoinRoomModal = (): JSX.Element | null => {
     <Fragment>
       <HeadContent>
         <Icon alt="roomIcon" src={Room} />
-        <Title>{t('modals.join_room.title')}</Title>
+        <Title>{t('home.join_room')}</Title>
       </HeadContent>
       {!playerSession.name && (
         <Input
           id="pseudo"
           type="text"
-          label="Before starting, create your pseudo"
-          placeholder={t('generic.create_pseudo_placeholder')}
+          label={t('common.create_pseudo_label')}
+          placeholder={t('common.create_pseudo_placeholder')}
           value={inputPseudo}
           onChange={({ target }) => setInputPseudo(target.value.toUpperCase())}
           uppercase
@@ -65,14 +65,14 @@ export const JoinRoomModal = (): JSX.Element | null => {
       )}
       <Input
         id="joinRoom"
-        label="Type the code of the room to join"
-        placeholder={t('modals.join_room.placeholder')}
+        label={t('home.room_code_label')}
+        placeholder={t('home.room_code_placeholder')}
         value={roomCode}
         onChange={({ target }) => setRoomCode(target.value.toUpperCase())}
         uppercase
       />
       <Button
-        content={t('modals.join_room.button')}
+        content={t('home.join_room_modal_button')}
         disabled={!roomCode}
         onClick={handleJoinRoom}
       />
