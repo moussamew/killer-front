@@ -80,7 +80,7 @@ describe('<SettingsModal />', () => {
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Neo' })),
       ),
-      rest.put(PLAYER_ENDPOINT, (_req, res, ctx) =>
+      rest.patch(PLAYER_ENDPOINT, (_req, res, ctx) =>
         res(
           ctx.status(400),
           ctx.json({

@@ -1,4 +1,4 @@
-import { PlayerStatus, RoomStatus } from '@/constants/enums';
+import { PlayerRole, PlayerStatus, RoomStatus } from '@/constants/enums';
 
 export interface Player {
   id?: number;
@@ -7,7 +7,7 @@ export interface Player {
   missionId?: number;
   roomCode?: string | null;
   targetId?: number;
-  role?: string;
+  role?: PlayerRole;
 }
 
 export interface Room {

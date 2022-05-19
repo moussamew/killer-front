@@ -69,10 +69,7 @@ describe('<JoinRoomModal />', () => {
 
   it('should show error while joining a room', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Neo' })),
-      ),
-      rest.put(PLAYER_ENDPOINT, (_req, res, ctx) =>
+      rest.patch(PLAYER_ENDPOINT, (_req, res, ctx) =>
         res(
           ctx.status(400),
           ctx.json({ errorCode: 'ROOM.NOT_FOUND', message: 'Room not found' }),
@@ -95,10 +92,7 @@ describe('<JoinRoomModal />', () => {
 
   it('should let the user close error message if showed', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Neo' })),
-      ),
-      rest.put(PLAYER_ENDPOINT, (_req, res, ctx) =>
+      rest.patch(PLAYER_ENDPOINT, (_req, res, ctx) =>
         res(
           ctx.status(400),
           ctx.json({ errorCode: 'ROOM.NOT_FOUND', message: 'Room not found' }),

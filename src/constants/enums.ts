@@ -12,6 +12,11 @@ export enum PlayerStatus {
   KILLED = 'KILLED',
 }
 
+export enum PlayerRole {
+  ADMIN = 'ADMIN',
+  PLAYER = 'PLAYER',
+}
+
 export enum RoomStatus {
   PENDING = 'PENDING',
   IN_GAME = 'IN_GAME',

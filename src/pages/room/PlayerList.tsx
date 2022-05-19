@@ -1,16 +1,21 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
-import NotReady from '@/assets/icons/not_ready.svg';
-import Killer from '@/assets/images/killer.png';
-import KillerAdmin from '@/assets/images/killer_king.png';
+import Admin from '@/assets/icons/admin.svg';
+import ExitRoom from '@/assets/icons/exitRoom.svg';
 import Knife from '@/assets/images/knife.png';
+import Player from '@/assets/images/player.png';
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
+import { PlayerRole } from '@/constants/enums';
 import t from '@/helpers/translate';
+import { ModalContext } from '@/hooks/context/modal';
+import { PlayerContext } from '@/hooks/context/player';
 
+import { KickPlayerModal } from './KickPlayerModal';
+import { LeaveRoomModal } from './LeaveRoomModal';
 import { getRoomPlayers } from './services/requests';
 
 const Container = tw.div`
@@ -26,23 +31,28 @@ const ListImage = tw.img`
   h-7 mr-1 -rotate-45
 `;
 
-const List = tw.div`
-  mt-1
-`;
-
 const PlayerItem = tw.div`
   flex flex-row items-center 
-  text-center py-1 justify-between 
-  border-b
+  text-center py-2 justify-center 
+  border-b relative
 `;
 
 const PlayerImage = tw.img`
-  pl-1 h-4 mr-2
+  absolute h-4 left-1
 `;
 
 const PlayerName = tw.p`
   text-2xl md:text-3xl font-bold 
   text-center uppercase
+`;
+
+const ExitIcon = tw.img`
+  absolute cursor-pointer right-2
+`;
+
+const AdminIcon = tw.img`
+  absolute right-2 h-2.5
+  rotate-y-45
 `;
 
 const PlayerList = (): JSX.Element => {
@@ -52,6 +62,9 @@ const PlayerList = (): JSX.Element => {
     'roomPlayers',
     () => getRoomPlayers(roomCode),
   );
+
+  const { playerSession } = useContext(PlayerContext);
+  const { openModal } = useContext(ModalContext);
 
   useEffect(() => {
     const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomCode}`, {
@@ -65,6 +78,19 @@ const PlayerList = (): JSX.Element => {
     return () => roomEventSource.close();
   }, [roomCode, refetchRoomPlayers]);
 
+  const handleRoomExit = (playerId?: number): void => {
+    if (playerSession.id === playerId) {
+      openModal(<LeaveRoomModal />);
+    }
+
+    if (
+      playerSession.id !== playerId &&
+      playerSession.role === PlayerRole.ADMIN
+    ) {
+      openModal(<KickPlayerModal />);
+    }
+  };
+
   return (
     <Container>
       <Section>
@@ -75,18 +101,23 @@ const PlayerList = (): JSX.Element => {
         </div>
       </Section>
       <hr />
-      <List>
-        {roomPlayers?.map(({ name, role }) => (
-          <PlayerItem key={name}>
-            <PlayerImage
-              alt={`player-${name}`}
-              src={role === 'ADMIN' ? KillerAdmin : Killer}
+      {roomPlayers?.map(({ id, name, role }) => (
+        <PlayerItem key={name}>
+          <PlayerImage alt={`player-${name}`} src={Player} />
+          <PlayerName>{name}</PlayerName>
+          {role === PlayerRole.ADMIN && playerSession.id !== id && (
+            <AdminIcon alt="admin" src={Admin} />
+          )}
+          {(playerSession.role === PlayerRole.ADMIN ||
+            playerSession.id === id) && (
+            <ExitIcon
+              alt={`exitRoom${name}`}
+              src={ExitRoom}
+              onClick={() => handleRoomExit(id)}
             />
-            <PlayerName>{name}</PlayerName>
-            <img alt="player not ready" src={NotReady} />
-          </PlayerItem>
-        ))}
-      </List>
+          )}
+        </PlayerItem>
+      ))}
     </Container>
   );
 };

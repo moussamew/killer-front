@@ -6,7 +6,7 @@ import { Player } from '@/types';
 const updatePlayer = async (playerInfos: Player): Promise<Player> => {
   const playerInfosUpdated = await request<Player>(
     PLAYER_ENDPOINT,
-    Method.PUT,
+    Method.PATCH,
     { body: JSON.stringify(playerInfos) },
   );
 
