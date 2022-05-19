@@ -4,9 +4,12 @@ import {
   FunctionComponent,
   ReactNode,
   SetStateAction,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
+
+import { usePrevious } from '../usePrevious';
 
 interface ModalContextInterface {
   modal: ReactNode;
@@ -27,6 +30,21 @@ const ModalProvider: FunctionComponent = ({ children }) => {
     }),
     [modal, openModal],
   );
+
+  const previousModal = usePrevious(modal);
+
+  /**
+   * Prevent page scrolling when a modal is open.
+   */
+  useEffect(() => {
+    if (!previousModal && modal) {
+      document.body.style.position = 'fixed';
+    }
+
+    if (previousModal && !modal) {
+      document.body.style.removeProperty('position');
+    }
+  }, [previousModal, modal]);
 
   return (
     <ModalContext.Provider value={memoizedModalComponent}>
