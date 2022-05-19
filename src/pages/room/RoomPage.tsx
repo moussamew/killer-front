@@ -14,10 +14,6 @@ import PlayerMissions from './PlayerMissions';
 import RoomMissions from './RoomMissions';
 import { ShareRoomLink } from './ShareRoomLink';
 
-const Content = tw.div`
-  max-w-screen-xl p-2 m-auto
-`;
-
 const Welcome = tw.div`
   flex flex-col md:flex-row 
   items-center mb-2 md:mb-4 
@@ -57,22 +53,20 @@ export const RoomPage = (): JSX.Element => {
 
   return (
     <Layout>
-      <Content>
-        <Welcome>
-          <WelcomeImage alt="welcome" src={Island} />
-          <RoomResume>
-            <h1>{t('room.welcome')}</h1>
-            <p>{t('room.join_room_code', { roomCode })}</p>
-            <RoomMissions />
-            <ShareRoomLink roomCode={roomCode!} />
-          </RoomResume>
-        </Welcome>
-        <hr />
-        <RoomFeatures>
-          <PlayerMissions roomCode={roomCode!} />
-          <PlayerList />
-        </RoomFeatures>
-      </Content>
+      <Welcome>
+        <WelcomeImage alt="welcome" src={Island} />
+        <RoomResume>
+          <h1>{t('room.welcome')}</h1>
+          <p>{t('room.join_room_code', { roomCode })}</p>
+          <RoomMissions />
+          <ShareRoomLink roomCode={roomCode!} />
+        </RoomResume>
+      </Welcome>
+      <hr />
+      <RoomFeatures>
+        <PlayerMissions roomCode={roomCode!} />
+        <PlayerList />
+      </RoomFeatures>
     </Layout>
   );
 };

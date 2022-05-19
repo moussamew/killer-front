@@ -10,11 +10,6 @@ import { Layout } from '@/layout/Layout';
 import { CreateRoomButton } from './CreateRoomButton';
 import { JoinRoomButton } from './JoinRoomButton';
 
-const Content = tw.div`
-  max-w-screen-lg m-auto
-  inset-0 px-2
-`;
-
 const WelcomeImage = tw.img`
   m-auto
 `;
@@ -36,13 +31,11 @@ export const HomePage = (): JSX.Element => {
 
   return (
     <Layout>
-      <Content>
-        <WelcomeImage alt="welcome" src={Killerparty} />
-        <h1>{t('home.title')}</h1>
-        <Text>{t('home.game_resume')}</Text>
-        <CreateRoomButton />
-        <JoinRoomButton />
-      </Content>
+      <WelcomeImage alt="welcome" src={Killerparty} />
+      <h1>{t('home.title')}</h1>
+      <Text>{t('home.game_resume')}</Text>
+      <CreateRoomButton />
+      <JoinRoomButton />
     </Layout>
   );
 };
