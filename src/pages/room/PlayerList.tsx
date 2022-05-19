@@ -5,6 +5,7 @@ import tw from 'tailwind-styled-components';
 
 import NotReady from '@/assets/icons/not_ready.svg';
 import Killer from '@/assets/images/killer.png';
+import KillerAdmin from '@/assets/images/killer_king.png';
 import Knife from '@/assets/images/knife.png';
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
@@ -75,9 +76,12 @@ const PlayerList = (): JSX.Element => {
       </Section>
       <hr />
       <List>
-        {roomPlayers?.map(({ name }) => (
+        {roomPlayers?.map(({ name, role }) => (
           <PlayerItem key={name}>
-            <PlayerImage alt={`player-${name}`} src={Killer} />
+            <PlayerImage
+              alt={`player-${name}`}
+              src={role === 'ADMIN' ? KillerAdmin : Killer}
+            />
             <PlayerName>{name}</PlayerName>
             <img alt="player not ready" src={NotReady} />
           </PlayerItem>

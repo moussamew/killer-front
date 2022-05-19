@@ -7,6 +7,7 @@ export interface Player {
   missionId?: number;
   roomCode?: string | null;
   targetId?: number;
+  role?: string;
 }
 
 export interface Room {
