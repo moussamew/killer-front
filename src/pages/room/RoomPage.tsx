@@ -64,13 +64,12 @@ export const RoomPage = (): JSX.Element => {
             <h1>{t('room.welcome')}</h1>
             <p>{t('room.join_room_code', { roomCode })}</p>
             <RoomMissions />
-            {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
             <ShareRoomLink roomCode={roomCode!} />
           </RoomResume>
         </Welcome>
         <hr />
         <RoomFeatures>
-          <PlayerMissions />
+          <PlayerMissions roomCode={roomCode!} />
           <PlayerList />
         </RoomFeatures>
       </Content>

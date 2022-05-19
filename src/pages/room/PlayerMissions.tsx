@@ -36,9 +36,13 @@ const DeleteMission = tw.img`
   -top-1 -right-1
 `;
 
-const PlayerMissions = (): JSX.Element | null => {
+interface Props {
+  roomCode: string;
+}
+
+const PlayerMissions = ({ roomCode }: Props): JSX.Element | null => {
   const { data: playerMissions, refetch: refetchPlayerMissions } = useQuery(
-    'playerMissions',
+    ['playerMissions', roomCode],
     () => getPlayerMissions(),
   );
 
