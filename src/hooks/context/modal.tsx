@@ -38,11 +38,11 @@ const ModalProvider: FunctionComponent = ({ children }) => {
    */
   useEffect(() => {
     if (!previousModal && modal) {
-      document.body.style.position = 'fixed';
+      document.body.style.overflow = 'hidden';
     }
 
     if (previousModal && !modal) {
-      document.body.style.removeProperty('position');
+      document.body.style.removeProperty('overflow');
     }
   }, [previousModal, modal]);
 

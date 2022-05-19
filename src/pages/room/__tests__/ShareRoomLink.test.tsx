@@ -21,6 +21,7 @@ describe('<ShareRoomLink />', () => {
     expect(spyNavigatorShare).toHaveBeenCalledTimes(1);
     expect(spyNavigatorShare).toHaveBeenCalledWith({
       title: 'Killerparty',
+      text: 'Hey! Join my party and try to kill me ^^',
       url: `${JOIN_ROOM_ROUTE}/P9LDG`,
     });
   });
