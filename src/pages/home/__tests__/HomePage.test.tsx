@@ -2,10 +2,7 @@ import { fireEvent, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-import {
-  PLAYER_ENDPOINT,
-  PLAYER_SESSION_ENDPOINT,
-} from '@/constants/endpoints';
+import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -48,19 +45,7 @@ describe('<HomePage />', () => {
     ).toBeInTheDocument();
   });
 
-  it('should show an error message when the user wants to join a room without pseudo', async () => {
-    server.use(
-      rest.post(PLAYER_ENDPOINT, (_req, res, ctx) =>
-        res(
-          ctx.status(400),
-          ctx.json({
-            errorCode: 'PLAYER.BAD_PSEUDO',
-            message: 'Name must be longer than or equal to 1 characters',
-          }),
-        ),
-      ),
-    );
-
+  it('should open the join room modal by clicking on the join room button', async () => {
     renderWithProviders(
       <MemoryRouter>
         <HomePage />
@@ -69,10 +54,6 @@ describe('<HomePage />', () => {
 
     fireEvent.click(await screen.findByText('Join a room'));
 
-    expect(
-      await screen.findByText(
-        'Name must be longer than or equal to 1 characters',
-      ),
-    ).toBeInTheDocument();
+    expect(await screen.findByText('Join this room')).toBeInTheDocument();
   });
 });

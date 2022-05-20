@@ -7,7 +7,7 @@ import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
 
-import SettingsModal from './modals/SettingsModal';
+import { SettingsModal } from './SettingsModal';
 
 const Navigation = tw.header`
   p-2 flex justify-between

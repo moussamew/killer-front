@@ -33,7 +33,7 @@ export const CreatePlayer = ({
       <p>{t('join_room.create_pseudo')}</p>
       <Input
         id="setPseudo"
-        placeholder={t('generic.create_pseudo_placeholder')}
+        placeholder={t('common.create_pseudo_placeholder')}
         value={pseudo}
         onChange={({ target }) => setPseudo(target.value.toUpperCase())}
       />

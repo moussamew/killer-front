@@ -8,7 +8,8 @@ import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
-import { updatePlayer } from '@/layout/services/requests';
+
+import { createPlayer, createRoom } from './services/requests';
 
 const HeadContent = tw.div`
   flex flex-row items-center
@@ -22,14 +23,16 @@ const Icon = tw.img`
   h-3 md:h-4
 `;
 
-const JoinRoomModal = (): JSX.Element | null => {
+export const CreateRoomModal = (): JSX.Element | null => {
+  const [inputPseudo, setInputPseudo] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
   const { refreshPlayerSession } = useContext(PlayerContext);
   const { closeModal } = useContext(ModalContext);
-  const [roomCode, setRoomCode] = useState('');
-  const [errorMessage, setErrorMessage] = useState<string>();
 
-  const handleJoinRoom = (): Promise<void> =>
-    updatePlayer({ roomCode })
+  const handleCreateRoom = (): Promise<void> =>
+    createPlayer({ name: inputPseudo })
+      .then(createRoom)
       .then(refreshPlayerSession)
       .then(closeModal)
       .catch((error) => setErrorMessage(error.message));
@@ -38,14 +41,21 @@ const JoinRoomModal = (): JSX.Element | null => {
     <Fragment>
       <HeadContent>
         <Icon alt="roomIcon" src={Room} />
-        <Title>{t('modals.join_room.title')}</Title>
+        <Title>{t('home.create_room')}</Title>
       </HeadContent>
       <Input
-        id="joinRoom"
-        placeholder={t('modals.join_room.placeholder')}
-        value={roomCode}
-        onChange={({ target }) => setRoomCode(target.value.toUpperCase())}
+        id="pseudo"
+        type="text"
+        label={t('common.create_pseudo_label')}
+        placeholder={t('common.create_pseudo_placeholder')}
+        value={inputPseudo}
+        onChange={({ target }) => setInputPseudo(target.value.toUpperCase())}
         uppercase
+      />
+      <Button
+        content={t('home.create_room_modal_button')}
+        disabled={!inputPseudo}
+        onClick={handleCreateRoom}
       />
       {errorMessage && (
         <ErrorMessage
@@ -53,13 +63,6 @@ const JoinRoomModal = (): JSX.Element | null => {
           closeMessage={() => setErrorMessage('')}
         />
       )}
-      <Button
-        content={t('modals.join_room.button')}
-        disabled={!roomCode}
-        onClick={handleJoinRoom}
-      />
     </Fragment>
   );
 };
-
-export default JoinRoomModal;
