@@ -42,7 +42,7 @@ export const JoinRoomPage = (): JSX.Element => {
   }, [playerSession, roomCode, refreshPlayerSession, navigate]);
 
   return (
-    <Layout hideSettings>
+    <Layout>
       <WelcomeImage alt="welcome" src={Killerparty} />
       {!playerSession?.name && (
         <CreatePlayer

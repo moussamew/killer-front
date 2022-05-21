@@ -41,8 +41,11 @@ const PlayerImage = tw.img`
   absolute h-4 left-1
 `;
 
-const PlayerName = tw.p`
-  text-2xl md:text-3xl font-bold 
+const PlayerName = tw.p<{ $currentPlayer: boolean }>`
+ ${({ $currentPlayer }): string =>
+   $currentPlayer ? 'font-bold' : 'font-medium'}
+
+  text-2xl md:text-3xl
   text-center uppercase
 `;
 
@@ -104,7 +107,9 @@ const PlayerList = (): JSX.Element => {
       {roomPlayers?.map(({ id, name, role }) => (
         <PlayerItem key={name}>
           <PlayerImage alt={`player-${name}`} src={Player} />
-          <PlayerName>{name}</PlayerName>
+          <PlayerName $currentPlayer={playerSession.id === id}>
+            {name}
+          </PlayerName>
           {role === PlayerRole.ADMIN && playerSession.id !== id && (
             <AdminIcon alt="admin" src={Admin} />
           )}

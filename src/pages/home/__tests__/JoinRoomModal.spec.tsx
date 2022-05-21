@@ -69,6 +69,9 @@ describe('<JoinRoomModal />', () => {
 
   it('should show error while joining a room', async () => {
     server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(ctx.status(200), ctx.json({ name: 'Neo' })),
+      ),
       rest.patch(PLAYER_ENDPOINT, (_req, res, ctx) =>
         res(
           ctx.status(400),
@@ -92,6 +95,9 @@ describe('<JoinRoomModal />', () => {
 
   it('should let the user close error message if showed', async () => {
     server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(ctx.status(200), ctx.json({ name: 'Neo' })),
+      ),
       rest.patch(PLAYER_ENDPOINT, (_req, res, ctx) =>
         res(
           ctx.status(400),

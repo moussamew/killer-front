@@ -25,11 +25,7 @@ const Image = tw.img`
   ml-1
 `;
 
-interface Props {
-  hideSettings?: boolean;
-}
-
-const Header = ({ hideSettings = false }: Props): JSX.Element => {
+const Header = (): JSX.Element => {
   const { playerSession } = useContext(PlayerContext);
   const { openModal } = useContext(ModalContext);
 
@@ -39,7 +35,7 @@ const Header = ({ hideSettings = false }: Props): JSX.Element => {
       {!isEmptyObject(playerSession) && (
         <PlayerInfos onClick={() => openModal(<SettingsModal />)}>
           <Text>{playerSession.name}</Text>
-          {!hideSettings && <Image alt="settings" src={Settings} />}
+          <Image alt="settings" src={Settings} />
         </PlayerInfos>
       )}
     </Navigation>
