@@ -10,11 +10,6 @@ import { updatePlayer } from '@/layout/services/requests';
 import { CreatePlayer } from './CreatePlayer';
 import { LeaveCurrentRoom } from './LeaveCurrentRoom';
 
-const Content = tw.div`
-  max-w-screen-lg m-auto
-  inset-0 px-2
-`;
-
 const WelcomeImage = tw.img`
   m-auto
 `;
@@ -48,21 +43,19 @@ export const JoinRoomPage = (): JSX.Element => {
 
   return (
     <Layout hideSettings>
-      <Content>
-        <WelcomeImage alt="welcome" src={Killerparty} />
-        {!playerSession?.name && (
-          <CreatePlayer
-            roomCode={roomCode}
-            refreshPlayerSession={refreshPlayerSession}
-          />
-        )}
-        {playerSession?.roomCode && (
-          <LeaveCurrentRoom
-            playerRoomCode={playerSession?.roomCode}
-            refreshPlayerSession={refreshPlayerSession}
-          />
-        )}
-      </Content>
+      <WelcomeImage alt="welcome" src={Killerparty} />
+      {!playerSession?.name && (
+        <CreatePlayer
+          roomCode={roomCode}
+          refreshPlayerSession={refreshPlayerSession}
+        />
+      )}
+      {playerSession?.roomCode && (
+        <LeaveCurrentRoom
+          playerRoomCode={playerSession?.roomCode}
+          refreshPlayerSession={refreshPlayerSession}
+        />
+      )}
     </Layout>
   );
 };

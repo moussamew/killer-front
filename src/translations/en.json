@@ -26,7 +26,8 @@
     "players_list_description": "List of all the killers who will have to kill each other.",
     "share_room_link": "Share link to join the room",
     "share_room_link_copy_paste": "Copy and paste the following link:\n {joinRoomLink}",
-    "share_room_link_success": "Link saved in the clipboard!"
+    "share_room_link_success": "Link saved in the clipboard!",
+    "share_room_text": "Hey! Join my party and try to kill me ^^"
   },
   "join_room": {
     "no_pseudo": "No pseudo found yet!",
