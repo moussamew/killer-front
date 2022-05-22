@@ -1,8 +1,4 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { rest } from 'msw';
 
 import {
@@ -19,32 +15,6 @@ describe('<SettingsModal />', () => {
     renderWithProviders(<SettingsModal />);
 
     expect(await screen.findByText('User Settings')).toBeInTheDocument();
-  });
-
-  it.skip('should let the user exit the current room', async () => {
-    server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: 'AX78D' })),
-      ),
-    );
-
-    renderWithProviders(<SettingsModal />);
-
-    await screen.findByText('User Settings');
-
-    server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: null })),
-      ),
-    );
-
-    fireEvent.click(screen.getByText('Leave this room'));
-
-    await waitForElementToBeRemoved(() =>
-      screen.queryByText('Leave this room'),
-    );
-
-    expect(screen.queryByText('Leave this room')).not.toBeInTheDocument();
   });
 
   it('should let the user update his pseudo', async () => {

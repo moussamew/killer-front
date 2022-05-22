@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import tw from 'tailwind-styled-components';
 
-import LeaveRoomConfirm from '@/assets/icons/leaveRoomConfirm.svg';
 import { Button } from '@/components/Button';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
@@ -38,11 +37,7 @@ export const LeaveRoomModal = (): JSX.Element => {
       <TextContent>
         <p>{t('room.leave_room_warning')}</p>
       </TextContent>
-      <Button
-        content={t('room.leave_room_confirmation')}
-        icon={LeaveRoomConfirm}
-        onClick={leaveRoom}
-      />
+      <Button content={t('room.leave_room_confirmation')} onClick={leaveRoom} />
     </div>
   );
 };

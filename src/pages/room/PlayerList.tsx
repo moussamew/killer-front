@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Admin from '@/assets/icons/admin.svg';
-import ExitRoom from '@/assets/icons/exitRoom.svg';
+import KickPlayer from '@/assets/icons/kickPlayer.svg';
+import LeaveRoom from '@/assets/icons/leaveRoom.svg';
 import Knife from '@/assets/images/knife.png';
 import Player from '@/assets/images/player.png';
 import { PROD_ENV } from '@/constants/app';
@@ -49,13 +50,16 @@ const PlayerName = tw.p<{ $currentPlayer: boolean }>`
   text-center uppercase
 `;
 
-const ExitIcon = tw.img`
+const KickPlayerIcon = tw.img`
   absolute cursor-pointer right-2
 `;
 
-const AdminIcon = tw.img`
+const LeaveRoomIcon = tw.img`
+  absolute cursor-pointer right-[1.8rem]
+`;
+
+const AdminStatusIcon = tw.img`
   absolute right-2 h-2.5
-  rotate-y-45
 `;
 
 const PlayerList = (): JSX.Element => {
@@ -66,7 +70,7 @@ const PlayerList = (): JSX.Element => {
     () => getRoomPlayers(roomCode),
   );
 
-  const { playerSession } = useContext(PlayerContext);
+  const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
   const { openModal } = useContext(ModalContext);
 
   useEffect(() => {
@@ -76,23 +80,11 @@ const PlayerList = (): JSX.Element => {
 
     roomEventSource.addEventListener('message', async (): Promise<void> => {
       await refetchRoomPlayers();
+      await refreshPlayerSession();
     });
 
     return () => roomEventSource.close();
-  }, [roomCode, refetchRoomPlayers]);
-
-  const handleRoomExit = (playerId?: number): void => {
-    if (playerSession.id === playerId) {
-      openModal(<LeaveRoomModal />);
-    }
-
-    if (
-      playerSession.id !== playerId &&
-      playerSession.role === PlayerRole.ADMIN
-    ) {
-      openModal(<KickPlayerModal />);
-    }
-  };
+  }, [roomCode, refetchRoomPlayers, refreshPlayerSession]);
 
   return (
     <Container>
@@ -111,16 +103,25 @@ const PlayerList = (): JSX.Element => {
             {name}
           </PlayerName>
           {role === PlayerRole.ADMIN && playerSession.id !== id && (
-            <AdminIcon alt="admin" src={Admin} />
+            <AdminStatusIcon alt="admin" src={Admin} />
           )}
-          {(playerSession.role === PlayerRole.ADMIN ||
-            playerSession.id === id) && (
-            <ExitIcon
-              alt={`exitRoom${name}`}
-              src={ExitRoom}
-              onClick={() => handleRoomExit(id)}
+          {playerSession.id === id && (
+            <LeaveRoomIcon
+              alt="leaveRoom"
+              src={LeaveRoom}
+              onClick={() => openModal(<LeaveRoomModal />)}
             />
           )}
+          {playerSession.role === PlayerRole.ADMIN &&
+            playerSession.id !== id && (
+              <KickPlayerIcon
+                alt={`kick${name}`}
+                src={KickPlayer}
+                onClick={() =>
+                  openModal(<KickPlayerModal playerName={name} playerId={id} />)
+                }
+              />
+            )}
         </PlayerItem>
       ))}
     </Container>
