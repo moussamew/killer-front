@@ -3,7 +3,12 @@ import { sources } from 'eventsourcemock';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-import { ROOM_ENDPOINT, ROOM_TOPIC } from '@/constants/endpoints';
+import {
+  PLAYER_SESSION_ENDPOINT,
+  ROOM_ENDPOINT,
+  ROOM_TOPIC,
+} from '@/constants/endpoints';
+import { PlayerRole } from '@/constants/enums';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -12,13 +17,22 @@ import PlayerList from '../PlayerList';
 describe('<PlayerList />', () => {
   it('should show all the player in the room', async () => {
     server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(
+          ctx.status(200),
+          ctx.json({
+            id: 1,
+            name: 'Trinity',
+          }),
+        ),
+      ),
       rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_req, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json([
-            { name: 'Neo' },
-            { name: 'Trinity' },
-            { name: 'Morpheus' },
+            { id: 0, name: 'Neo', role: PlayerRole.ADMIN },
+            { id: 1, name: 'Trinity' },
+            { id: 2, name: 'Morpheus' },
           ]),
         ),
       ),

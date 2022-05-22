@@ -38,4 +38,10 @@ export const roomHandlers = [
   rest.post(MISSION_ENDPOINT, async (_req, res, ctx) =>
     res(ctx.status(200), ctx.json({ id: 0, content: 'New Mission' })),
   ),
+  /**
+   * Mock kicking player.
+   */
+  rest.patch(`${ROOM_ENDPOINT}/*/player/*/admin`, async (_req, res, ctx) =>
+    res(ctx.status(200), ctx.json({})),
+  ),
 ];

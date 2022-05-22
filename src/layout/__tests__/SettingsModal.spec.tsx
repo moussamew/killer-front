@@ -28,17 +28,17 @@ describe('<SettingsModal />', () => {
 
     await screen.findByText('User Settings');
 
-    server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Trinity', roomCode: null })),
-      ),
-    );
-
     fireEvent.change(screen.getByPlaceholderText('Neo'), {
       target: { value: 'Trinity' },
     });
 
     fireEvent.click(screen.getByText('Save changes'));
+
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(ctx.status(200), ctx.json({ name: 'Trinity', roomCode: null })),
+      ),
+    );
 
     expect(await screen.findByPlaceholderText('Trinity'));
   });
@@ -75,10 +75,26 @@ describe('<SettingsModal />', () => {
 
     fireEvent.click(screen.getByText('Save changes'));
 
-    expect(await screen.findByText('Player bad name'));
+    await screen.findByText('Player bad name');
 
     fireEvent.click(screen.getByAltText('closeErrorMessage'));
 
     expect(screen.queryByText('Player bad name')).not.toBeInTheDocument();
+  });
+
+  it('should be able to close Update Pseudo feature', async () => {
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(ctx.status(200), ctx.json({ name: 'Neo' })),
+      ),
+    );
+
+    renderWithProviders(<SettingsModal />);
+
+    await screen.findByText('User Settings');
+
+    fireEvent.click(screen.getByText('Update my pseudo'));
+
+    expect(screen.queryByText('Save changes')).not.toBeInTheDocument();
   });
 });

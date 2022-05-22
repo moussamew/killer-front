@@ -1,7 +1,8 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { Button } from '@/components/Button';
+import { ErrorMessage } from '@/components/ErrorMessage';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
@@ -21,13 +22,16 @@ const TextContent = tw.div`
 `;
 
 export const LeaveRoomModal = (): JSX.Element => {
+  const [errorMessage, setErrorMessage] = useState('');
+
   const { refreshPlayerSession } = useContext(PlayerContext);
   const { closeModal } = useContext(ModalContext);
 
   const leaveRoom = (): Promise<void> =>
     updatePlayer({ roomCode: null })
       .then(refreshPlayerSession)
-      .then(closeModal);
+      .then(closeModal)
+      .catch((error) => setErrorMessage(error.message));
 
   return (
     <div>
@@ -38,6 +42,12 @@ export const LeaveRoomModal = (): JSX.Element => {
         <p>{t('room.leave_room_warning')}</p>
       </TextContent>
       <Button content={t('room.leave_room_confirmation')} onClick={leaveRoom} />
+      {errorMessage && (
+        <ErrorMessage
+          message={errorMessage}
+          closeMessage={() => setErrorMessage('')}
+        />
+      )}
     </div>
   );
 };
