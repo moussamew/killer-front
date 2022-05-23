@@ -27,7 +27,13 @@
     "share_room_link": "Share link to join the room",
     "share_room_link_copy_paste": "Copy and paste the following link:\n {joinRoomLink}",
     "share_room_link_success": "Link saved in the clipboard!",
-    "share_room_text": "Hey! Join my party and try to kill me ^^"
+    "share_room_text": "Hey! Join my party and try to kill me ^^",
+    "leave_room": "Leave the current room",
+    "leave_room_warning": "You are about to leave the room.\n Are you sure about this?",
+    "leave_room_confirmation": "Leave this room",
+    "kick_room": "Kick players from the room",
+    "kick_room_warning": "You are going to kick {playerName}.\n Are you sure about this?",
+    "kick_room_confirmation": "Kick {playerName}"
   },
   "join_room": {
     "no_pseudo": "No pseudo found yet!",
@@ -40,7 +46,6 @@
   },
   "layout": {
     "user_settings": "User Settings",
-    "leave_room": "Leave this room",
     "update_pseudo": "Update my pseudo",
     "save_changes": "Save changes"
   },

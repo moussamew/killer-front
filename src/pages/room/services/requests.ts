@@ -8,36 +8,46 @@ import { Method } from '@/constants/enums';
 import { fetchRequest, request } from '@/helpers/apis';
 import { Mission, Player } from '@/types';
 
+const { GET, POST, DELETE, PATCH } = Method;
+
 export const getRoomPlayers = async (roomCode?: string): Promise<Player[]> => {
   const roomPlayers = await request<Player[]>(
     `${ROOM_ENDPOINT}/${roomCode}/players`,
-    Method.GET,
+    GET,
   );
 
   return roomPlayers;
 };
 
 export const getRoomMissions = async (): Promise<number> => {
-  const roomMissions = await request<number>(ROOM_MISSION_ENDPOINT, Method.GET);
+  const roomMissions = await request<number>(ROOM_MISSION_ENDPOINT, GET);
 
   return roomMissions;
 };
 
 export const getPlayerMissions = async (): Promise<Mission[]> => {
-  const playerMissions = await request<Mission[]>(
-    PLAYER_MISSION_ENDPOINT,
-    Method.GET,
-  );
+  const playerMissions = await request<Mission[]>(PLAYER_MISSION_ENDPOINT, GET);
 
   return playerMissions;
 };
 
 export const createMission = async (content: string): Promise<void> => {
-  await request(MISSION_ENDPOINT, Method.POST, {
+  await request(MISSION_ENDPOINT, POST, {
     body: JSON.stringify({ content }),
   });
 };
 
 export const deleteMission = async (missionId: number): Promise<void> => {
-  await fetchRequest(`${MISSION_ENDPOINT}/${missionId}`, Method.DELETE);
+  await fetchRequest(`${MISSION_ENDPOINT}/${missionId}`, DELETE);
+};
+
+export const kickPlayerFromRoom = async (
+  roomCode: string,
+  playerId: number,
+): Promise<void> => {
+  await request(
+    `${ROOM_ENDPOINT}/${roomCode}/player/${playerId}/admin`,
+    PATCH,
+    { body: JSON.stringify({ roomCode: null }) },
+  );
 };

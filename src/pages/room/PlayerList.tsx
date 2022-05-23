@@ -1,15 +1,22 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
-import NotReady from '@/assets/icons/not_ready.svg';
-import Killer from '@/assets/images/killer.png';
+import Admin from '@/assets/icons/admin.svg';
+import KickPlayer from '@/assets/icons/kickPlayer.svg';
+import LeaveRoom from '@/assets/icons/leaveRoom.svg';
 import Knife from '@/assets/images/knife.png';
+import Player from '@/assets/images/player.png';
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
+import { PlayerRole } from '@/constants/enums';
 import t from '@/helpers/translate';
+import { ModalContext } from '@/hooks/context/modal';
+import { PlayerContext } from '@/hooks/context/player';
 
+import { KickPlayerModal } from './KickPlayerModal';
+import { LeaveRoomModal } from './LeaveRoomModal';
 import { getRoomPlayers } from './services/requests';
 
 const Container = tw.div`
@@ -25,23 +32,34 @@ const ListImage = tw.img`
   h-7 mr-1 -rotate-45
 `;
 
-const List = tw.div`
-  mt-1
-`;
-
 const PlayerItem = tw.div`
   flex flex-row items-center 
-  text-center py-1 justify-between 
-  border-b
+  text-center py-2 justify-center 
+  border-b relative
 `;
 
 const PlayerImage = tw.img`
-  pl-1 h-4 mr-2
+  absolute h-4 left-1
 `;
 
-const PlayerName = tw.p`
-  text-2xl md:text-3xl font-bold 
+const PlayerName = tw.p<{ $currentPlayer: boolean }>`
+ ${({ $currentPlayer }): string =>
+   $currentPlayer ? 'font-bold' : 'font-medium'}
+
+  text-2xl md:text-3xl
   text-center uppercase
+`;
+
+const KickPlayerIcon = tw.img`
+  absolute cursor-pointer right-2
+`;
+
+const LeaveRoomIcon = tw.img`
+  absolute cursor-pointer right-[1.8rem]
+`;
+
+const AdminStatusIcon = tw.img`
+  absolute right-2 h-2.5
 `;
 
 const PlayerList = (): JSX.Element => {
@@ -52,6 +70,9 @@ const PlayerList = (): JSX.Element => {
     () => getRoomPlayers(roomCode),
   );
 
+  const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
+  const { openModal } = useContext(ModalContext);
+
   useEffect(() => {
     const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomCode}`, {
       withCredentials: PROD_ENV,
@@ -59,10 +80,11 @@ const PlayerList = (): JSX.Element => {
 
     roomEventSource.addEventListener('message', async (): Promise<void> => {
       await refetchRoomPlayers();
+      await refreshPlayerSession();
     });
 
     return () => roomEventSource.close();
-  }, [roomCode, refetchRoomPlayers]);
+  }, [roomCode, refetchRoomPlayers, refreshPlayerSession]);
 
   return (
     <Container>
@@ -74,15 +96,34 @@ const PlayerList = (): JSX.Element => {
         </div>
       </Section>
       <hr />
-      <List>
-        {roomPlayers?.map(({ name }) => (
-          <PlayerItem key={name}>
-            <PlayerImage alt={`player-${name}`} src={Killer} />
-            <PlayerName>{name}</PlayerName>
-            <img alt="player not ready" src={NotReady} />
-          </PlayerItem>
-        ))}
-      </List>
+      {roomPlayers?.map(({ id, name, role }) => (
+        <PlayerItem key={name}>
+          <PlayerImage alt={`player-${name}`} src={Player} />
+          <PlayerName $currentPlayer={playerSession.id === id}>
+            {name}
+          </PlayerName>
+          {role === PlayerRole.ADMIN && playerSession.id !== id && (
+            <AdminStatusIcon alt="admin" src={Admin} />
+          )}
+          {playerSession.id === id && (
+            <LeaveRoomIcon
+              alt="leaveRoom"
+              src={LeaveRoom}
+              onClick={() => openModal(<LeaveRoomModal />)}
+            />
+          )}
+          {playerSession.role === PlayerRole.ADMIN &&
+            playerSession.id !== id && (
+              <KickPlayerIcon
+                alt={`kick${name}`}
+                src={KickPlayer}
+                onClick={() =>
+                  openModal(<KickPlayerModal playerName={name} playerId={id} />)
+                }
+              />
+            )}
+        </PlayerItem>
+      ))}
     </Container>
   );
 };

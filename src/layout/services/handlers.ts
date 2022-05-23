@@ -6,7 +6,7 @@ export const layoutHandlers = [
   /**
    * Mock update player.
    */
-  rest.put(PLAYER_ENDPOINT, (_req, res, ctx) =>
+  rest.patch(PLAYER_ENDPOINT, (_req, res, ctx) =>
     res(ctx.status(200), ctx.json({})),
   ),
 ];

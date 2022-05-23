@@ -2,8 +2,9 @@ import { fireEvent, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
+import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { HomePage } from '@/pages/home/HomePage';
+import { RoomPage } from '@/pages/room/RoomPage';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -44,36 +45,32 @@ describe('<Layout />', () => {
     expect(screen.getByText('User Settings')).toBeInTheDocument();
   });
 
-  it('should navigate to home if the user leave a room', async () => {
+  it('should redirect the user to the home page on room leaving', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: 'AX5KV' })),
+        res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: 'X7VBD' })),
+      ),
+      rest.get(`${ROOM_ENDPOINT}/X7VBD/players`, async (_req, res, ctx) =>
+        res(ctx.status(200), ctx.json([{ name: 'Neo' }])),
       ),
     );
 
     renderWithProviders(
-      <MemoryRouter initialEntries={['/room/AX5KV']}>
+      <MemoryRouter initialEntries={['/room/X7VBD']}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route
-            path="/room/AX5KV"
-            element={
-              <Layout>
-                <div>Hello</div>
-              </Layout>
-            }
-          />
+          <Route path="/room/:roomCode" element={<RoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByAltText('settings'));
+    fireEvent.click(await screen.findByAltText('leaveRoom'));
 
     fireEvent.click(screen.getByText('Leave this room'));
 
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Neo' })),
+        res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: null })),
       ),
     );
 

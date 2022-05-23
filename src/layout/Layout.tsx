@@ -16,10 +16,9 @@ const Content = tw.div`
 
 interface Props {
   children: ReactNode;
-  hideSettings?: boolean;
 }
 
-export const Layout = ({ children, hideSettings }: Props): JSX.Element => {
+export const Layout = ({ children }: Props): JSX.Element => {
   const { modal, closeModal } = useContext(ModalContext);
   const { playerSession } = useContext(PlayerContext);
 
@@ -35,7 +34,7 @@ export const Layout = ({ children, hideSettings }: Props): JSX.Element => {
 
   return (
     <Fragment>
-      <Header hideSettings={hideSettings} />
+      <Header />
       <Content>{children}</Content>
       {modal && <Modal closeModal={closeModal}>{modal}</Modal>}
     </Fragment>
