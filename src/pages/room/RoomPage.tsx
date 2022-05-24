@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Island from '@/assets/images/island.png';
+import { PlayerRole } from '@/constants/enums';
 import { isEmptyObject } from '@/helpers/objects';
 import t from '@/helpers/translate';
 import { PlayerContext } from '@/hooks/context/player';
@@ -13,10 +14,11 @@ import PlayerList from './PlayerList';
 import PlayerMissions from './PlayerMissions';
 import RoomMissions from './RoomMissions';
 import { ShareRoomLink } from './ShareRoomLink';
+import { StartPartyButton } from './StartPartyButton';
 
 const Welcome = tw.div`
   flex flex-col md:flex-row 
-  items-center mb-2 md:mb-4 
+  items-center md:items-start mb-2 md:mb-4 
   justify-center
 `;
 
@@ -60,6 +62,7 @@ export const RoomPage = (): JSX.Element => {
           <p>{t('room.join_room_code', { roomCode })}</p>
           <RoomMissions />
           <ShareRoomLink roomCode={roomCode!} />
+          {playerSession.role === PlayerRole.ADMIN && <StartPartyButton />}
         </RoomResume>
       </Welcome>
       <hr />

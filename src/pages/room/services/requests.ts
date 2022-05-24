@@ -4,7 +4,7 @@ import {
   ROOM_ENDPOINT,
   ROOM_MISSION_ENDPOINT,
 } from '@/constants/endpoints';
-import { Method } from '@/constants/enums';
+import { Method, RoomStatus } from '@/constants/enums';
 import { fetchRequest, request } from '@/helpers/apis';
 import { Mission, Player } from '@/types';
 
@@ -51,3 +51,8 @@ export const kickPlayerFromRoom = async (
 export const deleteRoom = async (roomCode: string): Promise<void> => {
   await request(`${ROOM_ENDPOINT}/${roomCode}`, DELETE);
 };
+
+export const startParty = async (roomCode: string): Promise<void> =>
+  request(`${ROOM_ENDPOINT}/${roomCode}`, PATCH, {
+    body: JSON.stringify({ status: RoomStatus.IN_GAME }),
+  });
