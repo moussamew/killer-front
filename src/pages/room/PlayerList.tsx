@@ -6,6 +6,7 @@ import tw from 'tailwind-styled-components';
 import Admin from '@/assets/icons/admin.svg';
 import KickPlayer from '@/assets/icons/kickPlayer.svg';
 import LeaveRoom from '@/assets/icons/leaveRoom.svg';
+import RoomSettings from '@/assets/icons/roomSettings.svg';
 import Knife from '@/assets/images/knife.png';
 import Player from '@/assets/images/player.png';
 import { PROD_ENV } from '@/constants/app';
@@ -17,6 +18,7 @@ import { PlayerContext } from '@/hooks/context/player';
 
 import { KickPlayerModal } from './KickPlayerModal';
 import { LeaveRoomModal } from './LeaveRoomModal';
+import { RoomSettingsModal } from './RoomSettingsModal';
 import { getRoomPlayers } from './services/requests';
 
 const Container = tw.div`
@@ -62,6 +64,15 @@ const AdminStatusIcon = tw.img`
   absolute right-2 h-2.5
 `;
 
+const SectionHeader = tw.div`
+  relative
+`;
+
+const Icon = tw.img`
+  absolute cursor-pointer h-2.5 
+  right-2 top-0 md:top-0.5
+`;
+
 const PlayerList = (): JSX.Element => {
   const { roomCode } = useParams();
 
@@ -91,7 +102,15 @@ const PlayerList = (): JSX.Element => {
       <Section>
         <ListImage alt="player list" src={Knife} />
         <div>
-          <h2>{t('room.players_list')}</h2>
+          <SectionHeader>
+            <h2>{t('room.players_list')}</h2>
+            {playerSession.role && (
+              <Icon
+                src={RoomSettings}
+                onClick={() => openModal(<RoomSettingsModal />)}
+              />
+            )}
+          </SectionHeader>
           <p>{t('room.players_list_description')}</p>
         </div>
       </Section>
