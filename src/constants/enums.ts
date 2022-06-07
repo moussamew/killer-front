@@ -22,3 +22,7 @@ export enum RoomStatus {
   IN_GAME = 'IN_GAME',
   ENDED = 'ENDED',
 }
+
+export enum MercureEventType {
+  ROOM_DELETED = 'room_deleted',
+}

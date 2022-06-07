@@ -11,7 +11,7 @@ import Knife from '@/assets/images/knife.png';
 import Player from '@/assets/images/player.png';
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
-import { PlayerRole } from '@/constants/enums';
+import { MercureEventType, PlayerRole } from '@/constants/enums';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
@@ -89,10 +89,18 @@ const PlayerList = (): JSX.Element => {
       withCredentials: PROD_ENV,
     });
 
-    roomEventSource.addEventListener('message', async (): Promise<void> => {
-      await refetchRoomPlayers();
-      await refreshPlayerSession();
-    });
+    roomEventSource.addEventListener(
+      'message',
+      async (event): Promise<void> => {
+        const { type } = JSON.parse(event.data);
+
+        if (type !== MercureEventType.ROOM_DELETED) {
+          await refetchRoomPlayers();
+        }
+
+        await refreshPlayerSession();
+      },
+    );
 
     return () => roomEventSource.close();
   }, [roomCode, refetchRoomPlayers, refreshPlayerSession]);
@@ -104,7 +112,7 @@ const PlayerList = (): JSX.Element => {
         <div>
           <SectionHeader>
             <h2>{t('room.players_list')}</h2>
-            {playerSession.role && (
+            {playerSession.role === PlayerRole.ADMIN && (
               <Icon
                 src={RoomSettings}
                 onClick={() => openModal(<RoomSettingsModal />)}

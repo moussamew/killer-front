@@ -92,7 +92,11 @@ describe('<PlayerList />', () => {
       ),
     );
 
-    const messageEvent = new MessageEvent('message');
+    const messageEvent = new MessageEvent('message', {
+      data: JSON.stringify({
+        type: null,
+      }),
+    });
 
     sources[mockRoomEventSource].emit(messageEvent.type, messageEvent);
 

@@ -49,5 +49,5 @@ export const kickPlayerFromRoom = async (
 };
 
 export const deleteRoom = async (roomCode: string): Promise<void> => {
-  await request(`${ROOM_ENDPOINT}/${roomCode}`, DELETE);
+  await fetchRequest(`${ROOM_ENDPOINT}/${roomCode}`, DELETE);
 };

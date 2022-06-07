@@ -4,6 +4,7 @@ import tw from 'tailwind-styled-components';
 import { Button } from '@/components/Button';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import { Input } from '@/components/Input';
+import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 
 import { deleteRoom } from './services/requests';
@@ -25,17 +26,17 @@ export const RoomSettingsModal = (): JSX.Element => {
 
   return (
     <div>
-      <Title>Room settings</Title>
+      <Title>{t('room.room_settings')}</Title>
       <Input
         id="deleteRoom"
-        label="Delete current room"
+        label={t('room.delete_current_room')}
         value={roomCode}
         onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
-        placeholder="Confirm by typing the room code"
+        placeholder={t('room.delete_room_placeholder')}
         uppercase
       />
       <Button
-        content="Delete the room"
+        content={t('room.delete_the_room')}
         disabled={!roomCode}
         onClick={handleDeleteRoom}
       />
