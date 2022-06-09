@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import { Button } from '@/components/Button';
@@ -14,13 +15,14 @@ const Title = tw.h2`
 `;
 
 export const RoomSettingsModal = (): JSX.Element => {
-  const [roomCode, setRoomCode] = useState('');
+  const { roomCode } = useParams();
+  const [inputRoomCode, setInputRoomCode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const { closeModal } = useContext(ModalContext);
 
   const handleDeleteRoom = (): Promise<void> =>
-    deleteRoom(roomCode)
+    deleteRoom(inputRoomCode)
       .then(closeModal)
       .catch((error) => setErrorMessage(error.message));
 
@@ -30,14 +32,14 @@ export const RoomSettingsModal = (): JSX.Element => {
       <Input
         id="deleteRoom"
         label={t('room.delete_current_room')}
-        value={roomCode}
-        onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
+        value={inputRoomCode}
+        onChange={(e) => setInputRoomCode(e.target.value.toUpperCase())}
         placeholder={t('room.delete_room_placeholder')}
         uppercase
       />
       <Button
         content={t('room.delete_the_room')}
-        disabled={!roomCode}
+        disabled={inputRoomCode !== roomCode}
         onClick={handleDeleteRoom}
       />
       {errorMessage && (
