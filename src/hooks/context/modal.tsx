@@ -9,6 +9,7 @@ import {
   useState,
 } from 'react';
 
+import { useEvent } from '../useEvent';
 import { usePrevious } from '../usePrevious';
 
 interface ModalContextInterface {
@@ -45,6 +46,16 @@ const ModalProvider: FunctionComponent = ({ children }) => {
       document.body.style.removeProperty('overflow');
     }
   }, [previousModal, modal]);
+
+  /**
+   * Close any modal opened when the user navigate through the history.
+   */
+  useEvent('popstate', () => {
+    if (modal) {
+      document.body.style.removeProperty('overflow');
+      openModal(null);
+    }
+  });
 
   return (
     <ModalContext.Provider value={memoizedModalComponent}>
