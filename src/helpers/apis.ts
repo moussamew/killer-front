@@ -24,7 +24,10 @@ export const request = async <T>(
 ): Promise<T> => {
   const response = await fetchRequest(url, method, requestParams);
 
-  const result = await response.json();
+  const result = await response.json().catch(() => {
+    // eslint-disable-next-line no-console
+    console.error(`${method} > ${url} does not have JSON response format.`);
+  });
 
   if (result?.errorCode || result?.statusCode) {
     throw new Error(result.message);

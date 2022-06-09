@@ -64,13 +64,13 @@ const AdminStatusIcon = tw.img`
   absolute right-2 h-2.5
 `;
 
-const SectionHeader = tw.div`
-  relative
-`;
-
-const Icon = tw.img`
+const RoomSettingsIcon = tw.img`
   absolute cursor-pointer h-2.5 
   right-2 top-0 md:top-0.5
+`;
+
+const SectionHeader = tw.div`
+  relative
 `;
 
 const PlayerList = (): JSX.Element => {
@@ -113,7 +113,8 @@ const PlayerList = (): JSX.Element => {
           <SectionHeader>
             <h2>{t('room.players_list')}</h2>
             {playerSession.role === PlayerRole.ADMIN && (
-              <Icon
+              <RoomSettingsIcon
+                alt="roomSettings"
                 src={RoomSettings}
                 onClick={() => openModal(<RoomSettingsModal />)}
               />

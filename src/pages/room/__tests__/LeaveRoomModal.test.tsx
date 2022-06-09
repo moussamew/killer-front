@@ -19,7 +19,7 @@ import { LeaveRoomModal } from '../LeaveRoomModal';
 import { RoomPage } from '../RoomPage';
 
 describe('<LeaveRoomModal />', () => {
-  it('should kick player from the room', async () => {
+  it('should be able to leave the room', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(
