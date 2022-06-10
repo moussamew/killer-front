@@ -44,4 +44,10 @@ export const roomHandlers = [
   rest.patch(`${ROOM_ENDPOINT}/*/player/*/admin`, async (_req, res, ctx) =>
     res(ctx.status(200), ctx.json({})),
   ),
+  /**
+   * Mock deleting room.
+   */
+  rest.delete(`${ROOM_ENDPOINT}/*`, async (_req, res, ctx) =>
+    res(ctx.status(200), ctx.json({})),
+  ),
 ];

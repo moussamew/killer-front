@@ -10,9 +10,9 @@ const StyledButton = tw.button<{
 }>`
   ${({ $buttonColor }): string => $buttonColor}
   ${({ disabled }): string =>
-    disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
+    disabled ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'}
     
-  transition-shadow duration-500 ease-in 
+  transition-all duration-300 ease-in 
   shadow-md hover:shadow-xl
   p-1 mt-1 rounded-lg 
   w-full text-3xl relative

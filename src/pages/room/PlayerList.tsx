@@ -6,17 +6,19 @@ import tw from 'tailwind-styled-components';
 import Admin from '@/assets/icons/admin.svg';
 import KickPlayer from '@/assets/icons/kickPlayer.svg';
 import LeaveRoom from '@/assets/icons/leaveRoom.svg';
+import RoomSettings from '@/assets/icons/roomSettings.svg';
 import Knife from '@/assets/images/knife.png';
 import Player from '@/assets/images/player.png';
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
-import { PlayerRole } from '@/constants/enums';
+import { MercureEventType, PlayerRole } from '@/constants/enums';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
 
 import { KickPlayerModal } from './KickPlayerModal';
 import { LeaveRoomModal } from './LeaveRoomModal';
+import { RoomSettingsModal } from './RoomSettingsModal';
 import { getRoomPlayers } from './services/requests';
 
 const Container = tw.div`
@@ -62,6 +64,15 @@ const AdminStatusIcon = tw.img`
   absolute right-2 h-2.5
 `;
 
+const RoomSettingsIcon = tw.img`
+  absolute cursor-pointer h-2.5 
+  right-2 top-0 md:top-0.5
+`;
+
+const SectionHeader = tw.div`
+  relative
+`;
+
 const PlayerList = (): JSX.Element => {
   const { roomCode } = useParams();
 
@@ -78,10 +89,18 @@ const PlayerList = (): JSX.Element => {
       withCredentials: PROD_ENV,
     });
 
-    roomEventSource.addEventListener('message', async (): Promise<void> => {
-      await refetchRoomPlayers();
-      await refreshPlayerSession();
-    });
+    roomEventSource.addEventListener(
+      'message',
+      async (event): Promise<void> => {
+        const { type } = JSON.parse(event.data);
+
+        if (type !== MercureEventType.ROOM_DELETED) {
+          await refetchRoomPlayers();
+        }
+
+        await refreshPlayerSession();
+      },
+    );
 
     return () => roomEventSource.close();
   }, [roomCode, refetchRoomPlayers, refreshPlayerSession]);
@@ -91,7 +110,16 @@ const PlayerList = (): JSX.Element => {
       <Section>
         <ListImage alt="player list" src={Knife} />
         <div>
-          <h2>{t('room.players_list')}</h2>
+          <SectionHeader>
+            <h2>{t('room.players_list')}</h2>
+            {playerSession.role === PlayerRole.ADMIN && (
+              <RoomSettingsIcon
+                alt="roomSettings"
+                src={RoomSettings}
+                onClick={() => openModal(<RoomSettingsModal />)}
+              />
+            )}
+          </SectionHeader>
           <p>{t('room.players_list_description')}</p>
         </div>
       </Section>

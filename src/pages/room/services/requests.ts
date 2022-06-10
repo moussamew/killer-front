@@ -19,16 +19,12 @@ export const getRoomPlayers = async (roomCode?: string): Promise<Player[]> => {
   return roomPlayers;
 };
 
-export const getRoomMissions = async (): Promise<number> => {
-  const roomMissions = await request<number>(ROOM_MISSION_ENDPOINT, GET);
-
-  return roomMissions;
+export const getRoomMissions = (): Promise<number> => {
+  return request<number>(ROOM_MISSION_ENDPOINT, GET);
 };
 
 export const getPlayerMissions = async (): Promise<Mission[]> => {
-  const playerMissions = await request<Mission[]>(PLAYER_MISSION_ENDPOINT, GET);
-
-  return playerMissions;
+  return request<Mission[]>(PLAYER_MISSION_ENDPOINT, GET);
 };
 
 export const createMission = async (content: string): Promise<void> => {
@@ -50,4 +46,8 @@ export const kickPlayerFromRoom = async (
     PATCH,
     { body: JSON.stringify({ roomCode: null }) },
   );
+};
+
+export const deleteRoom = async (roomCode: string): Promise<void> => {
+  await request(`${ROOM_ENDPOINT}/${roomCode}`, DELETE);
 };

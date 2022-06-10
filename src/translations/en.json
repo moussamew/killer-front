@@ -33,7 +33,11 @@
     "leave_room_confirmation": "Leave this room",
     "kick_room": "Kick players from the room",
     "kick_room_warning": "You are going to kick {playerName}.\n Are you sure about this?",
-    "kick_room_confirmation": "Kick {playerName}"
+    "kick_room_confirmation": "Kick {playerName}",
+    "room_settings": "Room settings",
+    "delete_current_room": "Delete current room",
+    "delete_room_placeholder": "Confirm by typing the room code",
+    "delete_the_room": "Delete the room"
   },
   "join_room": {
     "no_pseudo": "No pseudo found yet!",
