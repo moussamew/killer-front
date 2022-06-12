@@ -7,11 +7,11 @@ import {
   ROOM_MISSION_ENDPOINT,
 } from '@/constants/endpoints';
 
-export const roomPendingHandlers = [
+export const pendingRoomHandlers = [
   /**
    * Mock fetching players in a room.
    */
-  rest.get(`${ROOM_ENDPOINT}/*/players`, async (_req, res, ctx) =>
+  rest.get(`${ROOM_ENDPOINT}/:roomCode/players`, async (_req, res, ctx) =>
     res(ctx.status(200), ctx.json([])),
   ),
   /**
@@ -29,7 +29,7 @@ export const roomPendingHandlers = [
   /**
    * Mock deleting mission.
    */
-  rest.delete(`${MISSION_ENDPOINT}/*`, async (_req, res, ctx) =>
+  rest.delete(`${MISSION_ENDPOINT}/:missionId`, async (_req, res, ctx) =>
     res(ctx.status(200)),
   ),
   /**
@@ -41,13 +41,14 @@ export const roomPendingHandlers = [
   /**
    * Mock kicking player.
    */
-  rest.patch(`${ROOM_ENDPOINT}/*/player/*/admin`, async (_req, res, ctx) =>
-    res(ctx.status(200), ctx.json({})),
+  rest.patch(
+    `${ROOM_ENDPOINT}/:roomCode/player/:playerId/admin`,
+    async (_req, res, ctx) => res(ctx.status(200), ctx.json({})),
   ),
   /**
    * Mock deleting room.
    */
-  rest.delete(`${ROOM_ENDPOINT}/*`, async (_req, res, ctx) =>
+  rest.delete(`${ROOM_ENDPOINT}/:roomCode`, async (_req, res, ctx) =>
     res(ctx.status(200), ctx.json({})),
   ),
 ];
