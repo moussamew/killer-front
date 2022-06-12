@@ -7,6 +7,7 @@ import { PlayerProvider } from '@/hooks/context/player';
 
 import { HomePage } from './pages/home/HomePage';
 import { JoinRoomPage } from './pages/joinRoom/JoinRoomPage';
+import { PlayingRoomPage } from './pages/room/playing/PlayingRoomPage';
 import { RoomPage } from './pages/room/RoomPage';
 
 import './assets/styles/app.css';
@@ -31,6 +32,7 @@ const Application = (): JSX.Element => (
             <Route path="/" element={<HomePage />} />
             <Route path="/room">
               <Route path=":roomCode" element={<RoomPage />} />
+              <Route path=":roomCode/playing" element={<PlayingRoomPage />} />
             </Route>
             <Route path="/join">
               <Route path=":roomCode" element={<JoinRoomPage />} />
