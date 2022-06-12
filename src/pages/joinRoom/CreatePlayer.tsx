@@ -9,7 +9,7 @@ import t from '@/helpers/translate';
 import { createPlayer } from '../home/services/requests';
 
 interface Props {
-  roomCode?: string;
+  roomCode: string;
   refreshPlayerSession: () => Promise<void>;
 }
 

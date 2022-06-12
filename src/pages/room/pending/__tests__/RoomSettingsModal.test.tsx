@@ -11,8 +11,8 @@ import { PlayerRole } from '@/constants/enums';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-import { RoomPage } from '../../RoomPage';
-import { PendingRoomPage } from '../PendingRoomPage';
+import { PendingRoomPage } from '..';
+import { RoomPage } from '../..';
 import { RoomSettingsModal } from '../RoomSettingsModal';
 
 describe('<RoomSettingsModal />', () => {

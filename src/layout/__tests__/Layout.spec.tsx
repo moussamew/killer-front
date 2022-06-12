@@ -3,9 +3,9 @@ import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { HomePage } from '@/pages/home/HomePage';
-import { PendingRoomPage } from '@/pages/room/pending/PendingRoomPage';
-import { RoomPage } from '@/pages/room/RoomPage';
+import { HomePage } from '@/pages/home';
+import { RoomPage } from '@/pages/room';
+import { PendingRoomPage } from '@/pages/room/pending';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 

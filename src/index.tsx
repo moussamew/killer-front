@@ -6,11 +6,11 @@ import { ModalProvider } from '@/hooks/context/modal';
 import { PlayerProvider } from '@/hooks/context/player';
 
 import { Loader } from './components/Loader';
-import { HomePage } from './pages/home/HomePage';
+import { HomePage } from './pages/home';
 import { JoinRoomPage } from './pages/joinRoom/JoinRoomPage';
-import { PendingRoomPage } from './pages/room/pending/PendingRoomPage';
-import { PlayingRoomPage } from './pages/room/playing/PlayingRoomPage';
-import { RoomPage } from './pages/room/RoomPage';
+import { RoomPage } from './pages/room';
+import { PendingRoomPage } from './pages/room/pending';
+import { PlayingRoomPage } from './pages/room/playing';
 
 import './assets/styles/app.css';
 

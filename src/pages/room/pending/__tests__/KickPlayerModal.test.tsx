@@ -11,9 +11,9 @@ import { PlayerRole } from '@/constants/enums';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-import { RoomPage } from '../../RoomPage';
+import { PendingRoomPage } from '..';
+import { RoomPage } from '../..';
 import { KickPlayerModal } from '../KickPlayerModal';
-import { PendingRoomPage } from '../PendingRoomPage';
 
 const dummyProps = {
   playerName: 'Morpheus',

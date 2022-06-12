@@ -6,8 +6,8 @@ import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-import { RoomPage } from '../../RoomPage';
-import { PendingRoomPage } from '../PendingRoomPage';
+import { PendingRoomPage } from '..';
+import { RoomPage } from '../..';
 
 describe('<RoomPage />', () => {
   it('should show a room with the correct room code', async () => {

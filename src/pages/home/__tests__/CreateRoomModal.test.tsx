@@ -10,8 +10,8 @@ import { PLAYER_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
+import { HomePage } from '..';
 import { CreateRoomModal } from '../CreateRoomModal';
-import { HomePage } from '../HomePage';
 
 describe('<CreateRoomModal />', () => {
   it('should close modal after creating a room', async () => {

@@ -42,6 +42,8 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
    * Redirect player to the correct route related to the room status.
    */
   useEffect(() => {
+    console.warn({ room });
+
     if (room?.status === RoomStatus.PENDING) {
       navigate(`/room/${roomCode}/pending`);
     }

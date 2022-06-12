@@ -6,8 +6,8 @@ import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
+import { HomePage } from '..';
 import { CreateRoomButton } from '../CreateRoomButton';
-import { HomePage } from '../HomePage';
 
 describe('<CreateRoomButton />', () => {
   it('should redirect to create room modal for a player without session', async () => {

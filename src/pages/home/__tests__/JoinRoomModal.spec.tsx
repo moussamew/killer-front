@@ -10,7 +10,7 @@ import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
-import { HomePage } from '@/pages/home/HomePage';
+import { HomePage } from '@/pages/home';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
