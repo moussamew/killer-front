@@ -6,6 +6,8 @@ import Knife from '@/assets/images/knife.png';
 import { Button } from '@/components/Button';
 import { Layout } from '@/layout/Layout';
 
+import PlayerList from '../pending/PlayerList';
+
 import { getPlayerMission, getPlayerTarget } from './services/requests';
 
 const Content = tw.div`
@@ -27,7 +29,7 @@ const Text = tw.p`
 `;
 
 const Spacer = tw.hr`
-  my-1
+  my-1 md:my-2
 `;
 
 const KnifeImage = tw.img`
@@ -64,9 +66,7 @@ export const PlayingRoomPage = (): JSX.Element => {
             <Text>The target to kill is..</Text>
             <PlayerToKill>{playerTarget?.name}</PlayerToKill>
           </Target>
-          <Text>
-            To be able to kill your target, you must be able to make him..
-          </Text>
+          <Text>In order to kill your target, it must do..</Text>
           <Mission>{playerMission?.content}</Mission>
         </Section>
         <Spacer />
@@ -80,6 +80,8 @@ export const PlayingRoomPage = (): JSX.Element => {
           <Button content="I have been killed" />
         </Section>
       </Content>
+      <Spacer />
+      <PlayerList />
     </Layout>
   );
 };

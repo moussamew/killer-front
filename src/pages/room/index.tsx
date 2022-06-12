@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { RoomStatus } from '@/constants/enums';
 import { isEmptyObject } from '@/helpers/objects';
@@ -16,13 +16,15 @@ interface Props {
 export const RoomPage = ({ page }: Props): JSX.Element => {
   const { roomCode } = useParams();
 
+  const location = useLocation();
+
   const { playerSession } = useContext(PlayerContext);
 
   const previousRoomCode = usePrevious(playerSession?.roomCode);
 
-  const { data: room } = useQuery('room', () => getRoom(roomCode!));
-
   const navigate = useNavigate();
+
+  const { data: room } = useQuery(location.pathname, () => getRoom(roomCode!));
 
   /**
    * Redirect player to `join/room` route in two cases:
@@ -42,8 +44,6 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
    * Redirect player to the correct route related to the room status.
    */
   useEffect(() => {
-    console.warn({ room });
-
     if (room?.status === RoomStatus.PENDING) {
       navigate(`/room/${roomCode}/pending`);
     }

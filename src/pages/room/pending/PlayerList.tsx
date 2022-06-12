@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Admin from '@/assets/icons/admin.svg';
@@ -84,6 +84,8 @@ const PlayerList = (): JSX.Element => {
   const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
   const { openModal } = useContext(ModalContext);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomCode}`, {
       withCredentials: PROD_ENV,
@@ -91,19 +93,23 @@ const PlayerList = (): JSX.Element => {
 
     roomEventSource.addEventListener(
       'message',
-      async (event): Promise<void> => {
+      (event): void | Promise<void> => {
         const { type } = JSON.parse(event.data);
 
-        if (type !== MercureEventType.ROOM_DELETED) {
-          await refetchRoomPlayers();
+        if (type === MercureEventType.ROOM_IN_GAME) {
+          return navigate(`/room/${roomCode}/playing`);
         }
 
-        await refreshPlayerSession();
+        if (type === MercureEventType.ROOM_DELETED) {
+          return refreshPlayerSession();
+        }
+
+        return refetchRoomPlayers().then(refreshPlayerSession);
       },
     );
 
     return () => roomEventSource.close();
-  }, [roomCode, refetchRoomPlayers, refreshPlayerSession]);
+  }, [navigate, roomCode, refetchRoomPlayers, refreshPlayerSession]);
 
   return (
     <Container>
