@@ -13,6 +13,15 @@
     "room_code_placeholder": "Code of the room",
     "join_room_modal_button": "Join this room"
   },
+  "join_room": {
+    "no_pseudo": "No pseudo found yet!",
+    "create_pseudo": "You must create a pseudo before joining this room.",
+    "join_the_room": "Continue and join the room",
+    "create_room": "Create my own room",
+    "already_inside_room": "Already inside the room {playerRoomCode}!",
+    "careful_before_join_room": "Be careful, if you join this room, this will make you leave the previous one.",
+    "return_current_room": "Return to my current room"
+  },
   "room": {
     "welcome": "Welcome to the party!",
     "join_room_code": "The code to join this room is {roomCode}.",
@@ -39,14 +48,13 @@
     "delete_room_placeholder": "Confirm by typing the room code",
     "delete_the_room": "Delete the room"
   },
-  "join_room": {
-    "no_pseudo": "No pseudo found yet!",
-    "create_pseudo": "You must create a pseudo before joining this room.",
-    "join_the_room": "Continue and join the room",
-    "create_room": "Create my own room",
-    "already_inside_room": "Already inside the room {playerRoomCode}!",
-    "careful_before_join_room": "Be careful, if you join this room, this will make you leave the previous one.",
-    "return_current_room": "Return to my current room"
+  "playing_room": {
+    "target_section_title": "Try to kill your target and survive!",
+    "target_to_kill": "The target to kill is..",
+    "mission_to_do": "In order to kill your target, it must do..",
+    "killed_section_title": "Someone managed to kill you?",
+    "killed_button_infos": "Click on the button above to notify other players that you have been killed.",
+    "killed_button_text": "I have been killed"
   },
   "layout": {
     "user_settings": "User Settings",
