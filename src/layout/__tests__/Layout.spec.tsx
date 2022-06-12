@@ -4,6 +4,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { HomePage } from '@/pages/home/HomePage';
+import { PendingRoomPage } from '@/pages/room/pending/PendingRoomPage';
 import { RoomPage } from '@/pages/room/RoomPage';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
@@ -59,7 +60,10 @@ describe('<Layout />', () => {
       <MemoryRouter initialEntries={['/room/X7VBD']}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/room/:roomCode" element={<RoomPage />} />
+          <Route
+            path="/room/:roomCode"
+            element={<RoomPage page={<PendingRoomPage />} />}
+          />
         </Routes>
       </MemoryRouter>,
     );

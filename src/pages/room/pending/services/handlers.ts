@@ -7,7 +7,7 @@ import {
   ROOM_MISSION_ENDPOINT,
 } from '@/constants/endpoints';
 
-export const roomHandlers = [
+export const roomPendingHandlers = [
   /**
    * Mock fetching players in a room.
    */

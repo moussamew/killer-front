@@ -6,7 +6,8 @@ import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-import { RoomPage } from '../RoomPage';
+import { RoomPage } from '../../RoomPage';
+import { PendingRoomPage } from '../PendingRoomPage';
 
 describe('<RoomPage />', () => {
   it('should show a room with the correct room code', async () => {
@@ -19,7 +20,10 @@ describe('<RoomPage />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/P9LDG']}>
         <Routes>
-          <Route path="/room/:roomCode" element={<RoomPage />} />
+          <Route
+            path="/room/:roomCode"
+            element={<RoomPage page={<PendingRoomPage />} />}
+          />
         </Routes>
       </MemoryRouter>,
     );
@@ -37,7 +41,10 @@ describe('<RoomPage />', () => {
             path="/join/P9LDG"
             element={<div>Check user before join a room.</div>}
           />
-          <Route path="/room/:roomCode" element={<RoomPage />} />
+          <Route
+            path="/room/:roomCode"
+            element={<RoomPage page={<PendingRoomPage />} />}
+          />
         </Routes>
       </MemoryRouter>,
     );
@@ -61,7 +68,10 @@ describe('<RoomPage />', () => {
             path="/join/P9LDG"
             element={<div>Check user before join a room.</div>}
           />
-          <Route path="/room/:roomCode" element={<RoomPage />} />
+          <Route
+            path="/room/:roomCode"
+            element={<RoomPage page={<PendingRoomPage />} />}
+          />
         </Routes>
       </MemoryRouter>,
     );

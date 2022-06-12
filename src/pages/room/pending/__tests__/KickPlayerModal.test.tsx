@@ -11,8 +11,9 @@ import { PlayerRole } from '@/constants/enums';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
+import { RoomPage } from '../../RoomPage';
 import { KickPlayerModal } from '../KickPlayerModal';
-import { RoomPage } from '../RoomPage';
+import { PendingRoomPage } from '../PendingRoomPage';
 
 const dummyProps = {
   playerName: 'Morpheus',
@@ -47,7 +48,10 @@ describe('<KickPlayerModal />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7VBD']}>
         <Routes>
-          <Route path="/room/:roomCode" element={<RoomPage />} />
+          <Route
+            path="/room/:roomCode"
+            element={<RoomPage page={<PendingRoomPage />} />}
+          />
         </Routes>
       </MemoryRouter>,
     );

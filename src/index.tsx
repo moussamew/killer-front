@@ -5,8 +5,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ModalProvider } from '@/hooks/context/modal';
 import { PlayerProvider } from '@/hooks/context/player';
 
+import { Loader } from './components/Loader';
 import { HomePage } from './pages/home/HomePage';
 import { JoinRoomPage } from './pages/joinRoom/JoinRoomPage';
+import { PendingRoomPage } from './pages/room/pending/PendingRoomPage';
 import { PlayingRoomPage } from './pages/room/playing/PlayingRoomPage';
 import { RoomPage } from './pages/room/RoomPage';
 
@@ -30,12 +32,22 @@ const Application = (): JSX.Element => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/room">
-              <Route path=":roomCode" element={<RoomPage />} />
-              <Route path=":roomCode/playing" element={<PlayingRoomPage />} />
-            </Route>
             <Route path="/join">
               <Route path=":roomCode" element={<JoinRoomPage />} />
+            </Route>
+            <Route path="/room">
+              <Route
+                path=":roomCode/pending"
+                element={<RoomPage page={<PendingRoomPage />} />}
+              />
+              <Route
+                path=":roomCode/playing"
+                element={<RoomPage page={<PlayingRoomPage />} />}
+              />
+              <Route
+                path=":roomCode"
+                element={<RoomPage page={<Loader />} />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>
