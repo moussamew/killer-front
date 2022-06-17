@@ -46,7 +46,8 @@
     "room_settings": "Room settings",
     "delete_current_room": "Delete current room",
     "delete_room_placeholder": "Confirm by typing the room code",
-    "delete_the_room": "Delete the room"
+    "delete_the_room": "Delete the room",
+    "start_party": "Start the party"
   },
   "playing_room": {
     "target_section_title": "Try to kill your target and survive!",

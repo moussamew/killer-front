@@ -3,11 +3,11 @@ import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
+import { RoomPage } from '@/pages/room';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 import { PendingRoomPage } from '..';
-import { RoomPage } from '../..';
 
 describe('<RoomPage />', () => {
   it('should show a room with the correct room code', async () => {

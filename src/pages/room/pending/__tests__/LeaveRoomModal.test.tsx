@@ -12,11 +12,11 @@ import {
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
 import { PlayerRole } from '@/constants/enums';
+import { RoomPage } from '@/pages/room';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 import { PendingRoomPage } from '..';
-import { RoomPage } from '../..';
 import { LeaveRoomModal } from '../LeaveRoomModal';
 
 describe('<LeaveRoomModal />', () => {
