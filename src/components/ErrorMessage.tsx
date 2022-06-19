@@ -6,7 +6,7 @@ const Message = tw.p`
   border-2 border-red-300 bg-red-200 text-red-500
   normal-case relative
   p-1 mt-1 rounded-md text-2xl
-  font-medium md:font-bold text-left
+  font-medium md:font-bold text-center
 `;
 
 const CloseIcon = tw.img`

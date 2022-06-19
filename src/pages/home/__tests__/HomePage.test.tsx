@@ -6,7 +6,7 @@ import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-import { HomePage } from '../HomePage';
+import { HomePage } from '..';
 
 describe('<HomePage />', () => {
   it('should correctly show the home page', async () => {

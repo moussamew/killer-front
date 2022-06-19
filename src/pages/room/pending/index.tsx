@@ -1,22 +1,22 @@
-import { useContext, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Island from '@/assets/images/island.png';
-import { isEmptyObject } from '@/helpers/objects';
+import { PlayerRole } from '@/constants/enums';
 import t from '@/helpers/translate';
 import { PlayerContext } from '@/hooks/context/player';
-import { usePrevious } from '@/hooks/usePrevious';
 import { Layout } from '@/layout/Layout';
 
 import PlayerList from './PlayerList';
 import PlayerMissions from './PlayerMissions';
 import RoomMissions from './RoomMissions';
 import { ShareRoomLink } from './ShareRoomLink';
+import { StartPartyButton } from './StartPartyButton';
 
-const Welcome = tw.div`
+const Content = tw.div`
   flex flex-col md:flex-row 
-  items-center mb-2 md:mb-4 
+  items-center md:items-start mb-2 md:mb-4 
   justify-center
 `;
 
@@ -34,34 +34,23 @@ const RoomFeatures = tw.div`
   mt-2 md:mt-4
 `;
 
-export const RoomPage = (): JSX.Element => {
+export const PendingRoomPage = (): JSX.Element => {
   const { roomCode } = useParams();
+
   const { playerSession } = useContext(PlayerContext);
-
-  const previousRoomCode = usePrevious(playerSession?.roomCode);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (
-      isEmptyObject(playerSession) ||
-      (!previousRoomCode && playerSession?.roomCode !== roomCode)
-    ) {
-      navigate(`/join/${roomCode}`);
-    }
-  }, [playerSession, previousRoomCode, roomCode, navigate]);
 
   return (
     <Layout>
-      <Welcome>
+      <Content>
         <WelcomeImage alt="welcome" src={Island} />
         <RoomResume>
           <h1>{t('room.welcome')}</h1>
           <p>{t('room.join_room_code', { roomCode })}</p>
           <RoomMissions />
           <ShareRoomLink roomCode={roomCode!} />
+          {playerSession.role === PlayerRole.ADMIN && <StartPartyButton />}
         </RoomResume>
-      </Welcome>
+      </Content>
       <hr />
       <RoomFeatures>
         <PlayerMissions roomCode={roomCode!} />

@@ -12,11 +12,12 @@ import {
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
 import { PlayerRole } from '@/constants/enums';
+import { RoomPage } from '@/pages/room';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
+import { PendingRoomPage } from '..';
 import { LeaveRoomModal } from '../LeaveRoomModal';
-import { RoomPage } from '../RoomPage';
 
 describe('<LeaveRoomModal />', () => {
   it('should be able to leave the room', async () => {
@@ -40,7 +41,10 @@ describe('<LeaveRoomModal />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7VBD']}>
         <Routes>
-          <Route path="/room/:roomCode" element={<RoomPage />} />
+          <Route
+            path="/room/:roomCode"
+            element={<RoomPage page={<PendingRoomPage />} />}
+          />
         </Routes>
       </MemoryRouter>,
     );

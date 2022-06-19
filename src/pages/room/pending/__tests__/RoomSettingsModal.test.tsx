@@ -8,10 +8,11 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { PlayerRole } from '@/constants/enums';
+import { RoomPage } from '@/pages/room';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-import { RoomPage } from '../RoomPage';
+import { PendingRoomPage } from '..';
 import { RoomSettingsModal } from '../RoomSettingsModal';
 
 describe('<RoomSettingsModal />', () => {
@@ -33,7 +34,10 @@ describe('<RoomSettingsModal />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7VBD']}>
         <Routes>
-          <Route path="/room/:roomCode" element={<RoomPage />} />
+          <Route
+            path="/room/:roomCode"
+            element={<RoomPage page={<PendingRoomPage />} />}
+          />
         </Routes>
       </MemoryRouter>,
     );
