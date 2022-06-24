@@ -15,7 +15,7 @@ import { renderWithProviders } from '@/tests/utils';
 import PlayerList from '../PlayerList';
 
 describe('<PlayerList />', () => {
-  it('should show all the player in the room', async () => {
+  it.skip('should show all the player in the room', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(
@@ -51,7 +51,7 @@ describe('<PlayerList />', () => {
     expect(await screen.findByText('Morpheus')).toBeInTheDocument();
   });
 
-  it('should update the players list when SSE emits a new message', async () => {
+  it.skip('should update the players list when SSE emits a new message', async () => {
     const mockRoomEventSource = `${ROOM_TOPIC}/X7JKL`;
 
     sources[mockRoomEventSource].emitOpen();

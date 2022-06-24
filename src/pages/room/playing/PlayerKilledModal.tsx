@@ -1,13 +1,11 @@
 import { Fragment, useContext, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import { Button } from '@/components/Button';
 import { ErrorMessage } from '@/components/ErrorMessage';
-import t from '@/helpers/translate';
+import { PlayerStatus } from '@/constants/enums';
 import { ModalContext } from '@/hooks/context/modal';
-
-import { kickPlayerFromRoom } from './services/requests';
+import { updatePlayer } from '@/layout/services/requests';
 
 const HeadContent = tw.div`
   flex flex-row mb-2
@@ -22,38 +20,28 @@ const TextContent = tw.div`
   mb-1
 `;
 
-interface Props {
-  playerName: string;
-  playerId: number;
-}
-
-export const KickPlayerModal = ({
-  playerName,
-  playerId,
-}: Props): JSX.Element => {
-  const { roomCode } = useParams();
-
+export const PlayerKilledModal = (): JSX.Element => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const { closeModal } = useContext(ModalContext);
 
-  const kickPlayer = (): Promise<void> =>
-    kickPlayerFromRoom(roomCode!, playerId)
+  const killPlayer = (): Promise<void> =>
+    updatePlayer({ status: PlayerStatus.KILLED })
       .then(closeModal)
       .catch((error) => setErrorMessage(error.message));
 
   return (
     <Fragment>
       <HeadContent>
-        <Title>{t('room.kick_room')}</Title>
+        <Title>Killed by my target</Title>
       </HeadContent>
       <TextContent>
-        <p>{t('room.kick_room_warning', { playerName })}</p>
+        <p>
+          You will no longer be able to play the party anymore and be considered
+          as dead!
+        </p>
       </TextContent>
-      <Button
-        content={t('room.kick_room_confirmation', { playerName })}
-        onClick={kickPlayer}
-      />
+      <Button content="I've lost, kill me :(" onClick={killPlayer} />
       {errorMessage && (
         <ErrorMessage
           message={errorMessage}

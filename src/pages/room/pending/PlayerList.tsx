@@ -1,6 +1,4 @@
-import { useContext, useEffect } from 'react';
-import { useQuery } from 'react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useContext } from 'react';
 import tw from 'tailwind-styled-components';
 
 import Admin from '@/assets/icons/admin.svg';
@@ -9,17 +7,15 @@ import LeaveRoom from '@/assets/icons/leaveRoom.svg';
 import RoomSettings from '@/assets/icons/roomSettings.svg';
 import Knife from '@/assets/images/knife.png';
 import Player from '@/assets/images/player.png';
-import { PROD_ENV } from '@/constants/app';
-import { ROOM_TOPIC } from '@/constants/endpoints';
-import { MercureEventType, PlayerRole } from '@/constants/enums';
+import { PlayerRole } from '@/constants/enums';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
+import { RoomContext } from '@/hooks/context/room';
 
 import { KickPlayerModal } from './KickPlayerModal';
 import { LeaveRoomModal } from './LeaveRoomModal';
 import { RoomSettingsModal } from './RoomSettingsModal';
-import { getRoomPlayers } from './services/requests';
 
 const Container = tw.div`
   mt-3 xl:mt-0
@@ -74,42 +70,9 @@ const SectionHeader = tw.div`
 `;
 
 const PlayerList = (): JSX.Element => {
-  const { roomCode } = useParams();
-
-  const { data: roomPlayers, refetch: refetchRoomPlayers } = useQuery(
-    'roomPlayers',
-    () => getRoomPlayers(roomCode),
-  );
-
-  const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
+  const { playerSession } = useContext(PlayerContext);
+  const { roomPlayers } = useContext(RoomContext);
   const { openModal } = useContext(ModalContext);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomCode}`, {
-      withCredentials: PROD_ENV,
-    });
-
-    roomEventSource.addEventListener(
-      'message',
-      (event): void | Promise<void> => {
-        const { type } = JSON.parse(event.data);
-
-        if (type === MercureEventType.ROOM_IN_GAME) {
-          return navigate(`/room/${roomCode}/playing`);
-        }
-
-        if (type === MercureEventType.ROOM_DELETED) {
-          return refreshPlayerSession();
-        }
-
-        return refetchRoomPlayers().then(refreshPlayerSession);
-      },
-    );
-
-    return () => roomEventSource.close();
-  }, [navigate, roomCode, refetchRoomPlayers, refreshPlayerSession]);
 
   return (
     <Container>
@@ -130,7 +93,7 @@ const PlayerList = (): JSX.Element => {
         </div>
       </Section>
       <hr />
-      {roomPlayers?.map(({ id, name, role }) => (
+      {roomPlayers.map(({ id, name, role }) => (
         <PlayerItem key={name}>
           <PlayerImage alt={`player-${name}`} src={Player} />
           <PlayerName $currentPlayer={playerSession.id === id}>

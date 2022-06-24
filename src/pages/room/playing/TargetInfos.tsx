@@ -1,10 +1,9 @@
-import { useQuery } from 'react-query';
+import { useContext } from 'react';
 import tw from 'tailwind-styled-components';
 
 import Glasses from '@/assets/images/glasses.png';
 import t from '@/helpers/translate';
-
-import { getPlayerMission, getPlayerTarget } from './services/requests';
+import { TargetContext } from '@/hooks/context/target';
 
 const Content = tw.section`
   flex flex-col items-center
@@ -35,9 +34,7 @@ const Mission = tw(PlayerToKill)`
 `;
 
 export const TargetInfos = (): JSX.Element => {
-  const { data: playerTarget } = useQuery('playerTarget', getPlayerTarget);
-
-  const { data: playerMission } = useQuery('playerMission', getPlayerMission);
+  const { targetInfos } = useContext(TargetContext);
 
   return (
     <Content>
@@ -45,10 +42,10 @@ export const TargetInfos = (): JSX.Element => {
       <h2>{t('playing_room.target_section_title')}</h2>
       <Target>
         <Text>{t('playing_room.target_to_kill')}</Text>
-        <PlayerToKill>{playerTarget?.name}</PlayerToKill>
+        <PlayerToKill>{targetInfos.target?.name}</PlayerToKill>
       </Target>
       <Text>{t('playing_room.mission_to_do')}</Text>
-      <Mission>{playerMission?.content}</Mission>
+      <Mission>{targetInfos.mission?.content}</Mission>
     </Content>
   );
 };

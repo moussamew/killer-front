@@ -1,15 +1,17 @@
-import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
+import {
+  MISSION_ENDPOINT,
+  PLAYER_SESSION_ENDPOINT,
+  PLAYER_TARGET_ENDPOINT,
+} from '@/constants/endpoints';
 import { Method } from '@/constants/enums';
 import { request } from '@/helpers/apis';
-import { Player } from '@/types';
+import { Mission, Player, Target, TargetInfos } from '@/types';
 
-const getPlayerSession = async (): Promise<Player> => {
-  const playerSession = await request<Player>(
-    PLAYER_SESSION_ENDPOINT,
-    Method.GET,
-  );
+export const getPlayerSession = (): Promise<Player> =>
+  request<Player>(PLAYER_SESSION_ENDPOINT, Method.GET);
 
-  return playerSession;
-};
-
-export { getPlayerSession };
+export const getTargetInfos = (): Promise<TargetInfos> =>
+  Promise.all([
+    request<Target>(PLAYER_TARGET_ENDPOINT, Method.GET),
+    request<Mission>(MISSION_ENDPOINT, Method.GET),
+  ]).then(([target, mission]) => ({ target, mission }));

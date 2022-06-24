@@ -10,7 +10,7 @@ import { Mission, Player } from '@/types';
 
 const { GET, POST, DELETE, PATCH } = Method;
 
-export const getRoomPlayers = (roomCode?: string): Promise<Player[]> =>
+export const getRoomPlayers = (roomCode: string): Promise<Player[]> =>
   request(`${ROOM_ENDPOINT}/${roomCode}/players`, GET);
 
 export const getRoomMissions = (): Promise<number> =>

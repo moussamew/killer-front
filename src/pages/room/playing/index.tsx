@@ -4,7 +4,7 @@ import { Layout } from '@/layout/Layout';
 
 import PlayerList from '../pending/PlayerList';
 
-import { KilledButton } from './KilledButton';
+import { PlayerKilledButton } from './PlayerKilledButton';
 import { TargetInfos } from './TargetInfos';
 
 const Content = tw.div`
@@ -21,7 +21,7 @@ export const PlayingRoomPage = (): JSX.Element => (
     <Content>
       <TargetInfos />
       <Spacer />
-      <KilledButton />
+      <PlayerKilledButton />
     </Content>
     <Spacer />
     <PlayerList />

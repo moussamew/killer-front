@@ -14,14 +14,14 @@ import { Player } from '@/types';
 import { getPlayerSession } from '../services/requests';
 
 interface PlayerContextInterface {
-  playerSession: Player;
+  playerSession: Partial<Player>;
   refreshPlayerSession: () => Promise<void>;
 }
 
 const PlayerContext = createContext({} as PlayerContextInterface);
 
 const PlayerProvider: FunctionComponent = ({ children }) => {
-  const [playerSession, setPlayerSession] = useState<Player>({});
+  const [playerSession, setPlayerSession] = useState<Partial<Player>>({});
 
   const {
     isLoading,
