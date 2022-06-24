@@ -27,6 +27,6 @@ export interface Target {
 }
 
 export interface TargetInfos {
-  target: Target;
-  mission: Mission;
+  name: string;
+  mission: string;
 }

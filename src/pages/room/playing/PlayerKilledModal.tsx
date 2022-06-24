@@ -4,6 +4,7 @@ import tw from 'tailwind-styled-components';
 import { Button } from '@/components/Button';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import { PlayerStatus } from '@/constants/enums';
+import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { updatePlayer } from '@/layout/services/requests';
 
@@ -33,15 +34,15 @@ export const PlayerKilledModal = (): JSX.Element => {
   return (
     <Fragment>
       <HeadContent>
-        <Title>Killed by my target</Title>
+        <Title>{t('playing_room.player_killed_modal_title')}</Title>
       </HeadContent>
       <TextContent>
-        <p>
-          You will no longer be able to play the party anymore and be considered
-          as dead!
-        </p>
+        <p>{t('playing_room.player_killed_modal_text')}</p>
       </TextContent>
-      <Button content="I've lost, kill me :(" onClick={killPlayer} />
+      <Button
+        content={t('playing_room.player_killed_confirmation')}
+        onClick={killPlayer}
+      />
       {errorMessage && (
         <ErrorMessage
           message={errorMessage}

@@ -48,7 +48,11 @@ const TargetProvider: FunctionComponent = ({ children }) => {
     return <Loader />;
   }
 
-  if (isEmptyObject(targetInfos) && currentTarget) {
+  if (
+    isEmptyObject(targetInfos) &&
+    currentTarget &&
+    !isEmptyObject(currentTarget)
+  ) {
     setTargetInfos(currentTarget);
   }
 
