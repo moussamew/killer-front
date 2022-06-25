@@ -50,10 +50,13 @@ describe('<Layout />', () => {
   it('should redirect the user to the home page on room leaving', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: 'X7VBD' })),
+        res(
+          ctx.status(200),
+          ctx.json({ id: 0, name: 'Neo', roomCode: 'X7VBD' }),
+        ),
       ),
       rest.get(`${ROOM_ENDPOINT}/X7VBD/players`, async (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json([{ name: 'Neo' }])),
+        res(ctx.status(200), ctx.json([{ id: 0, name: 'Neo' }])),
       ),
     );
 

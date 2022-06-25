@@ -51,4 +51,10 @@ export const pendingRoomHandlers = [
   rest.delete(`${ROOM_ENDPOINT}/:roomCode`, async (_req, res, ctx) =>
     res(ctx.status(200), ctx.json({})),
   ),
+  /**
+   * Mock starting party.
+   */
+  rest.patch(`${ROOM_ENDPOINT}/:roomCode`, async (_req, res, ctx) =>
+    res(ctx.status(200), ctx.json({})),
+  ),
 ];
