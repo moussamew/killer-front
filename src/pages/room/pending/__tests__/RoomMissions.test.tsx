@@ -4,10 +4,9 @@ import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { ROOM_MISSION_ENDPOINT, ROOM_TOPIC } from '@/constants/endpoints';
+import { RoomMissions } from '@/pages/room/pending/RoomMissions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
-
-import RoomMissions from '../RoomMissions';
 
 describe('<RoomMissions />', () => {
   it('should show the count of all missions in the room', async () => {

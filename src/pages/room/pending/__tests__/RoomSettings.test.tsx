@@ -1,33 +1,39 @@
-import { screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { PlayerRole } from '@/constants/enums';
 import { RoomProvider } from '@/hooks/context/room';
+import { RoomPage } from '@/pages/room';
 import { PendingRoomPage } from '@/pages/room/pending';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-describe('<PendingRoomPage />', () => {
-  it('should show the pending room page with the correct room code', async () => {
+describe('<RoomSettings />', () => {
+  it('should show and open settings of the room if the user is the room admin', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(
           ctx.status(200),
-          ctx.json({ name: 'Neo', roomCode: 'P9LDG', role: PlayerRole.ADMIN }),
+          ctx.json({
+            id: 0,
+            name: 'Neo',
+            roomCode: 'X7VBD',
+            role: PlayerRole.ADMIN,
+          }),
         ),
       ),
     );
 
     renderWithProviders(
-      <MemoryRouter initialEntries={['/room/P9LDG']}>
+      <MemoryRouter initialEntries={['/room/X7VBD']}>
         <Routes>
           <Route
             path="/room/:roomCode"
             element={
               <RoomProvider>
-                <PendingRoomPage />
+                <RoomPage page={<PendingRoomPage />} />
               </RoomProvider>
             }
           />
@@ -35,20 +41,21 @@ describe('<PendingRoomPage />', () => {
       </MemoryRouter>,
     );
 
-    expect(
-      await screen.findByText('The code to join this room is P9LDG.'),
-    ).toBeInTheDocument();
-    expect(screen.getByText('Start the party')).toBeInTheDocument();
+    fireEvent.click(await screen.findByAltText('roomSettings'));
+
+    expect(screen.getByText('Neo')).toBeInTheDocument();
+    expect(screen.queryByText('Room settings')).toBeInTheDocument();
   });
 
-  it('should not show the Start party button if the player is not an admin', async () => {
+  it('should not show the settings of the room if the user is not the room admin', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
-            name: 'Trinity',
-            roomCode: 'P9LDG',
+            id: 0,
+            name: 'Neo',
+            roomCode: 'X7VBD',
             role: PlayerRole.PLAYER,
           }),
         ),
@@ -56,13 +63,13 @@ describe('<PendingRoomPage />', () => {
     );
 
     renderWithProviders(
-      <MemoryRouter initialEntries={['/room/P9LDG']}>
+      <MemoryRouter initialEntries={['/room/X7VBD']}>
         <Routes>
           <Route
             path="/room/:roomCode"
             element={
               <RoomProvider>
-                <PendingRoomPage />
+                <RoomPage page={<PendingRoomPage />} />
               </RoomProvider>
             }
           />
@@ -70,9 +77,7 @@ describe('<PendingRoomPage />', () => {
       </MemoryRouter>,
     );
 
-    expect(
-      await screen.findByText('The code to join this room is P9LDG.'),
-    ).toBeInTheDocument();
-    expect(screen.queryByText('Start the party')).not.toBeInTheDocument();
+    expect(await screen.findByText('Neo')).toBeInTheDocument();
+    expect(screen.queryByText('Room settings')).not.toBeInTheDocument();
   });
 });
