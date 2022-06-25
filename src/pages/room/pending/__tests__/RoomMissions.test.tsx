@@ -30,10 +30,6 @@ describe('<RoomMissions />', () => {
   });
 
   it('should update the count of all missions in the room when SSE emits a new message', async () => {
-    const mockMissionsEventSource = `${ROOM_TOPIC}/X7JKL/mission/{id}`;
-
-    sources[mockMissionsEventSource].emitOpen();
-
     server.use(
       rest.get(ROOM_MISSION_ENDPOINT, async (_req, res, ctx) =>
         res(ctx.status(200), ctx.json(2)),
@@ -58,10 +54,14 @@ describe('<RoomMissions />', () => {
 
     const messageEvent = new MessageEvent('message');
 
-    sources[mockMissionsEventSource].emit(messageEvent.type, messageEvent);
+    const missionsEventSource = `${ROOM_TOPIC}/X7JKL/mission/{id}`;
+
+    sources[missionsEventSource].emit(messageEvent.type, messageEvent);
 
     expect(
       await screen.findByText('There is currently 3 missions in this room.'),
     ).toBeInTheDocument();
+
+    sources[missionsEventSource].close();
   });
 });

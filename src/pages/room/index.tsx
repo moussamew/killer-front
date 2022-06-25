@@ -13,6 +13,8 @@ import { usePrevious } from '@/hooks/usePrevious';
 
 import { getRoom } from './services/requests';
 
+const { ROOM_IN_GAME, ROOM_DELETED, PLAYER_KILLED } = MercureEventType;
+
 interface Props {
   page: JSX.Element;
 }
@@ -83,15 +85,15 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
       (event): void | Promise<void> => {
         const { type } = JSON.parse(event.data);
 
-        if (type === MercureEventType.ROOM_IN_GAME) {
+        if (type === ROOM_IN_GAME) {
           return navigate(`/room/${roomCode}/playing`);
         }
 
-        if (type === MercureEventType.ROOM_DELETED) {
+        if (type === ROOM_DELETED) {
           return refreshPlayerSession();
         }
 
-        if (type === MercureEventType.PLAYER_KILLED) {
+        if (type === PLAYER_KILLED) {
           return refreshTargetInfos().then(refreshRoomPlayers);
         }
 

@@ -57,9 +57,13 @@ describe('<StartPartyButton />', () => {
       }),
     });
 
-    sources[`${ROOM_TOPIC}/P9LDG`].emit(messageEvent.type, messageEvent);
+    const roomEventSource = `${ROOM_TOPIC}/P9LDG`;
+
+    sources[roomEventSource].emit(messageEvent.type, messageEvent);
 
     expect(await screen.findByText('Party started!')).toBeInTheDocument();
+
+    sources[roomEventSource].close();
   });
 
   it('should let the user close the alert message if needed', async () => {
