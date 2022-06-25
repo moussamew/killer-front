@@ -8,9 +8,9 @@ import t from '@/helpers/translate';
 import { PlayerContext } from '@/hooks/context/player';
 import { Layout } from '@/layout/Layout';
 
-import PlayerList from './PlayerList';
-import PlayerMissions from './PlayerMissions';
-import RoomMissions from './RoomMissions';
+import { PlayerList } from './PlayerList';
+import { PlayerMissions } from './PlayerMissions';
+import { RoomMissions } from './RoomMissions';
 import { ShareRoomLink } from './ShareRoomLink';
 import { StartPartyButton } from './StartPartyButton';
 

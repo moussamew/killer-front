@@ -5,7 +5,7 @@ import Delete from '@/assets/icons/delete.svg';
 import Idea from '@/assets/images/idea.png';
 import t from '@/helpers/translate';
 
-import CreateMission from './CreateMission';
+import { CreateMission } from './CreateMission';
 import { deleteMission, getPlayerMissions } from './services/requests';
 
 const Container = tw.div`
@@ -40,7 +40,7 @@ interface Props {
   roomCode: string;
 }
 
-const PlayerMissions = ({ roomCode }: Props): JSX.Element | null => {
+export const PlayerMissions = ({ roomCode }: Props): JSX.Element | null => {
   const { data: playerMissions, refetch: refetchPlayerMissions } = useQuery(
     ['playerMissions', roomCode],
     () => getPlayerMissions(),
@@ -79,5 +79,3 @@ const PlayerMissions = ({ roomCode }: Props): JSX.Element | null => {
     </Container>
   );
 };
-
-export default PlayerMissions;

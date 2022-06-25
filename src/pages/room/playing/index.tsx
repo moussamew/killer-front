@@ -4,8 +4,7 @@ import tw from 'tailwind-styled-components';
 import { isEmptyObject } from '@/helpers/objects';
 import { TargetContext } from '@/hooks/context/target';
 import { Layout } from '@/layout/Layout';
-
-import PlayerList from '../pending/PlayerList';
+import { PlayerList } from '@/pages/room/pending/PlayerList';
 
 import { PlayerKilledButton } from './PlayerKilledButton';
 import { Status } from './Status';

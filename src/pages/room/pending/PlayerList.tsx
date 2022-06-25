@@ -10,7 +10,7 @@ const Content = tw.div`
   mt-3 xl:mt-0
 `;
 
-const PlayerList = (): JSX.Element => {
+export const PlayerList = (): JSX.Element => {
   const { roomPlayers } = useContext(RoomContext);
 
   return (
@@ -28,5 +28,3 @@ const PlayerList = (): JSX.Element => {
     </Content>
   );
 };
-
-export default PlayerList;

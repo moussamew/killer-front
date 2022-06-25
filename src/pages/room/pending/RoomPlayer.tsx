@@ -3,7 +3,7 @@ import tw from 'tailwind-styled-components';
 
 import Admin from '@/assets/icons/admin.svg';
 import KickPlayer from '@/assets/icons/kickPlayer.svg';
-import LeaveRoom from '@/assets/icons/leaveRoom.svg';
+import LeaveRoomImage from '@/assets/icons/leaveRoom.svg';
 import Player from '@/assets/images/player.png';
 import { PlayerRole } from '@/constants/enums';
 import { ModalContext } from '@/hooks/context/modal';
@@ -68,7 +68,7 @@ export const RoomPlayer = ({
       {playerSession.id === playerId && (
         <LeaveRoomIcon
           alt="leaveRoom"
-          src={LeaveRoom}
+          src={LeaveRoomImage}
           onClick={() => openModal(<LeaveRoomModal />)}
         />
       )}
