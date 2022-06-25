@@ -33,6 +33,43 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
   const { data: room } = useQuery(location.pathname, () => getRoom(roomCode!));
 
   /**
+   * Redirect player to the correct route related to the room status.
+   */
+  useEffect(() => {
+    if (room?.status === RoomStatus.PENDING) {
+      navigate(`/room/${roomCode}/pending`);
+    }
+
+    if (room?.status === RoomStatus.IN_GAME) {
+      navigate(`/room/${roomCode}/playing`);
+    }
+  }, [room, navigate, roomCode]);
+
+  /**
+   * Redirect player to the correct route by checking its session.
+   */
+  useEffect(() => {
+    /**
+     * Redirect player to `join/room` route in two cases:
+     * The player try to join the room without pseudo.
+     * The player try to join the room when he is already inside another room.
+     */
+    if (
+      isEmptyObject(playerSession) ||
+      (!previousRoomCode && playerSession?.roomCode !== roomCode)
+    ) {
+      navigate(`/join/${roomCode}`);
+    }
+
+    /**
+     * Redirect player to home page if its roomCode is removed.
+     */
+    if (previousRoomCode && !playerSession.roomCode) {
+      navigate('/');
+    }
+  }, [playerSession, previousRoomCode, roomCode, navigate]);
+
+  /**
    * Listen to SSE events emits in the Room page.
    * Apply corresponding side-effects.
    */
@@ -70,33 +107,6 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
     refreshRoomPlayers,
     refreshPlayerSession,
   ]);
-
-  /**
-   * Redirect player to `join/room` route in two cases:
-   * The player try to join the room without pseudo.
-   * The player try to join the room when he is already inside another room.
-   */
-  useEffect(() => {
-    if (
-      isEmptyObject(playerSession) ||
-      (!previousRoomCode && playerSession?.roomCode !== roomCode)
-    ) {
-      navigate(`/join/${roomCode}`);
-    }
-  }, [playerSession, previousRoomCode, roomCode, navigate]);
-
-  /**
-   * Redirect player to the correct route related to the room status.
-   */
-  useEffect(() => {
-    if (room?.status === RoomStatus.PENDING) {
-      navigate(`/room/${roomCode}/pending`);
-    }
-
-    if (room?.status === RoomStatus.IN_GAME) {
-      navigate(`/room/${roomCode}/playing`);
-    }
-  }, [room, navigate, roomCode]);
 
   return page;
 };
