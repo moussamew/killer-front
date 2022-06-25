@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
-import { MercureEventType, PlayerStatus, RoomStatus } from '@/constants/enums';
+import { MercureEventType, RoomStatus } from '@/constants/enums';
 import { isEmptyObject } from '@/helpers/objects';
 import { PlayerContext } from '@/hooks/context/player';
 import { RoomContext } from '@/hooks/context/room';
@@ -44,7 +44,7 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
     roomEventSource.addEventListener(
       'message',
       (event): void | Promise<void> => {
-        const { type, payload } = JSON.parse(event.data);
+        const { type } = JSON.parse(event.data);
 
         if (type === MercureEventType.ROOM_IN_GAME) {
           return navigate(`/room/${roomCode}/playing`);
@@ -54,7 +54,7 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
           return refreshPlayerSession();
         }
 
-        if (payload?.status === PlayerStatus.KILLED) {
+        if (type === MercureEventType.PLAYER_KILLED) {
           return refreshTargetInfos().then(refreshRoomPlayers);
         }
 
