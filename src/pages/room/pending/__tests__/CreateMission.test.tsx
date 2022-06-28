@@ -8,9 +8,8 @@ import { rest } from 'msw';
 import { vi } from 'vitest';
 
 import { MISSION_ENDPOINT } from '@/constants/endpoints';
+import { CreateMission } from '@/pages/room/pending/CreateMission';
 import { server } from '@/tests/server';
-
-import CreateMission from '../CreateMission';
 
 describe('<CreateMission />', () => {
   it('should add a new mission', async () => {

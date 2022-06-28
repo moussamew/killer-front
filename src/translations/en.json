@@ -55,7 +55,12 @@
     "mission_to_do": "In order to kill your target, it must do..",
     "killed_section_title": "Someone managed to kill you?",
     "killed_button_infos": "Click on the button above to notify other players that you have been killed.",
-    "killed_button_text": "I have been killed"
+    "killed_button_text": "I have been killed",
+    "player_killed": "Too bad! You are dead.",
+    "player_killed_resume": "Dead men tell no tales.. You just have to wait for the end of the game.",
+    "player_killed_modal_title": "Killed by my target",
+    "player_killed_modal_text": "You will not be able to play this party anymore and be considered as dead!",
+    "player_killed_confirmation": "Kill me :("
   },
   "layout": {
     "user_settings": "User Settings",

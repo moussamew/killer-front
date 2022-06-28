@@ -6,6 +6,8 @@ import { ModalProvider } from '@/hooks/context/modal';
 import { PlayerProvider } from '@/hooks/context/player';
 
 import { Loader } from './components/Loader';
+import { RoomProvider } from './hooks/context/room';
+import { TargetProvider } from './hooks/context/target';
 import { HomePage } from './pages/home';
 import { JoinRoomPage } from './pages/joinRoom/JoinRoomPage';
 import { RoomPage } from './pages/room';
@@ -38,11 +40,21 @@ const Application = (): JSX.Element => (
             <Route path="/room">
               <Route
                 path=":roomCode/pending"
-                element={<RoomPage page={<PendingRoomPage />} />}
+                element={
+                  <RoomProvider>
+                    <RoomPage page={<PendingRoomPage />} />
+                  </RoomProvider>
+                }
               />
               <Route
                 path=":roomCode/playing"
-                element={<RoomPage page={<PlayingRoomPage />} />}
+                element={
+                  <RoomProvider>
+                    <TargetProvider>
+                      <RoomPage page={<PlayingRoomPage />} />
+                    </TargetProvider>
+                  </RoomProvider>
+                }
               />
               <Route
                 path=":roomCode"

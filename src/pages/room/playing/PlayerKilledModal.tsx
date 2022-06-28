@@ -1,13 +1,12 @@
 import { Fragment, useContext, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import { Button } from '@/components/Button';
 import { ErrorMessage } from '@/components/ErrorMessage';
+import { PlayerStatus } from '@/constants/enums';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
-
-import { kickPlayerFromRoom } from './services/requests';
+import { updatePlayer } from '@/layout/services/requests';
 
 const HeadContent = tw.div`
   flex flex-row mb-2
@@ -22,37 +21,27 @@ const TextContent = tw.div`
   mb-1
 `;
 
-interface Props {
-  playerName: string;
-  playerId: number;
-}
-
-export const KickPlayerModal = ({
-  playerName,
-  playerId,
-}: Props): JSX.Element => {
-  const { roomCode } = useParams();
-
+export const PlayerKilledModal = (): JSX.Element => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const { closeModal } = useContext(ModalContext);
 
-  const kickPlayer = (): Promise<void> =>
-    kickPlayerFromRoom(roomCode!, playerId)
+  const killPlayer = (): Promise<void> =>
+    updatePlayer({ status: PlayerStatus.KILLED })
       .then(closeModal)
       .catch((error) => setErrorMessage(error.message));
 
   return (
     <Fragment>
       <HeadContent>
-        <Title>{t('room.kick_room')}</Title>
+        <Title>{t('playing_room.player_killed_modal_title')}</Title>
       </HeadContent>
       <TextContent>
-        <p>{t('room.kick_room_warning', { playerName })}</p>
+        <p>{t('playing_room.player_killed_modal_text')}</p>
       </TextContent>
       <Button
-        content={t('room.kick_room_confirmation', { playerName })}
-        onClick={kickPlayer}
+        content={t('playing_room.player_killed_confirmation')}
+        onClick={killPlayer}
       />
       {errorMessage && (
         <ErrorMessage

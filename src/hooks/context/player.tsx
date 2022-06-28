@@ -1,3 +1,4 @@
+import isEqual from 'fast-deep-equal';
 import {
   createContext,
   FunctionComponent,
@@ -14,28 +15,28 @@ import { Player } from '@/types';
 import { getPlayerSession } from '../services/requests';
 
 interface PlayerContextInterface {
-  playerSession: Player;
+  playerSession: Partial<Player>;
   refreshPlayerSession: () => Promise<void>;
 }
 
 const PlayerContext = createContext({} as PlayerContextInterface);
 
 const PlayerProvider: FunctionComponent = ({ children }) => {
-  const [playerSession, setPlayerSession] = useState<Player>({});
+  const [playerSession, setPlayerSession] = useState<Partial<Player>>({});
 
   const {
     isLoading,
     data: currentSession,
-    refetch: queryPlayerSession,
+    refetch: refetchPlayerSession,
   } = useQuery('playerSession', getPlayerSession);
 
   const refreshPlayerSession = useCallback(async (): Promise<void> => {
-    const { data: updatedSession } = await queryPlayerSession();
+    const { data: updatedSession } = await refetchPlayerSession();
 
-    if (updatedSession) {
+    if (updatedSession && !isEqual(currentSession, updatedSession)) {
       setPlayerSession(updatedSession);
     }
-  }, [queryPlayerSession]);
+  }, [refetchPlayerSession, currentSession]);
 
   const memoizedPlayerSession = useMemo(
     () => ({ playerSession, refreshPlayerSession }),

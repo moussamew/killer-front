@@ -6,10 +6,9 @@ import {
 import { rest } from 'msw';
 
 import { PLAYER_MISSION_ENDPOINT } from '@/constants/endpoints';
+import { PlayerMissions } from '@/pages/room/pending/PlayerMissions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
-
-import PlayerMissions from '../PlayerMissions';
 
 describe('<PlayerMissions />', () => {
   it('should show the input to create a new Mission', async () => {

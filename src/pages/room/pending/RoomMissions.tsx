@@ -8,7 +8,7 @@ import t from '@/helpers/translate';
 
 import { getRoomMissions } from './services/requests';
 
-const RoomMissions = (): JSX.Element => {
+export const RoomMissions = (): JSX.Element => {
   const { roomCode } = useParams();
 
   const { data: roomMissions, refetch: refetchRoomMissions } = useQuery(
@@ -35,5 +35,3 @@ const RoomMissions = (): JSX.Element => {
     </div>
   );
 };
-
-export default RoomMissions;
