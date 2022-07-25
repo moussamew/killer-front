@@ -1,24 +1,23 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/Button';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
+import { PlayerContext } from '@/hooks/context/player';
 
 import { createPlayer } from '../home/services/requests';
 
 interface Props {
   roomCode: string;
-  refreshPlayerSession: () => Promise<void>;
 }
 
-export const CreatePlayer = ({
-  roomCode,
-  refreshPlayerSession,
-}: Props): JSX.Element => {
+export const CreatePlayer = ({ roomCode }: Props): JSX.Element => {
   const [pseudo, setPseudo] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const { refreshPlayerSession } = useContext(PlayerContext);
 
   const navigate = useNavigate();
 

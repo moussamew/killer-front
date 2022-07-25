@@ -1,7 +1,6 @@
 import {
   createContext,
   Dispatch,
-  FunctionComponent,
   ReactNode,
   SetStateAction,
   useEffect,
@@ -18,9 +17,13 @@ interface ModalContextInterface {
   closeModal: () => void;
 }
 
+interface Props {
+  children: ReactNode;
+}
+
 const ModalContext = createContext({} as ModalContextInterface);
 
-const ModalProvider: FunctionComponent = ({ children }) => {
+const ModalProvider = ({ children }: Props): JSX.Element => {
   const [modal, openModal] = useState<ReactNode>(null);
 
   const memoizedModalComponent = useMemo(

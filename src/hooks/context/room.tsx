@@ -1,6 +1,6 @@
 import {
   createContext,
-  FunctionComponent,
+  ReactNode,
   useCallback,
   useMemo,
   useState,
@@ -17,9 +17,13 @@ interface RoomContextInterface {
   refreshRoomPlayers: () => Promise<void>;
 }
 
+interface Props {
+  children: ReactNode;
+}
+
 const RoomContext = createContext({} as RoomContextInterface);
 
-const RoomProvider: FunctionComponent = ({ children }) => {
+const RoomProvider = ({ children }: Props): JSX.Element => {
   const { roomCode } = useParams();
 
   const [roomPlayers, setRoomPlayers] = useState<Player[]>([]);

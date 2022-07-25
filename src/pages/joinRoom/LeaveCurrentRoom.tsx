@@ -1,21 +1,19 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Button } from '@/components/Button';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import t from '@/helpers/translate';
+import { PlayerContext } from '@/hooks/context/player';
 import { updatePlayer } from '@/layout/services/requests';
 
-interface Props {
-  playerRoomCode?: string;
-  refreshPlayerSession: () => Promise<void>;
-}
-
-export const LeaveCurrentRoom = ({
-  playerRoomCode,
-  refreshPlayerSession,
-}: Props): JSX.Element => {
+export const LeaveCurrentRoom = (): JSX.Element => {
   const { roomCode } = useParams();
+
+  const {
+    playerSession: { roomCode: playerRoomCode },
+    refreshPlayerSession,
+  } = useContext(PlayerContext);
 
   const [errorMessage, setErrorMessage] = useState<string>();
 
