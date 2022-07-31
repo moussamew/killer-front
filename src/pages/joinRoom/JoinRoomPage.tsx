@@ -1,13 +1,12 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Killerparty from '@/assets/images/killerparty.png';
+import { RoomError } from '@/constants/errors';
 import { PlayerContext } from '@/hooks/context/player';
 import { Layout } from '@/layout/Layout';
 import { updatePlayer } from '@/layout/services/requests';
-
-import { NotFoundPage } from '../notFound';
 
 import { CreatePlayer } from './CreatePlayer';
 import { LeaveCurrentRoom } from './LeaveCurrentRoom';
@@ -16,12 +15,12 @@ const WelcomeImage = tw.img`
   m-auto
 `;
 
+const { NOT_FOUND, BAD_ROOMCODE } = RoomError;
+
 export const JoinRoomPage = (): JSX.Element => {
   const { roomCode } = useParams();
 
   const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
-
-  const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -35,23 +34,24 @@ export const JoinRoomPage = (): JSX.Element => {
     }
 
     /**
-     * Let the user join automatically the room if:
-     * His name is already setted and he is not already inside a room.
+     * Let the user join automatically the room if his name is already setted
+     * and he is not already inside a room.
+     *
+     * Show not found page if:
+     * - The room cannot be found.
+     * - The name of the room is incorrect.
      */
     if (playerSession?.name && !playerSession?.roomCode) {
       updatePlayer({ roomCode })
         .then(refreshPlayerSession)
         .then(() => navigate(`/room/${roomCode}`))
-        .catch((error) => setErrorMessage(error.message));
+        .catch((error) => {
+          if ([NOT_FOUND, BAD_ROOMCODE].includes(error.errorCode)) {
+            navigate(`/room/${roomCode}/error`);
+          }
+        });
     }
   }, [playerSession, roomCode, refreshPlayerSession, navigate]);
-
-  /**
-   * Show not found page if there is an error while trying to join the room.
-   */
-  if (errorMessage) {
-    return <NotFoundPage />;
-  }
 
   return (
     <Layout>
