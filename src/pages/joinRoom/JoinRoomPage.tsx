@@ -47,7 +47,9 @@ export const JoinRoomPage = (): JSX.Element => {
         .then(() => navigate(`/room/${roomCode}`))
         .catch((error) => {
           if ([NOT_FOUND, BAD_ROOMCODE].includes(error.errorCode)) {
-            navigate(`/room/${roomCode}/error`);
+            navigate(`/room/${roomCode}/error`, {
+              state: error.message,
+            });
           }
         });
     }

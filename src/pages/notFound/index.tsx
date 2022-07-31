@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import NotFoundSrc from '@/assets/images/not-found.jpg';
@@ -14,14 +14,25 @@ const Image = tw.img`
   max-h-[80rem] m-auto
 `;
 
+const ErrorReason = tw.p`
+  text-red-600 mt-2
+`;
+
 export const NotFoundPage = (): JSX.Element => {
   const navigate = useNavigate();
+
+  const { state: errorMessage } = useLocation();
 
   return (
     <Layout>
       <SectionTitle>
         <h1>{t('not_found.title')}</h1>
         <p>{t('not_found.text')}</p>
+        {errorMessage && (
+          <ErrorReason>
+            {t('not_found.reason', { reason: errorMessage })}
+          </ErrorReason>
+        )}
       </SectionTitle>
       <Image alt="notFound" src={NotFoundSrc} />
       <Button
