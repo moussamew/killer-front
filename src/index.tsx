@@ -10,6 +10,7 @@ import { RoomProvider } from './hooks/context/room';
 import { TargetProvider } from './hooks/context/target';
 import { HomePage } from './pages/home';
 import { JoinRoomPage } from './pages/joinRoom/JoinRoomPage';
+import { NotFoundPage } from './pages/notFound';
 import { RoomPage } from './pages/room';
 import { PendingRoomPage } from './pages/room/pending';
 import { PlayingRoomPage } from './pages/room/playing';
@@ -61,6 +62,7 @@ const Application = (): JSX.Element => (
                 element={<RoomPage page={<Loader />} />}
               />
             </Route>
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>
       </PlayerProvider>

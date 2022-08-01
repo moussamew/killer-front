@@ -1,5 +1,6 @@
 import { Method } from '@/constants/enums';
 
+import { RequestError } from './errors';
 import { RequestParams } from './types';
 
 export const fetchRequest = (
@@ -29,8 +30,8 @@ export const request = async <T>(
     console.error(`${method} > ${url} does not have JSON response format.`);
   });
 
-  if (result?.errorCode || result?.statusCode) {
-    throw new Error(result.message);
+  if (result?.errorCode) {
+    throw new RequestError(result);
   }
 
   return result;

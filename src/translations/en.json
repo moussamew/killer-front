@@ -70,5 +70,11 @@
   "common": {
     "create_pseudo_label": "Before starting, create your pseudo",
     "create_pseudo_placeholder": "Choose a pseudo"
+  },
+  "not_found": {
+    "title": "Oops, something goes wrong!",
+    "text": "The room you requested can not be found.",
+    "back_home": "Go back to home page",
+    "reason": "Reason {reason}"
   }
 }
