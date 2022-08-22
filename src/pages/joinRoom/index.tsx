@@ -58,18 +58,8 @@ export const JoinRoomPage = (): JSX.Element => {
   return (
     <Layout>
       <WelcomeImage alt="welcome" src={Killerparty} />
-      {!playerSession?.name && (
-        <CreatePlayer
-          roomCode={roomCode!}
-          refreshPlayerSession={refreshPlayerSession}
-        />
-      )}
-      {playerSession?.roomCode && (
-        <LeaveCurrentRoom
-          playerRoomCode={playerSession?.roomCode}
-          refreshPlayerSession={refreshPlayerSession}
-        />
-      )}
+      {!playerSession?.name && <CreatePlayer roomCode={roomCode!} />}
+      {playerSession?.roomCode && <LeaveCurrentRoom />}
     </Layout>
   );
 };

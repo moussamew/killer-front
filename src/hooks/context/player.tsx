@@ -1,7 +1,7 @@
 import isEqual from 'fast-deep-equal';
 import {
   createContext,
-  FunctionComponent,
+  ReactNode,
   useCallback,
   useMemo,
   useState,
@@ -19,9 +19,13 @@ interface PlayerContextInterface {
   refreshPlayerSession: () => Promise<void>;
 }
 
+interface Props {
+  children: ReactNode;
+}
+
 const PlayerContext = createContext({} as PlayerContextInterface);
 
-const PlayerProvider: FunctionComponent = ({ children }) => {
+const PlayerProvider = ({ children }: Props): JSX.Element => {
   const [playerSession, setPlayerSession] = useState<Partial<Player>>({});
 
   const {

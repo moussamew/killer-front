@@ -75,6 +75,6 @@
     "title": "Oops, something goes wrong!",
     "text": "The room you requested can not be found.",
     "back_home": "Go back to home page",
-    "reason": "Reason {reason}"
+    "reason": "Reason: {reason}"
   }
 }

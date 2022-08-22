@@ -1,6 +1,6 @@
 import {
   createContext,
-  FunctionComponent,
+  ReactNode,
   useCallback,
   useMemo,
   useState,
@@ -17,9 +17,13 @@ interface TargetContextInterface {
   refreshTargetInfos: () => Promise<void>;
 }
 
+interface Props {
+  children: ReactNode;
+}
+
 const TargetContext = createContext({} as TargetContextInterface);
 
-const TargetProvider: FunctionComponent = ({ children }) => {
+const TargetProvider = ({ children }: Props): JSX.Element => {
   const [targetInfos, setTargetInfos] = useState<Partial<TargetInfos>>({});
 
   const {

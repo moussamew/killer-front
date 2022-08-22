@@ -9,7 +9,7 @@ import { Loader } from './components/Loader';
 import { RoomProvider } from './hooks/context/room';
 import { TargetProvider } from './hooks/context/target';
 import { HomePage } from './pages/home';
-import { JoinRoomPage } from './pages/joinRoom/JoinRoomPage';
+import { JoinRoomPage } from './pages/joinRoom';
 import { NotFoundPage } from './pages/notFound';
 import { RoomPage } from './pages/room';
 import { PendingRoomPage } from './pages/room/pending';
