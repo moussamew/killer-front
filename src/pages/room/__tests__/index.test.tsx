@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { sources } from 'eventsourcemock';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
@@ -22,9 +22,9 @@ import { RoomPage } from '@/pages/room';
 import { PendingRoomPage } from '@/pages/room/pending';
 import { PlayingRoomPage } from '@/pages/room/playing';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { Providers, renderWithProviders } from '@/tests/utils';
 
-describe.skip('<RoomPage />', () => {
+describe('<RoomPage />', () => {
   const roomEventSource = `${ROOM_TOPIC}/X7JKL`;
 
   it('should redirect player to PendingRoom page if the status of the room is PENDING', async () => {
@@ -180,12 +180,16 @@ describe.skip('<RoomPage />', () => {
       ),
     );
 
-    renderWithProviders(
+    render(
       <MemoryRouter initialEntries={['/room/X7JKL']}>
         <Routes>
           <Route
             path="/room/:roomCode"
-            element={<RoomPage page={<PendingRoomPage />} />}
+            element={
+              <Providers>
+                <RoomPage page={<PendingRoomPage />} />
+              </Providers>
+            }
           />
         </Routes>
       </MemoryRouter>,
@@ -250,16 +254,24 @@ describe.skip('<RoomPage />', () => {
       ),
     );
 
-    renderWithProviders(
+    render(
       <MemoryRouter initialEntries={['/room/X7JKL/pending']}>
         <Routes>
           <Route
             path="/room/:roomCode/playing"
-            element={<RoomPage page={<PlayingRoomPage />} />}
+            element={
+              <Providers>
+                <RoomPage page={<PlayingRoomPage />} />
+              </Providers>
+            }
           />
           <Route
             path="/room/:roomCode/pending"
-            element={<RoomPage page={<PendingRoomPage />} />}
+            element={
+              <Providers>
+                <RoomPage page={<PendingRoomPage />} />
+              </Providers>
+            }
           />
         </Routes>
       </MemoryRouter>,
@@ -300,13 +312,17 @@ describe.skip('<RoomPage />', () => {
       ),
     );
 
-    renderWithProviders(
+    render(
       <MemoryRouter initialEntries={['/room/X7JKL/pending']}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
             path="/room/:roomCode/pending"
-            element={<RoomPage page={<PendingRoomPage />} />}
+            element={
+              <Providers>
+                <RoomPage page={<PendingRoomPage />} />
+              </Providers>
+            }
           />
         </Routes>
       </MemoryRouter>,
@@ -382,12 +398,16 @@ describe.skip('<RoomPage />', () => {
       ),
     );
 
-    renderWithProviders(
+    render(
       <MemoryRouter initialEntries={['/room/X7JKL/playing']}>
         <Routes>
           <Route
             path="/room/:roomCode/playing"
-            element={<RoomPage page={<PlayingRoomPage />} />}
+            element={
+              <Providers>
+                <RoomPage page={<PlayingRoomPage />} />
+              </Providers>
+            }
           />
         </Routes>
       </MemoryRouter>,

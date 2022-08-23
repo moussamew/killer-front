@@ -16,10 +16,14 @@ export default defineConfig({
   },
   server: {
     port: 4000,
+    host: true,
   },
   test: {
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/tests/setup.ts',
+    coverage: {
+      provider: 'istanbul',
+    },
   },
 });

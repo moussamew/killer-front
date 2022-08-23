@@ -56,7 +56,14 @@ describe('<RoomPlayer />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL']}>
         <Routes>
-          <Route path="/room/:roomCode" element={<PlayerList />} />
+          <Route
+            path="/room/:roomCode"
+            element={
+              <Providers>
+                <PlayerList />
+              </Providers>
+            }
+          />
         </Routes>
       </MemoryRouter>,
     );
@@ -66,7 +73,7 @@ describe('<RoomPlayer />', () => {
     expect(screen.getByAltText('admin')).toBeInTheDocument();
   });
 
-  it.only('should open LeaveRoom Modal when the user click on LeaveRoom Icon', async () => {
+  it('should open LeaveRoom Modal when the user click on LeaveRoom Icon', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(
@@ -96,7 +103,13 @@ describe('<RoomPlayer />', () => {
             path="/room/:roomCode"
             element={
               <Providers>
-                <RoomPage page={<PendingRoomPage />} />
+                <RoomPage
+                  page={
+                    <Providers>
+                      <PendingRoomPage />
+                    </Providers>
+                  }
+                />
               </Providers>
             }
           />

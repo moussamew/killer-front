@@ -9,9 +9,9 @@ import { PlayerList } from '@/pages/room/pending/PlayerList';
 import { PlayerKilledButton } from './PlayerKilledButton';
 import { Status } from './Status';
 
-const Content = tw.div<{ $isPlayerDead: boolean }>`
+const Content = tw.div`
   flex flex-col md:flex-row 
-   ${({ $isPlayerDead }): string =>
+   ${({ $isPlayerDead }: { $isPlayerDead: boolean }): string =>
      $isPlayerDead ? 'justify-center' : 'justify-between'}
 `;
 
