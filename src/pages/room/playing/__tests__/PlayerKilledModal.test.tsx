@@ -1,8 +1,5 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -14,8 +11,6 @@ import {
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
 import { PlayerRole, RoomStatus } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
-import { TargetProvider } from '@/hooks/context/target';
 import { RoomPage } from '@/pages/room';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
@@ -52,21 +47,15 @@ describe('<PlayerKilledModal />', () => {
         <Routes>
           <Route
             path="/room/:roomCode/playing"
-            element={
-              <RoomProvider>
-                <TargetProvider>
-                  <RoomPage page={<PlayingRoomPage />} />
-                </TargetProvider>
-              </RoomProvider>
-            }
+            element={<RoomPage page={<PlayingRoomPage />} />}
           />
         </Routes>
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('I have been killed'));
+    await userEvent.click(await screen.findByText('I have been killed'));
 
-    fireEvent.click(screen.getByText('Kill me :('));
+    await userEvent.click(screen.getByText('Kill me :('));
 
     await waitForElementToBeRemoved(() => screen.getByText('Kill me :('));
 
@@ -115,25 +104,19 @@ describe('<PlayerKilledModal />', () => {
         <Routes>
           <Route
             path="/room/:roomCode/playing"
-            element={
-              <RoomProvider>
-                <TargetProvider>
-                  <RoomPage page={<PlayingRoomPage />} />
-                </TargetProvider>
-              </RoomProvider>
-            }
+            element={<RoomPage page={<PlayingRoomPage />} />}
           />
         </Routes>
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('I have been killed'));
+    await userEvent.click(await screen.findByText('I have been killed'));
 
-    fireEvent.click(screen.getByText('Kill me :('));
+    await userEvent.click(screen.getByText('Kill me :('));
 
     await screen.findByText('Cannot kill yourself');
 
-    fireEvent.click(screen.getByAltText('closeErrorMessage'));
+    await userEvent.click(screen.getByAltText('closeErrorMessage'));
 
     expect(screen.queryByText('Cannot kill yourself')).not.toBeInTheDocument();
   });

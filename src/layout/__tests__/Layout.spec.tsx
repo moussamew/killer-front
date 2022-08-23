@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -37,7 +38,7 @@ describe('<Layout />', () => {
 
     await screen.findByAltText('settings');
 
-    fireEvent.click(screen.getByAltText('settings'));
+    await userEvent.click(screen.getByAltText('settings'));
 
     expect(screen.getByText('User Settings')).toBeInTheDocument();
   });

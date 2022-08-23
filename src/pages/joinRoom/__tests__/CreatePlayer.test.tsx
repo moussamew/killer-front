@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -23,7 +24,7 @@ describe('<CreatePlayer />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Create my own room'));
+    await userEvent.click(await screen.findByText('Create my own room'));
 
     expect(
       await screen.findByText('The right way to kill your friends..'),
@@ -50,11 +51,12 @@ describe('<CreatePlayer />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.change(await screen.findByPlaceholderText('Choose a pseudo'), {
-      target: { value: 'Morpheus' },
-    });
+    await userEvent.type(
+      await screen.findByPlaceholderText('Choose a pseudo'),
+      'Morpheus',
+    );
 
-    fireEvent.click(screen.getByText('Continue and join the room'));
+    await userEvent.click(screen.getByText('Continue and join the room'));
 
     expect(
       await screen.findByText(
@@ -83,17 +85,18 @@ describe('<CreatePlayer />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.change(await screen.findByPlaceholderText('Choose a pseudo'), {
-      target: { value: 'Morpheus' },
-    });
+    await userEvent.type(
+      await screen.findByPlaceholderText('Choose a pseudo'),
+      'Morpheus',
+    );
 
-    fireEvent.click(screen.getByText('Continue and join the room'));
+    await userEvent.click(screen.getByText('Continue and join the room'));
 
     await screen.findByText(
       'Cannot create a room with your player name. Please use another name.',
     );
 
-    fireEvent.click(screen.getByAltText('closeErrorMessage'));
+    await userEvent.click(screen.getByAltText('closeErrorMessage'));
 
     expect(
       screen.queryByText(

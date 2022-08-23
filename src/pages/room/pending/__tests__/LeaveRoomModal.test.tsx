@@ -1,8 +1,9 @@
 import {
-  fireEvent,
+  render,
   screen,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -12,10 +13,9 @@ import {
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
 import { PlayerRole } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
 import { RoomPage } from '@/pages/room';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { Providers, renderWithProviders } from '@/tests/utils';
 
 import { PendingRoomPage } from '..';
 import { LeaveRoomModal } from '../LeaveRoomModal';
@@ -39,24 +39,24 @@ describe('<LeaveRoomModal />', () => {
       ),
     );
 
-    renderWithProviders(
+    render(
       <MemoryRouter initialEntries={['/room/X7VBD']}>
         <Routes>
           <Route
             path="/room/:roomCode"
             element={
-              <RoomProvider>
+              <Providers>
                 <RoomPage page={<PendingRoomPage />} />
-              </RoomProvider>
+              </Providers>
             }
           />
         </Routes>
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByAltText('leaveRoom'));
+    await userEvent.click(await screen.findByAltText('leaveRoom'));
 
-    fireEvent.click(screen.getByText('Leave this room'));
+    await userEvent.click(screen.getByText('Leave this room'));
 
     await waitForElementToBeRemoved(() =>
       screen.queryByText('Leave this room'),
@@ -82,11 +82,11 @@ describe('<LeaveRoomModal />', () => {
 
     renderWithProviders(<LeaveRoomModal />);
 
-    fireEvent.click(await screen.findByText('Leave this room'));
+    await userEvent.click(await screen.findByText('Leave this room'));
 
     await screen.findByText('Cannot leave this room');
 
-    fireEvent.click(screen.getByAltText('closeErrorMessage'));
+    await userEvent.click(screen.getByAltText('closeErrorMessage'));
 
     expect(
       screen.queryByAltText('Cannot leave this room'),

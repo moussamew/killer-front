@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
 import {
@@ -28,11 +29,9 @@ describe('<SettingsModal />', () => {
 
     await screen.findByText('User Settings');
 
-    fireEvent.change(screen.getByPlaceholderText('Neo'), {
-      target: { value: 'Trinity' },
-    });
+    await userEvent.type(screen.getByPlaceholderText('Neo'), 'Trinity');
 
-    fireEvent.click(screen.getByText('Save changes'));
+    await userEvent.click(screen.getByText('Save changes'));
 
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
@@ -69,15 +68,13 @@ describe('<SettingsModal />', () => {
       ),
     );
 
-    fireEvent.change(screen.getByPlaceholderText('Neo'), {
-      target: { value: 'Trinity' },
-    });
+    await userEvent.type(screen.getByPlaceholderText('Neo'), 'Trinity');
 
-    fireEvent.click(screen.getByText('Save changes'));
+    await userEvent.click(screen.getByText('Save changes'));
 
     await screen.findByText('Player bad name');
 
-    fireEvent.click(screen.getByAltText('closeErrorMessage'));
+    await userEvent.click(screen.getByAltText('closeErrorMessage'));
 
     expect(screen.queryByText('Player bad name')).not.toBeInTheDocument();
   });
@@ -93,7 +90,7 @@ describe('<SettingsModal />', () => {
 
     await screen.findByText('User Settings');
 
-    fireEvent.click(screen.getByText('Update my pseudo'));
+    await userEvent.click(screen.getByText('Update my pseudo'));
 
     expect(screen.queryByText('Save changes')).not.toBeInTheDocument();
   });

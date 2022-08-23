@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -23,11 +24,15 @@ describe('<ModalProvider />', () => {
 
     await screen.findByText('The right way to kill your friends..');
 
-    fireEvent.click(screen.getByAltText('settings'));
+    await await userEvent.click(screen.getByAltText('settings'));
 
     expect(screen.getByText('Update my pseudo')).toBeInTheDocument();
 
     window.dispatchEvent(new Event('popstate'));
+
+    await waitForElementToBeRemoved(() =>
+      screen.queryByText('Update my pseudo'),
+    );
 
     expect(screen.queryByText('Update my pseudo')).not.toBeInTheDocument();
   });

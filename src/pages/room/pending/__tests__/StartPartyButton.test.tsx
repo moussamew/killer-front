@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { sources } from 'eventsourcemock';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
@@ -9,7 +10,6 @@ import {
   ROOM_TOPIC,
 } from '@/constants/endpoints';
 import { MercureEventType, PlayerRole } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
 import { RoomPage } from '@/pages/room';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
@@ -39,17 +39,13 @@ describe('<StartPartyButton />', () => {
           <Route path="/room/P9LDG/playing" element={<p>Party started!</p>} />
           <Route
             path="/room/:roomCode"
-            element={
-              <RoomProvider>
-                <RoomPage page={<PendingRoomPage />} />
-              </RoomProvider>
-            }
+            element={<RoomPage page={<PendingRoomPage />} />}
           />
         </Routes>
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Start the party'));
+    await userEvent.click(await screen.findByText('Start the party'));
 
     const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
@@ -90,11 +86,11 @@ describe('<StartPartyButton />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Start the party'));
+    await userEvent.click(await screen.findByText('Start the party'));
 
     expect(await screen.findByText(errorMessage)).toBeInTheDocument();
 
-    fireEvent.click(screen.getByAltText('closeErrorMessage'));
+    await userEvent.click(screen.getByAltText('closeErrorMessage'));
 
     expect(screen.queryByText(errorMessage)).not.toBeInTheDocument();
   });

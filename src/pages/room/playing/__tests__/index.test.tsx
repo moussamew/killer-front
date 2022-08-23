@@ -9,8 +9,6 @@ import {
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
 import { PlayerRole, RoomStatus } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
-import { TargetProvider } from '@/hooks/context/target';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -47,13 +45,7 @@ describe('<PlayingRoomPage />', () => {
         <Routes>
           <Route
             path="/room/:roomCode/playing"
-            element={
-              <RoomProvider>
-                <TargetProvider>
-                  <RoomPage page={<PlayingRoomPage />} />
-                </TargetProvider>
-              </RoomProvider>
-            }
+            element={<RoomPage page={<PlayingRoomPage />} />}
           />
         </Routes>
       </MemoryRouter>,
@@ -98,13 +90,7 @@ describe('<PlayingRoomPage />', () => {
         <Routes>
           <Route
             path="/room/:roomCode/playing"
-            element={
-              <RoomProvider>
-                <TargetProvider>
-                  <RoomPage page={<PlayingRoomPage />} />
-                </TargetProvider>
-              </RoomProvider>
-            }
+            element={<RoomPage page={<PlayingRoomPage />} />}
           />
         </Routes>
       </MemoryRouter>,

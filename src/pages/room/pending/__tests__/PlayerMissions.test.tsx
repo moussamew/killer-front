@@ -1,8 +1,5 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
 import { PLAYER_MISSION_ENDPOINT } from '@/constants/endpoints';
@@ -21,9 +18,9 @@ describe('<PlayerMissions />', () => {
   it('should update the mission value inside the mission input after user changes', async () => {
     renderWithProviders(<PlayerMissions roomCode="X5VKT" />);
 
-    fireEvent.change(
+    await userEvent.type(
       await screen.findByPlaceholderText('Make him drink his glass dry'),
-      { target: { value: 'Rundown a League of Legends game' } },
+      'Rundown a League of Legends game',
     );
 
     expect(
@@ -45,7 +42,7 @@ describe('<PlayerMissions />', () => {
 
     await screen.findByText('Drink Jack Daniels');
 
-    fireEvent.click(screen.getByAltText('deleteMission'));
+    await userEvent.click(screen.getByAltText('deleteMission'));
 
     server.use(
       rest.get(PLAYER_MISSION_ENDPOINT, async (_req, res, ctx) =>

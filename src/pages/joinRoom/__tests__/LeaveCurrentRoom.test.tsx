@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -32,7 +33,9 @@ describe('<LeaveCurrentRoom />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Return to my current room'));
+    await await userEvent.click(
+      await screen.findByText('Return to my current room'),
+    );
 
     expect(
       screen.queryByText('Welcome to the room XAB4L!'),
@@ -62,13 +65,15 @@ describe('<LeaveCurrentRoom />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Continue and join the room'));
+    await await userEvent.click(
+      await screen.findByText('Continue and join the room'),
+    );
 
     await screen.findByText(
       'Cannot join a room with your player name. Please use another name.',
     );
 
-    fireEvent.click(screen.getByAltText('closeErrorMessage'));
+    await await userEvent.click(screen.getByAltText('closeErrorMessage'));
 
     expect(
       screen.queryByText(

@@ -1,13 +1,12 @@
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { PlayerRole } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
 import { PlayerList } from '@/pages/room/pending/PlayerList';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { Providers } from '@/tests/utils';
 
 describe('<PlayerList />', () => {
   it('should show player list', async () => {
@@ -33,15 +32,15 @@ describe('<PlayerList />', () => {
       ),
     );
 
-    renderWithProviders(
+    render(
       <MemoryRouter initialEntries={['/room/X7JKL']}>
         <Routes>
           <Route
             path="/room/:roomCode"
             element={
-              <RoomProvider>
+              <Providers>
                 <PlayerList />
-              </RoomProvider>
+              </Providers>
             }
           />
         </Routes>

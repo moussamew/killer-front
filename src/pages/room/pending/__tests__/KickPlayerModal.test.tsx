@@ -1,17 +1,17 @@
 import {
-  fireEvent,
+  render,
   screen,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { PlayerRole } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
 import { RoomPage } from '@/pages/room';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { Providers, renderWithProviders } from '@/tests/utils';
 
 import { PendingRoomPage } from '..';
 import { KickPlayerModal } from '../KickPlayerModal';
@@ -46,24 +46,24 @@ describe('<KickPlayerModal />', () => {
       ),
     );
 
-    renderWithProviders(
+    render(
       <MemoryRouter initialEntries={['/room/X7VBD']}>
         <Routes>
           <Route
             path="/room/:roomCode"
             element={
-              <RoomProvider>
+              <Providers>
                 <RoomPage page={<PendingRoomPage />} />
-              </RoomProvider>
+              </Providers>
             }
           />
         </Routes>
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByAltText('kickMorpheus'));
+    await userEvent.click(await screen.findByAltText('kickMorpheus'));
 
-    fireEvent.click(screen.getByText('Kick Morpheus'));
+    await userEvent.click(screen.getByText('Kick Morpheus'));
 
     await waitForElementToBeRemoved(() => screen.queryByText('Kick Morpheus'));
 
@@ -98,11 +98,11 @@ describe('<KickPlayerModal />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Kick Morpheus'));
+    await userEvent.click(await screen.findByText('Kick Morpheus'));
 
     await screen.findByText('Action is not allowed');
 
-    fireEvent.click(await screen.findByAltText('closeErrorMessage'));
+    await userEvent.click(await screen.findByAltText('closeErrorMessage'));
 
     expect(
       screen.queryByAltText('Action is not allowed'),

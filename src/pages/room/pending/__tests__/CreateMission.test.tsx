@@ -1,9 +1,9 @@
 import {
-  fireEvent,
   render,
   screen,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { vi } from 'vitest';
 
@@ -17,12 +17,12 @@ describe('<CreateMission />', () => {
 
     render(<CreateMission refetchPlayerMissions={spyRefetchPlayerMission} />);
 
-    fireEvent.change(
+    await userEvent.type(
       screen.getByPlaceholderText('Make him drink his glass dry'),
-      { target: { value: 'New mission' } },
+      'New mission',
     );
 
-    fireEvent.click(screen.getByText('Add this mission in the room'));
+    await userEvent.click(screen.getByText('Add this mission in the room'));
 
     await waitForElementToBeRemoved(() =>
       screen.queryByDisplayValue('New mission'),
@@ -48,12 +48,12 @@ describe('<CreateMission />', () => {
 
     render(<CreateMission refetchPlayerMissions={spyRefetchPlayerMission} />);
 
-    fireEvent.change(
+    await userEvent.type(
       screen.getByPlaceholderText('Make him drink his glass dry'),
-      { target: { value: 'New mission' } },
+      'New mission',
     );
 
-    fireEvent.click(screen.getByText('Add this mission in the room'));
+    await userEvent.click(screen.getByText('Add this mission in the room'));
 
     expect(
       await screen.findByText(
@@ -79,12 +79,12 @@ describe('<CreateMission />', () => {
 
     render(<CreateMission refetchPlayerMissions={spyRefetchPlayerMission} />);
 
-    fireEvent.change(
+    await userEvent.type(
       screen.getByPlaceholderText('Make him drink his glass dry'),
-      { target: { value: 'New mission' } },
+      'New mission',
     );
 
-    fireEvent.click(screen.getByText('Add this mission in the room'));
+    await userEvent.click(screen.getByText('Add this mission in the room'));
 
     expect(
       await screen.findByText(
@@ -110,18 +110,18 @@ describe('<CreateMission />', () => {
 
     render(<CreateMission refetchPlayerMissions={spyRefetchPlayerMission} />);
 
-    fireEvent.change(
+    await userEvent.type(
       screen.getByPlaceholderText('Make him drink his glass dry'),
-      { target: { value: 'New mission' } },
+      'New mission',
     );
 
-    fireEvent.click(screen.getByText('Add this mission in the room'));
+    await userEvent.click(screen.getByText('Add this mission in the room'));
 
     await screen.findByText(
       'Name must be longer than or equal to 1 characters',
     );
 
-    fireEvent.click(screen.getByAltText('closeErrorMessage'));
+    await userEvent.click(screen.getByAltText('closeErrorMessage'));
 
     expect(
       screen.queryByText(

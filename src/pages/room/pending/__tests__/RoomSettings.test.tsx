@@ -1,10 +1,10 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { PlayerRole } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
 import { RoomPage } from '@/pages/room';
 import { PendingRoomPage } from '@/pages/room/pending';
 import { server } from '@/tests/server';
@@ -31,17 +31,13 @@ describe('<RoomSettings />', () => {
         <Routes>
           <Route
             path="/room/:roomCode"
-            element={
-              <RoomProvider>
-                <RoomPage page={<PendingRoomPage />} />
-              </RoomProvider>
-            }
+            element={<RoomPage page={<PendingRoomPage />} />}
           />
         </Routes>
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByAltText('roomSettings'));
+    await userEvent.click(await screen.findByAltText('roomSettings'));
 
     expect(screen.getByText('Neo')).toBeInTheDocument();
     expect(screen.queryByText('Room settings')).toBeInTheDocument();
@@ -67,11 +63,7 @@ describe('<RoomSettings />', () => {
         <Routes>
           <Route
             path="/room/:roomCode"
-            element={
-              <RoomProvider>
-                <RoomPage page={<PendingRoomPage />} />
-              </RoomProvider>
-            }
+            element={<RoomPage page={<PendingRoomPage />} />}
           />
         </Routes>
       </MemoryRouter>,

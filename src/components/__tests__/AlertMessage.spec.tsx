@@ -1,4 +1,5 @@
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 import { AlertMessage } from '../AlertMessage';
@@ -15,12 +16,12 @@ describe('<AlertMessage />', () => {
     expect(screen.getByText('There is an error')).toBeInTheDocument();
   });
 
-  it('should execute closeMessage when the close icon is clicked', () => {
+  it('should execute closeMessage when the close icon is clicked', async () => {
     const spyCloseMessage = vi.fn();
 
     render(<AlertMessage {...dummyProps} closeMessage={spyCloseMessage} />);
 
-    fireEvent.click(screen.getByAltText('closeAlertMessage'));
+    await userEvent.click(screen.getByAltText('closeAlertMessage'));
 
     expect(spyCloseMessage).toHaveBeenCalledTimes(1);
   });

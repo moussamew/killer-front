@@ -1,14 +1,10 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { PlayerRole } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
 import { RoomPage } from '@/pages/room';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
@@ -37,24 +33,20 @@ describe('<RoomSettingsModal />', () => {
         <Routes>
           <Route
             path="/room/:roomCode"
-            element={
-              <RoomProvider>
-                <RoomPage page={<PendingRoomPage />} />
-              </RoomProvider>
-            }
+            element={<RoomPage page={<PendingRoomPage />} />}
           />
         </Routes>
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByAltText('roomSettings'));
+    await userEvent.click(await screen.findByAltText('roomSettings'));
 
-    fireEvent.change(
+    await userEvent.type(
       screen.getByPlaceholderText('Confirm by typing the room code'),
-      { target: { value: 'X7VBD' } },
+      'X7VBD',
     );
 
-    fireEvent.click(screen.getByText('Delete the room'));
+    await userEvent.click(screen.getByText('Delete the room'));
 
     await waitForElementToBeRemoved(() => screen.queryByText('Room settings'));
 
@@ -82,16 +74,16 @@ describe('<RoomSettingsModal />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.change(
+    await userEvent.type(
       await screen.findByPlaceholderText('Confirm by typing the room code'),
-      { target: { value: 'X7VBD' } },
+      'X7VBD',
     );
 
-    fireEvent.click(screen.getByText('Delete the room'));
+    await userEvent.click(screen.getByText('Delete the room'));
 
     await screen.findByText('Cannot delete this room');
 
-    fireEvent.click(screen.getByAltText('closeErrorMessage'));
+    await userEvent.click(screen.getByAltText('closeErrorMessage'));
 
     expect(
       screen.queryByAltText('Cannot delete this room'),

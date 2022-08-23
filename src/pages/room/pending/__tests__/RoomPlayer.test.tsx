@@ -1,16 +1,16 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { PlayerRole } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
 import { RoomPage } from '@/pages/room';
 import { PendingRoomPage } from '@/pages/room/pending';
 import { PlayerList } from '@/pages/room/pending/PlayerList';
 import { RoomPlayer } from '@/pages/room/pending/RoomPlayer';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { Providers, renderWithProviders } from '@/tests/utils';
 
 describe('<RoomPlayer />', () => {
   it('should show current player', async () => {
@@ -56,14 +56,7 @@ describe('<RoomPlayer />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL']}>
         <Routes>
-          <Route
-            path="/room/:roomCode"
-            element={
-              <RoomProvider>
-                <PlayerList />
-              </RoomProvider>
-            }
-          />
+          <Route path="/room/:roomCode" element={<PlayerList />} />
         </Routes>
       </MemoryRouter>,
     );
@@ -73,7 +66,7 @@ describe('<RoomPlayer />', () => {
     expect(screen.getByAltText('admin')).toBeInTheDocument();
   });
 
-  it('should open LeaveRoom Modal when the user click on LeaveRoom Icon', async () => {
+  it.only('should open LeaveRoom Modal when the user click on LeaveRoom Icon', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(
@@ -96,22 +89,22 @@ describe('<RoomPlayer />', () => {
       ),
     );
 
-    renderWithProviders(
+    render(
       <MemoryRouter initialEntries={['/room/X7VBD']}>
         <Routes>
           <Route
             path="/room/:roomCode"
             element={
-              <RoomProvider>
+              <Providers>
                 <RoomPage page={<PendingRoomPage />} />
-              </RoomProvider>
+              </Providers>
             }
           />
         </Routes>
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByAltText('leaveRoom'));
+    await userEvent.click(await screen.findByAltText('leaveRoom'));
 
     expect(screen.getByText('Leave this room')).toBeInTheDocument();
   });

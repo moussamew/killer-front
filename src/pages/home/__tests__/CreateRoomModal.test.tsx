@@ -1,8 +1,5 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -27,13 +24,14 @@ describe('<CreateRoomModal />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Create new room'));
+    await userEvent.click(await screen.findByText('Create new room'));
 
-    fireEvent.change(screen.getByPlaceholderText('Choose a pseudo'), {
-      target: { value: 'Morpheus' },
-    });
+    await userEvent.type(
+      screen.getByPlaceholderText('Choose a pseudo'),
+      'Morpheus',
+    );
 
-    fireEvent.click(screen.getByText('Create my room'));
+    await userEvent.click(screen.getByText('Create my room'));
 
     await waitForElementToBeRemoved(() => screen.queryByText('Create my room'));
 
@@ -56,11 +54,12 @@ describe('<CreateRoomModal />', () => {
 
     renderWithProviders(<CreateRoomModal />);
 
-    fireEvent.change(await screen.findByPlaceholderText('Choose a pseudo'), {
-      target: { value: 'Morpheus' },
-    });
+    await userEvent.type(
+      await screen.findByPlaceholderText('Choose a pseudo'),
+      'Morpheus',
+    );
 
-    fireEvent.click(screen.getByText('Create my room'));
+    await userEvent.click(screen.getByText('Create my room'));
 
     expect(
       await screen.findByText(
@@ -85,11 +84,12 @@ describe('<CreateRoomModal />', () => {
 
     renderWithProviders(<CreateRoomModal />);
 
-    fireEvent.change(await screen.findByPlaceholderText('Choose a pseudo'), {
-      target: { value: 'Morpheus' },
-    });
+    await userEvent.type(
+      await screen.findByPlaceholderText('Choose a pseudo'),
+      'Morpheus',
+    );
 
-    fireEvent.click(screen.getByText('Create my room'));
+    await userEvent.click(screen.getByText('Create my room'));
 
     expect(
       await screen.findByText(
@@ -97,7 +97,7 @@ describe('<CreateRoomModal />', () => {
       ),
     ).toBeInTheDocument();
 
-    fireEvent.click(screen.getByAltText('closeErrorMessage'));
+    await userEvent.click(screen.getByAltText('closeErrorMessage'));
 
     expect(
       screen.queryByText(
