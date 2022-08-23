@@ -1,14 +1,17 @@
 import { render, RenderOptions, RenderResult } from '@testing-library/react';
-import { ReactNode } from 'react';
+import { ReactElement } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { ModalProvider } from '@/hooks/context/modal';
 import { PlayerProvider } from '@/hooks/context/player';
+import { RoomProvider } from '@/hooks/context/room';
+import { TargetProvider } from '@/hooks/context/target';
 
-const renderWithProviders = (
-  component: ReactNode,
-  options?: RenderOptions,
-): RenderResult => {
+interface Props {
+  children: ReactElement;
+}
+
+export const Providers = ({ children }: Props): JSX.Element => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -17,14 +20,20 @@ const renderWithProviders = (
     },
   });
 
-  return render(
+  return (
     <QueryClientProvider client={queryClient}>
       <PlayerProvider>
-        <ModalProvider>{component}</ModalProvider>
+        <ModalProvider>
+          <RoomProvider>
+            <TargetProvider>{children}</TargetProvider>
+          </RoomProvider>
+        </ModalProvider>
       </PlayerProvider>
-    </QueryClientProvider>,
-    options,
+    </QueryClientProvider>
   );
 };
 
-export { renderWithProviders };
+export const renderWithProviders = (
+  ui: ReactElement,
+  options?: Omit<RenderOptions, 'wrapper'>,
+): RenderResult => render(ui, { wrapper: Providers, ...options });
