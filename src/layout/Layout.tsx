@@ -18,14 +18,9 @@ interface Props {
 export const Layout = ({ children }: Props): JSX.Element => {
   const { modal, closeModal } = useContext(ModalContext);
 
-  const { userAgent } = navigator;
-
-  console.warn({ userAgent });
-
   return (
     <Fragment>
       <Header />
-      <p>{userAgent}</p>
       <Content>{children}</Content>
       {modal && <Modal closeModal={closeModal}>{modal}</Modal>}
     </Fragment>

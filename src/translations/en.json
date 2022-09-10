@@ -65,7 +65,11 @@
   "layout": {
     "user_settings": "User Settings",
     "update_pseudo": "Update my pseudo",
-    "save_changes": "Save changes"
+    "save_changes": "Save changes",
+    "opened_from_webview": "Opened from {webViewApp}",
+    "restricted_access": "Access to Killer Party from a third party app is restricted for game experience reasons.",
+    "how_to_play": "Okay, but how can we play?",
+    "click_button_bellow": "By clicking on the button below, you can copy and paste the link directly into your browser."
   },
   "common": {
     "create_pseudo_label": "Before starting, create your pseudo",
