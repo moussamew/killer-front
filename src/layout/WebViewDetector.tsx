@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
+import Mobile from '@/assets/icons/mobile.svg';
 import Killerparty from '@/assets/images/killerparty.png';
 import { Button } from '@/components/Button';
 import { AppLogo, WebViewApp } from '@/constants/webview';
@@ -9,7 +10,7 @@ import t from '@/helpers/translate';
 
 import { Layout } from './Layout';
 
-const { Instagram, Messenger, iPhone } = WebViewApp;
+const { Instagram, Messenger } = WebViewApp;
 
 const Content = tw.div`
   text-center 
@@ -33,11 +34,12 @@ interface Props {
 
 export const WebViewDetector = ({ children }: Props): JSX.Element => {
   const [webViewApp, setWebViewApp] = useState<string | null>(null);
+  const [linkSaved, setLinkSaved] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    [Instagram, Messenger, iPhone].forEach((app) => {
+    [Instagram, Messenger].forEach((app) => {
       if (navigator.userAgent.includes(app)) {
         setWebViewApp(app);
       }
@@ -48,6 +50,12 @@ export const WebViewDetector = ({ children }: Props): JSX.Element => {
     return children;
   }
 
+  const saveLink = async (): Promise<void> => {
+    await navigator.clipboard.writeText(window.location.href);
+
+    setLinkSaved(t('common.link_saved'));
+  };
+
   return (
     <Layout>
       <Content>
@@ -56,8 +64,18 @@ export const WebViewDetector = ({ children }: Props): JSX.Element => {
         <Text>{t('layout.restricted_access')}</Text>
         <WebViewImage src={AppLogo[webViewApp]} />
         <h2>{t('layout.how_to_play')}</h2>
-        <Text>{t('layout.click_button_bellow')}</Text>
-        <Button content="Save the link in the clipboard" />
+        <Text>
+          {t(
+            linkSaved
+              ? 'layout.link_saved_explanation'
+              : 'layout.click_button_bellow',
+          )}
+        </Text>
+        <Button
+          content={linkSaved || t('layout.save_link')}
+          icon={Mobile}
+          onClick={saveLink}
+        />
       </Content>
     </Layout>
   );
