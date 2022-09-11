@@ -4,6 +4,7 @@ import tw from 'tailwind-styled-components';
 
 import Mobile from '@/assets/icons/mobile.svg';
 import Killerparty from '@/assets/images/killerparty.png';
+import { AlertMessage } from '@/components/AlertMessage';
 import { Button } from '@/components/Button';
 import { AppLogo, WebViewApp } from '@/constants/webview';
 import t from '@/helpers/translate';
@@ -35,6 +36,9 @@ interface Props {
 export const WebViewDetector = ({ children }: Props): JSX.Element => {
   const [webViewApp, setWebViewApp] = useState<string | null>(null);
   const [linkSaved, setLinkSaved] = useState<string | null>(null);
+  const [linkWithoutClipboard, setLinkWithoutClipboard] = useState<
+    string | null
+  >(null);
 
   const navigate = useNavigate();
 
@@ -51,9 +55,24 @@ export const WebViewDetector = ({ children }: Props): JSX.Element => {
   }
 
   const saveLink = async (): Promise<void> => {
-    await navigator.clipboard.writeText(window.location.href);
+    if (!navigator.clipboard) {
+      return setLinkWithoutClipboard(
+        t('common.link_without_clipboard', {
+          link: window.location.href,
+        }),
+      );
+    }
 
-    setLinkSaved(t('common.link_saved'));
+    return navigator.clipboard
+      .writeText(window.location.href)
+      .then(() => setLinkSaved(t('common.link_saved')))
+      .catch(() =>
+        setLinkWithoutClipboard(
+          t('common.link_without_clipboard', {
+            link: window.location.href,
+          }),
+        ),
+      );
   };
 
   return (
@@ -76,6 +95,9 @@ export const WebViewDetector = ({ children }: Props): JSX.Element => {
           icon={Mobile}
           onClick={saveLink}
         />
+        {linkWithoutClipboard && (
+          <AlertMessage message={linkWithoutClipboard} />
+        )}
       </Content>
     </Layout>
   );

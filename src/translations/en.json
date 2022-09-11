@@ -34,7 +34,6 @@
     "players_list": "Criminals in the room",
     "players_list_description": "List of all the killers who will have to kill each other.",
     "share_room_link": "Share link to join the room",
-    "share_room_link_copy_paste": "Copy and paste the following link:\n {joinRoomLink}",
     "share_room_text": "Hey! Join my party and try to kill me ^^",
     "leave_room": "Leave the current room",
     "leave_room_warning": "You are about to leave the room.\n Are you sure about this?",
@@ -75,7 +74,8 @@
   "common": {
     "create_pseudo_label": "Before starting, create your pseudo",
     "create_pseudo_placeholder": "Choose a pseudo",
-    "link_saved": "Link saved in the clipboard!"
+    "link_saved": "Link saved in the clipboard!",
+    "link_without_clipboard": "Copy and paste the following link:\n {link}"
   },
   "not_found": {
     "title": "Oops, something goes wrong!",
