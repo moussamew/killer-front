@@ -54,7 +54,7 @@
     "eventsourcemock": "^2.0.0",
     "husky": "^7.0.4",
     "jsdom": "^19.0.0",
-    "msw": "^0.36.8",
+    "msw": "^0.47.1",
     "postcss": "^8.4.5",
     "prettier": "^2.5.1",
     "tailwind-styled-components": "^2.0.3",
