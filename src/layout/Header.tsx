@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import tw from 'tailwind-styled-components';
 
 import Settings from '@/assets/icons/settings.svg';
-import { isEmptyObject } from '@/helpers/objects';
 import t from '@/helpers/translate';
+import { isEmptyObject } from '@/helpers/utils';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
 

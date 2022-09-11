@@ -5,7 +5,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
 import { MercureEventType, RoomStatus } from '@/constants/enums';
-import { isEmptyObject } from '@/helpers/objects';
+import { isEmptyObject } from '@/helpers/utils';
 import { PlayerContext } from '@/hooks/context/player';
 import { RoomContext } from '@/hooks/context/room';
 import { TargetContext } from '@/hooks/context/target';

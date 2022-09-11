@@ -8,7 +8,7 @@ import {
 import { useQuery } from 'react-query';
 
 import { Loader } from '@/components/Loader';
-import { isEmptyObject } from '@/helpers/objects';
+import { isEmptyObject } from '@/helpers/utils';
 import { getTargetInfos } from '@/hooks/services/requests';
 import { TargetInfos } from '@/types';
 

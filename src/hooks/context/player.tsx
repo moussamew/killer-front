@@ -9,7 +9,7 @@ import {
 import { useQuery } from 'react-query';
 
 import { Loader } from '@/components/Loader';
-import { isEmptyObject } from '@/helpers/objects';
+import { isEmptyObject } from '@/helpers/utils';
 import { Player } from '@/types';
 
 import { getPlayerSession } from '../services/requests';
