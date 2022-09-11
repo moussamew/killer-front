@@ -21,7 +21,7 @@ export const RoomSettingsModal = (): JSX.Element => {
 
   const { closeModal } = useContext(ModalContext);
 
-  const handleDeleteRoom = (): Promise<void> =>
+  const handleDeleteRoom = async (): Promise<void> =>
     deleteRoom(inputRoomCode)
       .then(closeModal)
       .catch((error) => setErrorMessage(error.message));

@@ -27,7 +27,7 @@ export const LeaveRoomModal = (): JSX.Element => {
   const { refreshPlayerSession } = useContext(PlayerContext);
   const { closeModal } = useContext(ModalContext);
 
-  const leaveRoom = (): Promise<void> =>
+  const leaveRoom = async (): Promise<void> =>
     updatePlayer({ roomCode: null })
       .then(refreshPlayerSession)
       .then(closeModal)
