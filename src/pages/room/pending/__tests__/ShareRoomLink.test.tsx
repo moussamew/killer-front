@@ -44,12 +44,12 @@ describe('<ShareRoomLink />', () => {
   });
 
   it('should save the room link in clipboard if share is not available', async () => {
-    const spyNavigatorClipboard = vi.fn();
+    const spyNavigatorClipboard = vi.fn().mockResolvedValue('');
 
     Object.defineProperty(window, 'navigator', {
       value: {
         share: null,
-        clipboard: { writeText: spyNavigatorClipboard.mockResolvedValue('') },
+        clipboard: { writeText: spyNavigatorClipboard },
       },
       writable: true,
     });
@@ -68,12 +68,12 @@ describe('<ShareRoomLink />', () => {
   });
 
   it('should show directly the room link if the clipboard cant be performed', async () => {
-    const spyNavigatorClipboard = vi.fn();
+    const spyNavigatorClipboard = vi.fn().mockRejectedValue('');
 
     Object.defineProperty(window, 'navigator', {
       value: {
         share: null,
-        clipboard: { writeText: spyNavigatorClipboard.mockRejectedValue('') },
+        clipboard: { writeText: spyNavigatorClipboard },
       },
       writable: true,
     });
