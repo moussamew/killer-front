@@ -37,7 +37,7 @@ export const KickPlayerModal = ({
 
   const { closeModal } = useContext(ModalContext);
 
-  const kickPlayer = (): Promise<void> =>
+  const kickPlayer = async (): Promise<void> =>
     kickPlayerFromRoom(roomCode!, playerId)
       .then(closeModal)
       .catch((error) => setErrorMessage(error.message));

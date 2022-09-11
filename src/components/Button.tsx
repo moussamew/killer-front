@@ -1,15 +1,17 @@
+import { useState } from 'react';
 import tw from 'tailwind-styled-components';
+
+import { isPromise } from '@/helpers/utils';
+
+import { Spinner } from './Spinner';
 
 const Content = tw.div`
   flex flex-col w-full
 `;
 
-const StyledButton = tw.button<{
-  $buttonColor: string;
-  disabled: boolean;
-}>`
-  ${({ $buttonColor }): string => $buttonColor}
-  ${({ disabled }): string =>
+const StyledButton = tw.button`
+  ${({ $buttonColor }: { $buttonColor: string }): string => $buttonColor}
+  ${({ disabled }: { disabled: boolean }): string =>
     disabled ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'}
     
   transition-all duration-300 ease-in 
@@ -19,8 +21,8 @@ const StyledButton = tw.button<{
   flex justify-center item-center
 `;
 
-const Text = tw.p<{ $textColor: string }>`
-  ${({ $textColor }): string => $textColor}
+const Text = tw.p`
+  ${({ $textColor }: { $textColor: string }): string => $textColor}
   font-medium text-3xl
 `;
 
@@ -30,9 +32,9 @@ const Icon = tw.img`
 
 interface Props {
   content: string;
+  onClick: () => void | Promise<void>;
   buttonColor?: string;
   textColor?: string;
-  onClick?: () => void;
   type?: 'submit' | 'reset' | 'button';
   disabled?: boolean;
   icon?: string;
@@ -46,16 +48,31 @@ export const Button = ({
   type = 'button',
   disabled = false,
   icon,
-}: Props): JSX.Element => (
-  <Content>
-    <StyledButton
-      onClick={onClick}
-      type={type}
-      $buttonColor={buttonColor}
-      disabled={disabled}
-    >
-      {icon && <Icon alt={content} src={icon} />}
-      <Text $textColor={textColor}>{content}</Text>
-    </StyledButton>
-  </Content>
-);
+}: Props): JSX.Element => {
+  const [isLoading, setLoading] = useState(false);
+
+  const handleClick = async (): Promise<void> => {
+    if (isPromise(onClick)) {
+      setLoading(true);
+
+      return (onClick() as Promise<void>).finally(() => setLoading(false));
+    }
+
+    return onClick();
+  };
+
+  return (
+    <Content>
+      <StyledButton
+        onClick={handleClick}
+        type={type}
+        $buttonColor={buttonColor}
+        disabled={isLoading || disabled}
+      >
+        {icon && !isLoading && <Icon alt={content} src={icon} />}
+        {isLoading && <Spinner />}
+        <Text $textColor={textColor}>{content}</Text>
+      </StyledButton>
+    </Content>
+  );
+};

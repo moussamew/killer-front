@@ -41,7 +41,7 @@ export const SettingsModal = (): JSX.Element => {
   const [pseudo, setPseudo] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const updatePseudo = (): Promise<void> =>
+  const updatePseudo = async (): Promise<void> =>
     updatePlayer({ name: pseudo })
       .then(refreshPlayerSession)
       .then(closeModal)

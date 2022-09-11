@@ -21,7 +21,7 @@ export const CreatePlayer = ({ roomCode }: Props): JSX.Element => {
 
   const navigate = useNavigate();
 
-  const handleJoinRoom = (): Promise<void> =>
+  const handleJoinRoom = async (): Promise<void> =>
     createPlayer({ name: pseudo, roomCode })
       .then(refreshPlayerSession)
       .catch((error) => setErrorMessage(error.message));

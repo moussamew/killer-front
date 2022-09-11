@@ -32,7 +32,7 @@ export const JoinRoomModal = (): JSX.Element | null => {
   const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
   const { closeModal } = useContext(ModalContext);
 
-  const handleJoinRoom = (): Promise<void> => {
+  const handleJoinRoom = async (): Promise<void> => {
     if (!playerSession.name) {
       return createPlayer({ name: inputPseudo, roomCode })
         .then(refreshPlayerSession)

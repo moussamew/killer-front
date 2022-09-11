@@ -30,7 +30,7 @@ export const CreateRoomModal = (): JSX.Element | null => {
   const { refreshPlayerSession } = useContext(PlayerContext);
   const { closeModal } = useContext(ModalContext);
 
-  const handleCreateRoom = (): Promise<void> =>
+  const handleCreateRoom = async (): Promise<void> =>
     createPlayer({ name: inputPseudo })
       .then(createRoom)
       .then(refreshPlayerSession)

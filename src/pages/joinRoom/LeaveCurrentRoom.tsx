@@ -19,7 +19,7 @@ export const LeaveCurrentRoom = (): JSX.Element => {
 
   const navigate = useNavigate();
 
-  const handleJoinRoom = (): Promise<void> =>
+  const handleJoinRoom = async (): Promise<void> =>
     updatePlayer({ roomCode })
       .then(refreshPlayerSession)
       .catch((error) => setErrorMessage(error.message));
