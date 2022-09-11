@@ -37,15 +37,17 @@ export const ShareRoomLink = ({ roomCode }: Props): JSX.Element => {
 
     if (!navigator.clipboard) {
       return setAlertMessage(
-        t('room.share_room_link_copy_paste', { joinRoomLink }),
+        t('common.link_without_clipboard', { link: joinRoomLink }),
       );
     }
 
     return navigator.clipboard
       .writeText(joinRoomLink)
-      .then(() => setSuccessMessage(t('room.share_room_link_success')))
+      .then(() => setSuccessMessage(t('common.link_saved')))
       .catch(() =>
-        setAlertMessage(t('room.share_room_link_copy_paste', { joinRoomLink })),
+        setAlertMessage(
+          t('common.link_without_clipboard', { link: joinRoomLink }),
+        ),
       );
   };
 

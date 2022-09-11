@@ -17,16 +17,18 @@ const CloseIcon = tw.img`
 
 interface Props {
   message: string;
-  closeMessage: () => void;
+  closeMessage?: () => void;
 }
 
 export const AlertMessage = ({ message, closeMessage }: Props): JSX.Element => (
   <Message>
-    <CloseIcon
-      alt="closeAlertMessage"
-      src={CloseAlertMessage}
-      onClick={() => closeMessage()}
-    />
+    {closeMessage && (
+      <CloseIcon
+        alt="closeAlertMessage"
+        src={CloseAlertMessage}
+        onClick={() => closeMessage()}
+      />
+    )}
     {message}
   </Message>
 );
