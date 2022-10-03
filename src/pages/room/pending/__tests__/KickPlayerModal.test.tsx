@@ -14,12 +14,6 @@ import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 import { PendingRoomPage } from '..';
-import { KickPlayerModal } from '../KickPlayerModal';
-
-const dummyProps = {
-  playerName: 'Morpheus',
-  playerId: 1,
-};
 
 describe('<KickPlayerModal />', () => {
   it('should kick player from the room', async () => {
@@ -69,43 +63,6 @@ describe('<KickPlayerModal />', () => {
 
     expect(
       screen.queryByText('Kick players from the room'),
-    ).not.toBeInTheDocument();
-  });
-
-  it('should let the user close error message if showed', async () => {
-    server.use(
-      rest.patch(
-        `${ROOM_ENDPOINT}/X7VBD/player/1/admin`,
-        async (_req, res, ctx) =>
-          res(
-            ctx.status(400),
-            ctx.json({
-              errorCode: 'ROOM.FORBIDDEN',
-              message: 'Action is not allowed',
-            }),
-          ),
-      ),
-    );
-
-    renderWithProviders(
-      <MemoryRouter initialEntries={['/room/X7VBD']}>
-        <Routes>
-          <Route
-            path="/room/:roomCode"
-            element={<KickPlayerModal {...dummyProps} />}
-          />
-        </Routes>
-      </MemoryRouter>,
-    );
-
-    fireEvent.click(await screen.findByText('Kick Morpheus'));
-
-    await screen.findByText('Action is not allowed');
-
-    fireEvent.click(await screen.findByAltText('closeErrorMessage'));
-
-    expect(
-      screen.queryByAltText('Action is not allowed'),
     ).not.toBeInTheDocument();
   });
 });

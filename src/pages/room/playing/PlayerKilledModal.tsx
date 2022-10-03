@@ -1,11 +1,9 @@
-import { Fragment, useContext, useState } from 'react';
+import { Fragment } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { Button } from '@/components/Button';
-import { ErrorMessage } from '@/components/ErrorMessage';
 import { PlayerStatus } from '@/constants/enums';
 import t from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
 import { updatePlayer } from '@/layout/services/requests';
 
 const HeadContent = tw.div`
@@ -22,14 +20,9 @@ const TextContent = tw.div`
 `;
 
 export const PlayerKilledModal = (): JSX.Element => {
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const { closeModal } = useContext(ModalContext);
-
-  const killPlayer = async (): Promise<void> =>
-    updatePlayer({ status: PlayerStatus.KILLED })
-      .then(closeModal)
-      .catch((error) => setErrorMessage(error.message));
+  const killPlayer = async (): Promise<void> => {
+    await updatePlayer({ status: PlayerStatus.KILLED });
+  };
 
   return (
     <Fragment>
@@ -43,12 +36,6 @@ export const PlayerKilledModal = (): JSX.Element => {
         content={t('playing_room.player_killed_confirmation')}
         onClick={killPlayer}
       />
-      {errorMessage && (
-        <ErrorMessage
-          message={errorMessage}
-          closeMessage={() => setErrorMessage('')}
-        />
-      )}
     </Fragment>
   );
 };
