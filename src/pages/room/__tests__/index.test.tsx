@@ -26,6 +26,9 @@ import { PlayingRoomPage } from '@/pages/room/playing';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
+const { PLAYER_KILLED, PLAYER_UPDATED, ROOM_DELETED, ROOM_IN_GAME } =
+  MercureEventType;
+
 describe('<RoomPage />', () => {
   const roomEventSource = `${ROOM_TOPIC}/X7JKL`;
 
@@ -158,7 +161,7 @@ describe('<RoomPage />', () => {
     ).toBeInTheDocument();
   });
 
-  it('should refresh the room players when SSE emits a new message without any type', async () => {
+  it('should refresh the room players when SSE emits a new message of type PLAYER_UPDATED', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(
@@ -241,7 +244,7 @@ describe('<RoomPage />', () => {
 
     const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
-        type: MercureEventType.NO_EVENT,
+        type: PLAYER_UPDATED,
       }),
     });
 
@@ -299,7 +302,7 @@ describe('<RoomPage />', () => {
 
     const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
-        type: MercureEventType.ROOM_IN_GAME,
+        type: ROOM_IN_GAME,
       }),
     });
 
@@ -356,7 +359,7 @@ describe('<RoomPage />', () => {
 
     const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
-        type: MercureEventType.ROOM_DELETED,
+        type: ROOM_DELETED,
       }),
     });
 
@@ -449,7 +452,7 @@ describe('<RoomPage />', () => {
 
     const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
-        type: MercureEventType.PLAYER_KILLED,
+        type: PLAYER_KILLED,
       }),
     });
 
