@@ -25,7 +25,7 @@ export const ErrorMessage = ({ message, closeMessage }: Props): JSX.Element => (
     <CloseIcon
       alt="closeErrorMessage"
       src={CloseErrorMessage}
-      onClick={() => closeMessage()}
+      onClick={closeMessage}
     />
     {message}
   </Message>
