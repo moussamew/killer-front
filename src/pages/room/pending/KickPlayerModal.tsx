@@ -1,11 +1,9 @@
-import { Fragment, useContext, useState } from 'react';
+import { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import { Button } from '@/components/Button';
-import { ErrorMessage } from '@/components/ErrorMessage';
 import t from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
 
 import { kickPlayerFromRoom } from './services/requests';
 
@@ -33,14 +31,8 @@ export const KickPlayerModal = ({
 }: Props): JSX.Element => {
   const { roomCode } = useParams();
 
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const { closeModal } = useContext(ModalContext);
-
   const kickPlayer = async (): Promise<void> =>
-    kickPlayerFromRoom(roomCode!, playerId)
-      .then(closeModal)
-      .catch((error) => setErrorMessage(error.message));
+    kickPlayerFromRoom(roomCode!, playerId);
 
   return (
     <Fragment>
@@ -54,12 +46,6 @@ export const KickPlayerModal = ({
         content={t('room.kick_room_confirmation', { playerName })}
         onClick={kickPlayer}
       />
-      {errorMessage && (
-        <ErrorMessage
-          message={errorMessage}
-          closeMessage={() => setErrorMessage('')}
-        />
-      )}
     </Fragment>
   );
 };
