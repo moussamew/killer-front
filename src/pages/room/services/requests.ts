@@ -3,5 +3,6 @@ import { Method } from '@/constants/enums';
 import { request } from '@/helpers/apis';
 import { Room } from '@/types';
 
-export const getRoom = async (roomCode: string): Promise<Room> =>
-  request(`${ROOM_ENDPOINT}/${roomCode}`, Method.GET);
+export function getRoom(roomCode: string): Promise<Room> {
+  return request({ url: `${ROOM_ENDPOINT}/${roomCode}`, method: Method.GET });
+}

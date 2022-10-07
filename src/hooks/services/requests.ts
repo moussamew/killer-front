@@ -7,16 +7,18 @@ import { Method } from '@/constants/enums';
 import { request } from '@/helpers/apis';
 import { Mission, Player, Target, TargetInfos } from '@/types';
 
-export const getPlayerSession = (): Promise<Player> =>
-  request<Player>(PLAYER_SESSION_ENDPOINT, Method.GET);
+export function getPlayerSession(): Promise<Player> {
+  return request({ url: PLAYER_SESSION_ENDPOINT, method: Method.GET });
+}
 
-export const getTargetInfos = (): Promise<Partial<TargetInfos>> =>
-  Promise.all([
-    request<Target>(PLAYER_TARGET_ENDPOINT, Method.GET),
-    request<Mission>(MISSION_ENDPOINT, Method.GET),
+export function getTargetInfos(): Promise<Partial<TargetInfos>> {
+  return Promise.all([
+    request<Target>({ url: PLAYER_TARGET_ENDPOINT, method: Method.GET }),
+    request<Mission>({ url: MISSION_ENDPOINT, method: Method.GET }),
   ])
     .then(([target, mission]) => ({
       name: target.name,
       mission: mission.content,
     }))
     .catch(() => ({}));
+}
