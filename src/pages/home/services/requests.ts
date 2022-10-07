@@ -3,24 +3,17 @@ import { Method } from '@/constants/enums';
 import { request } from '@/helpers/apis';
 import { Player, Room } from '@/types';
 
-const createPlayer = async ({
+export function createPlayer({
   name,
   roomCode,
-}: Partial<Player>): Promise<Player> => {
-  const player = await request<Player>(PLAYER_ENDPOINT, Method.POST, {
-    body: JSON.stringify({
-      name,
-      roomCode,
-    }),
+}: Partial<Player>): Promise<Player> {
+  return request({
+    url: PLAYER_ENDPOINT,
+    method: Method.POST,
+    requestInit: { body: JSON.stringify({ name, roomCode }) },
   });
+}
 
-  return player;
-};
-
-const createRoom = async (): Promise<Room> => {
-  const room = await request<Room>(ROOM_ENDPOINT, Method.POST);
-
-  return room;
-};
-
-export { createPlayer, createRoom };
+export function createRoom(): Promise<Room> {
+  return request({ url: ROOM_ENDPOINT, method: Method.POST });
+}

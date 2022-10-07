@@ -63,3 +63,9 @@ const PlayerProvider = ({ children }: Props): JSX.Element => {
 };
 
 export { PlayerContext, PlayerProvider };
+
+export function usePlayer(): { player: Player | undefined } {
+  const { data: player } = useQuery('playerSession', getPlayerSession);
+
+  return { player };
+}

@@ -4,7 +4,7 @@ import { Method } from '@/constants/enums';
 
 import { request } from '../apis';
 
-describe('Helpers > Requests', () => {
+describe('Helpers > APIs', () => {
   it('should log error when there is no json to parse on the response', async () => {
     const spyConsoleError = vi.spyOn(console, 'error');
 
@@ -12,7 +12,7 @@ describe('Helpers > Requests', () => {
       json: () => Promise.reject(),
     } as Response);
 
-    await request('fakeEndpoint', Method.GET);
+    await request({ url: 'fakeEndpoint', method: Method.GET });
 
     expect(spyConsoleError).toHaveBeenCalledWith(
       'GET > fakeEndpoint does not have JSON response format.',
