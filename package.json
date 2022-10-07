@@ -10,7 +10,8 @@
     "test": "vitest run",
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "tsc": "tsc"
   },
   "scripts-info": {
     "start": "Start the application on development environment",
@@ -20,7 +21,8 @@
     "test": "Run unit tests on the project",
     "test:watch": "Run unit tests on the project and listen to changes",
     "test:coverage": "Run unit tests on the project with coverage stats",
-    "prepare": "Prepare hooks after the dependencies installation"
+    "prepare": "Prepare hooks after the dependencies installation",
+    "tsc": "Run typescript linting on all files"
   },
   "dependencies": {
     "fast-deep-equal": "^3.1.3",

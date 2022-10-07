@@ -22,8 +22,8 @@ const PlayerImage = tw.img`
   absolute h-4 left-1
 `;
 
-const PlayerName = tw.p<{ $currentPlayer: boolean }>`
- ${({ $currentPlayer }): string =>
+const PlayerName = tw.p`
+ ${({ $currentPlayer }: { $currentPlayer: boolean }): string =>
    $currentPlayer ? 'font-bold' : 'font-medium'}
 
   text-2xl md:text-3xl

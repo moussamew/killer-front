@@ -6,8 +6,9 @@ const Content = tw.div`
   mt-1
 `;
 
-const StyledInput = tw.input<{ $uppercase?: boolean }>`
-  ${({ $uppercase }): string => ($uppercase ? 'uppercase' : 'normal-case')}
+const StyledInput = tw.input`
+  ${({ $uppercase }: { $uppercase?: boolean }): string =>
+    $uppercase ? 'uppercase' : 'normal-case'}
 
   p-1 text-3xl rounded-md
   border-solid border-2 border-light-blue-800
