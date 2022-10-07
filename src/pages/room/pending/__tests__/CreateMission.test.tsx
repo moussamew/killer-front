@@ -92,41 +92,4 @@ describe('<CreateMission />', () => {
       ),
     ).toBeInTheDocument();
   });
-
-  it('should let the user close error message if showed', async () => {
-    server.use(
-      rest.post(MISSION_ENDPOINT, async (_req, res, ctx) =>
-        res(
-          ctx.status(400),
-          ctx.json({
-            errorCode: 'MISSION.BAD_MISSION',
-            message: 'Name must be longer than or equal to 1 characters',
-          }),
-        ),
-      ),
-    );
-
-    const spyRefetchPlayerMission = vi.fn();
-
-    render(<CreateMission refetchPlayerMissions={spyRefetchPlayerMission} />);
-
-    fireEvent.change(
-      screen.getByPlaceholderText('Make him drink his glass dry'),
-      { target: { value: 'New mission' } },
-    );
-
-    fireEvent.click(screen.getByText('Add this mission in the room'));
-
-    await screen.findByText(
-      'Name must be longer than or equal to 1 characters',
-    );
-
-    fireEvent.click(screen.getByAltText('closeErrorMessage'));
-
-    expect(
-      screen.queryByText(
-        'An error has occured while creating a new room. Please retry later.',
-      ),
-    ).not.toBeInTheDocument();
-  });
 });
