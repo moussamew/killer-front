@@ -68,41 +68,4 @@ describe('<CreateRoomModal />', () => {
       ),
     ).toBeInTheDocument();
   });
-
-  it('should let the user close error message if showed', async () => {
-    server.use(
-      rest.post(PLAYER_ENDPOINT, async (_req, res, ctx) =>
-        res(
-          ctx.status(400),
-          ctx.json({
-            errorCode: 'PLAYER.ERROR',
-            message:
-              'Cannot create a room with your player name. Please use another name.',
-          }),
-        ),
-      ),
-    );
-
-    renderWithProviders(<CreateRoomModal />);
-
-    fireEvent.change(await screen.findByPlaceholderText('Choose a pseudo'), {
-      target: { value: 'Morpheus' },
-    });
-
-    fireEvent.click(screen.getByText('Create my room'));
-
-    expect(
-      await screen.findByText(
-        'Cannot create a room with your player name. Please use another name.',
-      ),
-    ).toBeInTheDocument();
-
-    fireEvent.click(screen.getByAltText('closeErrorMessage'));
-
-    expect(
-      screen.queryByText(
-        'Cannot create a room with your player name. Please use another name.',
-      ),
-    ).not.toBeInTheDocument();
-  });
 });

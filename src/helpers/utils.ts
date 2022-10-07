@@ -2,7 +2,9 @@ export function isEmptyObject<T extends object>(object: T): boolean {
   return Object.keys(object).length === 0;
 }
 
-export function isPromise(func: () => void | Promise<void>): boolean {
+export function isPromise(
+  func: () => void | Promise<void>,
+): func is () => Promise<void> {
   if (func.constructor.name === 'AsyncFunction') {
     return true;
   }

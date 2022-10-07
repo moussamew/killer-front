@@ -3,10 +3,8 @@ import tw from 'tailwind-styled-components';
 
 import Room from '@/assets/icons/room.svg';
 import { Button } from '@/components/Button';
-import { ErrorMessage } from '@/components/ErrorMessage';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
 
 import { createPlayer, createRoom } from './services/requests';
@@ -25,17 +23,13 @@ const Icon = tw.img`
 
 export const CreateRoomModal = (): JSX.Element | null => {
   const [inputPseudo, setInputPseudo] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   const { refreshPlayerSession } = useContext(PlayerContext);
-  const { closeModal } = useContext(ModalContext);
 
   const handleCreateRoom = async (): Promise<void> =>
     createPlayer({ name: inputPseudo })
       .then(createRoom)
-      .then(refreshPlayerSession)
-      .then(closeModal)
-      .catch((error) => setErrorMessage(error.message));
+      .then(refreshPlayerSession);
 
   return (
     <Fragment>
@@ -57,12 +51,6 @@ export const CreateRoomModal = (): JSX.Element | null => {
         disabled={!inputPseudo}
         onClick={handleCreateRoom}
       />
-      {errorMessage && (
-        <ErrorMessage
-          message={errorMessage}
-          closeMessage={() => setErrorMessage('')}
-        />
-      )}
     </Fragment>
   );
 };

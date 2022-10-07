@@ -2,7 +2,6 @@ import { Fragment, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/Button';
-import { ErrorMessage } from '@/components/ErrorMessage';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
 import { PlayerContext } from '@/hooks/context/player';
@@ -15,16 +14,13 @@ interface Props {
 
 export const CreatePlayer = ({ roomCode }: Props): JSX.Element => {
   const [pseudo, setPseudo] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   const { refreshPlayerSession } = useContext(PlayerContext);
 
   const navigate = useNavigate();
 
   const handleJoinRoom = async (): Promise<void> =>
-    createPlayer({ name: pseudo, roomCode })
-      .then(refreshPlayerSession)
-      .catch((error) => setErrorMessage(error.message));
+    createPlayer({ name: pseudo, roomCode }).then(refreshPlayerSession);
 
   return (
     <Fragment>
@@ -36,12 +32,7 @@ export const CreatePlayer = ({ roomCode }: Props): JSX.Element => {
         value={pseudo}
         onChange={({ target }) => setPseudo(target.value.toUpperCase())}
       />
-      {errorMessage && (
-        <ErrorMessage
-          message={errorMessage}
-          closeMessage={() => setErrorMessage('')}
-        />
-      )}
+
       <Button
         content={t('join_room.join_the_room', { roomCode })}
         onClick={handleJoinRoom}

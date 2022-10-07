@@ -8,6 +8,7 @@ import { HomePage } from '@/pages/home';
 import { JoinRoomPage } from '@/pages/joinRoom';
 import { NotFoundPage } from '@/pages/notFound';
 import { RoomPage } from '@/pages/room';
+import { EndedRoomPage } from '@/pages/room/ended';
 import { PendingRoomPage } from '@/pages/room/pending';
 import { PlayingRoomPage } from '@/pages/room/playing';
 
@@ -36,6 +37,14 @@ export const AppRoutes = (): JSX.Element => {
                   <TargetProvider>
                     <RoomPage page={<PlayingRoomPage />} />
                   </TargetProvider>
+                </RoomProvider>
+              }
+            />
+            <Route
+              path=":roomCode/ended"
+              element={
+                <RoomProvider>
+                  <RoomPage page={<EndedRoomPage />} />
                 </RoomProvider>
               }
             />
