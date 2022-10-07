@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { isPromise } from '@/helpers/utils';
+import { ModalContext } from '@/hooks/context/modal';
 
+import { ErrorMessage } from './ErrorMessage';
 import { Spinner } from './Spinner';
 
 const Content = tw.div`
@@ -49,16 +51,42 @@ export const Button = ({
   disabled = false,
   icon,
 }: Props): JSX.Element => {
+  const { modal, closeModal } = useContext(ModalContext);
+
   const [isLoading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const cleanModal = (): void => {
+    if (modal) {
+      closeModal();
+    }
+  };
+
+  const cleanErrorMessage = (): void => {
+    if (errorMessage) {
+      setErrorMessage(null);
+    }
+  };
 
   const handleClick = async (): Promise<void> => {
     if (isPromise(onClick)) {
       setLoading(true);
 
-      return (onClick() as Promise<void>).finally(() => setLoading(false));
+      return onClick()
+        .then(() => {
+          setLoading(false);
+          cleanErrorMessage();
+          cleanModal();
+        })
+        .catch((error) => {
+          setLoading(false);
+          setErrorMessage(error.message);
+        });
     }
 
-    return onClick();
+    onClick();
+
+    return cleanModal();
   };
 
   return (
@@ -73,6 +101,12 @@ export const Button = ({
         {isLoading && <Spinner />}
         <Text $textColor={textColor}>{content}</Text>
       </StyledButton>
+      {errorMessage && (
+        <ErrorMessage
+          message={errorMessage}
+          closeMessage={() => setErrorMessage(null)}
+        />
+      )}
     </Content>
   );
 };

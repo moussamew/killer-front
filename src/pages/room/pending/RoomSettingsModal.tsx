@@ -1,12 +1,10 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import { Button } from '@/components/Button';
-import { ErrorMessage } from '@/components/ErrorMessage';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
 
 import { deleteRoom } from './services/requests';
 
@@ -17,14 +15,8 @@ const Title = tw.h2`
 export const RoomSettingsModal = (): JSX.Element => {
   const { roomCode } = useParams();
   const [inputRoomCode, setInputRoomCode] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
-  const { closeModal } = useContext(ModalContext);
-
-  const handleDeleteRoom = async (): Promise<void> =>
-    deleteRoom(inputRoomCode)
-      .then(closeModal)
-      .catch((error) => setErrorMessage(error.message));
+  const handleDeleteRoom = async (): Promise<void> => deleteRoom(inputRoomCode);
 
   return (
     <div>
@@ -42,12 +34,6 @@ export const RoomSettingsModal = (): JSX.Element => {
         disabled={inputRoomCode !== roomCode}
         onClick={handleDeleteRoom}
       />
-      {errorMessage && (
-        <ErrorMessage
-          message={errorMessage}
-          closeMessage={() => setErrorMessage('')}
-        />
-      )}
     </div>
   );
 };
