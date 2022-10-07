@@ -23,6 +23,9 @@ jobs:
       - name: Install dependencies
         run: yarn
 
+      - name: Type checking
+        run: yarn tsc
+
       - name: Lint code
         run: yarn lint
 

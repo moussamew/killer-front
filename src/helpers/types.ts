@@ -1,8 +1,9 @@
 import { Method } from '@/constants/enums';
 
 export interface RequestParams {
-  method?: Method;
-  body?: BodyInit;
+  url: string;
+  method: Method;
+  requestInit?: RequestInit;
 }
 
 export interface RequestErrorParams {

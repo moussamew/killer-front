@@ -5,41 +5,59 @@ import {
   ROOM_MISSION_ENDPOINT,
 } from '@/constants/endpoints';
 import { Method, RoomStatus } from '@/constants/enums';
-import { fetchRequest, request } from '@/helpers/apis';
+import { request } from '@/helpers/apis';
 import { Mission, Player } from '@/types';
 
 const { GET, POST, DELETE, PATCH } = Method;
 
-export const getRoomPlayers = (roomCode: string): Promise<Player[]> =>
-  request(`${ROOM_ENDPOINT}/${roomCode}/players`, GET);
+export function getRoomPlayers(roomCode: string): Promise<Player[]> {
+  return request({ url: `${ROOM_ENDPOINT}/${roomCode}/players`, method: GET });
+}
 
-export const getRoomMissions = (): Promise<number> =>
-  request(ROOM_MISSION_ENDPOINT, GET);
+export function getRoomMissions(): Promise<number> {
+  return request({ url: ROOM_MISSION_ENDPOINT, method: GET });
+}
 
-export const getPlayerMissions = (): Promise<Mission[]> =>
-  request(PLAYER_MISSION_ENDPOINT, GET);
+export function getPlayerMissions(): Promise<Mission[]> {
+  return request({ url: PLAYER_MISSION_ENDPOINT, method: GET });
+}
 
-export const createMission = (content: string): Promise<void> =>
-  request(MISSION_ENDPOINT, POST, {
-    body: JSON.stringify({ content }),
+export function createMission(content: string): Promise<void> {
+  return request({
+    url: MISSION_ENDPOINT,
+    method: POST,
+    requestInit: {
+      body: JSON.stringify({ content }),
+    },
   });
+}
 
-export const deleteMission = async (missionId: number): Promise<void> => {
-  await fetchRequest(`${MISSION_ENDPOINT}/${missionId}`, DELETE);
-};
+export function deleteMission(missionId: number): Promise<void> {
+  return request({ url: `${MISSION_ENDPOINT}/${missionId}`, method: DELETE });
+}
 
-export const kickPlayerFromRoom = (
+export function kickPlayerFromRoom(
   roomCode: string,
   playerId: number,
-): Promise<void> =>
-  request(`${ROOM_ENDPOINT}/${roomCode}/player/${playerId}/admin`, PATCH, {
-    body: JSON.stringify({ roomCode: null }),
+): Promise<void> {
+  return request({
+    url: `${ROOM_ENDPOINT}/${roomCode}/player/${playerId}/admin`,
+    method: PATCH,
+    requestInit: {
+      body: JSON.stringify({ roomCode: null }),
+    },
   });
+}
 
-export const deleteRoom = (roomCode: string): Promise<void> =>
-  request(`${ROOM_ENDPOINT}/${roomCode}`, DELETE);
-
-export const startParty = async (roomCode: string): Promise<void> =>
-  request(`${ROOM_ENDPOINT}/${roomCode}`, PATCH, {
-    body: JSON.stringify({ status: RoomStatus.IN_GAME }),
+export function deleteRoom(roomCode: string): Promise<void> {
+  return request({ url: `${ROOM_ENDPOINT}/${roomCode}`, method: DELETE });
+}
+export function startParty(roomCode: string): Promise<void> {
+  return request({
+    url: `${ROOM_ENDPOINT}/${roomCode}`,
+    method: PATCH,
+    requestInit: {
+      body: JSON.stringify({ status: RoomStatus.IN_GAME }),
+    },
   });
+}
