@@ -3,11 +3,10 @@ import tw from 'tailwind-styled-components';
 
 import Edit from '@/assets/icons/edit.svg';
 import { Button } from '@/components/Button';
-import { ErrorMessage } from '@/components/ErrorMessage';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
 import { PlayerContext } from '@/hooks/context/player';
+import { RoomContext } from '@/hooks/context/room';
 
 import { updatePlayer } from './services/requests';
 
@@ -35,17 +34,15 @@ const Spacer = tw.hr`
 
 export const SettingsModal = (): JSX.Element => {
   const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
-  const { closeModal } = useContext(ModalContext);
+  const { refreshRoomPlayers } = useContext(RoomContext);
 
   const [isPseudoInputOpen, togglePseudoInput] = useState(true);
   const [pseudo, setPseudo] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   const updatePseudo = async (): Promise<void> =>
     updatePlayer({ name: pseudo })
       .then(refreshPlayerSession)
-      .then(closeModal)
-      .catch((error) => setErrorMessage(error.message));
+      .then(refreshRoomPlayers);
 
   return (
     <Fragment>
@@ -66,12 +63,6 @@ export const SettingsModal = (): JSX.Element => {
             placeholder={playerSession.name}
             uppercase
           />
-          {errorMessage && (
-            <ErrorMessage
-              message={errorMessage}
-              closeMessage={() => setErrorMessage('')}
-            />
-          )}
           <Button
             content={t('layout.save_changes')}
             onClick={updatePseudo}

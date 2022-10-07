@@ -3,7 +3,6 @@ import { QueryObserverResult } from 'react-query';
 
 import Add from '@/assets/icons/add.svg';
 import { Button } from '@/components/Button';
-import { ErrorMessage } from '@/components/ErrorMessage';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
 import { Mission } from '@/types';
@@ -18,16 +17,13 @@ export const CreateMission = ({
   refetchPlayerMissions,
 }: Props): JSX.Element => {
   const [newMission, setNewMission] = useState('');
-  const [errorMessage, setErrorMessage] = useState<string>();
 
   const addMission = async (): Promise<void> => {
     await createMission(newMission)
       .then(refetchPlayerMissions)
       .then(() => {
         setNewMission('');
-        setErrorMessage('');
-      })
-      .catch((error) => setErrorMessage(error.message));
+      });
   };
 
   return (
@@ -39,12 +35,6 @@ export const CreateMission = ({
         label={t('room.create_mission')}
         placeholder={t('room.mission_input')}
       />
-      {errorMessage && (
-        <ErrorMessage
-          message={errorMessage}
-          closeMessage={() => setErrorMessage('')}
-        />
-      )}
       <Button
         content={t('room.add_mission')}
         buttonColor="bg-red-400"
