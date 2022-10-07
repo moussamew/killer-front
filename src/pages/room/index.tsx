@@ -13,7 +13,14 @@ import { usePrevious } from '@/hooks/usePrevious';
 
 import { getRoom } from './services/requests';
 
-const { ROOM_IN_GAME, ROOM_DELETED, PLAYER_KILLED } = MercureEventType;
+const {
+  ROOM_IN_GAME,
+  ROOM_DELETED,
+  ROOM_UPDATED,
+  PLAYER_KILLED,
+  PLAYER_UPDATED,
+} = MercureEventType;
+const { PENDING, IN_GAME, ENDED } = RoomStatus;
 
 interface Props {
   page: JSX.Element;
@@ -32,18 +39,30 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
 
   const navigate = useNavigate();
 
-  const { data: room } = useQuery(location.pathname, () => getRoom(roomCode!));
+  const { data: room, refetch: refetchRoomStatus } = useQuery(
+    location.pathname,
+    () => getRoom(roomCode!),
+  );
 
   /**
    * Redirect player to the correct route related to the room status.
    */
   useEffect(() => {
-    if (room?.status === RoomStatus.PENDING) {
-      navigate(`/room/${roomCode}/pending`);
-    }
+    switch (room?.status) {
+      case PENDING:
+        navigate(`/room/${roomCode}/pending`);
+        break;
 
-    if (room?.status === RoomStatus.IN_GAME) {
-      navigate(`/room/${roomCode}/playing`);
+      case IN_GAME:
+        navigate(`/room/${roomCode}/playing`);
+        break;
+
+      case ENDED:
+        navigate(`/room/${roomCode}/ended`);
+        break;
+
+      default:
+        break;
     }
   }, [room, navigate, roomCode]);
 
@@ -80,26 +99,37 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
       withCredentials: PROD_ENV,
     });
 
-    roomEventSource.addEventListener(
-      'message',
-      (event): void | Promise<void> => {
-        const { type } = JSON.parse(event.data);
+    roomEventSource.addEventListener('message', (event) => {
+      const { type } = JSON.parse(event.data);
 
-        if (type === ROOM_IN_GAME) {
-          return navigate(`/room/${roomCode}/playing`);
-        }
+      switch (type) {
+        case ROOM_UPDATED:
+          refetchRoomStatus();
+          break;
 
-        if (type === ROOM_DELETED) {
-          return refreshPlayerSession();
-        }
+        case ROOM_DELETED:
+          refreshPlayerSession();
+          break;
 
-        if (type === PLAYER_KILLED) {
-          return refreshTargetInfos().then(refreshRoomPlayers);
-        }
+        case PLAYER_KILLED:
+          refreshTargetInfos().then(refreshRoomPlayers);
+          break;
 
-        return refreshRoomPlayers().then(refreshPlayerSession);
-      },
-    );
+        case PLAYER_UPDATED:
+          refreshRoomPlayers().then(refreshPlayerSession);
+          break;
+
+        /**
+         * Should be removed to use only ROOM_UPDATED event.
+         */
+        case ROOM_IN_GAME:
+          navigate(`/room/${roomCode}/playing`);
+          break;
+
+        default:
+          break;
+      }
+    });
 
     return () => roomEventSource.close();
   }, [
@@ -108,6 +138,7 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
     refreshTargetInfos,
     refreshRoomPlayers,
     refreshPlayerSession,
+    refetchRoomStatus,
   ]);
 
   return page;

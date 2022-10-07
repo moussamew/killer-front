@@ -60,6 +60,10 @@
     "player_killed_modal_text": "You will not be able to play this party anymore and be considered as dead!",
     "player_killed_confirmation": "Kill me :("
   },
+  "ended_room": {
+    "winner": "And the winner is.. {playerName}!",
+    "good_job": "Good job on this slaughter!"
+  },
   "layout": {
     "user_settings": "User Settings",
     "update_pseudo": "Update my pseudo",
