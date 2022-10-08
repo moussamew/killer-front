@@ -19,7 +19,7 @@ const Spacer = tw.hr`
   my-1 md:my-2
 `;
 
-export const PlayingRoomPage = (): JSX.Element => {
+export function PlayingRoomPage(): JSX.Element {
   const { targetInfos } = useContext(TargetContext);
 
   const isPlayerDead = isEmptyObject(targetInfos);
@@ -39,4 +39,4 @@ export const PlayingRoomPage = (): JSX.Element => {
       <PlayerList />
     </Layout>
   );
-};
+}

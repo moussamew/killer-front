@@ -42,7 +42,7 @@ interface Props {
   icon?: string;
 }
 
-export const Button = ({
+export function Button({
   content,
   buttonColor = 'bg-red-400',
   textColor = 'text-white',
@@ -50,7 +50,7 @@ export const Button = ({
   type = 'button',
   disabled = false,
   icon,
-}: Props): JSX.Element => {
+}: Props): JSX.Element {
   const { modal, closeModal } = useContext(ModalContext);
 
   const [isLoading, setLoading] = useState(false);
@@ -109,4 +109,4 @@ export const Button = ({
       )}
     </Content>
   );
-};
+}

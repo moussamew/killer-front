@@ -5,7 +5,7 @@ import Settings from '@/assets/icons/settings.svg';
 import t from '@/helpers/translate';
 import { isEmptyObject } from '@/helpers/utils';
 import { ModalContext } from '@/hooks/context/modal';
-import { PlayerContext } from '@/hooks/context/player';
+import { usePlayerSession } from '@/services/player/queries';
 
 import { SettingsModal } from './SettingsModal';
 
@@ -25,21 +25,21 @@ const Image = tw.img`
   ml-1
 `;
 
-const Header = (): JSX.Element => {
-  const { playerSession } = useContext(PlayerContext);
+function Header(): JSX.Element {
+  const { playerSession } = usePlayerSession();
   const { openModal } = useContext(ModalContext);
 
   return (
     <Navigation>
       <Text>{t('header.project_name')}</Text>
-      {!isEmptyObject(playerSession) && (
+      {playerSession && !isEmptyObject(playerSession) && (
         <PlayerInfos onClick={() => openModal(<SettingsModal />)}>
-          <Text>{playerSession.name}</Text>
+          <Text>{playerSession?.name}</Text>
           <Image alt="settings" src={Settings} />
         </PlayerInfos>
       )}
     </Navigation>
   );
-};
+}
 
 export default Header;

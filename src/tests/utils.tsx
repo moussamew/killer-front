@@ -3,7 +3,6 @@ import { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { ModalProvider } from '@/hooks/context/modal';
-import { PlayerProvider } from '@/hooks/context/player';
 
 const renderWithProviders = (
   component: ReactNode,
@@ -19,9 +18,7 @@ const renderWithProviders = (
 
   return render(
     <QueryClientProvider client={queryClient}>
-      <PlayerProvider>
-        <ModalProvider>{component}</ModalProvider>
-      </PlayerProvider>
+      <ModalProvider>{component}</ModalProvider>
     </QueryClientProvider>,
     options,
   );

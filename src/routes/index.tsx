@@ -12,7 +12,7 @@ import { EndedRoomPage } from '@/pages/room/ended';
 import { PendingRoomPage } from '@/pages/room/pending';
 import { PlayingRoomPage } from '@/pages/room/playing';
 
-export const AppRoutes = (): JSX.Element => {
+export function AppRoutes(): JSX.Element {
   return (
     <BrowserRouter>
       <WebViewDetector>
@@ -55,4 +55,4 @@ export const AppRoutes = (): JSX.Element => {
       </WebViewDetector>
     </BrowserRouter>
   );
-};
+}

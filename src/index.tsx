@@ -2,7 +2,6 @@ import { render } from 'react-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { ModalProvider } from '@/hooks/context/modal';
-import { PlayerProvider } from '@/hooks/context/player';
 import { AppRoutes } from '@/routes';
 
 import './assets/styles/app.css';
@@ -18,14 +17,14 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = (): JSX.Element => (
-  <QueryClientProvider client={queryClient}>
-    <ModalProvider>
-      <PlayerProvider>
+function App(): JSX.Element {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ModalProvider>
         <AppRoutes />
-      </PlayerProvider>
-    </ModalProvider>
-  </QueryClientProvider>
-);
+      </ModalProvider>
+    </QueryClientProvider>
+  );
+}
 
 render(<App />, NODE_APP);

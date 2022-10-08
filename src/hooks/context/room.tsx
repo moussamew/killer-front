@@ -9,8 +9,8 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 
 import { Loader } from '@/components/Loader';
-import { getRoomPlayers } from '@/pages/room/pending/services/requests';
-import { Player } from '@/types';
+import { Player } from '@/services/player/types';
+import { getRoomPlayers } from '@/services/room/requests';
 
 interface RoomContextInterface {
   roomPlayers: Player[];
@@ -23,7 +23,7 @@ interface Props {
 
 const RoomContext = createContext({} as RoomContextInterface);
 
-const RoomProvider = ({ children }: Props): JSX.Element => {
+function RoomProvider({ children }: Props): JSX.Element {
   const { roomCode } = useParams();
 
   const [roomPlayers, setRoomPlayers] = useState<Player[]>([]);
@@ -58,6 +58,6 @@ const RoomProvider = ({ children }: Props): JSX.Element => {
   return (
     <RoomContext.Provider value={memoizedRoom}>{children}</RoomContext.Provider>
   );
-};
+}
 
 export { RoomContext, RoomProvider };

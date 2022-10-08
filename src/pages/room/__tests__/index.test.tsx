@@ -10,12 +10,7 @@ import {
   ROOM_ENDPOINT,
   ROOM_TOPIC,
 } from '@/constants/endpoints';
-import {
-  MercureEventType,
-  PlayerRole,
-  PlayerStatus,
-  RoomStatus,
-} from '@/constants/enums';
+import { MercureEventType } from '@/constants/enums';
 import { RoomProvider } from '@/hooks/context/room';
 import { TargetProvider } from '@/hooks/context/target';
 import { HomePage } from '@/pages/home';
@@ -23,6 +18,8 @@ import { JoinRoomPage } from '@/pages/joinRoom';
 import { RoomPage } from '@/pages/room';
 import { PendingRoomPage } from '@/pages/room/pending';
 import { PlayingRoomPage } from '@/pages/room/playing';
+import { PlayerRole, PlayerStatus } from '@/services/player/constants';
+import { RoomStatus } from '@/services/room/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 

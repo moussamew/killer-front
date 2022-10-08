@@ -5,10 +5,9 @@ import { useParams } from 'react-router-dom';
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
 import t from '@/helpers/translate';
+import { getRoomMissions } from '@/services/room/requests';
 
-import { getRoomMissions } from './services/requests';
-
-export const RoomMissions = (): JSX.Element => {
+export function RoomMissions(): JSX.Element {
   const { roomCode } = useParams();
 
   const { data: roomMissions, refetch: refetchRoomMissions } = useQuery(
@@ -34,4 +33,4 @@ export const RoomMissions = (): JSX.Element => {
       <p>{t('room.missions_in_room', { missionsCount: roomMissions })}</p>
     </div>
   );
-};
+}

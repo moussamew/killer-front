@@ -8,10 +8,11 @@ import {
   PLAYER_TARGET_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
-import { PlayerRole, RoomStatus } from '@/constants/enums';
 import { RoomProvider } from '@/hooks/context/room';
 import { TargetProvider } from '@/hooks/context/target';
 import { RoomPage } from '@/pages/room';
+import { PlayerRole } from '@/services/player/constants';
+import { RoomStatus } from '@/services/room/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 

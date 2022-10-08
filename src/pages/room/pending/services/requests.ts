@@ -2,21 +2,13 @@ import {
   MISSION_ENDPOINT,
   PLAYER_MISSION_ENDPOINT,
   ROOM_ENDPOINT,
-  ROOM_MISSION_ENDPOINT,
 } from '@/constants/endpoints';
-import { Method, RoomStatus } from '@/constants/enums';
+import { Method } from '@/constants/enums';
 import { request } from '@/helpers/apis';
-import { Mission, Player } from '@/types';
+import { RoomStatus } from '@/services/room/constants';
+import { Mission } from '@/types';
 
 const { GET, POST, DELETE, PATCH } = Method;
-
-export function getRoomPlayers(roomCode: string): Promise<Player[]> {
-  return request({ url: `${ROOM_ENDPOINT}/${roomCode}/players`, method: GET });
-}
-
-export function getRoomMissions(): Promise<number> {
-  return request({ url: ROOM_MISSION_ENDPOINT, method: GET });
-}
 
 export function getPlayerMissions(): Promise<Mission[]> {
   return request({ url: PLAYER_MISSION_ENDPOINT, method: GET });

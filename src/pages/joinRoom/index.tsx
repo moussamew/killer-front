@@ -4,9 +4,9 @@ import tw from 'tailwind-styled-components';
 
 import Killerparty from '@/assets/images/killerparty.png';
 import { RoomError } from '@/constants/errors';
-import { PlayerContext } from '@/hooks/context/player';
 import { Layout } from '@/layout/Layout';
-import { updatePlayer } from '@/layout/services/requests';
+import { usePlayerSession } from '@/services/player/queries';
+import { updatePlayer } from '@/services/player/requests';
 
 import { CreatePlayer } from './CreatePlayer';
 import { LeaveCurrentRoom } from './LeaveCurrentRoom';
@@ -17,10 +17,11 @@ const WelcomeImage = tw.img`
 
 const { NOT_FOUND, BAD_ROOMCODE } = RoomError;
 
-export const JoinRoomPage = (): JSX.Element => {
+export function JoinRoomPage(): JSX.Element {
   const { roomCode } = useParams();
 
-  const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
+  /*  const { playerSession, refreshPlayerSession } = useContext(PlayerContext); */
+  const { playerSession } = usePlayerSession();
 
   const navigate = useNavigate();
 
@@ -43,7 +44,7 @@ export const JoinRoomPage = (): JSX.Element => {
      */
     if (playerSession?.name && !playerSession?.roomCode) {
       updatePlayer({ roomCode })
-        .then(refreshPlayerSession)
+        /* .then(refreshPlayerSession) */
         .then(() => navigate(`/room/${roomCode}`))
         .catch((error) => {
           if ([NOT_FOUND, BAD_ROOMCODE].includes(error.errorCode)) {
@@ -53,7 +54,7 @@ export const JoinRoomPage = (): JSX.Element => {
           }
         });
     }
-  }, [playerSession, roomCode, refreshPlayerSession, navigate]);
+  }, [playerSession, roomCode, navigate]);
 
   return (
     <Layout>
@@ -62,4 +63,4 @@ export const JoinRoomPage = (): JSX.Element => {
       {playerSession?.roomCode && <LeaveCurrentRoom />}
     </Layout>
   );
-};
+}

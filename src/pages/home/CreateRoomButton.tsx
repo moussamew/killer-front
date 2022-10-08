@@ -1,28 +1,25 @@
-import { Fragment, useContext, useState } from 'react';
+import { Fragment, useContext } from 'react';
 
 import { Button } from '@/components/Button';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
-import { PlayerContext } from '@/hooks/context/player';
+import { usePlayerSession } from '@/services/player/queries';
+import { useCreateRoom } from '@/services/room/mutations';
 
 import { CreateRoomModal } from './CreateRoomModal';
-import { createRoom } from './services/requests';
 
-export const CreateRoomButton = (): JSX.Element => {
-  const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
+export function CreateRoomButton(): JSX.Element {
+  const { playerSession } = usePlayerSession();
+  const { createRoomMutation } = useCreateRoom();
   const { openModal } = useContext(ModalContext);
 
-  const [roomErrorMessage, setRoomErrorMessage] = useState('');
-
-  const handleCreateRoom = async (): Promise<void> => {
-    if (!playerSession.name) {
+  const handleCreateRoom = (): void => {
+    if (!playerSession?.name) {
       return openModal(<CreateRoomModal />);
     }
 
-    return createRoom()
-      .then(refreshPlayerSession)
-      .catch(() => setRoomErrorMessage(t('home.create_room_error')));
+    return createRoomMutation.mutate();
   };
 
   return (
@@ -32,12 +29,12 @@ export const CreateRoomButton = (): JSX.Element => {
         buttonColor="bg-red-400"
         onClick={handleCreateRoom}
       />
-      {roomErrorMessage && (
+      {createRoomMutation.isError && (
         <ErrorMessage
-          message={roomErrorMessage}
-          closeMessage={() => setRoomErrorMessage('')}
+          message={t('home.create_room_error')}
+          closeMessage={() => createRoomMutation.reset()}
         />
       )}
     </Fragment>
   );
-};
+}

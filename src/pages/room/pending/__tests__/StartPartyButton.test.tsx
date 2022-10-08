@@ -4,10 +4,11 @@ import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_TOPIC } from '@/constants/endpoints';
-import { MercureEventType, PlayerRole } from '@/constants/enums';
+import { MercureEventType } from '@/constants/enums';
 import { RoomProvider } from '@/hooks/context/room';
 import { RoomPage } from '@/pages/room';
 import { PendingRoomPage } from '@/pages/room/pending';
+import { PlayerRole } from '@/services/player/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 

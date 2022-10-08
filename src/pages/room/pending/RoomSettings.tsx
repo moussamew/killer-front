@@ -3,10 +3,10 @@ import tw from 'tailwind-styled-components';
 
 import RoomSettingsImage from '@/assets/icons/roomSettings.svg';
 import KnifeImage from '@/assets/images/knife.png';
-import { PlayerRole } from '@/constants/enums';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
-import { PlayerContext } from '@/hooks/context/player';
+import { PlayerRole } from '@/services/player/constants';
+import { usePlayerSession } from '@/services/player/queries';
 
 import { RoomSettingsModal } from './RoomSettingsModal';
 
@@ -28,8 +28,8 @@ const SectionHeader = tw.div`
   relative
 `;
 
-export const RoomSettings = (): JSX.Element => {
-  const { playerSession } = useContext(PlayerContext);
+export function RoomSettings(): JSX.Element {
+  const { playerSession } = usePlayerSession();
   const { openModal } = useContext(ModalContext);
 
   return (
@@ -38,7 +38,7 @@ export const RoomSettings = (): JSX.Element => {
       <div>
         <SectionHeader>
           <h2>{t('room.players_list')}</h2>
-          {playerSession.role === PlayerRole.ADMIN && (
+          {playerSession?.role === PlayerRole.ADMIN && (
             <RoomSettingsIcon
               alt="roomSettings"
               src={RoomSettingsImage}
@@ -50,4 +50,4 @@ export const RoomSettings = (): JSX.Element => {
       </div>
     </Content>
   );
-};
+}

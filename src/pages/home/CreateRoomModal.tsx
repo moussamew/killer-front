@@ -1,13 +1,11 @@
-import { Fragment, useContext, useState } from 'react';
+import { Fragment, useState } from 'react';
 import tw from 'tailwind-styled-components';
 
 import Room from '@/assets/icons/room.svg';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
-import { PlayerContext } from '@/hooks/context/player';
-
-import { createPlayer, createRoom } from './services/requests';
+import { useCreatePlayer } from '@/services/player/mutations';
 
 const HeadContent = tw.div`
   flex flex-row items-center
@@ -21,15 +19,14 @@ const Icon = tw.img`
   h-3 md:h-4
 `;
 
-export const CreateRoomModal = (): JSX.Element | null => {
-  const [inputPseudo, setInputPseudo] = useState('');
+export function CreateRoomModal(): JSX.Element | null {
+  const [pseudo, setPseudo] = useState('');
 
-  const { refreshPlayerSession } = useContext(PlayerContext);
+  const { createPlayerMutation } = useCreatePlayer();
 
-  const handleCreateRoom = async (): Promise<void> =>
-    createPlayer({ name: inputPseudo })
-      .then(createRoom)
-      .then(refreshPlayerSession);
+  const handleCreateRoom = (): void => {
+    createPlayerMutation.mutate({ name: pseudo });
+  };
 
   return (
     <Fragment>
@@ -42,15 +39,15 @@ export const CreateRoomModal = (): JSX.Element | null => {
         type="text"
         label={t('common.create_pseudo_label')}
         placeholder={t('common.create_pseudo_placeholder')}
-        value={inputPseudo}
-        onChange={({ target }) => setInputPseudo(target.value.toUpperCase())}
+        value={pseudo}
+        onChange={({ target }) => setPseudo(target.value.toUpperCase())}
         uppercase
       />
       <Button
         content={t('home.create_room_modal_button')}
-        disabled={!inputPseudo}
+        disabled={!pseudo}
         onClick={handleCreateRoom}
       />
     </Fragment>
   );
-};
+}

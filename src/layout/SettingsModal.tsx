@@ -1,14 +1,12 @@
-import { Fragment, useContext, useState } from 'react';
+import { Fragment, useState } from 'react';
 import tw from 'tailwind-styled-components';
 
 import Edit from '@/assets/icons/edit.svg';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
-import { PlayerContext } from '@/hooks/context/player';
-import { RoomContext } from '@/hooks/context/room';
-
-import { updatePlayer } from './services/requests';
+import { useUpdatePlayer } from '@/services/player/mutations';
+import { usePlayerSession } from '@/services/player/queries';
 
 const HeadContent = tw.div`
   flex flex-row mb-2
@@ -32,44 +30,40 @@ const Spacer = tw.hr`
   my-1
 `;
 
-export const SettingsModal = (): JSX.Element => {
-  const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
-  const { refreshRoomPlayers } = useContext(RoomContext);
-
-  const [isPseudoInputOpen, togglePseudoInput] = useState(true);
+export function SettingsModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
 
-  const updatePseudo = async (): Promise<void> =>
-    updatePlayer({ name: pseudo })
-      .then(refreshPlayerSession)
-      .then(refreshRoomPlayers);
+  const { playerSession } = usePlayerSession();
+  const { updatePlayerMutation } = useUpdatePlayer();
+
+  const updatePlayerPseudo = (): void => {
+    updatePlayerMutation.mutate({ name: pseudo });
+  };
 
   return (
     <Fragment>
       <HeadContent>
         <Title>{t('layout.user_settings')}</Title>
       </HeadContent>
-      <Action onClick={() => togglePseudoInput(!isPseudoInputOpen)}>
+      <Action>
         <Text>{t('layout.update_pseudo')}</Text>
         <img alt="editPseudo" src={Edit} />
       </Action>
-      {isPseudoInputOpen && (
-        <Fragment>
-          <Spacer />
-          <Input
-            id="editPseudo"
-            value={pseudo}
-            onChange={(e) => setPseudo(e.target.value.toUpperCase())}
-            placeholder={playerSession.name}
-            uppercase
-          />
-          <Button
-            content={t('layout.save_changes')}
-            onClick={updatePseudo}
-            disabled={!pseudo}
-          />
-        </Fragment>
-      )}
+      <Fragment>
+        <Spacer />
+        <Input
+          id="editPseudo"
+          value={pseudo}
+          onChange={(e) => setPseudo(e.target.value.toUpperCase())}
+          placeholder={playerSession?.name}
+          uppercase
+        />
+        <Button
+          content={t('layout.save_changes')}
+          onClick={updatePlayerPseudo}
+          disabled={!pseudo}
+        />
+      </Fragment>
     </Fragment>
   );
-};
+}

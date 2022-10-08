@@ -4,8 +4,8 @@ import tw from 'tailwind-styled-components';
 
 import Killerparty from '@/assets/images/killerparty.png';
 import t from '@/helpers/translate';
-import { PlayerContext } from '@/hooks/context/player';
 import { Layout } from '@/layout/Layout';
+import { usePlayerSession } from '@/services/player/queries';
 
 import { CreateRoomButton } from './CreateRoomButton';
 import { JoinRoomButton } from './JoinRoomButton';
@@ -18,16 +18,16 @@ const Text = tw.p`
   my-2
 `;
 
-export const HomePage = (): JSX.Element => {
-  const { playerSession } = useContext(PlayerContext);
+export function HomePage(): JSX.Element {
+  const { playerSession } = usePlayerSession();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (playerSession.roomCode) {
+    if (playerSession?.roomCode) {
       navigate(`/room/${playerSession.roomCode}`);
     }
-  }, [navigate, playerSession.roomCode]);
+  }, [navigate, playerSession?.roomCode]);
 
   return (
     <Layout>
@@ -38,4 +38,4 @@ export const HomePage = (): JSX.Element => {
       <JoinRoomButton />
     </Layout>
   );
-};
+}

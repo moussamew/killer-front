@@ -5,11 +5,8 @@ import {
 } from '@/constants/endpoints';
 import { Method } from '@/constants/enums';
 import { request } from '@/helpers/apis';
-import { Mission, Player, Target, TargetInfos } from '@/types';
-
-export function getPlayerSession(): Promise<Player> {
-  return request({ url: PLAYER_SESSION_ENDPOINT, method: Method.GET });
-}
+import { Player } from '@/services/player/types';
+import { Mission, Target, TargetInfos } from '@/types';
 
 export function getTargetInfos(): Promise<Partial<TargetInfos>> {
   return Promise.all([

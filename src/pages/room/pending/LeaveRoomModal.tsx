@@ -1,10 +1,8 @@
-import { useContext } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { Button } from '@/components/Button';
 import t from '@/helpers/translate';
-import { PlayerContext } from '@/hooks/context/player';
-import { updatePlayer } from '@/layout/services/requests';
+import { useUpdatePlayer } from '@/services/player/mutations';
 
 const HeadContent = tw.div`
   flex flex-row mb-2
@@ -19,11 +17,12 @@ const TextContent = tw.div`
   mb-1
 `;
 
-export const LeaveRoomModal = (): JSX.Element => {
-  const { refreshPlayerSession } = useContext(PlayerContext);
+export function LeaveRoomModal(): JSX.Element {
+  const { updatePlayerMutation } = useUpdatePlayer();
 
-  const leaveRoom = async (): Promise<void> =>
-    updatePlayer({ roomCode: null }).then(refreshPlayerSession);
+  const leaveRoom = async (): Promise<void> => {
+    updatePlayerMutation.mutate({ roomCode: null });
+  };
 
   return (
     <div>
@@ -36,4 +35,4 @@ export const LeaveRoomModal = (): JSX.Element => {
       <Button content={t('room.leave_room_confirmation')} onClick={leaveRoom} />
     </div>
   );
-};
+}

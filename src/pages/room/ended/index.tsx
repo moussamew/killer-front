@@ -1,14 +1,13 @@
-import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Winner from '@/assets/images/winner.png';
 import { Button } from '@/components/Button';
-import { PlayerStatus } from '@/constants/enums';
 import t from '@/helpers/translate';
-import { PlayerContext } from '@/hooks/context/player';
-import { RoomContext } from '@/hooks/context/room';
 import { Layout } from '@/layout/Layout';
-import { updatePlayer } from '@/layout/services/requests';
+import { PlayerStatus } from '@/services/player/constants';
+import { useUpdatePlayer } from '@/services/player/mutations';
+import { useRoomPlayers } from '@/services/room/queries';
 
 const SectionTitle = tw.div`
   text-center 
@@ -18,16 +17,19 @@ const Image = tw.img`
   max-h-[80rem] m-auto
 `;
 
-export const EndedRoomPage = (): JSX.Element => {
-  const { roomPlayers } = useContext(RoomContext);
-  const { refreshPlayerSession } = useContext(PlayerContext);
+export function EndedRoomPage(): JSX.Element {
+  const { roomCode } = useParams();
 
-  const lastManStanding = roomPlayers.find(
+  const { roomPlayers } = useRoomPlayers(roomCode!);
+  const { updatePlayerMutation } = useUpdatePlayer();
+
+  const handleLeaveRoom = (): void => {
+    updatePlayerMutation.mutate({ roomCode: null });
+  };
+
+  const lastManStanding = roomPlayers?.find(
     ({ status }) => status === PlayerStatus.ALIVE,
   );
-
-  const leaveCurrentRoom = async (): Promise<void> =>
-    updatePlayer({ roomCode: null }).then(refreshPlayerSession);
 
   return (
     <Layout>
@@ -36,7 +38,7 @@ export const EndedRoomPage = (): JSX.Element => {
         <p>{t('ended_room.good_job')}</p>
       </SectionTitle>
       <Image alt="notFound" src={Winner} />
-      <Button content="Play another party!" onClick={leaveCurrentRoom} />
+      <Button content="Play another party!" onClick={handleLeaveRoom} />
     </Layout>
   );
-};
+}

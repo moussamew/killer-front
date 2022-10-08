@@ -4,12 +4,13 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
-import { MercureEventType, RoomStatus } from '@/constants/enums';
+import { MercureEventType } from '@/constants/enums';
 import { isEmptyObject } from '@/helpers/utils';
-import { PlayerContext } from '@/hooks/context/player';
-import { RoomContext } from '@/hooks/context/room';
 import { TargetContext } from '@/hooks/context/target';
 import { usePrevious } from '@/hooks/usePrevious';
+import { usePlayerSession } from '@/services/player/queries';
+import { RoomStatus } from '@/services/room/constants';
+import { useRoomPlayers } from '@/services/room/queries';
 
 import { getRoom } from './services/requests';
 
@@ -31,8 +32,8 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
 
   const location = useLocation();
 
-  const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
-  const { refreshRoomPlayers } = useContext(RoomContext);
+  const { playerSession, refetchPlayerSession } = usePlayerSession();
+  const { refetchRoomPlayers } = useRoomPlayers(roomCode!);
   const { refreshTargetInfos } = useContext(TargetContext);
 
   const previousRoomCode = usePrevious(playerSession?.roomCode);
@@ -76,7 +77,7 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
      * The player try to join the room when he is already inside another room.
      */
     if (
-      isEmptyObject(playerSession) ||
+      (playerSession && isEmptyObject(playerSession)) ||
       (!previousRoomCode && playerSession?.roomCode !== roomCode)
     ) {
       navigate(`/join/${roomCode}`);
@@ -85,7 +86,7 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
     /**
      * Redirect player to home page if its roomCode is removed.
      */
-    if (previousRoomCode && !playerSession.roomCode) {
+    if (previousRoomCode && !playerSession?.roomCode) {
       navigate('/');
     }
   }, [playerSession, previousRoomCode, roomCode, navigate]);
@@ -108,15 +109,15 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
           break;
 
         case ROOM_DELETED:
-          refreshPlayerSession();
+          refetchPlayerSession();
           break;
 
         case PLAYER_KILLED:
-          refreshTargetInfos().then(refreshRoomPlayers);
+          refreshTargetInfos().then(refetchRoomPlayers);
           break;
 
         case PLAYER_UPDATED:
-          refreshRoomPlayers().then(refreshPlayerSession);
+          refetchRoomPlayers();
           break;
 
         /**
@@ -136,9 +137,9 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
     roomCode,
     navigate,
     refreshTargetInfos,
-    refreshRoomPlayers,
-    refreshPlayerSession,
+    refetchPlayerSession,
     refetchRoomStatus,
+    refetchRoomPlayers,
   ]);
 
   return page;
