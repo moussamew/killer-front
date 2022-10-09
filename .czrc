@@ -2,7 +2,6 @@
   "path": "cz-emoji",
   "config": {
     "cz-emoji": {
-      "conventional": true,
       "skipQuestions": [
         "body",
         "breaking",

@@ -11,7 +11,8 @@
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",
     "prepare": "husky install",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "commit": "cz"
   },
   "scripts-info": {
     "start": "Start the application on development environment",
