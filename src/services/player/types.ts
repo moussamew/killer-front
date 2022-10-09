@@ -18,18 +18,8 @@ export interface PlayerSessionQuery {
 }
 
 export interface UpdatePlayerMutation {
-  updatePlayerMutation: UseMutationResult<
-    void,
-    unknown,
-    Partial<Player>,
-    unknown
-  >;
+  updatePlayer: UseMutationResult<void, unknown, Partial<Player>, unknown>;
 }
 export interface CreatePlayerMutation {
-  createPlayerMutation: UseMutationResult<
-    void,
-    unknown,
-    Partial<Player>,
-    unknown
-  >;
+  createPlayer: UseMutationResult<void, unknown, Partial<Player>, unknown>;
 }

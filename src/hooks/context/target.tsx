@@ -23,7 +23,7 @@ interface Props {
 
 const TargetContext = createContext({} as TargetContextInterface);
 
-const TargetProvider = ({ children }: Props): JSX.Element => {
+function TargetProvider({ children }: Props): JSX.Element {
   const [targetInfos, setTargetInfos] = useState<Partial<TargetInfos>>({});
 
   const {
@@ -65,6 +65,6 @@ const TargetProvider = ({ children }: Props): JSX.Element => {
       {children}
     </TargetContext.Provider>
   );
-};
+}
 
 export { TargetContext, TargetProvider };

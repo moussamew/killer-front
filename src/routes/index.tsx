@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { Loader } from '@/components/Loader';
-import { RoomProvider } from '@/hooks/context/room';
 import { TargetProvider } from '@/hooks/context/target';
 import { WebViewDetector } from '@/layout/WebViewDetector';
 import { HomePage } from '@/pages/home';
@@ -24,29 +23,19 @@ export function AppRoutes(): JSX.Element {
           <Route path="/room">
             <Route
               path=":roomCode/pending"
-              element={
-                <RoomProvider>
-                  <RoomPage page={<PendingRoomPage />} />
-                </RoomProvider>
-              }
+              element={<RoomPage page={<PendingRoomPage />} />}
             />
             <Route
               path=":roomCode/playing"
               element={
-                <RoomProvider>
-                  <TargetProvider>
-                    <RoomPage page={<PlayingRoomPage />} />
-                  </TargetProvider>
-                </RoomProvider>
+                <TargetProvider>
+                  <RoomPage page={<PlayingRoomPage />} />
+                </TargetProvider>
               }
             />
             <Route
               path=":roomCode/ended"
-              element={
-                <RoomProvider>
-                  <RoomPage page={<EndedRoomPage />} />
-                </RoomProvider>
-              }
+              element={<RoomPage page={<EndedRoomPage />} />}
             />
             <Route path=":roomCode" element={<RoomPage page={<Loader />} />} />
           </Route>

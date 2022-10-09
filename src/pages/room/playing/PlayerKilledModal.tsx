@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components';
 import { Button } from '@/components/Button';
 import t from '@/helpers/translate';
 import { PlayerStatus } from '@/services/player/constants';
-import { updatePlayer } from '@/services/player/requests';
+import { useUpdatePlayer } from '@/services/player/mutations';
 
 const HeadContent = tw.div`
   flex flex-row mb-2
@@ -20,8 +20,10 @@ const TextContent = tw.div`
 `;
 
 export function PlayerKilledModal(): JSX.Element {
-  const killPlayer = async (): Promise<void> => {
-    await updatePlayer({ status: PlayerStatus.KILLED });
+  const { updatePlayer } = useUpdatePlayer();
+
+  const handleKillPlayer = (): void => {
+    updatePlayer.mutate({ status: PlayerStatus.KILLED });
   };
 
   return (
@@ -34,7 +36,7 @@ export function PlayerKilledModal(): JSX.Element {
       </TextContent>
       <Button
         content={t('playing_room.player_killed_confirmation')}
-        onClick={killPlayer}
+        onClick={handleKillPlayer}
       />
     </Fragment>
   );

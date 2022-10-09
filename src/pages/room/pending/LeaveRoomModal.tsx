@@ -18,10 +18,10 @@ const TextContent = tw.div`
 `;
 
 export function LeaveRoomModal(): JSX.Element {
-  const { updatePlayerMutation } = useUpdatePlayer();
+  const { updatePlayer } = useUpdatePlayer();
 
   const leaveRoom = async (): Promise<void> => {
-    updatePlayerMutation.mutate({ roomCode: null });
+    updatePlayer.mutate({ roomCode: null });
   };
 
   return (

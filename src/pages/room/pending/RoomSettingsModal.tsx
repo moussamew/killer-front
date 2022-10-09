@@ -12,7 +12,7 @@ const Title = tw.h2`
   mb-0
 `;
 
-export const RoomSettingsModal = (): JSX.Element => {
+export function RoomSettingsModal(): JSX.Element {
   const { roomCode } = useParams();
   const [inputRoomCode, setInputRoomCode] = useState('');
 
@@ -36,4 +36,4 @@ export const RoomSettingsModal = (): JSX.Element => {
       />
     </div>
   );
-};
+}

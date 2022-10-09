@@ -5,7 +5,7 @@ import { Player } from '@/services/player/types';
 
 const { POST, GET } = Method;
 
-export async function createRoom(): Promise<void> {
+export async function createRoomRequest(): Promise<void> {
   await request({ url: ROOM_ENDPOINT, method: POST });
 }
 

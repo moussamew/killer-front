@@ -11,7 +11,7 @@ interface Props {
   roomCode: string;
 }
 
-export const ShareRoomLink = ({ roomCode }: Props): JSX.Element => {
+export function ShareRoomLink({ roomCode }: Props): JSX.Element {
   const [alertMessage, setAlertMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
@@ -66,4 +66,4 @@ export const ShareRoomLink = ({ roomCode }: Props): JSX.Element => {
       )}
     </Fragment>
   );
-};
+}

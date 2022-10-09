@@ -33,7 +33,7 @@ interface Props {
   children: JSX.Element;
 }
 
-export const WebViewDetector = ({ children }: Props): JSX.Element => {
+export function WebViewDetector({ children }: Props): JSX.Element {
   const [webViewApp, setWebViewApp] = useState<string | null>(null);
   const [linkSaved, setLinkSaved] = useState<string | null>(null);
   const [linkWithoutClipboard, setLinkWithoutClipboard] = useState<
@@ -101,4 +101,4 @@ export const WebViewDetector = ({ children }: Props): JSX.Element => {
       </Content>
     </Layout>
   );
-};
+}

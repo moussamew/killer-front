@@ -10,16 +10,16 @@ import { useCreateRoom } from '@/services/room/mutations';
 import { CreateRoomModal } from './CreateRoomModal';
 
 export function CreateRoomButton(): JSX.Element {
-  const { playerSession } = usePlayerSession();
-  const { createRoomMutation } = useCreateRoom();
   const { openModal } = useContext(ModalContext);
+  const { playerSession } = usePlayerSession();
+  const { createRoom } = useCreateRoom();
 
   const handleCreateRoom = (): void => {
     if (!playerSession?.name) {
       return openModal(<CreateRoomModal />);
     }
 
-    return createRoomMutation.mutate();
+    return createRoom.mutate();
   };
 
   return (
@@ -29,10 +29,10 @@ export function CreateRoomButton(): JSX.Element {
         buttonColor="bg-red-400"
         onClick={handleCreateRoom}
       />
-      {createRoomMutation.isError && (
+      {createRoom.isError && (
         <ErrorMessage
           message={t('home.create_room_error')}
-          closeMessage={() => createRoomMutation.reset()}
+          closeMessage={createRoom.reset}
         />
       )}
     </Fragment>

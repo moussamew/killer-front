@@ -20,13 +20,15 @@ interface Props {
   closeMessage: () => void;
 }
 
-export const ErrorMessage = ({ message, closeMessage }: Props): JSX.Element => (
-  <Message>
-    <CloseIcon
-      alt="closeErrorMessage"
-      src={CloseErrorMessage}
-      onClick={closeMessage}
-    />
-    {message}
-  </Message>
-);
+export function ErrorMessage({ message, closeMessage }: Props): JSX.Element {
+  return (
+    <Message>
+      <CloseIcon
+        alt="closeErrorMessage"
+        src={CloseErrorMessage}
+        onClick={closeMessage}
+      />
+      {message}
+    </Message>
+  );
+}

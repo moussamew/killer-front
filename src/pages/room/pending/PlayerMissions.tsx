@@ -40,7 +40,7 @@ interface Props {
   roomCode: string;
 }
 
-export const PlayerMissions = ({ roomCode }: Props): JSX.Element | null => {
+export function PlayerMissions({ roomCode }: Props): JSX.Element | null {
   const { data: playerMissions, refetch: refetchPlayerMissions } = useQuery(
     ['playerMissions', roomCode],
     () => getPlayerMissions(),
@@ -78,4 +78,4 @@ export const PlayerMissions = ({ roomCode }: Props): JSX.Element | null => {
       <CreateMission refetchPlayerMissions={refetchPlayerMissions} />
     </Container>
   );
-};
+}

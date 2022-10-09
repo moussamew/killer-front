@@ -11,7 +11,7 @@ export interface Room {
 }
 
 export interface CreateRoomMutation {
-  createRoomMutation: UseMutationResult<void, unknown, void, unknown>;
+  createRoom: UseMutationResult<void, unknown, void, unknown>;
 }
 
 export interface RoomPlayersQuery {

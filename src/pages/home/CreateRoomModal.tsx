@@ -22,10 +22,10 @@ const Icon = tw.img`
 export function CreateRoomModal(): JSX.Element | null {
   const [pseudo, setPseudo] = useState('');
 
-  const { createPlayerMutation } = useCreatePlayer();
+  const { createPlayer } = useCreatePlayer();
 
   const handleCreateRoom = (): void => {
-    createPlayerMutation.mutate({ name: pseudo });
+    createPlayer.mutate({ name: pseudo });
   };
 
   return (

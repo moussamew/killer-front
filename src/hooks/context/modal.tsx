@@ -23,7 +23,7 @@ interface Props {
 
 const ModalContext = createContext({} as ModalContextInterface);
 
-const ModalProvider = ({ children }: Props): JSX.Element => {
+function ModalProvider({ children }: Props): JSX.Element {
   const [modal, openModal] = useState<ReactNode>(null);
 
   const memoizedModalComponent = useMemo(
@@ -65,6 +65,6 @@ const ModalProvider = ({ children }: Props): JSX.Element => {
       {children}
     </ModalContext.Provider>
   );
-};
+}
 
 export { ModalContext, ModalProvider };

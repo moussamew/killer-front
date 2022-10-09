@@ -25,10 +25,7 @@ interface Props {
   playerId: number;
 }
 
-export const KickPlayerModal = ({
-  playerName,
-  playerId,
-}: Props): JSX.Element => {
+export function KickPlayerModal({ playerName, playerId }: Props): JSX.Element {
   const { roomCode } = useParams();
 
   const kickPlayer = async (): Promise<void> =>
@@ -48,4 +45,4 @@ export const KickPlayerModal = ({
       />
     </Fragment>
   );
-};
+}

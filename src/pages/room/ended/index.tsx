@@ -21,10 +21,10 @@ export function EndedRoomPage(): JSX.Element {
   const { roomCode } = useParams();
 
   const { roomPlayers } = useRoomPlayers(roomCode!);
-  const { updatePlayerMutation } = useUpdatePlayer();
+  const { updatePlayer } = useUpdatePlayer();
 
   const handleLeaveRoom = (): void => {
-    updatePlayerMutation.mutate({ roomCode: null });
+    updatePlayer.mutate({ roomCode: null });
   };
 
   const lastManStanding = roomPlayers?.find(

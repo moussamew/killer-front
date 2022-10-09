@@ -11,7 +11,7 @@ export function getPlayerSession(): Promise<Player> {
   return request({ url: PLAYER_SESSION_ENDPOINT, method: Method.GET });
 }
 
-export async function createPlayer({
+export async function createPlayerQuery({
   name,
   roomCode,
 }: Partial<Player>): Promise<void> {
@@ -22,7 +22,7 @@ export async function createPlayer({
   });
 }
 
-export async function updatePlayer(
+export async function updatePlayerQuery(
   playerInfos: Partial<Player>,
 ): Promise<void> {
   await request({

@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import tw from 'tailwind-styled-components';
 
 import Glasses from '@/assets/images/glasses.png';
@@ -38,24 +37,26 @@ interface Props {
   isPlayerDead: boolean;
 }
 
-export const Status = ({ isPlayerDead, targetInfos }: Props): JSX.Element => (
-  <Content>
-    <Image alt="party" src={Glasses} />
-    {isPlayerDead ? (
-      <Fragment>
-        <h2>{t('playing_room.player_killed')}</h2>
-        <Text>{t('playing_room.player_killed_resume')}</Text>
-      </Fragment>
-    ) : (
-      <Fragment>
-        <h2>{t('playing_room.target_section_title')}</h2>
-        <Target>
-          <Text>{t('playing_room.target_to_kill')}</Text>
-          <PlayerToKill>{targetInfos?.name}</PlayerToKill>
-        </Target>
-        <Text>{t('playing_room.mission_to_do')}</Text>
-        <Mission>{targetInfos?.mission}</Mission>
-      </Fragment>
-    )}
-  </Content>
-);
+export function Status({ isPlayerDead, targetInfos }: Props): JSX.Element {
+  return (
+    <Content>
+      <Image alt="party" src={Glasses} />
+      {isPlayerDead ? (
+        <div>
+          <h2>{t('playing_room.player_killed')}</h2>
+          <Text>{t('playing_room.player_killed_resume')}</Text>
+        </div>
+      ) : (
+        <div>
+          <h2>{t('playing_room.target_section_title')}</h2>
+          <Target>
+            <Text>{t('playing_room.target_to_kill')}</Text>
+            <PlayerToKill>{targetInfos?.name}</PlayerToKill>
+          </Target>
+          <Text>{t('playing_room.mission_to_do')}</Text>
+          <Mission>{targetInfos?.mission}</Mission>
+        </div>
+      )}
+    </Content>
+  );
+}

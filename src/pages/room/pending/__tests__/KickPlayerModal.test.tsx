@@ -7,7 +7,6 @@ import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { RoomProvider } from '@/hooks/context/room';
 import { RoomPage } from '@/pages/room';
 import { PlayerRole } from '@/services/player/constants';
 import { server } from '@/tests/server';
@@ -45,11 +44,7 @@ describe('<KickPlayerModal />', () => {
         <Routes>
           <Route
             path="/room/:roomCode"
-            element={
-              <RoomProvider>
-                <RoomPage page={<PendingRoomPage />} />
-              </RoomProvider>
-            }
+            element={<RoomPage page={<PendingRoomPage />} />}
           />
         </Routes>
       </MemoryRouter>,

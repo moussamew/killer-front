@@ -10,12 +10,12 @@ export function LeaveCurrentRoom(): JSX.Element {
   const { roomCode } = useParams();
 
   const { playerSession } = usePlayerSession();
-  const { updatePlayerMutation } = useUpdatePlayer();
+  const { updatePlayer } = useUpdatePlayer();
 
   const navigate = useNavigate();
 
   const handleJoinRoom = async (): Promise<void> => {
-    updatePlayerMutation.mutate({ roomCode });
+    updatePlayer.mutate({ roomCode });
   };
 
   return (

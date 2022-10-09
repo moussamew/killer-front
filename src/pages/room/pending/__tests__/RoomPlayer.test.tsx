@@ -3,7 +3,6 @@ import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { RoomProvider } from '@/hooks/context/room';
 import { RoomPage } from '@/pages/room';
 import { PendingRoomPage } from '@/pages/room/pending';
 import { PlayerList } from '@/pages/room/pending/PlayerList';
@@ -56,14 +55,7 @@ describe('<RoomPlayer />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL']}>
         <Routes>
-          <Route
-            path="/room/:roomCode"
-            element={
-              <RoomProvider>
-                <PlayerList />
-              </RoomProvider>
-            }
-          />
+          <Route path="/room/:roomCode" element={<PlayerList />} />
         </Routes>
       </MemoryRouter>,
     );
@@ -101,11 +93,7 @@ describe('<RoomPlayer />', () => {
         <Routes>
           <Route
             path="/room/:roomCode"
-            element={
-              <RoomProvider>
-                <RoomPage page={<PendingRoomPage />} />
-              </RoomProvider>
-            }
+            element={<RoomPage page={<PendingRoomPage />} />}
           />
         </Routes>
       </MemoryRouter>,

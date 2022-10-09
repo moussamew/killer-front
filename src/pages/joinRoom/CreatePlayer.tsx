@@ -12,7 +12,7 @@ interface Props {
 
 export function CreatePlayer({ roomCode }: Props): JSX.Element {
   const [pseudo, setPseudo] = useState('');
-  const { createPlayerMutation } = useCreatePlayer();
+  const { createPlayer } = useCreatePlayer();
   const navigate = useNavigate();
 
   const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
@@ -20,7 +20,7 @@ export function CreatePlayer({ roomCode }: Props): JSX.Element {
   };
 
   const handleJoinRoom = (): void => {
-    createPlayerMutation.mutate({ name: pseudo, roomCode });
+    createPlayer.mutate({ name: pseudo, roomCode });
   };
 
   const handleCreateRoom = (): void => {

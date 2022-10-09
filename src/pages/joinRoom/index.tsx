@@ -1,12 +1,11 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Killerparty from '@/assets/images/killerparty.png';
-import { RoomError } from '@/constants/errors';
 import { Layout } from '@/layout/Layout';
+import { useUpdatePlayer } from '@/services/player/mutations';
 import { usePlayerSession } from '@/services/player/queries';
-import { updatePlayer } from '@/services/player/requests';
 
 import { CreatePlayer } from './CreatePlayer';
 import { LeaveCurrentRoom } from './LeaveCurrentRoom';
@@ -15,13 +14,11 @@ const WelcomeImage = tw.img`
   m-auto
 `;
 
-const { NOT_FOUND, BAD_ROOMCODE } = RoomError;
-
 export function JoinRoomPage(): JSX.Element {
   const { roomCode } = useParams();
 
-  /*  const { playerSession, refreshPlayerSession } = useContext(PlayerContext); */
   const { playerSession } = usePlayerSession();
+  const { updatePlayer } = useUpdatePlayer();
 
   const navigate = useNavigate();
 
@@ -43,18 +40,21 @@ export function JoinRoomPage(): JSX.Element {
      * - The name of the room is incorrect.
      */
     if (playerSession?.name && !playerSession?.roomCode) {
-      updatePlayer({ roomCode })
-        /* .then(refreshPlayerSession) */
-        .then(() => navigate(`/room/${roomCode}`))
-        .catch((error) => {
-          if ([NOT_FOUND, BAD_ROOMCODE].includes(error.errorCode)) {
-            navigate(`/room/${roomCode}/error`, {
-              state: error.message,
-            });
-          }
-        });
+      updatePlayer.mutate(
+        { roomCode },
+        {
+          onSuccess: () => navigate(`/room/${roomCode}`),
+          onError: (error) => {
+            if (error instanceof Error) {
+              navigate(`/room/${roomCode}/error`, {
+                state: error.message,
+              });
+            }
+          },
+        },
+      );
     }
-  }, [playerSession, roomCode, navigate]);
+  }, [playerSession, updatePlayer, roomCode, navigate]);
 
   return (
     <Layout>

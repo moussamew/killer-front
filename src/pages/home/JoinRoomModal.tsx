@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { ChangeEvent, Fragment, useState } from 'react';
 import tw from 'tailwind-styled-components';
 
 import Room from '@/assets/icons/room.svg';
@@ -25,15 +25,23 @@ export function JoinRoomModal(): JSX.Element {
   const [roomCode, setRoomCode] = useState('');
 
   const { playerSession } = usePlayerSession();
-  const { updatePlayerMutation } = useUpdatePlayer();
-  const { createPlayerMutation } = useCreatePlayer();
+  const { createPlayer } = useCreatePlayer();
+  const { updatePlayer } = useUpdatePlayer();
+
+  const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
+    setPseudo(target.value.toUpperCase());
+  };
+
+  const handleRoomCode = ({ target }: ChangeEvent<HTMLInputElement>): void => {
+    setRoomCode(target.value.toUpperCase());
+  };
 
   const handleJoinRoom = (): void => {
     if (!playerSession?.name) {
-      return createPlayerMutation.mutate({ name: pseudo, roomCode });
+      return createPlayer.mutate({ name: pseudo, roomCode });
     }
 
-    return updatePlayerMutation.mutate({ roomCode });
+    return updatePlayer.mutate({ roomCode });
   };
 
   return (
@@ -49,7 +57,7 @@ export function JoinRoomModal(): JSX.Element {
           label={t('common.create_pseudo_label')}
           placeholder={t('common.create_pseudo_placeholder')}
           value={pseudo}
-          onChange={({ target }) => setPseudo(target.value.toUpperCase())}
+          onChange={handlePseudo}
           uppercase
         />
       )}
@@ -58,7 +66,7 @@ export function JoinRoomModal(): JSX.Element {
         label={t('home.room_code_label')}
         placeholder={t('home.room_code_placeholder')}
         value={roomCode}
-        onChange={({ target }) => setRoomCode(target.value.toUpperCase())}
+        onChange={handleRoomCode}
         uppercase
       />
       <Button

@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { ChangeEvent, Fragment, useState } from 'react';
 import tw from 'tailwind-styled-components';
 
 import Edit from '@/assets/icons/edit.svg';
@@ -32,12 +32,15 @@ const Spacer = tw.hr`
 
 export function SettingsModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
-
   const { playerSession } = usePlayerSession();
-  const { updatePlayerMutation } = useUpdatePlayer();
+  const { updatePlayer } = useUpdatePlayer();
+
+  const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
+    setPseudo(target.value.toUpperCase());
+  };
 
   const updatePlayerPseudo = (): void => {
-    updatePlayerMutation.mutate({ name: pseudo });
+    updatePlayer.mutate({ name: pseudo });
   };
 
   return (
@@ -54,7 +57,7 @@ export function SettingsModal(): JSX.Element {
         <Input
           id="editPseudo"
           value={pseudo}
-          onChange={(e) => setPseudo(e.target.value.toUpperCase())}
+          onChange={handlePseudo}
           placeholder={playerSession?.name}
           uppercase
         />

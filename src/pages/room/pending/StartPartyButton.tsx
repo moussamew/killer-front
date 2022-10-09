@@ -6,7 +6,7 @@ import t from '@/helpers/translate';
 
 import { startParty } from './services/requests';
 
-export const StartPartyButton = (): JSX.Element => {
+export function StartPartyButton(): JSX.Element {
   const { roomCode } = useParams();
 
   const handleStartParty = async (): Promise<void> => startParty(roomCode!);
@@ -20,4 +20,4 @@ export const StartPartyButton = (): JSX.Element => {
       icon={Party}
     />
   );
-};
+}

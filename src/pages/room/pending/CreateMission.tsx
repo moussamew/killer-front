@@ -13,9 +13,7 @@ interface Props {
   refetchPlayerMissions: () => Promise<QueryObserverResult<Mission[], unknown>>;
 }
 
-export const CreateMission = ({
-  refetchPlayerMissions,
-}: Props): JSX.Element => {
+export function CreateMission({ refetchPlayerMissions }: Props): JSX.Element {
   const [newMission, setNewMission] = useState('');
 
   const addMission = async (): Promise<void> => {
@@ -44,4 +42,4 @@ export const CreateMission = ({
       />
     </Fragment>
   );
-};
+}
