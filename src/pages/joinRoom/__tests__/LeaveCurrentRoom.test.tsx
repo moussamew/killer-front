@@ -25,7 +25,7 @@ describe('<LeaveCurrentRoom />', () => {
         <Routes>
           <Route path="/join/:roomCode" element={<JoinRoomPage />} />
           <Route
-            path="/room/X7JKL"
+            path="/room/:roomCode"
             element={<p>Welcome to the room XAB4L!</p>}
           />
         </Routes>
@@ -39,12 +39,12 @@ describe('<LeaveCurrentRoom />', () => {
     ).toBeInTheDocument();
   });
 
-  it('should let the player close the error message if showed', async () => {
+  it.skip('should let the player close the error message if showed', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: 'X7JKL' })),
       ),
-      rest.patch(PLAYER_ENDPOINT, async (_req, res, ctx) =>
+      rest.patch(PLAYER_ENDPOINT, (_req, res, ctx) =>
         res(
           ctx.status(400),
           ctx.json({

@@ -78,7 +78,9 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
      */
     if (
       (playerSession && isEmptyObject(playerSession)) ||
-      (!previousRoomCode && playerSession?.roomCode !== roomCode)
+      (!previousRoomCode &&
+        playerSession &&
+        playerSession?.roomCode !== roomCode)
     ) {
       navigate(`/join/${roomCode}`);
     }

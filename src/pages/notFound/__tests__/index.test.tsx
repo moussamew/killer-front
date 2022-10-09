@@ -6,6 +6,7 @@ import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
+import { RoomError } from '@/constants/errors';
 import { HomePage } from '@/pages/home';
 import { JoinRoomPage } from '@/pages/joinRoom';
 import { server } from '@/tests/server';
@@ -39,11 +40,11 @@ describe('<NotFoundPage />', () => {
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: null })),
       ),
-      rest.patch(PLAYER_ENDPOINT, async (_req, res, ctx) =>
+      rest.patch(PLAYER_ENDPOINT, (_req, res, ctx) =>
         res(
           ctx.status(400),
           ctx.json({
-            errorCode: 'ROOM.BAD_ROOMCODE',
+            errorCode: RoomError.BAD_ROOMCODE,
             message:
               'The roomCode need to be provided with a correct format (5 characters).',
           }),
@@ -54,8 +55,8 @@ describe('<NotFoundPage />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/join/X7JK']}>
         <Routes>
-          <Route path="/join/X7JK" element={<JoinRoomPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/join/:roomCode" element={<JoinRoomPage />} />
+          <Route path="/room/:roomCode/error" element={<NotFoundPage />} />
         </Routes>
       </MemoryRouter>,
     );

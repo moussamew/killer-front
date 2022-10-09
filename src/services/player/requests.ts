@@ -7,8 +7,10 @@ import { request } from '@/helpers/apis';
 
 import { Player } from './types';
 
-export function getPlayerSession(): Promise<Player> {
-  return request({ url: PLAYER_SESSION_ENDPOINT, method: Method.GET });
+const { GET, POST, PATCH } = Method;
+
+export function getPlayerSessionRequest(): Promise<Player> {
+  return request({ url: PLAYER_SESSION_ENDPOINT, method: GET });
 }
 
 export async function createPlayerQuery({
@@ -17,7 +19,7 @@ export async function createPlayerQuery({
 }: Partial<Player>): Promise<void> {
   await request({
     url: PLAYER_ENDPOINT,
-    method: Method.POST,
+    method: POST,
     requestInit: { body: JSON.stringify({ name, roomCode }) },
   });
 }
@@ -27,7 +29,7 @@ export async function updatePlayerQuery(
 ): Promise<void> {
   await request({
     url: PLAYER_ENDPOINT,
-    method: Method.PATCH,
+    method: PATCH,
     requestInit: { body: JSON.stringify(playerInfos) },
   });
 }

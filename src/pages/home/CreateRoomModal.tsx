@@ -1,10 +1,11 @@
-import { Fragment, useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import tw from 'tailwind-styled-components';
 
 import Room from '@/assets/icons/room.svg';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
+import { ModalContext } from '@/hooks/context/modal';
 import { useCreatePlayer } from '@/services/player/mutations';
 
 const HeadContent = tw.div`
@@ -21,15 +22,18 @@ const Icon = tw.img`
 
 export function CreateRoomModal(): JSX.Element | null {
   const [pseudo, setPseudo] = useState('');
-
   const { createPlayer } = useCreatePlayer();
+
+  const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
+    setPseudo(target.value);
+  };
 
   const handleCreateRoom = (): void => {
     createPlayer.mutate({ name: pseudo });
   };
 
   return (
-    <Fragment>
+    <div>
       <HeadContent>
         <Icon alt="roomIcon" src={Room} />
         <Title>{t('home.create_room')}</Title>
@@ -40,7 +44,7 @@ export function CreateRoomModal(): JSX.Element | null {
         label={t('common.create_pseudo_label')}
         placeholder={t('common.create_pseudo_placeholder')}
         value={pseudo}
-        onChange={({ target }) => setPseudo(target.value.toUpperCase())}
+        onChange={handlePseudo}
         uppercase
       />
       <Button
@@ -48,6 +52,6 @@ export function CreateRoomModal(): JSX.Element | null {
         disabled={!pseudo}
         onClick={handleCreateRoom}
       />
-    </Fragment>
+    </div>
   );
 }

@@ -16,9 +16,10 @@ const WelcomeImage = tw.img`
 
 export function JoinRoomPage(): JSX.Element {
   const { roomCode } = useParams();
-
   const { playerSession } = usePlayerSession();
-  const { updatePlayer } = useUpdatePlayer();
+  const {
+    updatePlayer: { mutate: updatePlayerMutate },
+  } = useUpdatePlayer();
 
   const navigate = useNavigate();
 
@@ -40,7 +41,7 @@ export function JoinRoomPage(): JSX.Element {
      * - The name of the room is incorrect.
      */
     if (playerSession?.name && !playerSession?.roomCode) {
-      updatePlayer.mutate(
+      updatePlayerMutate(
         { roomCode },
         {
           onSuccess: () => navigate(`/room/${roomCode}`),
@@ -54,7 +55,7 @@ export function JoinRoomPage(): JSX.Element {
         },
       );
     }
-  }, [playerSession, updatePlayer, roomCode, navigate]);
+  }, [playerSession, updatePlayerMutate, roomCode, navigate]);
 
   return (
     <Layout>

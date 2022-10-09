@@ -23,7 +23,7 @@ describe('<SettingsModal />', () => {
 
     renderWithProviders(<SettingsModal />);
 
-    await screen.findByText('User Settings');
+    await screen.findByPlaceholderText('Neo');
 
     fireEvent.change(screen.getByPlaceholderText('Neo'), {
       target: { value: 'Trinity' },

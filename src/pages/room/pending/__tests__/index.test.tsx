@@ -27,10 +27,7 @@ describe('<PendingRoomPage />', () => {
       </MemoryRouter>,
     );
 
-    expect(
-      await screen.findByText('The code to join this room is P9LDG.'),
-    ).toBeInTheDocument();
-    expect(screen.getByText('Start the party')).toBeInTheDocument();
+    expect(await screen.findByText('Start the party')).toBeInTheDocument();
   });
 
   it('should not show the Start party button if the player is not an admin', async () => {
