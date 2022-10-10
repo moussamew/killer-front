@@ -40,7 +40,7 @@ interface Props {
   roomCode: string;
 }
 
-export function PlayerMissions({ roomCode }: Props): JSX.Element | null {
+export function PlayerMissions({ roomCode }: Props): JSX.Element {
   const { data: playerMissions, refetch: refetchPlayerMissions } = useQuery(
     ['playerMissions', roomCode],
     () => getPlayerMissions(),

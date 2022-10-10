@@ -1,10 +1,11 @@
-import { Fragment, useContext } from 'react';
+import { Fragment } from 'react';
 import tw from 'tailwind-styled-components';
 
-import { isEmptyObject } from '@/helpers/utils';
-import { TargetContext } from '@/hooks/context/target';
 import { Layout } from '@/layout/Layout';
 import { PlayerList } from '@/pages/room/pending/PlayerList';
+import { useTargetInfos } from '@/services/mission/queries';
+import { PlayerStatus } from '@/services/player/constants';
+import { usePlayerSession } from '@/services/player/queries';
 
 import { PlayerKilledButton } from './PlayerKilledButton';
 import { Status } from './Status';
@@ -20,9 +21,10 @@ const Spacer = tw.hr`
 `;
 
 export function PlayingRoomPage(): JSX.Element {
-  const { targetInfos } = useContext(TargetContext);
+  const { targetInfos } = useTargetInfos();
+  const { playerSession } = usePlayerSession();
 
-  const isPlayerDead = isEmptyObject(targetInfos);
+  const isPlayerDead = playerSession?.status === PlayerStatus.KILLED;
 
   return (
     <Layout>

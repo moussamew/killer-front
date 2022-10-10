@@ -23,3 +23,12 @@ export interface UpdatePlayerMutation {
 export interface CreatePlayerMutation {
   createPlayer: UseMutationResult<void, unknown, Partial<Player>, unknown>;
 }
+
+export interface KickPlayerMutation {
+  kickPlayer: UseMutationResult<
+    void,
+    unknown,
+    Pick<Player, 'id' | 'roomCode'>,
+    unknown
+  >;
+}

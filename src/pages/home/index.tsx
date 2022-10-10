@@ -20,7 +20,6 @@ const Text = tw.p`
 
 export function HomePage(): JSX.Element {
   const { playerSession } = usePlayerSession();
-
   const navigate = useNavigate();
 
   useEffect(() => {

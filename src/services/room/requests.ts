@@ -11,10 +11,10 @@ export async function createRoomRequest(): Promise<Room> {
   return request({ url: ROOM_ENDPOINT, method: POST });
 }
 
-export function getRoomPlayers(roomCode: string): Promise<Player[]> {
+export function getRoomPlayersRequest(roomCode: string): Promise<Player[]> {
   return request({ url: `${ROOM_ENDPOINT}/${roomCode}/players`, method: GET });
 }
 
-export function getRoomMissions(): Promise<number> {
+export function getRoomMissionsRequest(): Promise<number> {
   return request({ url: ROOM_MISSION_ENDPOINT, method: GET });
 }

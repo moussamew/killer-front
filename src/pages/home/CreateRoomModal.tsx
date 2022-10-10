@@ -1,11 +1,10 @@
-import { ChangeEvent, useContext, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import tw from 'tailwind-styled-components';
 
 import Room from '@/assets/icons/room.svg';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
 import { useCreatePlayer } from '@/services/player/mutations';
 
 const HeadContent = tw.div`
@@ -20,7 +19,7 @@ const Icon = tw.img`
   h-3 md:h-4
 `;
 
-export function CreateRoomModal(): JSX.Element | null {
+export function CreateRoomModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
   const { createPlayer } = useCreatePlayer();
 

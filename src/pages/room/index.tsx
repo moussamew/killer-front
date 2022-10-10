@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
@@ -6,8 +6,8 @@ import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
 import { MercureEventType } from '@/constants/enums';
 import { isEmptyObject } from '@/helpers/utils';
-import { TargetContext } from '@/hooks/context/target';
 import { usePrevious } from '@/hooks/usePrevious';
+import { useTargetInfos } from '@/services/mission/queries';
 import { usePlayerSession } from '@/services/player/queries';
 import { RoomStatus } from '@/services/room/constants';
 import { useRoomPlayers } from '@/services/room/queries';
@@ -28,13 +28,11 @@ interface Props {
 }
 
 export const RoomPage = ({ page }: Props): JSX.Element => {
-  const { roomCode } = useParams();
-
   const location = useLocation();
-
+  const { roomCode } = useParams();
   const { playerSession, refetchPlayerSession } = usePlayerSession();
   const { refetchRoomPlayers } = useRoomPlayers(roomCode!);
-  const { refreshTargetInfos } = useContext(TargetContext);
+  const { refetchTargetInfos } = useTargetInfos();
 
   const previousRoomCode = usePrevious(playerSession?.roomCode);
 
@@ -78,9 +76,7 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
      */
     if (
       (playerSession && isEmptyObject(playerSession)) ||
-      (!previousRoomCode &&
-        playerSession &&
-        playerSession?.roomCode !== roomCode)
+      (!previousRoomCode && playerSession?.roomCode !== roomCode)
     ) {
       navigate(`/join/${roomCode}`);
     }
@@ -115,7 +111,7 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
           break;
 
         case PLAYER_KILLED:
-          refreshTargetInfos().then(refetchRoomPlayers);
+          refetchTargetInfos().then(refetchRoomPlayers);
           break;
 
         case PLAYER_UPDATED:
@@ -138,7 +134,7 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
   }, [
     roomCode,
     navigate,
-    refreshTargetInfos,
+    refetchTargetInfos,
     refetchPlayerSession,
     refetchRoomStatus,
     refetchRoomPlayers,

@@ -2,7 +2,7 @@ import tw from 'tailwind-styled-components';
 
 import Glasses from '@/assets/images/glasses.png';
 import t from '@/helpers/translate';
-import { TargetInfos } from '@/types';
+import { TargetInfos } from '@/services/mission/types';
 
 const Content = tw.section`
   flex flex-col items-center
@@ -33,7 +33,7 @@ const Mission = tw(PlayerToKill)`
 `;
 
 interface Props {
-  targetInfos: Partial<TargetInfos>;
+  targetInfos: Partial<TargetInfos> | undefined;
   isPlayerDead: boolean;
 }
 

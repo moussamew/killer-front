@@ -5,7 +5,7 @@ import Add from '@/assets/icons/add.svg';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
-import { Mission } from '@/types';
+import { Mission } from '@/services/mission/types';
 
 import { createMission } from './services/requests';
 

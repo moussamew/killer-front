@@ -8,7 +8,6 @@ import { usePlayerSession } from '@/services/player/queries';
 
 export function LeaveCurrentRoom(): JSX.Element {
   const { roomCode } = useParams();
-
   const { playerSession } = usePlayerSession();
   const { updatePlayer } = useUpdatePlayer();
 

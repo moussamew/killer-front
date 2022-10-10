@@ -23,7 +23,6 @@ const Icon = tw.img`
 export function JoinRoomModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
   const [roomCode, setRoomCode] = useState('');
-
   const { playerSession } = usePlayerSession();
   const { createPlayer } = useCreatePlayer();
   const { updatePlayer } = useUpdatePlayer();

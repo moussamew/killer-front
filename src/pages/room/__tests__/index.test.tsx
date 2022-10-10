@@ -11,7 +11,6 @@ import {
   ROOM_TOPIC,
 } from '@/constants/endpoints';
 import { MercureEventType } from '@/constants/enums';
-import { TargetProvider } from '@/hooks/context/target';
 import { HomePage } from '@/pages/home';
 import { JoinRoomPage } from '@/pages/joinRoom';
 import { RoomPage } from '@/pages/room';
@@ -92,11 +91,7 @@ describe('<RoomPage />', () => {
         <Routes>
           <Route
             path="/room/:roomCode/playing"
-            element={
-              <TargetProvider>
-                <RoomPage page={<PlayingRoomPage />} />
-              </TargetProvider>
-            }
+            element={<RoomPage page={<PlayingRoomPage />} />}
           />
           <Route path="/room/:roomCode" element={<RoomPage page={<div />} />} />
         </Routes>
@@ -260,11 +255,7 @@ describe('<RoomPage />', () => {
         <Routes>
           <Route
             path="/room/:roomCode/playing"
-            element={
-              <TargetProvider>
-                <RoomPage page={<PlayingRoomPage />} />
-              </TargetProvider>
-            }
+            element={<RoomPage page={<PlayingRoomPage />} />}
           />
           <Route
             path="/room/:roomCode/pending"
@@ -396,11 +387,7 @@ describe('<RoomPage />', () => {
         <Routes>
           <Route
             path="/room/:roomCode/playing"
-            element={
-              <TargetProvider>
-                <RoomPage page={<PlayingRoomPage />} />
-              </TargetProvider>
-            }
+            element={<RoomPage page={<PlayingRoomPage />} />}
           />
         </Routes>
       </MemoryRouter>,

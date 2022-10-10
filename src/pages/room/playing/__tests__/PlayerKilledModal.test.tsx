@@ -12,7 +12,6 @@ import {
   PLAYER_TARGET_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
-import { TargetProvider } from '@/hooks/context/target';
 import { RoomPage } from '@/pages/room';
 import { PlayingRoomPage } from '@/pages/room/playing';
 import { PlayerRole } from '@/services/player/constants';
@@ -50,11 +49,7 @@ describe('<PlayerKilledModal />', () => {
         <Routes>
           <Route
             path="/room/:roomCode/playing"
-            element={
-              <TargetProvider>
-                <RoomPage page={<PlayingRoomPage />} />
-              </TargetProvider>
-            }
+            element={<RoomPage page={<PlayingRoomPage />} />}
           />
         </Routes>
       </MemoryRouter>,

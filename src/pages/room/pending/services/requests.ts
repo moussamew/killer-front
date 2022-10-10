@@ -5,8 +5,8 @@ import {
 } from '@/constants/endpoints';
 import { Method } from '@/constants/enums';
 import { request } from '@/helpers/apis';
+import { Mission } from '@/services/mission/types';
 import { RoomStatus } from '@/services/room/constants';
-import { Mission } from '@/types';
 
 const { GET, POST, DELETE, PATCH } = Method;
 
@@ -26,19 +26,6 @@ export function createMission(content: string): Promise<void> {
 
 export function deleteMission(missionId: number): Promise<void> {
   return request({ url: `${MISSION_ENDPOINT}/${missionId}`, method: DELETE });
-}
-
-export function kickPlayerFromRoom(
-  roomCode: string,
-  playerId: number,
-): Promise<void> {
-  return request({
-    url: `${ROOM_ENDPOINT}/${roomCode}/player/${playerId}/admin`,
-    method: PATCH,
-    requestInit: {
-      body: JSON.stringify({ roomCode: null }),
-    },
-  });
 }
 
 export function deleteRoom(roomCode: string): Promise<void> {

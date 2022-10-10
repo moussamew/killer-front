@@ -4,8 +4,7 @@ import tw from 'tailwind-styled-components';
 
 import { Button } from '@/components/Button';
 import t from '@/helpers/translate';
-
-import { kickPlayerFromRoom } from './services/requests';
+import { useKickPlayer } from '@/services/player/mutations';
 
 const HeadContent = tw.div`
   flex flex-row mb-2
@@ -27,9 +26,11 @@ interface Props {
 
 export function KickPlayerModal({ playerName, playerId }: Props): JSX.Element {
   const { roomCode } = useParams();
+  const { kickPlayer } = useKickPlayer();
 
-  const kickPlayer = async (): Promise<void> =>
-    kickPlayerFromRoom(roomCode!, playerId);
+  const handleKickPlayer = (): void => {
+    kickPlayer.mutate({ id: playerId, roomCode: roomCode! });
+  };
 
   return (
     <Fragment>
@@ -41,7 +42,7 @@ export function KickPlayerModal({ playerName, playerId }: Props): JSX.Element {
       </TextContent>
       <Button
         content={t('room.kick_room_confirmation', { playerName })}
-        onClick={kickPlayer}
+        onClick={handleKickPlayer}
       />
     </Fragment>
   );

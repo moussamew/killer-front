@@ -19,7 +19,6 @@ const Image = tw.img`
 
 export function EndedRoomPage(): JSX.Element {
   const { roomCode } = useParams();
-
   const { roomPlayers } = useRoomPlayers(roomCode!);
   const { updatePlayer } = useUpdatePlayer();
 
