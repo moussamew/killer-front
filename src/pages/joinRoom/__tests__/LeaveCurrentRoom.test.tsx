@@ -6,10 +6,10 @@ import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
+import { JoinRoomPage } from '@/pages/joinRoom';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-import { JoinRoomPage } from '..';
 import { LeaveCurrentRoom } from '../LeaveCurrentRoom';
 
 describe('<LeaveCurrentRoom />', () => {

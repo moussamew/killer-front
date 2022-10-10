@@ -1,16 +1,12 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { MemoryRouter } from 'react-router-dom';
 
 import { PLAYER_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
+import { HomePage } from '@/pages/home';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-import { HomePage } from '..';
 import { CreateRoomModal } from '../CreateRoomModal';
 
 describe('<CreateRoomModal />', () => {

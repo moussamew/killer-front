@@ -52,11 +52,8 @@ describe('<RoomPage />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/P9LDG']}>
         <Routes>
-          <Route
-            path="/room/:roomCode/pending"
-            element={<RoomPage page={<PendingRoomPage />} />}
-          />
-          <Route path="/room/:roomCode" element={<RoomPage page={<div />} />} />
+          <Route path="/room/:roomCode/pending" element={<PendingRoomPage />} />
+          <Route path="/room/:roomCode" element={<RoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
@@ -89,11 +86,8 @@ describe('<RoomPage />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/P9LDG']}>
         <Routes>
-          <Route
-            path="/room/:roomCode/playing"
-            element={<RoomPage page={<PlayingRoomPage />} />}
-          />
-          <Route path="/room/:roomCode" element={<RoomPage page={<div />} />} />
+          <Route path="/room/:roomCode/playing" element={<PlayingRoomPage />} />
+          <Route path="/room/:roomCode" element={<RoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
@@ -106,7 +100,7 @@ describe('<RoomPage />', () => {
       <MemoryRouter initialEntries={['/room/P9LDG']}>
         <Routes>
           <Route path="/join/:roomCode" element={<JoinRoomPage />} />
-          <Route path="/room/:roomCode" element={<RoomPage page={<div />} />} />
+          <Route path="/room/:roomCode" element={<RoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
@@ -129,10 +123,7 @@ describe('<RoomPage />', () => {
       <MemoryRouter initialEntries={['/room/P9LDG']}>
         <Routes>
           <Route path="/join/:roomCode" element={<JoinRoomPage />} />
-          <Route
-            path="/room/:roomCode"
-            element={<RoomPage page={<PendingRoomPage />} />}
-          />
+          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
@@ -183,10 +174,7 @@ describe('<RoomPage />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL']}>
         <Routes>
-          <Route
-            path="/room/:roomCode"
-            element={<RoomPage page={<PendingRoomPage />} />}
-          />
+          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
@@ -253,14 +241,8 @@ describe('<RoomPage />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL/pending']}>
         <Routes>
-          <Route
-            path="/room/:roomCode/playing"
-            element={<RoomPage page={<PlayingRoomPage />} />}
-          />
-          <Route
-            path="/room/:roomCode/pending"
-            element={<RoomPage page={<PendingRoomPage />} />}
-          />
+          <Route path="/room/:roomCode/playing" element={<PlayingRoomPage />} />
+          <Route path="/room/:roomCode/pending" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
@@ -304,10 +286,7 @@ describe('<RoomPage />', () => {
       <MemoryRouter initialEntries={['/room/X7JKL/pending']}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route
-            path="/room/:roomCode/pending"
-            element={<RoomPage page={<PendingRoomPage />} />}
-          />
+          <Route path="/room/:roomCode/pending" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
@@ -385,10 +364,7 @@ describe('<RoomPage />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL/playing']}>
         <Routes>
-          <Route
-            path="/room/:roomCode/playing"
-            element={<RoomPage page={<PlayingRoomPage />} />}
-          />
+          <Route path="/room/:roomCode/playing" element={<PlayingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );

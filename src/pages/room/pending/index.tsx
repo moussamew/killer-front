@@ -4,6 +4,7 @@ import tw from 'tailwind-styled-components';
 import Island from '@/assets/images/island.png';
 import t from '@/helpers/translate';
 import { Layout } from '@/layout/Layout';
+import { RoomPage } from '@/pages/room';
 import { PlayerRole } from '@/services/player/constants';
 import { usePlayerSession } from '@/services/player/queries';
 
@@ -39,22 +40,24 @@ export function PendingRoomPage(): JSX.Element {
   const { playerSession } = usePlayerSession();
 
   return (
-    <Layout>
-      <Content>
-        <WelcomeImage alt="welcome" src={Island} />
-        <RoomResume>
-          <h1>{t('room.welcome')}</h1>
-          <p>{t('room.join_room_code', { roomCode })}</p>
-          <RoomMissions />
-          <ShareRoomLink roomCode={roomCode!} />
-          {playerSession?.role === PlayerRole.ADMIN && <StartPartyButton />}
-        </RoomResume>
-      </Content>
-      <hr />
-      <RoomFeatures>
-        <PlayerMissions roomCode={roomCode!} />
-        <PlayerList />
-      </RoomFeatures>
-    </Layout>
+    <RoomPage>
+      <Layout>
+        <Content>
+          <WelcomeImage alt="welcome" src={Island} />
+          <RoomResume>
+            <h1>{t('room.welcome')}</h1>
+            <p>{t('room.join_room_code', { roomCode })}</p>
+            <RoomMissions />
+            <ShareRoomLink roomCode={roomCode!} />
+            {playerSession?.role === PlayerRole.ADMIN && <StartPartyButton />}
+          </RoomResume>
+        </Content>
+        <hr />
+        <RoomFeatures>
+          <PlayerMissions roomCode={roomCode!} />
+          <PlayerList />
+        </RoomFeatures>
+      </Layout>
+    </RoomPage>
   );
 }

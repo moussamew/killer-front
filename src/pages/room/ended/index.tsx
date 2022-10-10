@@ -5,6 +5,7 @@ import Winner from '@/assets/images/winner.png';
 import { Button } from '@/components/Button';
 import t from '@/helpers/translate';
 import { Layout } from '@/layout/Layout';
+import { RoomPage } from '@/pages/room';
 import { PlayerStatus } from '@/services/player/constants';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useRoomPlayers } from '@/services/room/queries';
@@ -31,13 +32,17 @@ export function EndedRoomPage(): JSX.Element {
   );
 
   return (
-    <Layout>
-      <SectionTitle>
-        <h1>{t('ended_room.winner', { playerName: lastManStanding?.name })}</h1>
-        <p>{t('ended_room.good_job')}</p>
-      </SectionTitle>
-      <Image alt="notFound" src={Winner} />
-      <Button content="Play another party!" onClick={handleLeaveRoom} />
-    </Layout>
+    <RoomPage>
+      <Layout>
+        <SectionTitle>
+          <h1>
+            {t('ended_room.winner', { playerName: lastManStanding?.name })}
+          </h1>
+          <p>{t('ended_room.good_job')}</p>
+        </SectionTitle>
+        <Image alt="notFound" src={Winner} />
+        <Button content="Play another party!" onClick={handleLeaveRoom} />
+      </Layout>
+    </RoomPage>
   );
 }

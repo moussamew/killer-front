@@ -9,10 +9,9 @@ import {
 import { RoomError } from '@/constants/errors';
 import { HomePage } from '@/pages/home';
 import { JoinRoomPage } from '@/pages/joinRoom';
+import { NotFoundPage } from '@/pages/notFound';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
-
-import { NotFoundPage } from '..';
 
 describe('<NotFoundPage />', () => {
   it('should redirect the player to home page when the button is clicked', async () => {

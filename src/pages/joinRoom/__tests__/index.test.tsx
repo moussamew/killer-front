@@ -3,10 +3,9 @@ import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
+import { JoinRoomPage } from '@/pages/joinRoom';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
-
-import { JoinRoomPage } from '..';
 
 describe('<JoinRoomPage />', () => {
   it('should let the user join automatically the room if the roomCode saved in his session is the same', async () => {

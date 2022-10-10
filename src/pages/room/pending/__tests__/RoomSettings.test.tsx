@@ -28,10 +28,7 @@ describe('<RoomSettings />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7VBD']}>
         <Routes>
-          <Route
-            path="/room/:roomCode"
-            element={<RoomPage page={<PendingRoomPage />} />}
-          />
+          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
@@ -60,10 +57,7 @@ describe('<RoomSettings />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7VBD']}>
         <Routes>
-          <Route
-            path="/room/:roomCode"
-            element={<RoomPage page={<PendingRoomPage />} />}
-          />
+          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );

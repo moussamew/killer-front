@@ -5,7 +5,6 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_TOPIC } from '@/constants/endpoints';
 import { MercureEventType } from '@/constants/enums';
-import { RoomPage } from '@/pages/room';
 import { PendingRoomPage } from '@/pages/room/pending';
 import { PlayerRole } from '@/services/player/constants';
 import { server } from '@/tests/server';
@@ -31,10 +30,7 @@ describe('<StartPartyButton />', () => {
       <MemoryRouter initialEntries={['/room/P9LDG']}>
         <Routes>
           <Route path="/room/P9LDG/playing" element={<p>Party started!</p>} />
-          <Route
-            path="/room/:roomCode"
-            element={<RoomPage page={<PendingRoomPage />} />}
-          />
+          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );

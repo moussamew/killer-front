@@ -7,36 +7,28 @@ import { ROOM_TOPIC } from '@/constants/endpoints';
 import { MercureEventType } from '@/constants/enums';
 import { isEmptyObject } from '@/helpers/utils';
 import { usePrevious } from '@/hooks/usePrevious';
-import { useTargetInfos } from '@/services/mission/queries';
 import { usePlayerSession } from '@/services/player/queries';
 import { RoomStatus } from '@/services/room/constants';
 import { useRoomPlayers } from '@/services/room/queries';
 
 import { getRoom } from './services/requests';
 
-const {
-  ROOM_IN_GAME,
-  ROOM_DELETED,
-  ROOM_UPDATED,
-  PLAYER_KILLED,
-  PLAYER_UPDATED,
-} = MercureEventType;
+const { ROOM_IN_GAME, ROOM_DELETED, ROOM_UPDATED, PLAYER_UPDATED } =
+  MercureEventType;
 const { PENDING, IN_GAME, ENDED } = RoomStatus;
 
 interface Props {
-  page: JSX.Element;
+  children?: JSX.Element;
 }
 
-export const RoomPage = ({ page }: Props): JSX.Element => {
+export function RoomPage({ children }: Props): JSX.Element | null {
   const location = useLocation();
+  const navigate = useNavigate();
   const { roomCode } = useParams();
   const { playerSession, refetchPlayerSession } = usePlayerSession();
   const { refetchRoomPlayers } = useRoomPlayers(roomCode!);
-  const { refetchTargetInfos } = useTargetInfos();
 
   const previousRoomCode = usePrevious(playerSession?.roomCode);
-
-  const navigate = useNavigate();
 
   const { data: room, refetch: refetchRoomStatus } = useQuery(
     location.pathname,
@@ -106,23 +98,22 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
           refetchRoomStatus();
           break;
 
-        case ROOM_DELETED:
-          refetchPlayerSession();
-          break;
-
-        case PLAYER_KILLED:
-          refetchTargetInfos().then(refetchRoomPlayers);
-          break;
-
         case PLAYER_UPDATED:
           refetchRoomPlayers();
           break;
 
         /**
-         * Should be removed to use only ROOM_UPDATED event.
+         * Should be removed to use the `ROOM_UPDATED` event.
          */
         case ROOM_IN_GAME:
           navigate(`/room/${roomCode}/playing`);
+          break;
+
+        /**
+         * Should be removed to use the `ROOM_UPDATED` event.
+         */
+        case ROOM_DELETED:
+          refetchPlayerSession();
           break;
 
         default:
@@ -134,11 +125,10 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
   }, [
     roomCode,
     navigate,
-    refetchTargetInfos,
     refetchPlayerSession,
     refetchRoomStatus,
     refetchRoomPlayers,
   ]);
 
-  return page;
-};
+  return children || null;
+}

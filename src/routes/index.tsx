@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { Loader } from '@/components/Loader';
 import { WebViewDetector } from '@/layout/WebViewDetector';
 import { HomePage } from '@/pages/home';
 import { JoinRoomPage } from '@/pages/joinRoom';
@@ -20,19 +19,10 @@ export function AppRoutes(): JSX.Element {
             <Route path=":roomCode" element={<JoinRoomPage />} />
           </Route>
           <Route path="/room">
-            <Route
-              path=":roomCode/pending"
-              element={<RoomPage page={<PendingRoomPage />} />}
-            />
-            <Route
-              path=":roomCode/playing"
-              element={<RoomPage page={<PlayingRoomPage />} />}
-            />
-            <Route
-              path=":roomCode/ended"
-              element={<RoomPage page={<EndedRoomPage />} />}
-            />
-            <Route path=":roomCode" element={<RoomPage page={<Loader />} />} />
+            <Route path=":roomCode/pending" element={<PendingRoomPage />} />
+            <Route path=":roomCode/playing" element={<PlayingRoomPage />} />
+            <Route path=":roomCode/ended" element={<EndedRoomPage />} />
+            <Route path=":roomCode" element={<RoomPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

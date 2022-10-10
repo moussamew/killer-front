@@ -8,13 +8,11 @@ import {
   PLAYER_TARGET_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
+import { PlayingRoomPage } from '@/pages/room/playing';
 import { PlayerRole } from '@/services/player/constants';
 import { RoomStatus } from '@/services/room/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
-
-import { PlayingRoomPage } from '..';
-import { RoomPage } from '../..';
 
 describe('<PlayingRoomPage />', () => {
   it('should render playing room page with current target if the player is not dead', async () => {
@@ -44,10 +42,7 @@ describe('<PlayingRoomPage />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL/playing']}>
         <Routes>
-          <Route
-            path="/room/:roomCode/playing"
-            element={<RoomPage page={<PlayingRoomPage />} />}
-          />
+          <Route path="/room/:roomCode/playing" element={<PlayingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
@@ -89,10 +84,7 @@ describe('<PlayingRoomPage />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL/playing']}>
         <Routes>
-          <Route
-            path="/room/:roomCode/playing"
-            element={<RoomPage page={<PlayingRoomPage />} />}
-          />
+          <Route path="/room/:roomCode/playing" element={<PlayingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );

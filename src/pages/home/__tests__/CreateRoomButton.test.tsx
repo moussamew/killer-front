@@ -2,15 +2,13 @@ import { fireEvent, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-import { Loader } from '@/components/Loader';
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
+import { HomePage } from '@/pages/home';
 import { RoomPage } from '@/pages/room';
 import { PendingRoomPage } from '@/pages/room/pending';
 import { RoomStatus } from '@/services/room/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
-
-import { HomePage } from '..';
 
 describe('<CreateRoomButton />', () => {
   it('should redirect to create room modal for a player without session', async () => {
@@ -39,14 +37,8 @@ describe('<CreateRoomButton />', () => {
       <MemoryRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route
-            path="/room/:roomCode"
-            element={<RoomPage page={<Loader />} />}
-          />
-          <Route
-            path="/room/:roomCode/pending"
-            element={<RoomPage page={<PendingRoomPage />} />}
-          />
+          <Route path="/room/:roomCode" element={<RoomPage />} />
+          <Route path="/room/:roomCode/pending" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );

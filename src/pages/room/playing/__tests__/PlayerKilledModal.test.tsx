@@ -12,7 +12,6 @@ import {
   PLAYER_TARGET_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
-import { RoomPage } from '@/pages/room';
 import { PlayingRoomPage } from '@/pages/room/playing';
 import { PlayerRole } from '@/services/player/constants';
 import { RoomStatus } from '@/services/room/constants';
@@ -47,10 +46,7 @@ describe('<PlayerKilledModal />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL/playing']}>
         <Routes>
-          <Route
-            path="/room/:roomCode/playing"
-            element={<RoomPage page={<PlayingRoomPage />} />}
-          />
+          <Route path="/room/:roomCode/playing" element={<PlayingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
