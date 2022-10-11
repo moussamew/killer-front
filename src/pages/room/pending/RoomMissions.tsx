@@ -1,19 +1,14 @@
 import { useEffect } from 'react';
-import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
 import t from '@/helpers/translate';
-import { getRoomMissionsRequest } from '@/services/room/requests';
+import { useRoomMissions } from '@/services/room/queries';
 
 export function RoomMissions(): JSX.Element {
   const { roomCode } = useParams();
-
-  const { data: roomMissions, refetch: refetchRoomMissions } = useQuery(
-    'roomMissions',
-    () => getRoomMissionsRequest(),
-  );
+  const { roomMissions, refetchRoomMissions } = useRoomMissions();
 
   useEffect(() => {
     const missionsEventSource = new EventSource(
@@ -21,9 +16,7 @@ export function RoomMissions(): JSX.Element {
       { withCredentials: PROD_ENV },
     );
 
-    missionsEventSource.addEventListener('message', async (): Promise<void> => {
-      await refetchRoomMissions();
-    });
+    missionsEventSource.addEventListener('message', refetchRoomMissions);
 
     return () => missionsEventSource.close();
   }, [roomCode, refetchRoomMissions]);

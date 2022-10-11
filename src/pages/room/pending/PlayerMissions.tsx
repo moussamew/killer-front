@@ -1,12 +1,12 @@
-import { useQuery } from 'react-query';
 import tw from 'tailwind-styled-components';
 
 import Delete from '@/assets/icons/delete.svg';
 import Idea from '@/assets/images/idea.png';
 import t from '@/helpers/translate';
+import { useDeleteMission } from '@/services/mission/mutations';
+import { usePlayerMissions } from '@/services/mission/queries';
 
 import { CreateMission } from './CreateMission';
-import { deleteMission, getPlayerMissions } from './services/requests';
 
 const Container = tw.div`
   xl:w-1/2
@@ -41,14 +41,11 @@ interface Props {
 }
 
 export function PlayerMissions({ roomCode }: Props): JSX.Element {
-  const { data: playerMissions, refetch: refetchPlayerMissions } = useQuery(
-    ['playerMissions', roomCode],
-    () => getPlayerMissions(),
-  );
+  const { playerMissions } = usePlayerMissions(roomCode!);
+  const { deleteMission } = useDeleteMission();
 
-  const removeMission = async (missionId: number): Promise<void> => {
-    await deleteMission(missionId);
-    await refetchPlayerMissions();
+  const handleDeleteMission = (missionId: number) => (): void => {
+    deleteMission.mutate(missionId);
   };
 
   return (
@@ -69,13 +66,13 @@ export function PlayerMissions({ roomCode }: Props): JSX.Element {
               <DeleteMission
                 alt="deleteMission"
                 src={Delete}
-                onClick={() => removeMission(id)}
+                onClick={handleDeleteMission(id)}
               />
             </MissionCard>
           ))}
         </Missions>
       )}
-      <CreateMission refetchPlayerMissions={refetchPlayerMissions} />
+      <CreateMission />
     </Container>
   );
 }

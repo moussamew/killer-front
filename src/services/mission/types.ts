@@ -1,4 +1,4 @@
-import { QueryObserverResult } from 'react-query';
+import { QueryObserverResult, UseMutationResult } from 'react-query';
 
 export interface Mission {
   id: number;
@@ -20,4 +20,17 @@ export interface TargetInfosQuery {
   refetchTargetInfos(): Promise<
     QueryObserverResult<Partial<TargetInfos>, unknown>
   >;
+}
+
+export interface PlayerMissionsQuery {
+  playerMissions: Mission[] | undefined;
+  refetchPlayerMissions(): Promise<QueryObserverResult<Mission[], unknown>>;
+}
+
+export interface CreateMissionMutation {
+  createMission: UseMutationResult<void, unknown, string, unknown>;
+}
+
+export interface DeleteMissionMutation {
+  deleteMission: UseMutationResult<void, unknown, number, unknown>;
 }

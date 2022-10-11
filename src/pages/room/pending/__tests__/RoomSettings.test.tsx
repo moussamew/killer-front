@@ -3,7 +3,6 @@ import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
-import { RoomPage } from '@/pages/room';
 import { PendingRoomPage } from '@/pages/room/pending';
 import { PlayerRole } from '@/services/player/constants';
 import { server } from '@/tests/server';

@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useQuery } from 'react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { PROD_ENV } from '@/constants/app';
@@ -9,9 +8,7 @@ import { isEmptyObject } from '@/helpers/utils';
 import { usePrevious } from '@/hooks/usePrevious';
 import { usePlayerSession } from '@/services/player/queries';
 import { RoomStatus } from '@/services/room/constants';
-import { useRoomPlayers } from '@/services/room/queries';
-
-import { getRoom } from './services/requests';
+import { useRoomInfos, useRoomPlayers } from '@/services/room/queries';
 
 const { ROOM_IN_GAME, ROOM_DELETED, ROOM_UPDATED, PLAYER_UPDATED } =
   MercureEventType;
@@ -26,20 +23,18 @@ export function RoomPage({ children }: Props): JSX.Element | null {
   const navigate = useNavigate();
   const { roomCode } = useParams();
   const { playerSession, refetchPlayerSession } = usePlayerSession();
-  const { refetchRoomPlayers } = useRoomPlayers(roomCode!);
-
   const previousRoomCode = usePrevious(playerSession?.roomCode);
-
-  const { data: room, refetch: refetchRoomStatus } = useQuery(
-    location.pathname,
-    () => getRoom(roomCode!),
-  );
+  const { refetchRoomPlayers } = useRoomPlayers(roomCode!);
+  const { roomInfos, refetchRoomInfos } = useRoomInfos({
+    roomCode: roomCode!,
+    pathname: location.pathname,
+  });
 
   /**
    * Redirect player to the correct route related to the room status.
    */
   useEffect(() => {
-    switch (room?.status) {
+    switch (roomInfos?.status) {
       case PENDING:
         navigate(`/room/${roomCode}/pending`);
         break;
@@ -55,7 +50,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
       default:
         break;
     }
-  }, [room, navigate, roomCode]);
+  }, [roomInfos, navigate, roomCode]);
 
   /**
    * Redirect player to the correct route by checking its session.
@@ -95,7 +90,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
 
       switch (type) {
         case ROOM_UPDATED:
-          refetchRoomStatus();
+          refetchRoomInfos();
           break;
 
         case PLAYER_UPDATED:
@@ -126,7 +121,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
     roomCode,
     navigate,
     refetchPlayerSession,
-    refetchRoomStatus,
+    refetchRoomInfos,
     refetchRoomPlayers,
   ]);
 

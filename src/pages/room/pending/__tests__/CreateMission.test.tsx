@@ -5,7 +5,6 @@ import {
   waitForElementToBeRemoved,
 } from '@testing-library/react';
 import { rest } from 'msw';
-import { vi } from 'vitest';
 
 import { MISSION_ENDPOINT } from '@/constants/endpoints';
 import { CreateMission } from '@/pages/room/pending/CreateMission';
@@ -13,9 +12,7 @@ import { server } from '@/tests/server';
 
 describe('<CreateMission />', () => {
   it('should add a new mission', async () => {
-    const spyRefetchPlayerMission = vi.fn();
-
-    render(<CreateMission refetchPlayerMissions={spyRefetchPlayerMission} />);
+    render(<CreateMission />);
 
     fireEvent.change(
       screen.getByPlaceholderText('Make him drink his glass dry'),
@@ -27,8 +24,6 @@ describe('<CreateMission />', () => {
     await waitForElementToBeRemoved(() =>
       screen.queryByDisplayValue('New mission'),
     );
-
-    expect(spyRefetchPlayerMission).toHaveBeenCalledTimes(1);
   });
 
   it('should show error message when adding a new mission has failed', async () => {
@@ -44,9 +39,7 @@ describe('<CreateMission />', () => {
       ),
     );
 
-    const spyRefetchPlayerMission = vi.fn();
-
-    render(<CreateMission refetchPlayerMissions={spyRefetchPlayerMission} />);
+    render(<CreateMission />);
 
     fireEvent.change(
       screen.getByPlaceholderText('Make him drink his glass dry'),
@@ -75,9 +68,7 @@ describe('<CreateMission />', () => {
       ),
     );
 
-    const spyRefetchPlayerMission = vi.fn();
-
-    render(<CreateMission refetchPlayerMissions={spyRefetchPlayerMission} />);
+    render(<CreateMission />);
 
     fireEvent.change(
       screen.getByPlaceholderText('Make him drink his glass dry'),
