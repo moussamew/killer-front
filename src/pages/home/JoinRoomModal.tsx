@@ -30,7 +30,7 @@ export function JoinRoomModal(): JSX.Element {
   const { closeModal } = useContext(ModalContext);
 
   const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
-    setPseudo(target.value.toUpperCase());
+    setPseudo(target.value);
   };
 
   const handleRoomCode = ({ target }: ChangeEvent<HTMLInputElement>): void => {
@@ -40,7 +40,7 @@ export function JoinRoomModal(): JSX.Element {
   const handleJoinRoom = (): void => {
     if (!playerSession?.name) {
       return createPlayer.mutate(
-        { name: pseudo, roomCode },
+        { name: pseudo.toUpperCase(), roomCode },
         { onSuccess: closeModal },
       );
     }
@@ -62,7 +62,6 @@ export function JoinRoomModal(): JSX.Element {
           placeholder={t('common.create_pseudo_placeholder')}
           value={pseudo}
           onChange={handlePseudo}
-          uppercase
         />
       )}
       <Input

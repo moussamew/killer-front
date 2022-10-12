@@ -16,11 +16,11 @@ export function CreatePlayer({ roomCode }: Props): JSX.Element {
   const navigate = useNavigate();
 
   const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
-    setPseudo(target.value.toUpperCase());
+    setPseudo(target.value);
   };
 
   const handleJoinRoom = (): void => {
-    createPlayer.mutate({ name: pseudo, roomCode });
+    createPlayer.mutate({ name: pseudo.toUpperCase(), roomCode });
   };
 
   const handleCreateRoom = (): void => {

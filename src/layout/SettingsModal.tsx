@@ -36,11 +36,11 @@ export function SettingsModal(): JSX.Element {
   const { updatePlayer } = useUpdatePlayer();
 
   const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
-    setPseudo(target.value.toUpperCase());
+    setPseudo(target.value);
   };
 
   const updatePlayerPseudo = (): void => {
-    updatePlayer.mutate({ name: pseudo });
+    updatePlayer.mutate({ name: pseudo.toUpperCase() });
   };
 
   return (
@@ -59,7 +59,6 @@ export function SettingsModal(): JSX.Element {
           value={pseudo}
           onChange={handlePseudo}
           placeholder={playerSession?.name}
-          uppercase
         />
         <Button
           content={t('layout.save_changes')}

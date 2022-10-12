@@ -33,7 +33,7 @@ export function CreateRoomModal(): JSX.Element {
 
   const handleCreateRoom = (): void => {
     createPlayer.mutate(
-      { name: pseudo },
+      { name: pseudo.toUpperCase() },
       {
         onSuccess: () =>
           createRoom.mutate(undefined, { onSuccess: closeModal }),
@@ -54,7 +54,6 @@ export function CreateRoomModal(): JSX.Element {
         placeholder={t('common.create_pseudo_placeholder')}
         value={pseudo}
         onChange={handlePseudo}
-        uppercase
       />
       <Button
         content={t('home.create_room_modal_button')}
