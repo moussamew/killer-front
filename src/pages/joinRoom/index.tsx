@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Killerparty from '@/assets/images/killerparty.png';
+import { RoomErrorCode } from '@/constants/errors';
+import { RequestError } from '@/helpers/errors';
 import { Layout } from '@/layout/Layout';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { usePlayerSession } from '@/services/player/queries';
@@ -13,6 +15,8 @@ import { LeaveCurrentRoom } from './LeaveCurrentRoom';
 const WelcomeImage = tw.img`
   m-auto
 `;
+
+const { NOT_FOUND, BAD_ROOMCODE } = RoomErrorCode;
 
 export function JoinRoomPage(): JSX.Element {
   const { roomCode } = useParams();
@@ -46,10 +50,12 @@ export function JoinRoomPage(): JSX.Element {
         {
           onSuccess: () => navigate(`/room/${roomCode}`),
           onError: (error) => {
-            if (error instanceof Error) {
-              navigate(`/room/${roomCode}/error`, {
-                state: error.message,
-              });
+            if (error instanceof RequestError) {
+              if ([NOT_FOUND, BAD_ROOMCODE].includes(error.errorCode)) {
+                navigate(`/room/${roomCode}/error`, {
+                  state: error.message,
+                });
+              }
             }
           },
         },

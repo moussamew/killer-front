@@ -6,7 +6,7 @@ import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
-import { RoomError } from '@/constants/errors';
+import { RoomErrorCode } from '@/constants/errors';
 import { HomePage } from '@/pages/home';
 import { JoinRoomPage } from '@/pages/joinRoom';
 import { NotFoundPage } from '@/pages/notFound';
@@ -43,7 +43,7 @@ describe('<NotFoundPage />', () => {
         res(
           ctx.status(400),
           ctx.json({
-            errorCode: RoomError.BAD_ROOMCODE,
+            errorCode: RoomErrorCode.BAD_ROOMCODE,
             message:
               'The roomCode need to be provided with a correct format (5 characters).',
           }),

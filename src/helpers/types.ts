@@ -1,4 +1,7 @@
 import { Method } from '@/constants/enums';
+import { RoomErrorCode } from '@/constants/errors';
+
+export type ErrorCode = RoomErrorCode;
 
 export interface RequestParams {
   url: string;
@@ -7,7 +10,7 @@ export interface RequestParams {
 }
 
 export interface RequestErrorParams {
-  errorCode: string;
+  errorCode: ErrorCode;
   message: string;
   statusCode: number;
 }
