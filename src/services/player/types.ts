@@ -15,6 +15,7 @@ export interface Player {
 export interface PlayerSessionQuery {
   playerSession: Player | undefined;
   refetchPlayerSession(): Promise<QueryObserverResult<Player, unknown>>;
+  isPlayerSessionLoading: boolean;
 }
 
 export interface UpdatePlayerMutation {

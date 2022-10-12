@@ -1,11 +1,13 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import tw from 'tailwind-styled-components';
 
 import Room from '@/assets/icons/room.svg';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
+import { ModalContext } from '@/hooks/context/modal';
 import { useCreatePlayer } from '@/services/player/mutations';
+import { useCreateRoom } from '@/services/room/mutations';
 
 const HeadContent = tw.div`
   flex flex-row items-center
@@ -22,13 +24,21 @@ const Icon = tw.img`
 export function CreateRoomModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
   const { createPlayer } = useCreatePlayer();
+  const { createRoom } = useCreateRoom();
+  const { closeModal } = useContext(ModalContext);
 
   const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
     setPseudo(target.value);
   };
 
   const handleCreateRoom = (): void => {
-    createPlayer.mutate({ name: pseudo });
+    createPlayer.mutate(
+      { name: pseudo },
+      {
+        onSuccess: () =>
+          createRoom.mutate(undefined, { onSuccess: closeModal }),
+      },
+    );
   };
 
   return (

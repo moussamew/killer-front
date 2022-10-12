@@ -4,7 +4,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
 import { MercureEventType } from '@/constants/enums';
-import { isEmptyObject } from '@/helpers/utils';
 import { usePrevious } from '@/hooks/usePrevious';
 import { usePlayerSession } from '@/services/player/queries';
 import { RoomStatus } from '@/services/room/constants';
@@ -22,7 +21,8 @@ export function RoomPage({ children }: Props): JSX.Element | null {
   const location = useLocation();
   const navigate = useNavigate();
   const { roomCode } = useParams();
-  const { playerSession, refetchPlayerSession } = usePlayerSession();
+  const { playerSession, refetchPlayerSession, isPlayerSessionLoading } =
+    usePlayerSession();
   const previousRoomCode = usePrevious(playerSession?.roomCode);
   const { refetchRoomPlayers } = useRoomPlayers(roomCode!);
   const { roomInfos, refetchRoomInfos } = useRoomInfos({
@@ -61,20 +61,28 @@ export function RoomPage({ children }: Props): JSX.Element | null {
      * The player try to join the room without pseudo.
      * The player try to join the room when he is already inside another room.
      */
-    if (
-      (playerSession && isEmptyObject(playerSession)) ||
-      (!previousRoomCode && playerSession?.roomCode !== roomCode)
-    ) {
-      navigate(`/join/${roomCode}`);
-    }
+    if (!isPlayerSessionLoading) {
+      if (
+        !playerSession ||
+        (!previousRoomCode && playerSession?.roomCode !== roomCode)
+      ) {
+        navigate(`/join/${roomCode}`);
+      }
 
-    /**
-     * Redirect player to home page if its roomCode is removed.
-     */
-    if (previousRoomCode && !playerSession?.roomCode) {
-      navigate('/');
+      /**
+       * Redirect player to home page if its roomCode is removed.
+       */
+      if (previousRoomCode && !playerSession?.roomCode) {
+        navigate('/');
+      }
     }
-  }, [playerSession, previousRoomCode, roomCode, navigate]);
+  }, [
+    isPlayerSessionLoading,
+    playerSession,
+    previousRoomCode,
+    roomCode,
+    navigate,
+  ]);
 
   /**
    * Listen to SSE events emits in the Room page.

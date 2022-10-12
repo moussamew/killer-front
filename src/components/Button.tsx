@@ -1,8 +1,7 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { isPromise } from '@/helpers/utils';
-import { ModalContext } from '@/hooks/context/modal';
 
 import { ErrorMessage } from './ErrorMessage';
 import { Spinner } from './Spinner';
@@ -51,16 +50,8 @@ export function Button({
   disabled = false,
   icon,
 }: Props): JSX.Element {
-  const { modal, closeModal } = useContext(ModalContext);
-
   const [isLoading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-
-  const cleanModal = (): void => {
-    if (modal) {
-      closeModal();
-    }
-  };
 
   const cleanErrorMessage = (): void => {
     if (errorMessage) {
@@ -76,7 +67,6 @@ export function Button({
         .then(() => {
           setLoading(false);
           cleanErrorMessage();
-          cleanModal();
         })
         .catch((error) => {
           setLoading(false);
@@ -84,9 +74,7 @@ export function Button({
         });
     }
 
-    onClick();
-
-    return cleanModal();
+    return onClick();
   };
 
   return (

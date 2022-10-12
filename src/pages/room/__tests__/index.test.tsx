@@ -23,19 +23,24 @@ import { renderWithProviders } from '@/tests/utils';
 
 const { PLAYER_KILLED, PLAYER_UPDATED, ROOM_DELETED, ROOM_IN_GAME } =
   MercureEventType;
+const { PENDING, IN_GAME } = RoomStatus;
 
 describe('<RoomPage />', () => {
   const roomEventSource = `${ROOM_TOPIC}/X7JKL`;
 
   it('should redirect player to PendingRoom page if the status of the room is PENDING', async () => {
-    const mockPlayer = { id: 0, name: 'Neo', roomCode: 'P9LDG' };
-
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json(mockPlayer)),
+        res(
+          ctx.status(200),
+          ctx.json({ id: 0, name: 'Neo', roomCode: 'P9LDG' }),
+        ),
       ),
       rest.get(`${ROOM_ENDPOINT}/P9LDG/players`, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json([mockPlayer])),
+        res(
+          ctx.status(200),
+          ctx.json([{ id: 0, name: 'Neo', roomCode: 'P9LDG' }]),
+        ),
       ),
       rest.get(`${ROOM_ENDPOINT}/P9LDG`, (_req, res, ctx) =>
         res(
@@ -43,7 +48,7 @@ describe('<RoomPage />', () => {
           ctx.json({
             code: 'P9LDG',
             name: `Neo's room`,
-            status: RoomStatus.PENDING,
+            status: PENDING,
           }),
         ),
       ),
@@ -77,7 +82,7 @@ describe('<RoomPage />', () => {
           ctx.json({
             code: 'P9LDG',
             name: `Neo's room`,
-            status: RoomStatus.IN_GAME,
+            status: IN_GAME,
           }),
         ),
       ),
@@ -96,6 +101,12 @@ describe('<RoomPage />', () => {
   });
 
   it('should redirect player to JoinRoom page if the player did not have a player session', async () => {
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(ctx.status(400), ctx.json({})),
+      ),
+    );
+
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/P9LDG']}>
         <Routes>

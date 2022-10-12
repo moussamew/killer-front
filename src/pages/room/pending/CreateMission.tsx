@@ -10,14 +10,6 @@ export function CreateMission(): JSX.Element {
   const [mission, setMission] = useState('');
   const { createMission } = useCreateMission();
 
-  /*   const addMission = async (): Promise<void> => {
-    await createMission(newMission)
-      .then(refetchPlayerMissions)
-      .then(() => {
-        setNewMission('');
-      });
-  }; */
-
   const handleMission = ({ target }: ChangeEvent<HTMLInputElement>): void => {
     setMission(target.value.toUpperCase());
   };
