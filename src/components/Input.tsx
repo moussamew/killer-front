@@ -31,23 +31,25 @@ interface Props {
   uppercase?: boolean;
 }
 
-const InputRef = (
+function InputRef(
   { id, value, onChange, type = 'text', placeholder, label, uppercase }: Props,
   ref: ForwardedRef<HTMLInputElement>,
-): JSX.Element => (
-  <Content>
-    {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
-    <StyledInput
-      id={id}
-      value={value}
-      onChange={onChange}
-      ref={ref}
-      type={type}
-      placeholder={placeholder}
-      autoComplete="off"
-      $uppercase={uppercase}
-    />
-  </Content>
-);
+): JSX.Element {
+  return (
+    <Content>
+      {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
+      <StyledInput
+        id={id}
+        value={value}
+        onChange={onChange}
+        ref={ref}
+        type={type}
+        placeholder={placeholder}
+        autoComplete="off"
+        $uppercase={uppercase}
+      />
+    </Content>
+  );
+}
 
 export const Input = forwardRef(InputRef);

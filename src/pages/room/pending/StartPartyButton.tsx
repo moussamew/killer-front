@@ -3,13 +3,15 @@ import { useParams } from 'react-router-dom';
 import Party from '@/assets/icons/party.svg';
 import { Button } from '@/components/Button';
 import t from '@/helpers/translate';
+import { useStartParty } from '@/services/room/mutations';
 
-import { startParty } from './services/requests';
-
-export const StartPartyButton = (): JSX.Element => {
+export function StartPartyButton(): JSX.Element {
   const { roomCode } = useParams();
+  const { startParty } = useStartParty();
 
-  const handleStartParty = async (): Promise<void> => startParty(roomCode!);
+  const handleStartParty = (): void => {
+    startParty.mutate(roomCode!);
+  };
 
   return (
     <Button
@@ -20,4 +22,4 @@ export const StartPartyButton = (): JSX.Element => {
       icon={Party}
     />
   );
-};
+}

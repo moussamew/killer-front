@@ -23,7 +23,7 @@ describe('<SettingsModal />', () => {
 
     renderWithProviders(<SettingsModal />);
 
-    await screen.findByText('User Settings');
+    await screen.findByPlaceholderText('Neo');
 
     fireEvent.change(screen.getByPlaceholderText('Neo'), {
       target: { value: 'Trinity' },
@@ -38,21 +38,5 @@ describe('<SettingsModal />', () => {
     );
 
     expect(await screen.findByPlaceholderText('Trinity'));
-  });
-
-  it('should be able to close Settings Modal', async () => {
-    server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Neo' })),
-      ),
-    );
-
-    renderWithProviders(<SettingsModal />);
-
-    await screen.findByText('User Settings');
-
-    fireEvent.click(screen.getByText('Update my pseudo'));
-
-    expect(screen.queryByText('Save changes')).not.toBeInTheDocument();
   });
 });

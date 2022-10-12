@@ -3,12 +3,10 @@ import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { PlayerRole } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
-import { RoomPage } from '@/pages/room';
 import { PendingRoomPage } from '@/pages/room/pending';
 import { PlayerList } from '@/pages/room/pending/PlayerList';
 import { RoomPlayer } from '@/pages/room/pending/RoomPlayer';
+import { PlayerRole } from '@/services/player/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -56,14 +54,7 @@ describe('<RoomPlayer />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL']}>
         <Routes>
-          <Route
-            path="/room/:roomCode"
-            element={
-              <RoomProvider>
-                <PlayerList />
-              </RoomProvider>
-            }
-          />
+          <Route path="/room/:roomCode" element={<PlayerList />} />
         </Routes>
       </MemoryRouter>,
     );
@@ -99,14 +90,7 @@ describe('<RoomPlayer />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7VBD']}>
         <Routes>
-          <Route
-            path="/room/:roomCode"
-            element={
-              <RoomProvider>
-                <RoomPage page={<PendingRoomPage />} />
-              </RoomProvider>
-            }
-          />
+          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );

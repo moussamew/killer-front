@@ -1,12 +1,12 @@
-import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Island from '@/assets/images/island.png';
-import { PlayerRole } from '@/constants/enums';
 import t from '@/helpers/translate';
-import { PlayerContext } from '@/hooks/context/player';
 import { Layout } from '@/layout/Layout';
+import { RoomPage } from '@/pages/room';
+import { PlayerRole } from '@/services/player/constants';
+import { usePlayerSession } from '@/services/player/queries';
 
 import { PlayerList } from './PlayerList';
 import { PlayerMissions } from './PlayerMissions';
@@ -34,28 +34,30 @@ const RoomFeatures = tw.div`
   mt-2 md:mt-4
 `;
 
-export const PendingRoomPage = (): JSX.Element => {
+export function PendingRoomPage(): JSX.Element {
   const { roomCode } = useParams();
 
-  const { playerSession } = useContext(PlayerContext);
+  const { playerSession } = usePlayerSession();
 
   return (
-    <Layout>
-      <Content>
-        <WelcomeImage alt="welcome" src={Island} />
-        <RoomResume>
-          <h1>{t('room.welcome')}</h1>
-          <p>{t('room.join_room_code', { roomCode })}</p>
-          <RoomMissions />
-          <ShareRoomLink roomCode={roomCode!} />
-          {playerSession.role === PlayerRole.ADMIN && <StartPartyButton />}
-        </RoomResume>
-      </Content>
-      <hr />
-      <RoomFeatures>
-        <PlayerMissions roomCode={roomCode!} />
-        <PlayerList />
-      </RoomFeatures>
-    </Layout>
+    <RoomPage>
+      <Layout>
+        <Content>
+          <WelcomeImage alt="welcome" src={Island} />
+          <RoomResume>
+            <h1>{t('room.welcome')}</h1>
+            <p>{t('room.join_room_code', { roomCode })}</p>
+            <RoomMissions />
+            <ShareRoomLink roomCode={roomCode!} />
+            {playerSession?.role === PlayerRole.ADMIN && <StartPartyButton />}
+          </RoomResume>
+        </Content>
+        <hr />
+        <RoomFeatures>
+          <PlayerMissions roomCode={roomCode!} />
+          <PlayerList />
+        </RoomFeatures>
+      </Layout>
+    </RoomPage>
   );
-};
+}

@@ -1,47 +1,39 @@
-import { Fragment, useState } from 'react';
-import { QueryObserverResult } from 'react-query';
+import { ChangeEvent, Fragment, useState } from 'react';
 
 import Add from '@/assets/icons/add.svg';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
-import { Mission } from '@/types';
+import { useCreateMission } from '@/services/mission/mutations';
 
-import { createMission } from './services/requests';
+export function CreateMission(): JSX.Element {
+  const [mission, setMission] = useState('');
+  const { createMission } = useCreateMission();
 
-interface Props {
-  refetchPlayerMissions: () => Promise<QueryObserverResult<Mission[], unknown>>;
-}
+  const handleMission = ({ target }: ChangeEvent<HTMLInputElement>): void => {
+    setMission(target.value);
+  };
 
-export const CreateMission = ({
-  refetchPlayerMissions,
-}: Props): JSX.Element => {
-  const [newMission, setNewMission] = useState('');
-
-  const addMission = async (): Promise<void> => {
-    await createMission(newMission)
-      .then(refetchPlayerMissions)
-      .then(() => {
-        setNewMission('');
-      });
+  const handleCreateMission = (): void => {
+    createMission.mutate(mission, { onSuccess: () => setMission('') });
   };
 
   return (
     <Fragment>
       <Input
         id="createMission"
-        value={newMission}
-        onChange={(e) => setNewMission(e.target.value)}
+        value={mission}
+        onChange={handleMission}
         label={t('room.create_mission')}
         placeholder={t('room.mission_input')}
       />
       <Button
         content={t('room.add_mission')}
         buttonColor="bg-red-400"
-        disabled={!newMission}
-        onClick={addMission}
+        disabled={!mission}
+        onClick={handleCreateMission}
         icon={Add}
       />
     </Fragment>
   );
-};
+}

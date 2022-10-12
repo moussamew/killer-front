@@ -3,9 +3,8 @@ import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { PlayerRole } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
 import { PlayerList } from '@/pages/room/pending/PlayerList';
+import { PlayerRole } from '@/services/player/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -36,23 +35,15 @@ describe('<PlayerList />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL']}>
         <Routes>
-          <Route
-            path="/room/:roomCode"
-            element={
-              <RoomProvider>
-                <PlayerList />
-              </RoomProvider>
-            }
-          />
+          <Route path="/room/:roomCode" element={<PlayerList />} />
         </Routes>
       </MemoryRouter>,
     );
 
-    expect(
-      await screen.findByText('Criminals in the room'),
-    ).toBeInTheDocument();
-    expect(screen.getByText('Neo')).toBeInTheDocument();
-    expect(screen.getByText('Trinity')).toBeInTheDocument();
-    expect(screen.getByText('Morpheus')).toBeInTheDocument();
+    screen.getByText('Criminals in the room');
+
+    expect(await screen.findByText('Neo')).toBeInTheDocument();
+    expect(await screen.findByText('Trinity')).toBeInTheDocument();
+    expect(await screen.findByText('Morpheus')).toBeInTheDocument();
   });
 });

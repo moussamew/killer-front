@@ -1,9 +1,8 @@
 import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import { ReactNode } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import { ModalProvider } from '@/hooks/context/modal';
-import { PlayerProvider } from '@/hooks/context/player';
 
 const renderWithProviders = (
   component: ReactNode,
@@ -14,14 +13,18 @@ const renderWithProviders = (
       queries: {
         retry: false,
       },
+      mutations: {
+        retry: false,
+      },
     },
   });
 
+  // eslint-disable-next-line no-console
+  setLogger({ log: console.log, warn: console.warn, error: () => {} });
+
   return render(
     <QueryClientProvider client={queryClient}>
-      <PlayerProvider>
-        <ModalProvider>{component}</ModalProvider>
-      </PlayerProvider>
+      <ModalProvider>{component}</ModalProvider>
     </QueryClientProvider>,
     options,
   );

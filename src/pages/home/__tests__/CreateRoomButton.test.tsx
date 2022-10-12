@@ -3,11 +3,12 @@ import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
+import { HomePage } from '@/pages/home';
+import { RoomPage } from '@/pages/room';
+import { PendingRoomPage } from '@/pages/room/pending';
+import { RoomStatus } from '@/services/room/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
-
-import { HomePage } from '..';
-import { CreateRoomButton } from '../CreateRoomButton';
 
 describe('<CreateRoomButton />', () => {
   it('should redirect to create room modal for a player without session', async () => {
@@ -36,35 +37,50 @@ describe('<CreateRoomButton />', () => {
       <MemoryRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route
-            path="/room/YZVB5"
-            element={<p>Welcome to the room YZVB5!</p>}
-          />
+          <Route path="/room/:roomCode" element={<RoomPage />} />
+          <Route path="/room/:roomCode/pending" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Create new room'));
+    await screen.findByText('Trinity');
 
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Trinity', roomCode: 'YZVB5' })),
       ),
-    );
-
-    expect(
-      await screen.findByText(`Welcome to the room YZVB5!`),
-    ).toBeInTheDocument();
-  });
-
-  it('should show error message while creating new room', async () => {
-    server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Trinity' })),
+      rest.get(`${ROOM_ENDPOINT}/YZVB5`, (_req, res, ctx) =>
+        res(ctx.status(200), ctx.json({ status: RoomStatus.PENDING })),
       ),
     );
 
-    renderWithProviders(<CreateRoomButton />);
+    fireEvent.click(await screen.findByText('Create new room'));
+
+    expect(
+      await screen.findByText('Welcome to the party!'),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText('The code to join this room is YZVB5.'),
+    ).toBeInTheDocument();
+  });
+
+  it('should show error message when there is an error while creating a new room', async () => {
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(ctx.status(200), ctx.json({ name: 'Trinity', roomCode: null })),
+      ),
+      rest.post(ROOM_ENDPOINT, (_req, res, ctx) =>
+        res(ctx.status(400), ctx.json({ errorCode: 'ROOM.ERROR' })),
+      ),
+    );
+
+    renderWithProviders(
+      <MemoryRouter>
+        <HomePage />
+      </MemoryRouter>,
+    );
+
+    await screen.findByText('Trinity');
 
     fireEvent.click(await screen.findByText('Create new room'));
 
@@ -73,31 +89,5 @@ describe('<CreateRoomButton />', () => {
         'An error has occured while creating a new room. Please retry later.',
       ),
     ).toBeInTheDocument();
-  });
-
-  it('should let the user close error message if showed', async () => {
-    server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Trinity' })),
-      ),
-    );
-
-    renderWithProviders(<CreateRoomButton />);
-
-    await screen.findByText('Create new room');
-
-    fireEvent.click(screen.getByText('Create new room'));
-
-    await screen.findByText(
-      'An error has occured while creating a new room. Please retry later.',
-    );
-
-    fireEvent.click(screen.getByAltText('closeErrorMessage'));
-
-    expect(
-      screen.queryByText(
-        'An error has occured while creating a new room. Please retry later.',
-      ),
-    ).not.toBeInTheDocument();
   });
 });

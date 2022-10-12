@@ -7,13 +7,10 @@ import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { PlayerRole } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
-import { RoomPage } from '@/pages/room';
+import { PendingRoomPage } from '@/pages/room/pending';
+import { PlayerRole } from '@/services/player/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
-
-import { PendingRoomPage } from '..';
 
 describe('<KickPlayerModal />', () => {
   it('should kick player from the room', async () => {
@@ -29,7 +26,7 @@ describe('<KickPlayerModal />', () => {
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/X7VBD/players`, async (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/X7VBD/players`, (_req, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json([
@@ -43,14 +40,7 @@ describe('<KickPlayerModal />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7VBD']}>
         <Routes>
-          <Route
-            path="/room/:roomCode"
-            element={
-              <RoomProvider>
-                <RoomPage page={<PendingRoomPage />} />
-              </RoomProvider>
-            }
-          />
+          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );

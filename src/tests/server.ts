@@ -1,15 +1,11 @@
 import { setupServer } from 'msw/node';
 
-import { hooksHandlers } from '@/hooks/services/handlers';
-import { layoutHandlers } from '@/layout/services/handlers';
-import { homeHandlers } from '@/pages/home/services/handlers';
-import { pendingRoomHandlers } from '@/pages/room/pending/services/handlers';
-import { roomHandlers } from '@/pages/room/services/handlers';
+import { missionHandlers } from '@/services/mission/handlers';
+import { playerHandlers } from '@/services/player/handlers';
+import { roomHandlers } from '@/services/room/handlers';
 
 export const server = setupServer(
-  ...hooksHandlers,
-  ...homeHandlers,
+  ...missionHandlers,
+  ...playerHandlers,
   ...roomHandlers,
-  ...pendingRoomHandlers,
-  ...layoutHandlers,
 );

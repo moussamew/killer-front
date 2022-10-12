@@ -1,7 +1,7 @@
-import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
-import { RoomContext } from '@/hooks/context/room';
+import { useRoomPlayers } from '@/services/room/queries';
 
 import { RoomPlayer } from './RoomPlayer';
 import { RoomSettings } from './RoomSettings';
@@ -10,14 +10,15 @@ const Content = tw.div`
   mt-3 xl:mt-0
 `;
 
-export const PlayerList = (): JSX.Element => {
-  const { roomPlayers } = useContext(RoomContext);
+export function PlayerList(): JSX.Element {
+  const { roomCode } = useParams();
+  const { roomPlayers } = useRoomPlayers(roomCode!);
 
   return (
     <Content>
       <RoomSettings />
       <hr />
-      {roomPlayers.map(({ id, name, role }) => (
+      {roomPlayers?.map(({ id, name, role }) => (
         <RoomPlayer
           key={id}
           playerId={id}
@@ -27,4 +28,4 @@ export const PlayerList = (): JSX.Element => {
       ))}
     </Content>
   );
-};
+}

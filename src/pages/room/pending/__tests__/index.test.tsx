@@ -3,9 +3,8 @@ import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
-import { PlayerRole } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
 import { PendingRoomPage } from '@/pages/room/pending';
+import { PlayerRole } from '@/services/player/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -23,22 +22,12 @@ describe('<PendingRoomPage />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/P9LDG']}>
         <Routes>
-          <Route
-            path="/room/:roomCode"
-            element={
-              <RoomProvider>
-                <PendingRoomPage />
-              </RoomProvider>
-            }
-          />
+          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
 
-    expect(
-      await screen.findByText('The code to join this room is P9LDG.'),
-    ).toBeInTheDocument();
-    expect(screen.getByText('Start the party')).toBeInTheDocument();
+    expect(await screen.findByText('Start the party')).toBeInTheDocument();
   });
 
   it('should not show the Start party button if the player is not an admin', async () => {
@@ -58,14 +47,7 @@ describe('<PendingRoomPage />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/P9LDG']}>
         <Routes>
-          <Route
-            path="/room/:roomCode"
-            element={
-              <RoomProvider>
-                <PendingRoomPage />
-              </RoomProvider>
-            }
-          />
+          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );

@@ -1,14 +1,13 @@
-import { Fragment, useContext, useState } from 'react';
+import { ChangeEvent, Fragment, useContext, useState } from 'react';
 import tw from 'tailwind-styled-components';
 
 import Room from '@/assets/icons/room.svg';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
-import { PlayerContext } from '@/hooks/context/player';
-import { updatePlayer } from '@/layout/services/requests';
-
-import { createPlayer } from './services/requests';
+import { ModalContext } from '@/hooks/context/modal';
+import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
+import { usePlayerSession } from '@/services/player/queries';
 
 const HeadContent = tw.div`
   flex flex-row items-center
@@ -22,20 +21,31 @@ const Icon = tw.img`
   h-3 md:h-4
 `;
 
-export const JoinRoomModal = (): JSX.Element | null => {
-  const [inputPseudo, setInputPseudo] = useState('');
+export function JoinRoomModal(): JSX.Element {
+  const [pseudo, setPseudo] = useState('');
   const [roomCode, setRoomCode] = useState('');
+  const { playerSession } = usePlayerSession();
+  const { createPlayer } = useCreatePlayer();
+  const { updatePlayer } = useUpdatePlayer();
+  const { closeModal } = useContext(ModalContext);
 
-  const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
+  const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
+    setPseudo(target.value);
+  };
 
-  const handleJoinRoom = async (): Promise<void> => {
-    if (!playerSession.name) {
-      return createPlayer({ name: inputPseudo, roomCode }).then(
-        refreshPlayerSession,
+  const handleRoomCode = ({ target }: ChangeEvent<HTMLInputElement>): void => {
+    setRoomCode(target.value.toUpperCase());
+  };
+
+  const handleJoinRoom = (): void => {
+    if (!playerSession?.name) {
+      return createPlayer.mutate(
+        { name: pseudo.toUpperCase(), roomCode },
+        { onSuccess: closeModal },
       );
     }
 
-    return updatePlayer({ roomCode }).then(refreshPlayerSession);
+    return updatePlayer.mutate({ roomCode }, { onSuccess: closeModal });
   };
 
   return (
@@ -44,15 +54,14 @@ export const JoinRoomModal = (): JSX.Element | null => {
         <Icon alt="roomIcon" src={Room} />
         <Title>{t('home.join_room')}</Title>
       </HeadContent>
-      {!playerSession.name && (
+      {!playerSession?.name && (
         <Input
           id="pseudo"
           type="text"
           label={t('common.create_pseudo_label')}
           placeholder={t('common.create_pseudo_placeholder')}
-          value={inputPseudo}
-          onChange={({ target }) => setInputPseudo(target.value.toUpperCase())}
-          uppercase
+          value={pseudo}
+          onChange={handlePseudo}
         />
       )}
       <Input
@@ -60,7 +69,7 @@ export const JoinRoomModal = (): JSX.Element | null => {
         label={t('home.room_code_label')}
         placeholder={t('home.room_code_placeholder')}
         value={roomCode}
-        onChange={({ target }) => setRoomCode(target.value.toUpperCase())}
+        onChange={handleRoomCode}
         uppercase
       />
       <Button
@@ -70,4 +79,4 @@ export const JoinRoomModal = (): JSX.Element | null => {
       />
     </Fragment>
   );
-};
+}

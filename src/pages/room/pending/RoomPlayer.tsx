@@ -5,9 +5,9 @@ import Admin from '@/assets/icons/admin.svg';
 import KickPlayer from '@/assets/icons/kickPlayer.svg';
 import LeaveRoomImage from '@/assets/icons/leaveRoom.svg';
 import Player from '@/assets/images/player.png';
-import { PlayerRole } from '@/constants/enums';
 import { ModalContext } from '@/hooks/context/modal';
-import { PlayerContext } from '@/hooks/context/player';
+import { PlayerRole } from '@/services/player/constants';
+import { usePlayerSession } from '@/services/player/queries';
 
 import { KickPlayerModal } from './KickPlayerModal';
 import { LeaveRoomModal } from './LeaveRoomModal';
@@ -48,31 +48,31 @@ interface Props {
   playerRole: PlayerRole;
 }
 
-export const RoomPlayer = ({
+export function RoomPlayer({
   playerId,
   playerName,
   playerRole,
-}: Props): JSX.Element => {
-  const { playerSession } = useContext(PlayerContext);
+}: Props): JSX.Element {
+  const { playerSession } = usePlayerSession();
   const { openModal } = useContext(ModalContext);
 
   return (
     <PlayerItem key={playerName}>
       <PlayerImage alt={`player-${playerName}`} src={Player} />
-      <PlayerName $currentPlayer={playerSession.id === playerId}>
+      <PlayerName $currentPlayer={playerSession?.id === playerId}>
         {playerName}
       </PlayerName>
-      {playerRole === PlayerRole.ADMIN && playerSession.id !== playerId && (
+      {playerRole === PlayerRole.ADMIN && playerSession?.id !== playerId && (
         <AdminStatusIcon alt="admin" src={Admin} />
       )}
-      {playerSession.id === playerId && (
+      {playerSession?.id === playerId && (
         <LeaveRoomIcon
           alt="leaveRoom"
           src={LeaveRoomImage}
           onClick={() => openModal(<LeaveRoomModal />)}
         />
       )}
-      {playerSession.role === PlayerRole.ADMIN &&
+      {playerSession?.role === PlayerRole.ADMIN &&
         playerSession.id !== playerId && (
           <KickPlayerIcon
             alt={`kick${playerName}`}
@@ -86,4 +86,4 @@ export const RoomPlayer = ({
         )}
     </PlayerItem>
   );
-};
+}

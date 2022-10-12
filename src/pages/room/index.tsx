@@ -1,54 +1,40 @@
-import { useContext, useEffect } from 'react';
-import { useQuery } from 'react-query';
+import { useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
-import { MercureEventType, RoomStatus } from '@/constants/enums';
-import { isEmptyObject } from '@/helpers/utils';
-import { PlayerContext } from '@/hooks/context/player';
-import { RoomContext } from '@/hooks/context/room';
-import { TargetContext } from '@/hooks/context/target';
+import { MercureEventType } from '@/constants/enums';
 import { usePrevious } from '@/hooks/usePrevious';
+import { usePlayerSession } from '@/services/player/queries';
+import { RoomStatus } from '@/services/room/constants';
+import { useRoomInfos, useRoomPlayers } from '@/services/room/queries';
 
-import { getRoom } from './services/requests';
-
-const {
-  ROOM_IN_GAME,
-  ROOM_DELETED,
-  ROOM_UPDATED,
-  PLAYER_KILLED,
-  PLAYER_UPDATED,
-} = MercureEventType;
+const { ROOM_IN_GAME, ROOM_DELETED, ROOM_UPDATED, PLAYER_UPDATED } =
+  MercureEventType;
 const { PENDING, IN_GAME, ENDED } = RoomStatus;
 
 interface Props {
-  page: JSX.Element;
+  children?: JSX.Element;
 }
 
-export const RoomPage = ({ page }: Props): JSX.Element => {
-  const { roomCode } = useParams();
-
+export function RoomPage({ children }: Props): JSX.Element | null {
   const location = useLocation();
-
-  const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
-  const { refreshRoomPlayers } = useContext(RoomContext);
-  const { refreshTargetInfos } = useContext(TargetContext);
-
-  const previousRoomCode = usePrevious(playerSession?.roomCode);
-
   const navigate = useNavigate();
-
-  const { data: room, refetch: refetchRoomStatus } = useQuery(
-    location.pathname,
-    () => getRoom(roomCode!),
-  );
+  const { roomCode } = useParams();
+  const { playerSession, refetchPlayerSession, isPlayerSessionLoading } =
+    usePlayerSession();
+  const previousRoomCode = usePrevious(playerSession?.roomCode);
+  const { refetchRoomPlayers } = useRoomPlayers(roomCode!);
+  const { roomInfos, refetchRoomInfos } = useRoomInfos({
+    roomCode: roomCode!,
+    pathname: location.pathname,
+  });
 
   /**
    * Redirect player to the correct route related to the room status.
    */
   useEffect(() => {
-    switch (room?.status) {
+    switch (roomInfos?.status) {
       case PENDING:
         navigate(`/room/${roomCode}/pending`);
         break;
@@ -64,7 +50,7 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
       default:
         break;
     }
-  }, [room, navigate, roomCode]);
+  }, [roomInfos, navigate, roomCode]);
 
   /**
    * Redirect player to the correct route by checking its session.
@@ -75,20 +61,28 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
      * The player try to join the room without pseudo.
      * The player try to join the room when he is already inside another room.
      */
-    if (
-      isEmptyObject(playerSession) ||
-      (!previousRoomCode && playerSession?.roomCode !== roomCode)
-    ) {
-      navigate(`/join/${roomCode}`);
-    }
+    if (!isPlayerSessionLoading) {
+      if (
+        !playerSession ||
+        (!previousRoomCode && playerSession?.roomCode !== roomCode)
+      ) {
+        navigate(`/join/${roomCode}`);
+      }
 
-    /**
-     * Redirect player to home page if its roomCode is removed.
-     */
-    if (previousRoomCode && !playerSession.roomCode) {
-      navigate('/');
+      /**
+       * Redirect player to home page if its roomCode is removed.
+       */
+      if (previousRoomCode && !playerSession?.roomCode) {
+        navigate('/');
+      }
     }
-  }, [playerSession, previousRoomCode, roomCode, navigate]);
+  }, [
+    isPlayerSessionLoading,
+    playerSession,
+    previousRoomCode,
+    roomCode,
+    navigate,
+  ]);
 
   /**
    * Listen to SSE events emits in the Room page.
@@ -104,26 +98,25 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
 
       switch (type) {
         case ROOM_UPDATED:
-          refetchRoomStatus();
-          break;
-
-        case ROOM_DELETED:
-          refreshPlayerSession();
-          break;
-
-        case PLAYER_KILLED:
-          refreshTargetInfos().then(refreshRoomPlayers);
+          refetchRoomInfos();
           break;
 
         case PLAYER_UPDATED:
-          refreshRoomPlayers().then(refreshPlayerSession);
+          refetchRoomPlayers();
           break;
 
         /**
-         * Should be removed to use only ROOM_UPDATED event.
+         * Should be removed to use the `ROOM_UPDATED` event.
          */
         case ROOM_IN_GAME:
           navigate(`/room/${roomCode}/playing`);
+          break;
+
+        /**
+         * Should be removed to use the `ROOM_UPDATED` event.
+         */
+        case ROOM_DELETED:
+          refetchPlayerSession();
           break;
 
         default:
@@ -135,11 +128,10 @@ export const RoomPage = ({ page }: Props): JSX.Element => {
   }, [
     roomCode,
     navigate,
-    refreshTargetInfos,
-    refreshRoomPlayers,
-    refreshPlayerSession,
-    refetchRoomStatus,
+    refetchPlayerSession,
+    refetchRoomInfos,
+    refetchRoomPlayers,
   ]);
 
-  return page;
-};
+  return children || null;
+}

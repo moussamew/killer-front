@@ -64,7 +64,7 @@ module.exports = {
     ], // Forbid the import of external modules that are not declared in the package.json's dependencies
     'react/function-component-definition': [
       2,
-      { namedComponents: 'arrow-function' },
+      { namedComponents: 'function-declaration' },
     ],
     /* Use import/extensions workaround to import files with .ts/.tsx extensions
     Issue here: https://github.com/benmosher/eslint-plugin-import/issues/1615 */

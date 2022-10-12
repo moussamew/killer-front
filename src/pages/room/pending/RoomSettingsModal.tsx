@@ -1,22 +1,32 @@
-import { useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
-
-import { deleteRoom } from './services/requests';
+import { ModalContext } from '@/hooks/context/modal';
+import { useDeleteRoom } from '@/services/room/mutations';
 
 const Title = tw.h2`
   mb-0
 `;
 
-export const RoomSettingsModal = (): JSX.Element => {
+export function RoomSettingsModal(): JSX.Element {
   const { roomCode } = useParams();
+  const { closeModal } = useContext(ModalContext);
   const [inputRoomCode, setInputRoomCode] = useState('');
+  const { deleteRoom } = useDeleteRoom();
 
-  const handleDeleteRoom = async (): Promise<void> => deleteRoom(inputRoomCode);
+  const handleInputRoomCode = ({
+    target,
+  }: ChangeEvent<HTMLInputElement>): void => {
+    setInputRoomCode(target.value.toUpperCase());
+  };
+
+  const handleDeleteRoom = (): void => {
+    deleteRoom.mutate(inputRoomCode, { onSuccess: closeModal });
+  };
 
   return (
     <div>
@@ -25,7 +35,7 @@ export const RoomSettingsModal = (): JSX.Element => {
         id="deleteRoom"
         label={t('room.delete_current_room')}
         value={inputRoomCode}
-        onChange={(e) => setInputRoomCode(e.target.value.toUpperCase())}
+        onChange={handleInputRoomCode}
         placeholder={t('room.delete_room_placeholder')}
         uppercase
       />
@@ -36,4 +46,4 @@ export const RoomSettingsModal = (): JSX.Element => {
       />
     </div>
   );
-};
+}

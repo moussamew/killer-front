@@ -1,12 +1,13 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Killerparty from '@/assets/images/killerparty.png';
-import { RoomError } from '@/constants/errors';
-import { PlayerContext } from '@/hooks/context/player';
+import { RoomErrorCode } from '@/constants/errors';
+import { RequestError } from '@/helpers/errors';
 import { Layout } from '@/layout/Layout';
-import { updatePlayer } from '@/layout/services/requests';
+import { useUpdatePlayer } from '@/services/player/mutations';
+import { usePlayerSession } from '@/services/player/queries';
 
 import { CreatePlayer } from './CreatePlayer';
 import { LeaveCurrentRoom } from './LeaveCurrentRoom';
@@ -15,12 +16,14 @@ const WelcomeImage = tw.img`
   m-auto
 `;
 
-const { NOT_FOUND, BAD_ROOMCODE } = RoomError;
+const { NOT_FOUND, BAD_ROOMCODE } = RoomErrorCode;
 
-export const JoinRoomPage = (): JSX.Element => {
+export function JoinRoomPage(): JSX.Element {
   const { roomCode } = useParams();
-
-  const { playerSession, refreshPlayerSession } = useContext(PlayerContext);
+  const { playerSession } = usePlayerSession();
+  const {
+    updatePlayer: { mutate: updatePlayerMutate },
+  } = useUpdatePlayer();
 
   const navigate = useNavigate();
 
@@ -42,18 +45,23 @@ export const JoinRoomPage = (): JSX.Element => {
      * - The name of the room is incorrect.
      */
     if (playerSession?.name && !playerSession?.roomCode) {
-      updatePlayer({ roomCode })
-        .then(refreshPlayerSession)
-        .then(() => navigate(`/room/${roomCode}`))
-        .catch((error) => {
-          if ([NOT_FOUND, BAD_ROOMCODE].includes(error.errorCode)) {
-            navigate(`/room/${roomCode}/error`, {
-              state: error.message,
-            });
-          }
-        });
+      updatePlayerMutate(
+        { roomCode },
+        {
+          onSuccess: () => navigate(`/room/${roomCode}`),
+          onError: (error) => {
+            if (error instanceof RequestError) {
+              if ([NOT_FOUND, BAD_ROOMCODE].includes(error.errorCode)) {
+                navigate(`/room/${roomCode}/error`, {
+                  state: error.message,
+                });
+              }
+            }
+          },
+        },
+      );
     }
-  }, [playerSession, roomCode, refreshPlayerSession, navigate]);
+  }, [playerSession, updatePlayerMutate, roomCode, navigate]);
 
   return (
     <Layout>
@@ -62,4 +70,4 @@ export const JoinRoomPage = (): JSX.Element => {
       {playerSession?.roomCode && <LeaveCurrentRoom />}
     </Layout>
   );
-};
+}

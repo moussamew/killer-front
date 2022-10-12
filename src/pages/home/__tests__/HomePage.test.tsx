@@ -3,10 +3,9 @@ import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
+import { HomePage } from '@/pages/home';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
-
-import { HomePage } from '..';
 
 describe('<HomePage />', () => {
   it('should correctly show the home page', async () => {

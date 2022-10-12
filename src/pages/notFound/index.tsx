@@ -18,7 +18,7 @@ const ErrorReason = tw.p`
   text-red-600 mt-2
 `;
 
-export const NotFoundPage = (): JSX.Element => {
+export function NotFoundPage(): JSX.Element {
   const navigate = useNavigate();
 
   const { state: errorMessage } = useLocation();
@@ -41,4 +41,4 @@ export const NotFoundPage = (): JSX.Element => {
       />
     </Layout>
   );
-};
+}

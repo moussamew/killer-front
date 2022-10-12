@@ -8,14 +8,11 @@ import {
   PLAYER_TARGET_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
-import { PlayerRole, RoomStatus } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
-import { TargetProvider } from '@/hooks/context/target';
-import { RoomPage } from '@/pages/room';
+import { PlayingRoomPage } from '@/pages/room/playing';
+import { PlayerRole } from '@/services/player/constants';
+import { RoomStatus } from '@/services/room/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
-
-import { PlayingRoomPage } from '..';
 
 describe('<PlayerKilledButton />', () => {
   it('should open killed modal when the player click on killed button', async () => {
@@ -45,16 +42,7 @@ describe('<PlayerKilledButton />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL/playing']}>
         <Routes>
-          <Route
-            path="/room/:roomCode/playing"
-            element={
-              <RoomProvider>
-                <TargetProvider>
-                  <RoomPage page={<PlayingRoomPage />} />
-                </TargetProvider>
-              </RoomProvider>
-            }
-          />
+          <Route path="/room/:roomCode/playing" element={<PlayingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );

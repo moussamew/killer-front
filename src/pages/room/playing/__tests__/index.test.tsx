@@ -8,14 +8,11 @@ import {
   PLAYER_TARGET_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
-import { PlayerRole, RoomStatus } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
-import { TargetProvider } from '@/hooks/context/target';
+import { PlayingRoomPage } from '@/pages/room/playing';
+import { PlayerRole, PlayerStatus } from '@/services/player/constants';
+import { RoomStatus } from '@/services/room/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
-
-import { PlayingRoomPage } from '..';
-import { RoomPage } from '../..';
 
 describe('<PlayingRoomPage />', () => {
   it('should render playing room page with current target if the player is not dead', async () => {
@@ -31,13 +28,13 @@ describe('<PlayingRoomPage />', () => {
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, async (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ status: RoomStatus.IN_GAME })),
       ),
-      rest.get(PLAYER_TARGET_ENDPOINT, async (_req, res, ctx) =>
+      rest.get(PLAYER_TARGET_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ id: 1, name: 'Neo' })),
       ),
-      rest.get(MISSION_ENDPOINT, async (_req, res, ctx) =>
+      rest.get(MISSION_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ id: 200, content: 'Do something' })),
       ),
     );
@@ -45,28 +42,18 @@ describe('<PlayingRoomPage />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL/playing']}>
         <Routes>
-          <Route
-            path="/room/:roomCode/playing"
-            element={
-              <RoomProvider>
-                <TargetProvider>
-                  <RoomPage page={<PlayingRoomPage />} />
-                </TargetProvider>
-              </RoomProvider>
-            }
-          />
+          <Route path="/room/:roomCode/playing" element={<PlayingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
 
-    expect(
-      await screen.findByText('Try to kill your target and survive!'),
-    ).toBeInTheDocument();
-    expect(screen.getByText('Neo')).toBeInTheDocument();
-    expect(screen.getByText('Do something')).toBeInTheDocument();
+    screen.getByText('Try to kill your target and survive!');
+
+    expect(await screen.findByText('Neo')).toBeInTheDocument();
+    expect(await screen.findByText('Do something')).toBeInTheDocument();
   });
 
-  it('should render playing room page with dead message when there is no target to kill', async () => {
+  it('should render playing room page with dead message if the player is dead', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(
@@ -76,36 +63,19 @@ describe('<PlayingRoomPage />', () => {
             name: 'Trinity',
             roomCode: 'X7JKL',
             role: PlayerRole.PLAYER,
+            status: PlayerStatus.KILLED,
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, async (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ status: RoomStatus.IN_GAME })),
-      ),
-      rest.get(PLAYER_TARGET_ENDPOINT, async (_req, res, ctx) =>
-        res(
-          ctx.status(400),
-          ctx.json({
-            errorCode: 'TARGET.BAD_TARGET',
-            message: 'Name must be longer than or equal to 1 characters',
-          }),
-        ),
       ),
     );
 
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL/playing']}>
         <Routes>
-          <Route
-            path="/room/:roomCode/playing"
-            element={
-              <RoomProvider>
-                <TargetProvider>
-                  <RoomPage page={<PlayingRoomPage />} />
-                </TargetProvider>
-              </RoomProvider>
-            }
-          />
+          <Route path="/room/:roomCode/playing" element={<PlayingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );

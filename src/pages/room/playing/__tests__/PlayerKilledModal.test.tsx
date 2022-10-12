@@ -12,11 +12,9 @@ import {
   PLAYER_TARGET_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
-import { PlayerRole, RoomStatus } from '@/constants/enums';
-import { RoomProvider } from '@/hooks/context/room';
-import { TargetProvider } from '@/hooks/context/target';
-import { RoomPage } from '@/pages/room';
 import { PlayingRoomPage } from '@/pages/room/playing';
+import { PlayerRole } from '@/services/player/constants';
+import { RoomStatus } from '@/services/room/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -34,13 +32,13 @@ describe('<PlayerKilledModal />', () => {
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, async (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ status: RoomStatus.IN_GAME })),
       ),
-      rest.get(PLAYER_TARGET_ENDPOINT, async (_req, res, ctx) =>
+      rest.get(PLAYER_TARGET_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ id: 1, name: 'Neo' })),
       ),
-      rest.get(MISSION_ENDPOINT, async (_req, res, ctx) =>
+      rest.get(MISSION_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ id: 200, content: 'Do something' })),
       ),
     );
@@ -48,16 +46,7 @@ describe('<PlayerKilledModal />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL/playing']}>
         <Routes>
-          <Route
-            path="/room/:roomCode/playing"
-            element={
-              <RoomProvider>
-                <TargetProvider>
-                  <RoomPage page={<PlayingRoomPage />} />
-                </TargetProvider>
-              </RoomProvider>
-            }
-          />
+          <Route path="/room/:roomCode/playing" element={<PlayingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );

@@ -15,7 +15,7 @@ interface Props {
   children: ReactNode;
 }
 
-export const Layout = ({ children }: Props): JSX.Element => {
+export function Layout({ children }: Props): JSX.Element {
   const { modal, closeModal } = useContext(ModalContext);
 
   return (
@@ -25,4 +25,4 @@ export const Layout = ({ children }: Props): JSX.Element => {
       {modal && <Modal closeModal={closeModal}>{modal}</Modal>}
     </Fragment>
   );
-};
+}

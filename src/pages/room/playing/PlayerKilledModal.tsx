@@ -1,10 +1,11 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { Button } from '@/components/Button';
-import { PlayerStatus } from '@/constants/enums';
 import t from '@/helpers/translate';
-import { updatePlayer } from '@/layout/services/requests';
+import { ModalContext } from '@/hooks/context/modal';
+import { PlayerStatus } from '@/services/player/constants';
+import { useUpdatePlayer } from '@/services/player/mutations';
 
 const HeadContent = tw.div`
   flex flex-row mb-2
@@ -19,9 +20,15 @@ const TextContent = tw.div`
   mb-1
 `;
 
-export const PlayerKilledModal = (): JSX.Element => {
-  const killPlayer = async (): Promise<void> => {
-    await updatePlayer({ status: PlayerStatus.KILLED });
+export function PlayerKilledModal(): JSX.Element {
+  const { updatePlayer } = useUpdatePlayer();
+  const { closeModal } = useContext(ModalContext);
+
+  const handleKillPlayer = (): void => {
+    updatePlayer.mutate(
+      { status: PlayerStatus.KILLED },
+      { onSuccess: closeModal },
+    );
   };
 
   return (
@@ -34,8 +41,8 @@ export const PlayerKilledModal = (): JSX.Element => {
       </TextContent>
       <Button
         content={t('playing_room.player_killed_confirmation')}
-        onClick={killPlayer}
+        onClick={handleKillPlayer}
       />
     </Fragment>
   );
-};
+}

@@ -6,7 +6,7 @@ import { ModalContext } from '@/hooks/context/modal';
 
 import { JoinRoomModal } from './JoinRoomModal';
 
-export const JoinRoomButton = (): JSX.Element => {
+export function JoinRoomButton(): JSX.Element {
   const { openModal } = useContext(ModalContext);
 
   return (
@@ -17,4 +17,4 @@ export const JoinRoomButton = (): JSX.Element => {
       onClick={() => openModal(<JoinRoomModal />)}
     />
   );
-};
+}

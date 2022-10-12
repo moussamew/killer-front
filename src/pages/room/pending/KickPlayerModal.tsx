@@ -1,11 +1,11 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import { Button } from '@/components/Button';
 import t from '@/helpers/translate';
-
-import { kickPlayerFromRoom } from './services/requests';
+import { ModalContext } from '@/hooks/context/modal';
+import { useKickPlayer } from '@/services/player/mutations';
 
 const HeadContent = tw.div`
   flex flex-row mb-2
@@ -25,14 +25,17 @@ interface Props {
   playerId: number;
 }
 
-export const KickPlayerModal = ({
-  playerName,
-  playerId,
-}: Props): JSX.Element => {
+export function KickPlayerModal({ playerName, playerId }: Props): JSX.Element {
   const { roomCode } = useParams();
+  const { kickPlayer } = useKickPlayer();
+  const { closeModal } = useContext(ModalContext);
 
-  const kickPlayer = async (): Promise<void> =>
-    kickPlayerFromRoom(roomCode!, playerId);
+  const handleKickPlayer = (): void => {
+    kickPlayer.mutate(
+      { id: playerId, roomCode: roomCode! },
+      { onSuccess: closeModal },
+    );
+  };
 
   return (
     <Fragment>
@@ -44,8 +47,8 @@ export const KickPlayerModal = ({
       </TextContent>
       <Button
         content={t('room.kick_room_confirmation', { playerName })}
-        onClick={kickPlayer}
+        onClick={handleKickPlayer}
       />
     </Fragment>
   );
-};
+}

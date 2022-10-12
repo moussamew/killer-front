@@ -21,8 +21,12 @@ const Text = tw.p`
   font-medium
 `;
 
-export const PlayerKilledButton = (): JSX.Element => {
+export function PlayerKilledButton(): JSX.Element {
   const { openModal } = useContext(ModalContext);
+
+  const handleOpenModal = (): void => {
+    openModal(<PlayerKilledModal />);
+  };
 
   return (
     <Content>
@@ -31,8 +35,8 @@ export const PlayerKilledButton = (): JSX.Element => {
       <Text>{t('playing_room.killed_button_infos')}</Text>
       <Button
         content={t('playing_room.killed_button_text')}
-        onClick={() => openModal(<PlayerKilledModal />)}
+        onClick={handleOpenModal}
       />
     </Content>
   );
-};
+}
