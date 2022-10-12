@@ -18,12 +18,6 @@ import { JoinRoomModal } from '../JoinRoomModal';
 
 describe('<JoinRoomModal />', () => {
   it('should close modal after joining a room with player session', async () => {
-    server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Neo' })),
-      ),
-    );
-
     renderWithProviders(
       <MemoryRouter>
         <HomePage />
@@ -44,6 +38,12 @@ describe('<JoinRoomModal />', () => {
   });
 
   it('should close modal after joining a room without player session', async () => {
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(ctx.status(400), ctx.json({})),
+      ),
+    );
+
     renderWithProviders(
       <MemoryRouter>
         <HomePage />
@@ -67,7 +67,7 @@ describe('<JoinRoomModal />', () => {
     expect(screen.queryByText('Join this room')).not.toBeInTheDocument();
   });
 
-  it('should show error while joining a room', async () => {
+  it.skip('should show error while joining a room', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Neo' })),

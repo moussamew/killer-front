@@ -17,7 +17,7 @@ describe('<CreateMission />', () => {
 
     fireEvent.click(screen.getByText('Add this mission in the room'));
 
-    expect(screen.queryByDisplayValue('New mission')).not.toBeInTheDocument();
+    expect(await screen.findByDisplayValue('New mission')).toBeInTheDocument();
   });
 
   it.skip('should show error message when adding a new mission has failed', async () => {

@@ -32,13 +32,13 @@ describe('<PlayerKilledModal />', () => {
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, async (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ status: RoomStatus.IN_GAME })),
       ),
-      rest.get(PLAYER_TARGET_ENDPOINT, async (_req, res, ctx) =>
+      rest.get(PLAYER_TARGET_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ id: 1, name: 'Neo' })),
       ),
-      rest.get(MISSION_ENDPOINT, async (_req, res, ctx) =>
+      rest.get(MISSION_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ id: 200, content: 'Do something' })),
       ),
     );

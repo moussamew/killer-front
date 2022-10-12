@@ -11,7 +11,7 @@ export function CreateMission(): JSX.Element {
   const { createMission } = useCreateMission();
 
   const handleMission = ({ target }: ChangeEvent<HTMLInputElement>): void => {
-    setMission(target.value.toUpperCase());
+    setMission(target.value);
   };
 
   const handleCreateMission = (): void => {

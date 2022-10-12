@@ -18,19 +18,6 @@ describe('<PlayerMissions />', () => {
     expect(await screen.findByPlaceholderText('Make him drink his glass dry'));
   });
 
-  it('should update the mission value inside the mission input after user changes', async () => {
-    renderWithProviders(<PlayerMissions roomCode="X5VKT" />);
-
-    fireEvent.change(
-      await screen.findByPlaceholderText('Make him drink his glass dry'),
-      { target: { value: 'Rundown a League of Legends game' } },
-    );
-
-    expect(
-      screen.getByDisplayValue('Rundown a League of Legends game'),
-    ).toBeInTheDocument();
-  });
-
   it('should remove a mission', async () => {
     server.use(
       rest.get(PLAYER_MISSION_ENDPOINT, async (_req, res, ctx) =>

@@ -40,11 +40,10 @@ describe('<PlayerList />', () => {
       </MemoryRouter>,
     );
 
-    expect(
-      await screen.findByText('Criminals in the room'),
-    ).toBeInTheDocument();
-    expect(screen.getByText('Neo')).toBeInTheDocument();
-    expect(screen.getByText('Trinity')).toBeInTheDocument();
-    expect(screen.getByText('Morpheus')).toBeInTheDocument();
+    screen.getByText('Criminals in the room');
+
+    expect(await screen.findByText('Neo')).toBeInTheDocument();
+    expect(await screen.findByText('Trinity')).toBeInTheDocument();
+    expect(await screen.findByText('Morpheus')).toBeInTheDocument();
   });
 });

@@ -1,10 +1,11 @@
-import { ChangeEvent, Fragment, useState } from 'react';
+import { ChangeEvent, Fragment, useContext, useState } from 'react';
 import tw from 'tailwind-styled-components';
 
 import Room from '@/assets/icons/room.svg';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
+import { ModalContext } from '@/hooks/context/modal';
 import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
 import { usePlayerSession } from '@/services/player/queries';
 
@@ -26,6 +27,7 @@ export function JoinRoomModal(): JSX.Element {
   const { playerSession } = usePlayerSession();
   const { createPlayer } = useCreatePlayer();
   const { updatePlayer } = useUpdatePlayer();
+  const { closeModal } = useContext(ModalContext);
 
   const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
     setPseudo(target.value.toUpperCase());
@@ -37,10 +39,13 @@ export function JoinRoomModal(): JSX.Element {
 
   const handleJoinRoom = (): void => {
     if (!playerSession?.name) {
-      return createPlayer.mutate({ name: pseudo, roomCode });
+      return createPlayer.mutate(
+        { name: pseudo, roomCode },
+        { onSuccess: closeModal },
+      );
     }
 
-    return updatePlayer.mutate({ roomCode });
+    return updatePlayer.mutate({ roomCode }, { onSuccess: closeModal });
   };
 
   return (

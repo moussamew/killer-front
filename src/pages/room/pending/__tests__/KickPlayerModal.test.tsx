@@ -26,7 +26,7 @@ describe('<KickPlayerModal />', () => {
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/X7VBD/players`, async (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/X7VBD/players`, (_req, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json([

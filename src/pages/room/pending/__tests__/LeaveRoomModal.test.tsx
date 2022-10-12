@@ -48,7 +48,7 @@ describe('<LeaveRoomModal />', () => {
     );
 
     expect(
-      screen.queryByText(' Leave the current room'),
+      screen.queryByText('Leave the current room'),
     ).not.toBeInTheDocument();
   });
 });

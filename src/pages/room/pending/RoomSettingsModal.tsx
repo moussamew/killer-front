@@ -1,10 +1,11 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
+import { ModalContext } from '@/hooks/context/modal';
 import { useDeleteRoom } from '@/services/room/mutations';
 
 const Title = tw.h2`
@@ -13,6 +14,7 @@ const Title = tw.h2`
 
 export function RoomSettingsModal(): JSX.Element {
   const { roomCode } = useParams();
+  const { closeModal } = useContext(ModalContext);
   const [inputRoomCode, setInputRoomCode] = useState('');
   const { deleteRoom } = useDeleteRoom();
 
@@ -23,7 +25,7 @@ export function RoomSettingsModal(): JSX.Element {
   };
 
   const handleDeleteRoom = (): void => {
-    deleteRoom.mutate(inputRoomCode);
+    deleteRoom.mutate(inputRoomCode, { onSuccess: closeModal });
   };
 
   return (

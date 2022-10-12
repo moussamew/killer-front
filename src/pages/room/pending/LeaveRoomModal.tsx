@@ -1,7 +1,9 @@
+import { useContext } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { Button } from '@/components/Button';
 import t from '@/helpers/translate';
+import { ModalContext } from '@/hooks/context/modal';
 import { useUpdatePlayer } from '@/services/player/mutations';
 
 const HeadContent = tw.div`
@@ -19,9 +21,10 @@ const TextContent = tw.div`
 
 export function LeaveRoomModal(): JSX.Element {
   const { updatePlayer } = useUpdatePlayer();
+  const { closeModal } = useContext(ModalContext);
 
-  const leaveRoom = async (): Promise<void> => {
-    updatePlayer.mutate({ roomCode: null });
+  const handleLeaveRoom = (): void => {
+    updatePlayer.mutate({ roomCode: null }, { onSuccess: closeModal });
   };
 
   return (
@@ -32,7 +35,10 @@ export function LeaveRoomModal(): JSX.Element {
       <TextContent>
         <p>{t('room.leave_room_warning')}</p>
       </TextContent>
-      <Button content={t('room.leave_room_confirmation')} onClick={leaveRoom} />
+      <Button
+        content={t('room.leave_room_confirmation')}
+        onClick={handleLeaveRoom}
+      />
     </div>
   );
 }

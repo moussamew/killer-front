@@ -1,8 +1,9 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import tw from 'tailwind-styled-components';
 
 import { Button } from '@/components/Button';
 import t from '@/helpers/translate';
+import { ModalContext } from '@/hooks/context/modal';
 import { PlayerStatus } from '@/services/player/constants';
 import { useUpdatePlayer } from '@/services/player/mutations';
 
@@ -21,9 +22,13 @@ const TextContent = tw.div`
 
 export function PlayerKilledModal(): JSX.Element {
   const { updatePlayer } = useUpdatePlayer();
+  const { closeModal } = useContext(ModalContext);
 
   const handleKillPlayer = (): void => {
-    updatePlayer.mutate({ status: PlayerStatus.KILLED });
+    updatePlayer.mutate(
+      { status: PlayerStatus.KILLED },
+      { onSuccess: closeModal },
+    );
   };
 
   return (

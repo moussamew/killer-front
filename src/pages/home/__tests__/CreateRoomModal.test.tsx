@@ -1,4 +1,8 @@
-import { fireEvent, screen } from '@testing-library/react';
+import {
+  fireEvent,
+  screen,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 import { rest } from 'msw';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -31,9 +35,9 @@ describe('<CreateRoomModal />', () => {
 
     fireEvent.click(screen.getByText('Create my room'));
 
-    expect(screen.queryByText('Create my room')).not.toBeInTheDocument();
+    await waitForElementToBeRemoved(() => screen.queryByText('Create my room'));
 
-    screen.debug();
+    expect(screen.queryByText('Create my room')).not.toBeInTheDocument();
   });
 
   it.skip('should show error message while creating new player with a new room', async () => {
