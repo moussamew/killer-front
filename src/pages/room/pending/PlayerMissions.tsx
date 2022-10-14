@@ -41,7 +41,7 @@ interface Props {
 }
 
 export function PlayerMissions({ roomCode }: Props): JSX.Element {
-  const { playerMissions } = usePlayerMissions(roomCode!);
+  const { playerMissions } = usePlayerMissions(roomCode);
   const { deleteMission } = useDeleteMission();
 
   const handleDeleteMission = (missionId: number) => (): void => {

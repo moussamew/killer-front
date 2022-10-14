@@ -24,7 +24,6 @@ export interface TargetInfosQuery {
 
 export interface PlayerMissionsQuery {
   playerMissions: Mission[] | undefined;
-  refetchPlayerMissions(): Promise<QueryObserverResult<Mission[], unknown>>;
 }
 
 export interface CreateMissionMutation {
