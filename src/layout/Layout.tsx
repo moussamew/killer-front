@@ -21,6 +21,8 @@ export function Layout({ children }: Props): JSX.Element {
   return (
     <Fragment>
       <Header />
+      <p>{navigator.userAgent}</p>
+      <p>{document.referrer}</p>
       <Content>{children}</Content>
       {modal && <Modal closeModal={closeModal}>{modal}</Modal>}
     </Fragment>
