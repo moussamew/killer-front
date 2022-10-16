@@ -6,6 +6,7 @@ import { Button } from '@/components/Button';
 import { RESET_STATE_DELAY_MS } from '@/constants/common';
 import { JOIN_ROOM_ROUTE } from '@/constants/endpoints';
 import t from '@/helpers/translate';
+import { useCreateNavigatorClipboard } from '@/services/common/mutations';
 
 interface Props {
   roomCode: string;
@@ -14,6 +15,7 @@ interface Props {
 export function ShareRoomLink({ roomCode }: Props): JSX.Element {
   const [alertMessage, setAlertMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const { createNavigatorClipboard } = useCreateNavigatorClipboard();
 
   /**
    * Remove the success message after a specific delay.
@@ -25,30 +27,25 @@ export function ShareRoomLink({ roomCode }: Props): JSX.Element {
   }, [successMessage]);
 
   const saveRoomLink = async (): Promise<void> => {
-    const joinRoomLink = `${JOIN_ROOM_ROUTE}/${roomCode}`;
+    const roomLink = `${JOIN_ROOM_ROUTE}/${roomCode}`;
 
     if (navigator.share) {
       return navigator.share({
         title: 'Killerparty',
         text: t('room.share_room_text'),
-        url: joinRoomLink,
+        url: roomLink,
       });
     }
 
     if (!navigator.clipboard) {
-      return setAlertMessage(
-        t('common.link_without_clipboard', { link: joinRoomLink }),
-      );
+      return setAlertMessage(t('common.link_without_clipboard', { roomLink }));
     }
 
-    return navigator.clipboard
-      .writeText(joinRoomLink)
-      .then(() => setSuccessMessage(t('common.link_saved')))
-      .catch(() =>
-        setAlertMessage(
-          t('common.link_without_clipboard', { link: joinRoomLink }),
-        ),
-      );
+    return createNavigatorClipboard.mutate(roomLink, {
+      onSuccess: () => setSuccessMessage(t('common.link_saved')),
+      onError: () =>
+        setAlertMessage(t('common.link_without_clipboard', { roomLink })),
+    });
   };
 
   return (

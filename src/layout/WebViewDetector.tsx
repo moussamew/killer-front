@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Mobile from '@/assets/icons/mobile.svg';
 import Killerparty from '@/assets/images/killerparty.png';
 import { AlertMessage } from '@/components/AlertMessage';
 import { Button } from '@/components/Button';
-import { AppLogo, WebViewApp } from '@/constants/webview';
+import { AppLogo, TWITTER_WEBVIEW_URL, WebViewApp } from '@/constants/webview';
 import t from '@/helpers/translate';
+import { useCreateNavigatorClipboard } from '@/services/common/mutations';
 
 import { Layout } from './Layout';
 
-const { Instagram, Messenger } = WebViewApp;
+const { Instagram, Messenger, Twitter } = WebViewApp;
 
 const Content = tw.div`
   text-center 
@@ -34,13 +34,10 @@ interface Props {
 }
 
 export function WebViewDetector({ children }: Props): JSX.Element {
-  const [webViewApp, setWebViewApp] = useState<string | null>(null);
-  const [linkSaved, setLinkSaved] = useState<string | null>(null);
-  const [linkWithoutClipboard, setLinkWithoutClipboard] = useState<
-    string | null
-  >(null);
-
-  const navigate = useNavigate();
+  const [webViewApp, setWebViewApp] = useState('');
+  const [linkSaved, setLinkSaved] = useState('');
+  const [linkWithoutClipboard, setLinkWithoutClipboard] = useState('');
+  const { createNavigatorClipboard } = useCreateNavigatorClipboard();
 
   useEffect(() => {
     [Instagram, Messenger].forEach((app) => {
@@ -48,31 +45,32 @@ export function WebViewDetector({ children }: Props): JSX.Element {
         setWebViewApp(app);
       }
     });
-  }, [navigate]);
+
+    if (document.referrer.startsWith(TWITTER_WEBVIEW_URL)) {
+      setWebViewApp(Twitter);
+    }
+  }, []);
 
   if (!webViewApp) {
     return children;
   }
 
-  const saveLink = async (): Promise<void> => {
+  const saveLink = (): void => {
+    const roomLink = window.location.href;
+
     if (!navigator.clipboard) {
       return setLinkWithoutClipboard(
-        t('common.link_without_clipboard', {
-          link: window.location.href,
-        }),
+        t('common.link_without_clipboard', { roomLink }),
       );
     }
 
-    return navigator.clipboard
-      .writeText(window.location.href)
-      .then(() => setLinkSaved(t('common.link_saved')))
-      .catch(() =>
+    return createNavigatorClipboard.mutate(roomLink, {
+      onSuccess: () => setLinkSaved(t('common.link_saved')),
+      onError: () =>
         setLinkWithoutClipboard(
-          t('common.link_without_clipboard', {
-            link: window.location.href,
-          }),
+          t('common.link_without_clipboard', { roomLink }),
         ),
-      );
+    });
   };
 
   return (

@@ -1,7 +1,8 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import { JOIN_ROOM_ROUTE } from '@/constants/endpoints';
+import { renderWithProviders } from '@/tests/utils';
 
 import { ShareRoomLink } from '../ShareRoomLink';
 
@@ -14,7 +15,7 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    render(<ShareRoomLink roomCode="P9LDG" />);
+    renderWithProviders(<ShareRoomLink roomCode="P9LDG" />);
 
     fireEvent.click(screen.getByText('Share link to join the room'));
 
@@ -32,7 +33,7 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    render(<ShareRoomLink roomCode="P9LDG" />);
+    renderWithProviders(<ShareRoomLink roomCode="P9LDG" />);
 
     fireEvent.click(screen.getByText('Share link to join the room'));
 
@@ -54,17 +55,17 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    render(<ShareRoomLink roomCode="P9LDG" />);
+    renderWithProviders(<ShareRoomLink roomCode="P9LDG" />);
 
     fireEvent.click(screen.getByText('Share link to join the room'));
 
+    expect(
+      await screen.findByText('Link saved in the clipboard!'),
+    ).toBeInTheDocument();
     expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
     expect(spyNavigatorClipboard).toHaveBeenCalledWith(
       `${JOIN_ROOM_ROUTE}/P9LDG`,
     );
-    expect(
-      await screen.findByText('Link saved in the clipboard!'),
-    ).toBeInTheDocument();
   });
 
   it('should show directly the room link if the clipboard cant be performed', async () => {
@@ -78,19 +79,19 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    render(<ShareRoomLink roomCode="P9LDG" />);
+    renderWithProviders(<ShareRoomLink roomCode="P9LDG" />);
 
     fireEvent.click(screen.getByText('Share link to join the room'));
 
-    expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
-    expect(spyNavigatorClipboard).toHaveBeenCalledWith(
-      `${JOIN_ROOM_ROUTE}/P9LDG`,
-    );
     expect(
       await screen.findByText(
         `Copy and paste the following link: ${JOIN_ROOM_ROUTE}/P9LDG`,
       ),
     ).toBeInTheDocument();
+    expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
+    expect(spyNavigatorClipboard).toHaveBeenCalledWith(
+      `${JOIN_ROOM_ROUTE}/P9LDG`,
+    );
   });
 
   it('should let the user close the alert message if needed', async () => {
@@ -99,7 +100,7 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    render(<ShareRoomLink roomCode="P9LDG" />);
+    renderWithProviders(<ShareRoomLink roomCode="P9LDG" />);
 
     fireEvent.click(screen.getByText('Share link to join the room'));
 

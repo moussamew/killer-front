@@ -2,7 +2,7 @@ import { fireEvent, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 
-import { WebViewApp } from '@/constants/webview';
+import { TWITTER_WEBVIEW_URL, WebViewApp } from '@/constants/webview';
 import { renderWithProviders } from '@/tests/utils';
 
 import { WebViewDetector } from '../WebViewDetector';
@@ -157,5 +157,27 @@ describe('<WebViewDetector />', () => {
     expect(spyNavigatorClipboard).toHaveBeenCalledWith(
       'https://killerparty.com/join/P9LDG',
     );
+  });
+
+  it('should detect Twitter webview', async () => {
+    Object.defineProperty(document, 'referrer', {
+      value: TWITTER_WEBVIEW_URL,
+      writable: true,
+    });
+
+    renderWithProviders(
+      <MemoryRouter>
+        <WebViewDetector>
+          <p>Children!</p>
+        </WebViewDetector>
+      </MemoryRouter>,
+    );
+
+    expect(await screen.findByText('Opened from Twitter')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Access to Killer Party from a third party app is restricted for game experience reasons.',
+      ),
+    ).toBeInTheDocument();
   });
 });
