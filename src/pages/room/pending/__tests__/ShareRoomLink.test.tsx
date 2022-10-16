@@ -45,10 +45,12 @@ describe('<ShareRoomLink />', () => {
   });
 
   it('should save the room link in clipboard if share is not available', async () => {
+    const spyNavigatorClipboard = vi.fn().mockResolvedValue('');
+
     Object.defineProperty(window, 'navigator', {
       value: {
         share: null,
-        clipboard: { writeText: vi.fn().mockResolvedValue('') },
+        clipboard: { writeText: spyNavigatorClipboard },
       },
       writable: true,
     });
@@ -60,13 +62,19 @@ describe('<ShareRoomLink />', () => {
     expect(
       await screen.findByText('Link saved in the clipboard!'),
     ).toBeInTheDocument();
+    expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
+    expect(spyNavigatorClipboard).toHaveBeenCalledWith(
+      `${JOIN_ROOM_ROUTE}/P9LDG`,
+    );
   });
 
   it('should show directly the room link if the clipboard cant be performed', async () => {
+    const spyNavigatorClipboard = vi.fn().mockRejectedValue('');
+
     Object.defineProperty(window, 'navigator', {
       value: {
         share: null,
-        clipboard: { writeText: vi.fn().mockRejectedValue('') },
+        clipboard: { writeText: spyNavigatorClipboard },
       },
       writable: true,
     });
@@ -80,6 +88,10 @@ describe('<ShareRoomLink />', () => {
         `Copy and paste the following link: ${JOIN_ROOM_ROUTE}/P9LDG`,
       ),
     ).toBeInTheDocument();
+    expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
+    expect(spyNavigatorClipboard).toHaveBeenCalledWith(
+      `${JOIN_ROOM_ROUTE}/P9LDG`,
+    );
   });
 
   it('should let the user close the alert message if needed', async () => {
