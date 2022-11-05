@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import Share from '@/assets/icons/share.svg';
 import { AlertMessage } from '@/components/AlertMessage';
@@ -8,11 +9,8 @@ import { JOIN_ROOM_ROUTE } from '@/constants/endpoints';
 import t from '@/helpers/translate';
 import { useCreateNavigatorClipboard } from '@/services/common/mutations';
 
-interface Props {
-  roomCode: string;
-}
-
-export function ShareRoomLink({ roomCode }: Props): JSX.Element {
+export function ShareRoomLink(): JSX.Element {
+  const { roomCode } = useParams();
   const [alertMessage, setAlertMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const { createNavigatorClipboard } = useCreateNavigatorClipboard();

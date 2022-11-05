@@ -17,7 +17,7 @@ export async function request<T>({
 
   const result = await response.json().catch(() => {
     // eslint-disable-next-line no-console
-    /*     console.error(`${method} > ${url} does not have JSON response format.`); */
+    console.error(`${method} > ${url} does not have JSON response format.`);
   });
 
   if (result?.errorCode) {

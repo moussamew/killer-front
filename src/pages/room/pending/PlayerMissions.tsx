@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 import Delete from '@/assets/icons/delete.svg';
@@ -36,12 +37,9 @@ const DeleteMission = tw.img`
   -top-1 -right-1
 `;
 
-interface Props {
-  roomCode: string;
-}
-
-export function PlayerMissions({ roomCode }: Props): JSX.Element {
-  const { playerMissions } = usePlayerMissions(roomCode);
+export function PlayerMissions(): JSX.Element {
+  const { roomCode } = useParams();
+  const { playerMissions } = usePlayerMissions(roomCode!);
   const { deleteMission } = useDeleteMission();
 
   const handleDeleteMission = (missionId: number) => (): void => {

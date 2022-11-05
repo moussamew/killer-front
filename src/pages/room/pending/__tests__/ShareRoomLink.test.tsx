@@ -1,4 +1,5 @@
 import { fireEvent, screen } from '@testing-library/react';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { vi } from 'vitest';
 
 import { JOIN_ROOM_ROUTE } from '@/constants/endpoints';
@@ -15,7 +16,13 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    renderWithProviders(<ShareRoomLink roomCode="P9LDG" />);
+    renderWithProviders(
+      <MemoryRouter initialEntries={['/room/P9LDG']}>
+        <Routes>
+          <Route path="/room/:roomCode" element={<ShareRoomLink />} />
+        </Routes>
+      </MemoryRouter>,
+    );
 
     fireEvent.click(screen.getByText('Share link to join the room'));
 
@@ -33,7 +40,13 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    renderWithProviders(<ShareRoomLink roomCode="P9LDG" />);
+    renderWithProviders(
+      <MemoryRouter initialEntries={['/room/P9LDG']}>
+        <Routes>
+          <Route path="/room/:roomCode" element={<ShareRoomLink />} />
+        </Routes>
+      </MemoryRouter>,
+    );
 
     fireEvent.click(screen.getByText('Share link to join the room'));
 
@@ -55,7 +68,13 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    renderWithProviders(<ShareRoomLink roomCode="P9LDG" />);
+    renderWithProviders(
+      <MemoryRouter initialEntries={['/room/P9LDG']}>
+        <Routes>
+          <Route path="/room/:roomCode" element={<ShareRoomLink />} />
+        </Routes>
+      </MemoryRouter>,
+    );
 
     fireEvent.click(screen.getByText('Share link to join the room'));
 
@@ -79,7 +98,13 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    renderWithProviders(<ShareRoomLink roomCode="P9LDG" />);
+    renderWithProviders(
+      <MemoryRouter initialEntries={['/room/P9LDG']}>
+        <Routes>
+          <Route path="/room/:roomCode" element={<ShareRoomLink />} />
+        </Routes>
+      </MemoryRouter>,
+    );
 
     fireEvent.click(screen.getByText('Share link to join the room'));
 
@@ -100,7 +125,13 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    renderWithProviders(<ShareRoomLink roomCode="P9LDG" />);
+    renderWithProviders(
+      <MemoryRouter initialEntries={['/room/P9LDG']}>
+        <Routes>
+          <Route path="/room/:roomCode" element={<ShareRoomLink />} />
+        </Routes>
+      </MemoryRouter>,
+    );
 
     fireEvent.click(screen.getByText('Share link to join the room'));
 
