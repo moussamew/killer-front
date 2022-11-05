@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import tw from 'tailwind-styled-components';
 
 import { isPromise } from '@/helpers/utils';
@@ -52,12 +53,17 @@ export function Button({
   const [isLoading, setLoading] = useState(false);
 
   const handleClick = async (): Promise<void> => {
-    setLoading(true);
+    if (isPromise(onClick)) {
+      setLoading(true);
 
-    // eslint-disable-next-line no-unused-expressions
-    isPromise(onClick) ? await onClick() : onClick();
+      await onClick().catch((error) => {
+        toast.error(error.message);
+      });
 
-    setLoading(false);
+      return setLoading(false);
+    }
+
+    return onClick();
   };
 
   return (

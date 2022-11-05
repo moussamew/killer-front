@@ -1,4 +1,5 @@
 import { render } from 'react-dom';
+import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { ModalProvider } from '@/hooks/context/modal';
@@ -22,6 +23,15 @@ function App(): JSX.Element {
     <QueryClientProvider client={queryClient}>
       <ModalProvider>
         <AppRoutes />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            style: {
+              fontSize: '1.6rem',
+              backgroundColor: '#FBF6F0',
+            },
+          }}
+        />
       </ModalProvider>
     </QueryClientProvider>
   );
