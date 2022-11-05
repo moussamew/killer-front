@@ -1,7 +1,7 @@
 import { render } from 'react-dom';
-import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
+import { Notifications } from '@/components/Notifications';
 import { ModalProvider } from '@/hooks/context/modal';
 import { AppRoutes } from '@/routes';
 
@@ -23,7 +23,7 @@ function App(): JSX.Element {
     <QueryClientProvider client={queryClient}>
       <ModalProvider>
         <AppRoutes />
-        <Toaster position="top-center" />
+        <Notifications />
       </ModalProvider>
     </QueryClientProvider>
   );

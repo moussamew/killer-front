@@ -5,3 +5,11 @@ export const errorStyle = {
     color: '#fff',
   },
 };
+
+export const successStyle = {
+  style: {
+    fontSize: '1.6rem',
+    backgroundColor: '#5CB85C',
+    color: '#fff',
+  },
+};
