@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import tw from 'tailwind-styled-components';
 
+import { errorStyle } from '@/constants/styles';
 import { isPromise } from '@/helpers/utils';
 
 import { Spinner } from './Spinner';
@@ -56,11 +57,11 @@ export function Button({
     if (isPromise(onClick)) {
       setLoading(true);
 
-      await onClick().catch((error) => {
-        toast.error(error.message);
-      });
-
-      return setLoading(false);
+      return onClick()
+        .catch((error) => {
+          toast.error(error.message, errorStyle);
+        })
+        .finally(() => setLoading(false));
     }
 
     return onClick();

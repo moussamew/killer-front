@@ -23,15 +23,7 @@ function App(): JSX.Element {
     <QueryClientProvider client={queryClient}>
       <ModalProvider>
         <AppRoutes />
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            style: {
-              fontSize: '1.6rem',
-              backgroundColor: '#FBF6F0',
-            },
-          }}
-        />
+        <Toaster position="top-center" />
       </ModalProvider>
     </QueryClientProvider>
   );
