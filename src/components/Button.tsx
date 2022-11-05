@@ -3,7 +3,6 @@ import tw from 'tailwind-styled-components';
 
 import { isPromise } from '@/helpers/utils';
 
-import { ErrorMessage } from './ErrorMessage';
 import { Spinner } from './Spinner';
 
 const Content = tw.div`
@@ -51,30 +50,14 @@ export function Button({
   icon,
 }: Props): JSX.Element {
   const [isLoading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
-
-  const cleanErrorMessage = (): void => {
-    if (errorMessage) {
-      setErrorMessage(null);
-    }
-  };
 
   const handleClick = async (): Promise<void> => {
-    if (isPromise(onClick)) {
-      setLoading(true);
+    setLoading(true);
 
-      return onClick()
-        .then(() => {
-          setLoading(false);
-          cleanErrorMessage();
-        })
-        .catch((error) => {
-          setLoading(false);
-          setErrorMessage(error.message);
-        });
-    }
+    // eslint-disable-next-line no-unused-expressions
+    isPromise(onClick) ? await onClick() : onClick();
 
-    return onClick();
+    setLoading(false);
   };
 
   return (
@@ -89,12 +72,6 @@ export function Button({
         {isLoading && <Spinner />}
         <Text $textColor={textColor}>{content}</Text>
       </StyledButton>
-      {errorMessage && (
-        <ErrorMessage
-          message={errorMessage}
-          closeMessage={() => setErrorMessage(null)}
-        />
-      )}
     </Content>
   );
 }

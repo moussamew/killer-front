@@ -14,8 +14,10 @@ export function CreateMission(): JSX.Element {
     setMission(target.value);
   };
 
-  const handleCreateMission = (): void => {
-    createMission.mutate(mission, { onSuccess: () => setMission('') });
+  const handleCreateMission = async (): Promise<void> => {
+    await createMission.mutateAsync(mission, {
+      onSuccess: () => setMission(''),
+    });
   };
 
   return (
