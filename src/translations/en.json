@@ -72,8 +72,7 @@
     "restricted_access": "Access to Killer Party from a third party app is restricted for game experience reasons.",
     "how_to_play": "Okay, but how can we play?",
     "click_button_bellow": "By clicking on the button below, you can copy and paste the link directly into your browser.",
-    "save_link": "Save link in the clipboard",
-    "link_saved_explanation": "Go to your mobile browser and simply paste the link to access our application!"
+    "save_link": "Save link in the clipboard"
   },
   "common": {
     "create_pseudo_label": "Before starting, create your pseudo",

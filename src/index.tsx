@@ -1,6 +1,7 @@
 import { render } from 'react-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
+import { Notifications } from '@/components/Notifications';
 import { ModalProvider } from '@/hooks/context/modal';
 import { AppRoutes } from '@/routes';
 
@@ -22,6 +23,7 @@ function App(): JSX.Element {
     <QueryClientProvider client={queryClient}>
       <ModalProvider>
         <AppRoutes />
+        <Notifications />
       </ModalProvider>
     </QueryClientProvider>
   );

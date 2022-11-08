@@ -24,8 +24,8 @@ export function RoomSettingsModal(): JSX.Element {
     setInputRoomCode(target.value.toUpperCase());
   };
 
-  const handleDeleteRoom = (): void => {
-    deleteRoom.mutate(inputRoomCode, { onSuccess: closeModal });
+  const handleDeleteRoom = async (): Promise<void> => {
+    await deleteRoom.mutateAsync(inputRoomCode, { onSuccess: closeModal });
   };
 
   return (

@@ -20,8 +20,11 @@ const ErrorReason = tw.p`
 
 export function NotFoundPage(): JSX.Element {
   const navigate = useNavigate();
-
   const { state: errorMessage } = useLocation();
+
+  const handleGoBack = (): void => {
+    navigate('/');
+  };
 
   return (
     <Layout>
@@ -35,10 +38,7 @@ export function NotFoundPage(): JSX.Element {
         )}
       </SectionTitle>
       <Image alt="notFound" src={NotFoundSrc} />
-      <Button
-        content={t('not_found.back_home')}
-        onClick={() => navigate('/')}
-      />
+      <Button content={t('not_found.back_home')} onClick={handleGoBack} />
     </Layout>
   );
 }

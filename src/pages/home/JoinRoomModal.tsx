@@ -24,10 +24,11 @@ const Icon = tw.img`
 export function JoinRoomModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
   const [roomCode, setRoomCode] = useState('');
+
+  const { closeModal } = useContext(ModalContext);
   const { playerSession } = usePlayerSession();
   const { createPlayer } = useCreatePlayer();
   const { updatePlayer } = useUpdatePlayer();
-  const { closeModal } = useContext(ModalContext);
 
   const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
     setPseudo(target.value);
@@ -37,15 +38,15 @@ export function JoinRoomModal(): JSX.Element {
     setRoomCode(target.value.toUpperCase());
   };
 
-  const handleJoinRoom = (): void => {
+  const handleJoinRoom = async (): Promise<void> => {
     if (!playerSession?.name) {
-      return createPlayer.mutate(
+      return createPlayer.mutateAsync(
         { name: pseudo.toUpperCase(), roomCode },
         { onSuccess: closeModal },
       );
     }
 
-    return updatePlayer.mutate({ roomCode }, { onSuccess: closeModal });
+    return updatePlayer.mutateAsync({ roomCode }, { onSuccess: closeModal });
   };
 
   return (

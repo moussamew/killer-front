@@ -13,10 +13,10 @@ export function useTargetInfos(): TargetInfosQuery {
 }
 
 export function usePlayerMissions(roomCode: string): PlayerMissionsQuery {
-  const { data: playerMissions, refetch: refetchPlayerMissions } = useQuery(
+  const { data: playerMissions } = useQuery(
     ['playerMissions', roomCode],
     getPlayerMissionsRequest,
   );
 
-  return { playerMissions, refetchPlayerMissions };
+  return { playerMissions };
 }

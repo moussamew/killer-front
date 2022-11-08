@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import tw from 'tailwind-styled-components';
 
 import Mobile from '@/assets/icons/mobile.svg';
 import Killerparty from '@/assets/images/killerparty.png';
 import { AlertMessage } from '@/components/AlertMessage';
 import { Button } from '@/components/Button';
+import { successStyle } from '@/constants/styles';
 import { AppLogo, TWITTER_WEBVIEW_URL, WebViewApp } from '@/constants/webview';
 import t from '@/helpers/translate';
 import { useCreateNavigatorClipboard } from '@/services/common/mutations';
@@ -35,7 +37,7 @@ interface Props {
 
 export function WebViewDetector({ children }: Props): JSX.Element {
   const [webViewApp, setWebViewApp] = useState('');
-  const [linkSaved, setLinkSaved] = useState('');
+
   const [linkWithoutClipboard, setLinkWithoutClipboard] = useState('');
   const { createNavigatorClipboard } = useCreateNavigatorClipboard();
 
@@ -65,7 +67,9 @@ export function WebViewDetector({ children }: Props): JSX.Element {
     }
 
     return createNavigatorClipboard.mutate(roomLink, {
-      onSuccess: () => setLinkSaved(t('common.link_saved')),
+      onSuccess: () => {
+        toast.success(t('common.link_saved'), successStyle);
+      },
       onError: () =>
         setLinkWithoutClipboard(
           t('common.link_without_clipboard', { roomLink }),
@@ -81,15 +85,9 @@ export function WebViewDetector({ children }: Props): JSX.Element {
         <Text>{t('layout.restricted_access')}</Text>
         <WebViewImage src={AppLogo[webViewApp]} />
         <h2>{t('layout.how_to_play')}</h2>
-        <Text>
-          {t(
-            linkSaved
-              ? 'layout.link_saved_explanation'
-              : 'layout.click_button_bellow',
-          )}
-        </Text>
+        <Text>{t('layout.click_button_bellow')}</Text>
         <Button
-          content={linkSaved || t('layout.save_link')}
+          content={t('layout.save_link')}
           icon={Mobile}
           onClick={saveLink}
         />

@@ -23,8 +23,11 @@ export function LeaveRoomModal(): JSX.Element {
   const { updatePlayer } = useUpdatePlayer();
   const { closeModal } = useContext(ModalContext);
 
-  const handleLeaveRoom = (): void => {
-    updatePlayer.mutate({ roomCode: null }, { onSuccess: closeModal });
+  const handleLeaveRoom = async (): Promise<void> => {
+    await updatePlayer.mutateAsync(
+      { roomCode: null },
+      { onSuccess: closeModal },
+    );
   };
 
   return (

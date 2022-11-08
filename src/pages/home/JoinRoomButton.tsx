@@ -9,12 +9,16 @@ import { JoinRoomModal } from './JoinRoomModal';
 export function JoinRoomButton(): JSX.Element {
   const { openModal } = useContext(ModalContext);
 
+  const handleJoinRoom = (): void => {
+    openModal(<JoinRoomModal />);
+  };
+
   return (
     <Button
       content={t('home.join_room')}
       buttonColor="bg-yellow-200"
       textColor="text-lightDark"
-      onClick={() => openModal(<JoinRoomModal />)}
+      onClick={handleJoinRoom}
     />
   );
 }

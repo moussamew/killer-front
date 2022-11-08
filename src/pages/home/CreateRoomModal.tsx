@@ -31,8 +31,8 @@ export function CreateRoomModal(): JSX.Element {
     setPseudo(target.value);
   };
 
-  const handleCreateRoom = (): void => {
-    createPlayer.mutate(
+  const handleCreateRoom = async (): Promise<void> => {
+    await createPlayer.mutateAsync(
       { name: pseudo.toUpperCase() },
       {
         onSuccess: () =>
