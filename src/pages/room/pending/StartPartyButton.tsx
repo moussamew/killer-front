@@ -9,8 +9,8 @@ export function StartPartyButton(): JSX.Element {
   const { roomCode } = useParams();
   const { startParty } = useStartParty();
 
-  const handleStartParty = (): void => {
-    startParty.mutate(roomCode!);
+  const handleStartParty = async (): Promise<void> => {
+    await startParty.mutateAsync(roomCode!);
   };
 
   return (

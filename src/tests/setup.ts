@@ -6,6 +6,16 @@ import { server } from './server';
 
 global.EventSource = EventSource;
 
+Object.defineProperty(window, 'matchMedia', {
+  value: () => {
+    return {
+      matches: false,
+      addListener: () => {},
+      removeListener: () => {},
+    };
+  },
+});
+
 /**
  * Enable API mocking before tests.
  */

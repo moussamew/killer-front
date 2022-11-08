@@ -14,12 +14,12 @@ export function CreateRoomButton(): JSX.Element {
   const { playerSession } = usePlayerSession();
   const { createRoom } = useCreateRoom();
 
-  const handleCreateRoom = (): void => {
-    if (!playerSession?.name) {
-      return openModal(<CreateRoomModal />);
+  const handleCreateRoom = async (): Promise<void> => {
+    if (playerSession?.name) {
+      await createRoom.mutateAsync();
+    } else {
+      openModal(<CreateRoomModal />);
     }
-
-    return createRoom.mutate();
   };
 
   return (

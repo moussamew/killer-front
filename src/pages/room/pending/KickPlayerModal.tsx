@@ -30,8 +30,8 @@ export function KickPlayerModal({ playerName, playerId }: Props): JSX.Element {
   const { kickPlayer } = useKickPlayer();
   const { closeModal } = useContext(ModalContext);
 
-  const handleKickPlayer = (): void => {
-    kickPlayer.mutate(
+  const handleKickPlayer = async (): Promise<void> => {
+    await kickPlayer.mutateAsync(
       { id: playerId, roomCode: roomCode! },
       { onSuccess: closeModal },
     );

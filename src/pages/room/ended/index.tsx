@@ -23,7 +23,7 @@ export function EndedRoomPage(): JSX.Element {
   const { roomPlayers } = useRoomPlayers(roomCode!);
   const { updatePlayer } = useUpdatePlayer();
 
-  const handleLeaveRoom = (): void => {
+  const handleLeaveRoom = async (): Promise<void> => {
     updatePlayer.mutate({ roomCode: null });
   };
 
