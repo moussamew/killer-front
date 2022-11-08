@@ -24,8 +24,8 @@ export function PlayerKilledModal(): JSX.Element {
   const { updatePlayer } = useUpdatePlayer();
   const { closeModal } = useContext(ModalContext);
 
-  const handleKillPlayer = (): void => {
-    updatePlayer.mutate(
+  const handleKillPlayer = async (): Promise<void> => {
+    await updatePlayer.mutateAsync(
       { status: PlayerStatus.KILLED },
       { onSuccess: closeModal },
     );

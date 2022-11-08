@@ -12,7 +12,7 @@ import { renderWithProviders } from '@/tests/utils';
 
 describe('<PlayerMissions />', () => {
   it('should show the input to create a new Mission', async () => {
-    renderWithProviders(<PlayerMissions roomCode="X5VKT" />);
+    renderWithProviders(<PlayerMissions />);
 
     expect(await screen.findByText('Manage my missions'));
     expect(await screen.findByPlaceholderText('Make him drink his glass dry'));
@@ -28,7 +28,7 @@ describe('<PlayerMissions />', () => {
       ),
     );
 
-    renderWithProviders(<PlayerMissions roomCode="X5VKT" />);
+    renderWithProviders(<PlayerMissions />);
 
     await screen.findByText('Drink Jack Daniels');
 

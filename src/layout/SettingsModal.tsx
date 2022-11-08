@@ -39,8 +39,8 @@ export function SettingsModal(): JSX.Element {
     setPseudo(target.value);
   };
 
-  const updatePlayerPseudo = (): void => {
-    updatePlayer.mutate({ name: pseudo.toUpperCase() });
+  const updatePlayerPseudo = async (): Promise<void> => {
+    await updatePlayer.mutateAsync({ name: pseudo.toUpperCase() });
   };
 
   return (
