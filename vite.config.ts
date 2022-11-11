@@ -8,7 +8,14 @@ import { defineConfig } from 'vite';
 import { HotReloadJSON } from './plugins';
 
 export default defineConfig({
-  plugins: [reactRefresh(), HotReloadJSON()],
+  plugins: [
+    reactRefresh({
+      babel: {
+        plugins: ['babel-plugin-macros', 'babel-plugin-styled-components'],
+      },
+    }),
+    HotReloadJSON(),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src/'),
