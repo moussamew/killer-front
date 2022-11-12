@@ -44,8 +44,8 @@ export function CreatePlayer({ roomCode }: Props): JSX.Element {
       <Button
         content={t('join_room.create_room')}
         onClick={handleCreateRoom}
-        buttonColor="bg-yellow-200"
-        textColor="text-lightDark"
+        buttonColor="yellow"
+        textColor="lightDark"
       />
     </div>
   );

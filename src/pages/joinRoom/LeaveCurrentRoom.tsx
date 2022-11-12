@@ -29,8 +29,8 @@ export function LeaveCurrentRoom(): JSX.Element {
       <Button
         content={t('join_room.return_current_room')}
         onClick={() => navigate(`/room/${playerSession?.roomCode}`)}
-        buttonColor="bg-yellow-200"
-        textColor="text-lightDark"
+        buttonColor="yellow"
+        textColor="lightDark"
       />
     </Fragment>
   );

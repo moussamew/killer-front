@@ -26,7 +26,7 @@ export function CreateRoomButton(): JSX.Element {
     <Fragment>
       <Button
         content={t('home.create_room')}
-        buttonColor="bg-red-400"
+        buttonColor="red"
         onClick={handleCreateRoom}
       />
       {createRoom.isError && (

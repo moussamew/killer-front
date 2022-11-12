@@ -1,4 +1,4 @@
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 import Glasses from '@/assets/images/glasses.png';
 import t from '@/helpers/translate';
@@ -24,7 +24,7 @@ const Text = tw.p`
 const PlayerToKill = tw.span`
   shadow-xl border border-black
   p-0.5 my-1 rounded-lg bg-red-400
-  max-w-fit	text-3xl relative
+  max-w-[fit-content]	text-3xl relative
   text-white font-medium ml-1
 `;
 

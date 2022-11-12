@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 import NotFoundSrc from '@/assets/images/not-found.jpg';
 import { Button } from '@/components/Button';

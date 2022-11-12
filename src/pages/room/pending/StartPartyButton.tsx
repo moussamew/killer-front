@@ -17,8 +17,8 @@ export function StartPartyButton(): JSX.Element {
     <Button
       content={t('room.start_party')}
       onClick={handleStartParty}
-      buttonColor="bg-yellow-200"
-      textColor="text-lightDark"
+      buttonColor="yellow"
+      textColor="lightDark"
       icon={Party}
     />
   );

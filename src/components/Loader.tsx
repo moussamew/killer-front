@@ -1,4 +1,4 @@
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 const Image = tw.svg`
   animate-spin m-auto absolute 

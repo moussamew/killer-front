@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { toast, ToastBar, Toaster } from 'react-hot-toast';
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 const Alert = tw.div`
   cursor-pointer

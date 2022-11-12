@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 import CloseModal from '@/assets/icons/closeModal.svg';
 
