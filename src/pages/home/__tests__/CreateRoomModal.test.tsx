@@ -34,7 +34,7 @@ describe('<CreateRoomModal />', () => {
     expect(screen.queryByText('Create my room')).not.toBeInTheDocument();
   });
 
-  it.skip('should show error message while creating new player with a new room', async () => {
+  it('should show error message while creating new player with a new room', async () => {
     server.use(
       rest.post(PLAYER_ENDPOINT, async (_req, res, ctx) =>
         res(

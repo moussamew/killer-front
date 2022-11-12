@@ -39,7 +39,7 @@ describe('<LeaveCurrentRoom />', () => {
     ).toBeInTheDocument();
   });
 
-  it.skip('should let the player close the error message if showed', async () => {
+  it('should not let the player join a room if his name is already used', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: 'X7JKL' })),
@@ -64,16 +64,10 @@ describe('<LeaveCurrentRoom />', () => {
 
     fireEvent.click(await screen.findByText('Continue and join the room'));
 
-    await screen.findByText(
-      'Cannot join a room with your player name. Please use another name.',
-    );
-
-    fireEvent.click(screen.getByAltText('closeErrorMessage'));
-
     expect(
-      screen.queryByText(
+      await screen.findByText(
         'Cannot join a room with your player name. Please use another name.',
       ),
-    ).not.toBeInTheDocument();
+    ).toBeInTheDocument();
   });
 });

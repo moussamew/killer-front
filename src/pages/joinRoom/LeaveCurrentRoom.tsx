@@ -14,7 +14,7 @@ export function LeaveCurrentRoom(): JSX.Element {
   const navigate = useNavigate();
 
   const handleJoinRoom = async (): Promise<void> => {
-    updatePlayer.mutateAsync({ roomCode });
+    await updatePlayer.mutateAsync({ roomCode });
   };
 
   return (

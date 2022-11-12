@@ -14,8 +14,6 @@ import { HomePage } from '@/pages/home';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-import { JoinRoomModal } from '../JoinRoomModal';
-
 describe('<JoinRoomModal />', () => {
   it('should close modal after joining a room with player session', async () => {
     renderWithProviders(
@@ -67,7 +65,7 @@ describe('<JoinRoomModal />', () => {
     expect(screen.queryByText('Join this room')).not.toBeInTheDocument();
   });
 
-  it.skip('should show error while joining a room', async () => {
+  it('should show error while joining a room', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Neo' })),
@@ -80,9 +78,15 @@ describe('<JoinRoomModal />', () => {
       ),
     );
 
-    renderWithProviders(<JoinRoomModal />);
+    renderWithProviders(
+      <MemoryRouter>
+        <HomePage />
+      </MemoryRouter>,
+    );
 
-    await screen.findByText('Join a room');
+    await screen.findByText('Neo');
+
+    fireEvent.click(await screen.findByText('Join a room'));
 
     fireEvent.change(screen.getByPlaceholderText('Code of the room'), {
       target: { value: 'AABB1' },
