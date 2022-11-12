@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 import Delete from '@/assets/icons/delete.svg';
 import Idea from '@/assets/images/idea.png';
@@ -29,7 +29,7 @@ const Missions = tw.div`
 const MissionCard = tw.div`
   shadow-xl border border-black
   p-1 mt-1 mr-1 rounded-lg bg-yellow-200
-  max-w-fit	text-3xl relative
+  max-w-[fit-content]	text-3xl relative
 `;
 
 const DeleteMission = tw.img`

@@ -1,4 +1,4 @@
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 import CloseErrorMessage from '@/assets/icons/closeErrorMessage.svg';
 

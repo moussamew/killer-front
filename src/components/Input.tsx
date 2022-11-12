@@ -1,20 +1,18 @@
 import { ChangeEvent, ForwardedRef, forwardRef } from 'react';
-import tw from 'tailwind-styled-components';
+import tw, { styled } from 'twin.macro';
 
 const Content = tw.div`
   flex flex-col w-full 
   mt-1
 `;
 
-const StyledInput = tw.input`
-  ${({ $uppercase }: { $uppercase?: boolean }): string =>
-    $uppercase ? 'uppercase' : 'normal-case'}
+const StyledInput = styled.input<{ uppercase: boolean }>`
+  ${({ uppercase }) => (uppercase ? tw`uppercase` : tw`normal-case`)}
 
-  p-1 text-3xl rounded-md
-  border-solid border-2 border-light-blue-800
-  transition duration-100 ease-in 
-  focus-visible:border-blue-300
-  focus-visible:outline-0
+  ${tw`p-1 text-3xl rounded-md
+  border-solid border-2 border-blue-100
+  outline-none transition duration-200 ease-in
+  focus-visible:border-blue-300`}
 `;
 
 const StyledLabel = tw.label`
@@ -32,7 +30,15 @@ interface Props {
 }
 
 function InputRef(
-  { id, value, onChange, type = 'text', placeholder, label, uppercase }: Props,
+  {
+    id,
+    value,
+    onChange,
+    type = 'text',
+    placeholder,
+    label,
+    uppercase = false,
+  }: Props,
   ref: ForwardedRef<HTMLInputElement>,
 ): JSX.Element {
   return (
@@ -46,7 +52,7 @@ function InputRef(
         type={type}
         placeholder={placeholder}
         autoComplete="off"
-        $uppercase={uppercase}
+        uppercase={uppercase}
       />
     </Content>
   );

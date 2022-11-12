@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import tw from 'tailwind-styled-components';
+import tw, { styled } from 'twin.macro';
 
 import { errorStyle } from '@/constants/styles';
+import { colors, text } from '@/constants/tailwind';
 import { isPromise } from '@/helpers/utils';
 
 import { Spinner } from './Spinner';
@@ -11,21 +12,25 @@ const Content = tw.div`
   flex flex-col w-full
 `;
 
-const StyledButton = tw.button`
-  ${({ $buttonColor }: { $buttonColor: string }): string => $buttonColor}
-  ${({ disabled }: { disabled: boolean }): string =>
-    disabled ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'}
+const StyledButton = styled.button<{
+  buttonColor: keyof typeof colors;
+  disabled: boolean;
+}>`
+  ${({ buttonColor }) => colors[buttonColor]}
+  ${({ disabled }) =>
+    disabled ? tw`cursor-not-allowed opacity-70` : tw`cursor-pointer`}
     
-  transition-all duration-300 ease-in 
+  ${tw`transition-all duration-300 ease-in 
   shadow-md hover:shadow-xl
-  p-1 mt-1 rounded-lg 
+  p-1 mt-1 rounded-lg
   w-full text-3xl relative
-  flex justify-center item-center
+  flex justify-center items-center`}
 `;
 
-const Text = tw.p`
-  ${({ $textColor }: { $textColor: string }): string => $textColor}
-  font-medium text-3xl
+const Text = styled.p<{ textColor: keyof typeof text }>`
+  ${({ textColor }) => text[textColor]}
+
+  ${tw`font-medium text-3xl`}
 `;
 
 const Icon = tw.img`
@@ -35,8 +40,8 @@ const Icon = tw.img`
 interface Props {
   content: string;
   onClick: () => void | Promise<void>;
-  buttonColor?: string;
-  textColor?: string;
+  buttonColor?: keyof typeof colors;
+  textColor?: keyof typeof text;
   type?: 'submit' | 'reset' | 'button';
   disabled?: boolean;
   icon?: string;
@@ -44,8 +49,8 @@ interface Props {
 
 export function Button({
   content,
-  buttonColor = 'bg-red-400',
-  textColor = 'text-white',
+  buttonColor = 'red',
+  textColor = 'white',
   onClick,
   type = 'button',
   disabled = false,
@@ -72,12 +77,12 @@ export function Button({
       <StyledButton
         onClick={handleClick}
         type={type}
-        $buttonColor={buttonColor}
+        buttonColor={buttonColor}
         disabled={isLoading || disabled}
       >
         {icon && !isLoading && <Icon alt={content} src={icon} />}
         {isLoading && <Spinner />}
-        <Text $textColor={textColor}>{content}</Text>
+        <Text textColor={textColor}>{content}</Text>
       </StyledButton>
     </Content>
   );

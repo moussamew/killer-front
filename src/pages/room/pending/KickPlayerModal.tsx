@@ -1,6 +1,6 @@
 import { Fragment, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
 import t from '@/helpers/translate';

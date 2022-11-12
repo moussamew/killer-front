@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import tw from 'tailwind-styled-components';
+import tw, { styled } from 'twin.macro';
 
 import Admin from '@/assets/icons/admin.svg';
 import KickPlayer from '@/assets/icons/kickPlayer.svg';
@@ -22,9 +22,8 @@ const PlayerImage = tw.img`
   absolute h-4 left-1
 `;
 
-const PlayerName = tw.p`
- ${({ $currentPlayer }: { $currentPlayer: boolean }): string =>
-   $currentPlayer ? 'font-bold' : 'font-medium'}
+const PlayerName = styled.p<{ currentPlayer: boolean }>`
+  ${({ currentPlayer }) => (currentPlayer ? tw`font-bold` : `font-medium`)}
 
   text-2xl md:text-3xl
   text-center uppercase
@@ -59,7 +58,7 @@ export function RoomPlayer({
   return (
     <PlayerItem key={playerName}>
       <PlayerImage alt={`player-${playerName}`} src={Player} />
-      <PlayerName $currentPlayer={playerSession?.id === playerId}>
+      <PlayerName currentPlayer={playerSession?.id === playerId}>
         {playerName}
       </PlayerName>
       {playerRole === PlayerRole.ADMIN && playerSession?.id !== playerId && (

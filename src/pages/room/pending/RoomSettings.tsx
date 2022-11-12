@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 import RoomSettingsImage from '@/assets/icons/roomSettings.svg';
 import KnifeImage from '@/assets/images/knife.png';

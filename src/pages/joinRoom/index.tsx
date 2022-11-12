@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 import Killerparty from '@/assets/images/killerparty.png';
 import { RoomErrorCode } from '@/constants/errors';

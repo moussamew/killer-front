@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 import Settings from '@/assets/icons/settings.svg';
 import t from '@/helpers/translate';

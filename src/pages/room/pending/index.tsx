@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 import Island from '@/assets/images/island.png';
 import t from '@/helpers/translate';
@@ -26,7 +26,7 @@ const WelcomeImage = tw.img`
 
 const RoomResume = tw.div`
   mt-2 text-center md:text-left
-  w-full sm:w-fit
+  w-full sm:w-[fit-content]
 `;
 
 const RoomFeatures = tw.div`

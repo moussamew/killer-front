@@ -31,7 +31,7 @@ export function CreateMission(): JSX.Element {
       />
       <Button
         content={t('room.add_mission')}
-        buttonColor="bg-red-400"
+        buttonColor="red"
         disabled={!mission}
         onClick={handleCreateMission}
         icon={Add}

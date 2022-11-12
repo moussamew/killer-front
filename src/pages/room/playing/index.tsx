@@ -1,6 +1,6 @@
 import { Fragment, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import tw from 'tailwind-styled-components';
+import tw, { styled } from 'twin.macro';
 
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
@@ -16,10 +16,10 @@ import { useRoomPlayers } from '@/services/room/queries';
 import { PlayerKilledButton } from './PlayerKilledButton';
 import { Status } from './Status';
 
-const Content = tw.div`
+const Content = styled.div<{ isPlayerDead: boolean }>`
   flex flex-col md:flex-row 
-   ${({ $isPlayerDead }: { $isPlayerDead: boolean }): string =>
-     $isPlayerDead ? 'justify-center' : 'justify-between'}
+   ${({ isPlayerDead }) =>
+     isPlayerDead ? tw`justify-center` : `justify-between`}
 `;
 
 const Spacer = tw.hr`
@@ -57,7 +57,7 @@ export function PlayingRoomPage(): JSX.Element {
   return (
     <RoomPage>
       <Layout>
-        <Content $isPlayerDead={isPlayerDead}>
+        <Content isPlayerDead={isPlayerDead}>
           <Status isPlayerDead={isPlayerDead} targetInfos={targetInfos} />
           {!isPlayerDead && (
             <Fragment>

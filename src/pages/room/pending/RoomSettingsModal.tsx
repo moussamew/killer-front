@@ -1,6 +1,6 @@
 import { ChangeEvent, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';

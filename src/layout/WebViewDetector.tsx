@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 import Mobile from '@/assets/icons/mobile.svg';
 import Killerparty from '@/assets/images/killerparty.png';

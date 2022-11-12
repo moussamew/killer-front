@@ -1,5 +1,5 @@
 import { ChangeEvent, Fragment, useContext, useState } from 'react';
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 import Room from '@/assets/icons/room.svg';
 import { Button } from '@/components/Button';

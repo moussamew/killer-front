@@ -1,5 +1,5 @@
 import { Fragment, ReactNode, useContext } from 'react';
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 import { Modal } from '@/components/Modal';
 import { ModalContext } from '@/hooks/context/modal';

@@ -16,8 +16,8 @@ export function JoinRoomButton(): JSX.Element {
   return (
     <Button
       content={t('home.join_room')}
-      buttonColor="bg-yellow-200"
-      textColor="text-lightDark"
+      buttonColor="yellow"
+      textColor="lightDark"
       onClick={handleJoinRoom}
     />
   );
