@@ -42,7 +42,7 @@ describe('<CreatePlayer />', () => {
     ).toBeInTheDocument();
   });
 
-  it.skip('should show an error when the player cannot join the room', async () => {
+  it('should show an error when the player cannot join the room', async () => {
     server.use(
       rest.post(PLAYER_ENDPOINT, async (_req, res, ctx) =>
         res(

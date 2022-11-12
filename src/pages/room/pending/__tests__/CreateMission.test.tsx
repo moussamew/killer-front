@@ -20,7 +20,7 @@ describe('<CreateMission />', () => {
     expect(await screen.findByDisplayValue('New mission')).toBeInTheDocument();
   });
 
-  it.skip('should show error message when adding a new mission has failed', async () => {
+  it('should show error message when adding a new mission has failed', async () => {
     server.use(
       rest.post(MISSION_ENDPOINT, async (_req, res, ctx) =>
         res(
