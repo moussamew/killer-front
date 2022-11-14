@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
+import { Notifications } from '@/components/Notifications';
 import { ModalProvider } from '@/hooks/context/modal';
 
 const renderWithProviders = (
@@ -26,7 +27,7 @@ const renderWithProviders = (
   return render(
     <QueryClientProvider client={queryClient}>
       <ModalProvider>{component}</ModalProvider>
-      <Toaster />
+      <Notifications />
     </QueryClientProvider>,
     options,
   );

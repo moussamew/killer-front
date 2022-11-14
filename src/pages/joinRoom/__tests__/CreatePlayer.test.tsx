@@ -7,10 +7,10 @@ import {
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
 import { HomePage } from '@/pages/home';
+import { JoinRoomPage } from '@/pages/joinRoom';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-import { JoinRoomPage } from '..';
 import { CreatePlayer } from '../CreatePlayer';
 
 describe('<CreatePlayer />', () => {
