@@ -21,7 +21,7 @@ describe('<ModalProvider />', () => {
       </MemoryRouter>,
     );
 
-    await screen.findByText('The right way to kill your friends..');
+    await screen.findByText('Neo');
 
     fireEvent.click(screen.getByAltText('settings'));
 

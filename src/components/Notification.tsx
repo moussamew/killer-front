@@ -6,7 +6,7 @@ const Alert = tw.div`
   cursor-pointer
 `;
 
-export function Notifications(): JSX.Element {
+export function Notification(): JSX.Element {
   const closeNotification = (id: string) => (): void => {
     toast.dismiss(id);
   };

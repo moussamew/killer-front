@@ -13,7 +13,7 @@ export function LeaveCurrentRoom(): JSX.Element {
 
   const navigate = useNavigate();
 
-  const handleJoinRoom = async (): Promise<void> => {
+  const handleJoinNewRoom = async (): Promise<void> => {
     await updatePlayer.mutateAsync({ roomCode });
   };
 
@@ -25,7 +25,10 @@ export function LeaveCurrentRoom(): JSX.Element {
         })}
       </h1>
       <p>{t('join_room.careful_before_join_room')}</p>
-      <Button content={t('join_room.join_the_room')} onClick={handleJoinRoom} />
+      <Button
+        content={t('join_room.join_the_room')}
+        onClick={handleJoinNewRoom}
+      />
       <Button
         content={t('join_room.return_current_room')}
         onClick={() => navigate(`/room/${playerSession?.roomCode}`)}

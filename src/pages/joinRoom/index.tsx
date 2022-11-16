@@ -29,16 +29,16 @@ export function JoinRoomPage(): JSX.Element {
 
   useEffect(() => {
     /**
-     * Let the user join automatically the room if:
-     * He is already inside the same room that he want to join.
+     * Let the user join automatically the room if
+     * the user is already inside the same room that he want to join.
      */
     if (playerSession?.roomCode === roomCode) {
       navigate(`/room/${roomCode}`);
     }
 
     /**
-     * Let the user join automatically the room if his name is already setted
-     * and he is not already inside a room.
+     * Let the user join automatically the room if the user name is already setted
+     * and the user is not already inside a room.
      *
      * Show not found page if:
      * - The room cannot be found.
@@ -48,7 +48,6 @@ export function JoinRoomPage(): JSX.Element {
       updatePlayerMutate(
         { roomCode },
         {
-          onSuccess: () => navigate(`/room/${roomCode}`),
           onError: (error) => {
             if (error instanceof RequestError) {
               if ([NOT_FOUND, BAD_ROOMCODE].includes(error.errorCode)) {

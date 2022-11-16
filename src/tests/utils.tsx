@@ -1,8 +1,8 @@
 import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import { ReactNode } from 'react';
-import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
+import { Notification } from '@/components/Notification';
 import { ModalProvider } from '@/hooks/context/modal';
 
 const renderWithProviders = (
@@ -26,7 +26,7 @@ const renderWithProviders = (
   return render(
     <QueryClientProvider client={queryClient}>
       <ModalProvider>{component}</ModalProvider>
-      <Toaster />
+      <Notification />
     </QueryClientProvider>,
     options,
   );
