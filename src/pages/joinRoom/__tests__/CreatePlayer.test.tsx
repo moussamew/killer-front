@@ -8,12 +8,47 @@ import {
 } from '@/constants/endpoints';
 import { HomePage } from '@/pages/home';
 import { JoinRoomPage } from '@/pages/joinRoom';
+import { PendingRoomPage } from '@/pages/room/pending';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 import { CreatePlayer } from '../CreatePlayer';
 
 describe('<CreatePlayer />', () => {
+  it('should navigate to the room page joigned with the pseudo created by the user', async () => {
+    renderWithProviders(
+      <MemoryRouter initialEntries={['/join/X7JKL']}>
+        <Routes>
+          <Route path="/join/:roomCode" element={<JoinRoomPage />} />
+          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    fireEvent.change(await screen.findByPlaceholderText('Choose a pseudo'), {
+      target: { value: 'Morpheus' },
+    });
+
+    fireEvent.click(screen.getByText('Continue and join the room'));
+
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, async (_req, res, ctx) =>
+        res(
+          ctx.status(200),
+          ctx.json({
+            id: 1,
+            name: 'Morpheus',
+            roomCode: 'X7JKL',
+          }),
+        ),
+      ),
+    );
+
+    expect(
+      await screen.findByText('Welcome to the party!'),
+    ).toBeInTheDocument();
+  });
+
   it('should navigate to home page when the user wants to create its own room', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
@@ -26,6 +61,7 @@ describe('<CreatePlayer />', () => {
         ),
       ),
     );
+
     renderWithProviders(
       <MemoryRouter initialEntries={['/join/X7JKL']}>
         <Routes>

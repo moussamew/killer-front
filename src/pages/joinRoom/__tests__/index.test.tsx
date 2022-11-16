@@ -4,6 +4,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { JoinRoomPage } from '@/pages/joinRoom';
+import { PendingRoomPage } from '@/pages/room/pending';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -19,16 +20,13 @@ describe('<JoinRoomPage />', () => {
       <MemoryRouter initialEntries={['/join/X7JKL']}>
         <Routes>
           <Route path="/join/:roomCode" element={<JoinRoomPage />} />
-          <Route
-            path="/room/X7JKL"
-            element={<p>Welcome to the room X7JKL!</p>}
-          />
+          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
 
     expect(
-      await screen.findByText('Welcome to the room X7JKL!'),
+      await screen.findByText('Welcome to the party!'),
     ).toBeInTheDocument();
   });
 
@@ -43,16 +41,21 @@ describe('<JoinRoomPage />', () => {
       <MemoryRouter initialEntries={['/join/X7JKT']}>
         <Routes>
           <Route path="/join/:roomCode" element={<JoinRoomPage />} />
-          <Route
-            path="/room/X7JKT"
-            element={<p>Welcome to the room X7JKT!</p>}
-          />
+          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
 
+    await screen.findByAltText('welcome');
+
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(ctx.status(200), ctx.json({ name: 'Morpheus', roomCode: 'X7JKT' })),
+      ),
+    );
+
     expect(
-      await screen.findByText('Welcome to the room X7JKT!'),
+      await screen.findByText('Welcome to the party!'),
     ).toBeInTheDocument();
   });
 });
