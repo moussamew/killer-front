@@ -1,7 +1,7 @@
 import { ChangeEvent, Fragment, useState } from 'react';
 import tw from 'twin.macro';
 
-import Edit from '@/assets/icons/edit.svg';
+import { ReactComponent as EditIcon } from '@/assets/icons/edit.svg';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
@@ -50,7 +50,7 @@ export function SettingsModal(): JSX.Element {
       </HeadContent>
       <Action>
         <Text>{t('layout.update_pseudo')}</Text>
-        <img alt="editPseudo" src={Edit} />
+        <EditIcon />
       </Action>
       <Fragment>
         <Spacer />

@@ -4,6 +4,7 @@ import path from 'path';
 
 import reactRefresh from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import svgr from 'vite-plugin-svgr';
 
 import { HotReloadJSON } from './plugins';
 
@@ -15,6 +16,7 @@ export default defineConfig({
       },
     }),
     HotReloadJSON(),
+    svgr(),
   ],
   resolve: {
     alias: {
@@ -29,4 +31,6 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/tests/setup.ts',
   },
+
+  base: './',
 });
