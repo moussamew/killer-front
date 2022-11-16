@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import tw, { styled } from 'twin.macro';
 
 import { errorStyle } from '@/constants/styles';
 import { colors, text } from '@/constants/tailwind';
 import { isPromise } from '@/helpers/utils';
+import { useSafeState } from '@/hooks/useSafeState';
 
 import { Spinner } from './Spinner';
 
@@ -56,20 +56,18 @@ export function Button({
   disabled = false,
   icon,
 }: Props): JSX.Element {
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useSafeState(false);
 
   const handleClick = async (): Promise<void> => {
-    if (isPromise(onClick)) {
-      setLoading(true);
-
-      return onClick()
-        .catch((error) => {
-          toast.error(error.message, errorStyle);
-        })
-        .finally(() => setLoading(false));
+    if (!isPromise(onClick)) {
+      return onClick();
     }
 
-    return onClick();
+    setLoading(true);
+
+    await onClick().catch((error) => toast.error(error.message, errorStyle));
+
+    return setLoading(false);
   };
 
   return (

@@ -7,12 +7,47 @@ import {
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
 import { JoinRoomPage } from '@/pages/joinRoom';
+import { PendingRoomPage } from '@/pages/room/pending';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 import { LeaveCurrentRoom } from '../LeaveCurrentRoom';
 
 describe('<LeaveCurrentRoom />', () => {
+  it('should join a new room and leave the current one', async () => {
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: 'X7JKL' })),
+      ),
+    );
+
+    renderWithProviders(
+      <MemoryRouter initialEntries={['/join/XAB4L']}>
+        <Routes>
+          <Route path="/join/:roomCode" element={<JoinRoomPage />} />
+          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    await screen.findByText('Already inside the room X7JKL!');
+
+    fireEvent.click(screen.getByText('Continue and join the room'));
+
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: 'XAB4L' })),
+      ),
+    );
+
+    expect(
+      await screen.findByText('Welcome to the party!'),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText('The code to join this room is XAB4L.'),
+    ).toBeInTheDocument();
+  });
+
   it('should return to the current room', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
@@ -24,10 +59,7 @@ describe('<LeaveCurrentRoom />', () => {
       <MemoryRouter initialEntries={['/join/XAB4L']}>
         <Routes>
           <Route path="/join/:roomCode" element={<JoinRoomPage />} />
-          <Route
-            path="/room/:roomCode"
-            element={<p>Welcome to the room XAB4L!</p>}
-          />
+          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
@@ -35,7 +67,7 @@ describe('<LeaveCurrentRoom />', () => {
     fireEvent.click(await screen.findByText('Return to my current room'));
 
     expect(
-      screen.queryByText('Welcome to the room XAB4L!'),
+      await screen.findByText('Welcome to the party!'),
     ).toBeInTheDocument();
   });
 

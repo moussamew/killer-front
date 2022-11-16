@@ -21,14 +21,21 @@ import { RoomStatus } from '@/services/room/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
-const { PLAYER_KILLED, PLAYER_UPDATED, ROOM_DELETED, ROOM_IN_GAME } =
-  MercureEventType;
-const { PENDING, IN_GAME } = RoomStatus;
+import { EndedRoomPage } from '../ended';
+
+const {
+  PLAYER_KILLED,
+  PLAYER_UPDATED,
+  ROOM_DELETED,
+  ROOM_IN_GAME,
+  ROOM_UPDATED,
+} = MercureEventType;
+const { PENDING, IN_GAME, ENDED } = RoomStatus;
 
 describe('<RoomPage />', () => {
   const roomEventSource = `${ROOM_TOPIC}/X7JKL`;
 
-  it('should redirect player to PendingRoom page if the status of the room is PENDING', async () => {
+  it('should redirect player to PendingRoomPage page if the status of the room is PENDING', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(
@@ -66,7 +73,7 @@ describe('<RoomPage />', () => {
     await screen.findByText('Welcome to the party!');
   });
 
-  it('should redirect player to PlayingRoom page if the status of the room is IN_GAME', async () => {
+  it('should redirect player to PlayingRoomPage if the status of the room is IN_GAME', async () => {
     const mockPlayer = { id: 0, name: 'Neo', roomCode: 'P9LDG' };
 
     server.use(
@@ -98,6 +105,44 @@ describe('<RoomPage />', () => {
     );
 
     await screen.findByText('Try to kill your target and survive!');
+  });
+
+  it('should redirect player to EndedRoomPage if the status of the room is ENDED', async () => {
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(
+          ctx.status(200),
+          ctx.json({ id: 0, name: 'Neo', roomCode: 'P9LDG' }),
+        ),
+      ),
+      rest.get(`${ROOM_ENDPOINT}/P9LDG/players`, (_req, res, ctx) =>
+        res(
+          ctx.status(200),
+          ctx.json([{ id: 0, name: 'Neo', roomCode: 'P9LDG' }]),
+        ),
+      ),
+      rest.get(`${ROOM_ENDPOINT}/P9LDG`, (_req, res, ctx) =>
+        res(
+          ctx.status(200),
+          ctx.json({
+            code: 'P9LDG',
+            name: `Neo's room`,
+            status: ENDED,
+          }),
+        ),
+      ),
+    );
+
+    renderWithProviders(
+      <MemoryRouter initialEntries={['/room/P9LDG']}>
+        <Routes>
+          <Route path="/room/:roomCode/ended" element={<EndedRoomPage />} />
+          <Route path="/room/:roomCode" element={<RoomPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    await screen.findByText('Play another party!');
   });
 
   it('should redirect player to JoinRoom page if the player did not have a player session', async () => {
@@ -142,6 +187,76 @@ describe('<RoomPage />', () => {
     expect(
       await screen.findByText('Already inside the room X4KLP!'),
     ).toBeInTheDocument();
+  });
+
+  it('should refresh the room status when SSE emits a new message of type ROOM_UPDATED', async () => {
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+        res(
+          ctx.status(200),
+          ctx.json({
+            id: 0,
+            name: 'Trinity',
+            roomCode: 'X7JKL',
+            role: PlayerRole.ADMIN,
+          }),
+        ),
+      ),
+      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_req, res, ctx) =>
+        res(
+          ctx.status(200),
+          ctx.json([
+            {
+              id: 0,
+              name: 'Trinity',
+              roomCode: 'X7JKL',
+              role: PlayerRole.ADMIN,
+            },
+            {
+              id: 1,
+              name: 'Neo',
+              passcode: null,
+              status: PlayerStatus.ALIVE,
+              role: PlayerRole.PLAYER,
+              target: null,
+              missionId: null,
+              roomCode: 'X7JKL',
+            },
+          ]),
+        ),
+      ),
+    );
+
+    renderWithProviders(
+      <MemoryRouter initialEntries={['/room/X7JKL']}>
+        <Routes>
+          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
+          <Route path="/room/:roomCode/playing" element={<PlayingRoomPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    await screen.findByText('Neo');
+
+    server.use(
+      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_req, res, ctx) =>
+        res(ctx.status(200), ctx.json({ status: RoomStatus.IN_GAME })),
+      ),
+    );
+
+    const messageEvent = new MessageEvent('message', {
+      data: JSON.stringify({
+        type: ROOM_UPDATED,
+      }),
+    });
+
+    sources[roomEventSource].emit(messageEvent.type, messageEvent);
+
+    expect(
+      await screen.findByText('Try to kill your target and survive!'),
+    ).toBeInTheDocument();
+
+    sources[roomEventSource].close();
   });
 
   it('should refresh the room players when SSE emits a new message of type PLAYER_UPDATED', async () => {
