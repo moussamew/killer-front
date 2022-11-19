@@ -25,7 +25,6 @@ export function ShareRoomLink(): JSX.Element {
     }
 
     if (!navigator.clipboard) {
-      // eslint-disable-next-line no-void
       return void toast.error(t('common.link_error'), errorStyle);
     }
 

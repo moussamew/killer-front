@@ -58,7 +58,6 @@ export function WebViewDetector({ children }: Props): JSX.Element {
     const roomLink = window.location.href;
 
     if (!navigator.clipboard) {
-      // eslint-disable-next-line no-void
       return void toast.error(t('common.link_error'), errorStyle);
     }
 
