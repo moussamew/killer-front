@@ -1,7 +1,8 @@
-import { Fragment, useContext } from 'react';
+import { useContext } from 'react';
+import { toast } from 'react-hot-toast';
 
 import { Button } from '@/components/Button';
-import { ErrorMessage } from '@/components/ErrorMessage';
+import { errorStyle } from '@/constants/styles';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { usePlayerSession } from '@/services/player/queries';
@@ -16,25 +17,21 @@ export function CreateRoomButton(): JSX.Element {
 
   const handleCreateRoom = async (): Promise<void> => {
     if (playerSession?.name) {
-      await createRoom.mutateAsync();
-    } else {
-      openModal(<CreateRoomModal />);
+      return void createRoom.mutateAsync(undefined, {
+        onError: () => {
+          toast.error(t('home.create_room_error'), errorStyle);
+        },
+      });
     }
+
+    return openModal(<CreateRoomModal />);
   };
 
   return (
-    <Fragment>
-      <Button
-        content={t('home.create_room')}
-        buttonColor="red"
-        onClick={handleCreateRoom}
-      />
-      {createRoom.isError && (
-        <ErrorMessage
-          message={t('home.create_room_error')}
-          closeMessage={createRoom.reset}
-        />
-      )}
-    </Fragment>
+    <Button
+      content={t('home.create_room')}
+      buttonColor="red"
+      onClick={handleCreateRoom}
+    />
   );
 }
