@@ -78,7 +78,7 @@
     "create_pseudo_label": "Before starting, create your pseudo",
     "create_pseudo_placeholder": "Choose a pseudo",
     "link_saved": "Link saved in the clipboard!",
-    "link_without_clipboard": "Copy and paste the following link:\n {roomLink}"
+    "link_error": "Cannot copy the link natively. Please copy it manually."
   },
   "not_found": {
     "title": "Oops, something goes wrong!",
