@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import tw from 'twin.macro';
 
-import Settings from '@/assets/icons/settings.svg';
+import { ReactComponent as SettingsIcon } from '@/assets/icons/settings.svg';
 import t from '@/helpers/translate';
 import { isEmptyObject } from '@/helpers/utils';
 import { ModalContext } from '@/hooks/context/modal';
@@ -14,15 +14,11 @@ const Navigation = tw.header`
 `;
 
 const Text = tw.p`
-  font-bold text-black uppercase
+  font-bold text-black uppercase mr-1
 `;
 
 const PlayerInfos = tw.div`
   flex flex-row cursor-pointer
-`;
-
-const Image = tw.img`
-  ml-1
 `;
 
 function Header(): JSX.Element {
@@ -35,7 +31,7 @@ function Header(): JSX.Element {
       {playerSession && !isEmptyObject(playerSession) && (
         <PlayerInfos onClick={() => openModal(<SettingsModal />)}>
           <Text>{playerSession?.name}</Text>
-          <Image alt="settings" src={Settings} />
+          <SettingsIcon title="settings" />
         </PlayerInfos>
       )}
     </Navigation>

@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import tw, { styled } from 'twin.macro';
 
-import Admin from '@/assets/icons/admin.svg';
-import KickPlayer from '@/assets/icons/kickPlayer.svg';
-import LeaveRoomImage from '@/assets/icons/leaveRoom.svg';
+import { ReactComponent as AdminIcon } from '@/assets/icons/admin.svg';
+import { ReactComponent as KickPlayerIcon } from '@/assets/icons/kickPlayer.svg';
+import { ReactComponent as LeaveRoomIcon } from '@/assets/icons/leaveRoom.svg';
 import Player from '@/assets/images/player.png';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerRole } from '@/services/player/constants';
@@ -29,16 +29,8 @@ const PlayerName = styled.p<{ currentPlayer: boolean }>`
   text-center uppercase
 `;
 
-const KickPlayerIcon = tw.img`
-  absolute cursor-pointer right-2
-`;
-
-const LeaveRoomIcon = tw.img`
-  absolute cursor-pointer right-[1.8rem]
-`;
-
-const AdminStatusIcon = tw.img`
-  absolute right-2 h-2.5
+const Icon = tw.div`
+  absolute cursor-pointer right-0
 `;
 
 interface Props {
@@ -55,6 +47,14 @@ export function RoomPlayer({
   const { playerSession } = usePlayerSession();
   const { openModal } = useContext(ModalContext);
 
+  const handleLeaveRoom = (): void => {
+    openModal(<LeaveRoomModal />);
+  };
+
+  const handleKickPlayer = (): void => {
+    openModal(<KickPlayerModal playerName={playerName} playerId={playerId} />);
+  };
+
   return (
     <PlayerItem key={playerName}>
       <PlayerImage alt={`player-${playerName}`} src={Player} />
@@ -62,26 +62,20 @@ export function RoomPlayer({
         {playerName}
       </PlayerName>
       {playerRole === PlayerRole.ADMIN && playerSession?.id !== playerId && (
-        <AdminStatusIcon alt="admin" src={Admin} />
+        <Icon>
+          <AdminIcon />
+        </Icon>
       )}
       {playerSession?.id === playerId && (
-        <LeaveRoomIcon
-          alt="leaveRoom"
-          src={LeaveRoomImage}
-          onClick={() => openModal(<LeaveRoomModal />)}
-        />
+        <Icon onClick={handleLeaveRoom}>
+          <LeaveRoomIcon />
+        </Icon>
       )}
       {playerSession?.role === PlayerRole.ADMIN &&
         playerSession.id !== playerId && (
-          <KickPlayerIcon
-            alt={`kick${playerName}`}
-            src={KickPlayer}
-            onClick={() =>
-              openModal(
-                <KickPlayerModal playerName={playerName} playerId={playerId} />,
-              )
-            }
-          />
+          <Icon onClick={handleKickPlayer}>
+            <KickPlayerIcon title={`kick${playerName}`} />
+          </Icon>
         )}
     </PlayerItem>
   );
