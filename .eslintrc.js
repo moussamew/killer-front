@@ -47,10 +47,10 @@ module.exports = {
     ],
     '@typescript-eslint/no-empty-function': 'off', // Disable this rule to make empty function for testing case or default props
     '@typescript-eslint/no-var-requires': 'off', // Disable this rule to enable ES5 imports (const something = require('something');)
-    'react/jsx-fragments': [2, 'element'], // Enforce the use of Fragment|React.Fragment instead of <></>
+    'react/jsx-fragments': ['error', 'element'], // Enforce the use of Fragment|React.Fragment instead of <></>
     'react/prop-types': 'off', // Disable prop-types as we use TypeScript for type checking
     'react/require-default-props': 'off', // Disable default props forcing when props is optional
-    'react/jsx-filename-extension': [2, { extensions: ['.tsx'] }], // Only use react inside .tsx files
+    'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }], // Only use react inside .tsx files
     'react/jsx-props-no-spreading': 'off', // Disable this rule to make props spreading inside .spec files
     'import/prefer-default-export': 'off', // Disable this rule to make named exports
     'react/jsx-uses-react': 'off', // React in v17 can now be use without importing React from 'react'
@@ -78,7 +78,7 @@ module.exports = {
       },
     ],
     'import/order': [
-      2,
+      'error',
       {
         groups: [
           'builtin',
@@ -103,5 +103,6 @@ module.exports = {
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': 'error',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    'no-void': 'off',
   },
 };

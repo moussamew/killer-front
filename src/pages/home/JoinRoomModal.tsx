@@ -1,7 +1,6 @@
 import { ChangeEvent, Fragment, useContext, useState } from 'react';
 import tw from 'twin.macro';
 
-import Room from '@/assets/icons/room.svg';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
@@ -14,11 +13,7 @@ const HeadContent = tw.div`
 `;
 
 const Title = tw.h2`
-  mb-0 ml-0.5
-`;
-
-const Icon = tw.img`
-  h-3 md:h-4
+  mb-0
 `;
 
 export function JoinRoomModal(): JSX.Element {
@@ -52,7 +47,6 @@ export function JoinRoomModal(): JSX.Element {
   return (
     <Fragment>
       <HeadContent>
-        <Icon alt="roomIcon" src={Room} />
         <Title>{t('home.join_room')}</Title>
       </HeadContent>
       {!playerSession?.name && (

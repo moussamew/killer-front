@@ -46,7 +46,7 @@ describe('<WebViewDetector />', () => {
     ).toBeInTheDocument();
   });
 
-  it('should show directly the room link if the clipboard is not available', async () => {
+  it('should show error if the clipboard is not available', async () => {
     Object.defineProperties(window, {
       navigator: {
         value: {
@@ -76,7 +76,7 @@ describe('<WebViewDetector />', () => {
 
     expect(
       await screen.findByText(
-        'Copy and paste the following link: https://killerparty.com/join/P9LDG',
+        'Cannot copy the link natively. Please copy it manually.',
       ),
     ).toBeInTheDocument();
   });
@@ -120,7 +120,7 @@ describe('<WebViewDetector />', () => {
     );
   });
 
-  it('should show directly the room link if the clipboard saving cannot be performed', async () => {
+  it('should show error if the clipboard saving cannot be performed', async () => {
     const spyNavigatorClipboard = vi.fn().mockRejectedValue('');
 
     Object.defineProperty(window, 'navigator', {
@@ -150,7 +150,7 @@ describe('<WebViewDetector />', () => {
 
     expect(
       await screen.findByText(
-        'Copy and paste the following link: https://killerparty.com/join/P9LDG',
+        'Cannot copy the link natively. Please copy it manually.',
       ),
     ).toBeInTheDocument();
     expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);

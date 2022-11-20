@@ -34,7 +34,7 @@ describe('<ShareRoomLink />', () => {
     });
   });
 
-  it('should show directly the room link if the clipboard is not available', () => {
+  it('should show error if the clipboard is not available', () => {
     Object.defineProperty(window, 'navigator', {
       value: { share: null, clipboard: null },
       writable: true,
@@ -52,7 +52,7 @@ describe('<ShareRoomLink />', () => {
 
     expect(
       screen.getByText(
-        `Copy and paste the following link: ${JOIN_ROOM_ROUTE}/P9LDG`,
+        `Cannot copy the link natively. Please copy it manually.`,
       ),
     ).toBeInTheDocument();
   });
@@ -87,7 +87,7 @@ describe('<ShareRoomLink />', () => {
     );
   });
 
-  it('should show directly the room link if the clipboard cant be performed', async () => {
+  it('should show error if the clipboard cant be performed', async () => {
     const spyNavigatorClipboard = vi.fn().mockRejectedValue('');
 
     Object.defineProperty(window, 'navigator', {
@@ -110,43 +110,12 @@ describe('<ShareRoomLink />', () => {
 
     expect(
       await screen.findByText(
-        `Copy and paste the following link: ${JOIN_ROOM_ROUTE}/P9LDG`,
+        `Cannot copy the link natively. Please copy it manually.`,
       ),
     ).toBeInTheDocument();
     expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
     expect(spyNavigatorClipboard).toHaveBeenCalledWith(
       `${JOIN_ROOM_ROUTE}/P9LDG`,
     );
-  });
-
-  it('should let the user close the alert message if needed', async () => {
-    Object.defineProperty(window, 'navigator', {
-      value: { share: null, clipboard: null },
-      writable: true,
-    });
-
-    renderWithProviders(
-      <MemoryRouter initialEntries={['/room/P9LDG']}>
-        <Routes>
-          <Route path="/room/:roomCode" element={<ShareRoomLink />} />
-        </Routes>
-      </MemoryRouter>,
-    );
-
-    fireEvent.click(screen.getByText('Share link to join the room'));
-
-    expect(
-      screen.getByText(
-        `Copy and paste the following link: ${JOIN_ROOM_ROUTE}/P9LDG`,
-      ),
-    ).toBeInTheDocument();
-
-    fireEvent.click(screen.getByAltText('closeAlertMessage'));
-
-    expect(
-      screen.queryByText(
-        `Copy and paste the following link: ${JOIN_ROOM_ROUTE}/P9LDG`,
-      ),
-    ).not.toBeInTheDocument();
   });
 });

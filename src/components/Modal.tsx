@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import tw from 'twin.macro';
 
-import CloseModal from '@/assets/icons/closeModal.svg';
+import { ReactComponent as CloseIcon } from '@/assets/icons/close.svg';
 
 const Background = tw.div`
   bg-disabled fixed top-0
@@ -14,7 +14,7 @@ const Content = tw.div`
   md:mx-1/4 lg:mx-1/3 xl:mx-2/5
 `;
 
-const CloseIcon = tw.img`
+const Icon = tw.div`
   absolute cursor-pointer h-2
   top-0.5 right-0.5
 `;
@@ -28,7 +28,9 @@ export function Modal({ children, closeModal }: Props): JSX.Element {
   return (
     <Background>
       <Content>
-        <CloseIcon alt="closeModal" src={CloseModal} onClick={closeModal} />
+        <Icon onClick={closeModal}>
+          <CloseIcon title="closeModal" />
+        </Icon>
         {children}
       </Content>
     </Background>

@@ -1,18 +1,15 @@
-import { Fragment, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 
-import Share from '@/assets/icons/share.svg';
-import { AlertMessage } from '@/components/AlertMessage';
+import { ReactComponent as ShareIcon } from '@/assets/icons/share.svg';
 import { Button } from '@/components/Button';
 import { JOIN_ROOM_ROUTE } from '@/constants/endpoints';
-import { successStyle } from '@/constants/styles';
+import { errorStyle, successStyle } from '@/constants/styles';
 import t from '@/helpers/translate';
 import { useCreateNavigatorClipboard } from '@/services/common/mutations';
 
 export function ShareRoomLink(): JSX.Element {
   const { roomCode } = useParams();
-  const [alertMessage, setAlertMessage] = useState('');
 
   const { createNavigatorClipboard } = useCreateNavigatorClipboard();
 
@@ -28,31 +25,24 @@ export function ShareRoomLink(): JSX.Element {
     }
 
     if (!navigator.clipboard) {
-      return setAlertMessage(t('common.link_without_clipboard', { roomLink }));
+      return void toast.error(t('common.link_error'), errorStyle);
     }
 
     return createNavigatorClipboard.mutate(roomLink, {
       onSuccess: () => {
         toast.success(t('common.link_saved'), successStyle);
       },
-      onError: () =>
-        setAlertMessage(t('common.link_without_clipboard', { roomLink })),
+      onError: () => {
+        toast.error(t('common.link_error'), errorStyle);
+      },
     });
   };
 
   return (
-    <Fragment>
-      <Button
-        content={t('room.share_room_link')}
-        icon={Share}
-        onClick={saveRoomLink}
-      />
-      {alertMessage && (
-        <AlertMessage
-          message={alertMessage}
-          closeMessage={() => setAlertMessage('')}
-        />
-      )}
-    </Fragment>
+    <Button
+      content={t('room.share_room_link')}
+      icon={<ShareIcon />}
+      onClick={saveRoomLink}
+    />
   );
 }

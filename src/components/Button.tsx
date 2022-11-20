@@ -33,8 +33,8 @@ const Text = styled.p<{ textColor: keyof typeof text }>`
   ${tw`font-medium text-3xl`}
 `;
 
-const Icon = tw.img`
-  h-2.5 absolute left-1.5
+const Icon = tw.div`
+  absolute left-1
 `;
 
 interface Props {
@@ -44,7 +44,7 @@ interface Props {
   textColor?: keyof typeof text;
   type?: 'submit' | 'reset' | 'button';
   disabled?: boolean;
-  icon?: string;
+  icon?: JSX.Element;
 }
 
 export function Button({
@@ -78,7 +78,7 @@ export function Button({
         buttonColor={buttonColor}
         disabled={isLoading || disabled}
       >
-        {icon && !isLoading && <Icon alt={content} src={icon} />}
+        {icon && !isLoading && <Icon>{icon}</Icon>}
         {isLoading && <Spinner />}
         <Text textColor={textColor}>{content}</Text>
       </StyledButton>

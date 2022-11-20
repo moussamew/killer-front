@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import tw from 'twin.macro';
 
-import Mobile from '@/assets/icons/mobile.svg';
+import { ReactComponent as MobileIcon } from '@/assets/icons/mobile.svg';
 import Killerparty from '@/assets/images/killerparty.png';
-import { AlertMessage } from '@/components/AlertMessage';
 import { Button } from '@/components/Button';
-import { successStyle } from '@/constants/styles';
+import { errorStyle, successStyle } from '@/constants/styles';
 import { AppLogo, TWITTER_WEBVIEW_URL, WebViewApp } from '@/constants/webview';
 import t from '@/helpers/translate';
 import { useCreateNavigatorClipboard } from '@/services/common/mutations';
@@ -37,8 +36,6 @@ interface Props {
 
 export function WebViewDetector({ children }: Props): JSX.Element {
   const [webViewApp, setWebViewApp] = useState('');
-
-  const [linkWithoutClipboard, setLinkWithoutClipboard] = useState('');
   const { createNavigatorClipboard } = useCreateNavigatorClipboard();
 
   useEffect(() => {
@@ -61,19 +58,16 @@ export function WebViewDetector({ children }: Props): JSX.Element {
     const roomLink = window.location.href;
 
     if (!navigator.clipboard) {
-      return setLinkWithoutClipboard(
-        t('common.link_without_clipboard', { roomLink }),
-      );
+      return void toast.error(t('common.link_error'), errorStyle);
     }
 
     return createNavigatorClipboard.mutate(roomLink, {
       onSuccess: () => {
         toast.success(t('common.link_saved'), successStyle);
       },
-      onError: () =>
-        setLinkWithoutClipboard(
-          t('common.link_without_clipboard', { roomLink }),
-        ),
+      onError: () => {
+        toast.error(t('common.link_error'), errorStyle);
+      },
     });
   };
 
@@ -88,12 +82,9 @@ export function WebViewDetector({ children }: Props): JSX.Element {
         <Text>{t('layout.click_button_bellow')}</Text>
         <Button
           content={t('layout.save_link')}
-          icon={Mobile}
+          icon={<MobileIcon />}
           onClick={saveLink}
         />
-        {linkWithoutClipboard && (
-          <AlertMessage message={linkWithoutClipboard} />
-        )}
       </Content>
     </Layout>
   );
