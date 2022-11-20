@@ -1,8 +1,5 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -22,13 +19,14 @@ describe('<JoinRoomModal />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Join a room'));
+    await userEvent.click(await screen.findByText('Join a room'));
 
-    fireEvent.change(screen.getByPlaceholderText('Code of the room'), {
-      target: { value: 'X7B8K' },
-    });
+    await userEvent.type(
+      screen.getByPlaceholderText('Code of the room'),
+      'X7B8K',
+    );
 
-    fireEvent.click(screen.getByText('Join this room'));
+    await userEvent.click(screen.getByText('Join this room'));
 
     await waitForElementToBeRemoved(() => screen.queryByText('Join this room'));
 
@@ -48,17 +46,16 @@ describe('<JoinRoomModal />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Join a room'));
+    await userEvent.click(screen.getByText('Join a room'));
 
-    fireEvent.change(screen.getByPlaceholderText('Choose a pseudo'), {
-      target: { value: 'Neo' },
-    });
+    await userEvent.type(screen.getByPlaceholderText('Choose a pseudo'), 'Neo');
 
-    fireEvent.change(screen.getByPlaceholderText('Code of the room'), {
-      target: { value: 'X7B8K' },
-    });
+    await userEvent.type(
+      screen.getByPlaceholderText('Code of the room'),
+      'X7B8K',
+    );
 
-    fireEvent.click(screen.getByText('Join this room'));
+    await userEvent.click(screen.getByText('Join this room'));
 
     await waitForElementToBeRemoved(() => screen.queryByText('Join this room'));
 
@@ -86,13 +83,14 @@ describe('<JoinRoomModal />', () => {
 
     await screen.findByText('Neo');
 
-    fireEvent.click(await screen.findByText('Join a room'));
+    await userEvent.click(screen.getByText('Join a room'));
 
-    fireEvent.change(screen.getByPlaceholderText('Code of the room'), {
-      target: { value: 'AABB1' },
-    });
+    await userEvent.type(
+      screen.getByPlaceholderText('Code of the room'),
+      'AABB1',
+    );
 
-    fireEvent.click(screen.getByText('Join this room'));
+    await userEvent.click(screen.getByText('Join this room'));
 
     expect(await screen.findByText('Room not found')).toBeInTheDocument();
   });

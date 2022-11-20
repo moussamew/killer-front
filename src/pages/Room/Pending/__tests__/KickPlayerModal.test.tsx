@@ -1,8 +1,5 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -45,9 +42,9 @@ describe('<KickPlayerModal />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByTitle('kickMorpheus'));
+    await userEvent.click(await screen.findByTitle('kickMorpheus'));
 
-    fireEvent.click(screen.getByText('Kick Morpheus'));
+    await userEvent.click(screen.getByText('Kick Morpheus'));
 
     await waitForElementToBeRemoved(() => screen.queryByText('Kick Morpheus'));
 

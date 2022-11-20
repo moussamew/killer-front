@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -16,6 +17,19 @@ import { CreatePlayer } from '../CreatePlayer';
 
 describe('<CreatePlayer />', () => {
   it('should navigate to the room page joigned with the pseudo created by the user', async () => {
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, async (_req, res, ctx) =>
+        res(
+          ctx.status(200),
+          ctx.json({
+            id: 1,
+            name: null,
+            roomCode: null,
+          }),
+        ),
+      ),
+    );
+
     renderWithProviders(
       <MemoryRouter initialEntries={['/join/X7JKL']}>
         <Routes>
@@ -25,11 +39,14 @@ describe('<CreatePlayer />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.change(await screen.findByPlaceholderText('Choose a pseudo'), {
-      target: { value: 'Morpheus' },
-    });
+    await userEvent.type(
+      await screen.findByPlaceholderText('Choose a pseudo'),
+      'Morpheus',
+    );
 
-    fireEvent.click(screen.getByText('Continue and join the room'));
+    await userEvent.click(
+      await screen.findByText('Continue and join the room'),
+    );
 
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, async (_req, res, ctx) =>
@@ -71,7 +88,7 @@ describe('<CreatePlayer />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Create my own room'));
+    await userEvent.click(screen.getByText('Create my own room'));
 
     expect(
       await screen.findByText('The right way to kill your friends..'),
@@ -98,11 +115,12 @@ describe('<CreatePlayer />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.change(await screen.findByPlaceholderText('Choose a pseudo'), {
-      target: { value: 'Morpheus' },
-    });
+    await userEvent.type(
+      screen.getByPlaceholderText('Choose a pseudo'),
+      'Morpheus',
+    );
 
-    fireEvent.click(screen.getByText('Continue and join the room'));
+    await userEvent.click(screen.getByText('Continue and join the room'));
 
     expect(
       await screen.findByText(

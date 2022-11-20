@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -47,7 +48,7 @@ describe('<PlayerKilledButton />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('I have been killed'));
+    await userEvent.click(screen.getByText('I have been killed'));
 
     expect(await screen.findByText('Killed by my target')).toBeInTheDocument();
   });

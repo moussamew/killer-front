@@ -1,8 +1,5 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 
@@ -79,11 +76,13 @@ describe('<WebViewDetector />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Save link in the clipboard'));
+    await userEvent.click(
+      await screen.findByText('Save link in the clipboard'),
+    );
 
     expect(await screen.findByText(errorMessage)).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText(errorMessage));
+    await userEvent.click(screen.getByText(errorMessage));
 
     await waitForElementToBeRemoved(() => screen.queryByText(errorMessage));
   });
@@ -116,7 +115,9 @@ describe('<WebViewDetector />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Save link in the clipboard'));
+    await userEvent.click(
+      await screen.findByText('Save link in the clipboard'),
+    );
 
     expect(
       await screen.findByText('Link saved in the clipboard!'),
@@ -153,7 +154,9 @@ describe('<WebViewDetector />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Save link in the clipboard'));
+    await userEvent.click(
+      await screen.findByText('Save link in the clipboard'),
+    );
 
     expect(
       await screen.findByText(

@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -23,7 +24,7 @@ describe('<Layout />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByTitle('userSettings'));
+    await userEvent.click(await screen.findByTitle('userSettings'));
 
     expect(screen.getByText('User Settings')).toBeInTheDocument();
   });

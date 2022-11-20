@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -32,7 +33,7 @@ describe('<RoomSettings />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByTitle('roomSettings'));
+    await userEvent.click(await screen.findByTitle('roomSettings'));
 
     expect(screen.getByText('Neo')).toBeInTheDocument();
     expect(screen.queryByText('Room settings')).toBeInTheDocument();
