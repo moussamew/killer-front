@@ -28,7 +28,7 @@ export function ShareRoomLink(): JSX.Element {
       return void toast.error(t('common.link_error'), errorStyle);
     }
 
-    return createNavigatorClipboard.mutate(roomLink, {
+    return createNavigatorClipboard.mutateAsync(roomLink, {
       onSuccess: () => {
         toast.success(t('common.link_saved'), successStyle);
       },

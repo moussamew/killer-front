@@ -1,4 +1,8 @@
-import { fireEvent, screen } from '@testing-library/react';
+import {
+  fireEvent,
+  screen,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { vi } from 'vitest';
 
@@ -34,7 +38,10 @@ describe('<ShareRoomLink />', () => {
     });
   });
 
-  it('should show error if the clipboard is not available', () => {
+  it('should show error if the clipboard is not available', async () => {
+    const errorMessage =
+      'Cannot copy the link natively. Please copy it manually.';
+
     Object.defineProperty(window, 'navigator', {
       value: { share: null, clipboard: null },
       writable: true,
@@ -50,11 +57,11 @@ describe('<ShareRoomLink />', () => {
 
     fireEvent.click(screen.getByText('Share link to join the room'));
 
-    expect(
-      screen.getByText(
-        `Cannot copy the link natively. Please copy it manually.`,
-      ),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(errorMessage)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText(errorMessage));
+
+    await waitForElementToBeRemoved(() => screen.queryByText(errorMessage));
   });
 
   it('should save the room link in clipboard if share is not available', async () => {

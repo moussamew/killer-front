@@ -1,4 +1,4 @@
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { Notification } from '@/components/Notification';
@@ -9,16 +9,18 @@ import './assets/styles/app.css';
 
 const NODE_APP = document.getElementById('killerparty');
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: false,
-    },
-  },
-});
+const root = createRoot(NODE_APP!);
 
 function App(): JSX.Element {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        retry: false,
+      },
+    },
+  });
+
   return (
     <QueryClientProvider client={queryClient}>
       <ModalProvider>
@@ -29,4 +31,4 @@ function App(): JSX.Element {
   );
 }
 
-render(<App />, NODE_APP);
+root.render(<App />);
