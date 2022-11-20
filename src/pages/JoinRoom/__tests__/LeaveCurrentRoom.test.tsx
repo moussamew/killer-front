@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -32,7 +33,7 @@ describe('<LeaveCurrentRoom />', () => {
 
     await screen.findByText('Already inside the room X7JKL!');
 
-    fireEvent.click(screen.getByText('Continue and join the room'));
+    await userEvent.click(screen.getByText('Continue and join the room'));
 
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
@@ -64,7 +65,9 @@ describe('<LeaveCurrentRoom />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Return to my current room'));
+    await screen.findByText('Neo');
+
+    await userEvent.click(screen.getByText('Return to my current room'));
 
     expect(
       await screen.findByText('Welcome to the party!'),
@@ -94,7 +97,7 @@ describe('<LeaveCurrentRoom />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Continue and join the room'));
+    await userEvent.click(screen.getByText('Continue and join the room'));
 
     expect(
       await screen.findByText(

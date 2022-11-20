@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -18,7 +19,7 @@ describe('<CreateRoomButton />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Create new room'));
+    await userEvent.click(screen.getByText('Create new room'));
 
     expect(screen.getByText('Create my room')).toBeInTheDocument();
   });
@@ -54,7 +55,7 @@ describe('<CreateRoomButton />', () => {
       ),
     );
 
-    fireEvent.click(await screen.findByText('Create new room'));
+    await userEvent.click(screen.getByText('Create new room'));
 
     expect(
       await screen.findByText('Welcome to the party!'),
@@ -82,7 +83,7 @@ describe('<CreateRoomButton />', () => {
 
     await screen.findByText('Trinity');
 
-    fireEvent.click(await screen.findByText('Create new room'));
+    await userEvent.click(screen.getByText('Create new room'));
 
     expect(
       await screen.findByText(

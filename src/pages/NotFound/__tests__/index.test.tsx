@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -26,7 +27,7 @@ describe('<NotFoundPage />', () => {
 
     await screen.findByText('Oops, something goes wrong!');
 
-    fireEvent.click(screen.getByText('Go back to home page'));
+    await userEvent.click(screen.getByText('Go back to home page'));
 
     expect(
       await screen.findByText('The right way to kill your friends..'),

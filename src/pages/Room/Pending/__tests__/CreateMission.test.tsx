@@ -1,8 +1,5 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -39,12 +36,12 @@ describe('<CreateMission />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.change(
+    await userEvent.type(
       screen.getByPlaceholderText('Make him drink his glass dry'),
-      { target: { value: 'New mission' } },
+      'New mission',
     );
 
-    fireEvent.click(screen.getByText('Add new mission in the room'));
+    await userEvent.click(screen.getByText('Add new mission in the room'));
 
     server.use(
       rest.get(PLAYER_MISSION_ENDPOINT, (_req, res, ctx) =>
@@ -78,12 +75,12 @@ describe('<CreateMission />', () => {
 
     renderWithProviders(<CreateMission />);
 
-    fireEvent.change(
+    await userEvent.type(
       screen.getByPlaceholderText('Make him drink his glass dry'),
-      { target: { value: 'New mission' } },
+      'New mission',
     );
 
-    fireEvent.click(screen.getByText('Add new mission in the room'));
+    await userEvent.click(screen.getByText('Add new mission in the room'));
 
     expect(
       await screen.findByText(

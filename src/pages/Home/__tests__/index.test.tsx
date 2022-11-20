@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -51,7 +52,7 @@ describe('<HomePage />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Join a room'));
+    await userEvent.click(await screen.findByText('Join a room'));
 
     expect(await screen.findByText('Join this room')).toBeInTheDocument();
   });

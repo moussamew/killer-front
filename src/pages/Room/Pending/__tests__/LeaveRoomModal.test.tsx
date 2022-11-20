@@ -1,8 +1,5 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -39,9 +36,9 @@ describe('<LeaveRoomModal />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByTitle('leaveRoom'));
+    await userEvent.click(await screen.findByTitle('leaveRoom'));
 
-    fireEvent.click(screen.getByText('Leave this room'));
+    await userEvent.click(screen.getByText('Leave this room'));
 
     await waitForElementToBeRemoved(() =>
       screen.queryByText('Leave this room'),

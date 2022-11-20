@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { sources } from 'eventsourcemock';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
@@ -35,7 +36,7 @@ describe('<StartPartyButton />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Start the party'));
+    await userEvent.click(await screen.findByText('Start the party'));
 
     const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({

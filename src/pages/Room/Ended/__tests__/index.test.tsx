@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -39,7 +40,7 @@ describe('<EndedRoomPage />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('Play another party!'));
+    await userEvent.click(await screen.findByText('Play another party!'));
 
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>

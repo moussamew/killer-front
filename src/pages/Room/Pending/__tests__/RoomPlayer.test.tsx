@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -95,7 +96,7 @@ describe('<RoomPlayer />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByTitle('leaveRoom'));
+    await userEvent.click(await screen.findByTitle('leaveRoom'));
 
     expect(screen.getByText('Leave this room')).toBeInTheDocument();
   });

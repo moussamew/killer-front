@@ -1,8 +1,5 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -36,14 +33,14 @@ describe('<RoomSettingsModal />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByTitle('roomSettings'));
+    await userEvent.click(await screen.findByTitle('roomSettings'));
 
-    fireEvent.change(
+    await userEvent.type(
       screen.getByPlaceholderText('Confirm by typing the room code'),
-      { target: { value: 'X7VBD' } },
+      'X7VBD',
     );
 
-    fireEvent.click(screen.getByText('Delete the room'));
+    await userEvent.click(screen.getByText('Delete the room'));
 
     await waitForElementToBeRemoved(() => screen.queryByText('Room settings'));
 

@@ -1,8 +1,5 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
 import { PLAYER_MISSION_ENDPOINT } from '@/constants/endpoints';
@@ -32,7 +29,7 @@ describe('<PlayerMissions />', () => {
 
     await screen.findByText('Drink Jack Daniels');
 
-    fireEvent.click(screen.getByTitle('deleteMission'));
+    await userEvent.click(screen.getByTitle('deleteMission'));
 
     server.use(
       rest.get(PLAYER_MISSION_ENDPOINT, (_req, res, ctx) =>

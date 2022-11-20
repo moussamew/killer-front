@@ -1,9 +1,9 @@
 import {
-  fireEvent,
   render,
   screen,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { toast } from 'react-hot-toast';
 
 import { Notification } from '../Notification';
@@ -24,7 +24,9 @@ describe('<Notification />', () => {
 
     toast.error('This notification is an error!');
 
-    fireEvent.click(await screen.findByText('This notification is an error!'));
+    await userEvent.click(
+      await screen.findByText('This notification is an error!'),
+    );
 
     await waitForElementToBeRemoved(() =>
       screen.queryByText('This notification is an error!'),

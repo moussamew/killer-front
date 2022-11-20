@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
@@ -28,13 +29,11 @@ describe('<SettingsModal />', () => {
       </Layout>,
     );
 
-    fireEvent.click(await screen.findByTitle('userSettings'));
+    await userEvent.click(await screen.findByTitle('userSettings'));
 
-    fireEvent.change(await screen.findByPlaceholderText('New pseudo'), {
-      target: { value: 'Trinity' },
-    });
+    await userEvent.type(screen.getByPlaceholderText('New pseudo'), 'Trinity');
 
-    fireEvent.click(screen.getByText('Save changes'));
+    await userEvent.click(screen.getByText('Save changes'));
 
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>

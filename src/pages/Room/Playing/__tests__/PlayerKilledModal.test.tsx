@@ -1,8 +1,5 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
@@ -51,9 +48,9 @@ describe('<PlayerKilledModal />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByText('I have been killed'));
+    await userEvent.click(await screen.findByText('I have been killed'));
 
-    fireEvent.click(screen.getByText('Kill me :('));
+    await userEvent.click(screen.getByText('Kill me :('));
 
     await waitForElementToBeRemoved(() => screen.getByText('Kill me :('));
 

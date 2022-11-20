@@ -1,8 +1,5 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -27,7 +24,7 @@ describe('<ModalProvider />', () => {
 
     await screen.findByText('Neo');
 
-    fireEvent.click(screen.getByTitle('userSettings'));
+    await userEvent.click(screen.getByTitle('userSettings'));
 
     expect(screen.getByText('Update my pseudo')).toBeInTheDocument();
 

@@ -1,8 +1,5 @@
-import {
-  fireEvent,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { vi } from 'vitest';
 
@@ -12,7 +9,7 @@ import { renderWithProviders } from '@/tests/utils';
 import { ShareRoomLink } from '../ShareRoomLink';
 
 describe('<ShareRoomLink />', () => {
-  it('should share the room link with navigator share if exists when the user click on the share button', () => {
+  it('should share the room link with navigator share if exists when the user click on the share button', async () => {
     const spyNavigatorShare = vi.fn();
 
     Object.defineProperty(window, 'navigator', {
@@ -28,7 +25,7 @@ describe('<ShareRoomLink />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(screen.getByText('Share link to join the room'));
+    await userEvent.click(screen.getByText('Share link to join the room'));
 
     expect(spyNavigatorShare).toHaveBeenCalledTimes(1);
     expect(spyNavigatorShare).toHaveBeenCalledWith({
@@ -55,11 +52,11 @@ describe('<ShareRoomLink />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(screen.getByText('Share link to join the room'));
+    await userEvent.click(screen.getByText('Share link to join the room'));
 
     expect(await screen.findByText(errorMessage)).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText(errorMessage));
+    await userEvent.click(screen.getByText(errorMessage));
 
     await waitForElementToBeRemoved(() => screen.queryByText(errorMessage));
   });
@@ -83,7 +80,7 @@ describe('<ShareRoomLink />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(screen.getByText('Share link to join the room'));
+    await userEvent.click(screen.getByText('Share link to join the room'));
 
     expect(
       await screen.findByText('Link saved in the clipboard!'),
@@ -113,7 +110,7 @@ describe('<ShareRoomLink />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(screen.getByText('Share link to join the room'));
+    await userEvent.click(screen.getByText('Share link to join the room'));
 
     expect(
       await screen.findByText(
