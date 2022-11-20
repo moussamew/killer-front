@@ -25,10 +25,19 @@ export default defineConfig({
   },
   server: {
     port: 4000,
+    host: true,
   },
   test: {
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/tests/setup.ts',
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'es2020',
+    },
+  },
+  build: {
+    target: 'es2020',
   },
 });
