@@ -63,12 +63,12 @@ export function RoomPlayer({
       </PlayerName>
       {playerRole === PlayerRole.ADMIN && playerSession?.id !== playerId && (
         <Icon>
-          <AdminIcon />
+          <AdminIcon title="roomAdmin" />
         </Icon>
       )}
       {playerSession?.id === playerId && (
         <Icon onClick={handleLeaveRoom}>
-          <LeaveRoomIcon />
+          <LeaveRoomIcon title="leaveRoom" />
         </Icon>
       )}
       {playerSession?.role === PlayerRole.ADMIN &&

@@ -20,7 +20,7 @@ describe('<PlayerMissions />', () => {
 
   it('should remove a mission', async () => {
     server.use(
-      rest.get(PLAYER_MISSION_ENDPOINT, async (_req, res, ctx) =>
+      rest.get(PLAYER_MISSION_ENDPOINT, (_req, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json([{ id: 0, content: 'Drink Jack Daniels' }]),
@@ -32,10 +32,10 @@ describe('<PlayerMissions />', () => {
 
     await screen.findByText('Drink Jack Daniels');
 
-    fireEvent.click(screen.getByAltText('deleteMission'));
+    fireEvent.click(screen.getByTitle('deleteMission'));
 
     server.use(
-      rest.get(PLAYER_MISSION_ENDPOINT, async (_req, res, ctx) =>
+      rest.get(PLAYER_MISSION_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json([])),
       ),
     );

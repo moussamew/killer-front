@@ -16,15 +16,15 @@ export function CreateRoomButton(): JSX.Element {
   const { createRoom } = useCreateRoom();
 
   const handleCreateRoom = async (): Promise<void> => {
-    if (playerSession?.name) {
-      return void createRoom.mutateAsync(undefined, {
+    if (!playerSession?.name) {
+      openModal(<CreateRoomModal />);
+    } else {
+      await createRoom.mutateAsync(undefined, {
         onError: () => {
           toast.error(t('home.create_room_error'), errorStyle);
         },
       });
     }
-
-    return openModal(<CreateRoomModal />);
   };
 
   return (

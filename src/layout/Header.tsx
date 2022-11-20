@@ -25,13 +25,17 @@ function Header(): JSX.Element {
   const { playerSession } = usePlayerSession();
   const { openModal } = useContext(ModalContext);
 
+  const handleOpenSettings = (): void => {
+    openModal(<SettingsModal />);
+  };
+
   return (
     <Navigation>
       <Text>{t('header.project_name')}</Text>
       {playerSession && !isEmptyObject(playerSession) && (
-        <PlayerInfos onClick={() => openModal(<SettingsModal />)}>
+        <PlayerInfos>
           <Text>{playerSession?.name}</Text>
-          <SettingsIcon title="settings" />
+          <SettingsIcon title="userSettings" onClick={handleOpenSettings} />
         </PlayerInfos>
       )}
     </Navigation>

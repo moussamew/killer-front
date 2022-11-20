@@ -5,6 +5,7 @@ import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
+import { Layout } from '../Layout';
 import { SettingsModal } from '../SettingsModal';
 
 describe('<SettingsModal />', () => {
@@ -21,11 +22,15 @@ describe('<SettingsModal />', () => {
       ),
     );
 
-    renderWithProviders(<SettingsModal />);
+    renderWithProviders(
+      <Layout>
+        <p>Welcome</p>
+      </Layout>,
+    );
 
-    await screen.findByPlaceholderText('Neo');
+    fireEvent.click(await screen.findByTitle('userSettings'));
 
-    fireEvent.change(screen.getByPlaceholderText('Neo'), {
+    fireEvent.change(await screen.findByPlaceholderText('New pseudo'), {
       target: { value: 'Trinity' },
     });
 
@@ -37,6 +42,6 @@ describe('<SettingsModal />', () => {
       ),
     );
 
-    expect(await screen.findByPlaceholderText('Trinity'));
+    expect(await screen.findByText('Trinity'));
   });
 });

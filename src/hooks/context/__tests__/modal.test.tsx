@@ -23,7 +23,7 @@ describe('<ModalProvider />', () => {
 
     await screen.findByText('Neo');
 
-    fireEvent.click(screen.getByAltText('settings'));
+    fireEvent.click(screen.getByTitle('userSettings'));
 
     expect(screen.getByText('Update my pseudo')).toBeInTheDocument();
 

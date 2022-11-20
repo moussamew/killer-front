@@ -1,4 +1,4 @@
-import { ChangeEvent, Fragment, useContext, useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import tw from 'twin.macro';
 
 import { ReactComponent as EditIcon } from '@/assets/icons/edit.svg';
@@ -47,7 +47,7 @@ export function SettingsModal(): JSX.Element {
   };
 
   return (
-    <Fragment>
+    <div>
       <HeadContent>
         <Title>{t('layout.user_settings')}</Title>
       </HeadContent>
@@ -55,7 +55,7 @@ export function SettingsModal(): JSX.Element {
         <Text>{t('layout.update_pseudo')}</Text>
         <EditIcon />
       </Action>
-      <Fragment>
+      <div>
         <Spacer />
         <Input
           id="editPseudo"
@@ -68,7 +68,7 @@ export function SettingsModal(): JSX.Element {
           onClick={updatePlayerPseudo}
           disabled={!pseudo}
         />
-      </Fragment>
-    </Fragment>
+      </div>
+    </div>
   );
 }

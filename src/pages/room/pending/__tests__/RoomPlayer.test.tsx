@@ -61,7 +61,7 @@ describe('<RoomPlayer />', () => {
 
     expect(await screen.findByText('Neo')).toBeInTheDocument();
     expect(screen.getByText('Trinity')).toBeInTheDocument();
-    expect(screen.getByAltText('admin')).toBeInTheDocument();
+    expect(screen.getByTitle('roomAdmin')).toBeInTheDocument();
   });
 
   it('should open LeaveRoom Modal when the user click on LeaveRoom Icon', async () => {
@@ -95,7 +95,7 @@ describe('<RoomPlayer />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByAltText('leaveRoom'));
+    fireEvent.click(await screen.findByTitle('leaveRoom'));
 
     expect(screen.getByText('Leave this room')).toBeInTheDocument();
   });

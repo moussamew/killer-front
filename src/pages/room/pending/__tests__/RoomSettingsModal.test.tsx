@@ -13,7 +13,7 @@ import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<RoomSettingsModal />', () => {
-  it('should be able to delete the room as admin', async () => {
+  it('should be able to delete the room as an admin', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(
@@ -36,7 +36,7 @@ describe('<RoomSettingsModal />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByAltText('roomSettings'));
+    fireEvent.click(await screen.findByTitle('roomSettings'));
 
     fireEvent.change(
       screen.getByPlaceholderText('Confirm by typing the room code'),
