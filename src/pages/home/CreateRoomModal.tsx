@@ -1,7 +1,6 @@
 import { ChangeEvent, useContext, useState } from 'react';
 import tw from 'twin.macro';
 
-import Room from '@/assets/icons/room.svg';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
@@ -14,11 +13,7 @@ const HeadContent = tw.div`
 `;
 
 const Title = tw.h2`
-  mb-0 ml-0.5
-`;
-
-const Icon = tw.img`
-  h-3 md:h-4
+  mb-0
 `;
 
 export function CreateRoomModal(): JSX.Element {
@@ -44,7 +39,6 @@ export function CreateRoomModal(): JSX.Element {
   return (
     <div>
       <HeadContent>
-        <Icon alt="roomIcon" src={Room} />
         <Title>{t('home.create_room')}</Title>
       </HeadContent>
       <Input

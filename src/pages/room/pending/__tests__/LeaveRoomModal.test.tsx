@@ -39,7 +39,7 @@ describe('<LeaveRoomModal />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByAltText('leaveRoom'));
+    fireEvent.click(await screen.findByTitle('leaveRoom'));
 
     fireEvent.click(screen.getByText('Leave this room'));
 

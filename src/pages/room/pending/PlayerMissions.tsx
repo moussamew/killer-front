@@ -1,7 +1,8 @@
+import { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
-import tw from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
-import Delete from '@/assets/icons/delete.svg';
+import { ReactComponent as DeleteIcon } from '@/assets/icons/delete.svg';
 import Idea from '@/assets/images/idea.png';
 import t from '@/helpers/translate';
 import { useDeleteMission } from '@/services/mission/mutations';
@@ -32,9 +33,10 @@ const MissionCard = tw.div`
   max-w-[fit-content]	text-3xl relative
 `;
 
-const DeleteMission = tw.img`
-  absolute cursor-pointer h-2.5
-  -top-1 -right-1
+const DeleteMission = styled.div`
+  svg {
+    ${tw`absolute -top-1 -right-1 cursor-pointer`}
+  }
 `;
 
 export function PlayerMissions(): JSX.Element {
@@ -59,14 +61,14 @@ export function PlayerMissions(): JSX.Element {
       {playerMissions && (
         <Missions>
           {playerMissions.map(({ id, content }) => (
-            <MissionCard key={id}>
-              <span>{content}</span>
-              <DeleteMission
-                alt="deleteMission"
-                src={Delete}
-                onClick={handleDeleteMission(id)}
-              />
-            </MissionCard>
+            <Fragment key={`${id}-${content}`}>
+              <MissionCard>
+                <span>{content}</span>
+                <DeleteMission onClick={handleDeleteMission(id)}>
+                  <DeleteIcon title="deleteMission" />
+                </DeleteMission>
+              </MissionCard>
+            </Fragment>
           ))}
         </Missions>
       )}

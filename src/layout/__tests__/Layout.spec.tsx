@@ -8,19 +8,7 @@ import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<Layout />', () => {
-  it('should render correctly Layout with its children', async () => {
-    renderWithProviders(
-      <MemoryRouter>
-        <Layout>
-          <div>Hello</div>
-        </Layout>
-      </MemoryRouter>,
-    );
-
-    expect(await screen.findByText('Hello')).toBeInTheDocument();
-  });
-
-  it('should show the modal settings when current player click on settings icon', async () => {
+  it('should show the user settings when current player click on settings icon', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Neo' })),
@@ -35,9 +23,7 @@ describe('<Layout />', () => {
       </MemoryRouter>,
     );
 
-    await screen.findByAltText('settings');
-
-    fireEvent.click(screen.getByAltText('settings'));
+    fireEvent.click(await screen.findByTitle('userSettings'));
 
     expect(screen.getByText('User Settings')).toBeInTheDocument();
   });

@@ -44,7 +44,7 @@ describe('<CreateMission />', () => {
       { target: { value: 'New mission' } },
     );
 
-    fireEvent.click(screen.getByText('Add this mission in the room'));
+    fireEvent.click(screen.getByText('Add new mission in the room'));
 
     server.use(
       rest.get(PLAYER_MISSION_ENDPOINT, (_req, res, ctx) =>
@@ -83,7 +83,7 @@ describe('<CreateMission />', () => {
       { target: { value: 'New mission' } },
     );
 
-    fireEvent.click(screen.getByText('Add this mission in the room'));
+    fireEvent.click(screen.getByText('Add new mission in the room'));
 
     expect(
       await screen.findByText(

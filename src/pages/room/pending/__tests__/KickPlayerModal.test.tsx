@@ -45,7 +45,7 @@ describe('<KickPlayerModal />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByAltText('kickMorpheus'));
+    fireEvent.click(await screen.findByTitle('kickMorpheus'));
 
     fireEvent.click(screen.getByText('Kick Morpheus'));
 

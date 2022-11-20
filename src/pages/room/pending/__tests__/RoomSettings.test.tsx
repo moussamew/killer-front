@@ -32,7 +32,7 @@ describe('<RoomSettings />', () => {
       </MemoryRouter>,
     );
 
-    fireEvent.click(await screen.findByAltText('roomSettings'));
+    fireEvent.click(await screen.findByTitle('roomSettings'));
 
     expect(screen.getByText('Neo')).toBeInTheDocument();
     expect(screen.queryByText('Room settings')).toBeInTheDocument();
