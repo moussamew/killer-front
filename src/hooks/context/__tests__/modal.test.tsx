@@ -3,7 +3,7 @@ import { rest } from 'msw';
 import { MemoryRouter } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
-import { HomePage } from '@/pages/home';
+import { HomePage } from '@/pages/Home';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 

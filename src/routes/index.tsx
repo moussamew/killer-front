@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { WebViewDetector } from '@/layout/WebViewDetector';
-import { HomePage } from '@/pages/home';
-import { JoinRoomPage } from '@/pages/joinRoom';
-import { NotFoundPage } from '@/pages/notFound';
-import { RoomPage } from '@/pages/room';
-import { EndedRoomPage } from '@/pages/room/ended';
-import { PendingRoomPage } from '@/pages/room/pending';
-import { PlayingRoomPage } from '@/pages/room/playing';
+import { HomePage } from '@/pages/Home';
+import { JoinRoomPage } from '@/pages/JoinRoom';
+import { NotFoundPage } from '@/pages/NotFound';
+import { RoomPage } from '@/pages/Room';
+import { EndedRoomPage } from '@/pages/Room/Ended';
+import { PendingRoomPage } from '@/pages/Room/Pending';
+import { PlayingRoomPage } from '@/pages/Room/Playing';
 
 export function AppRoutes(): JSX.Element {
   return (
