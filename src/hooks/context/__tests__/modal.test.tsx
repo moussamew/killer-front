@@ -1,4 +1,8 @@
-import { fireEvent, screen } from '@testing-library/react';
+import {
+  fireEvent,
+  screen,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 import { rest } from 'msw';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -28,6 +32,10 @@ describe('<ModalProvider />', () => {
     expect(screen.getByText('Update my pseudo')).toBeInTheDocument();
 
     window.dispatchEvent(new Event('popstate'));
+
+    await waitForElementToBeRemoved(() =>
+      screen.queryByText('Update my pseudo'),
+    );
 
     expect(screen.queryByText('Update my pseudo')).not.toBeInTheDocument();
   });

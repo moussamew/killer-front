@@ -54,14 +54,14 @@ export function WebViewDetector({ children }: Props): JSX.Element {
     return children;
   }
 
-  const saveLink = (): void => {
+  const saveLink = async (): Promise<void> => {
     const roomLink = window.location.href;
 
     if (!navigator.clipboard) {
       return void toast.error(t('common.link_error'), errorStyle);
     }
 
-    return createNavigatorClipboard.mutate(roomLink, {
+    return createNavigatorClipboard.mutateAsync(roomLink, {
       onSuccess: () => {
         toast.success(t('common.link_saved'), successStyle);
       },

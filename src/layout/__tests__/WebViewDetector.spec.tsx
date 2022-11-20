@@ -1,4 +1,8 @@
-import { fireEvent, screen } from '@testing-library/react';
+import {
+  fireEvent,
+  screen,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 
@@ -47,6 +51,9 @@ describe('<WebViewDetector />', () => {
   });
 
   it('should show error if the clipboard is not available', async () => {
+    const errorMessage =
+      'Cannot copy the link natively. Please copy it manually.';
+
     Object.defineProperties(window, {
       navigator: {
         value: {
@@ -74,11 +81,11 @@ describe('<WebViewDetector />', () => {
 
     fireEvent.click(await screen.findByText('Save link in the clipboard'));
 
-    expect(
-      await screen.findByText(
-        'Cannot copy the link natively. Please copy it manually.',
-      ),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(errorMessage)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText(errorMessage));
+
+    await waitForElementToBeRemoved(() => screen.queryByText(errorMessage));
   });
 
   it('should save the link in the clipboard if available', async () => {
