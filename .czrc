@@ -4,8 +4,7 @@
     "cz-emoji": {
       "skipQuestions": [
         "body",
-        "breaking",
-        "issues"
+        "breaking"
       ]
     }
   }
