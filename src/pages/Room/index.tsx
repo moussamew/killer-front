@@ -102,7 +102,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
           break;
 
         case PLAYER_UPDATED:
-          refetchRoomPlayers();
+          refetchRoomPlayers().then(refetchPlayerSession);
           break;
 
         /**

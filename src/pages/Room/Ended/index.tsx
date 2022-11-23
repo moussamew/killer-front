@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import tw from 'twin.macro';
 
 import Winner from '@/assets/images/winner.png';
@@ -22,9 +22,10 @@ export function EndedRoomPage(): JSX.Element {
   const { roomCode } = useParams();
   const { roomPlayers } = useRoomPlayers(roomCode!);
   const { updatePlayer } = useUpdatePlayer();
+  const navigate = useNavigate();
 
   const handleLeaveRoom = async (): Promise<void> => {
-    updatePlayer.mutate({ roomCode: null });
+    updatePlayer.mutate({ roomCode: null }, { onSuccess: () => navigate('/') });
   };
 
   const lastManStanding = roomPlayers?.find(
