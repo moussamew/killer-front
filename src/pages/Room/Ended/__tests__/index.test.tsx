@@ -12,8 +12,7 @@ import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<EndedRoomPage />', () => {
-  // Fix this test by updating EndedRoom logic
-  it.skip('should leave the EndedRoomPage to start a new game', async () => {
+  it('should leave the EndedRoomPage to start a new game', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
         res(
