@@ -37,11 +37,13 @@ describe('<CreateMission />', () => {
     );
 
     await userEvent.type(
-      screen.getByPlaceholderText('Make him drink his glass dry'),
+      await screen.findByPlaceholderText('Make him drink his glass dry'),
       'New mission',
     );
 
-    await userEvent.click(screen.getByText('Add new mission in the room'));
+    await userEvent.click(
+      await screen.findByText('Add new mission in the room'),
+    );
 
     server.use(
       rest.get(PLAYER_MISSION_ENDPOINT, (_req, res, ctx) =>
@@ -50,10 +52,6 @@ describe('<CreateMission />', () => {
     );
 
     await screen.findByDisplayValue('New mission');
-
-    await waitForElementToBeRemoved(() =>
-      screen.getByDisplayValue('New mission'),
-    );
 
     expect(
       screen.getByPlaceholderText('Make him drink his glass dry'),

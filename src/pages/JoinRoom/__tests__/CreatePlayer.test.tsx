@@ -88,7 +88,7 @@ describe('<CreatePlayer />', () => {
       </MemoryRouter>,
     );
 
-    await userEvent.click(screen.getByText('Create my own room'));
+    await userEvent.click(await screen.findByText('Create my own room'));
 
     expect(
       await screen.findByText('The right way to kill your friends..'),

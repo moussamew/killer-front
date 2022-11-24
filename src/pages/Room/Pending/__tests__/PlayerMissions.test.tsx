@@ -1,4 +1,8 @@
-import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import {
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
@@ -29,7 +33,7 @@ describe('<PlayerMissions />', () => {
 
     await screen.findByText('Drink Jack Daniels');
 
-    await userEvent.click(screen.getByTitle('deleteMission'));
+    await userEvent.click(await screen.findByTitle('deleteMission'));
 
     server.use(
       rest.get(PLAYER_MISSION_ENDPOINT, (_req, res, ctx) =>
@@ -37,10 +41,8 @@ describe('<PlayerMissions />', () => {
       ),
     );
 
-    await waitForElementToBeRemoved(() =>
-      screen.queryByText('Drink Jack Daniels'),
-    );
-
-    expect(screen.queryByText('Drink Jack Daniels')).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.queryByText('Drink Jack Daniels')).not.toBeInTheDocument();
+    });
   });
 });

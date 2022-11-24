@@ -1,4 +1,5 @@
 import {
+  act,
   render,
   screen,
   waitForElementToBeRemoved,
@@ -12,7 +13,7 @@ describe('<Notification />', () => {
   it('should show a notification', async () => {
     render(<Notification />);
 
-    toast.success('This notification is a success!');
+    act(() => toast.success('This notification is a success!'));
 
     expect(
       await screen.findByText('This notification is a success!'),
@@ -22,7 +23,7 @@ describe('<Notification />', () => {
   it('should dismiss a notification', async () => {
     render(<Notification />);
 
-    toast.error('This notification is an error!');
+    act(() => toast.error('This notification is an error!'));
 
     await userEvent.click(
       await screen.findByText('This notification is an error!'),

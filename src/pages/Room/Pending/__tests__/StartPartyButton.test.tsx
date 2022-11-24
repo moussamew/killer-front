@@ -11,6 +11,8 @@ import { PlayerRole } from '@/services/player/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
+import { PlayingRoomPage } from '../../Playing';
+
 describe('<StartPartyButton />', () => {
   it('should be able to start a new party', async () => {
     server.use(
@@ -30,13 +32,15 @@ describe('<StartPartyButton />', () => {
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/P9LDG']}>
         <Routes>
-          <Route path="/room/P9LDG/playing" element={<p>Party started!</p>} />
+          <Route path="/room/P9LDG/playing" element={<PlayingRoomPage />} />
           <Route path="/room/:roomCode" element={<PendingRoomPage />} />
         </Routes>
       </MemoryRouter>,
     );
 
-    await userEvent.click(await screen.findByText('Start the party'));
+    await screen.findByText('Start the party');
+
+    await userEvent.click(screen.getByText('Start the party'));
 
     const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
@@ -48,7 +52,9 @@ describe('<StartPartyButton />', () => {
 
     sources[roomEventSource].emit(messageEvent.type, messageEvent);
 
-    expect(await screen.findByText('Party started!')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Try to kill your target and survive!'),
+    ).toBeInTheDocument();
 
     sources[roomEventSource].close();
   });

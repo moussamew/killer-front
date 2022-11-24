@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
@@ -40,6 +40,8 @@ describe('<SettingsModal />', () => {
         res(ctx.status(200), ctx.json({ name: 'Trinity', roomCode: null })),
       ),
     );
+
+    await waitForElementToBeRemoved(() => screen.queryByText('User Settings'));
 
     expect(await screen.findByText('Trinity'));
   });
