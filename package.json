@@ -65,7 +65,7 @@
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eventsourcemock": "^2.0.0",
-    "husky": "^8.0.1",
+    "husky": "^8.0.2",
     "jsdom": "^20.0.2",
     "msw": "^0.48.1",
     "postcss": "^8.4.19",
