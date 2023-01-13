@@ -27,11 +27,5 @@ export function CreateRoomButton(): JSX.Element {
     }
   };
 
-  return (
-    <Button
-      content={t('home.create_room')}
-      buttonColor="red"
-      onClick={handleCreateRoom}
-    />
-  );
+  return <Button content={t('home.create_room')} onClick={handleCreateRoom} />;
 }

@@ -3,6 +3,7 @@ import tw from 'twin.macro';
 export const colors = {
   red: tw`bg-red-400`,
   yellow: tw`bg-yellow-200`,
+  black: tw`bg-black`,
 };
 
 export const text = {

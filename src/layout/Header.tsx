@@ -1,7 +1,8 @@
 import { useContext } from 'react';
-import tw from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
 import { ReactComponent as SettingsIcon } from '@/assets/icons/settings.svg';
+import Logo from '@/assets/imagesV2/logo.png';
 import t from '@/helpers/translate';
 import { isEmptyObject } from '@/helpers/utils';
 import { ModalContext } from '@/hooks/context/modal';
@@ -13,8 +14,17 @@ const Navigation = tw.header`
   p-2 flex justify-between
 `;
 
-const Text = tw.p`
-  font-bold text-black uppercase mr-1
+const Text = styled.p`
+  font-size: 3rem;
+  color: #111827;
+  filter: drop-shadow(0.2rem 0.2rem 0.1rem #0f172a);
+  ${tw`font-light text-black mr-1`};
+`;
+
+const Img = styled.img`
+  height: 3rem;
+  filter: drop-shadow(0.2rem 0.2rem 0.2rem #0f172a);
+  margin-right: 2rem;
 `;
 
 const PlayerInfos = tw.div`
@@ -31,7 +41,11 @@ function Header(): JSX.Element {
 
   return (
     <Navigation>
-      <Text>{t('header.project_name')}</Text>
+      <div>
+        <Text>{t('header.project_name')}</Text>
+        <Img src={Logo} />
+      </div>
+
       {playerSession && !isEmptyObject(playerSession) && (
         <PlayerInfos>
           <Text>{playerSession?.name}</Text>

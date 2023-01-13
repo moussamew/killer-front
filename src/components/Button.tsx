@@ -21,16 +21,18 @@ const StyledButton = styled.button<{
     disabled ? tw`cursor-not-allowed opacity-70` : tw`cursor-pointer`}
     
   ${tw`transition-all duration-300 ease-in 
-  shadow-md hover:shadow-xl
-  p-1 mt-1 rounded-lg
-  w-full text-3xl relative
+  drop-shadow-md hover:drop-shadow-xl
+  p-2 mt-1 rounded-lg
+  w-fit text-3xl relative
   flex justify-center items-center`}
 `;
 
 const Text = styled.p<{ textColor: keyof typeof text }>`
   ${({ textColor }) => text[textColor]}
 
-  ${tw`font-medium text-3xl`}
+  ${tw`font-light text-3xl 
+  opacity-80 hover:opacity-100
+  transition-all duration-100 ease-in`}
 `;
 
 const Icon = tw.div`
@@ -49,7 +51,7 @@ interface Props {
 
 export function Button({
   content,
-  buttonColor = 'red',
+  buttonColor = 'black',
   textColor = 'white',
   onClick,
   type = 'button',
