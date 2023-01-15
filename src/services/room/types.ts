@@ -2,7 +2,15 @@ import { QueryObserverResult, UseMutationResult } from 'react-query';
 
 import { Player } from '@/services/player/types';
 
+import { PlayerStatus } from '../player/constants';
+
 import { RoomStatus } from './constants';
+
+interface RoomPlayer {
+  id: number;
+  name: string;
+  status: PlayerStatus;
+}
 
 export interface Room {
   id: number;
@@ -10,11 +18,8 @@ export interface Room {
   code: string;
   name: string;
   status: RoomStatus;
-}
-
-export interface RoomInfos {
-  roomCode: string;
-  pathname: string;
+  admin: RoomPlayer;
+  players: RoomPlayer[];
 }
 
 export interface CreateRoomMutation {
@@ -39,7 +44,7 @@ export interface RoomMissionsQuery {
   refetchRoomMissions(): Promise<QueryObserverResult<number, unknown>>;
 }
 
-export interface RoomInfosQuery {
-  roomInfos: Room | undefined;
-  refetchRoomInfos(): Promise<QueryObserverResult<Room, unknown>>;
+export interface RoomQuery {
+  room: Room | undefined;
+  refetchRoom(): Promise<QueryObserverResult<Room, unknown>>;
 }

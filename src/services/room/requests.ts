@@ -24,7 +24,7 @@ export function getRoomMissionsRequest(): Promise<number> {
   return request({ url: ROOM_MISSION_ENDPOINT, method: GET });
 }
 
-export function getRoomInfosRequest(roomCode: string): Promise<Room> {
+export function getRoomRequest(roomCode: string): Promise<Room> {
   return request({ url: `${ROOM_ENDPOINT}/${roomCode}`, method: GET });
 }
 

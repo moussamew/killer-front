@@ -3,14 +3,9 @@ import { useQuery } from 'react-query';
 import {
   getRoomMissionsRequest,
   getRoomPlayersRequest,
-  getRoomInfosRequest,
+  getRoomRequest,
 } from './requests';
-import {
-  RoomInfos,
-  RoomInfosQuery,
-  RoomMissionsQuery,
-  RoomPlayersQuery,
-} from './types';
+import { RoomQuery, RoomMissionsQuery, RoomPlayersQuery } from './types';
 
 export function useRoomPlayers(roomCode: string): RoomPlayersQuery {
   const { data: roomPlayers, refetch: refetchRoomPlayers } = useQuery(
@@ -30,14 +25,10 @@ export function useRoomMissions(): RoomMissionsQuery {
   return { roomMissions, refetchRoomMissions };
 }
 
-export function useRoomInfos({
-  roomCode,
-  pathname,
-}: RoomInfos): RoomInfosQuery {
-  const { data: roomInfos, refetch: refetchRoomInfos } = useQuery(
-    pathname,
-    () => getRoomInfosRequest(roomCode),
+export function useRoom(roomCode: string): RoomQuery {
+  const { data: room, refetch: refetchRoom } = useQuery('room', () =>
+    getRoomRequest(roomCode),
   );
 
-  return { roomInfos, refetchRoomInfos };
+  return { room, refetchRoom };
 }
