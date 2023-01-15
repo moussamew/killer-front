@@ -21,7 +21,7 @@ export function LeaveCurrentRoom(): JSX.Element {
     <Fragment>
       <h1>
         {t('join_room.already_inside_room', {
-          playerRoomCode: playerSession?.roomCode,
+          playerRoomCode: playerSession?.room.code,
         })}
       </h1>
       <p>{t('join_room.careful_before_join_room')}</p>
@@ -31,7 +31,7 @@ export function LeaveCurrentRoom(): JSX.Element {
       />
       <Button
         content={t('join_room.return_current_room')}
-        onClick={() => navigate(`/room/${playerSession?.roomCode}`)}
+        onClick={() => navigate(`/room/${playerSession?.room.code}`)}
         buttonColor="yellow"
         textColor="lightDark"
       />

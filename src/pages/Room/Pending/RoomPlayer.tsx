@@ -58,21 +58,21 @@ export function RoomPlayer({
   return (
     <PlayerItem key={playerName}>
       <PlayerImage alt={`player-${playerName}`} src={Player} />
-      <PlayerName currentPlayer={playerSession?.id === playerId}>
+      <PlayerName currentPlayer={playerSession?.room.id === playerId}>
         {playerName}
       </PlayerName>
-      {playerRole === PlayerRole.ADMIN && playerSession?.id !== playerId && (
+      {playerRole === PlayerRole.ADMIN && playerSession?.room.id !== playerId && (
         <Icon>
           <AdminIcon title="roomAdmin" />
         </Icon>
       )}
-      {playerSession?.id === playerId && (
+      {playerSession?.room.id === playerId && (
         <Icon onClick={handleLeaveRoom}>
           <LeaveRoomIcon title="leaveRoom" />
         </Icon>
       )}
       {playerSession?.role === PlayerRole.ADMIN &&
-        playerSession.id !== playerId && (
+        playerSession.room.id !== playerId && (
           <Icon onClick={handleKickPlayer}>
             <KickPlayerIcon title={`kick${playerName}`} />
           </Icon>

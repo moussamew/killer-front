@@ -6,11 +6,11 @@ import {
 import { Method } from '@/constants/enums';
 import { request } from '@/helpers/apis';
 
-import { Player } from './types';
+import { Player, PlayerSession } from './types';
 
 const { GET, POST, PATCH } = Method;
 
-export function getPlayerSessionRequest(): Promise<Player> {
+export function getPlayerSessionRequest(): Promise<PlayerSession> {
   return request({ url: PLAYER_SESSION_ENDPOINT, method: GET });
 }
 

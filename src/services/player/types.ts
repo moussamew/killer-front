@@ -1,5 +1,7 @@
 import { QueryObserverResult, UseMutationResult } from 'react-query';
 
+import { Room } from '../room/types';
+
 import { PlayerRole, PlayerStatus } from './constants';
 
 export interface Player {
@@ -12,9 +14,19 @@ export interface Player {
   missionId?: number;
 }
 
+export interface PlayerSession {
+  name: string;
+  killer: string | null;
+  assignedMission: number | null;
+  authoredMissions: number[];
+  status: PlayerStatus;
+  target: number | null;
+  room: Room;
+}
+
 export interface PlayerSessionQuery {
-  playerSession: Player | undefined;
-  refetchPlayerSession(): Promise<QueryObserverResult<Player, unknown>>;
+  playerSession: PlayerSession | undefined;
+  refetchPlayerSession(): Promise<QueryObserverResult<PlayerSession, unknown>>;
   isPlayerSessionLoading: boolean;
 }
 

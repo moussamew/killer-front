@@ -23,7 +23,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
   const { roomCode } = useParams();
   const { playerSession, refetchPlayerSession, isPlayerSessionLoading } =
     usePlayerSession();
-  const previousRoomCode = usePrevious(playerSession?.roomCode);
+  const previousRoomCode = usePrevious(playerSession?.room.code);
   const { refetchRoomPlayers } = useRoomPlayers(roomCode!);
   const { roomInfos, refetchRoomInfos } = useRoomInfos({
     roomCode: roomCode!,
@@ -64,7 +64,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
     if (!isPlayerSessionLoading) {
       if (
         !playerSession ||
-        (!previousRoomCode && playerSession?.roomCode !== roomCode)
+        (!previousRoomCode && playerSession?.room.code !== roomCode)
       ) {
         navigate(`/join/${roomCode}`);
       }
@@ -72,7 +72,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
       /**
        * Redirect player to home page if its roomCode is removed.
        */
-      if (previousRoomCode && !playerSession?.roomCode) {
+      if (previousRoomCode && !playerSession?.room.code) {
         navigate('/');
       }
     }
