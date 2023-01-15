@@ -1,12 +1,11 @@
 import { Fragment } from 'react';
-import { useParams } from 'react-router-dom';
 import tw, { styled } from 'twin.macro';
 
 import { ReactComponent as DeleteIcon } from '@/assets/icons/delete.svg';
 import Idea from '@/assets/images/idea.png';
 import t from '@/helpers/translate';
 import { useDeleteMission } from '@/services/mission/mutations';
-import { usePlayerMissions } from '@/services/mission/queries';
+import { usePlayerSession } from '@/services/player/queries';
 
 import { CreateMission } from './CreateMission';
 
@@ -40,8 +39,7 @@ const DeleteMission = styled.div`
 `;
 
 export function PlayerMissions(): JSX.Element {
-  const { roomCode } = useParams();
-  const { playerMissions } = usePlayerMissions(roomCode!);
+  const { playerSession } = usePlayerSession();
   const { deleteMission } = useDeleteMission();
 
   const handleDeleteMission = (missionId: number) => (): void => {
@@ -58,20 +56,18 @@ export function PlayerMissions(): JSX.Element {
         </div>
       </Section>
       <hr />
-      {playerMissions && (
-        <Missions>
-          {playerMissions.map(({ id, content }) => (
-            <Fragment key={`${id}-${content}`}>
-              <MissionCard>
-                <span>{content}</span>
-                <DeleteMission onClick={handleDeleteMission(id)}>
-                  <DeleteIcon title="deleteMission" />
-                </DeleteMission>
-              </MissionCard>
-            </Fragment>
-          ))}
-        </Missions>
-      )}
+      <Missions>
+        {playerSession?.authoredMissions.map(({ id, content }) => (
+          <Fragment key={`${id}-${content}`}>
+            <MissionCard>
+              <span>{content}</span>
+              <DeleteMission onClick={handleDeleteMission(id)}>
+                <DeleteIcon title="deleteMission" />
+              </DeleteMission>
+            </MissionCard>
+          </Fragment>
+        ))}
+      </Missions>
       <CreateMission />
     </Container>
   );

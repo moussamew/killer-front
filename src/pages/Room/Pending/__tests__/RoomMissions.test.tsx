@@ -1,21 +1,13 @@
 import { screen } from '@testing-library/react';
 import { sources } from 'eventsourcemock';
-import { rest } from 'msw';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-import { ROOM_MISSION_ENDPOINT, ROOM_TOPIC } from '@/constants/endpoints';
+import { ROOM_TOPIC } from '@/constants/endpoints';
 import { RoomMissions } from '@/pages/Room/Pending/RoomMissions';
-import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<RoomMissions />', () => {
   it('should show the count of all missions in the room', async () => {
-    server.use(
-      rest.get(ROOM_MISSION_ENDPOINT, async (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json(5)),
-      ),
-    );
-
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL']}>
         <Routes>
@@ -30,12 +22,6 @@ describe('<RoomMissions />', () => {
   });
 
   it('should update the count of all missions in the room when SSE emits a new message', async () => {
-    server.use(
-      rest.get(ROOM_MISSION_ENDPOINT, async (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json(2)),
-      ),
-    );
-
     renderWithProviders(
       <MemoryRouter initialEntries={['/room/X7JKL']}>
         <Routes>
@@ -45,12 +31,6 @@ describe('<RoomMissions />', () => {
     );
 
     await screen.findByText('There is currently 2 missions in this room.');
-
-    server.use(
-      rest.get(ROOM_MISSION_ENDPOINT, async (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json(3)),
-      ),
-    );
 
     const messageEvent = new MessageEvent('message');
 

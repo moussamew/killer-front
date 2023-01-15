@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-import { ROOM_ENDPOINT, ROOM_MISSION_ENDPOINT } from '@/constants/endpoints';
+import { ROOM_ENDPOINT } from '@/constants/endpoints';
 
 export const roomHandlers = [
   /**
@@ -20,12 +20,6 @@ export const roomHandlers = [
    */
   rest.get(`${ROOM_ENDPOINT}/:roomCode/players`, async (_req, res, ctx) =>
     res(ctx.status(200), ctx.json([])),
-  ),
-  /**
-   * Mock fetching missions in room.
-   */
-  rest.get(ROOM_MISSION_ENDPOINT, async (_req, res, ctx) =>
-    res(ctx.status(200), ctx.json(0)),
   ),
   /**
    * Mock fetching room status.

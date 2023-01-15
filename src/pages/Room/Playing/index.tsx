@@ -11,7 +11,7 @@ import { PlayerList } from '@/pages/Room/Pending/PlayerList';
 import { useTargetInfos } from '@/services/mission/queries';
 import { PlayerStatus } from '@/services/player/constants';
 import { usePlayerSession } from '@/services/player/queries';
-import { useRoomPlayers } from '@/services/room/queries';
+import { useRoom } from '@/services/room/queries';
 
 import { PlayerKilledButton } from './PlayerKilledButton';
 import { Status } from './Status';
@@ -30,7 +30,7 @@ export function PlayingRoomPage(): JSX.Element {
   const { roomCode } = useParams();
   const { targetInfos, refetchTargetInfos } = useTargetInfos();
   const { playerSession } = usePlayerSession();
-  const { refetchRoomPlayers } = useRoomPlayers(roomCode!);
+  const { refetchRoom } = useRoom(roomCode!);
 
   /**
    * Listen to SSE events emits in the Room page.
@@ -45,12 +45,12 @@ export function PlayingRoomPage(): JSX.Element {
       const { type } = JSON.parse(event.data);
 
       if (type === MercureEventType.PLAYER_KILLED) {
-        refetchTargetInfos().then(refetchRoomPlayers);
+        refetchTargetInfos().then(refetchRoom);
       }
     });
 
     return () => roomEventSource.close();
-  }, [roomCode, refetchTargetInfos, refetchRoomPlayers]);
+  }, [roomCode, refetchTargetInfos, refetchRoom]);
 
   const isPlayerDead = playerSession?.status === PlayerStatus.KILLED;
 

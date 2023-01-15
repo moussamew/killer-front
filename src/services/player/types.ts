@@ -1,5 +1,6 @@
 import { QueryObserverResult, UseMutationResult } from 'react-query';
 
+import { Mission } from '../mission/types';
 import { Room } from '../room/types';
 
 import { PlayerRole, PlayerStatus } from './constants';
@@ -18,7 +19,7 @@ export interface PlayerSession {
   name: string;
   killer: string | null;
   assignedMission: number | null;
-  authoredMissions: number[];
+  authoredMissions: Mission[];
   status: PlayerStatus;
   target: number | null;
   room: Room;

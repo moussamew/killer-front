@@ -7,7 +7,7 @@ import { MercureEventType } from '@/constants/enums';
 import { usePrevious } from '@/hooks/usePrevious';
 import { usePlayerSession } from '@/services/player/queries';
 import { RoomStatus } from '@/services/room/constants';
-import { useRoom, useRoomPlayers } from '@/services/room/queries';
+import { useRoom } from '@/services/room/queries';
 
 const { ROOM_IN_GAME, ROOM_DELETED, ROOM_UPDATED, PLAYER_UPDATED } =
   MercureEventType;
@@ -23,7 +23,6 @@ export function RoomPage({ children }: Props): JSX.Element | null {
   const { playerSession, refetchPlayerSession, isPlayerSessionLoading } =
     usePlayerSession();
   const previousRoomCode = usePrevious(playerSession?.room.code);
-  const { refetchRoomPlayers } = useRoomPlayers(roomCode!);
   const { room, refetchRoom } = useRoom(roomCode!);
 
   /**
@@ -98,7 +97,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
           break;
 
         case PLAYER_UPDATED:
-          refetchRoomPlayers().then(refetchPlayerSession);
+          refetchRoom().then(refetchPlayerSession);
           break;
 
         /**
@@ -121,13 +120,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
     });
 
     return () => roomEventSource.close();
-  }, [
-    roomCode,
-    navigate,
-    refetchPlayerSession,
-    refetchRoom,
-    refetchRoomPlayers,
-  ]);
+  }, [roomCode, navigate, refetchPlayerSession, refetchRoom]);
 
   return children || null;
 }
