@@ -6,9 +6,12 @@ export async function request<T>({
   method,
   requestInit,
 }: RequestParams): Promise<T> {
+  const token = localStorage.getItem('token');
+
   const response = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
+      ...(token && { Authorization: `Bearer ${token}` }),
     },
     credentials: 'include',
     method,
@@ -22,6 +25,10 @@ export async function request<T>({
 
   if (result?.errorCode) {
     throw new RequestError(result);
+  }
+
+  if (result?.token) {
+    localStorage.setItem('token', result.token);
   }
 
   return result;
