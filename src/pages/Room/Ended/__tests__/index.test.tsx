@@ -6,7 +6,6 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { HomePage } from '@/pages/Home';
 import { EndedRoomPage } from '@/pages/Room/Ended';
-import { PlayerRole } from '@/services/player/constants';
 import { RoomStatus } from '@/services/room/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
@@ -21,7 +20,6 @@ describe('<EndedRoomPage />', () => {
             id: 0,
             name: 'Trinity',
             roomCode: 'X7JKL',
-            role: PlayerRole.PLAYER,
           }),
         ),
       ),
@@ -49,7 +47,6 @@ describe('<EndedRoomPage />', () => {
             id: 0,
             name: 'Trinity',
             roomCode: null,
-            role: PlayerRole.PLAYER,
           }),
         ),
       ),

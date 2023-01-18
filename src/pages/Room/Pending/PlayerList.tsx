@@ -63,25 +63,24 @@ export function PlayerList(): JSX.Element {
       {room?.players.map(({ name, id }) => (
         <PlayerItem key={name}>
           <PlayerImage alt={`player-${name}`} src={Player} />
-          <PlayerName currentPlayer={playerSession?.room.id === id}>
+          <PlayerName currentPlayer={playerSession?.id === id}>
             {name}
           </PlayerName>
-          {playerSession?.room?.admin?.id === id && (
+          {room.admin.id === id && playerSession?.id !== id && (
             <Icon>
               <AdminIcon title="roomAdmin" />
             </Icon>
           )}
-          {playerSession?.name === name && (
+          {playerSession?.id === id && (
             <Icon onClick={handleLeaveRoom}>
               <LeaveRoomIcon title="leaveRoom" />
             </Icon>
           )}
-          {playerSession?.room?.admin?.id === id &&
-            playerSession.name !== name && (
-              <Icon onClick={handleKickPlayer(name, id)}>
-                <KickPlayerIcon title={`kick${name}`} />
-              </Icon>
-            )}
+          {room?.admin?.id !== id && playerSession?.name !== name && (
+            <Icon onClick={handleKickPlayer(name, id)}>
+              <KickPlayerIcon title={`kick${name}`} />
+            </Icon>
+          )}
         </PlayerItem>
       ))}
     </Content>

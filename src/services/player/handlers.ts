@@ -6,7 +6,7 @@ import {
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
 
-import { PlayerRole, PlayerStatus } from './constants';
+import { PlayerStatus } from './constants';
 
 export const playerHandlers = [
   /**
@@ -21,7 +21,6 @@ export const playerHandlers = [
         roomCode: null,
         targetId: null,
         missionId: null,
-        role: PlayerRole.ADMIN,
         status: PlayerStatus.ALIVE,
       }),
     ),

@@ -23,10 +23,10 @@ export function HomePage(): JSX.Element {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (playerSession?.room.code) {
+    if (playerSession?.room?.code) {
       navigate(`/room/${playerSession.room.code}`);
     }
-  }, [navigate, playerSession?.room.code]);
+  }, [navigate, playerSession?.room?.code]);
 
   return (
     <Layout>

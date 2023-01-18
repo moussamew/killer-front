@@ -3,46 +3,45 @@ import { QueryObserverResult, UseMutationResult } from 'react-query';
 import { Mission } from '../mission/types';
 import { Room } from '../room/types';
 
-import { PlayerRole, PlayerStatus } from './constants';
+import { PlayerStatus } from './constants';
 
 export interface Player {
   id: number;
   name: string;
+  room: string | null;
   status: PlayerStatus;
-  roomCode: string | null;
-  role: PlayerRole;
-  targetId?: number;
-  missionId?: number;
+  token: string;
 }
 
 export interface PlayerSession {
+  id: number;
   name: string;
   killer: string | null;
   assignedMission: number | null;
   authoredMissions: Mission[];
   status: PlayerStatus;
   target: number | null;
-  room: Room;
+  room: Room | null;
 }
 
 export interface PlayerSessionQuery {
   playerSession: PlayerSession | undefined;
   refetchPlayerSession(): Promise<QueryObserverResult<PlayerSession, unknown>>;
-  isPlayerSessionLoading: boolean;
+  isLoading: boolean;
 }
 
 export interface UpdatePlayerMutation {
   updatePlayer: UseMutationResult<void, unknown, Partial<Player>, unknown>;
 }
 export interface CreatePlayerMutation {
-  createPlayer: UseMutationResult<void, unknown, Partial<Player>, unknown>;
+  createPlayer: UseMutationResult<Player, unknown, string, unknown>;
 }
 
 export interface KickPlayerMutation {
   kickPlayer: UseMutationResult<
     void,
     unknown,
-    Pick<Player, 'id' | 'roomCode'>,
+    Pick<Player, 'room' | 'id'>,
     unknown
   >;
 }

@@ -27,13 +27,9 @@ export function CreateRoomModal(): JSX.Element {
   };
 
   const handleCreateRoom = async (): Promise<void> => {
-    await createPlayer.mutateAsync(
-      { name: pseudo.toUpperCase() },
-      {
-        onSuccess: () =>
-          createRoom.mutate(undefined, { onSuccess: closeModal }),
-      },
-    );
+    await createPlayer.mutateAsync(pseudo.toUpperCase(), {
+      onSuccess: () => createRoom.mutate(undefined, { onSuccess: closeModal }),
+    });
   };
 
   return (

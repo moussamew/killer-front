@@ -34,14 +34,20 @@ export function JoinRoomModal(): JSX.Element {
   };
 
   const handleJoinRoom = async (): Promise<void> => {
-    if (!playerSession?.name) {
-      return createPlayer.mutateAsync(
-        { name: pseudo.toUpperCase(), roomCode },
+    if (!playerSession) {
+      await createPlayer.mutateAsync(pseudo.toUpperCase(), {
+        onSuccess: ({ id }) =>
+          updatePlayer.mutateAsync(
+            { id, room: roomCode },
+            { onSuccess: closeModal },
+          ),
+      });
+    } else {
+      updatePlayer.mutateAsync(
+        { id: playerSession?.id, room: roomCode },
         { onSuccess: closeModal },
       );
     }
-
-    return updatePlayer.mutateAsync({ roomCode }, { onSuccess: closeModal });
   };
 
   return (

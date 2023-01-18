@@ -21,11 +21,13 @@ export function RoomMissions(): JSX.Element {
     return () => missionsEventSource.close();
   }, [roomCode, refetchRoom]);
 
+  const roomMissions = room?.missions.length;
+
   return (
     <div>
-      <p>
-        {t('room.missions_in_room', { missionsCount: room?.missions.length })}
-      </p>
+      {Boolean(roomMissions) && (
+        <p>{t('room.missions_in_room', { missionsCount: roomMissions })}</p>
+      )}
     </div>
   );
 }

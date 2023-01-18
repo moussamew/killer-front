@@ -6,7 +6,6 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { PendingRoomPage } from '@/pages/Room/Pending';
 import { PlayerList } from '@/pages/Room/Pending/PlayerList';
-import { PlayerRole } from '@/services/player/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -26,7 +25,7 @@ describe('<PlayerList />', () => {
         res(
           ctx.status(200),
           ctx.json([
-            { id: 0, name: 'Neo', role: PlayerRole.ADMIN },
+            { id: 0, name: 'Neo' },
             { id: 1, name: 'Trinity' },
             { id: 2, name: 'Morpheus' },
           ]),
@@ -52,10 +51,7 @@ describe('<PlayerList />', () => {
   it('should show current player', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(
-          ctx.status(200),
-          ctx.json({ id: 0, name: 'Trinity', role: PlayerRole.ADMIN }),
-        ),
+        res(ctx.status(200), ctx.json({ id: 0, name: 'Trinity' })),
       ),
     );
 
@@ -67,17 +63,14 @@ describe('<PlayerList />', () => {
   it('should show the admin icon next to the room admin to a player who is not', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(
-          ctx.status(200),
-          ctx.json({ id: 0, name: 'Neo', role: PlayerRole.PLAYER }),
-        ),
+        res(ctx.status(200), ctx.json({ id: 0, name: 'Neo' })),
       ),
       rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_req, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json([
-            { id: 0, name: 'Neo', role: PlayerRole.PLAYER },
-            { id: 1, name: 'Trinity', role: PlayerRole.ADMIN },
+            { id: 0, name: 'Neo' },
+            { id: 1, name: 'Trinity' },
           ]),
         ),
       ),
@@ -104,7 +97,6 @@ describe('<PlayerList />', () => {
           ctx.json({
             id: 0,
             name: 'Neo',
-            role: PlayerRole.PLAYER,
             roomCode: 'X7VBD',
           }),
         ),
@@ -116,7 +108,6 @@ describe('<PlayerList />', () => {
             {
               id: 0,
               name: 'Neo',
-              role: PlayerRole.PLAYER,
               roomCode: 'X7VBD',
             },
           ]),

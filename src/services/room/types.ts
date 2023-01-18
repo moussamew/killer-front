@@ -2,15 +2,7 @@ import { QueryObserverResult, UseMutationResult } from 'react-query';
 
 import { Player } from '@/services/player/types';
 
-import { PlayerStatus } from '../player/constants';
-
 import { RoomStatus } from './constants';
-
-interface RoomPlayer {
-  id: number;
-  name: string;
-  status: PlayerStatus;
-}
 
 export interface Room {
   id: number;
@@ -18,8 +10,8 @@ export interface Room {
   code: string;
   name: string;
   status: RoomStatus;
-  admin: RoomPlayer;
-  players: RoomPlayer[];
+  admin: Player;
+  players: Player[];
 }
 
 export interface CreateRoomMutation {
@@ -32,16 +24,6 @@ export interface DeleteRoomMutation {
 
 export interface StartPartyMutation {
   startParty: UseMutationResult<void, unknown, string, unknown>;
-}
-
-export interface RoomPlayersQuery {
-  roomPlayers: Player[] | undefined;
-  refetchRoomPlayers(): Promise<QueryObserverResult<Player[], unknown>>;
-}
-
-export interface RoomMissionsQuery {
-  roomMissions: number | undefined;
-  refetchRoomMissions(): Promise<QueryObserverResult<number, unknown>>;
 }
 
 export interface RoomQuery {

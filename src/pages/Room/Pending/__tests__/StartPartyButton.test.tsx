@@ -7,7 +7,6 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { PLAYER_SESSION_ENDPOINT, ROOM_TOPIC } from '@/constants/endpoints';
 import { MercureEventType } from '@/constants/enums';
 import { PendingRoomPage } from '@/pages/Room/Pending';
-import { PlayerRole } from '@/services/player/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -21,7 +20,6 @@ describe('<StartPartyButton />', () => {
             id: 0,
             name: 'Neo',
             roomCode: 'P9LDG',
-            role: PlayerRole.ADMIN,
           }),
         ),
       ),

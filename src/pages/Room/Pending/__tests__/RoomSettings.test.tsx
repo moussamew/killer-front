@@ -5,7 +5,6 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { PendingRoomPage } from '@/pages/Room/Pending';
-import { PlayerRole } from '@/services/player/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -19,7 +18,6 @@ describe('<RoomSettings />', () => {
             id: 0,
             name: 'Neo',
             roomCode: 'X7VBD',
-            role: PlayerRole.ADMIN,
           }),
         ),
       ),
@@ -48,7 +46,6 @@ describe('<RoomSettings />', () => {
             id: 0,
             name: 'Neo',
             roomCode: 'X7VBD',
-            role: PlayerRole.PLAYER,
           }),
         ),
       ),

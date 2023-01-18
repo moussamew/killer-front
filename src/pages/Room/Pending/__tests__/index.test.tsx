@@ -4,7 +4,6 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { PendingRoomPage } from '@/pages/Room/Pending';
-import { PlayerRole } from '@/services/player/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -12,10 +11,7 @@ describe('<PendingRoomPage />', () => {
   it('should show the pending room page with the correct room code', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(
-          ctx.status(200),
-          ctx.json({ name: 'Neo', roomCode: 'P9LDG', role: PlayerRole.ADMIN }),
-        ),
+        res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: 'P9LDG' })),
       ),
     );
 
@@ -38,7 +34,6 @@ describe('<PendingRoomPage />', () => {
           ctx.json({
             name: 'Trinity',
             roomCode: 'P9LDG',
-            role: PlayerRole.PLAYER,
           }),
         ),
       ),

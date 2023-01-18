@@ -10,7 +10,6 @@ import {
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
 import { PlayingRoomPage } from '@/pages/Room/Playing';
-import { PlayerRole } from '@/services/player/constants';
 import { RoomStatus } from '@/services/room/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
@@ -25,7 +24,6 @@ describe('<PlayerKilledModal />', () => {
             id: 0,
             name: 'Trinity',
             roomCode: 'X7JKL',
-            role: PlayerRole.PLAYER,
           }),
         ),
       ),

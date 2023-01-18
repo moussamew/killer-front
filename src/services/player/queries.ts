@@ -7,8 +7,12 @@ export function usePlayerSession(): PlayerSessionQuery {
   const {
     data: playerSession,
     refetch: refetchPlayerSession,
-    isLoading: isPlayerSessionLoading,
+    isLoading,
   } = useQuery('playerSession', getPlayerSessionRequest);
 
-  return { playerSession, refetchPlayerSession, isPlayerSessionLoading };
+  return {
+    playerSession,
+    refetchPlayerSession,
+    isLoading,
+  };
 }

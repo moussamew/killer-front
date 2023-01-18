@@ -16,7 +16,7 @@ import { JoinRoomPage } from '@/pages/JoinRoom';
 import { RoomPage } from '@/pages/Room';
 import { PendingRoomPage } from '@/pages/Room/Pending';
 import { PlayingRoomPage } from '@/pages/Room/Playing';
-import { PlayerRole, PlayerStatus } from '@/services/player/constants';
+import { PlayerStatus } from '@/services/player/constants';
 import { RoomStatus } from '@/services/room/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
@@ -198,7 +198,6 @@ describe('<RoomPage />', () => {
             id: 0,
             name: 'Trinity',
             roomCode: 'X7JKL',
-            role: PlayerRole.ADMIN,
           }),
         ),
       ),
@@ -210,14 +209,12 @@ describe('<RoomPage />', () => {
               id: 0,
               name: 'Trinity',
               roomCode: 'X7JKL',
-              role: PlayerRole.ADMIN,
             },
             {
               id: 1,
               name: 'Neo',
               passcode: null,
               status: PlayerStatus.ALIVE,
-              role: PlayerRole.PLAYER,
               target: null,
               missionId: null,
               roomCode: 'X7JKL',
@@ -268,7 +265,6 @@ describe('<RoomPage />', () => {
             id: 0,
             name: 'Trinity',
             roomCode: 'X7JKL',
-            role: PlayerRole.ADMIN,
           }),
         ),
       ),
@@ -280,14 +276,12 @@ describe('<RoomPage />', () => {
               id: 0,
               name: 'Trinity',
               roomCode: 'X7JKL',
-              role: PlayerRole.ADMIN,
             },
             {
               id: 1,
               name: 'Neo',
               passcode: null,
               status: PlayerStatus.ALIVE,
-              role: PlayerRole.PLAYER,
               target: null,
               missionId: null,
               roomCode: 'X7JKL',
@@ -316,14 +310,12 @@ describe('<RoomPage />', () => {
               id: 0,
               name: 'Trinity',
               roomCode: 'X7JKL',
-              role: PlayerRole.ADMIN,
             },
             {
               id: 1,
               name: 'Morpheus',
               passcode: null,
               status: PlayerStatus.ALIVE,
-              role: PlayerRole.PLAYER,
               target: null,
               missionId: null,
               roomCode: 'X7JKL',
@@ -352,7 +344,6 @@ describe('<RoomPage />', () => {
       id: 0,
       name: 'Trinity',
       roomCode: 'X7JKL',
-      role: PlayerRole.ADMIN,
     };
 
     server.use(
@@ -396,7 +387,6 @@ describe('<RoomPage />', () => {
       id: 0,
       name: 'Trinity',
       roomCode: 'X7JKL',
-      role: PlayerRole.ADMIN,
     };
 
     server.use(
@@ -450,7 +440,6 @@ describe('<RoomPage />', () => {
             id: 0,
             name: 'Trinity',
             roomCode: 'X7JKL',
-            role: PlayerRole.ADMIN,
           }),
         ),
       ),
@@ -462,19 +451,16 @@ describe('<RoomPage />', () => {
               id: 0,
               name: 'Trinity',
               roomCode: 'X7JKL',
-              role: PlayerRole.ADMIN,
             },
             {
               id: 1,
               name: 'Neo',
               roomCode: 'X7JKL',
-              role: PlayerRole.PLAYER,
             },
             {
               id: 2,
               name: 'Morpheus',
               roomCode: 'X7JKL',
-              role: PlayerRole.PLAYER,
             },
           ]),
         ),

@@ -9,7 +9,7 @@ import {
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
 import { PlayingRoomPage } from '@/pages/Room/Playing';
-import { PlayerRole, PlayerStatus } from '@/services/player/constants';
+import { PlayerStatus } from '@/services/player/constants';
 import { RoomStatus } from '@/services/room/constants';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
@@ -24,7 +24,6 @@ describe('<PlayingRoomPage />', () => {
             id: 0,
             name: 'Trinity',
             roomCode: 'X7JKL',
-            role: PlayerRole.PLAYER,
           }),
         ),
       ),
@@ -62,7 +61,6 @@ describe('<PlayingRoomPage />', () => {
             id: 0,
             name: 'Trinity',
             roomCode: 'X7JKL',
-            role: PlayerRole.PLAYER,
             status: PlayerStatus.KILLED,
           }),
         ),

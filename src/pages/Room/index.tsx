@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
 import { MercureEventType } from '@/constants/enums';
-import { usePrevious } from '@/hooks/usePrevious';
 import { usePlayerSession } from '@/services/player/queries';
 import { RoomStatus } from '@/services/room/constants';
 import { useRoom } from '@/services/room/queries';
@@ -20,9 +19,7 @@ interface Props {
 export function RoomPage({ children }: Props): JSX.Element | null {
   const navigate = useNavigate();
   const { roomCode } = useParams();
-  const { playerSession, refetchPlayerSession, isPlayerSessionLoading } =
-    usePlayerSession();
-  const previousRoomCode = usePrevious(playerSession?.room.code);
+  const { isLoading, playerSession, refetchPlayerSession } = usePlayerSession();
   const { room, refetchRoom } = useRoom(roomCode!);
 
   /**
@@ -51,33 +48,29 @@ export function RoomPage({ children }: Props): JSX.Element | null {
    * Redirect player to the correct route by checking its session.
    */
   useEffect(() => {
-    /**
-     * Redirect player to `join/room` route in two cases:
-     * The player try to join the room without pseudo.
-     * The player try to join the room when he is already inside another room.
-     */
-    if (!isPlayerSessionLoading) {
+    if (!isLoading) {
+      /**
+       * Redirect player to `join/room` route in two cases:
+       */
       if (
-        !playerSession ||
-        (!previousRoomCode && playerSession?.room.code !== roomCode)
+        /* The player try to join the room without pseudo. */
+        !playerSession?.name ||
+        /* The player try to join the room when he is already inside another room. */
+        (playerSession?.room?.code && playerSession?.room?.code !== roomCode)
       ) {
-        navigate(`/join/${roomCode}`);
+        return navigate(`/join/${roomCode}`);
       }
 
       /**
        * Redirect player to home page if its roomCode is removed.
        */
-      if (previousRoomCode && !playerSession?.room.code) {
-        navigate('/');
+      if (!playerSession?.room?.code) {
+        return navigate('/');
       }
     }
-  }, [
-    isPlayerSessionLoading,
-    playerSession,
-    previousRoomCode,
-    roomCode,
-    navigate,
-  ]);
+
+    return undefined;
+  }, [isLoading, playerSession, roomCode, navigate]);
 
   /**
    * Listen to SSE events emits in the Room page.
