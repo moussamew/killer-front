@@ -19,7 +19,7 @@ export interface PlayerSession {
   authoredMissions: Mission[];
   status: PlayerStatus;
   target: number | null;
-  room: Room | null;
+  room: Omit<Room, 'admin' | 'players'> | null;
 }
 
 export interface PlayerUpdateInfos {

@@ -3,27 +3,15 @@ import { rest } from 'msw';
 import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
-  ROOM_ENDPOINT,
 } from '@/constants/endpoints';
-
-import { PlayerStatus } from './constants';
+import { playerSessionWithoutRoom } from '@/tests/mocks/playerSession';
 
 export const playerHandlers = [
   /**
    * Mock player session.
    */
   rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-    res(
-      ctx.status(200),
-      ctx.json({
-        id: 135,
-        name: 'Le Mérovingien',
-        roomCode: null,
-        targetId: null,
-        missionId: null,
-        status: PlayerStatus.ALIVE,
-      }),
-    ),
+    res(ctx.status(200), ctx.json(playerSessionWithoutRoom)),
   ),
   /**
    * Mock player creation.
@@ -34,14 +22,7 @@ export const playerHandlers = [
   /**
    * Mock update player.
    */
-  rest.patch(PLAYER_ENDPOINT, (_req, res, ctx) =>
+  rest.patch(`${PLAYER_ENDPOINT}/*`, (_req, res, ctx) =>
     res(ctx.status(200), ctx.json({})),
-  ),
-  /**
-   * Mock kicking player.
-   */
-  rest.patch(
-    `${ROOM_ENDPOINT}/:roomCode/player/:playerId/admin`,
-    (_req, res, ctx) => res(ctx.status(200), ctx.json({})),
   ),
 ];

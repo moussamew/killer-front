@@ -1,10 +1,7 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { rest } from 'msw';
 
-import { PLAYER_MISSION_ENDPOINT } from '@/constants/endpoints';
 import { PlayerMissions } from '@/pages/Room/Pending/PlayerMissions';
-import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<PlayerMissions />', () => {
@@ -16,26 +13,11 @@ describe('<PlayerMissions />', () => {
   });
 
   it('should remove a mission', async () => {
-    server.use(
-      rest.get(PLAYER_MISSION_ENDPOINT, (_req, res, ctx) =>
-        res(
-          ctx.status(200),
-          ctx.json([{ id: 0, content: 'Drink Jack Daniels' }]),
-        ),
-      ),
-    );
-
     renderWithProviders(<PlayerMissions />);
 
     await screen.findByText('Drink Jack Daniels');
 
     await userEvent.click(screen.getByTitle('deleteMission'));
-
-    server.use(
-      rest.get(PLAYER_MISSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json([])),
-      ),
-    );
 
     await waitForElementToBeRemoved(() =>
       screen.queryByText('Drink Jack Daniels'),
