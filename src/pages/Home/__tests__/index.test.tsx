@@ -24,7 +24,10 @@ describe('<HomePage />', () => {
   it('should navigate to the room page if a room code exist inside the player session', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Trinity', roomCode: 'Y5XJK' })),
+        res(
+          ctx.status(200),
+          ctx.json({ name: 'Trinity', room: { code: 'Y5XJK' } }),
+        ),
       ),
     );
 
