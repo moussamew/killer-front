@@ -24,7 +24,7 @@ const Settings = tw.div`
 `;
 
 export function RoomSettings(): JSX.Element {
-  const { playerSession } = usePlayerSession();
+  const { player } = usePlayerSession();
   const { roomCode } = useParams();
   const { room } = useRoom(roomCode!);
   const { openModal } = useContext(ModalContext);
@@ -37,7 +37,7 @@ export function RoomSettings(): JSX.Element {
     <Content>
       <SectionHeader>
         <h2>{t('room.players_list')}</h2>
-        {playerSession?.id === room?.admin.id && (
+        {player?.id === room?.admin.id && (
           <Settings onClick={handleRoomSettings}>
             <RoomSettingsIcon title="roomSettings" />
           </Settings>

@@ -8,20 +8,20 @@ import { usePlayerSession } from '@/services/player/queries';
 
 export function LeaveCurrentRoom(): JSX.Element {
   const { roomCode } = useParams();
-  const { playerSession } = usePlayerSession();
+  const { player } = usePlayerSession();
   const { updatePlayer } = useUpdatePlayer();
 
   const navigate = useNavigate();
 
   const handleJoinNewRoom = async (): Promise<void> => {
-    await updatePlayer.mutateAsync({ id: playerSession?.id, room: roomCode });
+    await updatePlayer.mutateAsync({ id: player?.id, room: roomCode });
   };
 
   return (
     <Fragment>
       <h1>
         {t('join_room.already_inside_room', {
-          playerRoomCode: playerSession?.room?.code,
+          playerRoomCode: player?.room?.code,
         })}
       </h1>
       <p>{t('join_room.careful_before_join_room')}</p>
@@ -31,7 +31,7 @@ export function LeaveCurrentRoom(): JSX.Element {
       />
       <Button
         content={t('join_room.return_current_room')}
-        onClick={() => navigate(`/room/${playerSession?.room?.code}`)}
+        onClick={() => navigate(`/room/${player?.room?.code}`)}
         buttonColor="yellow"
         textColor="lightDark"
       />

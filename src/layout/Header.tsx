@@ -3,9 +3,7 @@ import tw from 'twin.macro';
 
 import { ReactComponent as SettingsIcon } from '@/assets/icons/settings.svg';
 import t from '@/helpers/translate';
-import { isEmptyObject } from '@/helpers/utils';
 import { ModalContext } from '@/hooks/context/modal';
-import { usePlayerSession } from '@/services/player/queries';
 
 import { SettingsModal } from './SettingsModal';
 
@@ -21,8 +19,11 @@ const PlayerInfos = tw.div`
   flex flex-row cursor-pointer
 `;
 
-function Header(): JSX.Element {
-  const { playerSession } = usePlayerSession();
+interface Props {
+  playerName?: string;
+}
+
+function Header({ playerName }: Props): JSX.Element {
   const { openModal } = useContext(ModalContext);
 
   const handleOpenSettings = (): void => {
@@ -32,9 +33,9 @@ function Header(): JSX.Element {
   return (
     <Navigation>
       <Text>{t('header.project_name')}</Text>
-      {playerSession && !isEmptyObject(playerSession) && (
+      {playerName && (
         <PlayerInfos>
-          <Text>{playerSession?.name}</Text>
+          <Text>{playerName}</Text>
           <SettingsIcon title="userSettings" onClick={handleOpenSettings} />
         </PlayerInfos>
       )}

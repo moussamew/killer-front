@@ -39,7 +39,7 @@ const DeleteMission = styled.div`
 `;
 
 export function PlayerMissions(): JSX.Element {
-  const { playerSession } = usePlayerSession();
+  const { player } = usePlayerSession();
   const { deleteMission } = useDeleteMission();
 
   const handleDeleteMission = (missionId: number) => (): void => {
@@ -57,7 +57,7 @@ export function PlayerMissions(): JSX.Element {
       </Section>
       <hr />
       <Missions>
-        {playerSession?.authoredMissions.map(({ id, content }) => (
+        {player?.authoredMissions.map(({ id, content }) => (
           <Fragment key={`${id}-${content}`}>
             <MissionCard>
               <span>{content}</span>

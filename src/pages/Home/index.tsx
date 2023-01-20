@@ -19,21 +19,21 @@ const Text = tw.p`
 `;
 
 export function HomePage(): JSX.Element {
-  const { playerSession } = usePlayerSession();
+  const { player } = usePlayerSession();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (playerSession?.room?.code) {
-      navigate(`/room/${playerSession.room.code}`);
+    if (player?.room?.code) {
+      navigate(`/room/${player.room.code}`);
     }
-  }, [navigate, playerSession?.room?.code]);
+  }, [navigate, player?.room?.code]);
 
   return (
     <Layout>
       <WelcomeImage alt="welcome" src={Killerparty} />
       <h1>{t('home.title')}</h1>
       <Text>{t('home.game_resume')}</Text>
-      <CreateRoomButton />
+      <CreateRoomButton playerName={player?.name} />
       <JoinRoomButton />
     </Layout>
   );

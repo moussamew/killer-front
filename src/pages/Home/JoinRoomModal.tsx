@@ -19,9 +19,8 @@ const Title = tw.h2`
 export function JoinRoomModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
   const [roomCode, setRoomCode] = useState('');
-
   const { closeModal } = useContext(ModalContext);
-  const { playerSession } = usePlayerSession();
+  const { player } = usePlayerSession();
   const { createPlayer } = useCreatePlayer();
   const { updatePlayer } = useUpdatePlayer();
 
@@ -34,7 +33,7 @@ export function JoinRoomModal(): JSX.Element {
   };
 
   const handleJoinRoom = async (): Promise<void> => {
-    if (!playerSession) {
+    if (!player) {
       await createPlayer.mutateAsync(pseudo.toUpperCase(), {
         onSuccess: ({ id }) =>
           updatePlayer.mutateAsync(
@@ -44,7 +43,7 @@ export function JoinRoomModal(): JSX.Element {
       });
     } else {
       updatePlayer.mutateAsync(
-        { id: playerSession?.id, room: roomCode },
+        { id: player?.id, room: roomCode },
         { onSuccess: closeModal },
       );
     }
@@ -55,7 +54,7 @@ export function JoinRoomModal(): JSX.Element {
       <HeadContent>
         <Title>{t('home.join_room')}</Title>
       </HeadContent>
-      {!playerSession?.name && (
+      {!player?.name && (
         <Input
           id="pseudo"
           type="text"

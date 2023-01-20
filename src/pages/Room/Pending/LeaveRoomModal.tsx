@@ -22,12 +22,12 @@ const TextContent = tw.div`
 
 export function LeaveRoomModal(): JSX.Element {
   const { updatePlayer } = useUpdatePlayer();
-  const { playerSession } = usePlayerSession();
+  const { player } = usePlayerSession();
   const { closeModal } = useContext(ModalContext);
 
   const handleLeaveRoom = async (): Promise<void> => {
     await updatePlayer.mutateAsync(
-      { id: playerSession?.id, room: null },
+      { id: player?.id, room: null },
       { onSuccess: closeModal },
     );
   };

@@ -23,12 +23,12 @@ export function EndedRoomPage(): JSX.Element {
   const { roomCode } = useParams();
   const { room } = useRoom(roomCode!);
   const { updatePlayer } = useUpdatePlayer();
-  const { playerSession } = usePlayerSession();
+  const { player } = usePlayerSession();
   const navigate = useNavigate();
 
   const handleLeaveRoom = async (): Promise<void> => {
     updatePlayer.mutate(
-      { id: playerSession?.id, room: null },
+      { id: player?.id, room: null },
       { onSuccess: () => navigate('/') },
     );
   };

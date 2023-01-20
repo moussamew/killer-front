@@ -19,7 +19,7 @@ interface Props {
 export function RoomPage({ children }: Props): JSX.Element | null {
   const navigate = useNavigate();
   const { roomCode } = useParams();
-  const { isLoading, playerSession, refetchPlayerSession } = usePlayerSession();
+  const { isLoading, player, refetchPlayer } = usePlayerSession();
   const { room, refetchRoom } = useRoom(roomCode!);
 
   /**
@@ -54,9 +54,9 @@ export function RoomPage({ children }: Props): JSX.Element | null {
        */
       if (
         /* The player try to join the room without pseudo. */
-        !playerSession?.name ||
+        !player?.name ||
         /* The player try to join the room when he is already inside another room. */
-        (playerSession?.room?.code && playerSession?.room?.code !== roomCode)
+        (player?.room?.code && player?.room?.code !== roomCode)
       ) {
         return navigate(`/join/${roomCode}`);
       }
@@ -64,13 +64,13 @@ export function RoomPage({ children }: Props): JSX.Element | null {
       /**
        * Redirect player to home page if its roomCode is removed.
        */
-      if (!playerSession?.room?.code) {
+      if (!player?.room?.code) {
         return navigate('/');
       }
     }
 
     return undefined;
-  }, [isLoading, playerSession, roomCode, navigate]);
+  }, [isLoading, player, roomCode, navigate]);
 
   /**
    * Listen to SSE events emits in the Room page.
@@ -90,7 +90,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
           break;
 
         case PLAYER_UPDATED:
-          refetchRoom().then(refetchPlayerSession);
+          refetchRoom().then(refetchPlayer);
           break;
 
         /**
@@ -104,7 +104,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
          * Should be removed to use the `ROOM_UPDATED` event.
          */
         case ROOM_DELETED:
-          refetchPlayerSession();
+          refetchPlayer();
           break;
 
         default:
@@ -113,7 +113,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
     });
 
     return () => roomEventSource.close();
-  }, [roomCode, navigate, refetchPlayerSession, refetchRoom]);
+  }, [roomCode, navigate, refetchPlayer, refetchRoom]);
 
   return children || null;
 }

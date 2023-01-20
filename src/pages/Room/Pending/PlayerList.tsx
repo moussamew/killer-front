@@ -42,7 +42,7 @@ const Icon = tw.div`
 export function PlayerList(): JSX.Element {
   const { roomCode } = useParams();
   const { room } = useRoom(roomCode!);
-  const { playerSession } = usePlayerSession();
+  const { player } = usePlayerSession();
   const { openModal } = useContext(ModalContext);
 
   const handleLeaveRoom = (): void => {
@@ -63,20 +63,18 @@ export function PlayerList(): JSX.Element {
       {room?.players.map(({ name, id }) => (
         <PlayerItem key={name}>
           <PlayerImage alt={`player-${name}`} src={Player} />
-          <PlayerName currentPlayer={playerSession?.id === id}>
-            {name}
-          </PlayerName>
-          {room.admin.id === id && playerSession?.id !== id && (
+          <PlayerName currentPlayer={player?.id === id}>{name}</PlayerName>
+          {room.admin.id === id && player?.id !== id && (
             <Icon>
               <AdminIcon title="roomAdmin" />
             </Icon>
           )}
-          {playerSession?.id === id && (
+          {player?.id === id && (
             <Icon onClick={handleLeaveRoom}>
               <LeaveRoomIcon title="leaveRoom" />
             </Icon>
           )}
-          {room?.admin?.id !== id && playerSession?.name !== name && (
+          {room?.admin?.id !== id && player?.name !== name && (
             <Icon onClick={handleKickPlayer(name, id)}>
               <KickPlayerIcon title={`kick${name}`} />
             </Icon>

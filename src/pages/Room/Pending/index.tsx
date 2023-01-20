@@ -36,7 +36,7 @@ const RoomFeatures = tw.div`
 
 export function PendingRoomPage(): JSX.Element | null {
   const { roomCode } = useParams();
-  const { playerSession } = usePlayerSession();
+  const { player } = usePlayerSession();
   const { room } = useRoom(roomCode!);
 
   return (
@@ -49,7 +49,7 @@ export function PendingRoomPage(): JSX.Element | null {
             <p>{t('room.join_room_code', { roomCode })}</p>
             <RoomMissions />
             <ShareRoomLink />
-            {playerSession?.id === room?.admin.id && <StartPartyButton />}
+            {player?.id === room?.admin.id && <StartPartyButton />}
           </RoomResume>
         </Content>
         <hr />

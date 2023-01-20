@@ -35,7 +35,7 @@ export function SettingsModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
   const { closeModal } = useContext(ModalContext);
   const { updatePlayer } = useUpdatePlayer();
-  const { playerSession } = usePlayerSession();
+  const { player } = usePlayerSession();
 
   const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
     setPseudo(target.value);
@@ -43,7 +43,7 @@ export function SettingsModal(): JSX.Element {
 
   const updatePlayerPseudo = async (): Promise<void> => {
     await updatePlayer.mutateAsync(
-      { id: playerSession?.id, name: pseudo.toUpperCase() },
+      { id: player?.id, name: pseudo.toUpperCase() },
       { onSuccess: () => closeModal() },
     );
   };

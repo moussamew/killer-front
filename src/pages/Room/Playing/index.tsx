@@ -29,7 +29,7 @@ const Spacer = tw.hr`
 export function PlayingRoomPage(): JSX.Element {
   const { roomCode } = useParams();
   const { targetInfos, refetchTargetInfos } = useTargetInfos();
-  const { playerSession } = usePlayerSession();
+  const { player } = usePlayerSession();
   const { refetchRoom } = useRoom(roomCode!);
 
   /**
@@ -52,7 +52,7 @@ export function PlayingRoomPage(): JSX.Element {
     return () => roomEventSource.close();
   }, [roomCode, refetchTargetInfos, refetchRoom]);
 
-  const isPlayerDead = playerSession?.status === PlayerStatus.KILLED;
+  const isPlayerDead = player?.status === PlayerStatus.KILLED;
 
   return (
     <RoomPage>

@@ -8,9 +8,7 @@ import { PlayerStatus } from './constants';
 export interface Player {
   id: number;
   name: string;
-  room: string | null;
   status: PlayerStatus;
-  token: string;
 }
 
 export interface PlayerSession {
@@ -24,24 +22,27 @@ export interface PlayerSession {
   room: Room | null;
 }
 
+export interface PlayerUpdateInfos {
+  id: number;
+  name: string;
+  room: string | null;
+  status: PlayerStatus;
+}
+
 export interface PlayerSessionQuery {
-  playerSession: PlayerSession | undefined;
-  refetchPlayerSession(): Promise<QueryObserverResult<PlayerSession, unknown>>;
+  player: PlayerSession | undefined;
+  refetchPlayer(): Promise<QueryObserverResult<PlayerSession, unknown>>;
   isLoading: boolean;
 }
 
 export interface UpdatePlayerMutation {
-  updatePlayer: UseMutationResult<void, unknown, Partial<Player>, unknown>;
+  updatePlayer: UseMutationResult<
+    void,
+    unknown,
+    Partial<PlayerUpdateInfos>,
+    unknown
+  >;
 }
 export interface CreatePlayerMutation {
   createPlayer: UseMutationResult<Player, unknown, string, unknown>;
-}
-
-export interface KickPlayerMutation {
-  kickPlayer: UseMutationResult<
-    void,
-    unknown,
-    Pick<Player, 'room' | 'id'>,
-    unknown
-  >;
 }

@@ -5,14 +5,14 @@ import { PlayerSessionQuery } from './types';
 
 export function usePlayerSession(): PlayerSessionQuery {
   const {
-    data: playerSession,
-    refetch: refetchPlayerSession,
+    data: player,
+    refetch: refetchPlayer,
     isLoading,
   } = useQuery('playerSession', getPlayerSessionRequest);
 
   return {
-    playerSession,
-    refetchPlayerSession,
+    player,
+    refetchPlayer,
     isLoading,
   };
 }

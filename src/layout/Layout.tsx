@@ -19,7 +19,7 @@ interface Props {
 
 export function Layout({ children }: Props): JSX.Element {
   const { modal, closeModal } = useContext(ModalContext);
-  const { isLoading } = usePlayerSession();
+  const { isLoading, player } = usePlayerSession();
 
   if (isLoading) {
     return <Loader />;
@@ -27,7 +27,7 @@ export function Layout({ children }: Props): JSX.Element {
 
   return (
     <Fragment>
-      <Header />
+      <Header playerName={player?.name} />
       <Content>{children}</Content>
       {modal && <Modal closeModal={closeModal}>{modal}</Modal>}
     </Fragment>
