@@ -1,5 +1,3 @@
-/// <reference types="vitest" />
-
 import path from 'path';
 
 import reactRefresh from '@vitejs/plugin-react';
@@ -26,11 +24,9 @@ export default defineConfig({
   server: {
     port: 4000,
     host: true,
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/tests/setup.ts',
+    watch: {
+      ignored: ['**/__tests__/**', '**/tests/**'],
+    },
   },
   optimizeDeps: {
     esbuildOptions: {
