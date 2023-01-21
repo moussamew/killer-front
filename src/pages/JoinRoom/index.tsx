@@ -8,7 +8,7 @@ import { RoomErrorCode } from '@/constants/errors';
 import { RequestError } from '@/helpers/errors';
 import { Layout } from '@/layout/Layout';
 import { useUpdatePlayer } from '@/services/player/mutations';
-import { usePlayerSession } from '@/services/player/queries';
+import { useSession } from '@/services/player/queries';
 
 import { CreatePlayer } from './CreatePlayer';
 import { LeaveCurrentRoom } from './LeaveCurrentRoom';
@@ -21,7 +21,7 @@ const { NOT_FOUND, BAD_ROOMCODE } = RoomErrorCode;
 
 export function JoinRoomPage(): JSX.Element {
   const { roomCode } = useParams();
-  const { player } = usePlayerSession();
+  const { session } = useSession();
   const { updatePlayer } = useUpdatePlayer();
 
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ export function JoinRoomPage(): JSX.Element {
      * Let the player join automatically the room if
      * the player is already inside the same room that he want to join.
      */
-    if (player?.room?.code === roomCode) {
+    if (session?.room?.code === roomCode) {
       navigate(`/room/${roomCode}`);
     }
 
@@ -41,9 +41,9 @@ export function JoinRoomPage(): JSX.Element {
      * Let the player join automatically the room if the player name is already setted
      * and the player is not already inside a room.
      */
-    if (player?.name && !player?.room?.code) {
+    if (session?.name && !session?.room?.code) {
       updatePlayerMutate(
-        { id: player.id, room: roomCode },
+        { id: session.id, room: roomCode },
         {
           onError: (error) => {
             if (error instanceof RequestError) {
@@ -62,7 +62,7 @@ export function JoinRoomPage(): JSX.Element {
         },
       );
     }
-  }, [player, updatePlayerMutate, roomCode, navigate]);
+  }, [session, updatePlayerMutate, roomCode, navigate]);
 
   /**
    * Returns loading spinner while the player is currently added to the room;
@@ -74,8 +74,8 @@ export function JoinRoomPage(): JSX.Element {
   return (
     <Layout>
       <WelcomeImage alt="welcome" src={Killerparty} />
-      {!player?.name && <CreatePlayer roomCode={roomCode!} />}
-      {player?.room?.code && <LeaveCurrentRoom />}
+      {!session?.name && <CreatePlayer roomCode={roomCode!} />}
+      {session?.room?.code && <LeaveCurrentRoom />}
     </Layout>
   );
 }

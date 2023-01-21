@@ -8,10 +8,8 @@ import { MercureEventType } from '@/constants/enums';
 import { Layout } from '@/layout/Layout';
 import { RoomPage } from '@/pages/Room';
 import { PlayerList } from '@/pages/Room/Pending/PlayerList';
-import { useTargetInfos } from '@/services/mission/queries';
 import { PlayerStatus } from '@/services/player/constants';
-import { usePlayerSession } from '@/services/player/queries';
-import { useRoom } from '@/services/room/queries';
+import { useSession } from '@/services/player/queries';
 
 import { PlayerKilledButton } from './PlayerKilledButton';
 import { Status } from './Status';
@@ -28,9 +26,7 @@ const Spacer = tw.hr`
 
 export function PlayingRoomPage(): JSX.Element {
   const { roomCode } = useParams();
-  const { targetInfos, refetchTargetInfos } = useTargetInfos();
-  const { player } = usePlayerSession();
-  const { refetchRoom } = useRoom(roomCode!);
+  const { session, refetchSession } = useSession();
 
   /**
    * Listen to SSE events emits in the Room page.
@@ -45,21 +41,19 @@ export function PlayingRoomPage(): JSX.Element {
       const { type } = JSON.parse(event.data);
 
       if (type === MercureEventType.PLAYER_KILLED) {
-        refetchTargetInfos().then(refetchRoom);
+        refetchSession();
       }
     });
 
     return () => roomEventSource.close();
-  }, [roomCode, refetchTargetInfos, refetchRoom]);
-
-  const isPlayerDead = player?.status === PlayerStatus.KILLED;
+  }, [roomCode, refetchSession]);
 
   return (
     <RoomPage>
       <Layout>
-        <Content isPlayerDead={isPlayerDead}>
-          <Status isPlayerDead={isPlayerDead} targetInfos={targetInfos} />
-          {!isPlayerDead && (
+        <Content isPlayerDead={session?.status === PlayerStatus.KILLED}>
+          <Status />
+          {session?.status === PlayerStatus.ALIVE && (
             <Fragment>
               <Spacer />
               <PlayerKilledButton />

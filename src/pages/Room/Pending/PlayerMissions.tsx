@@ -5,7 +5,7 @@ import { ReactComponent as DeleteIcon } from '@/assets/icons/delete.svg';
 import Idea from '@/assets/images/idea.png';
 import t from '@/helpers/translate';
 import { useDeleteMission } from '@/services/mission/mutations';
-import { usePlayerSession } from '@/services/player/queries';
+import { useSession } from '@/services/player/queries';
 
 import { CreateMission } from './CreateMission';
 
@@ -39,7 +39,7 @@ const DeleteMission = styled.div`
 `;
 
 export function PlayerMissions(): JSX.Element {
-  const { player } = usePlayerSession();
+  const { session } = useSession();
   const { deleteMission } = useDeleteMission();
 
   const handleDeleteMission = (missionId: number) => (): void => {
@@ -57,7 +57,7 @@ export function PlayerMissions(): JSX.Element {
       </Section>
       <hr />
       <Missions>
-        {player?.authoredMissions.map(({ id, content }) => (
+        {session?.authoredMissions.map(({ id, content }) => (
           <Fragment key={`${id}-${content}`}>
             <MissionCard>
               <span>{content}</span>

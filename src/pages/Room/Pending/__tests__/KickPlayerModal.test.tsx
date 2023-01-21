@@ -2,17 +2,17 @@ import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
-import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { adminPlayer } from '@/tests/mocks/players';
+import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { pendingRoomWithMultiplePlayers, roomCode } from '@/tests/mocks/rooms';
+import { adminSession } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<KickPlayerModal />', () => {
   it('should kick player from the room', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(adminPlayer)),
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(adminSession)),
       ),
       rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoomWithMultiplePlayers)),

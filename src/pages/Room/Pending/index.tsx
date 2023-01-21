@@ -5,7 +5,7 @@ import Island from '@/assets/images/island.png';
 import t from '@/helpers/translate';
 import { Layout } from '@/layout/Layout';
 import { RoomPage } from '@/pages/Room';
-import { usePlayerSession } from '@/services/player/queries';
+import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 
 import { PlayerList } from './PlayerList';
@@ -36,7 +36,7 @@ const RoomFeatures = tw.div`
 
 export function PendingRoomPage(): JSX.Element | null {
   const { roomCode } = useParams();
-  const { player } = usePlayerSession();
+  const { session } = useSession();
   const { room } = useRoom(roomCode!);
 
   return (
@@ -49,7 +49,7 @@ export function PendingRoomPage(): JSX.Element | null {
             <p>{t('room.join_room_code', { roomCode })}</p>
             <RoomMissions />
             <ShareRoomLink />
-            {player?.id === room?.admin.id && <StartPartyButton />}
+            {session?.id === room?.admin.id && <StartPartyButton />}
           </RoomResume>
         </Content>
         <hr />

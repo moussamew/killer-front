@@ -6,7 +6,7 @@ import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
-import { usePlayerSession } from '@/services/player/queries';
+import { useSession } from '@/services/player/queries';
 
 const HeadContent = tw.div`
   flex flex-row items-center
@@ -20,7 +20,7 @@ export function JoinRoomModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
   const [roomCode, setRoomCode] = useState('');
   const { closeModal } = useContext(ModalContext);
-  const { player } = usePlayerSession();
+  const { session } = useSession();
   const { createPlayer } = useCreatePlayer();
   const { updatePlayer } = useUpdatePlayer();
 
@@ -33,7 +33,7 @@ export function JoinRoomModal(): JSX.Element {
   };
 
   const handleJoinRoom = async (): Promise<void> => {
-    if (!player) {
+    if (!session) {
       await createPlayer.mutateAsync(pseudo.toUpperCase(), {
         onSuccess: ({ id }) =>
           updatePlayer.mutateAsync(
@@ -43,7 +43,7 @@ export function JoinRoomModal(): JSX.Element {
       });
     } else {
       updatePlayer.mutateAsync(
-        { id: player?.id, room: roomCode },
+        { id: session?.id, room: roomCode },
         { onSuccess: closeModal },
       );
     }
@@ -54,7 +54,7 @@ export function JoinRoomModal(): JSX.Element {
       <HeadContent>
         <Title>{t('home.join_room')}</Title>
       </HeadContent>
-      {!player?.name && (
+      {!session?.name && (
         <Input
           id="pseudo"
           type="text"

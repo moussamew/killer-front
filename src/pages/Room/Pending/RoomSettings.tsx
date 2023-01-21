@@ -5,7 +5,7 @@ import tw from 'twin.macro';
 import { ReactComponent as RoomSettingsIcon } from '@/assets/icons/roomSettings.svg';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
-import { usePlayerSession } from '@/services/player/queries';
+import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 
 import { RoomSettingsModal } from './RoomSettingsModal';
@@ -24,7 +24,7 @@ const Settings = tw.div`
 `;
 
 export function RoomSettings(): JSX.Element {
-  const { player } = usePlayerSession();
+  const { session } = useSession();
   const { roomCode } = useParams();
   const { room } = useRoom(roomCode!);
   const { openModal } = useContext(ModalContext);
@@ -37,7 +37,7 @@ export function RoomSettings(): JSX.Element {
     <Content>
       <SectionHeader>
         <h2>{t('room.players_list')}</h2>
-        {player?.id === room?.admin.id && (
+        {session?.id === room?.admin.id && (
           <Settings onClick={handleRoomSettings}>
             <RoomSettingsIcon title="roomSettings" />
           </Settings>

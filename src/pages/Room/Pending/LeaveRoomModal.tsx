@@ -5,7 +5,7 @@ import { Button } from '@/components/Button';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { useUpdatePlayer } from '@/services/player/mutations';
-import { usePlayerSession } from '@/services/player/queries';
+import { useSession } from '@/services/player/queries';
 
 const HeadContent = tw.div`
   flex flex-row mb-2
@@ -22,12 +22,12 @@ const TextContent = tw.div`
 
 export function LeaveRoomModal(): JSX.Element {
   const { updatePlayer } = useUpdatePlayer();
-  const { player } = usePlayerSession();
+  const { session } = useSession();
   const { closeModal } = useContext(ModalContext);
 
   const handleLeaveRoom = async (): Promise<void> => {
     await updatePlayer.mutateAsync(
-      { id: player?.id, room: null },
+      { id: session?.id, room: null },
       { onSuccess: closeModal },
     );
   };

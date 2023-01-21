@@ -2,11 +2,8 @@ import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
-import {
-  PLAYER_ENDPOINT,
-  PLAYER_SESSION_ENDPOINT,
-} from '@/constants/endpoints';
-import { fakePlayer } from '@/tests/mocks/players';
+import { PLAYER_ENDPOINT, SESSION_ENDPOINT } from '@/constants/endpoints';
+import { fakePlayerOne } from '@/tests/mocks/players';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -15,7 +12,7 @@ import { CreateRoomModal } from '../CreateRoomModal';
 describe('<CreateRoomModal />', () => {
   it('should close modal after creating a new room', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(null)),
       ),
     );
@@ -28,7 +25,7 @@ describe('<CreateRoomModal />', () => {
 
     await userEvent.type(
       screen.getByPlaceholderText('Choose a pseudo'),
-      fakePlayer.name,
+      fakePlayerOne.name,
     );
 
     await userEvent.click(screen.getByText('Create my room'));

@@ -1,8 +1,8 @@
-import { PlayerStatus } from '@/services/player/constants';
 import { RoomStatus } from '@/services/room/constants';
 import { Room } from '@/services/room/types';
 
-import { fakeMission } from './missions';
+import { fakeMissionOne, fakeMissionThree, fakeMissionTwo } from './missions';
+import { fakePlayerOne, fakePlayerThree, fakePlayerTwo } from './players';
 
 export const roomCode = 'SOSPC';
 
@@ -11,19 +11,9 @@ export const pendingRoom = {
   code: roomCode,
   name: "TRINITY's room",
   status: RoomStatus.PENDING,
-  players: [
-    {
-      id: 28,
-      name: 'TRINITY',
-      status: PlayerStatus.ALIVE,
-    },
-  ],
+  players: [fakePlayerOne],
   missions: [],
-  admin: {
-    id: 28,
-    name: 'TRINITY',
-    status: PlayerStatus.ALIVE,
-  },
+  admin: fakePlayerOne,
 } satisfies Room;
 
 export const pendingRoomWithMissions = {
@@ -31,19 +21,9 @@ export const pendingRoomWithMissions = {
   code: roomCode,
   name: "TRINITY's room",
   status: RoomStatus.PENDING,
-  players: [
-    {
-      id: 28,
-      name: 'TRINITY',
-      status: PlayerStatus.ALIVE,
-    },
-  ],
-  missions: [fakeMission],
-  admin: {
-    id: 28,
-    name: 'TRINITY',
-    status: PlayerStatus.ALIVE,
-  },
+  players: [fakePlayerOne],
+  missions: [fakeMissionOne, fakeMissionTwo, fakeMissionThree],
+  admin: fakePlayerOne,
 } satisfies Room;
 
 export const pendingRoomWithMultiplePlayers = {
@@ -51,29 +31,9 @@ export const pendingRoomWithMultiplePlayers = {
   code: roomCode,
   name: "TRINITY's room",
   status: RoomStatus.PENDING,
-  players: [
-    {
-      id: 28,
-      name: 'TRINITY',
-      status: PlayerStatus.ALIVE,
-    },
-    {
-      id: 29,
-      name: 'NEO',
-      status: PlayerStatus.ALIVE,
-    },
-    {
-      id: 30,
-      name: 'MORPHEUS',
-      status: PlayerStatus.ALIVE,
-    },
-  ],
+  players: [fakePlayerOne, fakePlayerTwo, fakePlayerThree],
   missions: [],
-  admin: {
-    id: 28,
-    name: 'TRINITY',
-    status: PlayerStatus.ALIVE,
-  },
+  admin: fakePlayerOne,
 } satisfies Room;
 
 export const playingRoom = {
@@ -81,19 +41,9 @@ export const playingRoom = {
   code: roomCode,
   name: "TRINITY's room",
   status: RoomStatus.IN_GAME,
-  players: [
-    {
-      id: 28,
-      name: 'TRINITY',
-      status: PlayerStatus.ALIVE,
-    },
-  ],
-  missions: [],
-  admin: {
-    id: 28,
-    name: 'TRINITY',
-    status: PlayerStatus.ALIVE,
-  },
+  players: [fakePlayerOne],
+  missions: [fakeMissionOne, fakeMissionTwo, fakeMissionThree],
+  admin: fakePlayerOne,
 } satisfies Room;
 
 export const endedRoom = {
@@ -101,17 +51,7 @@ export const endedRoom = {
   code: roomCode,
   name: "TRINITY's room",
   status: RoomStatus.ENDED,
-  players: [
-    {
-      id: 28,
-      name: 'TRINITY',
-      status: PlayerStatus.ALIVE,
-    },
-  ],
+  players: [fakePlayerOne],
   missions: [],
-  admin: {
-    id: 28,
-    name: 'TRINITY',
-    status: PlayerStatus.ALIVE,
-  },
+  admin: fakePlayerOne,
 } satisfies Room;

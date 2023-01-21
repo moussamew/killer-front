@@ -6,6 +6,7 @@ import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { PlayerStatus } from '@/services/player/constants';
 import { useUpdatePlayer } from '@/services/player/mutations';
+import { useSession } from '@/services/player/queries';
 
 const HeadContent = tw.div`
   flex flex-row mb-2
@@ -23,10 +24,11 @@ const TextContent = tw.div`
 export function PlayerKilledModal(): JSX.Element {
   const { updatePlayer } = useUpdatePlayer();
   const { closeModal } = useContext(ModalContext);
+  const { session } = useSession();
 
   const handleKillPlayer = async (): Promise<void> => {
     await updatePlayer.mutateAsync(
-      { status: PlayerStatus.KILLED },
+      { id: session?.id, status: PlayerStatus.KILLED },
       { onSuccess: closeModal },
     );
   };

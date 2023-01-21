@@ -4,21 +4,21 @@ import { sources } from 'eventsourcemock';
 import { rest } from 'msw';
 
 import {
-  PLAYER_SESSION_ENDPOINT,
+  SESSION_ENDPOINT,
   ROOM_ENDPOINT,
   ROOM_TOPIC,
 } from '@/constants/endpoints';
 import { MercureEventType } from '@/constants/enums';
-import { playerInPendingRoom } from '@/tests/mocks/players';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
+import { pendingRoomSession } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<StartPartyButton />', () => {
   it.skip('should be able to start a new party', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerInPendingRoom)),
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoomSession)),
       ),
       rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),

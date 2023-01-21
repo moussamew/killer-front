@@ -5,7 +5,7 @@ import tw from 'twin.macro';
 import Killerparty from '@/assets/images/killerparty.png';
 import t from '@/helpers/translate';
 import { Layout } from '@/layout/Layout';
-import { usePlayerSession } from '@/services/player/queries';
+import { useSession } from '@/services/player/queries';
 
 import { CreateRoomButton } from './CreateRoomButton';
 import { JoinRoomButton } from './JoinRoomButton';
@@ -19,21 +19,21 @@ const Text = tw.p`
 `;
 
 export function HomePage(): JSX.Element {
-  const { player } = usePlayerSession();
+  const { session } = useSession();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (player?.room?.code) {
-      navigate(`/room/${player.room.code}`);
+    if (session?.room?.code) {
+      navigate(`/room/${session.room.code}`);
     }
-  }, [navigate, player?.room?.code]);
+  }, [navigate, session?.room?.code]);
 
   return (
     <Layout>
       <WelcomeImage alt="welcome" src={Killerparty} />
       <h1>{t('home.title')}</h1>
       <Text>{t('home.game_resume')}</Text>
-      <CreateRoomButton playerName={player?.name} />
+      <CreateRoomButton playerName={session?.name} />
       <JoinRoomButton />
     </Layout>
   );

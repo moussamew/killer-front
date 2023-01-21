@@ -2,9 +2,9 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
-import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { playerInPendingRoom } from '@/tests/mocks/players';
+import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
+import { pendingRoomSession } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -19,8 +19,8 @@ describe('<HomePage />', () => {
 
   it('should navigate to the room page if a room code exist inside the player session', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerInPendingRoom)),
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoomSession)),
       ),
       rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),

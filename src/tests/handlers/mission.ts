@@ -1,23 +1,8 @@
 import { rest } from 'msw';
 
-import {
-  MISSION_ENDPOINT,
-  PLAYER_TARGET_ENDPOINT,
-} from '@/constants/endpoints';
+import { MISSION_ENDPOINT } from '@/constants/endpoints';
 
 export const missionHandlers = [
-  /**
-   * Mock fetching player target.
-   */
-  rest.get(PLAYER_TARGET_ENDPOINT, async (_, res, ctx) =>
-    res(ctx.status(200), ctx.json({})),
-  ),
-  /**
-   * Mock fetching mission to do to its target.
-   */
-  rest.get(MISSION_ENDPOINT, async (_, res, ctx) =>
-    res(ctx.status(200), ctx.json({})),
-  ),
   /**
    * Mock adding mission.
    */

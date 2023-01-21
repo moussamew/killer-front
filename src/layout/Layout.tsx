@@ -4,7 +4,7 @@ import tw from 'twin.macro';
 import { Loader } from '@/components/Loader';
 import { Modal } from '@/components/Modal';
 import { ModalContext } from '@/hooks/context/modal';
-import { usePlayerSession } from '@/services/player/queries';
+import { useSession } from '@/services/player/queries';
 
 import Header from './Header';
 
@@ -19,7 +19,7 @@ interface Props {
 
 export function Layout({ children }: Props): JSX.Element {
   const { modal, closeModal } = useContext(ModalContext);
-  const { isLoading, player } = usePlayerSession();
+  const { isLoading, session } = useSession();
 
   if (isLoading) {
     return <Loader />;
@@ -27,7 +27,7 @@ export function Layout({ children }: Props): JSX.Element {
 
   return (
     <Fragment>
-      <Header playerName={player?.name} />
+      <Header playerName={session?.name} />
       <Content>{children}</Content>
       {modal && <Modal closeModal={closeModal}>{modal}</Modal>}
     </Fragment>

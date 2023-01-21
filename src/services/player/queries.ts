@@ -1,18 +1,18 @@
 import { useQuery } from 'react-query';
 
-import { getPlayerSessionRequest } from './requests';
-import { PlayerSessionQuery } from './types';
+import { getSessionRequest } from './requests';
+import { SessionQuery } from './types';
 
-export function usePlayerSession(): PlayerSessionQuery {
+export function useSession(): SessionQuery {
   const {
-    data: player,
-    refetch: refetchPlayer,
+    data: session,
+    refetch: refetchSession,
     isLoading,
-  } = useQuery('playerSession', getPlayerSessionRequest);
+  } = useQuery('session', getSessionRequest);
 
   return {
-    player,
-    refetchPlayer,
+    session,
+    refetchSession,
     isLoading,
   };
 }

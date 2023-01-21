@@ -15,7 +15,7 @@ export function useCreateRoom(): CreateRoomMutation {
   const queryClient = useQueryClient();
 
   const createRoom = useMutation(createRoomRequest, {
-    onSuccess: () => queryClient.invalidateQueries('playerSession'),
+    onSuccess: () => queryClient.invalidateQueries('session'),
   });
 
   return { createRoom };
@@ -25,7 +25,7 @@ export function useDeleteRoom(): DeleteRoomMutation {
   const queryClient = useQueryClient();
 
   const deleteRoom = useMutation(deleteRoomRequest, {
-    onSuccess: () => queryClient.invalidateQueries('playerSession'),
+    onSuccess: () => queryClient.invalidateQueries('session'),
   });
 
   return { deleteRoom };

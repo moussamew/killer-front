@@ -8,7 +8,7 @@ import { Layout } from '@/layout/Layout';
 import { RoomPage } from '@/pages/Room';
 import { PlayerStatus } from '@/services/player/constants';
 import { useUpdatePlayer } from '@/services/player/mutations';
-import { usePlayerSession } from '@/services/player/queries';
+import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 
 const SectionTitle = tw.div`
@@ -23,12 +23,12 @@ export function EndedRoomPage(): JSX.Element {
   const { roomCode } = useParams();
   const { room } = useRoom(roomCode!);
   const { updatePlayer } = useUpdatePlayer();
-  const { player } = usePlayerSession();
+  const { session } = useSession();
   const navigate = useNavigate();
 
   const handleLeaveRoom = async (): Promise<void> => {
     updatePlayer.mutate(
-      { id: player?.id, room: null },
+      { id: session?.id, room: null },
       { onSuccess: () => navigate('/') },
     );
   };

@@ -11,14 +11,14 @@ export interface Player {
   status: PlayerStatus;
 }
 
-export interface PlayerSession {
+export interface Session {
   id: number;
   name: string;
   killer: string | null;
-  assignedMission: number | null;
+  assignedMission: Mission | null;
   authoredMissions: Mission[];
   status: PlayerStatus;
-  target: number | null;
+  target: Player | null;
   room: Omit<Room, 'admin' | 'players'> | null;
 }
 
@@ -29,9 +29,9 @@ export interface PlayerUpdateInfos {
   status: PlayerStatus;
 }
 
-export interface PlayerSessionQuery {
-  player: PlayerSession | undefined;
-  refetchPlayer(): Promise<QueryObserverResult<PlayerSession, unknown>>;
+export interface SessionQuery {
+  session: Session | undefined;
+  refetchSession(): Promise<QueryObserverResult<Session, unknown>>;
   isLoading: boolean;
 }
 

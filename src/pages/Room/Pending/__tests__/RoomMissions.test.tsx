@@ -3,20 +3,20 @@ import { sources } from 'eventsourcemock';
 import { rest } from 'msw';
 
 import {
-  PLAYER_SESSION_ENDPOINT,
+  SESSION_ENDPOINT,
   ROOM_ENDPOINT,
   ROOM_TOPIC,
 } from '@/constants/endpoints';
-import { playerInPendingRoom } from '@/tests/mocks/players';
 import { pendingRoomWithMissions, roomCode } from '@/tests/mocks/rooms';
+import { pendingRoomSession } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<RoomMissions />', () => {
   it('should show the count of all missions in the room', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerInPendingRoom)),
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoomSession)),
       ),
       rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoomWithMissions)),
@@ -26,14 +26,14 @@ describe('<RoomMissions />', () => {
     renderWithProviders({ route: `/room/${roomCode}` });
 
     expect(
-      await screen.findByText('There is currently 1 missions in this room.'),
+      await screen.findByText('There is currently 3 missions in this room.'),
     ).toBeInTheDocument();
   });
 
   it.skip('should update the count of all missions in the room when SSE emits a new message', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerInPendingRoom)),
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoomSession)),
       ),
       rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoomWithMissions)),
