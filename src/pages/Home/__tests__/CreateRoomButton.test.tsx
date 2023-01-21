@@ -1,15 +1,13 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
-import { MemoryRouter } from 'react-router-dom';
 
+import { AppRoutes } from '@/app/routes';
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { HomePage } from '@/pages/Home';
-import { AppRoutes } from '@/routes';
-import { playerWithRoom, playerWithoutRoom } from '@/tests/mocks/players';
+import { playerInPendingRoom, playerWithoutRoom } from '@/tests/mocks/players';
 import { pendingRoom } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { renderWithRouter } from '@/tests/utils';
 
 describe('<CreateRoomButton />', () => {
   it('should open a room creation modal if the user does not have a session', async () => {
@@ -19,11 +17,7 @@ describe('<CreateRoomButton />', () => {
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter>
-        <HomePage />
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />);
 
     await screen.findByText('The right way to kill your friends..');
 
@@ -45,13 +39,13 @@ describe('<CreateRoomButton />', () => {
       ),
     );
 
-    renderWithProviders(<AppRoutes />);
+    renderWithRouter(<AppRoutes />);
 
     await screen.findByText(playerWithoutRoom.name);
 
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerWithRoom)),
+        res(ctx.status(200), ctx.json(playerInPendingRoom)),
       ),
       rest.get(`${ROOM_ENDPOINT}/${pendingRoom.code}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),
@@ -80,11 +74,7 @@ describe('<CreateRoomButton />', () => {
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter>
-        <HomePage />
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />);
 
     await screen.findByText('Trinity');
 

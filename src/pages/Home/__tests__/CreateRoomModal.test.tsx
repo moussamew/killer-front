@@ -1,16 +1,15 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
-import { MemoryRouter } from 'react-router-dom';
 
+import { AppRoutes } from '@/app/routes';
 import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
-import { HomePage } from '@/pages/Home';
 import { fakePlayer } from '@/tests/mocks/players';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { renderWithRouter } from '@/tests/utils';
 
 import { CreateRoomModal } from '../CreateRoomModal';
 
@@ -22,11 +21,7 @@ describe('<CreateRoomModal />', () => {
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter>
-        <HomePage />
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />);
 
     await screen.findByText('The right way to kill your friends..');
 
@@ -58,7 +53,7 @@ describe('<CreateRoomModal />', () => {
       ),
     );
 
-    renderWithProviders(<CreateRoomModal />);
+    renderWithRouter(<CreateRoomModal />);
 
     await userEvent.type(
       screen.getByPlaceholderText('Choose a pseudo'),

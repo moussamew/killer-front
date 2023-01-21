@@ -1,7 +1,6 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
-import { MemoryRouter } from 'react-router-dom';
 
 import {
   PLAYER_ENDPOINT,
@@ -11,15 +10,11 @@ import { HomePage } from '@/pages/Home';
 import { fakePlayer } from '@/tests/mocks/players';
 import { roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { renderWithRouter } from '@/tests/utils';
 
 describe('<JoinRoomModal />', () => {
   it('should close modal after joining a room with player session', async () => {
-    renderWithProviders(
-      <MemoryRouter>
-        <HomePage />
-      </MemoryRouter>,
-    );
+    renderWithRouter(<HomePage />);
 
     await userEvent.click(await screen.findByText('Join a room'));
 
@@ -42,11 +37,7 @@ describe('<JoinRoomModal />', () => {
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter>
-        <HomePage />
-      </MemoryRouter>,
-    );
+    renderWithRouter(<HomePage />);
 
     await screen.findByText('The right way to kill your friends..');
 
@@ -82,11 +73,7 @@ describe('<JoinRoomModal />', () => {
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter>
-        <HomePage />
-      </MemoryRouter>,
-    );
+    renderWithRouter(<HomePage />);
 
     await screen.findByText('Neo');
 

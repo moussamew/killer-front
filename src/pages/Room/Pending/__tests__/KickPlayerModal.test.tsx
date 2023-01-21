@@ -1,15 +1,13 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
+import { AppRoutes } from '@/app/routes';
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { RoomPage } from '@/pages/Room';
-import { PendingRoomPage } from '@/pages/Room/Pending';
-import { adminPlayer, fakePlayer } from '@/tests/mocks/players';
+import { adminPlayer } from '@/tests/mocks/players';
 import { pendingRoomWithMultiplePlayers, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { renderWithRouter } from '@/tests/utils';
 
 describe('<KickPlayerModal />', () => {
   it('should kick player from the room', async () => {
@@ -22,23 +20,20 @@ describe('<KickPlayerModal />', () => {
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter initialEntries={[`/room/${roomCode}`]}>
-        <Routes>
-          <Route path="/room/:roomCode" element={<RoomPage />} />
-          <Route path="/room/:roomCode/pending" element={<PendingRoomPage />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
 
-    await screen.findByText(fakePlayer.name);
+    const { players } = pendingRoomWithMultiplePlayers;
 
-    await userEvent.click(await screen.findByTitle(`kick${fakePlayer.name}`));
+    const playerName = players[1].name;
 
-    await userEvent.click(screen.getByText(`Kick ${fakePlayer.name}`));
+    await screen.findByText(playerName);
+
+    await userEvent.click(await screen.findByTitle(`kick${playerName}`));
+
+    await userEvent.click(screen.getByText(`Kick ${playerName}`));
 
     await waitForElementToBeRemoved(() =>
-      screen.queryByText(`Kick ${fakePlayer.name}`),
+      screen.queryByText(`Kick ${playerName}`),
     );
 
     expect(

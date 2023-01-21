@@ -1,13 +1,12 @@
 import { screen } from '@testing-library/react';
 import { rest } from 'msw';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
+import { AppRoutes } from '@/app/routes';
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { PendingRoomPage } from '@/pages/Room/Pending';
-import { adminPlayer, playerWithRoom } from '@/tests/mocks/players';
+import { adminPlayer, playerInPendingRoom } from '@/tests/mocks/players';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { renderWithRouter } from '@/tests/utils';
 
 describe('<PendingRoomPage />', () => {
   it('should show the pending room page with the correct room code', async () => {
@@ -20,13 +19,7 @@ describe('<PendingRoomPage />', () => {
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter initialEntries={[`/room/${roomCode}`]}>
-        <Routes>
-          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
 
     expect(await screen.findByText('Start the party')).toBeInTheDocument();
   });
@@ -34,20 +27,21 @@ describe('<PendingRoomPage />', () => {
   it('should not show the Start party button if the player is not an admin', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerWithRoom)),
+        res(
+          ctx.status(200),
+          ctx.json({
+            ...playerInPendingRoom,
+            name: 'MORPHEUS',
+            id: 30,
+          }),
+        ),
       ),
       rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter initialEntries={[`/room/${roomCode}`]}>
-        <Routes>
-          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
 
     expect(
       await screen.findByText(`The code to join this room is ${roomCode}.`),

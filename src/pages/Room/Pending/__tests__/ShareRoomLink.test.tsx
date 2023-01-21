@@ -1,14 +1,31 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { rest } from 'msw';
 import { vi } from 'vitest';
 
-import { JOIN_ROOM_ROUTE } from '@/constants/endpoints';
-import { renderWithProviders } from '@/tests/utils';
-
-import { ShareRoomLink } from '../ShareRoomLink';
+import { AppRoutes } from '@/app/routes';
+import {
+  JOIN_ROOM_ROUTE,
+  PLAYER_SESSION_ENDPOINT,
+  ROOM_ENDPOINT,
+} from '@/constants/endpoints';
+import { playerInPendingRoom } from '@/tests/mocks/players';
+import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
+import { server } from '@/tests/server';
+import { renderWithRouter } from '@/tests/utils';
 
 describe('<ShareRoomLink />', () => {
+  beforeEach(() => {
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(playerInPendingRoom)),
+      ),
+      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoom)),
+      ),
+    );
+  });
+
   it('should share the room link with navigator share if exists when the user click on the share button', async () => {
     const spyNavigatorShare = vi.fn();
 
@@ -17,13 +34,9 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    renderWithProviders(
-      <MemoryRouter initialEntries={['/room/P9LDG']}>
-        <Routes>
-          <Route path="/room/:roomCode" element={<ShareRoomLink />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+
+    await screen.findByText('Share link to join the room');
 
     await userEvent.click(screen.getByText('Share link to join the room'));
 
@@ -31,7 +44,7 @@ describe('<ShareRoomLink />', () => {
     expect(spyNavigatorShare).toHaveBeenCalledWith({
       title: 'Killerparty',
       text: 'Hey! Join my party and try to kill me ^^',
-      url: `${JOIN_ROOM_ROUTE}/P9LDG`,
+      url: `${JOIN_ROOM_ROUTE}/${roomCode}`,
     });
   });
 
@@ -44,13 +57,9 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    renderWithProviders(
-      <MemoryRouter initialEntries={['/room/P9LDG']}>
-        <Routes>
-          <Route path="/room/:roomCode" element={<ShareRoomLink />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+
+    await screen.findByText('Share link to join the room');
 
     await userEvent.click(screen.getByText('Share link to join the room'));
 
@@ -72,13 +81,9 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    renderWithProviders(
-      <MemoryRouter initialEntries={['/room/P9LDG']}>
-        <Routes>
-          <Route path="/room/:roomCode" element={<ShareRoomLink />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+
+    await screen.findByText('Share link to join the room');
 
     await userEvent.click(screen.getByText('Share link to join the room'));
 
@@ -87,7 +92,7 @@ describe('<ShareRoomLink />', () => {
     ).toBeInTheDocument();
     expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
     expect(spyNavigatorClipboard).toHaveBeenCalledWith(
-      `${JOIN_ROOM_ROUTE}/P9LDG`,
+      `${JOIN_ROOM_ROUTE}/${roomCode}`,
     );
   });
 
@@ -102,13 +107,9 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    renderWithProviders(
-      <MemoryRouter initialEntries={['/room/P9LDG']}>
-        <Routes>
-          <Route path="/room/:roomCode" element={<ShareRoomLink />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+
+    await screen.findByText('Share link to join the room');
 
     await userEvent.click(screen.getByText('Share link to join the room'));
 
@@ -119,7 +120,7 @@ describe('<ShareRoomLink />', () => {
     ).toBeInTheDocument();
     expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
     expect(spyNavigatorClipboard).toHaveBeenCalledWith(
-      `${JOIN_ROOM_ROUTE}/P9LDG`,
+      `${JOIN_ROOM_ROUTE}/${roomCode}`,
     );
   });
 });

@@ -1,19 +1,17 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
+import { AppRoutes } from '@/app/routes';
 import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
+  ROOM_ENDPOINT,
 } from '@/constants/endpoints';
-import { HomePage } from '@/pages/Home';
-import { JoinRoomPage } from '@/pages/JoinRoom';
-import { PendingRoomPage } from '@/pages/Room/Pending';
-import { playerWithRoom, fakePlayer } from '@/tests/mocks/players';
-import { roomCode } from '@/tests/mocks/rooms';
+import { playerInPendingRoom, fakePlayer } from '@/tests/mocks/players';
+import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { renderWithRouter } from '@/tests/utils';
 
 import { CreatePlayer } from '../CreatePlayer';
 
@@ -25,14 +23,7 @@ describe('<CreatePlayer />', () => {
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter initialEntries={[`/join/${roomCode}`]}>
-        <Routes>
-          <Route path="/join/:roomCode" element={<JoinRoomPage />} />
-          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />, { route: `/join/${roomCode}` });
 
     await userEvent.type(
       await screen.findByPlaceholderText('Choose a pseudo'),
@@ -45,12 +36,15 @@ describe('<CreatePlayer />', () => {
 
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, async (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerWithRoom)),
+        res(ctx.status(200), ctx.json(playerInPendingRoom)),
+      ),
+      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, async (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoom)),
       ),
     );
 
     expect(
-      await screen.findByText('Welcome to the party!'),
+      await screen.findByText(`The code to join this room is ${roomCode}.`),
     ).toBeInTheDocument();
   });
 
@@ -61,14 +55,7 @@ describe('<CreatePlayer />', () => {
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter initialEntries={[`/join/${roomCode}`]}>
-        <Routes>
-          <Route path="/join/:roomCode" element={<JoinRoomPage />} />
-          <Route path="/" element={<HomePage />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />, { route: `/join/${roomCode}` });
 
     await screen.findByText('No pseudo found yet!');
 
@@ -93,11 +80,7 @@ describe('<CreatePlayer />', () => {
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter>
-        <CreatePlayer roomCode="X7JKL" />
-      </MemoryRouter>,
-    );
+    renderWithRouter(<CreatePlayer roomCode="X7JKL" />);
 
     await userEvent.type(
       screen.getByPlaceholderText('Choose a pseudo'),

@@ -5,13 +5,13 @@ import { rest } from 'msw';
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { PlayerMissions } from '@/pages/Room/Pending/PlayerMissions';
 import { fakeMission } from '@/tests/mocks/missions';
-import { playerWithRoom } from '@/tests/mocks/players';
+import { playerInPendingRoom } from '@/tests/mocks/players';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { renderWithRouter } from '@/tests/utils';
 
 describe('<PlayerMissions />', () => {
   it('should show the input to create a new Mission', async () => {
-    renderWithProviders(<PlayerMissions />);
+    renderWithRouter(<PlayerMissions />);
 
     expect(await screen.findByText('Manage my missions'));
     expect(await screen.findByPlaceholderText('Make him drink his glass dry'));
@@ -20,11 +20,11 @@ describe('<PlayerMissions />', () => {
   it('should remove a mission', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerWithRoom)),
+        res(ctx.status(200), ctx.json(playerInPendingRoom)),
       ),
     );
 
-    renderWithProviders(<PlayerMissions />);
+    renderWithRouter(<PlayerMissions />);
 
     await screen.findByText(fakeMission.content);
 
@@ -35,8 +35,8 @@ describe('<PlayerMissions />', () => {
         res(
           ctx.status(200),
           ctx.json({
-            ...playerWithRoom,
-            room: { ...playerWithRoom.room, missions: [] },
+            ...playerInPendingRoom,
+            room: { ...playerInPendingRoom.room, missions: [] },
             authoredMissions: [],
           }),
         ),

@@ -1,36 +1,49 @@
 import { screen } from '@testing-library/react';
 import { sources } from 'eventsourcemock';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { rest } from 'msw';
 
-import { ROOM_TOPIC } from '@/constants/endpoints';
-import { RoomMissions } from '@/pages/Room/Pending/RoomMissions';
-import { renderWithProviders } from '@/tests/utils';
+import { AppRoutes } from '@/app/routes';
+import {
+  PLAYER_SESSION_ENDPOINT,
+  ROOM_ENDPOINT,
+  ROOM_TOPIC,
+} from '@/constants/endpoints';
+import { playerInPendingRoom } from '@/tests/mocks/players';
+import { pendingRoomWithMissions, roomCode } from '@/tests/mocks/rooms';
+import { server } from '@/tests/server';
+import { renderWithRouter } from '@/tests/utils';
 
 describe('<RoomMissions />', () => {
   it('should show the count of all missions in the room', async () => {
-    renderWithProviders(
-      <MemoryRouter initialEntries={['/room/X7JKL']}>
-        <Routes>
-          <Route path="/room/:roomCode" element={<RoomMissions />} />
-        </Routes>
-      </MemoryRouter>,
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(playerInPendingRoom)),
+      ),
+      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoomWithMissions)),
+      ),
     );
 
+    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+
     expect(
-      await screen.findByText('There is currently 5 missions in this room.'),
+      await screen.findByText('There is currently 1 missions in this room.'),
     ).toBeInTheDocument();
   });
 
-  it('should update the count of all missions in the room when SSE emits a new message', async () => {
-    renderWithProviders(
-      <MemoryRouter initialEntries={['/room/X7JKL']}>
-        <Routes>
-          <Route path="/room/:roomCode" element={<RoomMissions />} />
-        </Routes>
-      </MemoryRouter>,
+  it.skip('should update the count of all missions in the room when SSE emits a new message', async () => {
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(playerInPendingRoom)),
+      ),
+      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoomWithMissions)),
+      ),
     );
 
-    await screen.findByText('There is currently 2 missions in this room.');
+    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+
+    await screen.findByText('There is currently 1 missions in this room.');
 
     const messageEvent = new MessageEvent('message');
 

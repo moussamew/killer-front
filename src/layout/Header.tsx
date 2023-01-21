@@ -34,9 +34,9 @@ function Header({ playerName }: Props): JSX.Element {
     <Navigation>
       <Text>{t('header.project_name')}</Text>
       {playerName && (
-        <PlayerInfos>
+        <PlayerInfos onClick={handleOpenSettings}>
           <Text>{playerName}</Text>
-          <SettingsIcon title="userSettings" onClick={handleOpenSettings} />
+          <SettingsIcon />
         </PlayerInfos>
       )}
     </Navigation>

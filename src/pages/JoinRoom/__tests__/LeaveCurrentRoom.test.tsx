@@ -1,20 +1,17 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
+import { AppRoutes } from '@/app/routes';
 import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
-import { JoinRoomPage } from '@/pages/JoinRoom';
-import { RoomPage } from '@/pages/Room';
-import { PendingRoomPage } from '@/pages/Room/Pending';
-import { playerWithRoom } from '@/tests/mocks/players';
+import { playerInPendingRoom } from '@/tests/mocks/players';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { renderWithRouter } from '@/tests/utils';
 
 import { LeaveCurrentRoom } from '../LeaveCurrentRoom';
 
@@ -22,19 +19,11 @@ describe('<LeaveCurrentRoom />', () => {
   it('should join a new room and leave the current one', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerWithRoom)),
+        res(ctx.status(200), ctx.json(playerInPendingRoom)),
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter initialEntries={['/join/XAB4L']}>
-        <Routes>
-          <Route path="/join/:roomCode" element={<JoinRoomPage />} />
-          <Route path="/room/:roomCode" element={<RoomPage />} />
-          <Route path="/room/:roomCode/pending" element={<PendingRoomPage />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />, { route: '/join/XAB4L' });
 
     await screen.findByText(`Already inside the room ${roomCode}!`);
 
@@ -45,8 +34,8 @@ describe('<LeaveCurrentRoom />', () => {
         res(
           ctx.status(200),
           ctx.json({
-            ...playerWithRoom,
-            room: { ...playerWithRoom.room, code: 'XAB4L' },
+            ...playerInPendingRoom,
+            room: { ...playerInPendingRoom.room, code: 'XAB4L' },
           }),
         ),
       ),
@@ -65,22 +54,14 @@ describe('<LeaveCurrentRoom />', () => {
   it('should let the player return to its current room', async () => {
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerWithRoom)),
+        res(ctx.status(200), ctx.json(playerInPendingRoom)),
       ),
       rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter initialEntries={['/join/XAB4L']}>
-        <Routes>
-          <Route path="/join/:roomCode" element={<JoinRoomPage />} />
-          <Route path="/room/:roomCode" element={<RoomPage />} />
-          <Route path="/room/:roomCode/pending" element={<PendingRoomPage />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />, { route: '/join/XAB4L' });
 
     await screen.findByText(`Already inside the room ${roomCode}!`);
 
@@ -110,11 +91,7 @@ describe('<LeaveCurrentRoom />', () => {
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter>
-        <LeaveCurrentRoom />
-      </MemoryRouter>,
-    );
+    renderWithRouter(<LeaveCurrentRoom />);
 
     await userEvent.click(screen.getByText('Continue and join the room'));
 
