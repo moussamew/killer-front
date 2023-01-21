@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 
-import { fakePlayer } from '@/tests/mocks/players';
+import { fakePlayerOne } from '@/tests/mocks/players';
 import { renderWithProviders } from '@/tests/utils';
 
 import Header from '../Header';
@@ -13,8 +13,10 @@ describe('<Header />', () => {
   });
 
   it('should show the name of the current player stored in the session', async () => {
-    renderWithProviders({ component: <Header playerName={fakePlayer.name} /> });
+    renderWithProviders({
+      component: <Header playerName={fakePlayerOne.name} />,
+    });
 
-    expect(await screen.findByText(fakePlayer.name)).toBeInTheDocument();
+    expect(await screen.findByText(fakePlayerOne.name)).toBeInTheDocument();
   });
 });

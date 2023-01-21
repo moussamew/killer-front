@@ -2,8 +2,8 @@ import { screen } from '@testing-library/react';
 import { rest } from 'msw';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { playerInPendingRoom } from '@/tests/mocks/players';
 import { pendingRoomWithMultiplePlayers, roomCode } from '@/tests/mocks/rooms';
+import { playerInPendingRoom } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 

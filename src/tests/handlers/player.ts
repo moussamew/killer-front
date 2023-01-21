@@ -4,7 +4,7 @@ import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
-import { playerWithoutRoom } from '@/tests/mocks/players';
+import { playerWithoutRoom } from '@/tests/mocks/sessions';
 
 export const playerHandlers = [
   /**

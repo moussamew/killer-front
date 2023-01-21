@@ -12,17 +12,17 @@ import {
 import { MercureEventType } from '@/constants/enums';
 import { PlayerStatus } from '@/services/player/constants';
 import {
-  playerInEndedRoom,
-  playerInPlayingRoom,
-  playerInPendingRoom,
-  playerWithoutRoom,
-} from '@/tests/mocks/players';
-import {
   endedRoom,
   playingRoom,
   pendingRoom,
   roomCode,
 } from '@/tests/mocks/rooms';
+import {
+  playerInEndedRoom,
+  playerInPlayingRoom,
+  playerInPendingRoom,
+  playerWithoutRoom,
+} from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 

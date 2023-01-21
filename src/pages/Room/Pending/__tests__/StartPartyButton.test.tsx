@@ -9,8 +9,8 @@ import {
   ROOM_TOPIC,
 } from '@/constants/endpoints';
 import { MercureEventType } from '@/constants/enums';
-import { playerInPendingRoom } from '@/tests/mocks/players';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
+import { playerInPendingRoom } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 

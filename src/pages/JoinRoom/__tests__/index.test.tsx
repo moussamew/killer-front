@@ -7,12 +7,12 @@ import {
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
 import { RoomErrorCode } from '@/constants/errors';
-import { playerWithoutRoom, playerInPendingRoom } from '@/tests/mocks/players';
 import {
   roomCode,
   pendingRoom,
   pendingRoomWithMultiplePlayers,
 } from '@/tests/mocks/rooms';
+import { playerWithoutRoom, playerInPendingRoom } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 

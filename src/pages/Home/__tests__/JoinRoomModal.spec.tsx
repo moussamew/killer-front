@@ -6,7 +6,7 @@ import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
-import { fakePlayer } from '@/tests/mocks/players';
+import { fakePlayerOne } from '@/tests/mocks/players';
 import { roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
@@ -44,7 +44,7 @@ describe('<JoinRoomModal />', () => {
 
     await userEvent.type(
       screen.getByPlaceholderText('Choose a pseudo'),
-      fakePlayer.name,
+      fakePlayerOne.name,
     );
 
     await userEvent.type(

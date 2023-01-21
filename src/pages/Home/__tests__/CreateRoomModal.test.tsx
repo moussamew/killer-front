@@ -6,7 +6,7 @@ import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
-import { fakePlayer } from '@/tests/mocks/players';
+import { fakePlayerOne } from '@/tests/mocks/players';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -28,7 +28,7 @@ describe('<CreateRoomModal />', () => {
 
     await userEvent.type(
       screen.getByPlaceholderText('Choose a pseudo'),
-      fakePlayer.name,
+      fakePlayerOne.name,
     );
 
     await userEvent.click(screen.getByText('Create my room'));

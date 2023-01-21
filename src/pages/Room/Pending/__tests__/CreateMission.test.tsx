@@ -8,13 +8,9 @@ import {
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
 import { CreateMission } from '@/pages/Room/Pending/CreateMission';
-import { fakeMission } from '@/tests/mocks/missions';
-import { playerInPendingRoom } from '@/tests/mocks/players';
-import {
-  pendingRoom,
-  pendingRoomWithMissions,
-  roomCode,
-} from '@/tests/mocks/rooms';
+import { fakeMissionThree } from '@/tests/mocks/missions';
+import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
+import { playerInPendingRoom } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -35,18 +31,26 @@ describe('<CreateMission />', () => {
 
     await userEvent.type(
       screen.getByPlaceholderText('Make him drink his glass dry'),
-      fakeMission.content,
+      fakeMissionThree.content,
     );
 
     await userEvent.click(screen.getByText('Add new mission in the room'));
 
     server.use(
-      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(pendingRoomWithMissions)),
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(
+          ctx.status(200),
+          ctx.json({
+            ...playerInPendingRoom,
+            authoredMissions: [fakeMissionThree],
+          }),
+        ),
       ),
     );
 
-    expect(await screen.findByText(fakeMission.content)).toBeInTheDocument();
+    expect(
+      await screen.findByText(fakeMissionThree.content),
+    ).toBeInTheDocument();
   });
 
   it.skip('should show error message when adding a new mission has failed', async () => {

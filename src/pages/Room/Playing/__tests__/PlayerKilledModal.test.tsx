@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { playerInPlayingRoom } from '@/tests/mocks/players';
 import { playingRoom, roomCode } from '@/tests/mocks/rooms';
+import { playerInPlayingRoom } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 

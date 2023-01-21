@@ -7,8 +7,8 @@ import {
   ROOM_ENDPOINT,
   ROOM_TOPIC,
 } from '@/constants/endpoints';
-import { playerInPendingRoom } from '@/tests/mocks/players';
 import { pendingRoomWithMissions, roomCode } from '@/tests/mocks/rooms';
+import { playerInPendingRoom } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -26,7 +26,7 @@ describe('<RoomMissions />', () => {
     renderWithProviders({ route: `/room/${roomCode}` });
 
     expect(
-      await screen.findByText('There is currently 1 missions in this room.'),
+      await screen.findByText('There is currently 3 missions in this room.'),
     ).toBeInTheDocument();
   });
 

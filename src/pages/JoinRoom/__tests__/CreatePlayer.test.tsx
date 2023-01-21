@@ -7,8 +7,9 @@ import {
   PLAYER_SESSION_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
-import { playerInPendingRoom, fakePlayer } from '@/tests/mocks/players';
+import { fakePlayerOne } from '@/tests/mocks/players';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
+import { playerInPendingRoom } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -26,7 +27,7 @@ describe('<CreatePlayer />', () => {
 
     await userEvent.type(
       await screen.findByPlaceholderText('Choose a pseudo'),
-      fakePlayer.name,
+      fakePlayerOne.name,
     );
 
     await userEvent.click(
