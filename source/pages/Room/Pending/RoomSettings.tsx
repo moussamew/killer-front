@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import tw from 'twin.macro';
 
 import { ReactComponent as RoomSettingsIcon } from '@/assets/icons/roomSettings.svg';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
 
 import Killerparty from '@/assets/images/killerparty.png';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { Layout } from '@/layout/Layout';
 import { useSession } from '@/services/player/queries';
 

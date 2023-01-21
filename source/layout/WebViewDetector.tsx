@@ -7,7 +7,7 @@ import Killerparty from '@/assets/images/killerparty.png';
 import { Button } from '@/components/Button';
 import { errorStyle, successStyle } from '@/constants/styles';
 import { AppLogo, TWITTER_WEBVIEW_URL, WebViewApp } from '@/constants/webview';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { useCreateNavigatorClipboard } from '@/services/common/mutations';
 
 import { Layout } from './Layout';

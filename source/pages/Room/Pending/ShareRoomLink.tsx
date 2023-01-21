@@ -5,7 +5,7 @@ import { ReactComponent as ShareIcon } from '@/assets/icons/share.svg';
 import { Button } from '@/components/Button';
 import { JOIN_ROOM_ROUTE } from '@/constants/endpoints';
 import { errorStyle, successStyle } from '@/constants/styles';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { useCreateNavigatorClipboard } from '@/services/common/mutations';
 
 export function ShareRoomLink(): JSX.Element {

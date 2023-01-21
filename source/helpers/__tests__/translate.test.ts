@@ -1,4 +1,4 @@
-import t from '../translate';
+import { t } from '../translate';
 
 describe('Helpers > Translate', () => {
   it('should returns the correct translation for the translate key given', () => {

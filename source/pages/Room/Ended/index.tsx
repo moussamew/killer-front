@@ -3,7 +3,7 @@ import tw from 'twin.macro';
 
 import Winner from '@/assets/images/winner.png';
 import { Button } from '@/components/Button';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { Layout } from '@/layout/Layout';
 import { RoomPage } from '@/pages/Room';
 import { PlayerStatus } from '@/services/player/constants';

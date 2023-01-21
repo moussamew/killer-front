@@ -1,7 +1,7 @@
 import tw from 'twin.macro';
 
 import Glasses from '@/assets/images/glasses.png';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { PlayerStatus } from '@/services/player/constants';
 import { useSession } from '@/services/player/queries';
 

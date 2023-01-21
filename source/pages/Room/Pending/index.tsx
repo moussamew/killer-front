@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import tw from 'twin.macro';
 
 import Island from '@/assets/images/island.png';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { Layout } from '@/layout/Layout';
 import { RoomPage } from '@/pages/Room';
 import { useSession } from '@/services/player/queries';

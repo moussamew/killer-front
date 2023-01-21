@@ -3,7 +3,7 @@ import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';

@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Button } from '@/components/Button';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 

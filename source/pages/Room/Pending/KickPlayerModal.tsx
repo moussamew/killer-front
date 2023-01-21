@@ -2,7 +2,7 @@ import { Fragment, useContext } from 'react';
 import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { useUpdatePlayer } from '@/services/player/mutations';
 

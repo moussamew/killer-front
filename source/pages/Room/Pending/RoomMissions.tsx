@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { useRoom } from '@/services/room/queries';
 
 export function RoomMissions(): JSX.Element {

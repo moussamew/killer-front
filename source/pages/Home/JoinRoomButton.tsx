@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import { Button } from '@/components/Button';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 
 import { JoinRoomModal } from './JoinRoomModal';

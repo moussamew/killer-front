@@ -3,7 +3,7 @@ import tw, { styled } from 'twin.macro';
 
 import { ReactComponent as DeleteIcon } from '@/assets/icons/delete.svg';
 import Idea from '@/assets/images/idea.png';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { useDeleteMission } from '@/services/mission/mutations';
 import { useSession } from '@/services/player/queries';
 

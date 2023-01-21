@@ -3,7 +3,7 @@ import tw from 'twin.macro';
 
 import NotFoundSrc from '@/assets/images/not-found.jpg';
 import { Button } from '@/components/Button';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { Layout } from '@/layout/Layout';
 
 const SectionTitle = tw.div`

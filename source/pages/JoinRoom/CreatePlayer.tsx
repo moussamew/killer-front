@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { useCreatePlayer } from '@/services/player/mutations';
 
 interface Props {

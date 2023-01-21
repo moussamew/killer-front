@@ -3,7 +3,7 @@ import tw from 'twin.macro';
 
 import Knife from '@/assets/images/knife.png';
 import { Button } from '@/components/Button';
-import t from '@/helpers/translate';
+import { t } from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 
 import { PlayerKilledModal } from './PlayerKilledModal';
