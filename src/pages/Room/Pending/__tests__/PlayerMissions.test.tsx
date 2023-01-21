@@ -2,10 +2,10 @@ import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
-import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
+import { SESSION_ENDPOINT } from '@/constants/endpoints';
 import { PlayerMissions } from '@/pages/Room/Pending/PlayerMissions';
 import { fakeMissionOne } from '@/tests/mocks/missions';
-import { playerInPendingRoom } from '@/tests/mocks/sessions';
+import { pendingRoomSession } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -19,11 +19,11 @@ describe('<PlayerMissions />', () => {
 
   it('should remove a mission', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
-            ...playerInPendingRoom,
+            ...pendingRoomSession,
             authoredMissions: [fakeMissionOne],
           }),
         ),
@@ -37,11 +37,11 @@ describe('<PlayerMissions />', () => {
     await userEvent.click(screen.getByTitle('deleteMission'));
 
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
-            ...playerInPendingRoom,
+            ...pendingRoomSession,
             authoredMissions: [],
           }),
         ),

@@ -11,7 +11,7 @@ export interface Player {
   status: PlayerStatus;
 }
 
-export interface PlayerSession {
+export interface Session {
   id: number;
   name: string;
   killer: string | null;
@@ -29,9 +29,9 @@ export interface PlayerUpdateInfos {
   status: PlayerStatus;
 }
 
-export interface PlayerSessionQuery {
-  player: PlayerSession | undefined;
-  refetchPlayer(): Promise<QueryObserverResult<PlayerSession, unknown>>;
+export interface SessionQuery {
+  session: Session | undefined;
+  refetchSession(): Promise<QueryObserverResult<Session, unknown>>;
   isLoading: boolean;
 }
 

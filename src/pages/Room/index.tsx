@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
 import { MercureEventType } from '@/constants/enums';
-import { usePlayerSession } from '@/services/player/queries';
+import { useSession } from '@/services/player/queries';
 import { RoomStatus } from '@/services/room/constants';
 import { useRoom } from '@/services/room/queries';
 
@@ -19,7 +19,7 @@ interface Props {
 export function RoomPage({ children }: Props): JSX.Element | null {
   const navigate = useNavigate();
   const { roomCode } = useParams();
-  const { isLoading, player, refetchPlayer } = usePlayerSession();
+  const { isLoading, session, refetchSession } = useSession();
   const { room, refetchRoom } = useRoom(roomCode!);
 
   /**
@@ -54,9 +54,9 @@ export function RoomPage({ children }: Props): JSX.Element | null {
        */
       if (
         /* The player try to join the room without pseudo. */
-        !player?.name ||
+        !session?.name ||
         /* The player try to join the room when he is already inside another room. */
-        (player?.room?.code && player?.room?.code !== roomCode)
+        (session?.room?.code && session?.room?.code !== roomCode)
       ) {
         return navigate(`/join/${roomCode}`);
       }
@@ -64,13 +64,13 @@ export function RoomPage({ children }: Props): JSX.Element | null {
       /**
        * Redirect player to home page if its roomCode is removed.
        */
-      if (!player?.room?.code) {
+      if (!session?.room?.code) {
         return navigate('/');
       }
     }
 
     return undefined;
-  }, [isLoading, player, roomCode, navigate]);
+  }, [isLoading, session, roomCode, navigate]);
 
   /**
    * Listen to SSE events emits in the Room page.
@@ -90,7 +90,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
           break;
 
         case PLAYER_UPDATED:
-          refetchRoom().then(refetchPlayer);
+          refetchRoom().then(refetchSession);
           break;
 
         /**
@@ -104,7 +104,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
          * Should be removed to use the `ROOM_UPDATED` event.
          */
         case ROOM_DELETED:
-          refetchPlayer();
+          refetchSession();
           break;
 
         default:
@@ -113,7 +113,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
     });
 
     return () => roomEventSource.close();
-  }, [roomCode, navigate, refetchPlayer, refetchRoom]);
+  }, [roomCode, navigate, refetchSession, refetchRoom]);
 
   return children || null;
 }

@@ -2,10 +2,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
-import {
-  PLAYER_ENDPOINT,
-  PLAYER_SESSION_ENDPOINT,
-} from '@/constants/endpoints';
+import { PLAYER_ENDPOINT, SESSION_ENDPOINT } from '@/constants/endpoints';
 import { RoomErrorCode } from '@/constants/errors';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
@@ -26,7 +23,7 @@ describe('<NotFoundPage />', () => {
 
   it.skip('should display an error message if needed', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: null })),
       ),
       rest.patch(PLAYER_ENDPOINT, (_, res, ctx) =>

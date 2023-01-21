@@ -1,17 +1,14 @@
 import { rest } from 'msw';
 
-import {
-  PLAYER_ENDPOINT,
-  PLAYER_SESSION_ENDPOINT,
-} from '@/constants/endpoints';
-import { playerWithoutRoom } from '@/tests/mocks/sessions';
+import { PLAYER_ENDPOINT, SESSION_ENDPOINT } from '@/constants/endpoints';
+import { noRoomSession } from '@/tests/mocks/sessions';
 
 export const playerHandlers = [
   /**
    * Mock player session.
    */
-  rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-    res(ctx.status(200), ctx.json(playerWithoutRoom)),
+  rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+    res(ctx.status(200), ctx.json(noRoomSession)),
   ),
   /**
    * Mock player creation.

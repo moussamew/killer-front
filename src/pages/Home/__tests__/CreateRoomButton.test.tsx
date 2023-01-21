@@ -2,16 +2,16 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
-import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
+import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { pendingRoom } from '@/tests/mocks/rooms';
-import { playerInPendingRoom, playerWithoutRoom } from '@/tests/mocks/sessions';
+import { pendingRoomSession, noRoomSession } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<CreateRoomButton />', () => {
   it('should open a room creation modal if the user does not have a session', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(null)),
       ),
     );
@@ -30,8 +30,8 @@ describe('<CreateRoomButton />', () => {
 
   it('should create a new room and redirect to it for a player with session', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerWithoutRoom)),
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(noRoomSession)),
       ),
       rest.post(ROOM_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),
@@ -40,11 +40,11 @@ describe('<CreateRoomButton />', () => {
 
     renderWithProviders();
 
-    await screen.findByText(playerWithoutRoom.name);
+    await screen.findByText(noRoomSession.name);
 
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerInPendingRoom)),
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoomSession)),
       ),
       rest.get(`${ROOM_ENDPOINT}/${pendingRoom.code}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),
@@ -65,7 +65,7 @@ describe('<CreateRoomButton />', () => {
 
   it.skip('should show error message when there is an error while creating a new room', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Trinity', roomCode: null })),
       ),
       rest.post(ROOM_ENDPOINT, (_, res, ctx) =>

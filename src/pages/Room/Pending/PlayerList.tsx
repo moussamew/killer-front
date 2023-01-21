@@ -7,7 +7,7 @@ import { ReactComponent as KickPlayerIcon } from '@/assets/icons/kickPlayer.svg'
 import { ReactComponent as LeaveRoomIcon } from '@/assets/icons/leaveRoom.svg';
 import Player from '@/assets/images/player.png';
 import { ModalContext } from '@/hooks/context/modal';
-import { usePlayerSession } from '@/services/player/queries';
+import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 
 import { KickPlayerModal } from './KickPlayerModal';
@@ -42,7 +42,7 @@ const Icon = tw.div`
 export function PlayerList(): JSX.Element {
   const { roomCode } = useParams();
   const { room } = useRoom(roomCode!);
-  const { player } = usePlayerSession();
+  const { session } = useSession();
   const { openModal } = useContext(ModalContext);
 
   const handleLeaveRoom = (): void => {
@@ -63,18 +63,18 @@ export function PlayerList(): JSX.Element {
       {room?.players.map(({ name, id }) => (
         <PlayerItem key={name}>
           <PlayerImage alt={`player-${name}`} src={Player} />
-          <PlayerName currentPlayer={player?.id === id}>{name}</PlayerName>
-          {room.admin.id === id && player?.id !== id && (
+          <PlayerName currentPlayer={session?.id === id}>{name}</PlayerName>
+          {room.admin.id === id && session?.id !== id && (
             <Icon>
               <AdminIcon title="roomAdmin" />
             </Icon>
           )}
-          {player?.id === id && (
+          {session?.id === id && (
             <Icon onClick={handleLeaveRoom}>
               <LeaveRoomIcon title="leaveRoom" />
             </Icon>
           )}
-          {room?.admin?.id !== id && player?.name !== name && (
+          {room?.admin?.id !== id && session?.name !== name && (
             <Icon onClick={handleKickPlayer(name, id)}>
               <KickPlayerIcon title={`kick${name}`} />
             </Icon>

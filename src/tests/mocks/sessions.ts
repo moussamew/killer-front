@@ -1,20 +1,20 @@
-import { PlayerSession } from '@/services/player/types';
+import { Session } from '@/services/player/types';
 import { RoomStatus } from '@/services/room/constants';
 
 import { fakeMissionOne, fakeMissionThree, fakeMissionTwo } from './missions';
 import { fakePlayerOne, fakePlayerThree, fakePlayerTwo } from './players';
 import { roomCode } from './rooms';
 
-export const playerWithoutRoom = {
+export const noRoomSession = {
   ...fakePlayerOne,
   room: null,
   target: null,
   killer: null,
   assignedMission: null,
   authoredMissions: [],
-} satisfies PlayerSession;
+} satisfies Session;
 
-export const playerInPendingRoom = {
+export const pendingRoomSession = {
   ...fakePlayerOne,
   room: {
     id: 17,
@@ -27,9 +27,9 @@ export const playerInPendingRoom = {
   killer: null,
   assignedMission: null,
   authoredMissions: [],
-} satisfies PlayerSession;
+} satisfies Session;
 
-export const playerInPlayingRoom = {
+export const playingRoomSession = {
   ...fakePlayerTwo,
   room: {
     id: 17,
@@ -42,9 +42,9 @@ export const playerInPlayingRoom = {
   killer: null,
   assignedMission: fakeMissionTwo,
   authoredMissions: [fakeMissionOne],
-} satisfies PlayerSession;
+} satisfies Session;
 
-export const playerInEndedRoom = {
+export const endedRoomSession = {
   ...fakePlayerThree,
   room: {
     id: 17,
@@ -57,9 +57,9 @@ export const playerInEndedRoom = {
   killer: null,
   assignedMission: null,
   authoredMissions: [],
-} satisfies PlayerSession;
+} satisfies Session;
 
-export const adminPlayer = {
+export const adminSession = {
   ...fakePlayerOne,
   room: {
     id: 17,
@@ -72,4 +72,4 @@ export const adminPlayer = {
   killer: null,
   assignedMission: null,
   authoredMissions: [],
-} satisfies PlayerSession;
+} satisfies Session;

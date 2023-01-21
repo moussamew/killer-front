@@ -3,7 +3,7 @@ import { rest } from 'msw';
 
 import {
   PLAYER_ENDPOINT,
-  PLAYER_SESSION_ENDPOINT,
+  SESSION_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
 import { RoomErrorCode } from '@/constants/errors';
@@ -12,15 +12,15 @@ import {
   pendingRoom,
   pendingRoomWithMultiplePlayers,
 } from '@/tests/mocks/rooms';
-import { playerWithoutRoom, playerInPendingRoom } from '@/tests/mocks/sessions';
+import { noRoomSession, pendingRoomSession } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<JoinRoomPage />', () => {
   it('should let the user join automatically the room if the roomCode saved in his session is the same', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerInPendingRoom)),
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoomSession)),
       ),
       rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),
@@ -38,8 +38,8 @@ describe('<JoinRoomPage />', () => {
 
   it('should let the player join automatically the room if his name is correctly setted and he is not already inside a room', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerWithoutRoom)),
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(noRoomSession)),
       ),
       rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoomWithMultiplePlayers)),
@@ -49,8 +49,8 @@ describe('<JoinRoomPage />', () => {
     renderWithProviders({ route: `/join/${roomCode}` });
 
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerInPendingRoom)),
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoomSession)),
       ),
     );
 
@@ -63,10 +63,10 @@ describe('<JoinRoomPage />', () => {
 
   it.skip('should redirect the player to not found page if the room code is incorrect', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerWithoutRoom)),
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(noRoomSession)),
       ),
-      rest.patch(`${PLAYER_ENDPOINT}/${playerWithoutRoom.id}`, (_, res, ctx) =>
+      rest.patch(`${PLAYER_ENDPOINT}/${noRoomSession.id}`, (_, res, ctx) =>
         res(
           ctx.status(400),
           ctx.json({ errorCode: RoomErrorCode.BAD_ROOMCODE }),

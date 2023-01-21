@@ -5,19 +5,19 @@ import { vi } from 'vitest';
 
 import {
   JOIN_ROOM_ROUTE,
-  PLAYER_SESSION_ENDPOINT,
+  SESSION_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
-import { playerInPendingRoom } from '@/tests/mocks/sessions';
+import { pendingRoomSession } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<ShareRoomLink />', () => {
   beforeEach(() => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerInPendingRoom)),
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoomSession)),
       ),
       rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),

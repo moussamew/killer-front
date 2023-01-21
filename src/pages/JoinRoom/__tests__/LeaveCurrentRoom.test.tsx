@@ -4,11 +4,11 @@ import { rest } from 'msw';
 
 import {
   PLAYER_ENDPOINT,
-  PLAYER_SESSION_ENDPOINT,
+  SESSION_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
-import { playerInPendingRoom } from '@/tests/mocks/sessions';
+import { pendingRoomSession } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
@@ -17,8 +17,8 @@ import { LeaveCurrentRoom } from '../LeaveCurrentRoom';
 describe('<LeaveCurrentRoom />', () => {
   it('should join a new room and leave the current one', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerInPendingRoom)),
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoomSession)),
       ),
     );
 
@@ -29,12 +29,12 @@ describe('<LeaveCurrentRoom />', () => {
     await userEvent.click(screen.getByText('Continue and join the room'));
 
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
-            ...playerInPendingRoom,
-            room: { ...playerInPendingRoom.room, code: 'XAB4L' },
+            ...pendingRoomSession,
+            room: { ...pendingRoomSession.room, code: 'XAB4L' },
           }),
         ),
       ),
@@ -52,8 +52,8 @@ describe('<LeaveCurrentRoom />', () => {
 
   it('should let the player return to its current room', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerInPendingRoom)),
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoomSession)),
       ),
       rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),
@@ -75,7 +75,7 @@ describe('<LeaveCurrentRoom />', () => {
 
   it.skip('should not let the player join a room if his name is already used', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: 'X7JKL' })),
       ),
       rest.patch(PLAYER_ENDPOINT, (_, res, ctx) =>

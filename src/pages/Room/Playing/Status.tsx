@@ -3,7 +3,7 @@ import tw from 'twin.macro';
 import Glasses from '@/assets/images/glasses.png';
 import t from '@/helpers/translate';
 import { PlayerStatus } from '@/services/player/constants';
-import { usePlayerSession } from '@/services/player/queries';
+import { useSession } from '@/services/player/queries';
 
 const Content = tw.section`
   flex flex-col items-center
@@ -38,12 +38,12 @@ const Mission = tw(PlayerToKill)`
 `;
 
 export function Status(): JSX.Element {
-  const { player } = usePlayerSession();
+  const { session } = useSession();
 
   return (
     <Content>
       <Image alt="party" src={Glasses} />
-      {player?.status === PlayerStatus.KILLED ? (
+      {session?.status === PlayerStatus.KILLED ? (
         <div>
           <h2>{t('playing_room.player_killed')}</h2>
           <Text>{t('playing_room.player_killed_resume')}</Text>
@@ -53,11 +53,11 @@ export function Status(): JSX.Element {
           <h2>{t('playing_room.target_section_title')}</h2>
           <TargetSection>
             <Text>{t('playing_room.target_to_kill')}</Text>
-            <PlayerToKill>{player?.target?.name}</PlayerToKill>
+            <PlayerToKill>{session?.target?.name}</PlayerToKill>
           </TargetSection>
           <MissionSection>
             <Text>{t('playing_room.mission_to_do')}</Text>
-            <Mission>{player?.assignedMission?.content}</Mission>
+            <Mission>{session?.assignedMission?.content}</Mission>
           </MissionSection>
         </div>
       )}

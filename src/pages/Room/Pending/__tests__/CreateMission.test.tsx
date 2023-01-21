@@ -4,21 +4,21 @@ import { rest } from 'msw';
 
 import {
   MISSION_ENDPOINT,
-  PLAYER_SESSION_ENDPOINT,
+  SESSION_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
 import { CreateMission } from '@/pages/Room/Pending/CreateMission';
 import { fakeMissionThree } from '@/tests/mocks/missions';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
-import { playerInPendingRoom } from '@/tests/mocks/sessions';
+import { pendingRoomSession } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<CreateMission />', () => {
   it('should add a new mission', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerInPendingRoom)),
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoomSession)),
       ),
       rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),
@@ -37,11 +37,11 @@ describe('<CreateMission />', () => {
     await userEvent.click(screen.getByText('Add new mission in the room'));
 
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
-            ...playerInPendingRoom,
+            ...pendingRoomSession,
             authoredMissions: [fakeMissionThree],
           }),
         ),
