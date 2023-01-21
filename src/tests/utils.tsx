@@ -1,15 +1,20 @@
 import { render, RenderResult } from '@testing-library/react';
 import { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
-import { BrowserRouter } from 'react-router-dom';
 
+import { AppRoutes } from '@/app/routes';
 import { Notification } from '@/components/Notification';
 import { ModalProvider } from '@/hooks/context/modal';
 
-const renderWithRouter = (
-  component: ReactNode,
-  { route = '/ ' } = {},
-): RenderResult => {
+interface RenderParams {
+  component?: ReactNode;
+  route?: string;
+}
+
+const renderWithProviders = ({
+  component = <AppRoutes />,
+  route = '/',
+}: RenderParams = {}): RenderResult => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -31,8 +36,7 @@ const renderWithRouter = (
       <ModalProvider>{component}</ModalProvider>
       <Notification />
     </QueryClientProvider>,
-    { wrapper: BrowserRouter },
   );
 };
 
-export { renderWithRouter };
+export { renderWithProviders };

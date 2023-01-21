@@ -6,7 +6,7 @@ import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { Layout } from '@/layout/Layout';
 import { playerWithoutRoom } from '@/tests/mocks/players';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderWithProviders } from '@/tests/utils';
 
 describe('<Layout />', () => {
   it('should show the user settings when current player click on settings icon', async () => {
@@ -16,11 +16,13 @@ describe('<Layout />', () => {
       ),
     );
 
-    renderWithRouter(
-      <Layout>
-        <div />
-      </Layout>,
-    );
+    renderWithProviders({
+      component: (
+        <Layout>
+          <div />
+        </Layout>
+      ),
+    });
 
     await userEvent.click(await screen.findByText(playerWithoutRoom.name));
 

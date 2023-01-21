@@ -1,12 +1,11 @@
 import { screen } from '@testing-library/react';
 import { rest } from 'msw';
 
-import { AppRoutes } from '@/app/routes';
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { adminPlayer, playerInPendingRoom } from '@/tests/mocks/players';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderWithProviders } from '@/tests/utils';
 
 describe('<PendingRoomPage />', () => {
   it('should show the pending room page with the correct room code', async () => {
@@ -19,7 +18,7 @@ describe('<PendingRoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderWithProviders({ route: `/room/${roomCode}` });
 
     expect(await screen.findByText('Start the party')).toBeInTheDocument();
   });
@@ -41,7 +40,7 @@ describe('<PendingRoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderWithProviders({ route: `/room/${roomCode}` });
 
     expect(
       await screen.findByText(`The code to join this room is ${roomCode}.`),

@@ -1,13 +1,12 @@
 import { screen } from '@testing-library/react';
 import { rest } from 'msw';
 
-import { AppRoutes } from '@/app/routes';
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { PlayerStatus } from '@/services/player/constants';
 import { playerInPlayingRoom } from '@/tests/mocks/players';
 import { playingRoom, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderWithProviders } from '@/tests/utils';
 
 describe('<PlayingRoomPage />', () => {
   it.skip('should render playing room page with current target if the player is not dead', async () => {
@@ -20,7 +19,7 @@ describe('<PlayingRoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderWithProviders({ route: `/room/${roomCode}` });
 
     screen.getByText('Try to kill your target and survive!');
 
@@ -41,7 +40,7 @@ describe('<PlayingRoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderWithProviders({ route: `/room/${roomCode}` });
 
     expect(
       await screen.findByText('Too bad! You are dead.'),

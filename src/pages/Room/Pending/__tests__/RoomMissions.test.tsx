@@ -2,7 +2,6 @@ import { screen } from '@testing-library/react';
 import { sources } from 'eventsourcemock';
 import { rest } from 'msw';
 
-import { AppRoutes } from '@/app/routes';
 import {
   PLAYER_SESSION_ENDPOINT,
   ROOM_ENDPOINT,
@@ -11,7 +10,7 @@ import {
 import { playerInPendingRoom } from '@/tests/mocks/players';
 import { pendingRoomWithMissions, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderWithProviders } from '@/tests/utils';
 
 describe('<RoomMissions />', () => {
   it('should show the count of all missions in the room', async () => {
@@ -24,7 +23,7 @@ describe('<RoomMissions />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderWithProviders({ route: `/room/${roomCode}` });
 
     expect(
       await screen.findByText('There is currently 1 missions in this room.'),
@@ -41,7 +40,7 @@ describe('<RoomMissions />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderWithProviders({ route: `/room/${roomCode}` });
 
     await screen.findByText('There is currently 1 missions in this room.');
 

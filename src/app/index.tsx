@@ -1,6 +1,5 @@
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { BrowserRouter } from 'react-router-dom';
 
 import { Notification } from '@/components/Notification';
 import { ModalProvider } from '@/hooks/context/modal';
@@ -28,9 +27,7 @@ function App(): JSX.Element {
     <QueryClientProvider client={queryClient}>
       <ModalProvider>
         <WebViewDetector>
-          <BrowserRouter>
-            <AppRoutes />
-          </BrowserRouter>
+          <AppRoutes />
         </WebViewDetector>
         <Notification />
       </ModalProvider>

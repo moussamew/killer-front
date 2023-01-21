@@ -1,17 +1,12 @@
 import { screen } from '@testing-library/react';
 import { rest } from 'msw';
 
-import { AppRoutes } from '@/app/routes';
 import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
 import { RoomErrorCode } from '@/constants/errors';
-import { JoinRoomPage } from '@/pages/JoinRoom';
-import { NotFoundPage } from '@/pages/NotFound';
-import { RoomPage } from '@/pages/Room';
-import { PendingRoomPage } from '@/pages/Room/Pending';
 import { playerWithoutRoom, playerInPendingRoom } from '@/tests/mocks/players';
 import {
   roomCode,
@@ -19,7 +14,7 @@ import {
   pendingRoomWithMultiplePlayers,
 } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderWithProviders } from '@/tests/utils';
 
 describe('<JoinRoomPage />', () => {
   it('should let the user join automatically the room if the roomCode saved in his session is the same', async () => {
@@ -32,7 +27,7 @@ describe('<JoinRoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/join/${roomCode}` });
+    renderWithProviders({ route: `/join/${roomCode}` });
 
     await screen.findByText('Welcome to the party!');
 
@@ -51,7 +46,7 @@ describe('<JoinRoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/join/${roomCode}` });
+    renderWithProviders({ route: `/join/${roomCode}` });
 
     server.use(
       rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
@@ -79,7 +74,7 @@ describe('<JoinRoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/join/${roomCode}` });
+    renderWithProviders({ route: `/join/${roomCode}` });
 
     await screen.findByText('Oops, something goes wrong!');
 

@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 import { TWITTER_WEBVIEW_URL, WebViewApp } from '@/constants/webview';
-import { renderWithRouter } from '@/tests/utils';
+import { renderWithProviders } from '@/tests/utils';
 
 import { WebViewDetector } from '../WebViewDetector';
 
@@ -16,11 +16,13 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithRouter(
-      <WebViewDetector>
-        <div />
-      </WebViewDetector>,
-    );
+    renderWithProviders({
+      component: (
+        <WebViewDetector>
+          <div />
+        </WebViewDetector>
+      ),
+    });
 
     expect(
       await screen.findByText('Opened from Messenger'),
@@ -53,11 +55,13 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithRouter(
-      <WebViewDetector>
-        <div />
-      </WebViewDetector>,
-    );
+    renderWithProviders({
+      component: (
+        <WebViewDetector>
+          <div />
+        </WebViewDetector>
+      ),
+    });
 
     await userEvent.click(
       await screen.findByText('Save link in the clipboard'),
@@ -90,11 +94,13 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithRouter(
-      <WebViewDetector>
-        <div />
-      </WebViewDetector>,
-    );
+    renderWithProviders({
+      component: (
+        <WebViewDetector>
+          <div />
+        </WebViewDetector>
+      ),
+    });
 
     await userEvent.click(
       await screen.findByText('Save link in the clipboard'),
@@ -127,11 +133,13 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithRouter(
-      <WebViewDetector>
-        <div />
-      </WebViewDetector>,
-    );
+    renderWithProviders({
+      component: (
+        <WebViewDetector>
+          <div />
+        </WebViewDetector>
+      ),
+    });
 
     await userEvent.click(
       await screen.findByText('Save link in the clipboard'),
@@ -154,11 +162,13 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithRouter(
-      <WebViewDetector>
-        <div />
-      </WebViewDetector>,
-    );
+    renderWithProviders({
+      component: (
+        <WebViewDetector>
+          <div />
+        </WebViewDetector>
+      ),
+    });
 
     expect(await screen.findByText('Opened from Twitter')).toBeInTheDocument();
     expect(
