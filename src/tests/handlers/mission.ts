@@ -9,25 +9,25 @@ export const missionHandlers = [
   /**
    * Mock fetching player target.
    */
-  rest.get(PLAYER_TARGET_ENDPOINT, async (_req, res, ctx) =>
+  rest.get(PLAYER_TARGET_ENDPOINT, async (_, res, ctx) =>
     res(ctx.status(200), ctx.json({})),
   ),
   /**
    * Mock fetching mission to do to its target.
    */
-  rest.get(MISSION_ENDPOINT, async (_req, res, ctx) =>
+  rest.get(MISSION_ENDPOINT, async (_, res, ctx) =>
     res(ctx.status(200), ctx.json({})),
   ),
   /**
    * Mock adding mission.
    */
-  rest.post(MISSION_ENDPOINT, async (_req, res, ctx) =>
+  rest.post(MISSION_ENDPOINT, async (_, res, ctx) =>
     res(ctx.status(200), ctx.json({ id: 0, content: 'New Mission' })),
   ),
   /**
    * Mock deleting mission.
    */
-  rest.delete(`${MISSION_ENDPOINT}/:missionId`, async (_req, res, ctx) =>
-    res(ctx.status(200)),
+  rest.delete(`${MISSION_ENDPOINT}/:missionId`, async (_, res, ctx) =>
+    res(ctx.status(200), ctx.json({})),
   ),
 ];

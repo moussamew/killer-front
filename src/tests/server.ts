@@ -1,8 +1,8 @@
 import { setupServer } from 'msw/node';
 
-import { missionHandlers } from '@/services/mission/handlers';
-import { playerHandlers } from '@/services/player/handlers';
-import { roomHandlers } from '@/services/room/handlers';
+import { missionHandlers } from './handlers/mission';
+import { playerHandlers } from './handlers/player';
+import { roomHandlers } from './handlers/room';
 
 export const server = setupServer(
   ...missionHandlers,

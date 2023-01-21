@@ -4,25 +4,25 @@ import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
-import { playerSessionWithoutRoom } from '@/tests/mocks/playerSession';
+import { playerWithoutRoom } from '@/tests/mocks/players';
 
 export const playerHandlers = [
   /**
    * Mock player session.
    */
-  rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-    res(ctx.status(200), ctx.json(playerSessionWithoutRoom)),
+  rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+    res(ctx.status(200), ctx.json(playerWithoutRoom)),
   ),
   /**
    * Mock player creation.
    */
-  rest.post(PLAYER_ENDPOINT, (_req, res, ctx) =>
+  rest.post(PLAYER_ENDPOINT, (_, res, ctx) =>
     res(ctx.status(200), ctx.json({})),
   ),
   /**
    * Mock update player.
    */
-  rest.patch(`${PLAYER_ENDPOINT}/*`, (_req, res, ctx) =>
+  rest.patch(`${PLAYER_ENDPOINT}/*`, (_, res, ctx) =>
     res(ctx.status(200), ctx.json({})),
   ),
 ];
