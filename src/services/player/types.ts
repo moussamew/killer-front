@@ -15,10 +15,10 @@ export interface PlayerSession {
   id: number;
   name: string;
   killer: string | null;
-  assignedMission: number | null;
+  assignedMission: Mission | null;
   authoredMissions: Mission[];
   status: PlayerStatus;
-  target: number | null;
+  target: Player | null;
   room: Omit<Room, 'admin' | 'players'> | null;
 }
 
