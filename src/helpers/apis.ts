@@ -1,4 +1,3 @@
-import { RequestError } from './errors';
 import { RequestParams } from './types';
 
 export async function request<T>({
@@ -6,9 +5,12 @@ export async function request<T>({
   method,
   requestInit,
 }: RequestParams): Promise<T> {
+  const token = localStorage.getItem('token');
+
   const response = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
+      ...(token && { Authorization: `Bearer ${token}` }),
     },
     credentials: 'include',
     method,
@@ -20,8 +22,14 @@ export async function request<T>({
     console.error(`${method} > ${url} does not have JSON response format.`);
   });
 
-  if (result?.errorCode) {
-    throw new RequestError(result);
+  // Not handle error messages correctly for now.
+  // Waiting for the back-end update on that.
+  if (result?.code && result?.message) {
+    return null as T;
+  }
+
+  if (result?.token) {
+    localStorage.setItem('token', result.token);
   }
 
   return result;

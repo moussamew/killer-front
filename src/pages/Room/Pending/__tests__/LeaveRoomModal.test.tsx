@@ -1,51 +1,39 @@
-import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
+import { AppRoutes } from '@/app/routes';
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { PendingRoomPage } from '@/pages/Room/Pending';
-import { PlayerRole } from '@/services/player/constants';
+import { playerInPendingRoom, playerWithoutRoom } from '@/tests/mocks/players';
+import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { renderWithRouter } from '@/tests/utils';
 
 describe('<LeaveRoomModal />', () => {
   it('should be able to leave the room', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(
-          ctx.status(200),
-          ctx.json({
-            id: 0,
-            name: 'Neo',
-            roomCode: 'X7VBD',
-            role: PlayerRole.ADMIN,
-          }),
-        ),
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(playerInPendingRoom)),
       ),
-      rest.get(`${ROOM_ENDPOINT}/X7VBD/players`, async (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json([{ id: 0, name: 'Neo' }])),
+      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoom)),
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter initialEntries={['/room/X7VBD']}>
-        <Routes>
-          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
 
     await userEvent.click(await screen.findByTitle('leaveRoom'));
 
     await userEvent.click(screen.getByText('Leave this room'));
 
-    await waitForElementToBeRemoved(() =>
-      screen.queryByText('Leave this room'),
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(playerWithoutRoom)),
+      ),
     );
 
     expect(
-      screen.queryByText('Leave the current room'),
-    ).not.toBeInTheDocument();
+      await screen.findByText('The right way to kill your friends..'),
+    ).toBeInTheDocument();
   });
 });

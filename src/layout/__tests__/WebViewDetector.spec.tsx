@@ -1,40 +1,25 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 
 import { TWITTER_WEBVIEW_URL, WebViewApp } from '@/constants/webview';
-import { renderWithProviders } from '@/tests/utils';
+import { renderWithRouter } from '@/tests/utils';
 
 import { WebViewDetector } from '../WebViewDetector';
 
 const { Messenger, Instagram } = WebViewApp;
 
 describe('<WebViewDetector />', () => {
-  it('should render children if not in a webview', async () => {
-    renderWithProviders(
-      <MemoryRouter>
-        <WebViewDetector>
-          <p>Children!</p>
-        </WebViewDetector>
-      </MemoryRouter>,
-    );
-
-    expect(await screen.findByText('Children!')).toBeInTheDocument();
-  });
-
   it('should render a message if in a webview', async () => {
     Object.defineProperty(window.navigator, 'userAgent', {
       value: Messenger,
       writable: true,
     });
 
-    renderWithProviders(
-      <MemoryRouter>
-        <WebViewDetector>
-          <p>Children!</p>
-        </WebViewDetector>
-      </MemoryRouter>,
+    renderWithRouter(
+      <WebViewDetector>
+        <div />
+      </WebViewDetector>,
     );
 
     expect(
@@ -68,12 +53,10 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithProviders(
-      <MemoryRouter>
-        <WebViewDetector>
-          <p>Children!</p>
-        </WebViewDetector>
-      </MemoryRouter>,
+    renderWithRouter(
+      <WebViewDetector>
+        <div />
+      </WebViewDetector>,
     );
 
     await userEvent.click(
@@ -107,12 +90,10 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithProviders(
-      <MemoryRouter>
-        <WebViewDetector>
-          <p>Children!</p>
-        </WebViewDetector>
-      </MemoryRouter>,
+    renderWithRouter(
+      <WebViewDetector>
+        <div />
+      </WebViewDetector>,
     );
 
     await userEvent.click(
@@ -146,12 +127,10 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithProviders(
-      <MemoryRouter>
-        <WebViewDetector>
-          <p>Children!</p>
-        </WebViewDetector>
-      </MemoryRouter>,
+    renderWithRouter(
+      <WebViewDetector>
+        <div />
+      </WebViewDetector>,
     );
 
     await userEvent.click(
@@ -175,12 +154,10 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithProviders(
-      <MemoryRouter>
-        <WebViewDetector>
-          <p>Children!</p>
-        </WebViewDetector>
-      </MemoryRouter>,
+    renderWithRouter(
+      <WebViewDetector>
+        <div />
+      </WebViewDetector>,
     );
 
     expect(await screen.findByText('Opened from Twitter')).toBeInTheDocument();

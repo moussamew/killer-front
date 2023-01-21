@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import tw from 'twin.macro';
 
 import Killerparty from '@/assets/images/killerparty.png';
+import { Loader } from '@/components/Loader';
 import { RoomErrorCode } from '@/constants/errors';
 import { RequestError } from '@/helpers/errors';
 import { Layout } from '@/layout/Layout';
@@ -20,36 +21,37 @@ const { NOT_FOUND, BAD_ROOMCODE } = RoomErrorCode;
 
 export function JoinRoomPage(): JSX.Element {
   const { roomCode } = useParams();
-  const { playerSession } = usePlayerSession();
-  const {
-    updatePlayer: { mutate: updatePlayerMutate },
-  } = useUpdatePlayer();
+  const { player } = usePlayerSession();
+  const { updatePlayer } = useUpdatePlayer();
 
   const navigate = useNavigate();
 
+  const { mutate: updatePlayerMutate, isLoading } = updatePlayer;
+
   useEffect(() => {
     /**
-     * Let the user join automatically the room if
-     * the user is already inside the same room that he want to join.
+     * Let the player join automatically the room if
+     * the player is already inside the same room that he want to join.
      */
-    if (playerSession?.roomCode === roomCode) {
+    if (player?.room?.code === roomCode) {
       navigate(`/room/${roomCode}`);
     }
 
     /**
-     * Let the user join automatically the room if the user name is already setted
-     * and the user is not already inside a room.
-     *
-     * Show not found page if:
-     * - The room cannot be found.
-     * - The name of the room is incorrect.
+     * Let the player join automatically the room if the player name is already setted
+     * and the player is not already inside a room.
      */
-    if (playerSession?.name && !playerSession?.roomCode) {
+    if (player?.name && !player?.room?.code) {
       updatePlayerMutate(
-        { roomCode },
+        { id: player.id, room: roomCode },
         {
           onError: (error) => {
             if (error instanceof RequestError) {
+              /**
+               * Show not found page if:
+               * - The room cannot be found.
+               * - The name of the room is incorrect.
+               */
               if ([NOT_FOUND, BAD_ROOMCODE].includes(error.errorCode)) {
                 navigate(`/room/${roomCode}/error`, {
                   state: error.message,
@@ -60,13 +62,20 @@ export function JoinRoomPage(): JSX.Element {
         },
       );
     }
-  }, [playerSession, updatePlayerMutate, roomCode, navigate]);
+  }, [player, updatePlayerMutate, roomCode, navigate]);
+
+  /**
+   * Returns loading spinner while the player is currently added to the room;
+   */
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <Layout>
       <WelcomeImage alt="welcome" src={Killerparty} />
-      {!playerSession?.name && <CreatePlayer roomCode={roomCode!} />}
-      {playerSession?.roomCode && <LeaveCurrentRoom />}
+      {!player?.name && <CreatePlayer roomCode={roomCode!} />}
+      {player?.room?.code && <LeaveCurrentRoom />}
     </Layout>
   );
 }

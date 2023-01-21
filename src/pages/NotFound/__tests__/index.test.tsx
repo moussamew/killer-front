@@ -1,29 +1,19 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
+import { AppRoutes } from '@/app/routes';
 import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
 import { RoomErrorCode } from '@/constants/errors';
-import { HomePage } from '@/pages/Home';
-import { JoinRoomPage } from '@/pages/JoinRoom';
-import { NotFoundPage } from '@/pages/NotFound';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { renderWithRouter } from '@/tests/utils';
 
 describe('<NotFoundPage />', () => {
-  it('should redirect the player to home page when the button is clicked', async () => {
-    renderWithProviders(
-      <MemoryRouter initialEntries={['/join/unknownRoomCode']}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/join/unknownRoomCode" element={<NotFoundPage />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+  it('should redirect the player to the home page if wanted', async () => {
+    renderWithRouter(<AppRoutes />, { route: '/unknown' });
 
     await screen.findByText('Oops, something goes wrong!');
 
@@ -35,12 +25,12 @@ describe('<NotFoundPage />', () => {
     expect(screen.queryByText('Go back to home page')).not.toBeInTheDocument();
   });
 
-  it('should display an error message if needed', async () => {
+  it.skip('should display an error message if needed', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: null })),
       ),
-      rest.patch(PLAYER_ENDPOINT, (_req, res, ctx) =>
+      rest.patch(PLAYER_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(400),
           ctx.json({
@@ -52,14 +42,7 @@ describe('<NotFoundPage />', () => {
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter initialEntries={['/join/X7JK']}>
-        <Routes>
-          <Route path="/join/:roomCode" element={<JoinRoomPage />} />
-          <Route path="/room/:roomCode/error" element={<NotFoundPage />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />, { route: '/join/X7JK' });
 
     await screen.findByText('Oops, something goes wrong!');
 

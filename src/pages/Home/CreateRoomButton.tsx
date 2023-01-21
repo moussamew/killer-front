@@ -5,18 +5,20 @@ import { Button } from '@/components/Button';
 import { errorStyle } from '@/constants/styles';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
-import { usePlayerSession } from '@/services/player/queries';
 import { useCreateRoom } from '@/services/room/mutations';
 
 import { CreateRoomModal } from './CreateRoomModal';
 
-export function CreateRoomButton(): JSX.Element {
+interface Props {
+  playerName?: string;
+}
+
+export function CreateRoomButton({ playerName }: Props): JSX.Element {
   const { openModal } = useContext(ModalContext);
-  const { playerSession } = usePlayerSession();
   const { createRoom } = useCreateRoom();
 
   const handleCreateRoom = async (): Promise<void> => {
-    if (!playerSession?.name) {
+    if (!playerName) {
       openModal(<CreateRoomModal />);
     } else {
       await createRoom.mutateAsync(undefined, {

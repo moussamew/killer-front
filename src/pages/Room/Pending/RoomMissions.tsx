@@ -4,11 +4,11 @@ import { useParams } from 'react-router-dom';
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
 import t from '@/helpers/translate';
-import { useRoomMissions } from '@/services/room/queries';
+import { useRoom } from '@/services/room/queries';
 
 export function RoomMissions(): JSX.Element {
   const { roomCode } = useParams();
-  const { roomMissions, refetchRoomMissions } = useRoomMissions();
+  const { room, refetchRoom } = useRoom(roomCode!);
 
   useEffect(() => {
     const missionsEventSource = new EventSource(
@@ -16,14 +16,18 @@ export function RoomMissions(): JSX.Element {
       { withCredentials: PROD_ENV },
     );
 
-    missionsEventSource.addEventListener('message', refetchRoomMissions);
+    missionsEventSource.addEventListener('message', refetchRoom);
 
     return () => missionsEventSource.close();
-  }, [roomCode, refetchRoomMissions]);
+  }, [roomCode, refetchRoom]);
+
+  const roomMissions = room?.missions.length;
 
   return (
     <div>
-      <p>{t('room.missions_in_room', { missionsCount: roomMissions })}</p>
+      {Boolean(roomMissions) && (
+        <p>{t('room.missions_in_room', { missionsCount: roomMissions })}</p>
+      )}
     </div>
   );
 }

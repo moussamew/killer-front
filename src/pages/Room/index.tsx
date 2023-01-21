@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
 import { MercureEventType } from '@/constants/enums';
-import { usePrevious } from '@/hooks/usePrevious';
 import { usePlayerSession } from '@/services/player/queries';
 import { RoomStatus } from '@/services/room/constants';
-import { useRoomInfos, useRoomPlayers } from '@/services/room/queries';
+import { useRoom } from '@/services/room/queries';
 
 const { ROOM_IN_GAME, ROOM_DELETED, ROOM_UPDATED, PLAYER_UPDATED } =
   MercureEventType;
@@ -18,23 +17,16 @@ interface Props {
 }
 
 export function RoomPage({ children }: Props): JSX.Element | null {
-  const location = useLocation();
   const navigate = useNavigate();
   const { roomCode } = useParams();
-  const { playerSession, refetchPlayerSession, isPlayerSessionLoading } =
-    usePlayerSession();
-  const previousRoomCode = usePrevious(playerSession?.roomCode);
-  const { refetchRoomPlayers } = useRoomPlayers(roomCode!);
-  const { roomInfos, refetchRoomInfos } = useRoomInfos({
-    roomCode: roomCode!,
-    pathname: location.pathname,
-  });
+  const { isLoading, player, refetchPlayer } = usePlayerSession();
+  const { room, refetchRoom } = useRoom(roomCode!);
 
   /**
    * Redirect player to the correct route related to the room status.
    */
   useEffect(() => {
-    switch (roomInfos?.status) {
+    switch (room?.status) {
       case PENDING:
         navigate(`/room/${roomCode}/pending`);
         break;
@@ -50,39 +42,35 @@ export function RoomPage({ children }: Props): JSX.Element | null {
       default:
         break;
     }
-  }, [roomInfos, navigate, roomCode]);
+  }, [room, navigate, roomCode]);
 
   /**
    * Redirect player to the correct route by checking its session.
    */
   useEffect(() => {
-    /**
-     * Redirect player to `join/room` route in two cases:
-     * The player try to join the room without pseudo.
-     * The player try to join the room when he is already inside another room.
-     */
-    if (!isPlayerSessionLoading) {
+    if (!isLoading) {
+      /**
+       * Redirect player to `join/room` route in two cases:
+       */
       if (
-        !playerSession ||
-        (!previousRoomCode && playerSession?.roomCode !== roomCode)
+        /* The player try to join the room without pseudo. */
+        !player?.name ||
+        /* The player try to join the room when he is already inside another room. */
+        (player?.room?.code && player?.room?.code !== roomCode)
       ) {
-        navigate(`/join/${roomCode}`);
+        return navigate(`/join/${roomCode}`);
       }
 
       /**
        * Redirect player to home page if its roomCode is removed.
        */
-      if (previousRoomCode && !playerSession?.roomCode) {
-        navigate('/');
+      if (!player?.room?.code) {
+        return navigate('/');
       }
     }
-  }, [
-    isPlayerSessionLoading,
-    playerSession,
-    previousRoomCode,
-    roomCode,
-    navigate,
-  ]);
+
+    return undefined;
+  }, [isLoading, player, roomCode, navigate]);
 
   /**
    * Listen to SSE events emits in the Room page.
@@ -98,11 +86,11 @@ export function RoomPage({ children }: Props): JSX.Element | null {
 
       switch (type) {
         case ROOM_UPDATED:
-          refetchRoomInfos();
+          refetchRoom();
           break;
 
         case PLAYER_UPDATED:
-          refetchRoomPlayers().then(refetchPlayerSession);
+          refetchRoom().then(refetchPlayer);
           break;
 
         /**
@@ -116,7 +104,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
          * Should be removed to use the `ROOM_UPDATED` event.
          */
         case ROOM_DELETED:
-          refetchPlayerSession();
+          refetchPlayer();
           break;
 
         default:
@@ -125,13 +113,7 @@ export function RoomPage({ children }: Props): JSX.Element | null {
     });
 
     return () => roomEventSource.close();
-  }, [
-    roomCode,
-    navigate,
-    refetchPlayerSession,
-    refetchRoomInfos,
-    refetchRoomPlayers,
-  ]);
+  }, [roomCode, navigate, refetchPlayer, refetchRoom]);
 
   return children || null;
 }

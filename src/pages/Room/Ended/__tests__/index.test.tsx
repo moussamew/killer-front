@@ -1,57 +1,32 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
+import { AppRoutes } from '@/app/routes';
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { HomePage } from '@/pages/Home';
-import { EndedRoomPage } from '@/pages/Room/Ended';
-import { PlayerRole } from '@/services/player/constants';
-import { RoomStatus } from '@/services/room/constants';
+import { playerInEndedRoom, playerWithoutRoom } from '@/tests/mocks/players';
+import { endedRoom, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { renderWithRouter } from '@/tests/utils';
 
 describe('<EndedRoomPage />', () => {
-  it('should leave the EndedRoomPage to start a new game', async () => {
+  it('should leave the ended room page to start a new game', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(
-          ctx.status(200),
-          ctx.json({
-            id: 0,
-            name: 'Trinity',
-            roomCode: 'X7JKL',
-            role: PlayerRole.PLAYER,
-          }),
-        ),
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(playerInEndedRoom)),
       ),
-      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ status: RoomStatus.ENDED })),
+      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(endedRoom)),
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter initialEntries={['/room/X7JKL/ended']}>
-        <Routes>
-          <Route path="/room/:roomCode/ended" element={<EndedRoomPage />} />
-          <Route path="/" element={<HomePage />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
 
     await userEvent.click(await screen.findByText('Play another party!'));
 
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(
-          ctx.status(200),
-          ctx.json({
-            id: 0,
-            name: 'Trinity',
-            roomCode: null,
-            role: PlayerRole.PLAYER,
-          }),
-        ),
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(playerWithoutRoom)),
       ),
     );
 

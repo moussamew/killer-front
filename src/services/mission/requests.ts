@@ -1,6 +1,5 @@
 import {
   MISSION_ENDPOINT,
-  PLAYER_MISSION_ENDPOINT,
   PLAYER_TARGET_ENDPOINT,
 } from '@/constants/endpoints';
 import { Method } from '@/constants/enums';
@@ -20,10 +19,6 @@ export function getTargetInfosRequest(): Promise<Partial<TargetInfos>> {
       mission: mission.content,
     }))
     .catch(() => ({}));
-}
-
-export function getPlayerMissionsRequest(): Promise<Mission[]> {
-  return request({ url: PLAYER_MISSION_ENDPOINT, method: GET });
 }
 
 export function createMissionRequest(content: string): Promise<void> {

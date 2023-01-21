@@ -5,8 +5,8 @@ import Island from '@/assets/images/island.png';
 import t from '@/helpers/translate';
 import { Layout } from '@/layout/Layout';
 import { RoomPage } from '@/pages/Room';
-import { PlayerRole } from '@/services/player/constants';
 import { usePlayerSession } from '@/services/player/queries';
+import { useRoom } from '@/services/room/queries';
 
 import { PlayerList } from './PlayerList';
 import { PlayerMissions } from './PlayerMissions';
@@ -34,9 +34,10 @@ const RoomFeatures = tw.div`
   mt-2 md:mt-4
 `;
 
-export function PendingRoomPage(): JSX.Element {
+export function PendingRoomPage(): JSX.Element | null {
   const { roomCode } = useParams();
-  const { playerSession } = usePlayerSession();
+  const { player } = usePlayerSession();
+  const { room } = useRoom(roomCode!);
 
   return (
     <RoomPage>
@@ -48,7 +49,7 @@ export function PendingRoomPage(): JSX.Element {
             <p>{t('room.join_room_code', { roomCode })}</p>
             <RoomMissions />
             <ShareRoomLink />
-            {playerSession?.role === PlayerRole.ADMIN && <StartPartyButton />}
+            {player?.id === room?.admin.id && <StartPartyButton />}
           </RoomResume>
         </Content>
         <hr />

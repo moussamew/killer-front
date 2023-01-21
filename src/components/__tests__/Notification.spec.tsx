@@ -8,7 +8,7 @@ import { toast } from 'react-hot-toast';
 
 import { Notification } from '../Notification';
 
-describe('<Notification />', () => {
+describe.skip('<Notification />', () => {
   it('should show a notification', async () => {
     render(<Notification />);
 

@@ -1,13 +1,14 @@
-import { render, RenderOptions, RenderResult } from '@testing-library/react';
+import { render, RenderResult } from '@testing-library/react';
 import { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
+import { BrowserRouter } from 'react-router-dom';
 
 import { Notification } from '@/components/Notification';
 import { ModalProvider } from '@/hooks/context/modal';
 
-const renderWithProviders = (
+const renderWithRouter = (
   component: ReactNode,
-  options?: RenderOptions,
+  { route = '/ ' } = {},
 ): RenderResult => {
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -23,13 +24,15 @@ const renderWithProviders = (
   // eslint-disable-next-line no-console
   setLogger({ log: console.log, warn: console.warn, error: () => {} });
 
+  window.history.pushState({}, '', route);
+
   return render(
     <QueryClientProvider client={queryClient}>
       <ModalProvider>{component}</ModalProvider>
       <Notification />
     </QueryClientProvider>,
-    options,
+    { wrapper: BrowserRouter },
   );
 };
 
-export { renderWithProviders };
+export { renderWithRouter };

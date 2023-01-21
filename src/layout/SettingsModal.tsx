@@ -7,6 +7,7 @@ import { Input } from '@/components/Input';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
 import { useUpdatePlayer } from '@/services/player/mutations';
+import { usePlayerSession } from '@/services/player/queries';
 
 const HeadContent = tw.div`
   flex flex-row mb-2
@@ -34,6 +35,7 @@ export function SettingsModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
   const { closeModal } = useContext(ModalContext);
   const { updatePlayer } = useUpdatePlayer();
+  const { player } = usePlayerSession();
 
   const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
     setPseudo(target.value);
@@ -41,7 +43,7 @@ export function SettingsModal(): JSX.Element {
 
   const updatePlayerPseudo = async (): Promise<void> => {
     await updatePlayer.mutateAsync(
-      { name: pseudo.toUpperCase() },
+      { id: player?.id, name: pseudo.toUpperCase() },
       { onSuccess: () => closeModal() },
     );
   };

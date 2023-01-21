@@ -20,7 +20,7 @@ export function CreatePlayer({ roomCode }: Props): JSX.Element {
   };
 
   const handleJoinRoom = async (): Promise<void> => {
-    await createPlayer.mutateAsync({ name: pseudo.toUpperCase(), roomCode });
+    await createPlayer.mutateAsync(pseudo.toUpperCase());
   };
 
   const handleCreateRoom = (): void => {

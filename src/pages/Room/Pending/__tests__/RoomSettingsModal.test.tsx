@@ -1,49 +1,44 @@
-import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
-import { PendingRoomPage } from '@/pages/Room/Pending';
-import { PlayerRole } from '@/services/player/constants';
+import { AppRoutes } from '@/app/routes';
+import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
+import { adminPlayer, playerWithoutRoom } from '@/tests/mocks/players';
+import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
+import { renderWithRouter } from '@/tests/utils';
 
 describe('<RoomSettingsModal />', () => {
   it('should be able to delete the room as an admin', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(
-          ctx.status(200),
-          ctx.json({
-            id: 0,
-            name: 'Neo',
-            roomCode: 'X7VBD',
-            role: PlayerRole.ADMIN,
-          }),
-        ),
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(adminPlayer)),
+      ),
+      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoom)),
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter initialEntries={['/room/X7VBD']}>
-        <Routes>
-          <Route path="/room/:roomCode" element={<PendingRoomPage />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
 
     await userEvent.click(await screen.findByTitle('roomSettings'));
 
     await userEvent.type(
       screen.getByPlaceholderText('Confirm by typing the room code'),
-      'X7VBD',
+      roomCode,
     );
 
     await userEvent.click(screen.getByText('Delete the room'));
 
-    await waitForElementToBeRemoved(() => screen.queryByText('Room settings'));
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(playerWithoutRoom)),
+      ),
+    );
 
-    expect(screen.queryByText('Room settings')).not.toBeInTheDocument();
+    expect(
+      await screen.findByText('The right way to kill your friends..'),
+    ).toBeInTheDocument();
   });
 });

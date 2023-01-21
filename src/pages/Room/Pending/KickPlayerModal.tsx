@@ -1,11 +1,10 @@
 import { Fragment, useContext } from 'react';
-import { useParams } from 'react-router-dom';
 import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
 import t from '@/helpers/translate';
 import { ModalContext } from '@/hooks/context/modal';
-import { useKickPlayer } from '@/services/player/mutations';
+import { useUpdatePlayer } from '@/services/player/mutations';
 
 const HeadContent = tw.div`
   flex flex-row mb-2
@@ -26,13 +25,12 @@ interface Props {
 }
 
 export function KickPlayerModal({ playerName, playerId }: Props): JSX.Element {
-  const { roomCode } = useParams();
-  const { kickPlayer } = useKickPlayer();
+  const { updatePlayer } = useUpdatePlayer();
   const { closeModal } = useContext(ModalContext);
 
   const handleKickPlayer = async (): Promise<void> => {
-    await kickPlayer.mutateAsync(
-      { id: playerId, roomCode: roomCode! },
+    await updatePlayer.mutateAsync(
+      { id: playerId, room: null },
       { onSuccess: closeModal },
     );
   };

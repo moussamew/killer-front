@@ -2,45 +2,39 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
+import { AppRoutes } from '@/app/routes';
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
+import { playerWithoutRoom } from '@/tests/mocks/players';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
-
-import { Layout } from '../Layout';
-import { SettingsModal } from '../SettingsModal';
+import { renderWithRouter } from '@/tests/utils';
 
 describe('<SettingsModal />', () => {
-  it('should render modal settings correctly', async () => {
-    renderWithProviders(<SettingsModal />);
-
-    expect(await screen.findByText('User Settings')).toBeInTheDocument();
-  });
-
   it('should let the user update his pseudo', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Neo' })),
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(playerWithoutRoom)),
       ),
     );
 
-    renderWithProviders(
-      <Layout>
-        <p>Welcome</p>
-      </Layout>,
-    );
+    renderWithRouter(<AppRoutes />);
 
-    await userEvent.click(await screen.findByTitle('userSettings'));
+    await screen.findByText(playerWithoutRoom.name);
 
-    await userEvent.type(screen.getByPlaceholderText('New pseudo'), 'Trinity');
+    await userEvent.click(screen.getByText(playerWithoutRoom.name));
+
+    await userEvent.type(screen.getByPlaceholderText('New pseudo'), 'MORPHEUS');
 
     await userEvent.click(screen.getByText('Save changes'));
 
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json({ name: 'Trinity', roomCode: null })),
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(
+          ctx.status(200),
+          ctx.json({ ...playerWithoutRoom, name: 'MORPHEUS' }),
+        ),
       ),
     );
 
-    expect(await screen.findByText('Trinity'));
+    expect(await screen.findByText('MORPHEUS'));
   });
 });
