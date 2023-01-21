@@ -20,13 +20,43 @@ export const playerWithoutRoom = {
   authoredMissions: [],
 } satisfies PlayerSession;
 
-export const playerWithRoom = {
+export const playerInPendingRoom = {
   ...fakePlayer,
   room: {
     id: 17,
     code: roomCode,
     name: "TRINITY's room",
     status: RoomStatus.PENDING,
+    missions: [fakeMission],
+  },
+  target: null,
+  killer: null,
+  assignedMission: null,
+  authoredMissions: [fakeMission],
+} satisfies PlayerSession;
+
+export const playerInPlayingRoom = {
+  ...fakePlayer,
+  room: {
+    id: 17,
+    code: roomCode,
+    name: "TRINITY's room",
+    status: RoomStatus.IN_GAME,
+    missions: [fakeMission],
+  },
+  target: null,
+  killer: null,
+  assignedMission: null,
+  authoredMissions: [fakeMission],
+} satisfies PlayerSession;
+
+export const playerInEndedRoom = {
+  ...fakePlayer,
+  room: {
+    id: 17,
+    code: roomCode,
+    name: "TRINITY's room",
+    status: RoomStatus.ENDED,
     missions: [fakeMission],
   },
   target: null,
