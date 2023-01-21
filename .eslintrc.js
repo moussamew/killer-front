@@ -104,5 +104,6 @@ module.exports = {
     '@typescript-eslint/no-shadow': 'error',
     '@typescript-eslint/no-non-null-assertion': 'off',
     'no-void': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
   },
 };
