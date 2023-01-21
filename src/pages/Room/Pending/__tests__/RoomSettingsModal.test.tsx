@@ -11,7 +11,7 @@ import { renderWithProviders } from '@/tests/utils';
 describe('<RoomSettingsModal />', () => {
   it('should be able to delete the room as an admin', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({

@@ -6,19 +6,18 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { RoomPage } from '@/pages/Room';
 import { PendingRoomPage } from '@/pages/Room/Pending';
-import { adminPlayerSession } from '@/tests/mocks/playerSession';
-import { pendingRoomWithMultiplePlayers, roomCode } from '@/tests/mocks/room';
-import { roomPlayerMorpheus } from '@/tests/mocks/roomPlayer';
+import { adminPlayer, fakePlayer } from '@/tests/mocks/players';
+import { pendingRoomWithMultiplePlayers, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<KickPlayerModal />', () => {
   it('should kick player from the room', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json(adminPlayerSession)),
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(adminPlayer)),
       ),
-      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoomWithMultiplePlayers)),
       ),
     );
@@ -32,16 +31,14 @@ describe('<KickPlayerModal />', () => {
       </MemoryRouter>,
     );
 
-    await screen.findByText(roomPlayerMorpheus.name);
+    await screen.findByText(fakePlayer.name);
 
-    await userEvent.click(
-      await screen.findByTitle(`kick${roomPlayerMorpheus.name}`),
-    );
+    await userEvent.click(await screen.findByTitle(`kick${fakePlayer.name}`));
 
-    await userEvent.click(screen.getByText(`Kick ${roomPlayerMorpheus.name}`));
+    await userEvent.click(screen.getByText(`Kick ${fakePlayer.name}`));
 
     await waitForElementToBeRemoved(() =>
-      screen.queryByText(`Kick ${roomPlayerMorpheus.name}`),
+      screen.queryByText(`Kick ${fakePlayer.name}`),
     );
 
     expect(

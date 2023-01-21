@@ -17,7 +17,7 @@ import { renderWithProviders } from '@/tests/utils';
 describe('<PlayingRoomPage />', () => {
   it('should render playing room page with current target if the player is not dead', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
@@ -27,13 +27,13 @@ describe('<PlayingRoomPage />', () => {
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ status: RoomStatus.IN_GAME })),
       ),
-      rest.get(PLAYER_TARGET_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_TARGET_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ id: 1, name: 'Neo' })),
       ),
-      rest.get(MISSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(MISSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ id: 200, content: 'Do something' })),
       ),
     );
@@ -54,7 +54,7 @@ describe('<PlayingRoomPage />', () => {
 
   it('should render playing room page with dead message if the player is dead', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
@@ -65,7 +65,7 @@ describe('<PlayingRoomPage />', () => {
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ status: RoomStatus.IN_GAME })),
       ),
     );

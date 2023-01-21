@@ -12,7 +12,7 @@ import { renderWithProviders } from '@/tests/utils';
 describe('<PlayerList />', () => {
   it('should show player list', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
@@ -21,7 +21,7 @@ describe('<PlayerList />', () => {
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json([
@@ -50,7 +50,7 @@ describe('<PlayerList />', () => {
 
   it('should show current player', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ id: 0, name: 'Trinity' })),
       ),
     );
@@ -62,10 +62,10 @@ describe('<PlayerList />', () => {
 
   it('should show the admin icon next to the room admin to a player who is not', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ id: 0, name: 'Neo' })),
       ),
-      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json([
@@ -91,7 +91,7 @@ describe('<PlayerList />', () => {
 
   it('should open LeaveRoom Modal when the user click on LeaveRoom Icon', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
@@ -101,7 +101,7 @@ describe('<PlayerList />', () => {
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/X7VBD/players`, async (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/X7VBD/players`, async (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json([

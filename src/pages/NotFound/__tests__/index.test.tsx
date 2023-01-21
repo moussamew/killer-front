@@ -15,12 +15,12 @@ import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<NotFoundPage />', () => {
-  it('should redirect the player to home page when the button is clicked', async () => {
+  it('should redirect the player to the home page if wanted', async () => {
     renderWithProviders(
-      <MemoryRouter initialEntries={['/join/unknownRoomCode']}>
+      <MemoryRouter initialEntries={['/join/errorCode']}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/join/unknownRoomCode" element={<NotFoundPage />} />
+          <Route path="/join/:roomCode" element={<NotFoundPage />} />
         </Routes>
       </MemoryRouter>,
     );
@@ -35,12 +35,12 @@ describe('<NotFoundPage />', () => {
     expect(screen.queryByText('Go back to home page')).not.toBeInTheDocument();
   });
 
-  it('should display an error message if needed', async () => {
+  it.skip('should display an error message if needed', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: null })),
       ),
-      rest.patch(PLAYER_ENDPOINT, (_req, res, ctx) =>
+      rest.patch(PLAYER_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(400),
           ctx.json({

@@ -17,7 +17,7 @@ import { renderWithProviders } from '@/tests/utils';
 describe('<PlayerKilledModal />', () => {
   it('should close killed modal when the user confirm his death', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
@@ -27,13 +27,13 @@ describe('<PlayerKilledModal />', () => {
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ status: RoomStatus.IN_GAME })),
       ),
-      rest.get(PLAYER_TARGET_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_TARGET_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ id: 1, name: 'Neo' })),
       ),
-      rest.get(MISSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(MISSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ id: 200, content: 'Do something' })),
       ),
     );

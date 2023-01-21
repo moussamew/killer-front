@@ -11,7 +11,7 @@ import { renderWithProviders } from '@/tests/utils';
 describe('<ModalProvider />', () => {
   it('should close any modal opened when the user navigate through the history', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: null })),
       ),
     );

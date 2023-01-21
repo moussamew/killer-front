@@ -11,7 +11,7 @@ import { renderWithProviders } from '@/tests/utils';
 describe('<LeaveRoomModal />', () => {
   it('should be able to leave the room', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
@@ -21,7 +21,7 @@ describe('<LeaveRoomModal />', () => {
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/X7VBD/players`, async (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/X7VBD/players`, async (_, res, ctx) =>
         res(ctx.status(200), ctx.json([{ id: 0, name: 'Neo' }])),
       ),
     );

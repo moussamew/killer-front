@@ -4,21 +4,18 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { PendingRoomPage } from '@/pages/Room/Pending';
-import {
-  adminPlayerSession,
-  playerSessionWithRoom,
-} from '@/tests/mocks/playerSession';
-import { pendingRoom, roomCode } from '@/tests/mocks/room';
+import { adminPlayer, playerWithRoom } from '@/tests/mocks/players';
+import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<PendingRoomPage />', () => {
   it('should show the pending room page with the correct room code', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json(adminPlayerSession)),
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(adminPlayer)),
       ),
-      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),
       ),
     );
@@ -36,10 +33,10 @@ describe('<PendingRoomPage />', () => {
 
   it('should not show the Start party button if the player is not an admin', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerSessionWithRoom)),
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(playerWithRoom)),
       ),
-      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),
       ),
     );

@@ -13,7 +13,7 @@ import { renderWithProviders } from '@/tests/utils';
 describe('<EndedRoomPage />', () => {
   it('should leave the EndedRoomPage to start a new game', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
@@ -23,7 +23,7 @@ describe('<EndedRoomPage />', () => {
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ status: RoomStatus.ENDED })),
       ),
     );
@@ -40,7 +40,7 @@ describe('<EndedRoomPage />', () => {
     await userEvent.click(await screen.findByText('Play another party!'));
 
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({

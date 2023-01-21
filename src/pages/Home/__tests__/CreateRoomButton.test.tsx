@@ -1,24 +1,20 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { HomePage } from '@/pages/Home';
-import { RoomPage } from '@/pages/Room';
-import { PendingRoomPage } from '@/pages/Room/Pending';
-import {
-  playerSessionWithoutRoom,
-  playerSessionWithRoom,
-} from '@/tests/mocks/playerSession';
-import { pendingRoom } from '@/tests/mocks/room';
+import { AppRoutes } from '@/routes';
+import { playerWithRoom, playerWithoutRoom } from '@/tests/mocks/players';
+import { pendingRoom } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<CreateRoomButton />', () => {
   it('should open a room creation modal if the user does not have a session', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(null)),
       ),
     );
@@ -41,31 +37,23 @@ describe('<CreateRoomButton />', () => {
 
   it('should create a new room and redirect to it for a player with session', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerSessionWithoutRoom)),
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(playerWithoutRoom)),
       ),
-      rest.post(ROOM_ENDPOINT, (_req, res, ctx) =>
+      rest.post(ROOM_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),
       ),
     );
 
-    renderWithProviders(
-      <MemoryRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/room/:roomCode" element={<RoomPage />} />
-          <Route path="/room/:roomCode/pending" element={<PendingRoomPage />} />
-        </Routes>
-      </MemoryRouter>,
-    );
+    renderWithProviders(<AppRoutes />);
 
-    await screen.findByText(playerSessionWithoutRoom.name);
+    await screen.findByText(playerWithoutRoom.name);
 
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerSessionWithRoom)),
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(playerWithRoom)),
       ),
-      rest.get(`${ROOM_ENDPOINT}/${pendingRoom.code}`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/${pendingRoom.code}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),
       ),
     );
@@ -84,10 +72,10 @@ describe('<CreateRoomButton />', () => {
 
   it.skip('should show error message when there is an error while creating a new room', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Trinity', roomCode: null })),
       ),
-      rest.post(ROOM_ENDPOINT, (_req, res, ctx) =>
+      rest.post(ROOM_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(400), ctx.json({ errorCode: 'ROOM.ERROR' })),
       ),
     );

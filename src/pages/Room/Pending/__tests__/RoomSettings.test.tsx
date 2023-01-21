@@ -11,7 +11,7 @@ import { renderWithProviders } from '@/tests/utils';
 describe('<RoomSettings />', () => {
   it('should show and open settings of the room if the user is the room admin', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
@@ -39,7 +39,7 @@ describe('<RoomSettings />', () => {
 
   it('should not show the settings of the room if the user is not the room admin', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({

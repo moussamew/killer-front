@@ -13,7 +13,7 @@ import { renderWithProviders } from '@/tests/utils';
 describe('<StartPartyButton />', () => {
   it('should be able to start a new party', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({

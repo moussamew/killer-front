@@ -9,15 +9,15 @@ import {
 } from '@/constants/endpoints';
 import { PendingRoomPage } from '@/pages/Room/Pending';
 import { CreateMission } from '@/pages/Room/Pending/CreateMission';
-import { playerSessionWithRoom } from '@/tests/mocks/playerSession';
+import { playerWithRoom } from '@/tests/mocks/players';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<CreateMission />', () => {
   it.skip('should add a new mission', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
-        res(ctx.status(200), ctx.json(playerSessionWithRoom)),
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(playerWithRoom)),
       ),
     );
 
@@ -49,7 +49,7 @@ describe('<CreateMission />', () => {
 
   it.skip('should show error message when adding a new mission has failed', async () => {
     server.use(
-      rest.post(MISSION_ENDPOINT, (_req, res, ctx) =>
+      rest.post(MISSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(400),
           ctx.json({

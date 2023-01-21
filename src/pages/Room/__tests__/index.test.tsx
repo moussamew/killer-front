@@ -37,19 +37,19 @@ describe('<RoomPage />', () => {
 
   it('should redirect player to PendingRoomPage page if the status of the room is PENDING', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({ id: 0, name: 'Neo', roomCode: 'P9LDG' }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/P9LDG/players`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/P9LDG/players`, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json([{ id: 0, name: 'Neo', roomCode: 'P9LDG' }]),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/P9LDG`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/P9LDG`, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
@@ -77,13 +77,13 @@ describe('<RoomPage />', () => {
     const mockPlayer = { id: 0, name: 'Neo', roomCode: 'P9LDG' };
 
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(mockPlayer)),
       ),
-      rest.get(`${ROOM_ENDPOINT}/P9LDG/players`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/P9LDG/players`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json([mockPlayer])),
       ),
-      rest.get(`${ROOM_ENDPOINT}/P9LDG`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/P9LDG`, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
@@ -109,19 +109,19 @@ describe('<RoomPage />', () => {
 
   it('should redirect player to EndedRoomPage if the status of the room is ENDED', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({ id: 0, name: 'Neo', roomCode: 'P9LDG' }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/P9LDG/players`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/P9LDG/players`, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json([{ id: 0, name: 'Neo', roomCode: 'P9LDG' }]),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/P9LDG`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/P9LDG`, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
@@ -147,7 +147,7 @@ describe('<RoomPage />', () => {
 
   it('should redirect player to JoinRoom page if the player did not have a player session', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(400), ctx.json({})),
       ),
     );
@@ -170,7 +170,7 @@ describe('<RoomPage />', () => {
 
   it('should redirect the player to JoinRoom page if the user is already inside a room', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ name: 'Neo', roomCode: 'X4KLP' })),
       ),
     );
@@ -191,7 +191,7 @@ describe('<RoomPage />', () => {
 
   it('should refresh the room status when SSE emits a new message of type ROOM_UPDATED', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
@@ -201,7 +201,7 @@ describe('<RoomPage />', () => {
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json([
@@ -236,7 +236,7 @@ describe('<RoomPage />', () => {
     await screen.findByText('Neo');
 
     server.use(
-      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/:X7JKL`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ status: RoomStatus.IN_GAME })),
       ),
     );
@@ -258,7 +258,7 @@ describe('<RoomPage />', () => {
 
   it('should refresh the room players when SSE emits a new message of type PLAYER_UPDATED', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
@@ -268,7 +268,7 @@ describe('<RoomPage />', () => {
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json([
@@ -302,7 +302,7 @@ describe('<RoomPage />', () => {
     await screen.findByText('Neo');
 
     server.use(
-      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json([
@@ -347,10 +347,10 @@ describe('<RoomPage />', () => {
     };
 
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(mockPlayer)),
       ),
-      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_, res, ctx) =>
         res(ctx.status(200), ctx.json([mockPlayer])),
       ),
     );
@@ -390,10 +390,10 @@ describe('<RoomPage />', () => {
     };
 
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(mockPlayer)),
       ),
-      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json([mockPlayer])),
       ),
     );
@@ -410,7 +410,7 @@ describe('<RoomPage />', () => {
     await screen.findByText('Welcome to the party!');
 
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ ...mockPlayer, roomCode: null })),
       ),
     );
@@ -433,7 +433,7 @@ describe('<RoomPage />', () => {
 
   it('should refresh target informations when SSE sends event of type PLAYER_KILLED', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, (_req, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({
@@ -443,7 +443,7 @@ describe('<RoomPage />', () => {
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, (_req, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json([
@@ -465,10 +465,10 @@ describe('<RoomPage />', () => {
           ]),
         ),
       ),
-      rest.get(PLAYER_TARGET_ENDPOINT, async (_req, res, ctx) =>
+      rest.get(PLAYER_TARGET_ENDPOINT, async (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ id: 1, name: 'Neo' })),
       ),
-      rest.get(MISSION_ENDPOINT, async (_req, res, ctx) =>
+      rest.get(MISSION_ENDPOINT, async (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ id: 200, content: 'Do something' })),
       ),
     );
@@ -484,10 +484,10 @@ describe('<RoomPage />', () => {
     await screen.findByText('Do something');
 
     server.use(
-      rest.get(PLAYER_TARGET_ENDPOINT, async (_req, res, ctx) =>
+      rest.get(PLAYER_TARGET_ENDPOINT, async (_, res, ctx) =>
         res(ctx.status(200), ctx.json({ id: 2, name: 'Morpheus' })),
       ),
-      rest.get(MISSION_ENDPOINT, async (_req, res, ctx) =>
+      rest.get(MISSION_ENDPOINT, async (_, res, ctx) =>
         res(
           ctx.status(200),
           ctx.json({ id: 200, content: 'Do another thing' }),

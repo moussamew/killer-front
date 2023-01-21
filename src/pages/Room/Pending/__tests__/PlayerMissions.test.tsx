@@ -1,7 +1,12 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { rest } from 'msw';
 
+import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { PlayerMissions } from '@/pages/Room/Pending/PlayerMissions';
+import { fakeMission } from '@/tests/mocks/missions';
+import { playerWithRoom } from '@/tests/mocks/players';
+import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<PlayerMissions />', () => {
@@ -13,16 +18,35 @@ describe('<PlayerMissions />', () => {
   });
 
   it('should remove a mission', async () => {
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(playerWithRoom)),
+      ),
+    );
+
     renderWithProviders(<PlayerMissions />);
 
-    await screen.findByText('Drink Jack Daniels');
+    await screen.findByText(fakeMission.content);
 
     await userEvent.click(screen.getByTitle('deleteMission'));
 
-    await waitForElementToBeRemoved(() =>
-      screen.queryByText('Drink Jack Daniels'),
+    server.use(
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
+        res(
+          ctx.status(200),
+          ctx.json({
+            ...playerWithRoom,
+            room: { ...playerWithRoom.room, missions: [] },
+            authoredMissions: [],
+          }),
+        ),
+      ),
     );
 
-    expect(screen.queryByText('Drink Jack Daniels')).not.toBeInTheDocument();
+    await waitForElementToBeRemoved(() =>
+      screen.queryByText(fakeMission.content),
+    );
+
+    expect(screen.queryByText(fakeMission.content)).not.toBeInTheDocument();
   });
 });

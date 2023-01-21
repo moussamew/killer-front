@@ -2,11 +2,13 @@ import { QueryObserverResult, UseMutationResult } from 'react-query';
 
 import { Player } from '@/services/player/types';
 
+import { Mission } from '../mission/types';
+
 import { RoomStatus } from './constants';
 
 export interface Room {
   id: number;
-  missions: number[];
+  missions: Mission[];
   code: string;
   name: string;
   status: RoomStatus;
