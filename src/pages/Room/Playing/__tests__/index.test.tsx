@@ -28,7 +28,7 @@ describe('<PlayingRoomPage />', () => {
     ).toBeInTheDocument();
   });
 
-  it.skip('should render playing room page with dead message if the player is dead', async () => {
+  it('should render playing room page with dead message if the player is dead', async () => {
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(
@@ -43,9 +43,8 @@ describe('<PlayingRoomPage />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    expect(
-      await screen.findByText('Too bad! You are dead.'),
-    ).toBeInTheDocument();
+    await screen.findByText('Too bad! You are dead.');
+
     expect(
       screen.getByText(
         'Dead men tell no tales.. You just have to wait for the end of the game.',

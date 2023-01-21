@@ -9,7 +9,7 @@ import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<PlayerKilledButton />', () => {
-  it.skip('should open killed modal when the player click on killed button', async () => {
+  it('should open killed modal when the player click on killed button', async () => {
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(playingRoomSession)),
@@ -20,6 +20,8 @@ describe('<PlayerKilledButton />', () => {
     );
 
     renderWithProviders({ route: `/room/${roomCode}` });
+
+    await screen.findByText('Try to kill your target and survive!');
 
     await userEvent.click(screen.getByText('I have been killed'));
 

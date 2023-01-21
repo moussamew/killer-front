@@ -1,15 +1,16 @@
-import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
+import { PlayerStatus } from '@/services/player/constants';
 import { playingRoom, roomCode } from '@/tests/mocks/rooms';
 import { playingRoomSession } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<PlayerKilledModal />', () => {
-  it.skip('should close killed modal when the user confirm his death', async () => {
+  it('should close killed modal when the user confirm his death', async () => {
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(playingRoomSession)),
@@ -25,12 +26,19 @@ describe('<PlayerKilledModal />', () => {
 
     await userEvent.click(screen.getByText('Kill me :('));
 
-    await waitForElementToBeRemoved(() => screen.getByText('Kill me :('));
+    server.use(
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(
+          ctx.status(200),
+          ctx.json({ ...playingRoomSession, status: PlayerStatus.KILLED }),
+        ),
+      ),
+    );
 
     expect(
-      screen.queryByText(
-        'You will not be able to play this party anymore and be considered as dead!',
+      await screen.findByText(
+        'Dead men tell no tales.. You just have to wait for the end of the game.',
       ),
-    ).not.toBeInTheDocument();
+    ).toBeInTheDocument();
   });
 });
