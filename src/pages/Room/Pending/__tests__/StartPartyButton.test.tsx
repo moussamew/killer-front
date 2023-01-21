@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 import { sources } from 'eventsourcemock';
 import { rest } from 'msw';
 
-import { AppRoutes } from '@/app/routes';
 import {
   PLAYER_SESSION_ENDPOINT,
   ROOM_ENDPOINT,
@@ -13,7 +12,7 @@ import { MercureEventType } from '@/constants/enums';
 import { playerInPendingRoom } from '@/tests/mocks/players';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderApplication } from '@/tests/utils';
 
 describe('<StartPartyButton />', () => {
   it.skip('should be able to start a new party', async () => {
@@ -26,7 +25,7 @@ describe('<StartPartyButton />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderApplication({ route: `/room/${roomCode}` });
 
     await userEvent.click(await screen.findByText('Start the party'));
 

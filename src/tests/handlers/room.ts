@@ -24,9 +24,9 @@ export const roomHandlers = [
   /**
    * Mock fetching room status.
    */
-  rest.get(`${ROOM_ENDPOINT}/:roomCode`, async (_, res, ctx) =>
+  /*  rest.get(`${ROOM_ENDPOINT}/:roomCode`, async (_, res, ctx) =>
     res(ctx.status(200), ctx.json({})),
-  ),
+  ), */
   /**
    * Mock starting party.
    */

@@ -2,18 +2,17 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
-import { AppRoutes } from '@/app/routes';
 import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
 import { RoomErrorCode } from '@/constants/errors';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderApplication } from '@/tests/utils';
 
 describe('<NotFoundPage />', () => {
   it('should redirect the player to the home page if wanted', async () => {
-    renderWithRouter(<AppRoutes />, { route: '/unknown' });
+    renderApplication({ route: '/unknown' });
 
     await screen.findByText('Oops, something goes wrong!');
 
@@ -42,7 +41,7 @@ describe('<NotFoundPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: '/join/X7JK' });
+    renderApplication({ route: '/join/X7JK' });
 
     await screen.findByText('Oops, something goes wrong!');
 

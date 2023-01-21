@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 import { TWITTER_WEBVIEW_URL, WebViewApp } from '@/constants/webview';
-import { renderWithRouter } from '@/tests/utils';
+import { renderComponent } from '@/tests/utils';
 
 import { WebViewDetector } from '../WebViewDetector';
 
@@ -16,7 +16,7 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithRouter(
+    renderComponent(
       <WebViewDetector>
         <div />
       </WebViewDetector>,
@@ -53,7 +53,7 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithRouter(
+    renderComponent(
       <WebViewDetector>
         <div />
       </WebViewDetector>,
@@ -90,7 +90,7 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithRouter(
+    renderComponent(
       <WebViewDetector>
         <div />
       </WebViewDetector>,
@@ -127,7 +127,7 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithRouter(
+    renderComponent(
       <WebViewDetector>
         <div />
       </WebViewDetector>,
@@ -154,7 +154,7 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithRouter(
+    renderComponent(
       <WebViewDetector>
         <div />
       </WebViewDetector>,

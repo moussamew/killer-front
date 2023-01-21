@@ -2,7 +2,6 @@ import { screen } from '@testing-library/react';
 import { sources } from 'eventsourcemock';
 import { rest } from 'msw';
 
-import { AppRoutes } from '@/app/routes';
 import {
   MISSION_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
@@ -11,11 +10,6 @@ import {
   ROOM_TOPIC,
 } from '@/constants/endpoints';
 import { MercureEventType } from '@/constants/enums';
-import { HomePage } from '@/pages/Home';
-import { JoinRoomPage } from '@/pages/JoinRoom';
-import { RoomPage } from '@/pages/Room';
-import { PendingRoomPage } from '@/pages/Room/Pending';
-import { PlayingRoomPage } from '@/pages/Room/Playing';
 import { PlayerStatus } from '@/services/player/constants';
 import {
   playerInEndedRoom,
@@ -30,9 +24,7 @@ import {
   roomCode,
 } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
-
-import { EndedRoomPage } from '../Ended';
+import { renderApplication } from '@/tests/utils';
 
 const {
   PLAYER_KILLED,
@@ -55,7 +47,7 @@ describe('<RoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderApplication({ route: `/room/${roomCode}` });
 
     await screen.findByText('Welcome to the party!');
   });
@@ -70,7 +62,7 @@ describe('<RoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderApplication({ route: `/room/${roomCode}` });
 
     await screen.findByText('Try to kill your target and survive!');
   });
@@ -85,7 +77,7 @@ describe('<RoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderApplication({ route: `/room/${roomCode}` });
 
     await screen.findByText('Play another party!');
   });
@@ -95,9 +87,12 @@ describe('<RoomPage />', () => {
       rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(400), ctx.json(null)),
       ),
+      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(null)),
+      ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderApplication({ route: `/room/${roomCode}` });
 
     expect(
       await screen.findByText(
@@ -111,9 +106,12 @@ describe('<RoomPage />', () => {
       rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(playerInPendingRoom)),
       ),
+      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json({ ...pendingRoom, code: 'P9LDG' })),
+      ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: '/room/P9LDG' });
+    renderApplication({ route: '/room/P9LDG' });
 
     expect(
       await screen.findByText(`Already inside the room ${roomCode}!`),
@@ -130,7 +128,7 @@ describe('<RoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderApplication({ route: `/room/${roomCode}` });
 
     await screen.findByText(`The code to join this room is ${roomCode}.`);
 
@@ -190,7 +188,7 @@ describe('<RoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderApplication({ route: `/room/${roomCode}` });
 
     await screen.findByText('Neo');
 
@@ -248,7 +246,7 @@ describe('<RoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderApplication({ route: `/room/${roomCode}` });
 
     await screen.findByText('Welcome to the party!');
 
@@ -278,7 +276,7 @@ describe('<RoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderApplication({ route: `/room/${roomCode}` });
 
     await screen.findByText(`The code to join this room is ${roomCode}.`);
 
@@ -346,7 +344,7 @@ describe('<RoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderApplication({ route: `/room/${roomCode}` });
 
     await screen.findByText('Do something');
 

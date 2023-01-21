@@ -2,7 +2,6 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
-import { AppRoutes } from '@/app/routes';
 import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
@@ -11,19 +10,19 @@ import {
 import { playerInPendingRoom, fakePlayer } from '@/tests/mocks/players';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderApplication, renderComponent } from '@/tests/utils';
 
 import { CreatePlayer } from '../CreatePlayer';
 
 describe('<CreatePlayer />', () => {
   it('should navigate to the room page joigned with the pseudo created by the user', async () => {
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, async (_, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(null)),
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/join/${roomCode}` });
+    renderApplication({ route: `/join/${roomCode}` });
 
     await userEvent.type(
       await screen.findByPlaceholderText('Choose a pseudo'),
@@ -35,10 +34,10 @@ describe('<CreatePlayer />', () => {
     );
 
     server.use(
-      rest.get(PLAYER_SESSION_ENDPOINT, async (_, res, ctx) =>
+      rest.get(PLAYER_SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(playerInPendingRoom)),
       ),
-      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, async (_, res, ctx) =>
+      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoom)),
       ),
     );
@@ -55,7 +54,7 @@ describe('<CreatePlayer />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/join/${roomCode}` });
+    renderApplication({ route: `/join/${roomCode}` });
 
     await screen.findByText('No pseudo found yet!');
 
@@ -80,7 +79,7 @@ describe('<CreatePlayer />', () => {
       ),
     );
 
-    renderWithRouter(<CreatePlayer roomCode="X7JKL" />);
+    renderComponent(<CreatePlayer roomCode="X7JKL" />);
 
     await userEvent.type(
       screen.getByPlaceholderText('Choose a pseudo'),

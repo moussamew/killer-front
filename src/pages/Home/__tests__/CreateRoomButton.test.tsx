@@ -2,12 +2,11 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
-import { AppRoutes } from '@/app/routes';
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { playerInPendingRoom, playerWithoutRoom } from '@/tests/mocks/players';
 import { pendingRoom } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderApplication } from '@/tests/utils';
 
 describe('<CreateRoomButton />', () => {
   it('should open a room creation modal if the user does not have a session', async () => {
@@ -17,7 +16,7 @@ describe('<CreateRoomButton />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />);
+    renderApplication();
 
     await screen.findByText('The right way to kill your friends..');
 
@@ -39,7 +38,7 @@ describe('<CreateRoomButton />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />);
+    renderApplication();
 
     await screen.findByText(playerWithoutRoom.name);
 
@@ -74,7 +73,7 @@ describe('<CreateRoomButton />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />);
+    renderApplication();
 
     await screen.findByText('Trinity');
 

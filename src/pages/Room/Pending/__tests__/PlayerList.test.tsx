@@ -1,12 +1,11 @@
 import { screen } from '@testing-library/react';
 import { rest } from 'msw';
 
-import { AppRoutes } from '@/app/routes';
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { playerInPendingRoom } from '@/tests/mocks/players';
 import { pendingRoomWithMultiplePlayers, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderApplication } from '@/tests/utils';
 
 describe('<PlayerList />', () => {
   it('should show name of the players in a list', async () => {
@@ -21,7 +20,7 @@ describe('<PlayerList />', () => {
 
     const { players } = pendingRoomWithMultiplePlayers;
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderApplication({ route: `/room/${roomCode}` });
 
     await screen.findByText('Criminals in the room');
 

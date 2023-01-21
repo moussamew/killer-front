@@ -2,11 +2,10 @@ import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
-import { AppRoutes } from '@/app/routes';
 import { PLAYER_SESSION_ENDPOINT } from '@/constants/endpoints';
 import { playerWithoutRoom } from '@/tests/mocks/players';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderApplication } from '@/tests/utils';
 
 describe('<ModalProvider />', () => {
   it('should close any modal opened when the user navigate through the history', async () => {
@@ -16,7 +15,7 @@ describe('<ModalProvider />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />);
+    renderApplication();
 
     await screen.findByText(playerWithoutRoom.name);
 
