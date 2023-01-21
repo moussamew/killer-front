@@ -1,11 +1,14 @@
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { BrowserRouter } from 'react-router-dom';
 
 import { Notification } from '@/components/Notification';
 import { ModalProvider } from '@/hooks/context/modal';
-import { AppRoutes } from '@/routes';
+import { WebViewDetector } from '@/layout/WebViewDetector';
 
-import './assets/styles/app.css';
+import { AppRoutes } from './routes';
+
+import '../assets/styles/app.css';
 
 const NODE_APP = document.getElementById('killerparty');
 
@@ -24,7 +27,11 @@ function App(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
       <ModalProvider>
-        <AppRoutes />
+        <WebViewDetector>
+          <BrowserRouter>
+            <AppRoutes />
+          </BrowserRouter>
+        </WebViewDetector>
         <Notification />
       </ModalProvider>
     </QueryClientProvider>
