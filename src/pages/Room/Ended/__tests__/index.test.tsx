@@ -2,12 +2,11 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
-import { AppRoutes } from '@/app/routes';
 import { PLAYER_SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { playerInEndedRoom, playerWithoutRoom } from '@/tests/mocks/players';
 import { endedRoom, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderWithProviders } from '@/tests/utils';
 
 describe('<EndedRoomPage />', () => {
   it('should leave the ended room page to start a new game', async () => {
@@ -20,7 +19,7 @@ describe('<EndedRoomPage />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderWithProviders({ route: `/room/${roomCode}` });
 
     await userEvent.click(await screen.findByText('Play another party!'));
 

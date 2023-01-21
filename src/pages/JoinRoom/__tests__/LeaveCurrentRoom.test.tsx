@@ -2,7 +2,6 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
-import { AppRoutes } from '@/app/routes';
 import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
@@ -11,7 +10,7 @@ import {
 import { playerInPendingRoom } from '@/tests/mocks/players';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderWithProviders } from '@/tests/utils';
 
 import { LeaveCurrentRoom } from '../LeaveCurrentRoom';
 
@@ -23,7 +22,7 @@ describe('<LeaveCurrentRoom />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: '/join/XAB4L' });
+    renderWithProviders({ route: '/join/XAB4L' });
 
     await screen.findByText(`Already inside the room ${roomCode}!`);
 
@@ -61,7 +60,7 @@ describe('<LeaveCurrentRoom />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: '/join/XAB4L' });
+    renderWithProviders({ route: '/join/XAB4L' });
 
     await screen.findByText(`Already inside the room ${roomCode}!`);
 
@@ -91,7 +90,7 @@ describe('<LeaveCurrentRoom />', () => {
       ),
     );
 
-    renderWithRouter(<LeaveCurrentRoom />);
+    renderWithProviders({ component: <LeaveCurrentRoom /> });
 
     await userEvent.click(screen.getByText('Continue and join the room'));
 

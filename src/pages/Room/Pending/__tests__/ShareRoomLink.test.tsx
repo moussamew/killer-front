@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { vi } from 'vitest';
 
-import { AppRoutes } from '@/app/routes';
 import {
   JOIN_ROOM_ROUTE,
   PLAYER_SESSION_ENDPOINT,
@@ -12,7 +11,7 @@ import {
 import { playerInPendingRoom } from '@/tests/mocks/players';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderWithProviders } from '@/tests/utils';
 
 describe('<ShareRoomLink />', () => {
   beforeEach(() => {
@@ -34,7 +33,7 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderWithProviders({ route: `/room/${roomCode}` });
 
     await screen.findByText('Share link to join the room');
 
@@ -57,7 +56,7 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderWithProviders({ route: `/room/${roomCode}` });
 
     await screen.findByText('Share link to join the room');
 
@@ -81,7 +80,7 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderWithProviders({ route: `/room/${roomCode}` });
 
     await screen.findByText('Share link to join the room');
 
@@ -107,7 +106,7 @@ describe('<ShareRoomLink />', () => {
       writable: true,
     });
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderWithProviders({ route: `/room/${roomCode}` });
 
     await screen.findByText('Share link to join the room');
 

@@ -2,7 +2,6 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
-import { AppRoutes } from '@/app/routes';
 import {
   MISSION_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
@@ -17,7 +16,7 @@ import {
   roomCode,
 } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderWithProviders } from '@/tests/utils';
 
 describe('<CreateMission />', () => {
   it('should add a new mission', async () => {
@@ -30,7 +29,7 @@ describe('<CreateMission />', () => {
       ),
     );
 
-    renderWithRouter(<AppRoutes />, { route: `/room/${roomCode}` });
+    renderWithProviders({ route: `/room/${roomCode}` });
 
     await screen.findByText(`The code to join this room is ${roomCode}.`);
 
@@ -63,7 +62,7 @@ describe('<CreateMission />', () => {
       ),
     );
 
-    renderWithRouter(<CreateMission />);
+    renderWithProviders({ component: <CreateMission /> });
 
     await userEvent.type(
       screen.getByPlaceholderText('Make him drink his glass dry'),

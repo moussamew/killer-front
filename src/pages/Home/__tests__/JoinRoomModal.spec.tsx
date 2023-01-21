@@ -6,15 +6,14 @@ import {
   PLAYER_ENDPOINT,
   PLAYER_SESSION_ENDPOINT,
 } from '@/constants/endpoints';
-import { HomePage } from '@/pages/Home';
 import { fakePlayer } from '@/tests/mocks/players';
 import { roomCode } from '@/tests/mocks/rooms';
 import { server } from '@/tests/server';
-import { renderWithRouter } from '@/tests/utils';
+import { renderWithProviders } from '@/tests/utils';
 
 describe('<JoinRoomModal />', () => {
   it('should close modal after joining a room with player session', async () => {
-    renderWithRouter(<HomePage />);
+    renderWithProviders();
 
     await userEvent.click(await screen.findByText('Join a room'));
 
@@ -37,7 +36,7 @@ describe('<JoinRoomModal />', () => {
       ),
     );
 
-    renderWithRouter(<HomePage />);
+    renderWithProviders();
 
     await screen.findByText('The right way to kill your friends..');
 
@@ -73,7 +72,7 @@ describe('<JoinRoomModal />', () => {
       ),
     );
 
-    renderWithRouter(<HomePage />);
+    renderWithProviders();
 
     await screen.findByText('Neo');
 
