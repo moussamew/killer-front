@@ -8,12 +8,20 @@ import {
   SESSION_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
+import { fakeUserAgent } from '@/tests/mocks/navigator';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { pendingRoomSession } from '@/tests/mocks/sessions';
 import { server } from '@/tests/server';
 import { renderWithProviders } from '@/tests/utils';
 
 describe('<ShareRoomLink />', () => {
+  beforeAll(() => {
+    Object.defineProperty(window, 'navigator', {
+      value: { userAgent: fakeUserAgent },
+      writable: true,
+    });
+  });
+
   beforeEach(() => {
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
@@ -29,7 +37,7 @@ describe('<ShareRoomLink />', () => {
     const spyNavigatorShare = vi.fn();
 
     Object.defineProperty(window, 'navigator', {
-      value: { share: spyNavigatorShare },
+      value: { ...window.navigator, share: spyNavigatorShare },
       writable: true,
     });
 
@@ -52,7 +60,7 @@ describe('<ShareRoomLink />', () => {
       'Cannot copy the link natively. Please copy it manually.';
 
     Object.defineProperty(window, 'navigator', {
-      value: { share: null, clipboard: null },
+      value: { ...window.navigator, share: null, clipboard: null },
       writable: true,
     });
 
@@ -74,6 +82,7 @@ describe('<ShareRoomLink />', () => {
 
     Object.defineProperty(window, 'navigator', {
       value: {
+        ...window.navigator,
         share: null,
         clipboard: { writeText: spyNavigatorClipboard },
       },
@@ -100,6 +109,7 @@ describe('<ShareRoomLink />', () => {
 
     Object.defineProperty(window, 'navigator', {
       value: {
+        ...window.navigator,
         share: null,
         clipboard: { writeText: spyNavigatorClipboard },
       },
