@@ -4,7 +4,7 @@ import reactRefresh from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
-import { HotReloadJSON } from './plugins';
+import { HotReloadJSON } from './tools/plugins';
 
 export default defineConfig({
   plugins: [
