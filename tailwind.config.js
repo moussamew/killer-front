@@ -1,7 +1,7 @@
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 
 module.exports = {
-  content: ['./src/**/*.js', './src/**/*.ts', './src/**/*.tsx'],
+  content: ['./source/**/*.js', './source/**/*.ts', './source/**/*.tsx'],
   theme: {
     extend: {
       fontSize: {

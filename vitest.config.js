@@ -9,7 +9,7 @@ export default mergeConfig(
     test: {
       globals: true,
       environment: 'jsdom',
-      setupFiles: './src/tests/setup.ts',
+      setupFiles: './source/tests/setup.ts',
     },
   }),
 );
