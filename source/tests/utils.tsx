@@ -2,8 +2,7 @@ import { render, RenderResult } from '@testing-library/react';
 import { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
-import { AppRoutes } from '@/app/routes';
-import { Notification } from '@/components/Notification';
+import { Routes } from '@/app/routes';
 import { ModalProvider } from '@/hooks/context/modal';
 
 interface RenderParams {
@@ -12,7 +11,7 @@ interface RenderParams {
 }
 
 const renderWithProviders = ({
-  component = <AppRoutes />,
+  component = <Routes />,
   route = '/',
 }: RenderParams = {}): RenderResult => {
   const queryClient = new QueryClient({
@@ -34,7 +33,6 @@ const renderWithProviders = ({
   return render(
     <QueryClientProvider client={queryClient}>
       <ModalProvider>{component}</ModalProvider>
-      <Notification />
     </QueryClientProvider>,
   );
 };

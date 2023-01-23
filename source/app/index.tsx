@@ -1,11 +1,9 @@
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import { Notification } from '@/components/Notification';
 import { ModalProvider } from '@/hooks/context/modal';
-import { WebViewDetector } from '@/layout/WebViewDetector';
 
-import { AppRoutes } from './routes';
+import { Routes } from './routes';
 
 import '../assets/styles/app.css';
 
@@ -26,10 +24,7 @@ function App(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
       <ModalProvider>
-        <WebViewDetector>
-          <AppRoutes />
-        </WebViewDetector>
-        <Notification />
+        <Routes />
       </ModalProvider>
     </QueryClientProvider>
   );

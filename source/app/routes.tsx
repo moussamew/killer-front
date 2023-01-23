@@ -8,7 +8,7 @@ import { EndedRoomPage } from '@/pages/Room/Ended';
 import { PendingRoomPage } from '@/pages/Room/Pending';
 import { PlayingRoomPage } from '@/pages/Room/Playing';
 
-export function AppRoutes(): JSX.Element {
+export function Routes(): JSX.Element {
   return (
     <RouterProvider
       router={createBrowserRouter([

@@ -10,8 +10,6 @@ import { AppLogo, TWITTER_WEBVIEW_URL, WebViewApp } from '@/constants/webview';
 import { t } from '@/helpers/translate';
 import { useCreateNavigatorClipboard } from '@/services/common/mutations';
 
-import { Layout } from './Layout';
-
 const { Instagram, Messenger, Twitter } = WebViewApp;
 
 const Content = tw.div`
@@ -31,7 +29,7 @@ const Text = tw.p`
 `;
 
 interface Props {
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 }
 
 export function WebViewDetector({ children }: Props): JSX.Element {
@@ -51,7 +49,7 @@ export function WebViewDetector({ children }: Props): JSX.Element {
   }, []);
 
   if (!webViewApp) {
-    return children;
+    return <div>{children}</div>;
   }
 
   const saveLink = async (): Promise<void> => {
@@ -72,20 +70,18 @@ export function WebViewDetector({ children }: Props): JSX.Element {
   };
 
   return (
-    <Layout>
-      <Content>
-        <WelcomeImage alt="welcome" src={Killerparty} />
-        <h1>{t('layout.opened_from_webview', { webViewApp })}</h1>
-        <Text>{t('layout.restricted_access')}</Text>
-        <WebViewImage src={AppLogo[webViewApp]} />
-        <h2>{t('layout.how_to_play')}</h2>
-        <Text>{t('layout.click_button_bellow')}</Text>
-        <Button
-          content={t('layout.save_link')}
-          icon={<MobileIcon />}
-          onClick={saveLink}
-        />
-      </Content>
-    </Layout>
+    <Content>
+      <WelcomeImage alt="welcome" src={Killerparty} />
+      <h1>{t('layout.opened_from_webview', { webViewApp })}</h1>
+      <Text>{t('layout.restricted_access')}</Text>
+      <WebViewImage src={AppLogo[webViewApp]} />
+      <h2>{t('layout.how_to_play')}</h2>
+      <Text>{t('layout.click_button_bellow')}</Text>
+      <Button
+        content={t('layout.save_link')}
+        icon={<MobileIcon />}
+        onClick={saveLink}
+      />
+    </Content>
   );
 }
