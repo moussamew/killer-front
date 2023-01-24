@@ -8,8 +8,8 @@ import {
   useState,
 } from 'react';
 
-import { useEvent } from '../useEvent';
-import { usePrevious } from '../usePrevious';
+import { useEvent } from '@/hooks/useEvent';
+import { usePrevious } from '@/hooks/usePrevious';
 
 interface ModalContextInterface {
   modal: ReactNode;

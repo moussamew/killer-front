@@ -4,7 +4,7 @@ import tw from 'twin.macro';
 import { Loader } from '@/components/Loader';
 import { Modal } from '@/components/Modal';
 import { Notification } from '@/components/Notification';
-import { ModalContext } from '@/hooks/context/modal';
+import { ModalContext } from '@/context/modal';
 import { useSession } from '@/services/player/queries';
 
 import Header from './Header';

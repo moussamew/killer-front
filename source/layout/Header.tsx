@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import tw from 'twin.macro';
 
 import { ReactComponent as SettingsIcon } from '@/assets/icons/settings.svg';
+import { ModalContext } from '@/context/modal';
 import { t } from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
 
 import { SettingsModal } from './SettingsModal';
 

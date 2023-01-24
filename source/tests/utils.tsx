@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import { Routes } from '@/app/routes';
-import { ModalProvider } from '@/hooks/context/modal';
+import { ModalProvider } from '@/context/modal';
 
 interface RenderParams {
   component?: ReactNode;

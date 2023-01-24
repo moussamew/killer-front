@@ -15,3 +15,8 @@ export enum MercureEventType {
   PLAYER_UPDATED = 'player_updated',
   NO_EVENT = 'no_event',
 }
+
+export enum Locale {
+  FRENCH = 'fr-FR',
+  ENGLISH = 'en-US',
+}

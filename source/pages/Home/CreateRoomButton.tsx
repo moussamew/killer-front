@@ -3,8 +3,8 @@ import { toast } from 'react-hot-toast';
 
 import { Button } from '@/components/Button';
 import { errorStyle } from '@/constants/styles';
+import { ModalContext } from '@/context/modal';
 import { t } from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
 import { useCreateRoom } from '@/services/room/mutations';
 
 import { CreateRoomModal } from './CreateRoomModal';

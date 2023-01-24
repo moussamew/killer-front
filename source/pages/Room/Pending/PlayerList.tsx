@@ -6,7 +6,7 @@ import { ReactComponent as AdminIcon } from '@/assets/icons/admin.svg';
 import { ReactComponent as KickPlayerIcon } from '@/assets/icons/kickPlayer.svg';
 import { ReactComponent as LeaveRoomIcon } from '@/assets/icons/leaveRoom.svg';
 import Player from '@/assets/images/player.png';
-import { ModalContext } from '@/hooks/context/modal';
+import { ModalContext } from '@/context/modal';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 

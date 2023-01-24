@@ -2,8 +2,8 @@ import { Fragment, useContext } from 'react';
 import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
+import { ModalContext } from '@/context/modal';
 import { t } from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
 import { PlayerStatus } from '@/services/player/constants';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';

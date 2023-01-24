@@ -3,7 +3,7 @@ import tw from 'twin.macro';
 
 import NotFoundSrc from '@/assets/images/not-found.jpg';
 import { Button } from '@/components/Button';
-import { t } from '@/helpers/translate';
+import { useTranslate } from '@/hooks/useTranslate';
 import { Layout } from '@/layout/Layout';
 
 const SectionTitle = tw.div`
@@ -21,6 +21,7 @@ const ErrorReason = tw.p`
 export function NotFoundPage(): JSX.Element {
   const navigate = useNavigate();
   const { state: errorMessage } = useLocation();
+  const { t } = useTranslate();
 
   const handleGoBack = (): void => {
     navigate('/');
@@ -29,16 +30,16 @@ export function NotFoundPage(): JSX.Element {
   return (
     <Layout>
       <SectionTitle>
-        <h1>{t('not_found.title')}</h1>
-        <p>{t('not_found.text')}</p>
+        <h1>{t('notfound.title')}</h1>
+        <p>{t('notfound.description')}</p>
         {errorMessage && (
           <ErrorReason>
-            {t('not_found.reason', { reason: errorMessage })}
+            {t('notfound.reason', { reason: errorMessage })}
           </ErrorReason>
         )}
       </SectionTitle>
       <Image alt="notFound" src={NotFoundSrc} />
-      <Button content={t('not_found.back_home')} onClick={handleGoBack} />
+      <Button content={t('notfound.back')} onClick={handleGoBack} />
     </Layout>
   );
 }

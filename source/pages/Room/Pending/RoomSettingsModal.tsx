@@ -4,8 +4,8 @@ import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
+import { ModalContext } from '@/context/modal';
 import { t } from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
 import { useDeleteRoom } from '@/services/room/mutations';
 
 const Title = tw.h2`
