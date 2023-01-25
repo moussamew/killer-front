@@ -76,7 +76,7 @@ export function PlayerList(): JSX.Element {
           )}
           {room?.admin?.id !== id && session?.name !== name && (
             <Icon onClick={handleKickPlayer(name, id)}>
-              <KickPlayerIcon title={`kick${name}`} />
+              <KickPlayerIcon title={`kick ${name}`} />
             </Icon>
           )}
         </PlayerItem>
