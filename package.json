@@ -7,9 +7,9 @@
     "build": "vite build",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
-    "test": "vitest run",
-    "test:watch": "vitest watch",
-    "test:coverage": "vitest run --coverage",
+    "test": "DEBUG_PRINT_LIMIT=10000 vitest run",
+    "test:watch": "DEBUG_PRINT_LIMIT=10000 vitest watch",
+    "test:coverage": "DEBUG_PRINT_LIMIT=10000 vitest run --coverage",
     "tsc": "tsc",
     "commit": "cz"
   },
