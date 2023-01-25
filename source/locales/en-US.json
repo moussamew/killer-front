@@ -53,6 +53,7 @@
   "room.player.killed.modal.confirm.button": "Kill me",
   "room.winner.name": "And the winner is.. {playerName}!",
   "room.winner.congrats": "Good job on this slaughter!",
+  "room.play.another.party.button": "Play another party",
   "notfound.title": "Oops, something goes wrong",
   "notfound.description": "The page you requested can not be found.",
   "notfound.reason": "Reason: {reason}",
