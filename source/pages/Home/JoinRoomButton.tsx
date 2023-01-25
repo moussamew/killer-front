@@ -2,11 +2,12 @@ import { useContext } from 'react';
 
 import { Button } from '@/components/Button';
 import { ModalContext } from '@/context/modal';
-import { t } from '@/helpers/translate';
+import { useTranslation } from '@/hooks/useTranslation';
 
 import { JoinRoomModal } from './JoinRoomModal';
 
 export function JoinRoomButton(): JSX.Element {
+  const { t } = useTranslation();
   const { openModal } = useContext(ModalContext);
 
   const handleJoinRoom = (): void => {
@@ -15,7 +16,7 @@ export function JoinRoomButton(): JSX.Element {
 
   return (
     <Button
-      content={t('home.join_room')}
+      content={t('home.join.room')}
       buttonColor="yellow"
       textColor="lightDark"
       onClick={handleJoinRoom}

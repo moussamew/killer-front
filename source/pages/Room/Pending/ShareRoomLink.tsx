@@ -5,11 +5,12 @@ import { ReactComponent as ShareIcon } from '@/assets/icons/share.svg';
 import { Button } from '@/components/Button';
 import { JOIN_ROOM_ROUTE } from '@/constants/endpoints';
 import { errorStyle, successStyle } from '@/constants/styles';
-import { t } from '@/helpers/translate';
+import { useTranslation } from '@/hooks/useTranslation';
 import { useCreateNavigatorClipboard } from '@/services/common/mutations';
 
 export function ShareRoomLink(): JSX.Element {
   const { roomCode } = useParams();
+  const { t } = useTranslation();
 
   const { createNavigatorClipboard } = useCreateNavigatorClipboard();
 
@@ -19,28 +20,28 @@ export function ShareRoomLink(): JSX.Element {
     if (navigator.share) {
       return navigator.share({
         title: 'Killerparty',
-        text: t('room.share_room_text'),
+        text: t('room.share.link.message'),
         url: roomLink,
       });
     }
 
     if (!navigator.clipboard) {
-      return void toast.error(t('common.link_error'), errorStyle);
+      return void toast.error(t('notification.link.saved.error'), errorStyle);
     }
 
     return createNavigatorClipboard.mutateAsync(roomLink, {
       onSuccess: () => {
-        toast.success(t('common.link_saved'), successStyle);
+        toast.success(t('notification.link.saved.success'), successStyle);
       },
       onError: () => {
-        toast.error(t('common.link_error'), errorStyle);
+        toast.error(t('notification.link.saved.error'), errorStyle);
       },
     });
   };
 
   return (
     <Button
-      content={t('room.share_room_link')}
+      content={t('room.share.link.button')}
       icon={<ShareIcon />}
       onClick={saveRoomLink}
     />

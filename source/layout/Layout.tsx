@@ -1,4 +1,4 @@
-import { Fragment, useContext } from 'react';
+import { Fragment, ReactNode, useContext } from 'react';
 import tw from 'twin.macro';
 
 import { Loader } from '@/components/Loader';
@@ -16,7 +16,7 @@ const Content = tw.div`
 `;
 
 interface Props {
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode | ReactNode[];
 }
 
 export function Layout({ children }: Props): JSX.Element {

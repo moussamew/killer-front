@@ -3,7 +3,6 @@ import tw from 'twin.macro';
 
 import { ReactComponent as SettingsIcon } from '@/assets/icons/settings.svg';
 import { ModalContext } from '@/context/modal';
-import { t } from '@/helpers/translate';
 
 import { SettingsModal } from './SettingsModal';
 
@@ -32,7 +31,7 @@ function Header({ playerName }: Props): JSX.Element {
 
   return (
     <Navigation>
-      <Text>{t('header.project_name')}</Text>
+      <Text>Killer Party</Text>
       {playerName && (
         <PlayerInfos onClick={handleOpenSettings}>
           <Text>{playerName}</Text>

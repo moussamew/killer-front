@@ -4,7 +4,7 @@ import tw from 'twin.macro';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { ModalContext } from '@/context/modal';
-import { t } from '@/helpers/translate';
+import { useTranslation } from '@/hooks/useTranslation';
 import { useCreatePlayer } from '@/services/player/mutations';
 import { useCreateRoom } from '@/services/room/mutations';
 
@@ -18,6 +18,7 @@ const Title = tw.h2`
 
 export function CreateRoomModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
+  const { t } = useTranslation();
   const { createPlayer } = useCreatePlayer();
   const { createRoom } = useCreateRoom();
   const { closeModal } = useContext(ModalContext);
@@ -35,18 +36,18 @@ export function CreateRoomModal(): JSX.Element {
   return (
     <div>
       <HeadContent>
-        <Title>{t('home.create_room')}</Title>
+        <Title>{t('home.create.room.button')}</Title>
       </HeadContent>
       <Input
         id="pseudo"
         type="text"
-        label={t('common.create_pseudo_label')}
-        placeholder={t('common.create_pseudo_placeholder')}
+        label={t('home.create.pseudo.label')}
+        placeholder={t('home.create.pseudo.placeholder')}
         value={pseudo}
         onChange={handlePseudo}
       />
       <Button
-        content={t('home.create_room_modal_button')}
+        content={t('home.create.room.confirm.button')}
         disabled={!pseudo}
         onClick={handleCreateRoom}
       />

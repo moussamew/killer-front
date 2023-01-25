@@ -4,7 +4,7 @@ import tw from 'twin.macro';
 import Knife from '@/assets/images/knife.png';
 import { Button } from '@/components/Button';
 import { ModalContext } from '@/context/modal';
-import { t } from '@/helpers/translate';
+import { useTranslation } from '@/hooks/useTranslation';
 
 import { PlayerKilledModal } from './PlayerKilledModal';
 
@@ -22,6 +22,7 @@ const Text = tw.p`
 `;
 
 export function PlayerKilledButton(): JSX.Element {
+  const { t } = useTranslation();
   const { openModal } = useContext(ModalContext);
 
   const handleOpenModal = (): void => {
@@ -31,12 +32,9 @@ export function PlayerKilledButton(): JSX.Element {
   return (
     <Content>
       <Image alt="killed" src={Knife} />
-      <h2>{t('playing_room.killed_section_title')}</h2>
-      <Text>{t('playing_room.killed_button_infos')}</Text>
-      <Button
-        content={t('playing_room.killed_button_text')}
-        onClick={handleOpenModal}
-      />
+      <h2>{t('room.killed.message')}</h2>
+      <Text>{t('room.killed.notify')}</Text>
+      <Button content={t('room.killed.button')} onClick={handleOpenModal} />
     </Content>
   );
 }

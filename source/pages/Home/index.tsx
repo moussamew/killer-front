@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
 
 import Killerparty from '@/assets/images/killerparty.png';
-import { t } from '@/helpers/translate';
+import { useTranslation } from '@/hooks/useTranslation';
 import { Layout } from '@/layout/Layout';
 import { useSession } from '@/services/player/queries';
 
@@ -19,8 +19,9 @@ const Text = tw.p`
 `;
 
 export function HomePage(): JSX.Element {
-  const { session } = useSession();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { session } = useSession();
 
   useEffect(() => {
     if (session?.room?.code) {
@@ -32,7 +33,7 @@ export function HomePage(): JSX.Element {
     <Layout>
       <WelcomeImage alt="welcome" src={Killerparty} />
       <h1>{t('home.title')}</h1>
-      <Text>{t('home.game_resume')}</Text>
+      <Text>{t('home.description')}</Text>
       <CreateRoomButton playerName={session?.name} />
       <JoinRoomButton />
     </Layout>

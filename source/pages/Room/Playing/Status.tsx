@@ -1,7 +1,7 @@
 import tw from 'twin.macro';
 
 import Glasses from '@/assets/images/glasses.png';
-import { t } from '@/helpers/translate';
+import { useTranslation } from '@/hooks/useTranslation';
 import { PlayerStatus } from '@/services/player/constants';
 import { useSession } from '@/services/player/queries';
 
@@ -38,6 +38,7 @@ const Mission = tw(PlayerToKill)`
 `;
 
 export function Status(): JSX.Element {
+  const { t } = useTranslation();
   const { session } = useSession();
 
   return (
@@ -45,18 +46,18 @@ export function Status(): JSX.Element {
       <Image alt="party" src={Glasses} />
       {session?.status === PlayerStatus.KILLED ? (
         <div>
-          <h2>{t('playing_room.player_killed')}</h2>
-          <Text>{t('playing_room.player_killed_resume')}</Text>
+          <h2>{t('room.player.killed.title')}</h2>
+          <Text>{t('room.player.killed.resume')}</Text>
         </div>
       ) : (
         <div>
-          <h2>{t('playing_room.target_section_title')}</h2>
+          <h2>{t('room.target.title')}</h2>
           <TargetSection>
-            <Text>{t('playing_room.target_to_kill')}</Text>
+            <Text>{t('room.target.to.kill')}</Text>
             <PlayerToKill>{session?.target?.name}</PlayerToKill>
           </TargetSection>
           <MissionSection>
-            <Text>{t('playing_room.mission_to_do')}</Text>
+            <Text>{t('room.target.mission')}</Text>
             <Mission>{session?.assignedMission?.content}</Mission>
           </MissionSection>
         </div>

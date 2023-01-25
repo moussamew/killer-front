@@ -3,7 +3,7 @@ import tw from 'twin.macro';
 
 import Winner from '@/assets/images/winner.png';
 import { Button } from '@/components/Button';
-import { t } from '@/helpers/translate';
+import { useTranslation } from '@/hooks/useTranslation';
 import { Layout } from '@/layout/Layout';
 import { RoomPage } from '@/pages/Room';
 import { PlayerStatus } from '@/services/player/constants';
@@ -21,6 +21,7 @@ const Image = tw.img`
 
 export function EndedRoomPage(): JSX.Element {
   const { roomCode } = useParams();
+  const { t } = useTranslation();
   const { room } = useRoom(roomCode!);
   const { updatePlayer } = useUpdatePlayer();
   const { session } = useSession();
@@ -42,9 +43,9 @@ export function EndedRoomPage(): JSX.Element {
       <Layout>
         <SectionTitle>
           <h1>
-            {t('ended_room.winner', { playerName: lastManStanding?.name })}
+            {t('room.winner.name', { playerName: lastManStanding?.name })}
           </h1>
-          <p>{t('ended_room.good_job')}</p>
+          <p>{t('room.winner.congrats')}</p>
         </SectionTitle>
         <Image alt="notFound" src={Winner} />
         <Button content="Play another party!" onClick={handleLeaveRoom} />

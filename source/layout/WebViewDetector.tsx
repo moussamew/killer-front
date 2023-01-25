@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import tw from 'twin.macro';
 
@@ -7,7 +7,7 @@ import Killerparty from '@/assets/images/killerparty.png';
 import { Button } from '@/components/Button';
 import { errorStyle, successStyle } from '@/constants/styles';
 import { AppLogo, TWITTER_WEBVIEW_URL, WebViewApp } from '@/constants/webview';
-import { t } from '@/helpers/translate';
+import { useTranslation } from '@/hooks/useTranslation';
 import { useCreateNavigatorClipboard } from '@/services/common/mutations';
 
 const { Instagram, Messenger, Twitter } = WebViewApp;
@@ -29,10 +29,11 @@ const Text = tw.p`
 `;
 
 interface Props {
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode | ReactNode[];
 }
 
 export function WebViewDetector({ children }: Props): JSX.Element {
+  const { t } = useTranslation();
   const [webViewApp, setWebViewApp] = useState('');
   const { createNavigatorClipboard } = useCreateNavigatorClipboard();
 
@@ -56,15 +57,15 @@ export function WebViewDetector({ children }: Props): JSX.Element {
     const roomLink = window.location.href;
 
     if (!navigator.clipboard) {
-      return void toast.error(t('common.link_error'), errorStyle);
+      return void toast.error(t('notification.link.saved.error'), errorStyle);
     }
 
     return createNavigatorClipboard.mutateAsync(roomLink, {
       onSuccess: () => {
-        toast.success(t('common.link_saved'), successStyle);
+        toast.success(t('notification.link.saved.success'), successStyle);
       },
       onError: () => {
-        toast.error(t('common.link_error'), errorStyle);
+        toast.error(t('notification.link.saved.error'), errorStyle);
       },
     });
   };
@@ -72,13 +73,13 @@ export function WebViewDetector({ children }: Props): JSX.Element {
   return (
     <Content>
       <WelcomeImage alt="welcome" src={Killerparty} />
-      <h1>{t('layout.opened_from_webview', { webViewApp })}</h1>
-      <Text>{t('layout.restricted_access')}</Text>
+      <h1>{t('webview.title', { webViewApp })}</h1>
+      <Text>{t('webview.restriction.message')}</Text>
       <WebViewImage src={AppLogo[webViewApp]} />
-      <h2>{t('layout.how_to_play')}</h2>
-      <Text>{t('layout.click_button_bellow')}</Text>
+      <h2>{t('webview.how.to.play')}</h2>
+      <Text>{t('webview.click.button.message')}</Text>
       <Button
-        content={t('layout.save_link')}
+        content={t('webview.save.link.button')}
         icon={<MobileIcon />}
         onClick={saveLink}
       />

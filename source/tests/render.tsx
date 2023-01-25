@@ -1,8 +1,11 @@
 import { render, RenderResult } from '@testing-library/react';
 import { ReactNode } from 'react';
+import { IntlProvider } from 'react-intl';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import { Routes } from '@/app/routes';
+import { Locale } from '@/constants/enums';
+import { translations } from '@/constants/languages';
 import { ModalProvider } from '@/context/modal';
 
 interface RenderParams {
@@ -10,10 +13,10 @@ interface RenderParams {
   route?: string;
 }
 
-const renderWithProviders = ({
+export function renderWithProviders({
   component = <Routes />,
   route = '/',
-}: RenderParams = {}): RenderResult => {
+}: RenderParams = {}): RenderResult {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -32,9 +35,12 @@ const renderWithProviders = ({
 
   return render(
     <QueryClientProvider client={queryClient}>
-      <ModalProvider>{component}</ModalProvider>
+      <IntlProvider
+        locale={Locale.FRENCH}
+        messages={translations[Locale.FRENCH]}
+      >
+        <ModalProvider>{component}</ModalProvider>
+      </IntlProvider>
     </QueryClientProvider>,
   );
-};
-
-export { renderWithProviders };
+}
