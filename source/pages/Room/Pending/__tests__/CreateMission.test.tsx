@@ -11,8 +11,8 @@ import { CreateMission } from '@/pages/Room/Pending/CreateMission';
 import { fakeMissionThree } from '@/tests/mocks/missions';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { pendingRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<CreateMission />', () => {
   it('should add a new mission', async () => {
@@ -27,14 +27,18 @@ describe('<CreateMission />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText(`The code to join this room is ${roomCode}.`);
+    await screen.findByText('Le code pour rejoindre cette partie est SOSPC.');
 
     await userEvent.type(
-      screen.getByPlaceholderText('Make him drink his glass dry'),
+      screen.getByPlaceholderText(
+        /Boire un verre préparé par vos soins à votre victime/,
+      ),
       fakeMissionThree.content,
     );
 
-    await userEvent.click(screen.getByText('Add new mission in the room'));
+    await userEvent.click(
+      screen.getByText('Ajouter cette mission à la partie'),
+    );
 
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>

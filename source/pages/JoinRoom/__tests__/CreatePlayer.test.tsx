@@ -10,8 +10,8 @@ import {
 import { fakePlayerOne } from '@/tests/mocks/players';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { pendingRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 import { CreatePlayer } from '../CreatePlayer';
 
@@ -25,14 +25,14 @@ describe('<CreatePlayer />', () => {
 
     renderWithProviders({ route: `/join/${roomCode}` });
 
+    await screen.findByText('Pas de nom associé !');
+
     await userEvent.type(
-      await screen.findByPlaceholderText('Choose a pseudo'),
+      screen.getByPlaceholderText('Choisir un nom'),
       fakePlayerOne.name,
     );
 
-    await userEvent.click(
-      await screen.findByText('Continue and join the room'),
-    );
+    await userEvent.click(screen.getByText('Rejoindre cette partie'));
 
     server.use(
       rest.get(SESSION_ENDPOINT, async (_, res, ctx) =>
@@ -43,8 +43,10 @@ describe('<CreatePlayer />', () => {
       ),
     );
 
+    await screen.findByText('Bienvenue à la fête !');
+
     expect(
-      await screen.findByText(`The code to join this room is ${roomCode}.`),
+      screen.getByText('Le code pour rejoindre cette partie est SOSPC.'),
     ).toBeInTheDocument();
   });
 
@@ -57,12 +59,12 @@ describe('<CreatePlayer />', () => {
 
     renderWithProviders({ route: `/join/${roomCode}` });
 
-    await screen.findByText('No pseudo found yet!');
+    await screen.findByText('Pas de nom associé !');
 
-    await userEvent.click(screen.getByText('Create my own room'));
+    await userEvent.click(screen.getByText('Créer ma partie'));
 
     expect(
-      await screen.findByText('The right way to kill your friends..'),
+      await screen.findByText('La bonne manière de tuer vos amis..'),
     ).toBeInTheDocument();
   });
 
@@ -80,7 +82,7 @@ describe('<CreatePlayer />', () => {
       ),
     );
 
-    renderWithProviders({ component: <CreatePlayer roomCode="X7JKL" /> });
+    renderWithProviders({ component: <CreatePlayer /> });
 
     await userEvent.type(
       screen.getByPlaceholderText('Choose a pseudo'),

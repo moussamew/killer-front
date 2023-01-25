@@ -4,8 +4,8 @@ import { rest } from 'msw';
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { pendingRoomWithMultiplePlayers, roomCode } from '@/tests/mocks/rooms';
 import { pendingRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<PlayerList />', () => {
   it('should show name of the players in a list', async () => {
@@ -18,13 +18,11 @@ describe('<PlayerList />', () => {
       ),
     );
 
-    const { players } = pendingRoomWithMultiplePlayers;
-
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Criminals in the room');
+    await screen.findByText('Criminels dans la partie');
 
-    expect(await screen.findByText(players[1].name)).toBeInTheDocument();
-    expect(await screen.findByText(players[2].name)).toBeInTheDocument();
+    expect(screen.getByText('MORPHEUS')).toBeInTheDocument();
+    expect(screen.getByText('NEO')).toBeInTheDocument();
   });
 });

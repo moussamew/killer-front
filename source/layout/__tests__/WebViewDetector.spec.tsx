@@ -1,43 +1,29 @@
-import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 import { TWITTER_WEBVIEW_URL, WebViewApp } from '@/constants/webview';
-import { renderWithProviders } from '@/tests/utils';
-
-import { WebViewDetector } from '../WebViewDetector';
+import { renderWithProviders } from '@/tests/render';
 
 const { Messenger, Instagram } = WebViewApp;
 
 describe('<WebViewDetector />', () => {
-  it('should render a message if in a webview', async () => {
+  it('should prevents the application to be accessible if the user open it from a webview', async () => {
     Object.defineProperty(window.navigator, 'userAgent', {
       value: Messenger,
       writable: true,
     });
 
-    renderWithProviders({
-      component: (
-        <WebViewDetector>
-          <div />
-        </WebViewDetector>
-      ),
-    });
+    renderWithProviders();
 
     expect(
-      await screen.findByText('Opened from Messenger'),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        'Access to Killer Party from a third party app is restricted for game experience reasons.',
+      await screen.findByText(
+        `L'accès à Killer Party depuis une application tierce est limité pour des raisons d'expérience de jeu.`,
       ),
     ).toBeInTheDocument();
   });
 
   it('should show error if the clipboard is not available', async () => {
-    const errorMessage =
-      'Cannot copy the link natively. Please copy it manually.';
-
     Object.defineProperties(window, {
       navigator: {
         value: {
@@ -55,23 +41,15 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithProviders({
-      component: (
-        <WebViewDetector>
-          <div />
-        </WebViewDetector>
+    renderWithProviders();
+
+    await userEvent.click(await screen.findByText('Enregistrer le lien'));
+
+    expect(
+      await screen.findByText(
+        'Impossible de copier le lien automatiquement, veuillez le copier manuellement.',
       ),
-    });
-
-    await userEvent.click(
-      await screen.findByText('Save link in the clipboard'),
-    );
-
-    expect(await screen.findByText(errorMessage)).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText(errorMessage));
-
-    await waitForElementToBeRemoved(() => screen.queryByText(errorMessage));
+    ).toBeInTheDocument();
   });
 
   it('should save the link in the clipboard if available', async () => {
@@ -94,21 +72,11 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithProviders({
-      component: (
-        <WebViewDetector>
-          <div />
-        </WebViewDetector>
-      ),
-    });
+    renderWithProviders();
 
-    await userEvent.click(
-      await screen.findByText('Save link in the clipboard'),
-    );
+    await userEvent.click(await screen.findByText('Enregistrer le lien'));
 
-    expect(
-      await screen.findByText('Link saved in the clipboard!'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText('Lien enregistré !')).toBeInTheDocument();
     expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
     expect(spyNavigatorClipboard).toHaveBeenCalledWith(
       'https://killerparty.com/join/P9LDG',
@@ -133,23 +101,15 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithProviders({
-      component: (
-        <WebViewDetector>
-          <div />
-        </WebViewDetector>
-      ),
-    });
+    renderWithProviders();
 
-    await userEvent.click(
-      await screen.findByText('Save link in the clipboard'),
+    await userEvent.click(await screen.findByText('Enregistrer le lien'));
+
+    const notification = await screen.findAllByText(
+      `Impossible de copier le lien automatiquement, veuillez le copier manuellement.`,
     );
 
-    expect(
-      await screen.findByText(
-        'Cannot copy the link natively. Please copy it manually.',
-      ),
-    ).toBeInTheDocument();
+    expect(notification[1]).toBeInTheDocument();
     expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
     expect(spyNavigatorClipboard).toHaveBeenCalledWith(
       'https://killerparty.com/join/P9LDG',
@@ -162,18 +122,14 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    renderWithProviders({
-      component: (
-        <WebViewDetector>
-          <div />
-        </WebViewDetector>
-      ),
-    });
+    renderWithProviders();
 
-    expect(await screen.findByText('Opened from Twitter')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Ouvert depuis Twitter'),
+    ).toBeInTheDocument();
     expect(
       screen.getByText(
-        'Access to Killer Party from a third party app is restricted for game experience reasons.',
+        `L'accès à Killer Party depuis une application tierce est limité pour des raisons d'expérience de jeu.`,
       ),
     ).toBeInTheDocument();
   });

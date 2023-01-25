@@ -6,15 +6,19 @@ import { SESSION_ENDPOINT } from '@/constants/endpoints';
 import { PlayerMissions } from '@/pages/Room/Pending/PlayerMissions';
 import { fakeMissionOne } from '@/tests/mocks/missions';
 import { pendingRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<PlayerMissions />', () => {
   it('should show the input to create a new Mission', async () => {
     renderWithProviders({ component: <PlayerMissions /> });
 
-    expect(await screen.findByText('Manage my missions'));
-    expect(await screen.findByPlaceholderText('Make him drink his glass dry'));
+    expect(await screen.findByText('Créer une nouvelle mission'));
+    expect(
+      await screen.findByPlaceholderText(
+        /Boire un verre préparé par vos soins à votre victime/,
+      ),
+    );
   });
 
   it('should remove a mission', async () => {

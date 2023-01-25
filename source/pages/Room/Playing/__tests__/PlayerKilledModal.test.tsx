@@ -6,8 +6,8 @@ import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { PlayerStatus } from '@/services/player/constants';
 import { playingRoom, roomCode } from '@/tests/mocks/rooms';
 import { playingRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<PlayerKilledModal />', () => {
   it('should close killed modal when the user confirm his death', async () => {
@@ -22,9 +22,9 @@ describe('<PlayerKilledModal />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await userEvent.click(await screen.findByText('I have been killed'));
+    await userEvent.click(await screen.findByText(`J'ai été tué`));
 
-    await userEvent.click(screen.getByText('Kill me :('));
+    await userEvent.click(screen.getByText('Tuez-moi'));
 
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
@@ -37,7 +37,7 @@ describe('<PlayerKilledModal />', () => {
 
     expect(
       await screen.findByText(
-        'Dead men tell no tales.. You just have to wait for the end of the game.',
+        `Les morts ne racontent pas d'histoires... Vous devez juste attendre la fin du jeu.`,
       ),
     ).toBeInTheDocument();
   });

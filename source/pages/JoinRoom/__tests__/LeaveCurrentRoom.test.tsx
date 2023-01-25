@@ -9,8 +9,8 @@ import {
 } from '@/constants/endpoints';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { pendingRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 import { LeaveCurrentRoom } from '../LeaveCurrentRoom';
 
@@ -24,9 +24,9 @@ describe('<LeaveCurrentRoom />', () => {
 
     renderWithProviders({ route: '/join/XAB4L' });
 
-    await screen.findByText(`Already inside the room ${roomCode}!`);
+    await screen.findByText(`Déjà à l'intérieur de la partie SOSPC !`);
 
-    await userEvent.click(screen.getByText('Continue and join the room'));
+    await userEvent.click(screen.getByText('Continuer et rejoindre la partie'));
 
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
@@ -43,10 +43,10 @@ describe('<LeaveCurrentRoom />', () => {
       ),
     );
 
-    await screen.findByText('Welcome to the party!');
+    await screen.findByText('Bienvenue à la fête !');
 
     expect(
-      screen.getByText('The code to join this room is XAB4L.'),
+      screen.getByText('Le code pour rejoindre cette partie est XAB4L.'),
     ).toBeInTheDocument();
   });
 
@@ -62,14 +62,14 @@ describe('<LeaveCurrentRoom />', () => {
 
     renderWithProviders({ route: '/join/XAB4L' });
 
-    await screen.findByText(`Already inside the room ${roomCode}!`);
+    await screen.findByText(`Déjà à l'intérieur de la partie SOSPC !`);
 
-    await userEvent.click(screen.getByText('Return to my current room'));
+    await userEvent.click(screen.getByText('Retourner dans ma partie'));
 
-    await screen.findByText('Welcome to the party!');
+    await screen.findByText('Bienvenue à la fête !');
 
     expect(
-      screen.getByText(`The code to join this room is ${roomCode}.`),
+      screen.getByText('Le code pour rejoindre cette partie est SOSPC.'),
     ).toBeInTheDocument();
   });
 
