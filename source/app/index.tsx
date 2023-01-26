@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { Locale } from '@/constants/enums';
 import { translations } from '@/constants/languages';
-import { LanguageProvider } from '@/context/language';
+import { LocaleProvider } from '@/context/language';
 import { ModalProvider } from '@/context/modal';
 
 import { Routes } from './routes';
@@ -17,7 +17,7 @@ const NODE_APP = document.getElementById('killerparty');
 const root = createRoot(NODE_APP!);
 
 function App(): JSX.Element {
-  const [language, setLanguage] = useState(
+  const [locale, setLocale] = useState(
     (localStorage.getItem('locale') as Locale) || Locale.FRENCH,
   );
 
@@ -32,12 +32,12 @@ function App(): JSX.Element {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <IntlProvider locale={language} messages={translations[language]}>
-        <LanguageProvider language={language} setLanguage={setLanguage}>
+      <IntlProvider locale={locale} messages={translations[locale]}>
+        <LocaleProvider locale={locale} setLocale={setLocale}>
           <ModalProvider>
             <Routes />
           </ModalProvider>
-        </LanguageProvider>
+        </LocaleProvider>
       </IntlProvider>
     </QueryClientProvider>
   );

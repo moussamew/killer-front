@@ -62,6 +62,7 @@
   "layout.user.update.pseudo.label": "Update my pseudo",
   "layout.user.update.pseudo.placeholder": "New pseudo",
   "layout.user.update.pseudo.confirm.button": "Save changes",
+  "layout.user.language.switch": "Change the interface language",
   "webview.title": "Opened from {webViewApp}",
   "webview.restriction.message": "Access to Killer Party from a third party app is restricted for game experience reasons.",
   "webview.how.to.play": "Okay, but how can we play?",

@@ -26,18 +26,16 @@ function Header({ playerName }: Props): JSX.Element {
   const { openModal } = useContext(ModalContext);
 
   const handleOpenSettings = (): void => {
-    openModal(<SettingsModal />);
+    openModal(<SettingsModal playerName={playerName} />);
   };
 
   return (
     <Navigation>
       <Text>Killer Party</Text>
-      {playerName && (
-        <PlayerInfos onClick={handleOpenSettings}>
-          <Text>{playerName}</Text>
-          <SettingsIcon />
-        </PlayerInfos>
-      )}
+      <PlayerInfos>
+        {playerName && <Text>{playerName}</Text>}
+        <SettingsIcon onClick={handleOpenSettings} />
+      </PlayerInfos>
     </Navigation>
   );
 }
