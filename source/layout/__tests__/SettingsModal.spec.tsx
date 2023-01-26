@@ -18,9 +18,7 @@ describe('<SettingsModal />', () => {
 
     renderWithProviders();
 
-    await screen.findByText(noRoomSession.name);
-
-    await userEvent.click(screen.getByText(noRoomSession.name));
+    await userEvent.click(await screen.findByTitle('settings'));
 
     await userEvent.type(
       screen.getByPlaceholderText('Nouveau nom'),

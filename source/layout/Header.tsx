@@ -34,7 +34,7 @@ function Header({ playerName }: Props): JSX.Element {
       <Text>Killer Party</Text>
       <PlayerInfos>
         {playerName && <Text>{playerName}</Text>}
-        <SettingsIcon onClick={handleOpenSettings} />
+        <SettingsIcon title="settings" onClick={handleOpenSettings} />
       </PlayerInfos>
     </Navigation>
   );

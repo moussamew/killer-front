@@ -24,7 +24,7 @@ describe('<Layout />', () => {
       ),
     });
 
-    await userEvent.click(await screen.findByText(noRoomSession.name));
+    await userEvent.click(await screen.findByTitle('settings'));
 
     expect(screen.getByText('Paramètres')).toBeInTheDocument();
   });
