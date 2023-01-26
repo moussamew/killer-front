@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import tw from 'twin.macro';
 
 import Island from '@/assets/images/island.png';
-import t from '@/helpers/translate';
+import { useTranslation } from '@/hooks/useTranslation';
 import { Layout } from '@/layout/Layout';
 import { RoomPage } from '@/pages/Room';
 import { useSession } from '@/services/player/queries';
@@ -36,6 +36,7 @@ const RoomFeatures = tw.div`
 
 export function PendingRoomPage(): JSX.Element | null {
   const { roomCode } = useParams();
+  const { t } = useTranslation();
   const { session } = useSession();
   const { room } = useRoom(roomCode!);
 
@@ -45,8 +46,8 @@ export function PendingRoomPage(): JSX.Element | null {
         <Content>
           <WelcomeImage alt="welcome" src={Island} />
           <RoomResume>
-            <h1>{t('room.welcome')}</h1>
-            <p>{t('room.join_room_code', { roomCode })}</p>
+            <h1>{t('room.welcome.title')}</h1>
+            <p>{t('room.join.room.code', { roomCode })}</p>
             <RoomMissions />
             <ShareRoomLink />
             {session?.id === room?.admin.id && <StartPartyButton />}

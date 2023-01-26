@@ -5,8 +5,8 @@ import { rest } from 'msw';
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { pendingRoom } from '@/tests/mocks/rooms';
 import { pendingRoomSession, noRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<CreateRoomButton />', () => {
   it('should open a room creation modal if the user does not have a session', async () => {
@@ -18,14 +18,14 @@ describe('<CreateRoomButton />', () => {
 
     renderWithProviders();
 
-    await screen.findByText('The right way to kill your friends..');
+    await screen.findByText('La bonne manière de tuer vos amis..');
 
-    await userEvent.click(screen.getByText('Create new room'));
+    await userEvent.click(screen.getByText('Créer une nouvelle partie'));
 
     expect(
-      screen.getByText('Before starting, create your pseudo'),
+      screen.getByText('Avant de commencer, veuillez choisir un nom'),
     ).toBeInTheDocument();
-    expect(screen.getByText('Create my room')).toBeInTheDocument();
+    expect(screen.getByText('Créer ma partie')).toBeInTheDocument();
   });
 
   it('should create a new room and redirect to it for a player with session', async () => {
@@ -51,15 +51,10 @@ describe('<CreateRoomButton />', () => {
       ),
     );
 
-    await userEvent.click(screen.getByText('Create new room'));
+    await userEvent.click(screen.getByText('Créer une nouvelle partie'));
 
     expect(
-      await screen.findByText('Welcome to the party!'),
-    ).toBeInTheDocument();
-    expect(
-      await screen.findByText(
-        `The code to join this room is ${pendingRoom.code}.`,
-      ),
+      await screen.findByText('Le code pour rejoindre cette partie est SOSPC.'),
     ).toBeInTheDocument();
   });
 

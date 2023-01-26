@@ -5,8 +5,8 @@ import { rest } from 'msw';
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { endedRoom, roomCode } from '@/tests/mocks/rooms';
 import { endedRoomSession, noRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<EndedRoomPage />', () => {
   it('should leave the ended room page to start a new game', async () => {
@@ -21,7 +21,7 @@ describe('<EndedRoomPage />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await userEvent.click(await screen.findByText('Play another party!'));
+    await userEvent.click(await screen.findByText('Jouer une autre partie'));
 
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
@@ -30,7 +30,7 @@ describe('<EndedRoomPage />', () => {
     );
 
     expect(
-      await screen.findByText('The right way to kill your friends..'),
+      await screen.findByText('La bonne manière de tuer vos amis..'),
     ).toBeInTheDocument();
   });
 });

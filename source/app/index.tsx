@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { IntlProvider } from 'react-intl';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import { Notification } from '@/components/Notification';
-import { ModalProvider } from '@/hooks/context/modal';
-import { WebViewDetector } from '@/layout/WebViewDetector';
+import { Locale } from '@/constants/enums';
+import { translations } from '@/constants/languages';
+import { LocaleProvider } from '@/context/locale';
+import { ModalProvider } from '@/context/modal';
 
-import { AppRoutes } from './routes';
+import { Routes } from './routes';
 
 import '../assets/styles/app.css';
 
@@ -14,6 +17,10 @@ const NODE_APP = document.getElementById('killerparty');
 const root = createRoot(NODE_APP!);
 
 function App(): JSX.Element {
+  const [locale, setLocale] = useState(
+    (localStorage.getItem('locale') as Locale) || Locale.FRENCH,
+  );
+
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -25,12 +32,13 @@ function App(): JSX.Element {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ModalProvider>
-        <WebViewDetector>
-          <AppRoutes />
-        </WebViewDetector>
-        <Notification />
-      </ModalProvider>
+      <IntlProvider locale={locale} messages={translations[locale]}>
+        <LocaleProvider locale={locale} setLocale={setLocale}>
+          <ModalProvider>
+            <Routes />
+          </ModalProvider>
+        </LocaleProvider>
+      </IntlProvider>
     </QueryClientProvider>
   );
 }

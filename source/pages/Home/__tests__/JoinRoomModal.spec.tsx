@@ -1,59 +1,92 @@
-import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
-import { PLAYER_ENDPOINT, SESSION_ENDPOINT } from '@/constants/endpoints';
+import {
+  PLAYER_ENDPOINT,
+  ROOM_ENDPOINT,
+  SESSION_ENDPOINT,
+} from '@/constants/endpoints';
 import { fakePlayerOne } from '@/tests/mocks/players';
-import { roomCode } from '@/tests/mocks/rooms';
+import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
+import { noRoomSession, pendingRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<JoinRoomModal />', () => {
-  it('should close modal after joining a room with player session', async () => {
-    renderWithProviders();
-
-    await userEvent.click(await screen.findByText('Join a room'));
-
-    await userEvent.type(
-      screen.getByPlaceholderText('Code of the room'),
-      roomCode,
-    );
-
-    await userEvent.click(screen.getByText('Join this room'));
-
-    await waitForElementToBeRemoved(() => screen.queryByText('Join this room'));
-
-    expect(screen.queryByText('Join this room')).not.toBeInTheDocument();
-  });
-
-  it('should close modal after joining a room without player session', async () => {
+  it('should join a room when player has a session', async () => {
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(400), ctx.json(null)),
+        res(ctx.status(200), ctx.json(noRoomSession)),
       ),
     );
 
     renderWithProviders();
 
-    await screen.findByText('The right way to kill your friends..');
-
-    await userEvent.click(screen.getByText('Join a room'));
+    await userEvent.click(await screen.findByText('Rejoindre une partie'));
 
     await userEvent.type(
-      screen.getByPlaceholderText('Choose a pseudo'),
+      screen.getByPlaceholderText('Code de la partie'),
+      roomCode,
+    );
+
+    await userEvent.click(screen.getByText('Rejoindre cette partie'));
+
+    server.use(
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoomSession)),
+      ),
+      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoom)),
+      ),
+    );
+
+    await screen.findByText('Bienvenue à la fête !');
+
+    expect(
+      screen.getByText('Le code pour rejoindre cette partie est SOSPC.'),
+    ).toBeInTheDocument();
+  });
+
+  it('should close modal after joining a room without player session', async () => {
+    server.use(
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(401), ctx.json(null)),
+      ),
+    );
+
+    renderWithProviders();
+
+    await screen.findByText('La bonne manière de tuer vos amis..');
+
+    await userEvent.click(screen.getByText('Rejoindre une partie'));
+
+    await userEvent.type(
+      screen.getByPlaceholderText('Choisir un nom'),
       fakePlayerOne.name,
     );
 
     await userEvent.type(
-      screen.getByPlaceholderText('Code of the room'),
+      screen.getByPlaceholderText('Code de la partie'),
       roomCode,
     );
 
-    await userEvent.click(screen.getByText('Join this room'));
+    await userEvent.click(screen.getByText('Rejoindre cette partie'));
 
-    await waitForElementToBeRemoved(() => screen.queryByText('Join this room'));
+    server.use(
+      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoomSession)),
+      ),
+      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json(pendingRoom)),
+      ),
+    );
 
-    expect(screen.queryByText('Join this room')).not.toBeInTheDocument();
+    await screen.findByText('Bienvenue à la fête !');
+
+    expect(
+      screen.getByText('Le code pour rejoindre cette partie est SOSPC.'),
+    ).toBeInTheDocument();
   });
 
   it.skip('should show error while joining a room', async () => {

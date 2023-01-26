@@ -5,15 +5,15 @@ import { rest } from 'msw';
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { pendingRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<HomePage />', () => {
   it('should correctly show the home page', async () => {
     renderWithProviders();
 
     expect(
-      await screen.findByText('The right way to kill your friends..'),
+      await screen.findByText('La bonne manière de tuer vos amis..'),
     ).toBeInTheDocument();
   });
 
@@ -29,19 +29,20 @@ describe('<HomePage />', () => {
 
     renderWithProviders();
 
+    await screen.findByText('Bienvenue à la fête !');
+
     expect(
-      await screen.findByText('Welcome to the party!'),
-    ).toBeInTheDocument();
-    expect(
-      await screen.findByText(`The code to join this room is ${roomCode}.`),
+      screen.getByText('Le code pour rejoindre cette partie est SOSPC.'),
     ).toBeInTheDocument();
   });
 
   it('should open the join room modal by clicking on the join room button', async () => {
     renderWithProviders();
 
-    await userEvent.click(await screen.findByText('Join a room'));
+    await userEvent.click(await screen.findByText('Rejoindre une partie'));
 
-    expect(await screen.findByText('Join this room')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Rejoindre cette partie'),
+    ).toBeInTheDocument();
   });
 });

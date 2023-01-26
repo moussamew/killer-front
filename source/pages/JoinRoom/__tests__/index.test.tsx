@@ -13,8 +13,8 @@ import {
   pendingRoomWithMultiplePlayers,
 } from '@/tests/mocks/rooms';
 import { noRoomSession, pendingRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<JoinRoomPage />', () => {
   it('should let the user join automatically the room if the roomCode saved in his session is the same', async () => {
@@ -29,10 +29,8 @@ describe('<JoinRoomPage />', () => {
 
     renderWithProviders({ route: `/join/${roomCode}` });
 
-    await screen.findByText('Welcome to the party!');
-
     expect(
-      screen.getByText(`The code to join this room is ${roomCode}.`),
+      await screen.findByText('Le code pour rejoindre cette partie est SOSPC.'),
     ).toBeInTheDocument();
   });
 
@@ -54,10 +52,8 @@ describe('<JoinRoomPage />', () => {
       ),
     );
 
-    await screen.findByText('Welcome to the party!');
-
     expect(
-      screen.getByText(`The code to join this room is ${roomCode}.`),
+      await screen.findByText('Le code pour rejoindre cette partie est SOSPC.'),
     ).toBeInTheDocument();
   });
 

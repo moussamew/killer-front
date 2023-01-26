@@ -5,8 +5,8 @@ import { rest } from 'msw';
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { pendingRoomSession, noRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<LeaveRoomModal />', () => {
   it('should be able to leave the room', async () => {
@@ -21,9 +21,11 @@ describe('<LeaveRoomModal />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await userEvent.click(await screen.findByTitle('leaveRoom'));
+    await screen.findByText('Bienvenue à la fête !');
 
-    await userEvent.click(screen.getByText('Leave this room'));
+    await userEvent.click(screen.getByTitle('leaveRoom'));
+
+    await userEvent.click(screen.getByText('Quitter la partie'));
 
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
@@ -32,7 +34,7 @@ describe('<LeaveRoomModal />', () => {
     );
 
     expect(
-      await screen.findByText('The right way to kill your friends..'),
+      await screen.findByText('La bonne manière de tuer vos amis..'),
     ).toBeInTheDocument();
   });
 });

@@ -4,8 +4,8 @@ import { rest } from 'msw';
 
 import { PLAYER_ENDPOINT, SESSION_ENDPOINT } from '@/constants/endpoints';
 import { fakePlayerOne } from '@/tests/mocks/players';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 import { CreateRoomModal } from '../CreateRoomModal';
 
@@ -19,20 +19,22 @@ describe('<CreateRoomModal />', () => {
 
     renderWithProviders();
 
-    await screen.findByText('The right way to kill your friends..');
+    await screen.findByText('La bonne manière de tuer vos amis..');
 
-    await userEvent.click(screen.getByText('Create new room'));
+    await userEvent.click(screen.getByText('Créer une nouvelle partie'));
 
     await userEvent.type(
-      screen.getByPlaceholderText('Choose a pseudo'),
+      screen.getByPlaceholderText('Choisir un nom'),
       fakePlayerOne.name,
     );
 
-    await userEvent.click(screen.getByText('Create my room'));
+    await userEvent.click(screen.getByText('Créer ma partie'));
 
-    await waitForElementToBeRemoved(() => screen.queryByText('Create my room'));
+    await waitForElementToBeRemoved(() =>
+      screen.queryByText('Créer ma partie'),
+    );
 
-    expect(screen.queryByText('Create my room')).not.toBeInTheDocument();
+    expect(screen.queryByText('Créer ma partie')).not.toBeInTheDocument();
   });
 
   it.skip('should show error message while creating new player with a new room', async () => {

@@ -5,8 +5,8 @@ import { rest } from 'msw';
 import { SESSION_ENDPOINT } from '@/constants/endpoints';
 import { Layout } from '@/layout/Layout';
 import { noRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<Layout />', () => {
   it('should show the user settings when current player click on settings icon', async () => {
@@ -24,8 +24,8 @@ describe('<Layout />', () => {
       ),
     });
 
-    await userEvent.click(await screen.findByText(noRoomSession.name));
+    await userEvent.click(await screen.findByTitle('settings'));
 
-    expect(screen.getByText('User Settings')).toBeInTheDocument();
+    expect(screen.getByText('Paramètres')).toBeInTheDocument();
   });
 });

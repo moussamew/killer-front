@@ -5,8 +5,8 @@ import { rest } from 'msw';
 import { SESSION_ENDPOINT } from '@/constants/endpoints';
 import { fakePlayerTwo } from '@/tests/mocks/players';
 import { noRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<SettingsModal />', () => {
   it('should let the user update his pseudo', async () => {
@@ -18,16 +18,14 @@ describe('<SettingsModal />', () => {
 
     renderWithProviders();
 
-    await screen.findByText(noRoomSession.name);
-
-    await userEvent.click(screen.getByText(noRoomSession.name));
+    await userEvent.click(await screen.findByTitle('settings'));
 
     await userEvent.type(
-      screen.getByPlaceholderText('New pseudo'),
+      screen.getByPlaceholderText('Nouveau nom'),
       fakePlayerTwo.name,
     );
 
-    await userEvent.click(screen.getByText('Save changes'));
+    await userEvent.click(screen.getByText('Sauvegarder'));
 
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
