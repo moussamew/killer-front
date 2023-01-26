@@ -74,7 +74,7 @@ export function JoinRoomPage(): JSX.Element {
   return (
     <Layout>
       <WelcomeImage alt="welcome" src={Killerparty} />
-      {!session?.name && <CreatePlayer roomCode={roomCode!} />}
+      {!session?.name && <CreatePlayer />}
       {session?.room?.code && <LeaveCurrentRoom />}
     </Layout>
   );

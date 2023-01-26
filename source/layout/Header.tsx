@@ -2,8 +2,7 @@ import { useContext } from 'react';
 import tw from 'twin.macro';
 
 import { ReactComponent as SettingsIcon } from '@/assets/icons/settings.svg';
-import t from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
+import { ModalContext } from '@/context/modal';
 
 import { SettingsModal } from './SettingsModal';
 
@@ -27,18 +26,16 @@ function Header({ playerName }: Props): JSX.Element {
   const { openModal } = useContext(ModalContext);
 
   const handleOpenSettings = (): void => {
-    openModal(<SettingsModal />);
+    openModal(<SettingsModal playerName={playerName} />);
   };
 
   return (
     <Navigation>
-      <Text>{t('header.project_name')}</Text>
-      {playerName && (
-        <PlayerInfos onClick={handleOpenSettings}>
-          <Text>{playerName}</Text>
-          <SettingsIcon />
-        </PlayerInfos>
-      )}
+      <Text>Killer Party</Text>
+      <PlayerInfos>
+        {playerName && <Text>{playerName}</Text>}
+        <SettingsIcon title="settings" onClick={handleOpenSettings} />
+      </PlayerInfos>
     </Navigation>
   );
 }

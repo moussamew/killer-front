@@ -5,11 +5,11 @@ import { rest } from 'msw';
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { adminSession, noRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<RoomSettingsModal />', () => {
-  it('should be able to delete the room as an admin', async () => {
+  it('should be able to delete the room as admin', async () => {
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(adminSession)),
@@ -21,14 +21,18 @@ describe('<RoomSettingsModal />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await userEvent.click(await screen.findByTitle('roomSettings'));
+    await screen.findByText('Bienvenue à la fête !');
+
+    await userEvent.click(screen.getByTitle('roomSettings'));
 
     await userEvent.type(
-      screen.getByPlaceholderText('Confirm by typing the room code'),
+      screen.getByPlaceholderText(
+        /Confirmez en saisissant le code de la partie/,
+      ),
       roomCode,
     );
 
-    await userEvent.click(screen.getByText('Delete the room'));
+    await userEvent.click(screen.getByText('Supprimer'));
 
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
@@ -37,7 +41,7 @@ describe('<RoomSettingsModal />', () => {
     );
 
     expect(
-      await screen.findByText('The right way to kill your friends..'),
+      await screen.findByText('La bonne manière de tuer vos amis..'),
     ).toBeInTheDocument();
   });
 });

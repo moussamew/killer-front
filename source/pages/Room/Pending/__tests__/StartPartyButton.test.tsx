@@ -11,8 +11,8 @@ import {
 import { MercureEventType } from '@/constants/enums';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { pendingRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<StartPartyButton />', () => {
   it.skip('should be able to start a new party', async () => {

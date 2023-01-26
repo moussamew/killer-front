@@ -2,8 +2,8 @@ import { Fragment, useContext } from 'react';
 import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
-import t from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
+import { ModalContext } from '@/context/modal';
+import { useTranslation } from '@/hooks/useTranslation';
 import { useUpdatePlayer } from '@/services/player/mutations';
 
 const HeadContent = tw.div`
@@ -25,6 +25,7 @@ interface Props {
 }
 
 export function KickPlayerModal({ playerName, playerId }: Props): JSX.Element {
+  const { t } = useTranslation();
   const { updatePlayer } = useUpdatePlayer();
   const { closeModal } = useContext(ModalContext);
 
@@ -38,13 +39,13 @@ export function KickPlayerModal({ playerName, playerId }: Props): JSX.Element {
   return (
     <Fragment>
       <HeadContent>
-        <Title>{t('room.kick_room')}</Title>
+        <Title>{t('room.kick.players.title')}</Title>
       </HeadContent>
       <TextContent>
-        <p>{t('room.kick_room_warning', { playerName })}</p>
+        <p>{t('room.kick.players.warning', { playerName })}</p>
       </TextContent>
       <Button
-        content={t('room.kick_room_confirmation', { playerName })}
+        content={t('room.kick.players.confirm.button', { playerName })}
         onClick={handleKickPlayer}
       />
     </Fragment>

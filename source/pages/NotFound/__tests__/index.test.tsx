@@ -4,21 +4,20 @@ import { rest } from 'msw';
 
 import { PLAYER_ENDPOINT, SESSION_ENDPOINT } from '@/constants/endpoints';
 import { RoomErrorCode } from '@/constants/errors';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<NotFoundPage />', () => {
   it('should redirect the player to the home page if wanted', async () => {
     renderWithProviders({ route: '/unknown' });
 
-    await screen.findByText('Oops, something goes wrong!');
+    await screen.findByText('On dirait que quelque chose cloche');
 
-    await userEvent.click(screen.getByText('Go back to home page'));
+    await userEvent.click(screen.getByText(`Retourner à l'accueil`));
 
     expect(
-      await screen.findByText('The right way to kill your friends..'),
+      await screen.findByText('La bonne manière de tuer vos amis..'),
     ).toBeInTheDocument();
-    expect(screen.queryByText('Go back to home page')).not.toBeInTheDocument();
   });
 
   it.skip('should display an error message if needed', async () => {

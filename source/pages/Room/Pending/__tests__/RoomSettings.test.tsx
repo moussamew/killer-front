@@ -5,8 +5,8 @@ import { rest } from 'msw';
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { adminSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<RoomSettings />', () => {
   it('should show and open settings of the room if the user is the room admin', async () => {
@@ -23,6 +23,6 @@ describe('<RoomSettings />', () => {
 
     await userEvent.click(await screen.findByTitle('roomSettings'));
 
-    expect(screen.queryByText('Room settings')).toBeInTheDocument();
+    expect(screen.queryByText('Paramètres de la partie')).toBeInTheDocument();
   });
 });

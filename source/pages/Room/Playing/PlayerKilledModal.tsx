@@ -2,8 +2,8 @@ import { Fragment, useContext } from 'react';
 import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
-import t from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
+import { ModalContext } from '@/context/modal';
+import { useTranslation } from '@/hooks/useTranslation';
 import { PlayerStatus } from '@/services/player/constants';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
@@ -22,6 +22,7 @@ const TextContent = tw.div`
 `;
 
 export function PlayerKilledModal(): JSX.Element {
+  const { t } = useTranslation();
   const { updatePlayer } = useUpdatePlayer();
   const { closeModal } = useContext(ModalContext);
   const { session } = useSession();
@@ -36,13 +37,13 @@ export function PlayerKilledModal(): JSX.Element {
   return (
     <Fragment>
       <HeadContent>
-        <Title>{t('playing_room.player_killed_modal_title')}</Title>
+        <Title>{t('room.player.killed.modal.title')}</Title>
       </HeadContent>
       <TextContent>
-        <p>{t('playing_room.player_killed_modal_text')}</p>
+        <p>{t('room.player.killed.modal.warning')}</p>
       </TextContent>
       <Button
-        content={t('playing_room.player_killed_confirmation')}
+        content={t('room.player.killed.modal.confirm.button')}
         onClick={handleKillPlayer}
       />
     </Fragment>

@@ -4,8 +4,8 @@ import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
-import t from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
+import { ModalContext } from '@/context/modal';
+import { useTranslation } from '@/hooks/useTranslation';
 import { useDeleteRoom } from '@/services/room/mutations';
 
 const Title = tw.h2`
@@ -14,6 +14,7 @@ const Title = tw.h2`
 
 export function RoomSettingsModal(): JSX.Element {
   const { roomCode } = useParams();
+  const { t } = useTranslation();
   const { closeModal } = useContext(ModalContext);
   const [inputRoomCode, setInputRoomCode] = useState('');
   const { deleteRoom } = useDeleteRoom();
@@ -30,17 +31,17 @@ export function RoomSettingsModal(): JSX.Element {
 
   return (
     <div>
-      <Title>{t('room.room_settings')}</Title>
+      <Title>{t('room.settings')}</Title>
       <Input
         id="deleteRoom"
-        label={t('room.delete_current_room')}
+        label={t('room.delete.current.room')}
         value={inputRoomCode}
         onChange={handleInputRoomCode}
-        placeholder={t('room.delete_room_placeholder')}
+        placeholder={t('room.delete.current.room.placeholder')}
         uppercase
       />
       <Button
-        content={t('room.delete_the_room')}
+        content={t('room.delete.current.room.confirm.button')}
         disabled={inputRoomCode !== roomCode}
         onClick={handleDeleteRoom}
       />
