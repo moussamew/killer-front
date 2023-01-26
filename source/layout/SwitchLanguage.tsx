@@ -3,7 +3,7 @@ import tw from 'twin.macro';
 
 import { DropdownList } from '@/components/DropdownList';
 import { languageToLocale, localeToLanguage } from '@/constants/languages';
-import { LocaleContext } from '@/context/language';
+import { LocaleContext } from '@/context/locale';
 import { useTranslation } from '@/hooks/useTranslation';
 
 const Action = tw.div`

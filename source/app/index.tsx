@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { Locale } from '@/constants/enums';
 import { translations } from '@/constants/languages';
-import { LocaleProvider } from '@/context/language';
+import { LocaleProvider } from '@/context/locale';
 import { ModalProvider } from '@/context/modal';
 
 import { Routes } from './routes';
