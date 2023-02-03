@@ -1,5 +1,5 @@
 import { RoomStatus } from '@/services/room/constants';
-import { Room } from '@/services/room/types';
+import { type Room } from '@/services/room/types';
 
 import { fakeMissionOne, fakeMissionThree, fakeMissionTwo } from './missions';
 import { fakePlayerOne, fakePlayerThree, fakePlayerTwo } from './players';

@@ -1,12 +1,12 @@
 import {
   createContext,
-  Dispatch,
-  SetStateAction,
+  type Dispatch,
+  type SetStateAction,
   useCallback,
   useMemo,
 } from 'react';
 
-import { Locale } from '@/constants/enums';
+import { type Locale } from '@/constants/enums';
 
 interface LocaleContextInterface {
   locale: Locale;

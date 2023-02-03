@@ -2,7 +2,7 @@ import { PLAYER_ENDPOINT, SESSION_ENDPOINT } from '@/constants/endpoints';
 import { Method } from '@/constants/enums';
 import { request } from '@/helpers/apis';
 
-import { Player, Session } from './types';
+import { type Player, type Session } from './types';
 
 const { GET, POST, PATCH } = Method;
 

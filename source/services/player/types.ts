@@ -1,9 +1,9 @@
-import { QueryObserverResult, UseMutationResult } from 'react-query';
+import { type QueryObserverResult, type UseMutationResult } from 'react-query';
 
-import { Mission } from '../mission/types';
-import { Room } from '../room/types';
+import { type Mission } from '../mission/types';
+import { type Room } from '../room/types';
 
-import { PlayerStatus } from './constants';
+import { type PlayerStatus } from './constants';
 
 export interface Player {
   id: number;

@@ -1,5 +1,5 @@
-import { Method } from '@/constants/enums';
-import { RoomErrorCode } from '@/constants/errors';
+import { type Method } from '@/constants/enums';
+import { type RoomErrorCode } from '@/constants/errors';
 
 export type ErrorCode = RoomErrorCode;
 

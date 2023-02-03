@@ -3,7 +3,7 @@ import { Method } from '@/constants/enums';
 import { request } from '@/helpers/apis';
 
 import { RoomStatus } from './constants';
-import { Room } from './types';
+import { type Room } from './types';
 
 const { POST, GET, DELETE, PATCH } = Method;
 

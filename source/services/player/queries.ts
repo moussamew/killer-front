@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 
 import { getSessionRequest } from './requests';
-import { SessionQuery } from './types';
+import { type SessionQuery } from './types';
 
 export function useSession(): SessionQuery {
   const {

@@ -1,5 +1,5 @@
-import { render, RenderResult } from '@testing-library/react';
-import { ReactNode } from 'react';
+import { render, type RenderResult } from '@testing-library/react';
+import { type ReactNode } from 'react';
 import { IntlProvider } from 'react-intl';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 

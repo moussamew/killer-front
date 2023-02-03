@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import tw from 'twin.macro';
 
 import { ReactComponent as CloseIcon } from '@/assets/icons/close.svg';

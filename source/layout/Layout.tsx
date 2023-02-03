@@ -1,4 +1,4 @@
-import { Fragment, ReactNode, useContext } from 'react';
+import { Fragment, type ReactNode, useContext } from 'react';
 import tw from 'twin.macro';
 
 import { Loader } from '@/components/Loader';

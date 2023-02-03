@@ -1,7 +1,7 @@
 import { useMutation } from 'react-query';
 
 import { createNavigatorClipboardRequest } from './requests';
-import { CreateNavigatorClipboardMutation } from './types';
+import { type CreateNavigatorClipboardMutation } from './types';
 
 export function useCreateNavigatorClipboard(): CreateNavigatorClipboardMutation {
   const createNavigatorClipboard = useMutation((roomLink: string) =>

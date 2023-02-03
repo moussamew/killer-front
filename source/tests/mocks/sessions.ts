@@ -1,4 +1,4 @@
-import { Session } from '@/services/player/types';
+import { type Session } from '@/services/player/types';
 import { RoomStatus } from '@/services/room/constants';
 
 import { fakeMissionOne, fakeMissionThree, fakeMissionTwo } from './missions';

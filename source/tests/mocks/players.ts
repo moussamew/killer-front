@@ -1,5 +1,5 @@
 import { PlayerStatus } from '@/services/player/constants';
-import { Player } from '@/services/player/types';
+import { type Player } from '@/services/player/types';
 
 export const fakePlayerOne = {
   id: 1,

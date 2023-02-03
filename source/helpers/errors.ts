@@ -1,4 +1,4 @@
-import { ErrorCode, RequestErrorParams } from './types';
+import { type ErrorCode, type RequestErrorParams } from './types';
 
 export class RequestError extends Error {
   readonly errorCode: ErrorCode;

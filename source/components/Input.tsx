@@ -1,4 +1,4 @@
-import { ChangeEvent, ForwardedRef, forwardRef } from 'react';
+import { type ChangeEvent, type ForwardedRef, forwardRef } from 'react';
 import tw, { styled } from 'twin.macro';
 
 const Content = tw.div`
