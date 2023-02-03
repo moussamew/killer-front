@@ -1,4 +1,4 @@
-import { RequestParams } from './types';
+import { type RequestParams } from './types';
 
 export async function request<T>({
   url,

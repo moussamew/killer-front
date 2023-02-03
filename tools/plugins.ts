@@ -1,4 +1,4 @@
-import { Plugin } from 'vite';
+import { type Plugin } from 'vite';
 
 /**
  * Plugin that listen to `JSON` files changes and update the application.

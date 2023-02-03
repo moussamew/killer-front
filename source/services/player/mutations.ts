@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query';
 
 import { createPlayerRequest, updatePlayerRequest } from './requests';
-import { CreatePlayerMutation, UpdatePlayerMutation } from './types';
+import { type CreatePlayerMutation, type UpdatePlayerMutation } from './types';
 
 export function useUpdatePlayer(): UpdatePlayerMutation {
   const queryClient = useQueryClient();

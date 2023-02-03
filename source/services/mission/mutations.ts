@@ -1,7 +1,10 @@
 import { useMutation, useQueryClient } from 'react-query';
 
 import { createMissionRequest, deleteMissionRequest } from './requests';
-import { CreateMissionMutation, DeleteMissionMutation } from './types';
+import {
+  type CreateMissionMutation,
+  type DeleteMissionMutation,
+} from './types';
 
 export function useCreateMission(): CreateMissionMutation {
   const queryClient = useQueryClient();

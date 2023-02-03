@@ -1,6 +1,6 @@
-import { PrimitiveType, useIntl } from 'react-intl';
+import { type PrimitiveType, useIntl } from 'react-intl';
 
-import { translations } from '@/constants/languages';
+import { type translations } from '@/constants/languages';
 
 export type TranslationKey =
   keyof (typeof translations)[keyof typeof translations];

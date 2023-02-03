@@ -105,5 +105,9 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     'no-void': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/consistent-type-imports': [
+      'error',
+      { fixStyle: 'inline-type-imports' },
+    ],
   },
 };

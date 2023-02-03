@@ -6,9 +6,9 @@ import {
   startPartyRequest,
 } from './requests';
 import {
-  CreateRoomMutation,
-  DeleteRoomMutation,
-  StartPartyMutation,
+  type CreateRoomMutation,
+  type DeleteRoomMutation,
+  type StartPartyMutation,
 } from './types';
 
 export function useCreateRoom(): CreateRoomMutation {

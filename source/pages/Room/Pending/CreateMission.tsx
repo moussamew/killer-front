@@ -1,4 +1,4 @@
-import { ChangeEvent, Fragment, useState } from 'react';
+import { type ChangeEvent, Fragment, useState } from 'react';
 
 import { ReactComponent as AddIcon } from '@/assets/icons/add.svg';
 import { Button } from '@/components/Button';

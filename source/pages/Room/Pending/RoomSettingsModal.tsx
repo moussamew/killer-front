@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useState } from 'react';
+import { type ChangeEvent, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import tw from 'twin.macro';
 

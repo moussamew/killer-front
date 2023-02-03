@@ -1,4 +1,4 @@
-import { ChangeEvent, Fragment, useContext, useState } from 'react';
+import { type ChangeEvent, Fragment, useContext, useState } from 'react';
 import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';

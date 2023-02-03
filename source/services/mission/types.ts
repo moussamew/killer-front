@@ -1,4 +1,4 @@
-import { UseMutationResult } from 'react-query';
+import { type UseMutationResult } from 'react-query';
 
 export interface Mission {
   id: number;
