@@ -3,7 +3,7 @@ import tw, { styled } from 'twin.macro';
 
 import { ReactComponent as DeleteIcon } from '@/assets/icons/delete.svg';
 import Idea from '@/assets/images/idea.png';
-import t from '@/helpers/translate';
+import { useTranslation } from '@/hooks/useTranslation';
 import { useDeleteMission } from '@/services/mission/mutations';
 import { useSession } from '@/services/player/queries';
 
@@ -39,6 +39,7 @@ const DeleteMission = styled.div`
 `;
 
 export function PlayerMissions(): JSX.Element {
+  const { t } = useTranslation();
   const { session } = useSession();
   const { deleteMission } = useDeleteMission();
 
@@ -51,8 +52,8 @@ export function PlayerMissions(): JSX.Element {
       <Section>
         <Image alt="missions" src={Idea} />
         <div>
-          <h2>{t('room.manage_missions')}</h2>
-          <p>{t('room.missions_description')}</p>
+          <h2>{t('room.manage.missions')}</h2>
+          <p>{t('room.missions.description')}</p>
         </div>
       </Section>
       <hr />

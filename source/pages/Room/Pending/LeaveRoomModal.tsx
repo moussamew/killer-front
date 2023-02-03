@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
-import t from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
+import { ModalContext } from '@/context/modal';
+import { useTranslation } from '@/hooks/useTranslation';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
@@ -21,6 +21,7 @@ const TextContent = tw.div`
 `;
 
 export function LeaveRoomModal(): JSX.Element {
+  const { t } = useTranslation();
   const { updatePlayer } = useUpdatePlayer();
   const { session } = useSession();
   const { closeModal } = useContext(ModalContext);
@@ -35,13 +36,13 @@ export function LeaveRoomModal(): JSX.Element {
   return (
     <div>
       <HeadContent>
-        <Title>{t('room.leave_room')}</Title>
+        <Title>{t('room.leave.title')}</Title>
       </HeadContent>
       <TextContent>
-        <p>{t('room.leave_room_warning')}</p>
+        <p>{t('room.leave.warning')}</p>
       </TextContent>
       <Button
-        content={t('room.leave_room_confirmation')}
+        content={t('room.leave.confirm.button')}
         onClick={handleLeaveRoom}
       />
     </div>

@@ -3,8 +3,8 @@ import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
-import t from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
+import { ModalContext } from '@/context/modal';
+import { useTranslation } from '@/hooks/useTranslation';
 import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
@@ -19,6 +19,7 @@ const Title = tw.h2`
 export function JoinRoomModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
   const [roomCode, setRoomCode] = useState('');
+  const { t } = useTranslation();
   const { closeModal } = useContext(ModalContext);
   const { session } = useSession();
   const { createPlayer } = useCreatePlayer();
@@ -52,28 +53,28 @@ export function JoinRoomModal(): JSX.Element {
   return (
     <Fragment>
       <HeadContent>
-        <Title>{t('home.join_room')}</Title>
+        <Title>{t('home.join.room')}</Title>
       </HeadContent>
       {!session?.name && (
         <Input
           id="pseudo"
           type="text"
-          label={t('common.create_pseudo_label')}
-          placeholder={t('common.create_pseudo_placeholder')}
+          label={t('home.create.pseudo.label')}
+          placeholder={t('home.create.pseudo.placeholder')}
           value={pseudo}
           onChange={handlePseudo}
         />
       )}
       <Input
         id="joinRoom"
-        label={t('home.room_code_label')}
-        placeholder={t('home.room_code_placeholder')}
+        label={t('home.join.room.code.label')}
+        placeholder={t('home.join.room.code.placeholder')}
         value={roomCode}
         onChange={handleRoomCode}
         uppercase
       />
       <Button
-        content={t('home.join_room_modal_button')}
+        content={t('home.join.room.confirm.button')}
         disabled={!roomCode}
         onClick={handleJoinRoom}
       />

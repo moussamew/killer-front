@@ -22,8 +22,8 @@ import {
   pendingRoomSession,
   noRoomSession,
 } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 const {
   PLAYER_KILLED,
@@ -48,7 +48,7 @@ describe('<RoomPage />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Welcome to the party!');
+    await screen.findByText('Bienvenue à la fête !');
   });
 
   it('should redirect player to playing room page if the status of the room is IN_GAME', async () => {
@@ -63,7 +63,7 @@ describe('<RoomPage />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Try to kill your target and survive!');
+    await screen.findByText('Essayez de tuer votre cible et de survivre !');
   });
 
   it('should redirect player to ended room page if the status of the room is ENDED', async () => {
@@ -78,7 +78,7 @@ describe('<RoomPage />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Play another party!');
+    await screen.findByText('Jouer une autre partie');
   });
 
   it('should redirect player to join room page if the player did not have a player session', async () => {
@@ -92,7 +92,7 @@ describe('<RoomPage />', () => {
 
     expect(
       await screen.findByText(
-        'You must create a pseudo before joining this room.',
+        'Vous devez choisir un nom avant de rejoindre cette partie.',
       ),
     ).toBeInTheDocument();
   });
@@ -107,7 +107,7 @@ describe('<RoomPage />', () => {
     renderWithProviders({ route: '/room/P9LDG' });
 
     expect(
-      await screen.findByText(`Already inside the room ${roomCode}!`),
+      await screen.findByText(`Déjà à l'intérieur de la partie SOSPC !`),
     ).toBeInTheDocument();
   });
 
@@ -288,7 +288,7 @@ describe('<RoomPage />', () => {
     sources[roomEventSource].emit(messageEvent.type, messageEvent);
 
     expect(
-      await screen.findByText('The right way to kill your friends..'),
+      await screen.findByText('La bonne manière de tuer vos amis..'),
     ).toBeInTheDocument();
     expect(screen.queryByText('Welcome to the party!')).not.toBeInTheDocument();
 

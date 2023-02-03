@@ -5,8 +5,8 @@ import { rest } from 'msw';
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { playingRoom, roomCode } from '@/tests/mocks/rooms';
 import { playingRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<PlayerKilledButton />', () => {
   it('should open killed modal when the player click on killed button', async () => {
@@ -21,10 +21,10 @@ describe('<PlayerKilledButton />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Try to kill your target and survive!');
+    await screen.findByText('Essayez de tuer votre cible et de survivre !');
 
-    await userEvent.click(screen.getByText('I have been killed'));
+    await userEvent.click(screen.getByText(`J'ai été tué`));
 
-    expect(await screen.findByText('Killed by my target')).toBeInTheDocument();
+    expect(await screen.findByText('Tué par ma cible')).toBeInTheDocument();
   });
 });

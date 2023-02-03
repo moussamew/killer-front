@@ -5,8 +5,8 @@ import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
 import { PlayerStatus } from '@/services/player/constants';
 import { playingRoom, roomCode } from '@/tests/mocks/rooms';
 import { playingRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<PlayingRoomPage />', () => {
   it('should render playing room page with current target', async () => {
@@ -21,11 +21,10 @@ describe('<PlayingRoomPage />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Try to kill your target and survive!');
-
     expect(
-      screen.getByText(playingRoomSession.assignedMission.content),
+      await screen.findByText('La cible à tuer est..'),
     ).toBeInTheDocument();
+    expect(screen.getByText('NEO')).toBeInTheDocument();
   });
 
   it('should render playing room page with dead message if the player is dead', async () => {
@@ -43,11 +42,9 @@ describe('<PlayingRoomPage />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Too bad! You are dead.');
-
     expect(
-      screen.getByText(
-        'Dead men tell no tales.. You just have to wait for the end of the game.',
+      await screen.findByText(
+        `Les morts ne racontent pas d'histoires... Vous devez juste attendre la fin du jeu.`,
       ),
     ).toBeInTheDocument();
   });

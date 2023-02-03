@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import tw from 'twin.macro';
 
 import { ReactComponent as RoomSettingsIcon } from '@/assets/icons/roomSettings.svg';
-import t from '@/helpers/translate';
-import { ModalContext } from '@/hooks/context/modal';
+import { ModalContext } from '@/context/modal';
+import { useTranslation } from '@/hooks/useTranslation';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 
@@ -24,6 +24,7 @@ const Settings = tw.div`
 `;
 
 export function RoomSettings(): JSX.Element {
+  const { t } = useTranslation();
   const { session } = useSession();
   const { roomCode } = useParams();
   const { room } = useRoom(roomCode!);
@@ -36,13 +37,13 @@ export function RoomSettings(): JSX.Element {
   return (
     <Content>
       <SectionHeader>
-        <h2>{t('room.players_list')}</h2>
+        <h2>{t('room.players.list')}</h2>
         {session?.id === room?.admin.id && (
           <Settings onClick={handleRoomSettings}>
             <RoomSettingsIcon title="roomSettings" />
           </Settings>
         )}
-        <p>{t('room.players_list_description')}</p>
+        <p>{t('room.players.list.description')}</p>
       </SectionHeader>
     </Content>
   );

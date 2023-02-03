@@ -9,8 +9,8 @@ import {
 } from '@/constants/endpoints';
 import { pendingRoomWithMissions, roomCode } from '@/tests/mocks/rooms';
 import { pendingRoomSession } from '@/tests/mocks/sessions';
+import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-import { renderWithProviders } from '@/tests/utils';
 
 describe('<RoomMissions />', () => {
   it('should show the count of all missions in the room', async () => {
@@ -25,8 +25,10 @@ describe('<RoomMissions />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
+    await screen.findByText('Bienvenue à la fête !');
+
     expect(
-      await screen.findByText('There is currently 3 missions in this room.'),
+      screen.getByText('Il y a actuellement 3 missions dans cette partie.'),
     ).toBeInTheDocument();
   });
 

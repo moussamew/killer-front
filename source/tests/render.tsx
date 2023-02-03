@@ -1,20 +1,22 @@
 import { render, RenderResult } from '@testing-library/react';
 import { ReactNode } from 'react';
+import { IntlProvider } from 'react-intl';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
-import { AppRoutes } from '@/app/routes';
-import { Notification } from '@/components/Notification';
-import { ModalProvider } from '@/hooks/context/modal';
+import { Routes } from '@/app/routes';
+import { Locale } from '@/constants/enums';
+import { translations } from '@/constants/languages';
+import { ModalProvider } from '@/context/modal';
 
 interface RenderParams {
   component?: ReactNode;
   route?: string;
 }
 
-const renderWithProviders = ({
-  component = <AppRoutes />,
+export function renderWithProviders({
+  component = <Routes />,
   route = '/',
-}: RenderParams = {}): RenderResult => {
+}: RenderParams = {}): RenderResult {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -33,10 +35,12 @@ const renderWithProviders = ({
 
   return render(
     <QueryClientProvider client={queryClient}>
-      <ModalProvider>{component}</ModalProvider>
-      <Notification />
+      <IntlProvider
+        locale={Locale.FRENCH}
+        messages={translations[Locale.FRENCH]}
+      >
+        <ModalProvider>{component}</ModalProvider>
+      </IntlProvider>
     </QueryClientProvider>,
   );
-};
-
-export { renderWithProviders };
+}

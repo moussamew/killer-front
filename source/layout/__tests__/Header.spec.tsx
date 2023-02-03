@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 
 import { fakePlayerOne } from '@/tests/mocks/players';
-import { renderWithProviders } from '@/tests/utils';
+import { renderWithProviders } from '@/tests/render';
 
 import Header from '../Header';
 
