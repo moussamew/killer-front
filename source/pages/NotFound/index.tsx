@@ -4,7 +4,6 @@ import tw from 'twin.macro';
 import NotFoundSrc from '@/assets/images/not-found.jpg';
 import { Button } from '@/components/Button';
 import { useTranslation } from '@/hooks/useTranslation';
-import { Layout } from '@/layout/Layout';
 
 const SectionTitle = tw.div`
   text-center 
@@ -28,7 +27,7 @@ export function NotFoundPage(): JSX.Element {
   };
 
   return (
-    <Layout>
+    <div>
       <SectionTitle>
         <h1>{t('notfound.title')}</h1>
         <p>{t('notfound.description')}</p>
@@ -40,6 +39,6 @@ export function NotFoundPage(): JSX.Element {
       </SectionTitle>
       <Image alt="notFound" src={NotFoundSrc} />
       <Button content={t('notfound.back')} onClick={handleGoBack} />
-    </Layout>
+    </div>
   );
 }

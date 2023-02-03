@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import tw from 'twin.macro';
 
@@ -29,7 +29,7 @@ const Text = tw.p`
 `;
 
 interface Props {
-  children: ReactNode | ReactNode[];
+  children: JSX.Element;
 }
 
 export function WebViewDetector({ children }: Props): JSX.Element {

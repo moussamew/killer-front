@@ -4,7 +4,6 @@ import tw from 'twin.macro';
 
 import Killerparty from '@/assets/images/killerparty.png';
 import { useTranslation } from '@/hooks/useTranslation';
-import { Layout } from '@/layout/Layout';
 import { useSession } from '@/services/player/queries';
 
 import { CreateRoomButton } from './CreateRoomButton';
@@ -30,12 +29,12 @@ export function HomePage(): JSX.Element {
   }, [navigate, session?.room?.code]);
 
   return (
-    <Layout>
+    <div>
       <WelcomeImage alt="welcome" src={Killerparty} />
       <h1>{t('home.title')}</h1>
       <Text>{t('home.description')}</Text>
       <CreateRoomButton playerName={session?.name} />
       <JoinRoomButton />
-    </Layout>
+    </div>
   );
 }

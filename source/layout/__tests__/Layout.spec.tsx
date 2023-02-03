@@ -16,13 +16,7 @@ describe('<Layout />', () => {
       ),
     );
 
-    renderWithProviders({
-      component: (
-        <Layout>
-          <div />
-        </Layout>
-      ),
-    });
+    renderWithProviders({ component: <Layout /> });
 
     await userEvent.click(await screen.findByTitle('settings'));
 

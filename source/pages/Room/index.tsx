@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
@@ -12,11 +12,7 @@ const { ROOM_IN_GAME, ROOM_DELETED, ROOM_UPDATED, PLAYER_UPDATED } =
   MercureEventType;
 const { PENDING, IN_GAME, ENDED } = RoomStatus;
 
-interface Props {
-  children?: JSX.Element;
-}
-
-export function RoomPage({ children }: Props): JSX.Element | null {
+export function RoomPage(): JSX.Element | null {
   const navigate = useNavigate();
   const { roomCode } = useParams();
   const { isLoading, session, refetchSession } = useSession();
@@ -115,5 +111,5 @@ export function RoomPage({ children }: Props): JSX.Element | null {
     return () => roomEventSource.close();
   }, [roomCode, navigate, refetchSession, refetchRoom]);
 
-  return children || null;
+  return <Outlet /> || null;
 }

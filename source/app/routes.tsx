@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import { Layout } from '@/layout/Layout';
 import { HomePage } from '@/pages/Home';
 import { JoinRoomPage } from '@/pages/JoinRoom';
 import { NotFoundPage } from '@/pages/NotFound';
@@ -13,15 +14,31 @@ export function Routes(): JSX.Element {
     <RouterProvider
       router={createBrowserRouter([
         {
-          path: '/',
-          element: <HomePage />,
+          element: <Layout />,
+          children: [
+            { path: '/', element: <HomePage /> },
+            { path: '/join/:roomCode', element: <JoinRoomPage /> },
+            {
+              path: '/room/:roomCode',
+              element: <RoomPage />,
+              children: [
+                {
+                  path: '/room/:roomCode/pending',
+                  element: <PendingRoomPage />,
+                },
+                {
+                  path: '/room/:roomCode/playing',
+                  element: <PlayingRoomPage />,
+                },
+                {
+                  path: '/room/:roomCode/ended',
+                  element: <EndedRoomPage />,
+                },
+              ],
+            },
+            { path: '*', element: <NotFoundPage /> },
+          ],
         },
-        { path: '/join/:roomCode', element: <JoinRoomPage /> },
-        { path: '/room/:roomCode', element: <RoomPage /> },
-        { path: '/room/:roomCode/pending', element: <PendingRoomPage /> },
-        { path: '/room/:roomCode/playing', element: <PlayingRoomPage /> },
-        { path: '/room/:roomCode/ended', element: <EndedRoomPage /> },
-        { path: '*', element: <NotFoundPage /> },
       ])}
     />
   );

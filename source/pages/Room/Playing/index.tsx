@@ -5,8 +5,6 @@ import tw, { styled } from 'twin.macro';
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
 import { MercureEventType } from '@/constants/enums';
-import { Layout } from '@/layout/Layout';
-import { RoomPage } from '@/pages/Room';
 import { PlayerList } from '@/pages/Room/Pending/PlayerList';
 import { PlayerStatus } from '@/services/player/constants';
 import { useSession } from '@/services/player/queries';
@@ -49,20 +47,18 @@ export function PlayingRoomPage(): JSX.Element {
   }, [roomCode, refetchSession]);
 
   return (
-    <RoomPage>
-      <Layout>
-        <Content isPlayerDead={session?.status === PlayerStatus.KILLED}>
-          <Status />
-          {session?.status === PlayerStatus.ALIVE && (
-            <Fragment>
-              <Spacer />
-              <PlayerKilledButton />
-            </Fragment>
-          )}
-        </Content>
-        <Spacer />
-        <PlayerList />
-      </Layout>
-    </RoomPage>
+    <div>
+      <Content isPlayerDead={session?.status === PlayerStatus.KILLED}>
+        <Status />
+        {session?.status === PlayerStatus.ALIVE && (
+          <Fragment>
+            <Spacer />
+            <PlayerKilledButton />
+          </Fragment>
+        )}
+      </Content>
+      <Spacer />
+      <PlayerList />
+    </div>
   );
 }
