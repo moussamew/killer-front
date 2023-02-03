@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { IntlProvider } from 'react-intl';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
+import { QueryConfig } from '@/constants/config';
 import { Locale } from '@/constants/enums';
 import { translations } from '@/constants/languages';
 import { LocaleProvider } from '@/context/locale';
@@ -21,14 +22,7 @@ function App(): JSX.Element {
     (localStorage.getItem('locale') as Locale) || Locale.FRENCH,
   );
 
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false,
-        retry: false,
-      },
-    },
-  });
+  const queryClient = new QueryClient(QueryConfig);
 
   return (
     <QueryClientProvider client={queryClient}>

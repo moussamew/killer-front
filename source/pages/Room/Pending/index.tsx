@@ -3,8 +3,6 @@ import tw from 'twin.macro';
 
 import Island from '@/assets/images/island.png';
 import { useTranslation } from '@/hooks/useTranslation';
-import { Layout } from '@/layout/Layout';
-import { RoomPage } from '@/pages/Room';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 
@@ -41,24 +39,22 @@ export function PendingRoomPage(): JSX.Element | null {
   const { room } = useRoom(roomCode!);
 
   return (
-    <RoomPage>
-      <Layout>
-        <Content>
-          <WelcomeImage alt="welcome" src={Island} />
-          <RoomResume>
-            <h1>{t('room.welcome.title')}</h1>
-            <p>{t('room.join.room.code', { roomCode })}</p>
-            <RoomMissions />
-            <ShareRoomLink />
-            {session?.id === room?.admin.id && <StartPartyButton />}
-          </RoomResume>
-        </Content>
-        <hr />
-        <RoomFeatures>
-          <PlayerMissions />
-          <PlayerList />
-        </RoomFeatures>
-      </Layout>
-    </RoomPage>
+    <div>
+      <Content>
+        <WelcomeImage alt="welcome" src={Island} />
+        <RoomResume>
+          <h1>{t('room.welcome.title')}</h1>
+          <p>{t('room.join.room.code', { roomCode })}</p>
+          <RoomMissions />
+          <ShareRoomLink />
+          {session?.id === room?.admin.id && <StartPartyButton />}
+        </RoomResume>
+      </Content>
+      <hr />
+      <RoomFeatures>
+        <PlayerMissions />
+        <PlayerList />
+      </RoomFeatures>
+    </div>
   );
 }

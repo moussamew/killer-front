@@ -4,8 +4,6 @@ import tw from 'twin.macro';
 import Winner from '@/assets/images/winner.png';
 import { Button } from '@/components/Button';
 import { useTranslation } from '@/hooks/useTranslation';
-import { Layout } from '@/layout/Layout';
-import { RoomPage } from '@/pages/Room';
 import { PlayerStatus } from '@/services/player/constants';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
@@ -39,20 +37,16 @@ export function EndedRoomPage(): JSX.Element {
   );
 
   return (
-    <RoomPage>
-      <Layout>
-        <SectionTitle>
-          <h1>
-            {t('room.winner.name', { playerName: lastManStanding?.name })}
-          </h1>
-          <p>{t('room.winner.congrats')}</p>
-        </SectionTitle>
-        <Image alt="notFound" src={Winner} />
-        <Button
-          content={t('room.play.another.party.button')}
-          onClick={handleLeaveRoom}
-        />
-      </Layout>
-    </RoomPage>
+    <div>
+      <SectionTitle>
+        <h1>{t('room.winner.name', { playerName: lastManStanding?.name })}</h1>
+        <p>{t('room.winner.congrats')}</p>
+      </SectionTitle>
+      <Image alt="notFound" src={Winner} />
+      <Button
+        content={t('room.play.another.party.button')}
+        onClick={handleLeaveRoom}
+      />
+    </div>
   );
 }

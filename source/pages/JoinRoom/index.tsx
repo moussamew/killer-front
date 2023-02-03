@@ -6,7 +6,6 @@ import Killerparty from '@/assets/images/killerparty.png';
 import { Loader } from '@/components/Loader';
 import { RoomErrorCode } from '@/constants/errors';
 import { RequestError } from '@/helpers/errors';
-import { Layout } from '@/layout/Layout';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
@@ -72,10 +71,10 @@ export function JoinRoomPage(): JSX.Element {
   }
 
   return (
-    <Layout>
+    <div>
       <WelcomeImage alt="welcome" src={Killerparty} />
       {!session?.name && <CreatePlayer />}
       {session?.room?.code && <LeaveCurrentRoom />}
-    </Layout>
+    </div>
   );
 }
