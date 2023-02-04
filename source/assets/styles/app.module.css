@@ -7,6 +7,10 @@
   letter-spacing: -0.05rem;
 }
 
+h3 {
+  font-weight: 400;
+}
+
 @layer base {
   html {
     @apply scroll-smooth;
