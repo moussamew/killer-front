@@ -1,10 +1,12 @@
+import reactRefresh from '@vitejs/plugin-react';
 import { type Plugin } from 'vite';
+import svgr from 'vite-plugin-svgr';
 
 /**
  * Plugin that listen to `JSON` files changes and update the application.
  * This is actually used for all translations in the application that are based on `JSON` files.
  */
-export const HotReloadJSON = (): Plugin => ({
+const HotReloadJSON = (): Plugin => ({
   name: 'json-hot-reload',
   apply: 'serve',
   enforce: 'post',
@@ -14,3 +16,13 @@ export const HotReloadJSON = (): Plugin => ({
     }
   },
 });
+
+export const Plugins = [
+  reactRefresh({
+    babel: {
+      plugins: ['babel-plugin-macros', 'babel-plugin-styled-components'],
+    },
+  }),
+  HotReloadJSON(),
+  svgr(),
+];
