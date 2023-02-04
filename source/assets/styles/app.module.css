@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  font-family: 'Inter', sans-serif;
+  font-family: Inter, sans-serif;
   letter-spacing: -0.05rem;
 }
 
@@ -14,6 +14,7 @@ h3 {
 @layer base {
   html {
     @apply scroll-smooth;
+
     font-size: 62.5%;
   }
 

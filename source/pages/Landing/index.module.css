@@ -15,11 +15,11 @@
 
 .button {
   padding: 20px;
+  background-color: hsl(210deg 7% 20%);
+  color: hsl(255deg 100% 100%);
   font-size: 18px;
-  color: hsl(255, 100%, 100%);
-  background-color: hsl(210, 7%, 20%);
-}
 
-.button:hover {
-  background-color: hsl(210, 7%, 25%);
+  &:hover {
+    background-color: hsl(210deg 7% 25%);
+  }
 }
