@@ -15,7 +15,7 @@ import { StartPartyButton } from './StartPartyButton';
 const Content = tw.div`
   flex flex-col md:flex-row 
   items-center md:items-start mb-2 md:mb-4 
-  justify-center
+  justify-center pb-2 border-b
 `;
 
 const WelcomeImage = tw.img`
@@ -39,7 +39,7 @@ export function PendingRoomPage(): JSX.Element | null {
   const { room } = useRoom(roomCode!);
 
   return (
-    <div>
+    <>
       <Content>
         <WelcomeImage alt="welcome" src={Island} />
         <RoomResume>
@@ -50,11 +50,10 @@ export function PendingRoomPage(): JSX.Element | null {
           {session?.id === room?.admin.id && <StartPartyButton />}
         </RoomResume>
       </Content>
-      <hr />
       <RoomFeatures>
         <PlayerMissions />
         <PlayerList />
       </RoomFeatures>
-    </div>
+    </>
   );
 }

@@ -29,12 +29,12 @@ export function HomePage(): JSX.Element {
   }, [navigate, session?.room?.code]);
 
   return (
-    <div>
+    <>
       <WelcomeImage alt="welcome" src={Killerparty} />
       <h1>{t('home.title')}</h1>
       <Text>{t('home.description')}</Text>
       <CreateRoomButton playerName={session?.name} />
       <JoinRoomButton />
-    </div>
+    </>
   );
 }

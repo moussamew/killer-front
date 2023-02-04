@@ -13,7 +13,7 @@ import { Routes } from './routes';
 
 import '../assets/styles/app.css';
 
-const NODE_APP = document.getElementById('killerparty');
+const NODE_APP = document.getElementById('app');
 
 const root = createRoot(NODE_APP!);
 

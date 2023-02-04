@@ -34,7 +34,7 @@ export function CreateRoomModal(): JSX.Element {
   };
 
   return (
-    <div>
+    <>
       <HeadContent>
         <Title>{t('home.create.room.button')}</Title>
       </HeadContent>
@@ -51,6 +51,6 @@ export function CreateRoomModal(): JSX.Element {
         disabled={!pseudo}
         onClick={handleCreateRoom}
       />
-    </div>
+    </>
   );
 }

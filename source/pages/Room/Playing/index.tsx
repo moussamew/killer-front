@@ -47,7 +47,7 @@ export function PlayingRoomPage(): JSX.Element {
   }, [roomCode, refetchSession]);
 
   return (
-    <div>
+    <>
       <Content isPlayerDead={session?.status === PlayerStatus.KILLED}>
         <Status />
         {session?.status === PlayerStatus.ALIVE && (
@@ -59,6 +59,6 @@ export function PlayingRoomPage(): JSX.Element {
       </Content>
       <Spacer />
       <PlayerList />
-    </div>
+    </>
   );
 }

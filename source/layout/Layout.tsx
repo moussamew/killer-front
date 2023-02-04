@@ -11,7 +11,7 @@ import { useSession } from '@/services/player/queries';
 import Header from './Header';
 import { WebViewDetector } from './WebViewDetector';
 
-const Content = tw.div`
+const Content = tw.main`
   max-w-screen-xl m-auto
   inset-0 px-2 mb-2
 `;

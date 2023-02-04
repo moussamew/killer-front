@@ -71,10 +71,10 @@ export function JoinRoomPage(): JSX.Element {
   }
 
   return (
-    <div>
+    <>
       <WelcomeImage alt="welcome" src={Killerparty} />
       {!session?.name && <CreatePlayer />}
       {session?.room?.code && <LeaveCurrentRoom />}
-    </div>
+    </>
   );
 }

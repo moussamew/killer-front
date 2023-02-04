@@ -37,7 +37,7 @@ export function EndedRoomPage(): JSX.Element {
   );
 
   return (
-    <div>
+    <>
       <SectionTitle>
         <h1>{t('room.winner.name', { playerName: lastManStanding?.name })}</h1>
         <p>{t('room.winner.congrats')}</p>
@@ -47,6 +47,6 @@ export function EndedRoomPage(): JSX.Element {
         content={t('room.play.another.party.button')}
         onClick={handleLeaveRoom}
       />
-    </div>
+    </>
   );
 }

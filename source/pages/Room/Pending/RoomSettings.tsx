@@ -11,7 +11,7 @@ import { useRoom } from '@/services/room/queries';
 import { RoomSettingsModal } from './RoomSettingsModal';
 
 const Content = tw.div`
-  mb-2
+  mb-2 pb-2 border-b
 `;
 
 const SectionHeader = tw.div`

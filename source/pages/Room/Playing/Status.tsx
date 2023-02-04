@@ -45,12 +45,12 @@ export function Status(): JSX.Element {
     <Content>
       <Image alt="party" src={Glasses} />
       {session?.status === PlayerStatus.KILLED ? (
-        <div>
+        <>
           <h2>{t('room.player.killed.title')}</h2>
           <Text>{t('room.player.killed.resume')}</Text>
-        </div>
+        </>
       ) : (
-        <div>
+        <>
           <h2>{t('room.target.title')}</h2>
           <TargetSection>
             <Text>{t('room.target.to.kill')}</Text>
@@ -60,7 +60,7 @@ export function Status(): JSX.Element {
             <Text>{t('room.target.mission')}</Text>
             <Mission>{session?.assignedMission?.content}</Mission>
           </MissionSection>
-        </div>
+        </>
       )}
     </Content>
   );

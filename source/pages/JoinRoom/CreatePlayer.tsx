@@ -25,7 +25,7 @@ export function CreatePlayer(): JSX.Element {
   };
 
   return (
-    <div>
+    <>
       <h1>{t('join.room.no.pseudo')}</h1>
       <p>{t('join.room.create.pseudo')}</p>
       <Input
@@ -44,6 +44,6 @@ export function CreatePlayer(): JSX.Element {
         buttonColor="yellow"
         textColor="lightDark"
       />
-    </div>
+    </>
   );
 }
