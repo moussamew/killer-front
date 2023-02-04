@@ -1,4 +1,4 @@
-import { type ChangeEvent, Fragment, useContext, useState } from 'react';
+import { type ChangeEvent, useContext, useState } from 'react';
 import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
@@ -51,7 +51,7 @@ export function JoinRoomModal(): JSX.Element {
   };
 
   return (
-    <Fragment>
+    <>
       <HeadContent>
         <Title>{t('home.join.room')}</Title>
       </HeadContent>
@@ -78,6 +78,6 @@ export function JoinRoomModal(): JSX.Element {
         disabled={!roomCode}
         onClick={handleJoinRoom}
       />
-    </Fragment>
+    </>
   );
 }

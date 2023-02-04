@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { toast, ToastBar, Toaster } from 'react-hot-toast';
 import tw from 'twin.macro';
 
@@ -17,10 +16,10 @@ export function Notification(): JSX.Element {
         <Alert role="presentation" onClick={closeNotification(toaster.id)}>
           <ToastBar toast={toaster}>
             {({ icon, message }) => (
-              <Fragment>
+              <>
                 {icon}
                 {message}
-              </Fragment>
+              </>
             )}
           </ToastBar>
         </Alert>

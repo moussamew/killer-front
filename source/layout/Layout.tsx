@@ -1,4 +1,4 @@
-import { Fragment, useContext } from 'react';
+import { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import tw from 'twin.macro';
 
@@ -25,7 +25,7 @@ export function Layout(): JSX.Element {
   }
 
   return (
-    <Fragment>
+    <>
       <Header playerName={session?.name} />
       <Content>
         <WebViewDetector>
@@ -34,6 +34,6 @@ export function Layout(): JSX.Element {
       </Content>
       {modal && <Modal closeModal={closeModal}>{modal}</Modal>}
       <Notification />
-    </Fragment>
+    </>
   );
 }

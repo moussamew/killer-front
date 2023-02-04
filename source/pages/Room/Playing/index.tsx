@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import tw, { styled } from 'twin.macro';
 
@@ -51,10 +51,10 @@ export function PlayingRoomPage(): JSX.Element {
       <Content isPlayerDead={session?.status === PlayerStatus.KILLED}>
         <Status />
         {session?.status === PlayerStatus.ALIVE && (
-          <Fragment>
+          <>
             <Spacer />
             <PlayerKilledButton />
-          </Fragment>
+          </>
         )}
       </Content>
       <Spacer />

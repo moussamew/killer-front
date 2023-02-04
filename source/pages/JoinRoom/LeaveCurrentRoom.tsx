@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Button } from '@/components/Button';
@@ -19,7 +18,7 @@ export function LeaveCurrentRoom(): JSX.Element {
   };
 
   return (
-    <Fragment>
+    <>
       <h1>
         {t('join.room.already.inside.room', {
           roomCode: session?.room?.code,
@@ -36,6 +35,6 @@ export function LeaveCurrentRoom(): JSX.Element {
         buttonColor="yellow"
         textColor="lightDark"
       />
-    </Fragment>
+    </>
   );
 }

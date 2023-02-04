@@ -1,4 +1,4 @@
-import { Fragment, useContext } from 'react';
+import { useContext } from 'react';
 import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
@@ -37,7 +37,7 @@ export function KickPlayerModal({ playerName, playerId }: Props): JSX.Element {
   };
 
   return (
-    <Fragment>
+    <>
       <HeadContent>
         <Title>{t('room.kick.players.title')}</Title>
       </HeadContent>
@@ -48,6 +48,6 @@ export function KickPlayerModal({ playerName, playerId }: Props): JSX.Element {
         content={t('room.kick.players.confirm.button', { playerName })}
         onClick={handleKickPlayer}
       />
-    </Fragment>
+    </>
   );
 }
