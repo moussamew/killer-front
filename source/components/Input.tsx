@@ -16,7 +16,7 @@ const StyledInput = styled.input<{ uppercase: boolean }>`
 `;
 
 const StyledLabel = tw.label`
-  font-bold text-lightDark pb-1
+  font-semibold text-lightDark pb-1
 `;
 
 interface Props {

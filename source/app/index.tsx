@@ -11,7 +11,9 @@ import { ModalProvider } from '@/context/modal';
 
 import { Routes } from './routes';
 
-import '../assets/styles/app.css';
+/** Base CSS Files */
+import '@/assets/styles/app.module.css';
+import '@/assets/styles/fonts.module.css';
 
 const NODE_APP = document.getElementById('app');
 

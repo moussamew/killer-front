@@ -29,7 +29,7 @@ const PlayerImage = tw.img`
 `;
 
 const PlayerName = styled.p<{ currentPlayer: boolean }>`
-  ${({ currentPlayer }) => (currentPlayer ? tw`font-bold` : `font-medium`)}
+  ${({ currentPlayer }) => (currentPlayer ? tw`font-semibold` : `font-medium`)}
 
   text-2xl md:text-3xl
   text-center uppercase

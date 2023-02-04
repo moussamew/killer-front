@@ -11,7 +11,7 @@ const Navigation = tw.header`
 `;
 
 const Text = tw.p`
-  font-bold text-black uppercase mr-1
+  font-semibold text-black uppercase mr-1
 `;
 
 const PlayerInfos = tw.div`
