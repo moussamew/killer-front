@@ -6,7 +6,7 @@ import { ROOM_TOPIC } from '@/constants/endpoints';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useRoom } from '@/services/room/queries';
 
-export function RoomMissions(): JSX.Element {
+export function RoomMissions(): JSX.Element | null {
   const { roomCode } = useParams();
   const { t } = useTranslation();
   const { room, refetchRoom } = useRoom(roomCode!);
@@ -24,11 +24,7 @@ export function RoomMissions(): JSX.Element {
 
   const roomMissions = room?.missions.length;
 
-  return (
-    <div>
-      {Boolean(roomMissions) && (
-        <p>{t('room.missions.count', { missions: roomMissions })}</p>
-      )}
-    </div>
-  );
+  if (!roomMissions) return null;
+
+  return <p>{t('room.missions.count', { missions: roomMissions })}</p>;
 }

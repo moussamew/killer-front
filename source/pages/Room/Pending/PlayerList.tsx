@@ -59,7 +59,6 @@ export function PlayerList(): JSX.Element {
   return (
     <Content>
       <RoomSettings />
-      <hr />
       {room?.players.map(({ name, id }) => (
         <PlayerItem key={name}>
           <PlayerImage alt={`player-${name}`} src={Player} />

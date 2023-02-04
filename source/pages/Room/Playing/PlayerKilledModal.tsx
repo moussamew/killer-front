@@ -1,4 +1,4 @@
-import { Fragment, useContext } from 'react';
+import { useContext } from 'react';
 import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
@@ -35,7 +35,7 @@ export function PlayerKilledModal(): JSX.Element {
   };
 
   return (
-    <Fragment>
+    <>
       <HeadContent>
         <Title>{t('room.player.killed.modal.title')}</Title>
       </HeadContent>
@@ -46,6 +46,6 @@ export function PlayerKilledModal(): JSX.Element {
         content={t('room.player.killed.modal.confirm.button')}
         onClick={handleKillPlayer}
       />
-    </Fragment>
+    </>
   );
 }

@@ -27,7 +27,7 @@ export function NotFoundPage(): JSX.Element {
   };
 
   return (
-    <div>
+    <>
       <SectionTitle>
         <h1>{t('notfound.title')}</h1>
         <p>{t('notfound.description')}</p>
@@ -39,6 +39,6 @@ export function NotFoundPage(): JSX.Element {
       </SectionTitle>
       <Image alt="notFound" src={NotFoundSrc} />
       <Button content={t('notfound.back')} onClick={handleGoBack} />
-    </div>
+    </>
   );
 }

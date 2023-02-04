@@ -15,7 +15,7 @@ const Container = tw.div`
 
 const Section = tw.div`
   flex flex-row items-center 
-  mb-2
+  mb-2 pb-2 border-b
 `;
 
 const Image = tw.img`
@@ -51,12 +51,11 @@ export function PlayerMissions(): JSX.Element {
     <Container>
       <Section>
         <Image alt="missions" src={Idea} />
-        <div>
+        <>
           <h2>{t('room.manage.missions')}</h2>
           <p>{t('room.missions.description')}</p>
-        </div>
+        </>
       </Section>
-      <hr />
       <Missions>
         {session?.authoredMissions.map(({ id, content }) => (
           <Fragment key={`${id}-${content}`}>

@@ -50,7 +50,7 @@ export function WebViewDetector({ children }: Props): JSX.Element {
   }, []);
 
   if (!webViewApp) {
-    return <div>{children}</div>;
+    return children;
   }
 
   const saveLink = async (): Promise<void> => {

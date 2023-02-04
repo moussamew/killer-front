@@ -1,4 +1,4 @@
-import { Fragment, useContext } from 'react';
+import { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import tw from 'twin.macro';
 
@@ -11,7 +11,7 @@ import { useSession } from '@/services/player/queries';
 import Header from './Header';
 import { WebViewDetector } from './WebViewDetector';
 
-const Content = tw.div`
+const Content = tw.main`
   max-w-screen-xl m-auto
   inset-0 px-2 mb-2
 `;
@@ -25,7 +25,7 @@ export function Layout(): JSX.Element {
   }
 
   return (
-    <Fragment>
+    <>
       <Header playerName={session?.name} />
       <Content>
         <WebViewDetector>
@@ -34,6 +34,6 @@ export function Layout(): JSX.Element {
       </Content>
       {modal && <Modal closeModal={closeModal}>{modal}</Modal>}
       <Notification />
-    </Fragment>
+    </>
   );
 }

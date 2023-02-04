@@ -30,7 +30,7 @@ export function RoomSettingsModal(): JSX.Element {
   };
 
   return (
-    <div>
+    <>
       <Title>{t('room.settings')}</Title>
       <Input
         id="deleteRoom"
@@ -45,6 +45,6 @@ export function RoomSettingsModal(): JSX.Element {
         disabled={inputRoomCode !== roomCode}
         onClick={handleDeleteRoom}
       />
-    </div>
+    </>
   );
 }

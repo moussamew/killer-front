@@ -1,4 +1,4 @@
-import { type ChangeEvent, Fragment, useState } from 'react';
+import { type ChangeEvent, useState } from 'react';
 
 import { ReactComponent as AddIcon } from '@/assets/icons/add.svg';
 import { Button } from '@/components/Button';
@@ -22,7 +22,7 @@ export function CreateMission(): JSX.Element {
   };
 
   return (
-    <Fragment>
+    <>
       <Input
         id="createMission"
         value={mission}
@@ -37,6 +37,6 @@ export function CreateMission(): JSX.Element {
         onClick={handleCreateMission}
         icon={<AddIcon />}
       />
-    </Fragment>
+    </>
   );
 }

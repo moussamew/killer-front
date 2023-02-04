@@ -34,7 +34,7 @@ export function LeaveRoomModal(): JSX.Element {
   };
 
   return (
-    <div>
+    <>
       <HeadContent>
         <Title>{t('room.leave.title')}</Title>
       </HeadContent>
@@ -45,6 +45,6 @@ export function LeaveRoomModal(): JSX.Element {
         content={t('room.leave.confirm.button')}
         onClick={handleLeaveRoom}
       />
-    </div>
+    </>
   );
 }
