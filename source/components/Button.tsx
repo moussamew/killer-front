@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 import { toast } from 'react-hot-toast';
 
-import { ReactComponent as Loading } from '@/assets/icons/loading.svg';
+import { ReactComponent as Spinner } from '@/assets/icons/spinner.svg';
 import { errorStyle } from '@/constants/styles';
 import { isPromise } from '@/helpers/utils';
 import { useSafeState } from '@/hooks/useSafeState';
@@ -44,7 +44,7 @@ export function Button({
       type="button"
       disabled={isLoading || disabled}
     >
-      {isLoading && <Loading className={styles.spinner} />}
+      {isLoading && <Spinner className={styles.spinner} />}
       <span className={clsx({ [styles.hidden]: isLoading })}>{children}</span>
     </button>
   );

@@ -14,7 +14,7 @@ export function StartPartyButton(): JSX.Element {
   };
 
   return (
-    <Button onClick={handleStartParty} color="secondary">
+    <Button onClick={handleStartParty} color="primary">
       {t('room.start.party.button')}
     </Button>
   );

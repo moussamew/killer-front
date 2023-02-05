@@ -8,6 +8,8 @@ import { useTranslation } from '@/hooks/useTranslation';
 import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
+import styles from './styles/JoinRoomModal.module.css';
+
 const HeadContent = tw.div`
   flex flex-row items-center
 `;
@@ -73,7 +75,12 @@ export function JoinRoomModal(): JSX.Element {
         onChange={handleRoomCode}
         uppercase
       />
-      <Button color="primary" disabled={!roomCode} onClick={handleJoinRoom}>
+      <Button
+        color="secondary"
+        disabled={!roomCode}
+        onClick={handleJoinRoom}
+        customStyle={styles.button}
+      >
         {t('home.join.room.confirm.button')}
       </Button>
     </>

@@ -15,6 +15,9 @@
   --color-yellow-70: hsl(52deg 100% 70%);
   --color-yellow-80: hsl(52deg 100% 80%);
   --color-yellow-90: hsl(52deg 100% 90%);
+  --color-camel-97: hsl(30deg 75% 97%);
+  --color-camel-90: hsl(27deg 65% 90%);
+  --color-camel-80: hsl(27deg 65% 80%);
 
   /* Font sizes */
   --text-small: 16px;
