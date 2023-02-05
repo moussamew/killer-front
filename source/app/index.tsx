@@ -15,6 +15,8 @@ import { Routes } from './routes';
 import '@/assets/styles/preflight.module.css';
 import '@/assets/styles/app.module.css';
 import '@/assets/styles/fonts.module.css';
+import '@/assets/styles/variables.module.css';
+import '@/assets/styles/animations.module.css';
 
 const NODE_APP = document.getElementById('app');
 

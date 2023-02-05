@@ -1,25 +1,123 @@
-.content {
-  margin-top: 200px;
+.spacing {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  @media (min-width: 720px) {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
 }
 
-.textDescription {
-  margin-top: 30px;
-  margin-bottom: 30px;
+.introduction {
+  composes: spacing;
+  text-align: center;
+
+  @media (max-width: 720px) {
+    text-align: left;
+  }
+
+  h1,
+  h2 {
+    margin-bottom: 30px;
+
+    @media (max-width: 720px) {
+      margin-bottom: 20px;
+    }
+  }
 }
 
 .actions {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 30px;
   gap: 10px;
+
+  @media (min-width: 720px) {
+    flex-direction: row;
+  }
+}
+
+.step {
+  composes: spacing;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--color-black-90);
+
+  @media (max-width: 720px) {
+    flex-direction: column;
+  }
+}
+
+.number {
+  width: 50px;
+  margin-right: 60px;
+  margin-left: 60px;
+  color: var(--color-black-20);
+  font-size: 60px;
+
+  @media (max-width: 720px) {
+    display: none;
+  }
 }
 
 .button {
-  padding: 20px;
-  background-color: hsl(210deg 7% 20%);
-  color: hsl(255deg 100% 100%);
-  font-size: 18px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: var(--color-black-30);
+  box-shadow: var(--shadow-small);
+  color: var(--color-white);
+  font-size: var(--text-small);
+  transition: background-color ease-out 500ms;
 
   &:hover {
-    background-color: hsl(210deg 7% 25%);
+    background-color: var(--color-black-10);
+  }
+
+  @media (min-width: 720px) {
+    padding: 20px;
+    font-size: var(--text-medium);
+  }
+}
+
+.buttonYellow {
+  composes: button;
+  background-color: var(--color-yellow-70);
+  color: var(--color-black-30);
+
+  &:hover {
+    background-color: var(--color-yellow-50);
+  }
+}
+
+.gallery {
+  display: flex;
+  overflow: auto;
+  flex-direction: row;
+  padding: 20px 10px;
+  border-top: 1px solid var(--color-black-90);
+  border-bottom: 1px solid var(--color-black-90);
+  gap: 20px;
+
+  @media (min-width: 720px) {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+  }
+
+  svg {
+    width: 100px;
+    min-width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    filter: drop-shadow(var(--shadow-small));
+  }
+
+  svg:hover {
+    cursor: pointer;
+
+    :global {
+      animation: grow 1s infinite;
+    }
   }
 }

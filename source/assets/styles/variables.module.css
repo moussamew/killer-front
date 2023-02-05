@@ -1,0 +1,24 @@
+:root {
+  /* Colors */
+  --color-white: hsl(255deg 100% 100%);
+  --color-black-10: hsl(210deg 7% 10%);
+  --color-black-20: hsl(210deg 7% 20%);
+  --color-black-30: hsl(210deg 7% 30%);
+  --color-black-40: hsl(210deg 7% 40%);
+  --color-black-50: hsl(210deg 7% 50%);
+  --color-black-60: hsl(210deg 7% 60%);
+  --color-black-70: hsl(210deg 7% 70%);
+  --color-black-80: hsl(210deg 7% 80%);
+  --color-black-90: hsl(210deg 7% 90%);
+  --color-yellow-50: hsl(52deg 100% 50%);
+  --color-yellow-60: hsl(52deg 100% 60%);
+  --color-yellow-70: hsl(52deg 100% 70%);
+
+  /* Font sizes */
+  --text-small: 16px;
+  --text-medium: 18px;
+  --text-large: 20px;
+
+  /* Box shadows */
+  --shadow-small: var(--color-black-80) 0 2px 4px;
+}
