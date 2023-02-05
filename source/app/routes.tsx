@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Layout } from '@/layout/Layout';
 import { HomePage } from '@/pages/Home';
 import { JoinRoomPage } from '@/pages/JoinRoom';
+import { Landing } from '@/pages/Landing';
 import { NotFoundPage } from '@/pages/NotFound';
 import { RoomPage } from '@/pages/Room';
 import { EndedRoomPage } from '@/pages/Room/Ended';
@@ -17,6 +18,7 @@ export function Routes(): JSX.Element {
           element: <Layout />,
           children: [
             { path: '/', element: <HomePage /> },
+            { path: '/landing', element: <Landing /> },
             { path: '/join/:roomCode', element: <JoinRoomPage /> },
             {
               path: '/room/:roomCode',

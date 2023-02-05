@@ -1,0 +1,20 @@
+{
+  /** Format a file on save. */
+  "editor.formatOnSave": true,
+
+  /** Controls whether the editor should automatically format the pasted content. */
+  "editor.formatOnPaste": true,
+
+  /** Code action kinds to be run on save. */
+  "editor.codeActionsOnSave": {
+    /** Fix ESLint errors on save. */
+    "source.fixAll.eslint": true,
+
+    /** Fix CSS errors on save. */
+    "source.fixAll.stylelint": true
+  },
+  "emmet.includeLanguages": {
+    "postcss": "css"
+  },
+  "postcss.validate": false
+}
