@@ -38,7 +38,9 @@ export function NotFoundPage(): JSX.Element {
         )}
       </SectionTitle>
       <Image alt="notFound" src={NotFoundSrc} />
-      <Button content={t('notfound.back')} onClick={handleGoBack} />
+      <Button color="primary" onClick={handleGoBack}>
+        {t('notfound.back')}
+      </Button>
     </>
   );
 }

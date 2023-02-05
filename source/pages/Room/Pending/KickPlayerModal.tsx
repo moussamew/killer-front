@@ -44,10 +44,9 @@ export function KickPlayerModal({ playerName, playerId }: Props): JSX.Element {
       <TextContent>
         <p>{t('room.kick.players.warning', { playerName })}</p>
       </TextContent>
-      <Button
-        content={t('room.kick.players.confirm.button', { playerName })}
-        onClick={handleKickPlayer}
-      />
+      <Button color="primary" onClick={handleKickPlayer}>
+        {t('room.kick.players.confirm.button', { playerName })}
+      </Button>
     </>
   );
 }

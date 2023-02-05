@@ -46,11 +46,9 @@ export function CreateRoomModal(): JSX.Element {
         value={pseudo}
         onChange={handlePseudo}
       />
-      <Button
-        content={t('home.create.room.confirm.button')}
-        disabled={!pseudo}
-        onClick={handleCreateRoom}
-      />
+      <Button color="primary" disabled={!pseudo} onClick={handleCreateRoom}>
+        {t('home.create.room.confirm.button')}
+      </Button>
     </>
   );
 }

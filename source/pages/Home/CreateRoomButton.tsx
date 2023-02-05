@@ -31,10 +31,8 @@ export function CreateRoomButton({ playerName }: Props): JSX.Element {
   };
 
   return (
-    <Button
-      content={t('home.create.room.button')}
-      buttonColor="red"
-      onClick={handleCreateRoom}
-    />
+    <Button color="primary" onClick={handleCreateRoom}>
+      {t('home.create.room.button')}
+    </Button>
   );
 }

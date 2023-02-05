@@ -1,60 +1,27 @@
+import { clsx } from 'clsx';
 import { toast } from 'react-hot-toast';
-import tw, { styled } from 'twin.macro';
 
+import { ReactComponent as Loading } from '@/assets/icons/loading.svg';
 import { errorStyle } from '@/constants/styles';
-import { colors, text } from '@/constants/tailwind';
 import { isPromise } from '@/helpers/utils';
 import { useSafeState } from '@/hooks/useSafeState';
 
-import { Spinner } from './Spinner';
-
-const Content = tw.div`
-  flex flex-col w-full
-`;
-
-const StyledButton = styled.button<{
-  buttonColor: keyof typeof colors;
-  disabled: boolean;
-}>`
-  ${({ buttonColor }) => colors[buttonColor]}
-  ${({ disabled }) =>
-    disabled ? tw`cursor-not-allowed opacity-70` : tw`cursor-pointer`}
-    
-  ${tw`transition-all duration-300 ease-in 
-  shadow-md hover:shadow-xl
-  p-1 mt-1 rounded-lg
-  w-full text-3xl relative
-  flex justify-center items-center`}
-`;
-
-const Text = styled.p<{ textColor: keyof typeof text }>`
-  ${({ textColor }) => text[textColor]}
-
-  ${tw`font-medium text-3xl`}
-`;
-
-const Icon = tw.div`
-  absolute left-1
-`;
+import styles from './styles/Button.module.css';
 
 interface Props {
-  content: string;
   onClick: () => void | Promise<void>;
-  buttonColor?: keyof typeof colors;
-  textColor?: keyof typeof text;
-  type?: 'submit' | 'reset' | 'button';
+  children: string;
+  color: 'primary' | 'secondary';
   disabled?: boolean;
-  icon?: JSX.Element;
+  customStyle?: string;
 }
 
 export function Button({
-  content,
-  buttonColor = 'red',
-  textColor = 'white',
   onClick,
-  type = 'button',
+  children,
+  color,
   disabled = false,
-  icon,
+  customStyle,
 }: Props): JSX.Element {
   const [isLoading, setLoading] = useSafeState(false);
 
@@ -71,17 +38,14 @@ export function Button({
   };
 
   return (
-    <Content>
-      <StyledButton
-        onClick={handleClick}
-        type={type}
-        buttonColor={buttonColor}
-        disabled={isLoading || disabled}
-      >
-        {icon && !isLoading && <Icon>{icon}</Icon>}
-        {isLoading && <Spinner />}
-        <Text textColor={textColor}>{content}</Text>
-      </StyledButton>
-    </Content>
+    <button
+      className={clsx(styles.button, styles[color], customStyle)}
+      onClick={handleClick}
+      type="button"
+      disabled={isLoading || disabled}
+    >
+      {isLoading && <Loading className={styles.spinner} />}
+      <span className={clsx({ [styles.hidden]: isLoading })}>{children}</span>
+    </button>
   );
 }

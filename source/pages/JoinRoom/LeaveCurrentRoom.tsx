@@ -25,16 +25,15 @@ export function LeaveCurrentRoom(): JSX.Element {
         })}
       </h1>
       <p>{t('join.room.warning')}</p>
+      <Button color="primary" onClick={handleJoinNewRoom}>
+        {t('join.room.confirm.button')}
+      </Button>
       <Button
-        content={t('join.room.confirm.button')}
-        onClick={handleJoinNewRoom}
-      />
-      <Button
-        content={t('join.room.return.button')}
+        color="secondary"
         onClick={() => navigate(`/room/${session?.room?.code}`)}
-        buttonColor="yellow"
-        textColor="lightDark"
-      />
+      >
+        {t('join.room.return.button')}
+      </Button>
     </>
   );
 }

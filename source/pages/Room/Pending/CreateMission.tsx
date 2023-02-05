@@ -1,6 +1,5 @@
 import { type ChangeEvent, useState } from 'react';
 
-import { ReactComponent as AddIcon } from '@/assets/icons/add.svg';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -31,12 +30,12 @@ export function CreateMission(): JSX.Element {
         placeholder={t('room.mission.placeholder')}
       />
       <Button
-        content={t('room.create.new.mission.button')}
-        buttonColor="red"
+        color="secondary"
         disabled={!mission}
         onClick={handleCreateMission}
-        icon={<AddIcon />}
-      />
+      >
+        {t('room.create.new.mission.button')}
+      </Button>
     </>
   );
 }

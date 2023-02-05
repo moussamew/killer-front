@@ -8,6 +8,7 @@ import { ReactComponent as Milk } from '@/assets/images/avatars/milk.svg';
 import { ReactComponent as Pirate } from '@/assets/images/avatars/pirate.svg';
 import { ReactComponent as Samurai } from '@/assets/images/avatars/samurai.svg';
 import { ReactComponent as Surf } from '@/assets/images/avatars/surf.svg';
+import { Button } from '@/components/Button';
 
 import styles from './index.module.css';
 
@@ -27,16 +28,12 @@ export function Landing(): JSX.Element {
         </p>
       </div>
       <div className={styles.actions}>
-        <button className={styles.button} type="button" onClick={() => {}}>
+        <Button color="primary" onClick={() => {}}>
           Créer une nouvelle partie
-        </button>
-        <button
-          className={styles.buttonYellow}
-          type="button"
-          onClick={() => {}}
-        >
+        </Button>
+        <Button color="secondary" onClick={() => {}}>
           Rejoindre une partie
-        </button>
+        </Button>
       </div>
       <div className={styles.gallery}>
         <Samurai />

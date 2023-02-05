@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import tw from 'twin.macro';
 
-import { ReactComponent as MobileIcon } from '@/assets/icons/mobile.svg';
 import Killerparty from '@/assets/images/killerparty.png';
 import { Button } from '@/components/Button';
 import { errorStyle, successStyle } from '@/constants/styles';
@@ -78,11 +77,9 @@ export function WebViewDetector({ children }: Props): JSX.Element {
       <WebViewImage src={AppLogo[webViewApp]} />
       <h2>{t('webview.how.to.play')}</h2>
       <Text>{t('webview.click.button.message')}</Text>
-      <Button
-        content={t('webview.save.link.button')}
-        icon={<MobileIcon />}
-        onClick={saveLink}
-      />
+      <Button color="primary" onClick={saveLink}>
+        {t('webview.save.link.button')}
+      </Button>
     </Content>
   );
 }

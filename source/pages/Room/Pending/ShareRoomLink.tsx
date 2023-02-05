@@ -1,7 +1,6 @@
 import { toast } from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 
-import { ReactComponent as ShareIcon } from '@/assets/icons/share.svg';
 import { Button } from '@/components/Button';
 import { JOIN_ROOM_ROUTE } from '@/constants/endpoints';
 import { errorStyle, successStyle } from '@/constants/styles';
@@ -40,10 +39,8 @@ export function ShareRoomLink(): JSX.Element {
   };
 
   return (
-    <Button
-      content={t('room.share.link.button')}
-      icon={<ShareIcon />}
-      onClick={saveRoomLink}
-    />
+    <Button color="secondary" onClick={saveRoomLink}>
+      {t('room.share.link.button')}
+    </Button>
   );
 }

@@ -73,11 +73,9 @@ export function JoinRoomModal(): JSX.Element {
         onChange={handleRoomCode}
         uppercase
       />
-      <Button
-        content={t('home.join.room.confirm.button')}
-        disabled={!roomCode}
-        onClick={handleJoinRoom}
-      />
+      <Button color="primary" disabled={!roomCode} onClick={handleJoinRoom}>
+        {t('home.join.room.confirm.button')}
+      </Button>
     </>
   );
 }

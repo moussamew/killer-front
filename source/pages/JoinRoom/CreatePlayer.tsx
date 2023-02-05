@@ -34,16 +34,12 @@ export function CreatePlayer(): JSX.Element {
         value={pseudo}
         onChange={handlePseudo}
       />
-      <Button
-        content={t('home.join.room.confirm.button')}
-        onClick={handleJoinRoom}
-      />
-      <Button
-        content={t('home.create.room.confirm.button')}
-        onClick={handleCreateRoom}
-        buttonColor="yellow"
-        textColor="lightDark"
-      />
+      <Button color="primary" onClick={handleJoinRoom}>
+        {t('home.join.room.confirm.button')}
+      </Button>
+      <Button color="secondary" onClick={handleCreateRoom}>
+        {t('home.create.room.confirm.button')}
+      </Button>
     </>
   );
 }
