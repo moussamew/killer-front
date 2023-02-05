@@ -17,7 +17,6 @@ export function Routes(): JSX.Element {
           element: <Layout />,
           children: [
             { path: '/', element: <HomePage /> },
-
             { path: '/join/:roomCode', element: <JoinRoomPage /> },
             {
               path: '/room/:roomCode',

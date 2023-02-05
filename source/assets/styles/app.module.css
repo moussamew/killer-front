@@ -30,12 +30,6 @@ strong {
   font-weight: 600;
 }
 
-p {
-  @media (max-width: 720px) {
-    margin-bottom: 10px;
-  }
-}
-
 @layer base {
   html {
     @apply scroll-smooth;

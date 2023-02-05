@@ -1,6 +1,7 @@
 import 'whatwg-fetch';
 import '@testing-library/jest-dom';
 import EventSource from 'eventsourcemock';
+import { vi } from 'vitest';
 
 import { server } from './server';
 
@@ -15,6 +16,14 @@ Object.defineProperty(window, 'matchMedia', {
     };
   },
 });
+
+/** Dirty hacky because Vitest can't correctly run all tests with multiple SVG */
+vi.mock('@/pages/Home/Gallery.tsx', () => ({
+  __esModule: true,
+  Gallery: () => {
+    return null;
+  },
+}));
 
 /**
  * Enable API mocking before tests.
