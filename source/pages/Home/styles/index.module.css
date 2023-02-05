@@ -1,0 +1,39 @@
+.spacing {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  @media (min-width: 720px) {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+}
+
+.introduction {
+  composes: spacing;
+  text-align: center;
+
+  @media (max-width: 720px) {
+    text-align: left;
+  }
+
+  h1,
+  h2 {
+    margin-bottom: 30px;
+
+    @media (max-width: 720px) {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 30px;
+  gap: 10px;
+
+  @media (min-width: 720px) {
+    flex-direction: row;
+  }
+}

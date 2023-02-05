@@ -43,10 +43,9 @@ export function EndedRoomPage(): JSX.Element {
         <p>{t('room.winner.congrats')}</p>
       </SectionTitle>
       <Image alt="notFound" src={Winner} />
-      <Button
-        content={t('room.play.another.party.button')}
-        onClick={handleLeaveRoom}
-      />
+      <Button color="primary" onClick={handleLeaveRoom}>
+        {t('room.play.another.party.button')}
+      </Button>
     </>
   );
 }

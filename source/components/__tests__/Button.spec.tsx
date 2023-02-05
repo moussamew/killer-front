@@ -8,17 +8,25 @@ describe('<Button />', () => {
   it('should show the text inside the button', () => {
     const spyCallback = vi.fn();
 
-    render(<Button content="My Button" onClick={spyCallback} />);
+    render(
+      <Button color="primary" onClick={spyCallback}>
+        Text
+      </Button>,
+    );
 
-    expect(screen.getByText('My Button')).toBeInTheDocument();
+    expect(screen.getByText('Text')).toBeInTheDocument();
   });
 
   it('should execute the callback passed when the button is clicked', async () => {
     const spyCallback = vi.fn();
 
-    render(<Button content="My Button" onClick={spyCallback} />);
+    render(
+      <Button color="primary" onClick={spyCallback}>
+        Text
+      </Button>,
+    );
 
-    await userEvent.click(screen.getByText('My Button'));
+    await userEvent.click(screen.getByText('Text'));
 
     expect(spyCallback).toHaveBeenCalledTimes(1);
   });
@@ -26,9 +34,13 @@ describe('<Button />', () => {
   it('should not execute the callback passed in parameter when disabled is set to true', async () => {
     const spyCallback = vi.fn();
 
-    render(<Button content="My Button" disabled onClick={spyCallback} />);
+    render(
+      <Button color="primary" onClick={spyCallback} disabled>
+        Text
+      </Button>,
+    );
 
-    await userEvent.click(screen.getByText('My Button'));
+    await userEvent.click(screen.getByText('Text'));
 
     expect(spyCallback).not.toHaveBeenCalled();
   });

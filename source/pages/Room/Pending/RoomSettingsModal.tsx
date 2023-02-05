@@ -41,10 +41,12 @@ export function RoomSettingsModal(): JSX.Element {
         uppercase
       />
       <Button
-        content={t('room.delete.current.room.confirm.button')}
+        color="primary"
         disabled={inputRoomCode !== roomCode}
         onClick={handleDeleteRoom}
-      />
+      >
+        {t('room.delete.current.room.confirm.button')}
+      </Button>
     </>
   );
 }

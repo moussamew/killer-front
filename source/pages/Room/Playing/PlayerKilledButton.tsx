@@ -34,7 +34,9 @@ export function PlayerKilledButton(): JSX.Element {
       <Image alt="killed" src={Knife} />
       <h2>{t('room.killed.message')}</h2>
       <Text>{t('room.killed.notify')}</Text>
-      <Button content={t('room.killed.button')} onClick={handleOpenModal} />
+      <Button color="primary" onClick={handleOpenModal}>
+        {t('room.killed.button')}
+      </Button>
     </Content>
   );
 }

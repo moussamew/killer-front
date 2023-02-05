@@ -41,10 +41,9 @@ export function LeaveRoomModal(): JSX.Element {
       <TextContent>
         <p>{t('room.leave.warning')}</p>
       </TextContent>
-      <Button
-        content={t('room.leave.confirm.button')}
-        onClick={handleLeaveRoom}
-      />
+      <Button color="primary" onClick={handleLeaveRoom}>
+        {t('room.leave.confirm.button')}
+      </Button>
     </>
   );
 }

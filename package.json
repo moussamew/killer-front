@@ -8,9 +8,9 @@
     "lint": "yarn lint:js && yarn lint:css",
     "lint:js": "eslint . --ext .ts,.tsx",
     "lint:css": "stylelint '**/*.css'",
-    "test": "DEBUG_PRINT_LIMIT=10000 vitest run",
-    "test:watch": "DEBUG_PRINT_LIMIT=10000 vitest watch",
-    "test:coverage": "DEBUG_PRINT_LIMIT=10000 vitest run --coverage",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage",
     "tsc": "tsc",
     "commit": "cz"
   },
@@ -27,6 +27,7 @@
     "commit": "Run commitizen to create a commit"
   },
   "dependencies": {
+    "clsx": "^1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.0",

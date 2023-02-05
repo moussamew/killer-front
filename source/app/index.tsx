@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { IntlProvider } from 'react-intl';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
+import { Strong } from '@/components/Elements';
 import { QueryConfig } from '@/constants/config';
 import { Locale } from '@/constants/enums';
 import { translations } from '@/constants/languages';
@@ -31,7 +32,11 @@ function App(): JSX.Element {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <IntlProvider locale={locale} messages={translations[locale]}>
+      <IntlProvider
+        locale={locale}
+        messages={translations[locale]}
+        defaultRichTextElements={{ strong: Strong }}
+      >
         <LocaleProvider locale={locale} setLocale={setLocale}>
           <ModalProvider>
             <Routes />

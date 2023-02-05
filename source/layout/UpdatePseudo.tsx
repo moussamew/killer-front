@@ -8,6 +8,8 @@ import { useTranslation } from '@/hooks/useTranslation';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
+import styles from './styles/UpdatePseudo.module.css';
+
 const Content = tw.div`
   mb-1
 `;
@@ -51,10 +53,13 @@ export function UpdatePseudo(): JSX.Element {
         placeholder={t('layout.user.update.pseudo.placeholder')}
       />
       <Button
-        content={t('layout.user.update.pseudo.confirm.button')}
+        color="primary"
         onClick={updatePlayerPseudo}
         disabled={!pseudo}
-      />
+        customStyle={styles.button}
+      >
+        {t('layout.user.update.pseudo.confirm.button')}
+      </Button>
     </Content>
   );
 }

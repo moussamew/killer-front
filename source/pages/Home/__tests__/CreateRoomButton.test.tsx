@@ -18,7 +18,7 @@ describe('<CreateRoomButton />', () => {
 
     renderWithProviders();
 
-    await screen.findByText('La bonne manière de tuer vos amis..');
+    await screen.findByText('Ça vous tente un petit meurtre entre amis ?');
 
     await userEvent.click(screen.getByText('Créer une nouvelle partie'));
 
@@ -53,8 +53,10 @@ describe('<CreateRoomButton />', () => {
 
     await userEvent.click(screen.getByText('Créer une nouvelle partie'));
 
+    await screen.findByText('Le code pour rejoindre cette partie est SOSPC.');
+
     expect(
-      await screen.findByText('Le code pour rejoindre cette partie est SOSPC.'),
+      screen.getByText('Le code pour rejoindre cette partie est SOSPC.'),
     ).toBeInTheDocument();
   });
 

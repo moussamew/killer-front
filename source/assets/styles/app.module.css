@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  background-color: var(--color-camel-97);
   font-family: Inter, sans-serif;
   letter-spacing: -0.05rem;
 }
@@ -29,21 +30,11 @@ strong {
   font-weight: 600;
 }
 
-p {
-  @media (max-width: 720px) {
-    margin-bottom: 10px;
-  }
-}
-
 @layer base {
   html {
     @apply scroll-smooth;
 
     font-size: 62.5%;
-  }
-
-  body {
-    @apply bg-brand;
   }
 
   label,

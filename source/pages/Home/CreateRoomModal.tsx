@@ -8,6 +8,8 @@ import { useTranslation } from '@/hooks/useTranslation';
 import { useCreatePlayer } from '@/services/player/mutations';
 import { useCreateRoom } from '@/services/room/mutations';
 
+import styles from './styles/CreateRoomModal.module.css';
+
 const HeadContent = tw.div`
   flex flex-row items-center
 `;
@@ -47,10 +49,13 @@ export function CreateRoomModal(): JSX.Element {
         onChange={handlePseudo}
       />
       <Button
-        content={t('home.create.room.confirm.button')}
+        color="primary"
         disabled={!pseudo}
         onClick={handleCreateRoom}
-      />
+        customStyle={styles.button}
+      >
+        {t('home.create.room.confirm.button')}
+      </Button>
     </>
   );
 }

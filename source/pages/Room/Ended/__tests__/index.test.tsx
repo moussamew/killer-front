@@ -30,7 +30,7 @@ describe('<EndedRoomPage />', () => {
     );
 
     expect(
-      await screen.findByText('La bonne manière de tuer vos amis..'),
+      await screen.findByText('Ça vous tente un petit meurtre entre amis ?'),
     ).toBeInTheDocument();
   });
 });

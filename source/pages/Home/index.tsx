@@ -1,21 +1,14 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import tw from 'twin.macro';
 
-import Killerparty from '@/assets/images/killerparty.png';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useSession } from '@/services/player/queries';
 
 import { CreateRoomButton } from './CreateRoomButton';
+import { Gallery } from './Gallery';
 import { JoinRoomButton } from './JoinRoomButton';
-
-const WelcomeImage = tw.img`
-  m-auto
-`;
-
-const Text = tw.p`
-  my-2
-`;
+import { Rules } from './Rules';
+import styles from './styles/index.module.css';
 
 export function HomePage(): JSX.Element {
   const navigate = useNavigate();
@@ -30,11 +23,17 @@ export function HomePage(): JSX.Element {
 
   return (
     <>
-      <WelcomeImage alt="welcome" src={Killerparty} />
-      <h1>{t('home.title')}</h1>
-      <Text>{t('home.description')}</Text>
-      <CreateRoomButton playerName={session?.name} />
-      <JoinRoomButton />
+      <div className={styles.introduction}>
+        <h1>{t('home.title')}</h1>
+        <h2>{t('home.subtitle')}</h2>
+        <p>{t('home.description')}</p>
+      </div>
+      <div className={styles.actions}>
+        <CreateRoomButton playerName={session?.name} />
+        <JoinRoomButton />
+      </div>
+      <Gallery />
+      <Rules />
     </>
   );
 }

@@ -42,10 +42,9 @@ export function PlayerKilledModal(): JSX.Element {
       <TextContent>
         <p>{t('room.player.killed.modal.warning')}</p>
       </TextContent>
-      <Button
-        content={t('room.player.killed.modal.confirm.button')}
-        onClick={handleKillPlayer}
-      />
+      <Button color="primary" onClick={handleKillPlayer}>
+        {t('room.player.killed.modal.confirm.button')}
+      </Button>
     </>
   );
 }

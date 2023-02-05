@@ -288,7 +288,7 @@ describe('<RoomPage />', () => {
     sources[roomEventSource].emit(messageEvent.type, messageEvent);
 
     expect(
-      await screen.findByText('La bonne manière de tuer vos amis..'),
+      await screen.findByText('Ça vous tente un petit meurtre entre amis ?'),
     ).toBeInTheDocument();
     expect(screen.queryByText('Welcome to the party!')).not.toBeInTheDocument();
 
