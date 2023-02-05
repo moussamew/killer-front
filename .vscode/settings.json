@@ -12,5 +12,9 @@
 
     /** Fix CSS errors on save. */
     "source.fixAll.stylelint": true
-  }
+  },
+  "emmet.includeLanguages": {
+    "postcss": "css"
+  },
+  "postcss.validate": false
 }
