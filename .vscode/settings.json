@@ -13,8 +13,15 @@
     /** Fix CSS errors on save. */
     "source.fixAll.stylelint": true
   },
+
+  /** Use PostCSS as default language for VSCode */
   "emmet.includeLanguages": {
     "postcss": "css"
   },
-  "postcss.validate": false
+
+  /** Disable default validations to let StyleLint priority */
+  "postcss.validate": false,
+
+  /** Use TypeScript project version */
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

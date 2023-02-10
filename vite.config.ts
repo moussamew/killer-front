@@ -10,7 +10,7 @@ export default defineConfig({
   server: {
     port: 4000,
     host: true,
-    watch: { ignored: ['**/__tests__/**', '**/tests/**'] },
+    watch: { ignored: ['**/__tests__/**', '**/tests/**', 'coverage/**'] },
   },
   optimizeDeps: { esbuildOptions: { target: 'es2020' } },
   build: { target: 'es2020', outDir: 'build' },

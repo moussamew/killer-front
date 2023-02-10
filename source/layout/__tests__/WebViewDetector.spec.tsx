@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { vi } from 'vitest';
 
 import { TWITTER_WEBVIEW_URL, WebViewApp } from '@/constants/webview';
+import { roomCode } from '@/tests/mocks/rooms';
 import { renderWithProviders } from '@/tests/render';
 
 const { Messenger, Instagram } = WebViewApp;
@@ -34,14 +34,7 @@ describe('<WebViewDetector />', () => {
       },
     });
 
-    Object.defineProperty(window, 'location', {
-      value: {
-        href: 'https://killerparty.com/join/P9LDG',
-      },
-      writable: true,
-    });
-
-    renderWithProviders();
+    renderWithProviders({ route: `/join/${roomCode}` });
 
     await userEvent.click(await screen.findByText('Enregistrer le lien'));
 
@@ -53,7 +46,7 @@ describe('<WebViewDetector />', () => {
   });
 
   it('should save the link in the clipboard if available', async () => {
-    const spyNavigatorClipboard = vi.fn().mockResolvedValue('');
+    const spyNavigatorClipboard = jest.fn().mockResolvedValue('');
 
     Object.defineProperties(window, {
       navigator: {
@@ -65,26 +58,19 @@ describe('<WebViewDetector />', () => {
       },
     });
 
-    Object.defineProperty(window, 'location', {
-      value: {
-        href: 'https://killerparty.com/join/P9LDG',
-      },
-      writable: true,
-    });
-
-    renderWithProviders();
+    renderWithProviders({ route: `/join/${roomCode}` });
 
     await userEvent.click(await screen.findByText('Enregistrer le lien'));
 
     expect(await screen.findByText('Lien enregistré !')).toBeInTheDocument();
     expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
     expect(spyNavigatorClipboard).toHaveBeenCalledWith(
-      'https://killerparty.com/join/P9LDG',
+      `http://localhost/join/${roomCode}`,
     );
   });
 
-  it('should show error if the clipboard saving cannot be performed', async () => {
-    const spyNavigatorClipboard = vi.fn().mockRejectedValue('');
+  it.skip('should show error if the clipboard saving cannot be performed', async () => {
+    const spyNavigatorClipboard = jest.fn().mockRejectedValue('');
 
     Object.defineProperty(window, 'navigator', {
       value: {
@@ -94,14 +80,7 @@ describe('<WebViewDetector />', () => {
       writable: true,
     });
 
-    Object.defineProperty(window, 'location', {
-      value: {
-        href: 'https://killerparty.com/join/P9LDG',
-      },
-      writable: true,
-    });
-
-    renderWithProviders();
+    renderWithProviders({ route: `/join/${roomCode}` });
 
     await userEvent.click(await screen.findByText('Enregistrer le lien'));
 

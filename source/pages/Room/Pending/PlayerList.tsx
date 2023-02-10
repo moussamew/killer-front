@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import tw, { styled } from 'twin.macro';
 
-import { ReactComponent as AdminIcon } from '@/assets/icons/admin.svg';
-import { ReactComponent as KickPlayerIcon } from '@/assets/icons/kickPlayer.svg';
-import { ReactComponent as LeaveRoomIcon } from '@/assets/icons/leaveRoom.svg';
+import AdminIcon from '@/assets/icons/admin.svg';
+import KickPlayerIcon from '@/assets/icons/kickPlayer.svg';
+import LeaveRoomIcon from '@/assets/icons/leaveRoom.svg';
 import Player from '@/assets/images/player.png';
 import { ModalContext } from '@/context/modal';
 import { useSession } from '@/services/player/queries';
@@ -65,17 +65,17 @@ export function PlayerList(): JSX.Element {
           <PlayerName currentPlayer={session?.id === id}>{name}</PlayerName>
           {room.admin.id === id && session?.id !== id && (
             <Icon>
-              <AdminIcon title="roomAdmin" />
+              <AdminIcon title="RoomAdmin" />
             </Icon>
           )}
           {session?.id === id && (
             <Icon onClick={handleLeaveRoom}>
-              <LeaveRoomIcon title="leaveRoom" />
+              <LeaveRoomIcon title="Leave the current room" />
             </Icon>
           )}
           {room?.admin?.id !== id && session?.name !== name && (
             <Icon onClick={handleKickPlayer(name, id)}>
-              <KickPlayerIcon title={`kick ${name}`} />
+              <KickPlayerIcon title={`Kick ${name}`} />
             </Icon>
           )}
         </PlayerItem>

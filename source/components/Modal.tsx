@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 import tw from 'twin.macro';
 
-import { ReactComponent as Close } from '@/assets/icons/close.svg';
+import Close from '@/assets/icons/close.svg';
 
 import styles from './styles/Modal.module.css';
 

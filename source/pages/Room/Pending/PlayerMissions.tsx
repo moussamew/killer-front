@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import tw, { styled } from 'twin.macro';
 
-import { ReactComponent as DeleteIcon } from '@/assets/icons/delete.svg';
+import DeleteIcon from '@/assets/icons/delete.svg';
 import Idea from '@/assets/images/idea.png';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useDeleteMission } from '@/services/mission/mutations';

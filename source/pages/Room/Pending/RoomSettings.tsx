@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import tw from 'twin.macro';
 
-import { ReactComponent as RoomSettingsIcon } from '@/assets/icons/roomSettings.svg';
+import RoomSettingsIcon from '@/assets/icons/roomSettings.svg';
 import { ModalContext } from '@/context/modal';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useSession } from '@/services/player/queries';
