@@ -2,11 +2,12 @@ import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import tw, { styled } from 'twin.macro';
 
-import { ReactComponent as AdminIcon } from '@/assets/icons/admin.svg';
-import { ReactComponent as KickPlayerIcon } from '@/assets/icons/kickPlayer.svg';
-import { ReactComponent as LeaveRoomIcon } from '@/assets/icons/leaveRoom.svg';
+import Admin from '@/assets/icons/admin.svg';
+import KickPlayer from '@/assets/icons/kickPlayer.svg';
+import LeaveRoom from '@/assets/icons/leaveRoom.svg';
 import Player from '@/assets/images/player.png';
 import { ModalContext } from '@/context/modal';
+import { useTranslation } from '@/hooks/useTranslation';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 
@@ -44,6 +45,7 @@ export function PlayerList(): JSX.Element {
   const { room } = useRoom(roomCode!);
   const { session } = useSession();
   const { openModal } = useContext(ModalContext);
+  const { t } = useTranslation();
 
   const handleLeaveRoom = (): void => {
     openModal(<LeaveRoomModal />);
@@ -65,17 +67,17 @@ export function PlayerList(): JSX.Element {
           <PlayerName currentPlayer={session?.id === id}>{name}</PlayerName>
           {room.admin.id === id && session?.id !== id && (
             <Icon>
-              <AdminIcon title="roomAdmin" />
+              <Admin title={t('tooltip.admin.room')} />
             </Icon>
           )}
           {session?.id === id && (
             <Icon onClick={handleLeaveRoom}>
-              <LeaveRoomIcon title="leaveRoom" />
+              <LeaveRoom title={t('tooltip.leave.room')} />
             </Icon>
           )}
           {room?.admin?.id !== id && session?.name !== name && (
             <Icon onClick={handleKickPlayer(name, id)}>
-              <KickPlayerIcon title={`kick ${name}`} />
+              <KickPlayer title={t('tooltip.kick.player')} />
             </Icon>
           )}
         </PlayerItem>

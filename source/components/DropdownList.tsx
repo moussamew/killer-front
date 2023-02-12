@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import tw from 'twin.macro';
 
-import { ReactComponent as ActiveIcon } from '@/assets/icons/active.svg';
-import { ReactComponent as ExpandIcon } from '@/assets/icons/expand.svg';
+import Active from '@/assets/icons/active.svg';
+import Expand from '@/assets/icons/expand.svg';
 
 const Content = tw.div`
   p-1 mt-1 text-3xl 
@@ -51,14 +51,14 @@ export function DropdownList({
     <Content>
       <Dropdown onClick={handleOpenList}>
         <p>{currentItem}</p>
-        <ExpandIcon />
+        <Expand />
       </Dropdown>
       {isListOpen && (
         <List>
           {itemList.map((item) => (
             <Item key={item} onClick={handleClick(item)}>
               <p>{item}</p>
-              {item === currentItem && <ActiveIcon />}
+              {item === currentItem && <Active />}
             </Item>
           ))}
         </List>

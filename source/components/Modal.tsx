@@ -1,7 +1,8 @@
 import { type ReactNode } from 'react';
 import tw from 'twin.macro';
 
-import { ReactComponent as Close } from '@/assets/icons/close.svg';
+import Close from '@/assets/icons/close.svg';
+import { useTranslation } from '@/hooks/useTranslation';
 
 import styles from './styles/Modal.module.css';
 
@@ -28,11 +29,12 @@ interface Props {
 }
 
 export function Modal({ children, closeModal }: Props): JSX.Element {
+  const { t } = useTranslation();
   return (
     <Background>
       <Content>
         <Icon onClick={closeModal}>
-          <Close className={styles.icon} title="closeModal" />
+          <Close className={styles.icon} title={t('tooltip.close')} />
         </Icon>
         {children}
       </Content>

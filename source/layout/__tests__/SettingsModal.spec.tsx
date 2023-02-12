@@ -18,7 +18,9 @@ describe('<SettingsModal />', () => {
 
     renderWithProviders();
 
-    await userEvent.click(await screen.findByTitle('settings'));
+    await userEvent.click(
+      await screen.findByTitle(`Paramètres de l'utilisateur`),
+    );
 
     await userEvent.type(
       screen.getByPlaceholderText('Nouveau nom'),

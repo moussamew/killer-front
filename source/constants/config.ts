@@ -7,5 +7,8 @@ export const QueryConfig: QueryClientConfig = {
       retry: false,
       retryOnMount: false,
     },
+    mutations: {
+      retry: false,
+    },
   },
 };

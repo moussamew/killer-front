@@ -1,14 +1,12 @@
-import { vi } from 'vitest';
-
 import { Method } from '@/constants/enums';
 
 import { request } from '../apis';
 
 describe('Helpers > APIs', () => {
   it('should log error when there is no json to parse on the response', async () => {
-    const spyConsoleError = vi.spyOn(console, 'error');
+    const spyConsoleError = jest.spyOn(console, 'error');
 
-    vi.spyOn(global, 'fetch').mockResolvedValue({
+    jest.spyOn(global, 'fetch').mockResolvedValue({
       json: () => Promise.reject(),
     } as Response);
 

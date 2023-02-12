@@ -5,16 +5,16 @@ import { fakeMissionOne, fakeMissionThree, fakeMissionTwo } from './missions';
 import { fakePlayerOne, fakePlayerThree, fakePlayerTwo } from './players';
 import { roomCode } from './rooms';
 
-export const noRoomSession = {
+export const noRoomSession: Session = {
   ...fakePlayerOne,
   room: null,
   target: null,
   killer: null,
   assignedMission: null,
   authoredMissions: [],
-} satisfies Session;
+};
 
-export const pendingRoomSession = {
+export const pendingRoomSession: Session = {
   ...fakePlayerOne,
   room: {
     id: 17,
@@ -27,9 +27,9 @@ export const pendingRoomSession = {
   killer: null,
   assignedMission: null,
   authoredMissions: [],
-} satisfies Session;
+};
 
-export const playingRoomSession = {
+export const playingRoomSession: Session = {
   ...fakePlayerTwo,
   room: {
     id: 17,
@@ -42,9 +42,9 @@ export const playingRoomSession = {
   killer: null,
   assignedMission: fakeMissionTwo,
   authoredMissions: [fakeMissionOne],
-} satisfies Session;
+};
 
-export const endedRoomSession = {
+export const endedRoomSession: Session = {
   ...fakePlayerThree,
   room: {
     id: 17,
@@ -57,9 +57,9 @@ export const endedRoomSession = {
   killer: null,
   assignedMission: null,
   authoredMissions: [],
-} satisfies Session;
+};
 
-export const adminSession = {
+export const adminSession: Session = {
   ...fakePlayerOne,
   room: {
     id: 17,
@@ -72,4 +72,4 @@ export const adminSession = {
   killer: null,
   assignedMission: null,
   authoredMissions: [],
-} satisfies Session;
+};

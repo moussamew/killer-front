@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 import { toast } from 'react-hot-toast';
 
-import { ReactComponent as Spinner } from '@/assets/icons/spinner.svg';
+import Spinner from '@/assets/icons/spinner.svg';
 import { errorStyle } from '@/constants/styles';
 import { isPromise } from '@/helpers/utils';
 import { useSafeState } from '@/hooks/useSafeState';

@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import tw, { styled } from 'twin.macro';
 
-import { ReactComponent as DeleteIcon } from '@/assets/icons/delete.svg';
+import Delete from '@/assets/icons/delete.svg';
 import Idea from '@/assets/images/idea.png';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useDeleteMission } from '@/services/mission/mutations';
@@ -62,7 +62,7 @@ export function PlayerMissions(): JSX.Element {
             <MissionCard>
               <span>{content}</span>
               <DeleteMission onClick={handleDeleteMission(id)}>
-                <DeleteIcon title="deleteMission" />
+                <Delete title={t('tooltip.delete.mission')} />
               </DeleteMission>
             </MissionCard>
           </Fragment>
