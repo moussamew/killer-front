@@ -24,7 +24,7 @@ describe('<KickPlayerModal />', () => {
 
     await screen.findByText('MORPHEUS');
 
-    await userEvent.click(screen.getByTitle('kick MORPHEUS'));
+    await userEvent.click(screen.getByTitle('Expulser ce joueur'));
 
     await userEvent.click(screen.getByText('Expulser MORPHEUS'));
 

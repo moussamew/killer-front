@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import tw from 'twin.macro';
 
-import SettingsIcon from '@/assets/icons/settings.svg';
+import Settings from '@/assets/icons/settings.svg';
 import { ModalContext } from '@/context/modal';
+import { useTranslation } from '@/hooks/useTranslation';
 
 import { SettingsModal } from './SettingsModal';
 
@@ -24,6 +25,7 @@ interface Props {
 
 function Header({ playerName }: Props): JSX.Element {
   const { openModal } = useContext(ModalContext);
+  const { t } = useTranslation();
 
   const handleOpenSettings = (): void => {
     openModal(<SettingsModal playerName={playerName} />);
@@ -34,7 +36,10 @@ function Header({ playerName }: Props): JSX.Element {
       <Text>Killer Party</Text>
       <PlayerInfos>
         {playerName && <Text>{playerName}</Text>}
-        <SettingsIcon title="settings" onClick={handleOpenSettings} />
+        <Settings
+          title={t('tooltip.user.settings')}
+          onClick={handleOpenSettings}
+        />
       </PlayerInfos>
     </Navigation>
   );

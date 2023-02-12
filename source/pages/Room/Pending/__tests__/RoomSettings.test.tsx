@@ -21,7 +21,7 @@ describe('<RoomSettings />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await userEvent.click(await screen.findByTitle('roomSettings'));
+    await userEvent.click(await screen.findByTitle('Gérer la partie'));
 
     expect(screen.queryByText('Paramètres de la partie')).toBeInTheDocument();
   });

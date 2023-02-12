@@ -23,7 +23,7 @@ describe('<LeaveRoomModal />', () => {
 
     await screen.findByText('Bienvenue à la fête !');
 
-    await userEvent.click(screen.getByTitle('Leave the current room'));
+    await userEvent.click(screen.getByTitle('Quitter la partie en cours'));
 
     await userEvent.click(screen.getByText('Quitter la partie'));
 

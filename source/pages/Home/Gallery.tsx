@@ -12,18 +12,18 @@ import Surf from '@/assets/images/avatars/surf.svg';
 import styles from './styles/Gallery.module.css';
 
 export function Gallery(): JSX.Element {
-  const avatars = [
-    <Samurai title="samurai" key="samurai" />,
-    <Milk title="milk" key="milk" />,
-    <Beach title="beach" key="beach" />,
-    <Surf title="surf" key="surf" />,
-    <Jedi title="jedi" key="jedi" />,
-    <Captain title="captain" key="captain" />,
-    <Gladiator title="gladiator" key="gladiator" />,
-    <Football title="football" key="football" />,
-    <Pirate title="pirate" key="pirate" />,
-    <Avenger title="avenger" key="avenger" />,
-  ];
-
-  return <div className={styles.gallery}>{avatars}</div>;
+  return (
+    <div className={styles.gallery}>
+      <Samurai />
+      <Milk />
+      <Beach />
+      <Surf />
+      <Jedi />
+      <Captain />
+      <Gladiator />
+      <Football />
+      <Pirate />
+      <Avenger />
+    </div>
+  );
 }

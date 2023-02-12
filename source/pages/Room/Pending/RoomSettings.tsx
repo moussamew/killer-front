@@ -40,7 +40,7 @@ export function RoomSettings(): JSX.Element {
         <h2>{t('room.players.list')}</h2>
         {session?.id === room?.admin.id && (
           <Settings onClick={handleRoomSettings}>
-            <RoomSettingsIcon title="roomSettings" />
+            <RoomSettingsIcon title={t('tooltip.room.settings')} />
           </Settings>
         )}
         <p>{t('room.players.list.description')}</p>
