@@ -38,7 +38,7 @@ describe('<PlayerMissions />', () => {
 
     await screen.findByText(fakeMissionOne.content);
 
-    await userEvent.click(screen.getByTitle('deleteMission'));
+    await userEvent.click(screen.getByTitle('Supprimer la mission'));
 
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>

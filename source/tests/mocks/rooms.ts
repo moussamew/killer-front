@@ -6,7 +6,7 @@ import { fakePlayerOne, fakePlayerThree, fakePlayerTwo } from './players';
 
 export const roomCode = 'SOSPC';
 
-export const pendingRoom = {
+export const pendingRoom: Room = {
   id: 17,
   code: roomCode,
   name: "TRINITY's room",
@@ -14,9 +14,9 @@ export const pendingRoom = {
   players: [fakePlayerOne],
   missions: [],
   admin: fakePlayerOne,
-} satisfies Room;
+};
 
-export const pendingRoomWithMissions = {
+export const pendingRoomWithMissions: Room = {
   id: 17,
   code: roomCode,
   name: "TRINITY's room",
@@ -24,9 +24,9 @@ export const pendingRoomWithMissions = {
   players: [fakePlayerOne],
   missions: [fakeMissionOne, fakeMissionTwo, fakeMissionThree],
   admin: fakePlayerOne,
-} satisfies Room;
+};
 
-export const pendingRoomWithMultiplePlayers = {
+export const pendingRoomWithMultiplePlayers: Room = {
   id: 17,
   code: roomCode,
   name: "TRINITY's room",
@@ -34,9 +34,9 @@ export const pendingRoomWithMultiplePlayers = {
   players: [fakePlayerOne, fakePlayerTwo, fakePlayerThree],
   missions: [],
   admin: fakePlayerOne,
-} satisfies Room;
+};
 
-export const playingRoom = {
+export const playingRoom: Room = {
   id: 17,
   code: roomCode,
   name: "TRINITY's room",
@@ -44,9 +44,9 @@ export const playingRoom = {
   players: [fakePlayerOne],
   missions: [fakeMissionOne, fakeMissionTwo, fakeMissionThree],
   admin: fakePlayerOne,
-} satisfies Room;
+};
 
-export const endedRoom = {
+export const endedRoom: Room = {
   id: 17,
   code: roomCode,
   name: "TRINITY's room",
@@ -54,4 +54,4 @@ export const endedRoom = {
   players: [fakePlayerOne],
   missions: [],
   admin: fakePlayerOne,
-} satisfies Room;
+};

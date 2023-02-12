@@ -24,5 +24,8 @@ export const Plugins = [
     },
   }),
   HotReloadJSON(),
-  svgr(),
+  svgr({
+    exportAsDefault: true,
+    svgrOptions: { titleProp: true },
+  }),
 ];

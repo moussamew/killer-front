@@ -36,7 +36,7 @@
   "room.players.list.description": "List of all the criminals who will have to kill each other.",
   "room.share.link.button": "Share link to join the room",
   "room.share.link.message": "Hey! Join my party and try to kill me",
-  "room.leave.title": "Leave the current room",
+  "room.leave.title": "Leave the room",
   "room.leave.warning": "You are about to leave the room.\n Are you sure about this?",
   "room.leave.confirm.button": "Leave this room",
   "room.kick.players.title": "Kick players from the room",
@@ -76,5 +76,12 @@
   "webview.click.button.message": "By clicking on the button below, you can copy and paste the link directly into your browser.",
   "webview.save.link.button": "Save link in the clipboard",
   "notification.link.saved.success": "Link saved in the clipboard!",
-  "notification.link.saved.error": "Cannot copy the link natively. Please copy it manually."
+  "notification.link.saved.error": "Cannot copy the link natively. Please copy it manually.",
+  "tooltip.close": "Close",
+  "tooltip.admin.room": "Admin of the room",
+  "tooltip.leave.room": "Leave the current room",
+  "tooltip.kick.player": "Kick player",
+  "tooltip.delete.mission": "Delete this mission",
+  "tooltip.room.settings": "Room settings",
+  "tooltip.user.settings": "User settings"
 }

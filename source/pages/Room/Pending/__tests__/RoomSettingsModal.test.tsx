@@ -23,7 +23,7 @@ describe('<RoomSettingsModal />', () => {
 
     await screen.findByText('Bienvenue à la fête !');
 
-    await userEvent.click(screen.getByTitle('roomSettings'));
+    await userEvent.click(screen.getByTitle('Gérer la partie'));
 
     await userEvent.type(
       screen.getByPlaceholderText(

@@ -18,7 +18,9 @@ describe('<Layout />', () => {
 
     renderWithProviders({ component: <Layout /> });
 
-    await userEvent.click(await screen.findByTitle('settings'));
+    await userEvent.click(
+      await screen.findByTitle(`Paramètres de l'utilisateur`),
+    );
 
     expect(screen.getByText('Paramètres')).toBeInTheDocument();
   });

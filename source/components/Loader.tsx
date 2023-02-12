@@ -1,4 +1,4 @@
-import { ReactComponent as Spinner } from '@/assets/icons/spinner.svg';
+import Spinner from '@/assets/icons/spinner.svg';
 
 import styles from './styles/Spinner.module.css';
 

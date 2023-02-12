@@ -32,7 +32,8 @@ export function ShareRoomLink(): JSX.Element {
       onSuccess: () => {
         toast.success(t('notification.link.saved.success'), successStyle);
       },
-      onError: () => {
+      onError: (err) => {
+        console.warn({ err });
         toast.error(t('notification.link.saved.error'), errorStyle);
       },
     });
