@@ -1,9 +1,6 @@
 import { toast, ToastBar, Toaster } from 'react-hot-toast';
-import tw from 'twin.macro';
 
-const Alert = tw.div`
-  cursor-pointer
-`;
+import styles from './styles/Notification.module.css';
 
 export function Notification(): JSX.Element {
   const closeNotification = (id: string) => (): void => {
@@ -13,7 +10,11 @@ export function Notification(): JSX.Element {
   return (
     <Toaster position="top-center">
       {(toaster) => (
-        <Alert role="presentation" onClick={closeNotification(toaster.id)}>
+        <div
+          role="presentation"
+          className={styles.notification}
+          onClick={closeNotification(toaster.id)}
+        >
           <ToastBar toast={toaster}>
             {({ icon, message }) => (
               <>
@@ -22,7 +23,7 @@ export function Notification(): JSX.Element {
               </>
             )}
           </ToastBar>
-        </Alert>
+        </div>
       )}
     </Toaster>
   );

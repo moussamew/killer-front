@@ -4,8 +4,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  border-radius: 10px;
+  padding: var(--spacing-small);
+  border-radius: var(--radius-small);
   box-shadow: var(--shadow-small);
   font-size: var(--text-small);
   transition: background-color ease-in-out 500ms, opacity ease-in-out 500ms;

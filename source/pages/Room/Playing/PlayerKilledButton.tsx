@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import tw from 'twin.macro';
 
 import Knife from '@/assets/images/knife.png';
 import { Button } from '@/components/Button';
@@ -7,19 +6,7 @@ import { ModalContext } from '@/context/modal';
 import { useTranslation } from '@/hooks/useTranslation';
 
 import { PlayerKilledModal } from './PlayerKilledModal';
-
-const Content = tw.section`
-  flex flex-col items-center
-  text-center
-`;
-
-const Image = tw.img`
-  h-[12rem]
-`;
-
-const Text = tw.p`
-  font-medium
-`;
+import styles from './styles/PlayerKilledButton.module.css';
 
 export function PlayerKilledButton(): JSX.Element {
   const { t } = useTranslation();
@@ -30,13 +17,13 @@ export function PlayerKilledButton(): JSX.Element {
   };
 
   return (
-    <Content>
-      <Image alt="killed" src={Knife} />
+    <div className={styles.content}>
+      <img alt="killed" src={Knife} className={styles.image} />
       <h2>{t('room.killed.message')}</h2>
-      <Text>{t('room.killed.notify')}</Text>
+      <p>{t('room.killed.notify')}</p>
       <Button color="primary" onClick={handleOpenModal}>
         {t('room.killed.button')}
       </Button>
-    </Content>
+    </div>
   );
 }

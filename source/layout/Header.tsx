@@ -1,23 +1,11 @@
 import { useContext } from 'react';
-import tw from 'twin.macro';
 
 import Settings from '@/assets/icons/settings.svg';
 import { ModalContext } from '@/context/modal';
 import { useTranslation } from '@/hooks/useTranslation';
 
 import { SettingsModal } from './SettingsModal';
-
-const Navigation = tw.header`
-  p-2 flex justify-between
-`;
-
-const Text = tw.p`
-  font-semibold text-black uppercase mr-1
-`;
-
-const PlayerInfos = tw.div`
-  flex flex-row cursor-pointer
-`;
+import styles from './styles/Header.module.css';
 
 interface Props {
   playerName?: string;
@@ -32,16 +20,16 @@ function Header({ playerName }: Props): JSX.Element {
   };
 
   return (
-    <Navigation>
-      <Text>Killer Party</Text>
-      <PlayerInfos>
-        {playerName && <Text>{playerName}</Text>}
+    <header className={styles.header}>
+      <p className={styles.text}>Killer Party</p>
+      <div className={styles.settings}>
+        {playerName && <p className={styles.text}>{playerName}</p>}
         <Settings
           title={t('tooltip.user.settings')}
           onClick={handleOpenSettings}
         />
-      </PlayerInfos>
-    </Navigation>
+      </div>
+    </header>
   );
 }
 

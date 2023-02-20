@@ -1,0 +1,12 @@
+.content {
+  position: relative;
+  padding-bottom: var(--spacing-medium);
+  border-bottom-width: 1px;
+}
+
+.icon {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  cursor: pointer;
+}

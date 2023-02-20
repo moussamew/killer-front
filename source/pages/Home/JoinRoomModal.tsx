@@ -1,5 +1,4 @@
 import { type ChangeEvent, useContext, useState } from 'react';
-import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
@@ -9,14 +8,6 @@ import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
 import styles from './styles/JoinRoomModal.module.css';
-
-const HeadContent = tw.div`
-  flex flex-row items-center
-`;
-
-const Title = tw.h2`
-  mb-0
-`;
 
 export function JoinRoomModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
@@ -54,9 +45,7 @@ export function JoinRoomModal(): JSX.Element {
 
   return (
     <>
-      <HeadContent>
-        <Title>{t('home.join.room')}</Title>
-      </HeadContent>
+      <h2>{t('home.join.room')}</h2>
       {!session?.name && (
         <Input
           id="pseudo"

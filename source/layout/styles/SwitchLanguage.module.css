@@ -1,0 +1,9 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.text {
+  font-size: var(--color-grey-40);
+}

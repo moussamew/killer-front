@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-medium);
+}
+
+.text {
+  margin-right: var(--spacing-small);
+  color: var(--color-black-10);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.settings {
+  display: flex;
+}

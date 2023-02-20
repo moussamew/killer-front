@@ -1,23 +1,9 @@
 import { useContext } from 'react';
-import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
 import { ModalContext } from '@/context/modal';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useUpdatePlayer } from '@/services/player/mutations';
-
-const HeadContent = tw.div`
-  flex flex-row mb-2
-  items-center
-`;
-
-const Title = tw.h2`
-  mb-0
-`;
-
-const TextContent = tw.div`
-  mb-1
-`;
 
 interface Props {
   playerName: string;
@@ -38,12 +24,8 @@ export function KickPlayerModal({ playerName, playerId }: Props): JSX.Element {
 
   return (
     <>
-      <HeadContent>
-        <Title>{t('room.kick.players.title')}</Title>
-      </HeadContent>
-      <TextContent>
-        <p>{t('room.kick.players.warning', { playerName })}</p>
-      </TextContent>
+      <h2>{t('room.kick.players.title')}</h2>
+      <p>{t('room.kick.players.warning', { playerName })}</p>
       <Button color="primary" onClick={handleKickPlayer}>
         {t('room.kick.players.confirm.button', { playerName })}
       </Button>

@@ -1,4 +1,4 @@
-import reactRefresh from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react';
 import { type Plugin } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
@@ -18,11 +18,7 @@ const HotReloadJSON = (): Plugin => ({
 });
 
 export const Plugins = [
-  reactRefresh({
-    babel: {
-      plugins: ['babel-plugin-macros', 'babel-plugin-styled-components'],
-    },
-  }),
+  react(),
   HotReloadJSON(),
   svgr({
     exportAsDefault: true,

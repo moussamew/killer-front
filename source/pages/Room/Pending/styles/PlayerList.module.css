@@ -1,0 +1,38 @@
+.content {
+  @media (max-width: 1280px) {
+    margin-top: var(--spacing-medium);
+  }
+}
+
+.player {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--spacing-medium);
+  padding-bottom: var(--spacing-medium);
+  border-bottom-width: 1px;
+  text-align: center;
+}
+
+.image {
+  position: absolute;
+  left: var(--spacing-small);
+  height: 40px;
+}
+
+.playerName {
+  font-size: var(--text-large);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.currentPlayerName {
+  font-weight: 500;
+}
+
+.icon {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
