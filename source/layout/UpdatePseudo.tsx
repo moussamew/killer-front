@@ -1,5 +1,4 @@
 import { type ChangeEvent, useContext, useState } from 'react';
-import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
@@ -9,19 +8,6 @@ import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
 import styles from './styles/UpdatePseudo.module.css';
-
-const Content = tw.div`
-  mb-1
-`;
-
-const Action = tw.div`
-  flex flex-row justify-between
-  cursor-pointer
-`;
-
-const Text = tw.p`
-  font-medium
-`;
 
 export function UpdatePseudo(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
@@ -42,14 +28,12 @@ export function UpdatePseudo(): JSX.Element {
   };
 
   return (
-    <Content>
-      <Action>
-        <Text>{t('layout.user.update.pseudo.label')}</Text>
-      </Action>
+    <div className={styles.content}>
       <Input
         id="editPseudo"
         value={pseudo}
         onChange={handlePseudo}
+        label={t('layout.user.update.pseudo.label')}
         placeholder={t('layout.user.update.pseudo.placeholder')}
       />
       <Button
@@ -60,6 +44,6 @@ export function UpdatePseudo(): JSX.Element {
       >
         {t('layout.user.update.pseudo.confirm.button')}
       </Button>
-    </Content>
+    </div>
   );
 }

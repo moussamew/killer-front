@@ -11,7 +11,7 @@
     animation: spin 1s linear infinite;
   }
 
-  circle {
+  & circle {
     stroke: var(--color-camel-90);
   }
 }

@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import tw from 'twin.macro';
 
 import Winner from '@/assets/images/winner.png';
 import { Button } from '@/components/Button';
@@ -9,13 +8,7 @@ import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 
-const SectionTitle = tw.div`
-  text-center 
-`;
-
-const Image = tw.img`
-  max-h-[80rem] m-auto
-`;
+import styles from './styles/index.module.css';
 
 export function EndedRoomPage(): JSX.Element {
   const { roomCode } = useParams();
@@ -38,12 +31,16 @@ export function EndedRoomPage(): JSX.Element {
 
   return (
     <>
-      <SectionTitle>
+      <div className={styles.infos}>
         <h1>{t('room.winner.name', { playerName: lastManStanding?.name })}</h1>
         <p>{t('room.winner.congrats')}</p>
-      </SectionTitle>
-      <Image alt="notFound" src={Winner} />
-      <Button color="primary" onClick={handleLeaveRoom}>
+      </div>
+      <img alt="notFound" src={Winner} className={styles.image} />
+      <Button
+        color="primary"
+        onClick={handleLeaveRoom}
+        customStyle={styles.button}
+      >
         {t('room.play.another.party.button')}
       </Button>
     </>

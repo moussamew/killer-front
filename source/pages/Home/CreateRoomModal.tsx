@@ -1,5 +1,4 @@
 import { type ChangeEvent, useContext, useState } from 'react';
-import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
@@ -9,14 +8,6 @@ import { useCreatePlayer } from '@/services/player/mutations';
 import { useCreateRoom } from '@/services/room/mutations';
 
 import styles from './styles/CreateRoomModal.module.css';
-
-const HeadContent = tw.div`
-  flex flex-row items-center
-`;
-
-const Title = tw.h2`
-  mb-0
-`;
 
 export function CreateRoomModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
@@ -37,9 +28,7 @@ export function CreateRoomModal(): JSX.Element {
 
   return (
     <>
-      <HeadContent>
-        <Title>{t('home.create.room.button')}</Title>
-      </HeadContent>
+      <h2>{t('home.create.room.button')}</h2>
       <Input
         id="pseudo"
         type="text"

@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import tw from 'twin.macro';
 
 import Killerparty from '@/assets/images/killerparty.png';
 import { Loader } from '@/components/Loader';
@@ -11,10 +10,6 @@ import { useSession } from '@/services/player/queries';
 
 import { CreatePlayer } from './CreatePlayer';
 import { LeaveCurrentRoom } from './LeaveCurrentRoom';
-
-const WelcomeImage = tw.img`
-  m-auto
-`;
 
 const { NOT_FOUND, BAD_ROOMCODE } = RoomErrorCode;
 
@@ -72,7 +67,7 @@ export function JoinRoomPage(): JSX.Element {
 
   return (
     <>
-      <WelcomeImage alt="welcome" src={Killerparty} />
+      <img alt="welcome" src={Killerparty} />
       {!session?.name && <CreatePlayer />}
       {session?.room?.code && <LeaveCurrentRoom />}
     </>

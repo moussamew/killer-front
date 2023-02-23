@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import tw from 'twin.macro';
 
 import { Button } from '@/components/Button';
 import { ModalContext } from '@/context/modal';
@@ -7,18 +6,7 @@ import { useTranslation } from '@/hooks/useTranslation';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
-const HeadContent = tw.div`
-  flex flex-row mb-2
-  items-center
-`;
-
-const Title = tw.h2`
-  mb-0
-`;
-
-const TextContent = tw.div`
-  mb-1
-`;
+import styles from './styles/LeaveRoomModal.module.css';
 
 export function LeaveRoomModal(): JSX.Element {
   const { t } = useTranslation();
@@ -34,16 +22,12 @@ export function LeaveRoomModal(): JSX.Element {
   };
 
   return (
-    <>
-      <HeadContent>
-        <Title>{t('room.leave.title')}</Title>
-      </HeadContent>
-      <TextContent>
-        <p>{t('room.leave.warning')}</p>
-      </TextContent>
+    <div className={styles.content}>
+      <h2>{t('room.leave.title')}</h2>
+      <p>{t('room.leave.warning')}</p>
       <Button color="primary" onClick={handleLeaveRoom}>
         {t('room.leave.confirm.button')}
       </Button>
-    </>
+    </div>
   );
 }

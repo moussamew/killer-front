@@ -1,23 +1,7 @@
-import { type ChangeEvent, type ForwardedRef, forwardRef } from 'react';
-import tw, { styled } from 'twin.macro';
+import clsx from 'clsx';
+import { type ChangeEvent } from 'react';
 
-const Content = tw.div`
-  flex flex-col w-full 
-  mt-1
-`;
-
-const StyledInput = styled.input<{ uppercase: boolean }>`
-  ${({ uppercase }) => (uppercase ? tw`uppercase` : tw`normal-case`)}
-
-  ${tw`p-1 text-3xl rounded-md
-  border-solid border-2 border-blue-100
-  outline-none transition duration-200 ease-in
-  focus-visible:border-blue-300`}
-`;
-
-const StyledLabel = tw.label`
-  font-semibold text-lightDark pb-1
-`;
+import styles from './styles/Input.module.css';
 
 interface Props {
   id: string;
@@ -29,33 +13,33 @@ interface Props {
   uppercase?: boolean;
 }
 
-function InputRef(
-  {
-    id,
-    value,
-    onChange,
-    type = 'text',
-    placeholder,
-    label,
-    uppercase = false,
-  }: Props,
-  ref: ForwardedRef<HTMLInputElement>,
-): JSX.Element {
+export function Input({
+  id,
+  value,
+  onChange,
+  type = 'text',
+  placeholder,
+  label,
+  uppercase = false,
+}: Props): JSX.Element {
   return (
-    <Content>
-      {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
-      <StyledInput
+    <div className={styles.content}>
+      {label && (
+        <label className={styles.label} htmlFor={id}>
+          {label}
+        </label>
+      )}
+      <input
         id={id}
         value={value}
         onChange={onChange}
-        ref={ref}
         type={type}
         placeholder={placeholder}
         autoComplete="off"
-        uppercase={uppercase}
+        className={clsx(styles.input, {
+          [styles.uppercase]: uppercase,
+        })}
       />
-    </Content>
+    </div>
   );
 }
-
-export const Input = forwardRef(InputRef);

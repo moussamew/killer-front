@@ -1,5 +1,9 @@
+.content {
+  margin-bottom: var(--spacing-small);
+}
+
 .button {
   width: 100%;
-  padding: 10px;
-  margin-top: 10px;
+  padding: var(--spacing-small);
+  margin-top: var(--spacing-small);
 }

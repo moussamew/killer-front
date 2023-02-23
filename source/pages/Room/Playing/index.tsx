@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import tw, { styled } from 'twin.macro';
 
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
@@ -11,16 +10,7 @@ import { useSession } from '@/services/player/queries';
 
 import { PlayerKilledButton } from './PlayerKilledButton';
 import { Status } from './Status';
-
-const Content = styled.div<{ isPlayerDead: boolean }>`
-  flex flex-col md:flex-row 
-   ${({ isPlayerDead }) =>
-     isPlayerDead ? tw`justify-center` : `justify-between`}
-`;
-
-const Spacer = tw.hr`
-  my-1 md:my-2
-`;
+import styles from './styles/index.module.css';
 
 export function PlayingRoomPage(): JSX.Element {
   const { roomCode } = useParams();
@@ -48,16 +38,10 @@ export function PlayingRoomPage(): JSX.Element {
 
   return (
     <>
-      <Content isPlayerDead={session?.status === PlayerStatus.KILLED}>
+      <div className={styles.content}>
         <Status />
-        {session?.status === PlayerStatus.ALIVE && (
-          <>
-            <Spacer />
-            <PlayerKilledButton />
-          </>
-        )}
-      </Content>
-      <Spacer />
+        {session?.status === PlayerStatus.ALIVE && <PlayerKilledButton />}
+      </div>
       <PlayerList />
     </>
   );

@@ -1,0 +1,8 @@
+.content {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 720px) {
+    flex-direction: row;
+  }
+}

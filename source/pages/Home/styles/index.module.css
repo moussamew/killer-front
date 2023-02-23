@@ -16,7 +16,7 @@
     text-align: left;
   }
 
-  h1,
+  & h1,
   h2 {
     margin-bottom: 30px;
 
@@ -31,7 +31,7 @@
   flex-direction: column;
   justify-content: center;
   padding-bottom: 30px;
-  gap: 10px;
+  gap: var(--spacing-small);
 
   @media (min-width: 720px) {
     flex-direction: row;

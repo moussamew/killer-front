@@ -1,19 +1,11 @@
 import { useContext } from 'react';
-import tw from 'twin.macro';
 
-import { DropdownList } from '@/components/DropdownList';
+import { Dropdown } from '@/components/Dropdown';
 import { languageToLocale, localeToLanguage } from '@/constants/languages';
 import { LocaleContext } from '@/context/locale';
 import { useTranslation } from '@/hooks/useTranslation';
 
-const Action = tw.div`
-  flex flex-col justify-between
-  cursor-pointer
-`;
-
-const Text = tw.p`
-  font-medium
-`;
+import styles from './styles/SwitchLanguage.module.css';
 
 export function SwitchLanguage(): JSX.Element {
   const { t } = useTranslation();
@@ -24,13 +16,13 @@ export function SwitchLanguage(): JSX.Element {
   };
 
   return (
-    <Action>
-      <Text>{t('layout.user.language.switch')}</Text>
-      <DropdownList
-        currentItem={localeToLanguage[locale]}
-        itemList={Object.values(localeToLanguage)}
-        actionOnClick={handleUpdateLocale}
+    <div className={styles.content}>
+      <p>{t('layout.user.language.switch')}</p>
+      <Dropdown
+        items={Object.values(localeToLanguage)}
+        onClick={handleUpdateLocale}
+        activeItem={localeToLanguage[locale]}
       />
-    </Action>
+    </div>
   );
 }

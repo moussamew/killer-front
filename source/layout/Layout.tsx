@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
-import tw from 'twin.macro';
 
 import { Loader } from '@/components/Loader';
 import { Modal } from '@/components/Modal';
@@ -9,12 +8,8 @@ import { ModalContext } from '@/context/modal';
 import { useSession } from '@/services/player/queries';
 
 import Header from './Header';
+import styles from './styles/Layout.module.css';
 import { WebViewDetector } from './WebViewDetector';
-
-const Content = tw.main`
-  max-w-screen-xl m-auto
-  inset-0 px-2 mb-2
-`;
 
 export function Layout(): JSX.Element {
   const { modal, closeModal } = useContext(ModalContext);
@@ -27,11 +22,11 @@ export function Layout(): JSX.Element {
   return (
     <>
       <Header playerName={session?.name} />
-      <Content>
+      <section className={styles.layout}>
         <WebViewDetector>
           <Outlet />
         </WebViewDetector>
-      </Content>
+      </section>
       {modal && <Modal closeModal={closeModal}>{modal}</Modal>}
       <Notification />
     </>
