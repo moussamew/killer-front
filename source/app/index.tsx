@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { Strong } from '@/components/Elements';
 import { QueryConfig } from '@/constants/config';
 import { Locale } from '@/constants/enums';
+import { noop } from '@/constants/functions';
 import { translations } from '@/constants/languages';
 import { LocaleProvider } from '@/context/locale';
 import { ModalProvider } from '@/context/modal';
@@ -36,6 +37,7 @@ function App(): JSX.Element {
         locale={locale}
         messages={translations[locale]}
         defaultRichTextElements={{ strong: Strong }}
+        onWarn={noop}
       >
         <LocaleProvider locale={locale} setLocale={setLocale}>
           <ModalProvider>
