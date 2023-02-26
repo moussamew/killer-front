@@ -4,8 +4,10 @@ import { IntlProvider } from 'react-intl';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import { Routes } from '@/app/routes';
+import { Strong } from '@/components/Elements';
 import { QueryConfig } from '@/constants/config';
 import { Locale } from '@/constants/enums';
+import { noop } from '@/constants/functions';
 import { translations } from '@/constants/languages';
 import { ModalProvider } from '@/context/modal';
 
@@ -30,6 +32,8 @@ export function renderWithProviders({
       <IntlProvider
         locale={Locale.FRENCH}
         messages={translations[Locale.FRENCH]}
+        defaultRichTextElements={{ strong: Strong }}
+        onWarn={noop}
       >
         <ModalProvider>{component}</ModalProvider>
       </IntlProvider>
