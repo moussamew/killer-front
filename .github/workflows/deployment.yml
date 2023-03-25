@@ -1,4 +1,4 @@
-name: Killer Web Front - Deploy (CI)
+name: Killer Web Front - Deployment (CI)
 on:
   push:
     branches: [master]
