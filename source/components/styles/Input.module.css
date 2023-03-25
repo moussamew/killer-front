@@ -26,4 +26,8 @@
 
 .uppercase {
   text-transform: uppercase;
+
+  &::placeholder {
+    text-transform: none;
+  }
 }

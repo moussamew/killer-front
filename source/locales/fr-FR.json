@@ -1,7 +1,7 @@
 {
   "home.title": "Ça vous tente un petit meurtre entre amis ?",
   "home.subtitle": "Tuer ou être tuer, faites votre choix.",
-  "home.description": "Killerparty est un <strong>jeu en ligne</strong> où vous devez demasquez vos ennemis avant de vous faire assassiner.\nVous pouvez être la <strong>proie</strong> comme le <strong>prédateur</strong>.",
+  "home.description": "Killerparty est un <strong>jeu en ligne</strong> où vous devez démasquez vos ennemis avant de vous faire assassiner.\nVous pouvez être la <strong>proie</strong> comme le <strong>prédateur</strong>.",
   "home.create.room.button": "Créer une nouvelle partie",
   "home.create.room.error": "Une erreur s'est produite lors de la création d'une nouvelle partie. Veuillez réessayer plus tard.",
   "home.create.room.confirm.button": "Créer ma partie",
