@@ -14,3 +14,7 @@
 .settings {
   display: flex;
 }
+
+.icon {
+  cursor: pointer;
+}
