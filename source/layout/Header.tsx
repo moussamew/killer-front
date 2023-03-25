@@ -27,6 +27,7 @@ function Header({ playerName }: Props): JSX.Element {
         <Settings
           title={t('tooltip.user.settings')}
           onClick={handleOpenSettings}
+          className={styles.icon}
         />
       </div>
     </header>
