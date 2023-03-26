@@ -36,7 +36,7 @@ export function JoinRoomModal(): JSX.Element {
           ),
       });
     } else {
-      updatePlayer.mutateAsync(
+      await updatePlayer.mutateAsync(
         { id: session?.id, room: roomCode },
         { onSuccess: closeModal },
       );
