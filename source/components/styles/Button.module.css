@@ -23,7 +23,7 @@
   }
 
   @media (min-width: 720px) {
-    padding: 20px;
+    padding: var(--spacing-medium);
     font-size: var(--text-medium);
   }
 }
@@ -56,14 +56,10 @@
 
 .spinner {
   position: absolute;
-  height: 30px;
+  height: 20px;
 
   :global {
     animation: spin 1s linear infinite;
-  }
-
-  @media (max-width: 720px) {
-    height: 20px;
   }
 }
 
