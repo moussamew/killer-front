@@ -25,13 +25,7 @@ import {
 import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
 
-const {
-  PLAYER_KILLED,
-  PLAYER_UPDATED,
-  ROOM_DELETED,
-  ROOM_IN_GAME,
-  ROOM_UPDATED,
-} = MercureEventType;
+const { PLAYER_KILLED, ROOM_UPDATED } = MercureEventType;
 
 describe('<RoomPage />', () => {
   const roomEventSource = `${ROOM_TOPIC}/X7JKL`;
@@ -211,7 +205,7 @@ describe('<RoomPage />', () => {
 
     const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
-        type: PLAYER_UPDATED,
+        type: ROOM_UPDATED,
       }),
     });
 
@@ -245,7 +239,7 @@ describe('<RoomPage />', () => {
 
     const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
-        type: ROOM_IN_GAME,
+        type: ROOM_UPDATED,
       }),
     });
 
@@ -281,7 +275,7 @@ describe('<RoomPage />', () => {
 
     const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
-        type: ROOM_DELETED,
+        type: ROOM_UPDATED,
       }),
     });
 
