@@ -11,7 +11,7 @@
   justify-content: center;
   padding-top: var(--spacing-medium);
   padding-bottom: var(--spacing-medium);
-  border-bottom-width: 1px;
+  border-bottom: 1px solid var(--color-black-90);
   text-align: center;
 }
 
