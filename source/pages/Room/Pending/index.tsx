@@ -7,7 +7,6 @@ import { useRoom } from '@/services/room/queries';
 
 import { PlayerList } from './PlayerList';
 import { PlayerMissions } from './PlayerMissions';
-import { RoomMissions } from './RoomMissions';
 import { ShareRoomLink } from './ShareRoomLink';
 import { StartPartyButton } from './StartPartyButton';
 import styles from './styles/index.module.css';
@@ -18,6 +17,8 @@ export function PendingRoomPage(): JSX.Element | null {
   const { session } = useSession();
   const { room } = useRoom(roomCode!);
 
+  const missions = room?.missions.length;
+
   return (
     <>
       <div className={styles.content}>
@@ -25,7 +26,7 @@ export function PendingRoomPage(): JSX.Element | null {
         <div className={styles.description}>
           <h1>{t('room.welcome.title')}</h1>
           <p>{t('room.join.room.code', { roomCode })}</p>
-          <RoomMissions />
+          {missions && <p>{t('room.missions.count', { missions })}</p>}
           <ShareRoomLink />
           {session?.id === room?.admin.id && <StartPartyButton />}
         </div>
