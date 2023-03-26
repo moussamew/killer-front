@@ -31,7 +31,7 @@ describe('<StartPartyButton />', () => {
 
     const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
-        type: MercureEventType.ROOM_IN_GAME,
+        type: MercureEventType.ROOM_UPDATED,
       }),
     });
 

@@ -5,12 +5,11 @@ import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
 import { MercureEventType } from '@/constants/enums';
 import { useSession } from '@/services/player/queries';
-import { RoomStatus } from '@/services/room/constants';
 import { useRoom } from '@/services/room/queries';
 
-const { ROOM_IN_GAME, ROOM_DELETED, ROOM_UPDATED, PLAYER_UPDATED } =
-  MercureEventType;
-const { PENDING, IN_GAME, ENDED } = RoomStatus;
+import { roomStatusToRoute } from './constants';
+
+const { ROOM_UPDATED } = MercureEventType;
 
 export function RoomPage(): JSX.Element | null {
   const navigate = useNavigate();
@@ -22,23 +21,34 @@ export function RoomPage(): JSX.Element | null {
    * Redirect player to the correct route related to the room status.
    */
   useEffect(() => {
-    switch (room?.status) {
-      case PENDING:
-        navigate(`/room/${roomCode}/pending`);
-        break;
+    if (room?.status) {
+      const roomStatusRoute = roomStatusToRoute[room.status];
 
-      case IN_GAME:
-        navigate(`/room/${roomCode}/playing`);
-        break;
-
-      case ENDED:
-        navigate(`/room/${roomCode}/ended`);
-        break;
-
-      default:
-        break;
+      navigate(`/room/${roomCode}/${roomStatusRoute}`);
     }
   }, [room, navigate, roomCode]);
+
+  /**
+   * Listen to SSE events emits in the Room page.
+   * Apply corresponding side-effects.
+   */
+  useEffect(() => {
+    const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomCode}`, {
+      withCredentials: PROD_ENV,
+    });
+
+    roomEventSource.addEventListener('message', (event) => {
+      if (event.data) {
+        const eventMessage = JSON.parse(event.data);
+
+        if (eventMessage?.type === ROOM_UPDATED) {
+          refetchRoom().then(refetchSession);
+        }
+      }
+    });
+
+    return () => roomEventSource.close();
+  }, [roomCode, navigate, refetchSession, refetchRoom]);
 
   /**
    * Redirect player to the correct route by checking its session.
@@ -67,49 +77,6 @@ export function RoomPage(): JSX.Element | null {
 
     return undefined;
   }, [isLoading, session, roomCode, navigate]);
-
-  /**
-   * Listen to SSE events emits in the Room page.
-   * Apply corresponding side-effects.
-   */
-  useEffect(() => {
-    const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomCode}`, {
-      withCredentials: PROD_ENV,
-    });
-
-    roomEventSource.addEventListener('message', (event) => {
-      const { type } = JSON.parse(event.data);
-
-      switch (type) {
-        case ROOM_UPDATED:
-          refetchRoom();
-          break;
-
-        case PLAYER_UPDATED:
-          refetchRoom().then(refetchSession);
-          break;
-
-        /**
-         * Should be removed to use the `ROOM_UPDATED` event.
-         */
-        case ROOM_IN_GAME:
-          navigate(`/room/${roomCode}/playing`);
-          break;
-
-        /**
-         * Should be removed to use the `ROOM_UPDATED` event.
-         */
-        case ROOM_DELETED:
-          refetchSession();
-          break;
-
-        default:
-          break;
-      }
-    });
-
-    return () => roomEventSource.close();
-  }, [roomCode, navigate, refetchSession, refetchRoom]);
 
   return <Outlet /> || null;
 }
