@@ -33,8 +33,10 @@ describe('<LeaveRoomModal />', () => {
       ),
     );
 
+    await screen.findByText('Ça vous tente un petit meurtre entre amis ?');
+
     expect(
-      await screen.findByText('Ça vous tente un petit meurtre entre amis ?'),
+      screen.getByText('Ça vous tente un petit meurtre entre amis ?'),
     ).toBeInTheDocument();
   });
 });

@@ -35,9 +35,13 @@ describe('<PlayerKilledModal />', () => {
       ),
     );
 
+    await screen.findByText(
+      "Les morts ne racontent pas d'histoires... Vous devez juste attendre la fin du jeu.",
+    );
+
     expect(
-      await screen.findByText(
-        `Les morts ne racontent pas d'histoires... Vous devez juste attendre la fin du jeu.`,
+      screen.getByText(
+        "Les morts ne racontent pas d'histoires... Vous devez juste attendre la fin du jeu.",
       ),
     ).toBeInTheDocument();
   });
