@@ -27,8 +27,6 @@ describe('<SettingsModal />', () => {
       fakePlayerTwo.name,
     );
 
-    await userEvent.click(screen.getByText('Sauvegarder'));
-
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(
@@ -37,6 +35,8 @@ describe('<SettingsModal />', () => {
         ),
       ),
     );
+
+    await userEvent.click(screen.getByText('Sauvegarder'));
 
     expect(await screen.findByText(fakePlayerTwo.name));
   });
