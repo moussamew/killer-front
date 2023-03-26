@@ -24,9 +24,7 @@ describe('<LeaveCurrentRoom />', () => {
 
     renderWithProviders({ route: '/join/XAB4L' });
 
-    await screen.findByText(`Déjà à l'intérieur de la partie SOSPC !`);
-
-    await userEvent.click(screen.getByText('Continuer et rejoindre la partie'));
+    await screen.findByText("Déjà à l'intérieur de la partie SOSPC !");
 
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
@@ -42,6 +40,8 @@ describe('<LeaveCurrentRoom />', () => {
         res(ctx.status(200), ctx.json({ ...pendingRoom, code: 'XAB4L' })),
       ),
     );
+
+    await userEvent.click(screen.getByText('Continuer et rejoindre la partie'));
 
     await screen.findByText('Bienvenue à la fête !');
 
