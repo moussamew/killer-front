@@ -22,9 +22,7 @@ describe('<PlayerKilledModal />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await userEvent.click(await screen.findByText(`J'ai été tué`));
-
-    await userEvent.click(screen.getByText('Tuez-moi'));
+    await userEvent.click(await screen.findByText("J'ai été tué"));
 
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
@@ -35,12 +33,10 @@ describe('<PlayerKilledModal />', () => {
       ),
     );
 
-    await screen.findByText(
-      "Les morts ne racontent pas d'histoires... Vous devez juste attendre la fin du jeu.",
-    );
+    await userEvent.click(screen.getByText('Tuez-moi'));
 
     expect(
-      screen.getByText(
+      await screen.findByText(
         "Les morts ne racontent pas d'histoires... Vous devez juste attendre la fin du jeu.",
       ),
     ).toBeInTheDocument();

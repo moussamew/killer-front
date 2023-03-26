@@ -25,13 +25,13 @@ describe('<LeaveRoomModal />', () => {
 
     await userEvent.click(screen.getByTitle('Quitter la partie en cours'));
 
-    await userEvent.click(screen.getByText('Quitter la partie'));
-
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(noRoomSession)),
       ),
     );
+
+    await userEvent.click(screen.getByText('Quitter la partie'));
 
     await screen.findByText('Ça vous tente un petit meurtre entre amis ?');
 
