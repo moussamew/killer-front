@@ -36,10 +36,6 @@ describe('<CreateMission />', () => {
       fakeMissionThree.content,
     );
 
-    await userEvent.click(
-      screen.getByText('Ajouter cette mission à la partie'),
-    );
-
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(
@@ -50,6 +46,10 @@ describe('<CreateMission />', () => {
           }),
         ),
       ),
+    );
+
+    await userEvent.click(
+      screen.getByText('Ajouter cette mission à la partie'),
     );
 
     expect(
