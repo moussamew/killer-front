@@ -64,7 +64,7 @@ export function WebViewDetector({ children }: Props): JSX.Element {
       />
       <h2>{t('webview.how.to.play')}</h2>
       <p>{t('webview.click.button.message')}</p>
-      <Button color="primary" onClick={saveLink} customStyle={styles.button}>
+      <Button color="primary" onClick={saveLink}>
         {t('webview.save.link.button')}
       </Button>
     </div>

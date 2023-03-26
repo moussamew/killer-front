@@ -1,6 +1,6 @@
 .spacing {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: var(--spacing-large);
+  padding-bottom: var(--spacing-large);
 
   @media (min-width: 720px) {
     padding-top: 30px;
@@ -35,5 +35,7 @@
 
   @media (min-width: 720px) {
     flex-direction: row;
+    margin-right: 10%;
+    margin-left: 10%;
   }
 }
