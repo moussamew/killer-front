@@ -25,11 +25,7 @@ export function NotFoundPage(): JSX.Element {
         )}
       </div>
       <img alt="notFound" className={styles.image} src={NotFoundSrc} />
-      <Button
-        color="primary"
-        onClick={handleGoBack}
-        customStyle={styles.button}
-      >
+      <Button color="primary" onClick={handleGoBack}>
         {t('notfound.back')}
       </Button>
     </>

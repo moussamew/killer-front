@@ -7,8 +7,6 @@ import { useTranslation } from '@/hooks/useTranslation';
 import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
-import styles from './styles/JoinRoomModal.module.css';
-
 export function JoinRoomModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
   const [roomCode, setRoomCode] = useState('');
@@ -64,12 +62,7 @@ export function JoinRoomModal(): JSX.Element {
         onChange={handleRoomCode}
         uppercase
       />
-      <Button
-        color="secondary"
-        disabled={!roomCode}
-        onClick={handleJoinRoom}
-        customStyle={styles.button}
-      >
+      <Button color="secondary" disabled={!roomCode} onClick={handleJoinRoom}>
         {t('home.join.room.confirm.button')}
       </Button>
     </>

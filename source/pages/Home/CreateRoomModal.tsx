@@ -7,8 +7,6 @@ import { useTranslation } from '@/hooks/useTranslation';
 import { useCreatePlayer } from '@/services/player/mutations';
 import { useCreateRoom } from '@/services/room/mutations';
 
-import styles from './styles/CreateRoomModal.module.css';
-
 export function CreateRoomModal(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
   const { t } = useTranslation();
@@ -37,12 +35,7 @@ export function CreateRoomModal(): JSX.Element {
         value={pseudo}
         onChange={handlePseudo}
       />
-      <Button
-        color="primary"
-        disabled={!pseudo}
-        onClick={handleCreateRoom}
-        customStyle={styles.button}
-      >
+      <Button color="primary" disabled={!pseudo} onClick={handleCreateRoom}>
         {t('home.create.room.confirm.button')}
       </Button>
     </>

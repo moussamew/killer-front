@@ -36,12 +36,7 @@ export function UpdatePseudo(): JSX.Element {
         label={t('layout.user.update.pseudo.label')}
         placeholder={t('layout.user.update.pseudo.placeholder')}
       />
-      <Button
-        color="primary"
-        onClick={updatePlayerPseudo}
-        disabled={!pseudo}
-        customStyle={styles.button}
-      >
+      <Button color="primary" onClick={updatePlayerPseudo} disabled={!pseudo}>
         {t('layout.user.update.pseudo.confirm.button')}
       </Button>
     </div>
