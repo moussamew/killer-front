@@ -6,6 +6,10 @@ import { server } from './server';
 
 global.EventSource = EventSource;
 
+jest.mock('../constants/app', () => ({
+  API_URL: 'http://api.killerparty.app',
+}));
+
 Object.defineProperty(window, 'matchMedia', {
   value: () => {
     return {
