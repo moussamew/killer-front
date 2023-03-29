@@ -5,7 +5,6 @@ on:
       - completed
     workflows:
       - 'Killer Web Front - Test (CI)'
-      - 'Killer Web Front - Deployment (CI)'
 
 jobs:
   merge-me:
