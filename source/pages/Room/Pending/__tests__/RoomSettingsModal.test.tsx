@@ -32,13 +32,13 @@ describe('<RoomSettingsModal />', () => {
       roomCode,
     );
 
-    await userEvent.click(screen.getByText('Supprimer'));
-
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(noRoomSession)),
       ),
     );
+
+    await userEvent.click(screen.getByText('Supprimer'));
 
     expect(
       await screen.findByText('Ça vous tente un petit meurtre entre amis ?'),
