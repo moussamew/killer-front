@@ -26,7 +26,7 @@ export function PendingRoomPage(): JSX.Element | null {
         <div className={styles.description}>
           <h1>{t('room.welcome.title')}</h1>
           <p>{t('room.join.room.code', { roomCode })}</p>
-          {missions && <p>{t('room.missions.count', { missions })}</p>}
+          {Boolean(missions) && <p>{t('room.missions.count', { missions })}</p>}
           <ShareRoomLink />
           {session?.id === room?.admin.id && <StartPartyButton />}
         </div>
