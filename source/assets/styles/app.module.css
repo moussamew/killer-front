@@ -4,6 +4,14 @@
   letter-spacing: -0.05rem;
 }
 
+* {
+  font-size: var(--text-small);
+
+  @media (min-width: 720px) {
+    font-size: var(--text-medium);
+  }
+}
+
 h1 {
   font-size: 24px;
 
@@ -24,16 +32,6 @@ h2 {
 
 strong {
   font-weight: 500;
-}
-
-label,
-p,
-input::placeholder {
-  font-size: var(--text-small);
-
-  @media (min-width: 720px) {
-    font-size: var(--text-medium);
-  }
 }
 
 p {
