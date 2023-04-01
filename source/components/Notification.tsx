@@ -8,7 +8,24 @@ export function Notification(): JSX.Element {
   };
 
   return (
-    <Toaster position="top-center">
+    <Toaster
+      position="bottom-left"
+      toastOptions={{
+        style: {
+          color: '#fff',
+        },
+        success: {
+          style: {
+            backgroundColor: '#5CB85C',
+          },
+        },
+        error: {
+          style: {
+            backgroundColor: '#F87171',
+          },
+        },
+      }}
+    >
       {(toaster) => (
         <div
           role="presentation"
