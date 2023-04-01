@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 
 import { Button } from '@/components/Button';
 import { JOIN_ROOM_ROUTE } from '@/constants/endpoints';
-import { errorStyle, successStyle } from '@/constants/styles';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useCreateNavigatorClipboard } from '@/services/common/mutations';
 
@@ -25,15 +24,15 @@ export function ShareRoomLink(): JSX.Element {
     }
 
     if (!navigator.clipboard) {
-      return void toast.error(t('notification.link.saved.error'), errorStyle);
+      return void toast.error(t('notification.link.saved.error'));
     }
 
     return createNavigatorClipboard.mutateAsync(roomLink, {
       onSuccess: () => {
-        toast.success(t('notification.link.saved.success'), successStyle);
+        toast.success(t('notification.link.saved.success'));
       },
       onError: () => {
-        toast.error(t('notification.link.saved.error'), errorStyle);
+        toast.error(t('notification.link.saved.error'));
       },
     });
   };

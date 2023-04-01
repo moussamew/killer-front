@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 import { Button } from '@/components/Button';
-import { errorStyle, successStyle } from '@/constants/styles';
 import { AppLogo, TWITTER_WEBVIEW_URL, WebViewApp } from '@/constants/webview';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useCreateNavigatorClipboard } from '@/services/common/mutations';
@@ -40,15 +39,15 @@ export function WebViewDetector({ children }: Props): JSX.Element {
     const roomLink = window.location.href;
 
     if (!navigator.clipboard) {
-      return void toast.error(t('notification.link.saved.error'), errorStyle);
+      return void toast.error(t('notification.link.saved.error'));
     }
 
     return createNavigatorClipboard.mutateAsync(roomLink, {
       onSuccess: () => {
-        toast.success(t('notification.link.saved.success'), successStyle);
+        toast.success(t('notification.link.saved.success'));
       },
       onError: () => {
-        toast.error(t('notification.link.saved.error'), errorStyle);
+        toast.error(t('notification.link.saved.error'));
       },
     });
   };

@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import { toast } from 'react-hot-toast';
 
 import { Button } from '@/components/Button';
-import { errorStyle } from '@/constants/styles';
 import { ModalContext } from '@/context/modal';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useCreateRoom } from '@/services/room/mutations';
@@ -24,7 +23,7 @@ export function CreateRoomButton({ playerName }: Props): JSX.Element {
     } else {
       await createRoom.mutateAsync(undefined, {
         onError: () => {
-          toast.error(t('home.create.room.error'), errorStyle);
+          toast.error(t('home.create.room.error'));
         },
       });
     }
