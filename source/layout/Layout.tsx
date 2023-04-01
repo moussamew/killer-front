@@ -13,7 +13,7 @@ import { WebViewDetector } from './WebViewDetector';
 
 export function Layout(): JSX.Element {
   const { modal, closeModal } = useContext(ModalContext);
-  const { isLoading, session } = useSession();
+  const { isLoading, session, refetchSession } = useSession();
 
   if (isLoading) {
     return <Loader />;
@@ -24,7 +24,7 @@ export function Layout(): JSX.Element {
       <Header playerName={session?.name} />
       <section className={styles.layout}>
         <WebViewDetector>
-          <Outlet />
+          <Outlet context={{ isLoading, session, refetchSession }} />
         </WebViewDetector>
       </section>
       {modal && <Modal closeModal={closeModal}>{modal}</Modal>}

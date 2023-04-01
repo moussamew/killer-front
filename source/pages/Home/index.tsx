@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 
 import { useTranslation } from '@/hooks/useTranslation';
-import { useSession } from '@/services/player/queries';
+import { type SessionQuery } from '@/services/player/types';
 
 import { CreateRoomButton } from './CreateRoomButton';
 import { Gallery } from './Gallery';
@@ -13,7 +13,7 @@ import styles from './styles/index.module.css';
 export function HomePage(): JSX.Element {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { session } = useSession();
+  const { session } = useOutletContext<SessionQuery>();
 
   useEffect(() => {
     if (session?.room?.code) {
