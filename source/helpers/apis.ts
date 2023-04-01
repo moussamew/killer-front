@@ -1,3 +1,5 @@
+import { toast } from 'react-hot-toast';
+
 import { type RequestParams } from './types';
 
 export async function request<T>({
@@ -16,14 +18,15 @@ export async function request<T>({
     ...requestInit,
   });
 
-  const result = await response.json().catch(() => {
-    // eslint-disable-next-line no-console
-    console.error(`${method} > ${url} does not have JSON response format.`);
-  });
+  // Early return for "204 No Content status".
+  if (response.status === 204) {
+    return null as T;
+  }
 
-  // Not handle error messages correctly for now.
-  // Waiting for the back-end update on that.
-  if (result?.code && result?.message) {
+  const result = await response.json();
+
+  if (!response.ok) {
+    toast.error(result.detail);
     return null as T;
   }
 
