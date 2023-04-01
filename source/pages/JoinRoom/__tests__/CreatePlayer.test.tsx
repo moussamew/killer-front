@@ -32,8 +32,6 @@ describe('<CreatePlayer />', () => {
       fakePlayerOne.name,
     );
 
-    await userEvent.click(screen.getByText('Rejoindre cette partie'));
-
     server.use(
       rest.get(SESSION_ENDPOINT, async (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoomSession)),
@@ -42,6 +40,8 @@ describe('<CreatePlayer />', () => {
         res(ctx.status(200), ctx.json(pendingRoom)),
       ),
     );
+
+    await userEvent.click(screen.getByText('Rejoindre cette partie'));
 
     await screen.findByText('Bienvenue à la fête !');
 
