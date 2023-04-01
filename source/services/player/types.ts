@@ -30,8 +30,8 @@ export interface PlayerUpdateInfos {
 }
 
 export interface SessionQuery {
-  session: Session | undefined;
-  refetchSession(): Promise<QueryObserverResult<Session, unknown>>;
+  session: Session | null | undefined;
+  refetchSession(): Promise<QueryObserverResult<Session | null, unknown>>;
   isLoading: boolean;
 }
 
