@@ -71,8 +71,6 @@ describe('<JoinRoomModal />', () => {
       roomCode,
     );
 
-    await userEvent.click(screen.getByText('Rejoindre cette partie'));
-
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(pendingRoomSession)),
@@ -81,6 +79,8 @@ describe('<JoinRoomModal />', () => {
         res(ctx.status(200), ctx.json(pendingRoom)),
       ),
     );
+
+    await userEvent.click(screen.getByText('Rejoindre cette partie'));
 
     await screen.findByText('Bienvenue à la fête !');
 
