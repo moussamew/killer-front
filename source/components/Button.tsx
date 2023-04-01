@@ -1,8 +1,6 @@
 import { clsx } from 'clsx';
-import { toast } from 'react-hot-toast';
 
 import Spinner from '@/assets/icons/spinner.svg';
-import { errorStyle } from '@/constants/styles';
 import { isPromise } from '@/helpers/utils';
 import { useSafeState } from '@/hooks/useSafeState';
 
@@ -32,7 +30,7 @@ export function Button({
 
     setLoading(true);
 
-    await onClick().catch((error) => toast.error(error.message, errorStyle));
+    await onClick();
 
     return setLoading(false);
   };
