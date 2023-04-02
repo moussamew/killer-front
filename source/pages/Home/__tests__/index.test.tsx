@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
@@ -12,9 +13,7 @@ describe('<HomePage />', () => {
   it('should correctly show the home page', async () => {
     renderWithProviders();
 
-    expect(
-      await screen.findByText('Ça vous tente un petit meurtre entre amis ?'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(t('home.title'))).toBeInTheDocument();
   });
 
   it('should navigate to the room page if a room code exist inside the player session', async () => {
@@ -29,20 +28,20 @@ describe('<HomePage />', () => {
 
     renderWithProviders();
 
-    await screen.findByText('Bienvenue à la fête !');
+    await screen.findByText(t('room.welcome.title'));
 
     expect(
-      screen.getByText('Le code pour rejoindre cette partie est SOSPC.'),
+      screen.getByText(t('room.join.room.code', { roomCode })),
     ).toBeInTheDocument();
   });
 
   it('should open the join room modal by clicking on the join room button', async () => {
     renderWithProviders();
 
-    await userEvent.click(await screen.findByText('Rejoindre une partie'));
+    await userEvent.click(await screen.findByText(t('home.join.room')));
 
     expect(
-      await screen.findByText('Rejoindre cette partie'),
+      await screen.findByText(t('home.join.room.confirm.button')),
     ).toBeInTheDocument();
   });
 });

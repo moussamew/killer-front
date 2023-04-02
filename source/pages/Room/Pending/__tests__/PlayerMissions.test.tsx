@@ -1,5 +1,6 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { SESSION_ENDPOINT } from '@/constants/endpoints';
@@ -50,7 +51,7 @@ describe('<PlayerMissions />', () => {
       ),
     );
 
-    await userEvent.click(screen.getByTitle('Supprimer la mission'));
+    await userEvent.click(screen.getByTitle(t('tooltip.delete.mission')));
 
     await waitForElementToBeRemoved(() =>
       screen.queryByText(fakeMissionOne.content),

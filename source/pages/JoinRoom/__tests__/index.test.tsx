@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import {
@@ -30,7 +31,7 @@ describe('<JoinRoomPage />', () => {
     renderWithProviders({ route: `/join/${roomCode}` });
 
     expect(
-      await screen.findByText('Le code pour rejoindre cette partie est SOSPC.'),
+      await screen.findByText(t('room.join.room.code', { roomCode })),
     ).toBeInTheDocument();
   });
 
@@ -53,7 +54,7 @@ describe('<JoinRoomPage />', () => {
     );
 
     expect(
-      await screen.findByText('Le code pour rejoindre cette partie est SOSPC.'),
+      await screen.findByText(t('room.join.room.code', { roomCode })),
     ).toBeInTheDocument();
   });
 

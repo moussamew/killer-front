@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
@@ -21,7 +22,7 @@ describe('<RoomSettings />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await userEvent.click(await screen.findByTitle('Gérer la partie'));
+    await userEvent.click(await screen.findByTitle(t('tooltip.room.settings')));
 
     expect(screen.queryByText('Paramètres de la partie')).toBeInTheDocument();
   });

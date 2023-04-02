@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
@@ -21,14 +22,12 @@ describe('<RoomSettingsModal />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Bienvenue à la fête !');
+    await screen.findByText(t('room.welcome.title'));
 
-    await userEvent.click(screen.getByTitle('Gérer la partie'));
+    await userEvent.click(screen.getByTitle(t('tooltip.room.settings')));
 
     await userEvent.type(
-      screen.getByPlaceholderText(
-        /Confirmez en saisissant le code de la partie/,
-      ),
+      screen.getByPlaceholderText(t('room.delete.current.room.placeholder')),
       roomCode,
     );
 
@@ -38,10 +37,10 @@ describe('<RoomSettingsModal />', () => {
       ),
     );
 
-    await userEvent.click(screen.getByText('Supprimer'));
+    await userEvent.click(
+      screen.getByText(t('room.delete.current.room.confirm.button')),
+    );
 
-    expect(
-      await screen.findByText('Ça vous tente un petit meurtre entre amis ?'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(t('home.title'))).toBeInTheDocument();
   });
 });

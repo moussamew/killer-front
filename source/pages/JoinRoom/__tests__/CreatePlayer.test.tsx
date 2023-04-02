@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import {
@@ -25,10 +26,10 @@ describe('<CreatePlayer />', () => {
 
     renderWithProviders({ route: `/join/${roomCode}` });
 
-    await screen.findByText('Pas de nom associé !');
+    await screen.findByText(t('join.room.no.pseudo'));
 
     await userEvent.type(
-      screen.getByPlaceholderText('Choisir un nom'),
+      screen.getByPlaceholderText(t('home.create.pseudo.placeholder')),
       fakePlayerOne.name,
     );
 
@@ -41,12 +42,12 @@ describe('<CreatePlayer />', () => {
       ),
     );
 
-    await userEvent.click(screen.getByText('Rejoindre cette partie'));
+    await userEvent.click(screen.getByText(t('home.join.room.confirm.button')));
 
-    await screen.findByText('Bienvenue à la fête !');
+    await screen.findByText(t('room.welcome.title'));
 
     expect(
-      screen.getByText('Le code pour rejoindre cette partie est SOSPC.'),
+      screen.getByText(t('room.join.room.code', { roomCode })),
     ).toBeInTheDocument();
   });
 
@@ -59,13 +60,13 @@ describe('<CreatePlayer />', () => {
 
     renderWithProviders({ route: `/join/${roomCode}` });
 
-    await screen.findByText('Pas de nom associé !');
+    await screen.findByText(t('join.room.no.pseudo'));
 
-    await userEvent.click(screen.getByText('Créer ma partie'));
+    await userEvent.click(
+      screen.getByText(t('home.create.room.confirm.button')),
+    );
 
-    expect(
-      await screen.findByText('Ça vous tente un petit meurtre entre amis ?'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(t('home.title'))).toBeInTheDocument();
   });
 
   it.skip('should show an error when the player cannot join the room', async () => {

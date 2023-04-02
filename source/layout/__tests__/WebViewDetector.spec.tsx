@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 
 import { TWITTER_WEBVIEW_URL, WebViewApp } from '@/constants/webview';
 import { roomCode } from '@/tests/mocks/rooms';
@@ -17,9 +18,7 @@ describe('<WebViewDetector />', () => {
     renderWithProviders();
 
     expect(
-      await screen.findByText(
-        `L'accès à Killer Party depuis une application tierce est limité pour des raisons d'expérience de jeu.`,
-      ),
+      await screen.findByText(t('webview.restriction.message')),
     ).toBeInTheDocument();
   });
 
@@ -36,12 +35,12 @@ describe('<WebViewDetector />', () => {
 
     renderWithProviders({ route: `/join/${roomCode}` });
 
-    await userEvent.click(await screen.findByText('Enregistrer le lien'));
+    await userEvent.click(
+      await screen.findByText(t('webview.save.link.button')),
+    );
 
     expect(
-      await screen.findByText(
-        'Impossible de copier le lien automatiquement, veuillez le copier manuellement.',
-      ),
+      await screen.findByText(t('notification.link.saved.error')),
     ).toBeInTheDocument();
   });
 
@@ -60,9 +59,13 @@ describe('<WebViewDetector />', () => {
 
     renderWithProviders({ route: `/join/${roomCode}` });
 
-    await userEvent.click(await screen.findByText('Enregistrer le lien'));
+    await userEvent.click(
+      await screen.findByText(t('webview.save.link.button')),
+    );
 
-    expect(await screen.findByText('Lien enregistré !')).toBeInTheDocument();
+    expect(
+      await screen.findByText(t('notification.link.saved.success')),
+    ).toBeInTheDocument();
     expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
     expect(spyNavigatorClipboard).toHaveBeenCalledWith(
       `http://localhost/join/${roomCode}`,
@@ -82,10 +85,12 @@ describe('<WebViewDetector />', () => {
 
     renderWithProviders({ route: `/join/${roomCode}` });
 
-    await userEvent.click(await screen.findByText('Enregistrer le lien'));
+    await userEvent.click(
+      await screen.findByText(t('webview.save.link.button')),
+    );
 
     const notification = await screen.findAllByText(
-      `Impossible de copier le lien automatiquement, veuillez le copier manuellement.`,
+      t('notification.link.saved.error'),
     );
 
     expect(notification[1]).toBeInTheDocument();

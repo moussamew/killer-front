@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import {
@@ -42,14 +43,12 @@ describe('<ShareRoomLink />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await userEvent.click(
-      await screen.findByText('Partager le lien de la partie'),
-    );
+    await userEvent.click(await screen.findByText(t('room.share.link.button')));
 
     expect(spyNavigatorShare).toHaveBeenCalledTimes(1);
     expect(spyNavigatorShare).toHaveBeenCalledWith({
       title: 'Killerparty',
-      text: `Rejoignez la partie et essayer d'en sortir vivant`,
+      text: t('room.share.link.message'),
       url: `${JOIN_ROOM_ROUTE}/${roomCode}`,
     });
   });
@@ -62,13 +61,9 @@ describe('<ShareRoomLink />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await userEvent.click(
-      await screen.findByText('Partager le lien de la partie'),
-    );
+    await userEvent.click(await screen.findByText(t('room.share.link.button')));
 
-    await screen.findByText(
-      'Impossible de copier le lien automatiquement, veuillez le copier manuellement.',
-    );
+    await screen.findByText(t('notification.link.saved.error'));
   });
 
   it('should save the room link in clipboard if share is not available', async () => {
@@ -85,11 +80,11 @@ describe('<ShareRoomLink />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await userEvent.click(
-      await screen.findByText('Partager le lien de la partie'),
-    );
+    await userEvent.click(await screen.findByText(t('room.share.link.button')));
 
-    expect(await screen.findByText('Lien enregistré !')).toBeInTheDocument();
+    expect(
+      await screen.findByText(t('notification.link.saved.success')),
+    ).toBeInTheDocument();
     expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
     expect(spyNavigatorClipboard).toHaveBeenCalledWith(
       `${JOIN_ROOM_ROUTE}/${roomCode}`,
@@ -110,12 +105,10 @@ describe('<ShareRoomLink />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await userEvent.click(
-      await screen.findByText('Partager le lien de la partie'),
-    );
+    await userEvent.click(await screen.findByText(t('room.share.link.button')));
 
     const notification = await screen.findAllByText(
-      'Impossible de copier le lien automatiquement, veuillez le copier manuellement.',
+      t('notification.link.saved.error'),
     );
 
     expect(notification[1]).toBeInTheDocument();

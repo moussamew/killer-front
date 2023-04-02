@@ -1,7 +1,9 @@
 import { screen } from '@testing-library/react';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
+import { fakePlayerThree, fakePlayerTwo } from '@/tests/mocks/players';
 import { pendingRoomWithMultiplePlayers, roomCode } from '@/tests/mocks/rooms';
 import { pendingRoomSession } from '@/tests/mocks/sessions';
 import { renderWithProviders } from '@/tests/render';
@@ -20,9 +22,9 @@ describe('<PlayerList />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Criminels dans la partie');
+    await screen.findByText(t('room.players.list'));
 
-    expect(screen.getByText('MORPHEUS')).toBeInTheDocument();
-    expect(screen.getByText('NEO')).toBeInTheDocument();
+    expect(screen.getByText(fakePlayerTwo.name)).toBeInTheDocument();
+    expect(screen.getByText(fakePlayerThree.name)).toBeInTheDocument();
   });
 });

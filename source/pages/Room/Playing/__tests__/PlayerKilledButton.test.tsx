@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
@@ -21,9 +22,9 @@ describe('<PlayerKilledButton />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Essayez de tuer votre cible et de survivre !');
+    await screen.findByText(t('room.target.title'));
 
-    await userEvent.click(screen.getByText(`J'ai été tué`));
+    await userEvent.click(screen.getByText(t('room.killed.button')));
 
     expect(await screen.findByText('Tué par ma cible')).toBeInTheDocument();
   });

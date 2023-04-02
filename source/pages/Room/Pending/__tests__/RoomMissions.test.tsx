@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import { sources } from 'eventsourcemock';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import {
@@ -25,7 +26,7 @@ describe('<RoomMissions />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Bienvenue à la fête !');
+    await screen.findByText(t('room.welcome.title'));
 
     expect(
       screen.getByText('Il y a actuellement 3 missions dans cette partie.'),
