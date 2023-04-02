@@ -15,7 +15,7 @@ export async function request<T>({
       'Content-Type': 'application/json',
       ...(token && { Authorization: `Bearer ${token}` }),
     },
-    credentials: 'same-origin',
+    credentials: 'include',
     method,
     ...requestInit,
   }).catch((error) => {
