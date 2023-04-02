@@ -10,35 +10,31 @@ export async function request<T>({
 }: RequestParams): Promise<T> {
   const token = localStorage.getItem('token');
 
-  try {
-    const response = await fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        ...(token && { Authorization: `Bearer ${token}` }),
-      },
-      method,
-      ...requestInit,
-    });
+  const response = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token && { Authorization: `Bearer ${token}` }),
+    },
+    method,
+    ...requestInit,
+  });
 
-    // Early return for "204 No Content status".
-    if (response.status === 204) {
-      return null as T;
-    }
-
-    const result = await response.json();
-
-    if (!response.ok) {
-      toast.error(result.detail);
-      return null as T;
-    }
-
-    if (result?.token) {
-      localStorage.setItem('token', result.token);
-    }
-
-    return result;
-  } catch (error) {
-    toast.error(t('errors.server.message'));
+  if (response.status === 204) {
     return null as T;
   }
+
+  const result = await response.json();
+
+  if (result.status >= 400) {
+    const errorMessage = result?.detail || t('errors.server.message');
+
+    toast.error(errorMessage);
+    throw new Error(errorMessage);
+  }
+
+  if (result?.token) {
+    localStorage.setItem('token', result.token);
+  }
+
+  return result;
 }
