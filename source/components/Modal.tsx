@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Close from '@/assets/icons/close.svg';
-import { useTranslation } from '@/hooks/useTranslation';
 
 import styles from './styles/Modal.module.css';
 
@@ -12,6 +12,7 @@ interface Props {
 
 export function Modal({ children, closeModal }: Props): JSX.Element {
   const { t } = useTranslation();
+
   return (
     <div className={styles.content}>
       <div className={styles.modal}>

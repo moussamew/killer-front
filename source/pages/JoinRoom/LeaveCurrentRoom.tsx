@@ -1,7 +1,7 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Button } from '@/components/Button';
-import { useTranslation } from '@/hooks/useTranslation';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 

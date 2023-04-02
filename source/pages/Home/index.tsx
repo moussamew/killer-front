@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
-import { useTranslation } from '@/hooks/useTranslation';
 import { type SessionQuery } from '@/services/player/types';
 
 import { CreateRoomButton } from './CreateRoomButton';
@@ -26,7 +26,9 @@ export function HomePage(): JSX.Element {
       <div className={styles.introduction}>
         <h1>{t('home.title')}</h1>
         <h2>{t('home.subtitle')}</h2>
-        <p>{t('home.description')}</p>
+        <p>
+          <Trans t={t} i18nKey="home.description" />
+        </p>
       </div>
       <div className={styles.actions}>
         <CreateRoomButton playerName={session?.name} />

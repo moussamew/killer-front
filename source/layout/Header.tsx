@@ -1,8 +1,8 @@
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Settings from '@/assets/icons/settings.svg';
 import { ModalContext } from '@/context/modal';
-import { useTranslation } from '@/hooks/useTranslation';
 
 import { SettingsModal } from './SettingsModal';
 import styles from './styles/Header.module.css';

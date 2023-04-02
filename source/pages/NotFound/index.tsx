@@ -1,8 +1,8 @@
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import NotFoundSrc from '@/assets/images/not-found.jpg';
 import { Button } from '@/components/Button';
-import { useTranslation } from '@/hooks/useTranslation';
 
 import styles from './styles/index.module.css';
 

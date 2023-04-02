@@ -1,5 +1,6 @@
+import { useTranslation } from 'react-i18next';
+
 import Glasses from '@/assets/images/glasses.png';
-import { useTranslation } from '@/hooks/useTranslation';
 import { PlayerStatus } from '@/services/player/constants';
 import { useSession } from '@/services/player/queries';
 

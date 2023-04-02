@@ -1,9 +1,9 @@
 import { type ChangeEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
-import { useTranslation } from '@/hooks/useTranslation';
 import { useCreatePlayer } from '@/services/player/mutations';
 
 export function CreatePlayer(): JSX.Element {

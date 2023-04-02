@@ -1,8 +1,8 @@
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/Button';
 import { ModalContext } from '@/context/modal';
-import { useTranslation } from '@/hooks/useTranslation';
 
 import { JoinRoomModal } from './JoinRoomModal';
 

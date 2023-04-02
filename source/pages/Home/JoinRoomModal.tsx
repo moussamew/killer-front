@@ -1,9 +1,9 @@
 import { type ChangeEvent, useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { ModalContext } from '@/context/modal';
-import { useTranslation } from '@/hooks/useTranslation';
 import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 

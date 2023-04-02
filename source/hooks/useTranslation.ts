@@ -12,7 +12,8 @@ interface UseTranslation {
   ) => string;
 }
 
-export function useTranslation(): UseTranslation {
+// TODO: Use this hook as a wrapper for useTranslation from i18next
+function useTranslation(): UseTranslation {
   const { formatMessage } = useIntl();
 
   const t = (

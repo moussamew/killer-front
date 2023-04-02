@@ -1,8 +1,8 @@
 import { type ChangeEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
-import { useTranslation } from '@/hooks/useTranslation';
 import { useCreateMission } from '@/services/mission/mutations';
 
 export function CreateMission(): JSX.Element {

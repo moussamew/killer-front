@@ -1,8 +1,8 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import Winner from '@/assets/images/winner.png';
 import { Button } from '@/components/Button';
-import { useTranslation } from '@/hooks/useTranslation';
 import { PlayerStatus } from '@/services/player/constants';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';

@@ -1,9 +1,9 @@
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Knife from '@/assets/images/knife.png';
 import { Button } from '@/components/Button';
 import { ModalContext } from '@/context/modal';
-import { useTranslation } from '@/hooks/useTranslation';
 
 import { PlayerKilledModal } from './PlayerKilledModal';
 import styles from './styles/PlayerKilledButton.module.css';
