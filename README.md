@@ -8,12 +8,12 @@ Entirely written in **TypeScript**, from the balls to the bones.
 
 ## How to install it
 
-Install dependencies by using yarn:
+Install dependencies by using pnpm:
 
-_(Be sure to be in a correct node version (at least >= 16.0.0) before using yarn)_
+_(Be sure to be in a correct node version (at least >= 16.0.0) before using pnpm)_
 
 ```bash
-yarn
+pnpm install
 ```
 
 ## How to configure it
@@ -33,7 +33,7 @@ The **STAGING API URL** to use inside your **.env** file is: https://killer-api-
 Launch the Web Application by using the following command:
 
 ```bash
-yarn start
+pnpm start
 ```
 
 And voilà!
