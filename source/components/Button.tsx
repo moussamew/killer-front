@@ -30,9 +30,7 @@ export function Button({
 
     setLoading(true);
 
-    await onClick();
-
-    return setLoading(false);
+    return onClick().finally(() => setLoading(false));
   };
 
   return (
