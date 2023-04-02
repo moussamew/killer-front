@@ -83,5 +83,6 @@
   "tooltip.kick.player": "Expulser ce joueur",
   "tooltip.delete.mission": "Supprimer la mission",
   "tooltip.room.settings": "Gérer la partie",
-  "tooltip.user.settings": "Paramètres de l'utilisateur"
+  "tooltip.user.settings": "Paramètres de l'utilisateur",
+  "errors.server.message": "Un problème est survenu lors du traitement de votre requête."
 }
