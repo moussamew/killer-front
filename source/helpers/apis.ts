@@ -17,6 +17,10 @@ export async function request<T>({
     },
     method,
     ...requestInit,
+  }).catch((error) => {
+    toast.error(t('errors.server.message'));
+
+    throw new Error(error.message);
   });
 
   if (response.status === 204) {
@@ -26,10 +30,9 @@ export async function request<T>({
   const result = await response.json();
 
   if (result.status >= 400) {
-    const errorMessage = result?.detail || t('errors.server.message');
+    toast.error(result?.detail);
 
-    toast.error(errorMessage);
-    throw new Error(errorMessage);
+    throw new Error(result?.detail);
   }
 
   if (result?.token) {
