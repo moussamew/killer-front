@@ -34,7 +34,7 @@
   color: var(--color-white);
 
   &:hover:not(:disabled) {
-    background-color: var(--color-black-10);
+    background-color: var(--color-black-20);
   }
 
   .spinner circle {
@@ -47,7 +47,7 @@
   color: var(--color-black-30);
 
   &:hover:not(:disabled) {
-    background-color: var(--color-yellow-50);
+    background-color: var(--color-yellow-60);
   }
 
   .spinner circle {
