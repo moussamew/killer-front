@@ -21,16 +21,16 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: yarn
+        run: pnpm install
 
       - name: Type checking
-        run: yarn tsc
+        run: pnpm tsc
 
       - name: Lint code
-        run: yarn lint
+        run: pnpm lint
 
       - name: Unit test code
-        run: yarn test
+        run: pnpm test
 
       - name: Build Web Front
-        run: yarn build
+        run: pnpm build

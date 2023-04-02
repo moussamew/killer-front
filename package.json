@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "start": "vite serve",
     "build": "vite build",
-    "lint": "yarn lint:js && yarn lint:css",
+    "lint": "pnpm lint:js && pnpm lint:css",
     "lint:js": "eslint . --ext .ts,.tsx",
     "lint:css": "stylelint '**/*.css'",
     "test": "jest --coverage=false",
@@ -14,6 +15,7 @@
     "tsc": "tsc"
   },
   "scripts-info": {
+    "presinstall": "Script executed before installing dependencies",
     "start": "Start the application on development environment",
     "build": "Build the application on production environment",
     "lint": "Run linters",
