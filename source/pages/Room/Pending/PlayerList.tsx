@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import Admin from '@/assets/icons/admin.svg';
@@ -7,7 +8,6 @@ import KickPlayer from '@/assets/icons/kickPlayer.svg';
 import LeaveRoom from '@/assets/icons/leaveRoom.svg';
 import Player from '@/assets/images/player.png';
 import { ModalContext } from '@/context/modal';
-import { useTranslation } from '@/hooks/useTranslation';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 

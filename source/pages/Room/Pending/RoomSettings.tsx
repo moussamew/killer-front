@@ -1,9 +1,9 @@
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import RoomSettingsIcon from '@/assets/icons/roomSettings.svg';
 import { ModalContext } from '@/context/modal';
-import { useTranslation } from '@/hooks/useTranslation';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 

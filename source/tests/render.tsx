@@ -1,15 +1,12 @@
 import { render, type RenderResult } from '@testing-library/react';
 import { type ReactNode } from 'react';
-import { IntlProvider } from 'react-intl';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import { Routes } from '@/app/routes';
-import { Strong } from '@/components/Elements';
 import { QueryConfig } from '@/constants/config';
-import { Locale } from '@/constants/enums';
-import { noop } from '@/constants/functions';
-import { translations } from '@/constants/languages';
 import { ModalProvider } from '@/context/modal';
+
+import '../app/i18n';
 
 interface RenderParams {
   component?: ReactNode;
@@ -29,14 +26,7 @@ export function renderWithProviders({
 
   return render(
     <QueryClientProvider client={queryClient}>
-      <IntlProvider
-        locale={Locale.FRENCH}
-        messages={translations[Locale.FRENCH]}
-        defaultRichTextElements={{ strong: Strong }}
-        onWarn={noop}
-      >
-        <ModalProvider>{component}</ModalProvider>
-      </IntlProvider>
+      <ModalProvider>{component}</ModalProvider>
     </QueryClientProvider>,
   );
 }

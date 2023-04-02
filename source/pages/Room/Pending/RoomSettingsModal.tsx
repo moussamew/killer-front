@@ -1,10 +1,10 @@
 import { type ChangeEvent, useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { ModalContext } from '@/context/modal';
-import { useTranslation } from '@/hooks/useTranslation';
 import { useDeleteRoom } from '@/services/room/mutations';
 
 export function RoomSettingsModal(): JSX.Element {

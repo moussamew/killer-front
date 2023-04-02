@@ -1,7 +1,7 @@
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import Island from '@/assets/images/island.png';
-import { useTranslation } from '@/hooks/useTranslation';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 

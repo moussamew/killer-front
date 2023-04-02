@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { toast } from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/Button';
 import { ModalContext } from '@/context/modal';
-import { useTranslation } from '@/hooks/useTranslation';
 import { useCreateRoom } from '@/services/room/mutations';
 
 import { CreateRoomModal } from './CreateRoomModal';

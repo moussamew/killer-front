@@ -13,7 +13,7 @@ export const languageToLocale: Record<string, Locale> = {
   '🇬🇧 English': Locale.ENGLISH,
 };
 
-export const localeToLanguage: Record<Locale, string> = {
+export const localeToLanguage: Record<Locale | string, string> = {
   [Locale.FRENCH]: '🇫🇷 Français',
   [Locale.ENGLISH]: '🇬🇧 English',
 };

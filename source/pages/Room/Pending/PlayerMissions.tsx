@@ -1,6 +1,7 @@
+import { useTranslation } from 'react-i18next';
+
 import Delete from '@/assets/icons/delete.svg';
 import Idea from '@/assets/images/idea.png';
-import { useTranslation } from '@/hooks/useTranslation';
 import { useDeleteMission } from '@/services/mission/mutations';
 import { useSession } from '@/services/player/queries';
 
