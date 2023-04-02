@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import {
@@ -15,6 +16,8 @@ import { server } from '@/tests/server';
 import { LeaveCurrentRoom } from '../LeaveCurrentRoom';
 
 describe('<LeaveCurrentRoom />', () => {
+  const newRoomCode = 'XAB4L';
+
   it('should join a new room and leave the current one', async () => {
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
@@ -22,9 +25,9 @@ describe('<LeaveCurrentRoom />', () => {
       ),
     );
 
-    renderWithProviders({ route: '/join/XAB4L' });
+    renderWithProviders({ route: `/join/${newRoomCode}` });
 
-    await screen.findByText("Déjà à l'intérieur de la partie SOSPC !");
+    await screen.findByText(t('join.room.already.inside.room', { roomCode }));
 
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
@@ -32,21 +35,21 @@ describe('<LeaveCurrentRoom />', () => {
           ctx.status(200),
           ctx.json({
             ...pendingRoomSession,
-            room: { ...pendingRoomSession.room, code: 'XAB4L' },
+            room: { ...pendingRoomSession.room, code: newRoomCode },
           }),
         ),
       ),
-      rest.get(`${ROOM_ENDPOINT}/XAB4L`, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json({ ...pendingRoom, code: 'XAB4L' })),
+      rest.get(`${ROOM_ENDPOINT}/${newRoomCode}`, (_, res, ctx) =>
+        res(ctx.status(200), ctx.json({ ...pendingRoom, code: newRoomCode })),
       ),
     );
 
-    await userEvent.click(screen.getByText('Continuer et rejoindre la partie'));
+    await userEvent.click(screen.getByText(t('join.room.confirm.button')));
 
-    await screen.findByText('Bienvenue à la fête !');
+    await screen.findByText(t('room.welcome.title'));
 
     expect(
-      screen.getByText('Le code pour rejoindre cette partie est XAB4L.'),
+      screen.getByText(t('room.join.room.code', { roomCode: newRoomCode })),
     ).toBeInTheDocument();
   });
 
@@ -60,16 +63,16 @@ describe('<LeaveCurrentRoom />', () => {
       ),
     );
 
-    renderWithProviders({ route: '/join/XAB4L' });
+    renderWithProviders({ route: `/join/${newRoomCode}` });
 
-    await screen.findByText(`Déjà à l'intérieur de la partie SOSPC !`);
+    await screen.findByText(t('join.room.already.inside.room', { roomCode }));
 
-    await userEvent.click(screen.getByText('Retourner dans ma partie'));
+    await userEvent.click(screen.getByText(t('join.room.return.button')));
 
-    await screen.findByText('Bienvenue à la fête !');
+    await screen.findByText(t('room.welcome.title'));
 
     expect(
-      screen.getByText('Le code pour rejoindre cette partie est SOSPC.'),
+      screen.getByText(t('room.join.room.code', { roomCode })),
     ).toBeInTheDocument();
   });
 

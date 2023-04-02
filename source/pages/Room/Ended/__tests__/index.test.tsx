@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
@@ -21,7 +22,7 @@ describe('<EndedRoomPage />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Jouer une autre partie');
+    await screen.findByText(t('room.play.another.party.button'));
 
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
@@ -29,10 +30,10 @@ describe('<EndedRoomPage />', () => {
       ),
     );
 
-    await userEvent.click(screen.getByText('Jouer une autre partie'));
+    await userEvent.click(
+      screen.getByText(t('room.play.another.party.button')),
+    );
 
-    expect(
-      await screen.findByText('Ça vous tente un petit meurtre entre amis ?'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(t('home.title'))).toBeInTheDocument();
   });
 });

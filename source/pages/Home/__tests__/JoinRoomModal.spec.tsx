@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import {
@@ -23,10 +24,10 @@ describe('<JoinRoomModal />', () => {
 
     renderWithProviders();
 
-    await userEvent.click(await screen.findByText('Rejoindre une partie'));
+    await userEvent.click(await screen.findByText(t('home.join.room')));
 
     await userEvent.type(
-      screen.getByPlaceholderText('Code de la partie'),
+      screen.getByPlaceholderText(t('home.join.room.code.placeholder')),
       roomCode,
     );
 
@@ -39,12 +40,12 @@ describe('<JoinRoomModal />', () => {
       ),
     );
 
-    await userEvent.click(screen.getByText('Rejoindre cette partie'));
+    await userEvent.click(screen.getByText(t('home.join.room.confirm.button')));
 
-    await screen.findByText('Bienvenue à la fête !');
+    await screen.findByText(t('room.welcome.title'));
 
     expect(
-      screen.getByText('Le code pour rejoindre cette partie est SOSPC.'),
+      screen.getByText(t('room.join.room.code', { roomCode })),
     ).toBeInTheDocument();
   });
 
@@ -57,17 +58,17 @@ describe('<JoinRoomModal />', () => {
 
     renderWithProviders();
 
-    await screen.findByText('Ça vous tente un petit meurtre entre amis ?');
+    await screen.findByText(t('home.title'));
 
-    await userEvent.click(screen.getByText('Rejoindre une partie'));
+    await userEvent.click(screen.getByText(t('home.join.room')));
 
     await userEvent.type(
-      screen.getByPlaceholderText('Choisir un nom'),
+      screen.getByPlaceholderText(t('home.create.pseudo.placeholder')),
       fakePlayerOne.name,
     );
 
     await userEvent.type(
-      screen.getByPlaceholderText('Code de la partie'),
+      screen.getByPlaceholderText(t('home.join.room.code.placeholder')),
       roomCode,
     );
 
@@ -80,12 +81,12 @@ describe('<JoinRoomModal />', () => {
       ),
     );
 
-    await userEvent.click(screen.getByText('Rejoindre cette partie'));
+    await userEvent.click(screen.getByText(t('home.join.room.confirm.button')));
 
-    await screen.findByText('Bienvenue à la fête !');
+    await screen.findByText(t('room.welcome.title'));
 
     expect(
-      screen.getByText('Le code pour rejoindre cette partie est SOSPC.'),
+      screen.getByText(t('room.join.room.code', { roomCode })),
     ).toBeInTheDocument();
   });
 

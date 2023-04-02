@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { sources } from 'eventsourcemock';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import {
@@ -27,7 +28,9 @@ describe('<StartPartyButton />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await userEvent.click(await screen.findByText('Start the party'));
+    await userEvent.click(
+      await screen.findByText(t('room.start.party.button')),
+    );
 
     const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({

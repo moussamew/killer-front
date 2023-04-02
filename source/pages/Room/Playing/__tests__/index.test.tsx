@@ -1,7 +1,9 @@
 import { screen } from '@testing-library/react';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
+import { fakePlayerThree } from '@/tests/mocks/players';
 import { playingRoom, roomCode } from '@/tests/mocks/rooms';
 import { playingRoomSession } from '@/tests/mocks/sessions';
 import { renderWithProviders } from '@/tests/render';
@@ -21,8 +23,8 @@ describe('<PlayingRoomPage />', () => {
     renderWithProviders({ route: `/room/${roomCode}` });
 
     expect(
-      await screen.findByText('La cible à tuer est..'),
+      await screen.findByText(t('room.target.to.kill')),
     ).toBeInTheDocument();
-    expect(screen.getByText('NEO')).toBeInTheDocument();
+    expect(screen.getByText(fakePlayerThree.name)).toBeInTheDocument();
   });
 });

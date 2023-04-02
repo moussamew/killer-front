@@ -1,9 +1,10 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { fakePlayerOne, fakePlayerThree } from '@/tests/mocks/players';
+import { fakePlayerOne, fakePlayerTwo } from '@/tests/mocks/players';
 import { pendingRoomWithMultiplePlayers, roomCode } from '@/tests/mocks/rooms';
 import { adminSession } from '@/tests/mocks/sessions';
 import { renderWithProviders } from '@/tests/render';
@@ -16,17 +17,21 @@ describe('<KickPlayerModal />', () => {
         res(ctx.status(200), ctx.json(adminSession)),
       ),
       rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(pendingRoomWithMultiplePlayers)),
+        res(
+          ctx.status(200),
+          ctx.json({
+            ...pendingRoomWithMultiplePlayers,
+            players: [fakePlayerOne, fakePlayerTwo],
+          }),
+        ),
       ),
     );
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('MORPHEUS');
+    await screen.findByText(fakePlayerTwo.name);
 
-    await userEvent.click(screen.getByTitle('Expulser ce joueur'));
-
-    await userEvent.click(screen.getByText('Expulser MORPHEUS'));
+    await userEvent.click(screen.getByTitle(t('tooltip.kick.player')));
 
     server.use(
       rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
@@ -34,14 +39,24 @@ describe('<KickPlayerModal />', () => {
           ctx.status(200),
           ctx.json({
             ...pendingRoomWithMultiplePlayers,
-            players: [fakePlayerOne, fakePlayerThree],
+            players: [fakePlayerOne],
           }),
         ),
       ),
     );
 
-    await waitForElementToBeRemoved(() => screen.queryByText('MORPHEUS'));
+    await userEvent.click(
+      screen.getByText(
+        t('room.kick.players.confirm.button', {
+          playerName: fakePlayerTwo.name,
+        }),
+      ),
+    );
 
-    expect(screen.queryByText('MORPHEUS')).not.toBeInTheDocument();
+    await waitForElementToBeRemoved(() =>
+      screen.queryByText(fakePlayerTwo.name),
+    );
+
+    expect(screen.queryByText(fakePlayerTwo.name)).not.toBeInTheDocument();
   });
 });

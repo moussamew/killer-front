@@ -1,5 +1,6 @@
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { PLAYER_ENDPOINT, SESSION_ENDPOINT } from '@/constants/endpoints';
@@ -19,22 +20,26 @@ describe('<CreateRoomModal />', () => {
 
     renderWithProviders();
 
-    await screen.findByText('Ça vous tente un petit meurtre entre amis ?');
+    await screen.findByText(t('home.title'));
 
-    await userEvent.click(screen.getByText('Créer une nouvelle partie'));
+    await userEvent.click(screen.getByText(t('home.create.room.button')));
 
     await userEvent.type(
-      screen.getByPlaceholderText('Choisir un nom'),
+      screen.getByPlaceholderText(t('home.create.pseudo.placeholder')),
       fakePlayerOne.name,
     );
 
-    await userEvent.click(screen.getByText('Créer ma partie'));
-
-    await waitForElementToBeRemoved(() =>
-      screen.queryByText('Créer ma partie'),
+    await userEvent.click(
+      screen.getByText(t('home.create.room.confirm.button')),
     );
 
-    expect(screen.queryByText('Créer ma partie')).not.toBeInTheDocument();
+    await waitForElementToBeRemoved(() =>
+      screen.queryByText(t('home.create.room.confirm.button')),
+    );
+
+    expect(
+      screen.queryByText(t('home.create.room.confirm.button')),
+    ).not.toBeInTheDocument();
   });
 
   it.skip('should show error message while creating new player with a new room', async () => {

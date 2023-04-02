@@ -1,9 +1,10 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
-import { pendingRoom } from '@/tests/mocks/rooms';
+import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { pendingRoomSession, noRoomSession } from '@/tests/mocks/sessions';
 import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
@@ -18,14 +19,14 @@ describe('<CreateRoomButton />', () => {
 
     renderWithProviders();
 
-    await screen.findByText('Ça vous tente un petit meurtre entre amis ?');
+    await screen.findByText(t('home.title'));
 
-    await userEvent.click(screen.getByText('Créer une nouvelle partie'));
+    await userEvent.click(screen.getByText(t('home.create.room.button')));
 
+    expect(screen.getByText(t('home.create.pseudo.label'))).toBeInTheDocument();
     expect(
-      screen.getByText('Avant de commencer, veuillez choisir un nom'),
+      screen.getByText(t('home.create.room.confirm.button')),
     ).toBeInTheDocument();
-    expect(screen.getByText('Créer ma partie')).toBeInTheDocument();
   });
 
   it('should create a new room and redirect to it for a player with session', async () => {
@@ -51,12 +52,10 @@ describe('<CreateRoomButton />', () => {
       ),
     );
 
-    await userEvent.click(screen.getByText('Créer une nouvelle partie'));
-
-    await screen.findByText('Le code pour rejoindre cette partie est SOSPC.');
+    await userEvent.click(screen.getByText(t('home.create.room.button')));
 
     expect(
-      screen.getByText('Le code pour rejoindre cette partie est SOSPC.'),
+      await screen.findByText(t('room.join.room.code', { roomCode })),
     ).toBeInTheDocument();
   });
 

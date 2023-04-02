@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import {
@@ -27,7 +28,7 @@ describe('<CreateMission />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Le code pour rejoindre cette partie est SOSPC.');
+    await screen.findByText(t('room.join.room.code', { roomCode }));
 
     await userEvent.type(
       screen.getByPlaceholderText(
@@ -49,7 +50,7 @@ describe('<CreateMission />', () => {
     );
 
     await userEvent.click(
-      screen.getByText('Ajouter cette mission à la partie'),
+      screen.getByText(t('room.create.new.mission.button')),
     );
 
     expect(

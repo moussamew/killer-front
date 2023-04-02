@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { PLAYER_ENDPOINT, SESSION_ENDPOINT } from '@/constants/endpoints';
@@ -11,13 +12,11 @@ describe('<NotFoundPage />', () => {
   it('should redirect the player to the home page if wanted', async () => {
     renderWithProviders({ route: '/unknown' });
 
-    await screen.findByText('On dirait que quelque chose cloche');
+    await screen.findByText(t('notfound.title'));
 
-    await userEvent.click(screen.getByText(`Retourner à l'accueil`));
+    await userEvent.click(screen.getByText(t('notfound.back')));
 
-    expect(
-      await screen.findByText('Ça vous tente un petit meurtre entre amis ?'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(t('home.title'))).toBeInTheDocument();
   });
 
   it.skip('should display an error message if needed', async () => {

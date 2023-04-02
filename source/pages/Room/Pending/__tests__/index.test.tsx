@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
@@ -21,7 +22,9 @@ describe('<PendingRoomPage />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    expect(await screen.findByText('Lancer la partie')).toBeInTheDocument();
+    expect(
+      await screen.findByText(t('room.start.party.button')),
+    ).toBeInTheDocument();
   });
 
   it('should not show the Start party button if the player is not an admin', async () => {
@@ -43,8 +46,10 @@ describe('<PendingRoomPage />', () => {
     renderWithProviders({ route: `/room/${roomCode}` });
 
     expect(
-      await screen.findByText('Le code pour rejoindre cette partie est SOSPC.'),
+      await screen.findByText(t('room.join.room.code', { roomCode })),
     ).toBeInTheDocument();
-    expect(screen.queryByText('Lancer la partie')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(t('room.start.party.button')),
+    ).not.toBeInTheDocument();
   });
 });

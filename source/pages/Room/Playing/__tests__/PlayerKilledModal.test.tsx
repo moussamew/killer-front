@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
@@ -22,7 +23,7 @@ describe('<PlayerKilledModal />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await userEvent.click(await screen.findByText("J'ai été tué"));
+    await userEvent.click(await screen.findByText(t('room.killed.button')));
 
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
@@ -33,12 +34,12 @@ describe('<PlayerKilledModal />', () => {
       ),
     );
 
-    await userEvent.click(screen.getByText('Tuez-moi'));
+    await userEvent.click(
+      screen.getByText(t('room.player.killed.modal.confirm.button')),
+    );
 
     expect(
-      await screen.findByText(
-        "Les morts ne racontent pas d'histoires... Vous devez juste attendre la fin du jeu.",
-      ),
+      await screen.findByText(t('room.player.killed.resume')),
     ).toBeInTheDocument();
   });
 });

@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import { sources } from 'eventsourcemock';
+import { t } from 'i18next';
 import { rest } from 'msw';
 
 import {
@@ -42,7 +43,7 @@ describe('<RoomPage />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Bienvenue à la fête !');
+    await screen.findByText(t('room.welcome.title'));
   });
 
   it('should redirect player to playing room page if the status of the room is IN_GAME', async () => {
@@ -57,7 +58,7 @@ describe('<RoomPage />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Essayez de tuer votre cible et de survivre !');
+    await screen.findByText(t('room.target.title'));
   });
 
   it('should redirect player to ended room page if the status of the room is ENDED', async () => {
@@ -72,7 +73,7 @@ describe('<RoomPage />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText('Jouer une autre partie');
+    await screen.findByText(t('room.play.another.party.button'));
   });
 
   it('should redirect player to join room page if the player did not have a player session', async () => {
@@ -85,9 +86,7 @@ describe('<RoomPage />', () => {
     renderWithProviders({ route: `/room/${roomCode}` });
 
     expect(
-      await screen.findByText(
-        'Vous devez choisir un nom avant de rejoindre cette partie.',
-      ),
+      await screen.findByText(t('join.room.create.pseudo')),
     ).toBeInTheDocument();
   });
 
@@ -101,7 +100,7 @@ describe('<RoomPage />', () => {
     renderWithProviders({ route: '/room/P9LDG' });
 
     expect(
-      await screen.findByText(`Déjà à l'intérieur de la partie SOSPC !`),
+      await screen.findByText(t('join.room.already.inside.room', { roomCode })),
     ).toBeInTheDocument();
   });
 
@@ -281,9 +280,7 @@ describe('<RoomPage />', () => {
 
     sources[roomEventSource].emit(messageEvent.type, messageEvent);
 
-    expect(
-      await screen.findByText('Ça vous tente un petit meurtre entre amis ?'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(t('home.title'))).toBeInTheDocument();
     expect(screen.queryByText('Welcome to the party!')).not.toBeInTheDocument();
 
     sources[roomEventSource].close();
