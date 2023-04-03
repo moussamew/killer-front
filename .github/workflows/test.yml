@@ -12,7 +12,7 @@ jobs:
       - name: Installs pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: latest
+          version: 8.x.x
 
       - run: echo "🎉 ${{ github.event_name }} event on ${{ github.ref }} triggered this action."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server."
@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile=false
+        run: pnpm install
 
       - name: Type checking
         run: pnpm tsc
