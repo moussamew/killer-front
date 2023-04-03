@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
+import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
 import { MercureEventType } from '@/constants/enums';
 import { useSession } from '@/services/player/queries';
@@ -32,7 +33,9 @@ export function RoomPage(): JSX.Element | null {
    * Apply corresponding side-effects.
    */
   useEffect(() => {
-    const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomCode}`);
+    const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomCode}`, {
+      withCredentials: PROD_ENV,
+    });
 
     roomEventSource.addEventListener('message', (event) => {
       if (event.data) {
