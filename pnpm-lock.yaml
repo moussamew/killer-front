@@ -166,8 +166,8 @@ devDependencies:
     specifier: ^5.0.3
     version: 5.0.3
   typescript-plugin-css-modules:
-    specifier: ^4.2.2
-    version: 4.2.2(typescript@5.0.3)
+    specifier: ^4.2.3
+    version: 4.2.3(typescript@5.0.3)
   vite:
     specifier: 4.2.1
     version: 4.2.1(@types/node@18.15.11)
@@ -6547,6 +6547,15 @@ packages:
     resolution: {integrity: sha512-3sOlxmbKcSHMjlUXQZKQ06jOswE7oVkXPxmZdoB1r5l0q6gTFTQSHxNxOrCccElbW7dxNytifNEo8qidX2Vsig==}
     dev: true
 
+  /postcss-modules-extract-imports@3.0.0(postcss@8.4.21):
+    resolution: {integrity: sha512-bdHleFnP3kZ4NYDhuGlVK+CMrQ/pqUm8bx/oGL93K6gVwiclvX5x0n76fYMKuIGKzlABOy13zsvqjb0f92TEXw==}
+    engines: {node: ^10 || ^12 || >= 14}
+    peerDependencies:
+      postcss: ^8.1.0
+    dependencies:
+      postcss: 8.4.21
+    dev: true
+
   /postcss-modules-local-by-default@4.0.0(postcss@8.4.21):
     resolution: {integrity: sha512-sT7ihtmGSF9yhm6ggikHdV0hlziDTX7oFoXtuVWeDd3hHObNkcHRo9V3yg7vCAY7cONyxJC/XXCmmiHHcvX7bQ==}
     engines: {node: ^10 || ^12 || >= 14}
@@ -7682,8 +7691,8 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  /typescript-plugin-css-modules@4.2.2(typescript@5.0.3):
-    resolution: {integrity: sha512-X5OYGkX96ENq2c7xFJO4tgtiMTlBkOMoRmVHQXH2H4CGFcVODKGieDqPU2B0IV0I+AyvKYDFdKh4ZKtKxAcAww==}
+  /typescript-plugin-css-modules@4.2.3(typescript@5.0.3):
+    resolution: {integrity: sha512-jEEP2oUPOqR89QGgvPK2HSTZLkrCeKZQ9EwiNxm9VUcufUbNY1Tv053fPKRq6c13PMQjlBU3WrQjKN8u0j5Y6w==}
     peerDependencies:
       typescript: '>=3.9.0'
     dependencies:
@@ -7695,6 +7704,7 @@ packages:
       lodash.camelcase: 4.3.0
       postcss: 8.4.21
       postcss-load-config: 3.1.4(postcss@8.4.21)
+      postcss-modules-extract-imports: 3.0.0(postcss@8.4.21)
       postcss-modules-local-by-default: 4.0.0(postcss@8.4.21)
       postcss-modules-scope: 3.0.0(postcss@8.4.21)
       reserved-words: 0.1.2
