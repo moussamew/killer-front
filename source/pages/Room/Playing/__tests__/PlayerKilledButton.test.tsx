@@ -26,6 +26,8 @@ describe('<PlayerKilledButton />', () => {
 
     await userEvent.click(screen.getByText(t('room.killed.button')));
 
-    expect(await screen.findByText('Tué par ma cible')).toBeInTheDocument();
+    expect(
+      await screen.findByText(t('room.player.killed.modal.title')),
+    ).toBeInTheDocument();
   });
 });

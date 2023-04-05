@@ -24,6 +24,6 @@ describe('<RoomSettings />', () => {
 
     await userEvent.click(await screen.findByTitle(t('tooltip.room.settings')));
 
-    expect(screen.queryByText('Paramètres de la partie')).toBeInTheDocument();
+    expect(screen.queryByText(t('room.settings'))).toBeInTheDocument();
   });
 });

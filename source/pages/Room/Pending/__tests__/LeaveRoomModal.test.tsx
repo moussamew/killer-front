@@ -24,7 +24,7 @@ describe('<LeaveRoomModal />', () => {
 
     await screen.findByText(t('room.welcome.title'));
 
-    await userEvent.click(screen.getByTitle('Quitter la partie en cours'));
+    await userEvent.click(screen.getByTitle(t('tooltip.leave.room')));
 
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
@@ -32,7 +32,7 @@ describe('<LeaveRoomModal />', () => {
       ),
     );
 
-    await userEvent.click(screen.getByText('Quitter la partie'));
+    await userEvent.click(screen.getByText(t('room.leave.confirm.button')));
 
     expect(await screen.findByText(t('home.title'))).toBeInTheDocument();
   });

@@ -29,7 +29,11 @@ describe('<RoomMissions />', () => {
     await screen.findByText(t('room.welcome.title'));
 
     expect(
-      screen.getByText('Il y a actuellement 3 missions dans cette partie.'),
+      screen.getByText(
+        t('room.missions.count', {
+          missions: pendingRoomWithMissions.missions.length,
+        }),
+      ),
     ).toBeInTheDocument();
   });
 
