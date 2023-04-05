@@ -14,12 +14,8 @@ describe('<PlayerMissions />', () => {
   it('should show the input to create a new Mission', async () => {
     renderWithProviders({ component: <PlayerMissions /> });
 
-    expect(await screen.findByText('Créer une nouvelle mission'));
-    expect(
-      await screen.findByPlaceholderText(
-        /Boire un verre préparé par vos soins à votre victime/,
-      ),
-    );
+    expect(await screen.findByText(t('room.create.new.mission.label')));
+    expect(await screen.findByPlaceholderText(t('room.mission.placeholder')));
   });
 
   it('should remove a mission', async () => {

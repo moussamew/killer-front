@@ -31,9 +31,7 @@ describe('<CreateMission />', () => {
     await screen.findByText(t('room.join.room.code', { roomCode }));
 
     await userEvent.type(
-      screen.getByPlaceholderText(
-        /Boire un verre préparé par vos soins à votre victime/,
-      ),
+      screen.getByPlaceholderText(t('room.mission.placeholder')),
       fakeMissionThree.content,
     );
 
