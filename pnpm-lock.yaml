@@ -142,8 +142,8 @@ devDependencies:
     specifier: ^15.1.0
     version: 15.1.0(postcss@8.4.21)
   postcss-nesting:
-    specifier: ^11.1.0
-    version: 11.1.0(postcss@8.4.21)
+    specifier: ^11.2.2
+    version: 11.2.2(postcss@8.4.21)
   prettier:
     specifier: ^2.8.7
     version: 2.8.7
@@ -6658,8 +6658,8 @@ packages:
       postcss-selector-parser: 6.0.11
     dev: true
 
-  /postcss-nesting@11.1.0(postcss@8.4.21):
-    resolution: {integrity: sha512-TVBCeKlUmMyX3sNeSg10yATb2XmAoosp0E1zdlpjrD+L2FrQPmrRTxlRFQh/R0Y4WlQ0butfDwRhzlYuj7y/TA==}
+  /postcss-nesting@11.2.2(postcss@8.4.21):
+    resolution: {integrity: sha512-aOTiUniAB1bcPE6GGiynWRa6PZFPhOTAm5q3q5cem6QeSijIHHkWr6gs65ukCZMXeak8yXeZVbBJET3VM+HlhA==}
     engines: {node: ^14 || ^16 || >=18}
     peerDependencies:
       postcss: ^8.4
