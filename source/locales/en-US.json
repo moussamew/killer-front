@@ -84,5 +84,6 @@
   "tooltip.delete.mission": "Delete this mission",
   "tooltip.room.settings": "Room settings",
   "tooltip.user.settings": "User settings",
-  "errors.server.message": "A problem occurred while processing your request."
+  "errors.server.message": "A problem occurred while processing your request.",
+  "errors.token.invalid": "Your session has expired."
 }

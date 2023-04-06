@@ -1,6 +1,8 @@
 import { t } from 'i18next';
 import { toast } from 'react-hot-toast';
 
+import { TokenErrorCode } from '@/constants/errors';
+
 import { type RequestParams } from './types';
 
 export async function request<T>({
@@ -30,9 +32,15 @@ export async function request<T>({
 
   const result = await response.json();
 
+  if (result.code === 401 && result.message === TokenErrorCode.INVALID_TOKEN) {
+    localStorage.removeItem('token');
+
+    toast.error(t('errors.token.invalid'));
+    throw new Error(t('errors.token.invalid'));
+  }
+
   if (result.status >= 400) {
     toast.error(result?.detail);
-
     throw new Error(result?.detail);
   }
 

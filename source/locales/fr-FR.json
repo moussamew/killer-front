@@ -84,5 +84,6 @@
   "tooltip.delete.mission": "Supprimer la mission",
   "tooltip.room.settings": "Gérer la partie",
   "tooltip.user.settings": "Paramètres de l'utilisateur",
-  "errors.server.message": "Un problème est survenu lors du traitement de votre requête."
+  "errors.server.message": "Un problème est survenu lors du traitement de votre requête.",
+  "errors.token.invalid": "Votre session a expiré."
 }
