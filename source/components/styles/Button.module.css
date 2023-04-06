@@ -23,7 +23,7 @@
     cursor: not-allowed;
   }
 
-  @media (min-width: 720px) {
+  @media (width >= 720px) {
     padding: var(--spacing-medium);
     font-size: var(--text-medium);
   }

@@ -16,12 +16,12 @@
   margin-left: var(--spacing-medium);
   background-color: var(--color-camel-97);
 
-  @media (min-width: 720px) {
+  @media (width >= 720px) {
     margin-right: 25%;
     margin-left: 25%;
   }
 
-  @media (min-width: 1080px) {
+  @media (width >= 1080px) {
     margin-right: 35%;
     margin-left: 35%;
   }
