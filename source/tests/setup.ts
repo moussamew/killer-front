@@ -2,6 +2,7 @@ import 'whatwg-fetch';
 import '@testing-library/jest-dom';
 import EventSource from 'eventsourcemock';
 
+import { fakeLocalStorage } from './mocks/window';
 import { server } from './server';
 
 global.EventSource = EventSource;
@@ -18,6 +19,10 @@ Object.defineProperty(window, 'matchMedia', {
       removeListener: () => {},
     };
   },
+});
+
+Object.defineProperty(window, 'localStorage', {
+  value: fakeLocalStorage(),
 });
 
 /**
