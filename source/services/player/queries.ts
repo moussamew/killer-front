@@ -8,7 +8,9 @@ export function useSession(): SessionQuery {
     data: session,
     refetch: refetchSession,
     isLoading,
-  } = useQuery('session', getSessionRequest);
+  } = useQuery('session', getSessionRequest, {
+    enabled: Boolean(localStorage.getItem('token')),
+  });
 
   return {
     session,
