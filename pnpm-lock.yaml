@@ -127,8 +127,8 @@ devDependencies:
     specifier: ^29.5.0
     version: 29.5.0
   jest-transformer-svg:
-    specifier: ^2.0.0
-    version: 2.0.0(jest@29.5.0)(react@18.2.0)
+    specifier: ^2.0.1
+    version: 2.0.1(jest@29.5.0)(react@18.2.0)
   jsdom:
     specifier: ^21.1.1
     version: 21.1.1
@@ -5625,10 +5625,10 @@ packages:
       - supports-color
     dev: true
 
-  /jest-transformer-svg@2.0.0(jest@29.5.0)(react@18.2.0):
-    resolution: {integrity: sha512-+f6er7UZTiHTeel9nma1i0NTAU8AjbEvhK2RYUoMxTNihwo98z2rrrDBIbppZI6ACDzeul3bhRmI9M6d25J/Nw==}
+  /jest-transformer-svg@2.0.1(jest@29.5.0)(react@18.2.0):
+    resolution: {integrity: sha512-L3j70WjfQtAYXjZi/vyKW8A5pcEUnv7mR0cugSyP6Kqee+fjsMzUHs5UPbnLKH+y7lfSpOjXijMbfEcjLqCuaw==}
     peerDependencies:
-      jest: ^28.1.0
+      jest: '>= 28.1.0'
       react: ^17.0.0 || ^18.0.0
     dependencies:
       jest: 29.5.0(@types/node@18.15.11)
