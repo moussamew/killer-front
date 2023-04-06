@@ -7,7 +7,7 @@
 * {
   font-size: var(--text-small);
 
-  @media (min-width: 720px) {
+  @media (width >= 720px) {
     font-size: var(--text-medium);
   }
 }
@@ -15,7 +15,7 @@
 h1 {
   font-size: 24px;
 
-  @media (min-width: 720px) {
+  @media (width >= 720px) {
     font-size: 38px;
   }
 }
@@ -24,7 +24,7 @@ h2 {
   font-size: var(--text-large);
   font-weight: 400;
 
-  @media (min-width: 720px) {
+  @media (width >= 720px) {
     font-size: 22px;
     font-weight: 500;
   }
