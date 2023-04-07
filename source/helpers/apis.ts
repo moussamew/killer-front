@@ -1,9 +1,11 @@
 import { t } from 'i18next';
 import { toast } from 'react-hot-toast';
 
-import { TokenErrorCode } from '@/constants/errors';
+import { ErrorCode } from '@/constants/errors';
 
 import { type RequestParams } from './types';
+
+const { SERVER_ERROR, INVALID_TOKEN, EXPIRED_TOKEN } = ErrorCode;
 
 export async function request<T>({
   url,
@@ -21,7 +23,7 @@ export async function request<T>({
     method,
     ...requestInit,
   }).catch((error) => {
-    toast.error(t('errors.server.message'));
+    toast.error(t(`errors.${SERVER_ERROR}`));
 
     throw new Error(error.message);
   });
@@ -32,16 +34,22 @@ export async function request<T>({
 
   const result = await response.json();
 
-  if (result.code === 401 && result.message === TokenErrorCode.INVALID_TOKEN) {
+  if (
+    result.code === 401 &&
+    [INVALID_TOKEN, EXPIRED_TOKEN].includes(result.message)
+  ) {
     localStorage.removeItem('token');
+    const errorMessage = t(`errors.${result.message}`);
 
-    toast.error(t('errors.token.invalid'));
-    throw new Error(t('errors.token.invalid'));
+    toast.error(errorMessage);
+    throw new Error(errorMessage);
   }
 
   if (result.status >= 400) {
-    toast.error(result?.detail);
-    throw new Error(result?.detail);
+    const errorMessage = t(`errors.${result?.detail}`);
+
+    toast.error(errorMessage);
+    throw new Error(errorMessage);
   }
 
   if (result?.token) {
