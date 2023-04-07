@@ -39,6 +39,7 @@
   "room.leave.title": "Partie en cours",
   "room.leave.warning": "Vous êtes sur le point de quitter la partie.\nÊtes-vous sûr ?",
   "room.leave.confirm.button": "Quitter la partie",
+  "room.leave.confirmed.message": "Partie quitté avec succès.",
   "room.kick.players.title": "Expulser des joueurs de la partie",
   "room.kick.players.warning": "Vous êtes sur le point d'exclure {{playerName}}.\nÊtes-vous sûr ?",
   "room.kick.players.confirm.button": "Expulser {{playerName}}",

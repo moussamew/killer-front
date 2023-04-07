@@ -47,6 +47,7 @@
   "room.delete.current.room.placeholder": "Confirm by typing the room code",
   "room.delete.current.room.confirm.button": "Delete the room",
   "room.start.party.button": "Start the party",
+  "room.leave.confirmed.message": "Party successfully left.",
   "room.target.title": "Try to kill your target and survive!",
   "room.target.to.kill": "The target to kill is..",
   "room.target.mission": "In order to kill your target, it must do..",
