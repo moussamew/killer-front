@@ -38,17 +38,23 @@ export function RoomPage(): JSX.Element | null {
     });
 
     roomEventSource.addEventListener('message', (event) => {
-      if (event.data) {
-        const eventMessage = JSON.parse(event.data);
+      const { type, player } = JSON.parse(event.data);
 
-        if (eventMessage?.type === ROOM_UPDATED) {
-          refetchRoom().then(refetchSession);
+      const playerEvent = JSON.parse(player);
+
+      if (type === ROOM_UPDATED) {
+        if (!playerEvent.room && playerEvent.id === session?.id) {
+          return refetchSession();
         }
+
+        return refetchRoom().then(refetchSession);
       }
+
+      return null;
     });
 
     return () => roomEventSource.close();
-  }, [roomCode, navigate, refetchSession, refetchRoom]);
+  }, [roomCode, session?.id, navigate, refetchSession, refetchRoom]);
 
   /**
    * Redirect player to the correct route by checking its session.
