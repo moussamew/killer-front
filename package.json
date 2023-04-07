@@ -83,7 +83,7 @@
     "stylelint-config-idiomatic-order": "^9.0.0",
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-standard": "^32.0.0",
-    "typescript": "^5.0.3",
+    "typescript": "^5.0.4",
     "typescript-plugin-css-modules": "^5.0.0",
     "vite": "4.2.1",
     "vite-plugin-svgr": "^2.4.0",
