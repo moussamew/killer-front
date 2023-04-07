@@ -11,6 +11,7 @@ export function Notification(): JSX.Element {
     <Toaster
       position="bottom-left"
       toastOptions={{
+        duration: 5000,
         style: {
           color: '#fff',
         },
