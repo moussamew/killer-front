@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/Button';
@@ -17,7 +18,12 @@ export function LeaveRoomModal(): JSX.Element {
   const handleLeaveRoom = async (): Promise<void> => {
     await updatePlayer.mutateAsync(
       { id: session?.id, room: null },
-      { onSuccess: closeModal },
+      {
+        onSuccess: () => {
+          toast.success(t('room.leave.confirmed.message'));
+          closeModal();
+        },
+      },
     );
   };
 
