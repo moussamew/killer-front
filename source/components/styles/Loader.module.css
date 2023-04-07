@@ -1,11 +1,8 @@
 .spinner {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   height: 40px;
   margin: auto;
+  inset: 0;
 
   :global {
     animation: spin 1s linear infinite;
