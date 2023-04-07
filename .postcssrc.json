@@ -2,6 +2,7 @@
   "plugins": {
     "postcss-import": {},
     "postcss-nesting": {},
-    "autoprefixer": {}
+    "autoprefixer": {},
+    "postcss-preset-env": {}
   }
 }
