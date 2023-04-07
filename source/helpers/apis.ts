@@ -35,7 +35,7 @@ export async function request<T>({
   const result = await response.json();
 
   if (
-    result.code === 401 &&
+    response.status === 401 &&
     [INVALID_TOKEN, EXPIRED_TOKEN].includes(result.message)
   ) {
     localStorage.removeItem('token');
@@ -45,7 +45,7 @@ export async function request<T>({
     throw new Error(errorMessage);
   }
 
-  if (result.status >= 400) {
+  if (response.status >= 400) {
     const errorMessage = t(`errors.${result?.detail}`);
 
     toast.error(errorMessage);
