@@ -3,6 +3,8 @@ export enum RoomErrorCode {
   BAD_ROOMCODE = 'ROOM.BAD_ROOMCODE',
 }
 
-export enum TokenErrorCode {
-  INVALID_TOKEN = 'Invalid JWT Token',
+export enum ErrorCode {
+  SERVER_ERROR = 'SERVER_ERROR',
+  INVALID_TOKEN = 'INVALID_TOKEN',
+  EXPIRED_TOKEN = 'EXPIRED_TOKEN',
 }

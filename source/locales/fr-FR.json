@@ -84,6 +84,9 @@
   "tooltip.delete.mission": "Supprimer la mission",
   "tooltip.room.settings": "Gérer la partie",
   "tooltip.user.settings": "Paramètres de l'utilisateur",
-  "errors.server.message": "Un problème est survenu lors du traitement de votre requête.",
-  "errors.token.invalid": "Votre session a expiré."
+  "errors.SERVER_ERROR": "Un problème est survenu lors du traitement de votre requête.",
+  "errors.EXPIRED_TOKEN": "Votre session a expiré.",
+  "errors.INVALID_TOKEN": "La récupération de votre session a échoué.",
+  "errors.TOO_SHORT_CONTENT": "Le contenu saisi est trop court.",
+  "errors.ROOM_NOT_FOUND": "La partie que vous tentez de rejoindre n'existe pas."
 }

@@ -84,6 +84,9 @@
   "tooltip.delete.mission": "Delete this mission",
   "tooltip.room.settings": "Room settings",
   "tooltip.user.settings": "User settings",
-  "errors.server.message": "A problem occurred while processing your request.",
-  "errors.token.invalid": "Your session has expired."
+  "errors.SERVER_ERROR": "A problem occurred while processing your request.",
+  "errors.EXPIRED_TOKEN": "Your session has expired.",
+  "errors.INVALID_TOKEN": "The recovery of your session has failed.",
+  "errors.TOO_SHORT_CONTENT": "The content entered is too short.",
+  "errors.ROOM_NOT_FOUND": "The party you are trying to reach does not exist."
 }
