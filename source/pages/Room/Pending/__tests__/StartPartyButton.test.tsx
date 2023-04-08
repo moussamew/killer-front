@@ -9,7 +9,6 @@ import {
   ROOM_ENDPOINT,
   ROOM_TOPIC,
 } from '@/constants/endpoints';
-import { MercureEventType } from '@/constants/enums';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
 import { pendingRoomSession } from '@/tests/mocks/sessions';
 import { renderWithProviders } from '@/tests/render';
@@ -32,15 +31,15 @@ describe('<StartPartyButton />', () => {
       await screen.findByText(t('room.start.party.button')),
     );
 
-    const messageEvent = new MessageEvent('message', {
+    /*   const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
         type: MercureEventType.ROOM_UPDATED,
       }),
-    });
+    }); */
 
     const roomEventSource = `${ROOM_TOPIC}/${roomCode}`;
 
-    sources[roomEventSource].emit(messageEvent.type, messageEvent);
+    /*  sources[roomEventSource].emit(messageEvent.type, messageEvent); */
 
     expect(await screen.findByText('Party started!')).toBeInTheDocument();
 

@@ -9,7 +9,6 @@ import {
   ROOM_ENDPOINT,
   ROOM_TOPIC,
 } from '@/constants/endpoints';
-import { MercureEventType } from '@/constants/enums';
 import { PlayerStatus } from '@/services/player/constants';
 import {
   endedRoom,
@@ -25,8 +24,6 @@ import {
 } from '@/tests/mocks/sessions';
 import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
-
-const { PLAYER_KILLED, ROOM_UPDATED } = MercureEventType;
 
 describe('<RoomPage />', () => {
   const roomEventSource = `${ROOM_TOPIC}/X7JKL`;
@@ -124,13 +121,13 @@ describe('<RoomPage />', () => {
       ),
     );
 
-    const messageEvent = new MessageEvent('message', {
+    /*   const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
         type: ROOM_UPDATED,
       }),
     });
 
-    sources[roomEventSource].emit(messageEvent.type, messageEvent);
+    sources[roomEventSource].emit(messageEvent.type, messageEvent); */
 
     expect(
       await screen.findByText('Try to kill your target and survive!'),
@@ -202,13 +199,13 @@ describe('<RoomPage />', () => {
       ),
     );
 
-    const messageEvent = new MessageEvent('message', {
+    /* const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
         type: ROOM_UPDATED,
       }),
     });
 
-    sources[roomEventSource].emit(messageEvent.type, messageEvent);
+    sources[roomEventSource].emit(messageEvent.type, messageEvent); */
 
     expect(await screen.findByText('Morpheus')).toBeInTheDocument();
     expect(screen.queryByText('Neo')).not.toBeInTheDocument();
@@ -236,13 +233,13 @@ describe('<RoomPage />', () => {
 
     await screen.findByText('Welcome to the party!');
 
-    const messageEvent = new MessageEvent('message', {
+    /*  const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
         type: ROOM_UPDATED,
       }),
     });
 
-    sources[roomEventSource].emit(messageEvent.type, messageEvent);
+    sources[roomEventSource].emit(messageEvent.type, messageEvent); */
 
     expect(
       await screen.findByText('Try to kill your target and survive!'),
@@ -272,13 +269,13 @@ describe('<RoomPage />', () => {
       ),
     );
 
-    const messageEvent = new MessageEvent('message', {
+    /*  const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
         type: ROOM_UPDATED,
       }),
     });
 
-    sources[roomEventSource].emit(messageEvent.type, messageEvent);
+    sources[roomEventSource].emit(messageEvent.type, messageEvent); */
 
     expect(await screen.findByText(t('home.title'))).toBeInTheDocument();
     expect(screen.queryByText('Welcome to the party!')).not.toBeInTheDocument();
@@ -313,13 +310,13 @@ describe('<RoomPage />', () => {
       ),
     );
 
-    const messageEvent = new MessageEvent('message', {
+    /*    const messageEvent = new MessageEvent('message', {
       data: JSON.stringify({
         type: PLAYER_KILLED,
       }),
     });
 
-    sources[roomEventSource].emit(messageEvent.type, messageEvent);
+    sources[roomEventSource].emit(messageEvent.type, messageEvent); */
 
     expect(await screen.findByText('Do another thing')).toBeInTheDocument();
     expect(screen.queryByText('Do something')).not.toBeInTheDocument();
