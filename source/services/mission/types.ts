@@ -1,4 +1,4 @@
-import { type UseMutationResult } from 'react-query';
+import { type UseMutationResult } from '@tanstack/react-query';
 
 export interface Mission {
   id: number;

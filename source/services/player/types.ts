@@ -1,4 +1,7 @@
-import { type QueryObserverResult, type UseMutationResult } from 'react-query';
+import {
+  type QueryObserverResult,
+  type UseMutationResult,
+} from '@tanstack/react-query';
 
 import { type Mission } from '../mission/types';
 import { type Room } from '../room/types';
