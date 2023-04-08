@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 import { QueryConfig } from '@/constants/config';
 import { ModalProvider } from '@/context/modal';
+import { SidebarProvider } from '@/context/sidebar';
 
 import { Routes } from './routes';
 
@@ -26,7 +27,9 @@ function App(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
       <ModalProvider>
-        <Routes />
+        <SidebarProvider>
+          <Routes />
+        </SidebarProvider>
       </ModalProvider>
     </QueryClientProvider>
   );
