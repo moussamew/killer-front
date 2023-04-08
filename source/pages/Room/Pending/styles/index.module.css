@@ -26,8 +26,11 @@
   margin-top: var(--spacing-medium);
   text-align: center;
 
-  & button {
+  @media (width <= 768px) {
     width: 100%;
+  }
+
+  & button {
     margin-top: var(--spacing-small);
   }
 }
