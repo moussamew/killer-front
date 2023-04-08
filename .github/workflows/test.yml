@@ -5,25 +5,19 @@ env:
 jobs:
   tests:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
     steps:
+      - name: Copy Repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
       - name: Installs pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 8.x.x
-
-      - run: echo "🎉 ${{ github.event_name }} event on ${{ github.ref }} triggered this action."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server."
-
-      - name: Copy Repository
-        uses: actions/checkout@v3
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
         run: pnpm install
