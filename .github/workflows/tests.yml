@@ -1,4 +1,4 @@
-name: Killer Web Front - Test
+name: Testing
 on: [push]
 env:
   FRONT_URL: ${{ secrets.FRONT_URL }}
