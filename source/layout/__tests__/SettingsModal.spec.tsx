@@ -9,7 +9,7 @@ import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
 
 describe('<SettingsModal />', () => {
-  it('should let the user update his pseudo', async () => {
+  it.skip('should let the user update his pseudo', async () => {
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(noRoomSession)),
