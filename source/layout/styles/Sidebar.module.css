@@ -1,0 +1,15 @@
+.sidebar {
+  width: 0;
+  background-color: #efeeed;
+  transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.sidebarOpen {
+  width: 25%;
+  padding: var(--spacing-medium);
+  border-left: 1px solid #dcdcd9;
+
+  @media screen and (width <= 768px) {
+    width: 100%;
+  }
+}
