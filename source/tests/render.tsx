@@ -1,6 +1,6 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, type RenderResult } from '@testing-library/react';
 import { type ReactNode } from 'react';
-import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import { Routes } from '@/app/routes';
 import { QueryConfig } from '@/constants/config';
@@ -17,12 +17,13 @@ export function renderWithProviders({
   component = <Routes />,
   route = '/',
 }: RenderParams = {}): RenderResult {
-  // eslint-disable-next-line no-console
-  setLogger({ log: console.log, warn: console.warn, error: () => {} });
-
   window.history.pushState({}, '', route);
 
-  const queryClient = new QueryClient(QueryConfig);
+  const queryClient = new QueryClient({
+    ...QueryConfig,
+    // eslint-disable-next-line no-console
+    logger: { log: console.log, warn: console.warn, error: () => {} },
+  });
 
   return render(
     <QueryClientProvider client={queryClient}>

@@ -1,12 +1,13 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { getRoomRequest } from './requests';
 import { type RoomQuery } from './types';
 
 export function useRoom(roomCode: string): RoomQuery {
-  const { data: room, refetch: refetchRoom } = useQuery('room', () =>
-    getRoomRequest(roomCode),
-  );
+  const { data: room, refetch: refetchRoom } = useQuery({
+    queryKey: ['room'],
+    queryFn: () => getRoomRequest(roomCode),
+  });
 
   return { room, refetchRoom };
 }

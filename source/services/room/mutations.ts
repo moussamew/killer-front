@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import {
   createRoomRequest,
@@ -14,8 +14,9 @@ import {
 export function useCreateRoom(): CreateRoomMutation {
   const queryClient = useQueryClient();
 
-  const createRoom = useMutation(createRoomRequest, {
-    onSuccess: () => queryClient.invalidateQueries('session'),
+  const createRoom = useMutation({
+    mutationFn: createRoomRequest,
+    onSuccess: () => queryClient.invalidateQueries(['session']),
   });
 
   return { createRoom };
@@ -24,15 +25,16 @@ export function useCreateRoom(): CreateRoomMutation {
 export function useDeleteRoom(): DeleteRoomMutation {
   const queryClient = useQueryClient();
 
-  const deleteRoom = useMutation(deleteRoomRequest, {
-    onSuccess: () => queryClient.invalidateQueries('session'),
+  const deleteRoom = useMutation({
+    mutationFn: deleteRoomRequest,
+    onSuccess: () => queryClient.invalidateQueries(['session']),
   });
 
   return { deleteRoom };
 }
 
 export function useStartParty(): StartPartyMutation {
-  const startParty = useMutation(startPartyRequest);
+  const startParty = useMutation({ mutationFn: startPartyRequest });
 
   return { startParty };
 }
