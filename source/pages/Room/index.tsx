@@ -3,13 +3,10 @@ import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
-import { MercureEventType } from '@/constants/enums';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 
 import { roomStatusToRoute } from './constants';
-
-const { ROOM_UPDATED } = MercureEventType;
 
 export function RoomPage(): JSX.Element | null {
   const navigate = useNavigate();
@@ -38,19 +35,13 @@ export function RoomPage(): JSX.Element | null {
     });
 
     roomEventSource.addEventListener('message', (event) => {
-      const { type, player } = JSON.parse(event.data);
+      const roomInfos = JSON.parse(event.data);
 
-      const playerEvent = JSON.parse(player);
-
-      if (type === ROOM_UPDATED) {
-        if (!playerEvent.room && playerEvent.id === session?.id) {
-          return refetchSession();
-        }
-
-        return refetchRoom().then(refetchSession);
+      if (!roomInfos.id) {
+        return refetchSession();
       }
 
-      return null;
+      return refetchRoom().then(refetchSession);
     });
 
     return () => roomEventSource.close();
