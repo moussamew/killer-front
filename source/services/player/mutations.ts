@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { createPlayerRequest, updatePlayerRequest } from './requests';
 import { type CreatePlayerMutation, type UpdatePlayerMutation } from './types';
@@ -6,8 +6,9 @@ import { type CreatePlayerMutation, type UpdatePlayerMutation } from './types';
 export function useUpdatePlayer(): UpdatePlayerMutation {
   const queryClient = useQueryClient();
 
-  const updatePlayer = useMutation(updatePlayerRequest, {
-    onSuccess: () => queryClient.invalidateQueries('session'),
+  const updatePlayer = useMutation({
+    mutationFn: updatePlayerRequest,
+    onSuccess: () => queryClient.invalidateQueries(['session']),
   });
 
   return { updatePlayer };
@@ -16,8 +17,9 @@ export function useUpdatePlayer(): UpdatePlayerMutation {
 export function useCreatePlayer(): CreatePlayerMutation {
   const queryClient = useQueryClient();
 
-  const createPlayer = useMutation(createPlayerRequest, {
-    onSuccess: () => queryClient.invalidateQueries('session'),
+  const createPlayer = useMutation({
+    mutationFn: createPlayerRequest,
+    onSuccess: () => queryClient.invalidateQueries(['session']),
   });
 
   return { createPlayer };
