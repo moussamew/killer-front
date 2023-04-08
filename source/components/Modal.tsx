@@ -21,7 +21,6 @@ export function Modal({ children, closeModal }: Props): JSX.Element {
           title={t('tooltip.close')}
           onClick={closeModal}
         />
-
         {children}
       </div>
     </div>

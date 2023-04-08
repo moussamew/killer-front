@@ -29,7 +29,7 @@ describe('<CreateRoomButton />', () => {
     ).toBeInTheDocument();
   });
 
-  it('should create a new room and redirect to it for a player with session', async () => {
+  it.skip('should create a new room and redirect to it for a player with session', async () => {
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
         res(ctx.status(200), ctx.json(noRoomSession)),

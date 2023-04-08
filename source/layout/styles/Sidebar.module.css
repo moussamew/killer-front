@@ -1,7 +1,14 @@
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .sidebar {
   width: 0;
-  background-color: #efeeed;
-  transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: #fef5ed;
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  will-change: width;
 }
 
 .sidebarOpen {
