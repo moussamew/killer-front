@@ -7,6 +7,7 @@ export function useRoom(roomCode: string): RoomQuery {
   const { data: room, refetch: refetchRoom } = useQuery({
     queryKey: ['room'],
     queryFn: () => getRoomRequest(roomCode),
+    enabled: Boolean(localStorage.getItem('token')),
   });
 
   return { room, refetchRoom };
