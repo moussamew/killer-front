@@ -89,6 +89,7 @@
   "errors.SERVER_ERROR": "A problem occurred while processing your request.",
   "errors.EXPIRED_TOKEN": "Your session has expired.",
   "errors.INVALID_TOKEN": "The recovery of your session has failed.",
+  "errors.TOKEN_NOT_FOUND": "You cannot access this page without a session.",
   "errors.ROOM_NOT_FOUND": "The party you are trying to reach does not exist.",
   "errors.PLAYER_NAME_TOO_SHORT_CONTENT": "Your player name is too short.",
   "errors.MISSION_TOO_SHORT_CONTENT": "Please choose a explicit phrase for the mission you want to add.",

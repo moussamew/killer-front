@@ -5,7 +5,8 @@ import { ErrorCode } from '@/constants/errors';
 
 import { type RequestParams } from './types';
 
-const { SERVER_ERROR, INVALID_TOKEN, EXPIRED_TOKEN } = ErrorCode;
+const { SERVER_ERROR, INVALID_TOKEN, EXPIRED_TOKEN, TOKEN_NOT_FOUND } =
+  ErrorCode;
 
 export async function request<T>({
   url,
@@ -36,9 +37,10 @@ export async function request<T>({
 
   if (
     response.status === 401 &&
-    [INVALID_TOKEN, EXPIRED_TOKEN].includes(result.message)
+    [INVALID_TOKEN, EXPIRED_TOKEN, TOKEN_NOT_FOUND].includes(result.message)
   ) {
     localStorage.removeItem('token');
+
     const errorMessage = t(`errors.${result.message}`);
 
     toast.error(errorMessage);
