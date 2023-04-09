@@ -1,12 +1,23 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import { type RequestError } from '@/helpers/errors';
+
 import { createPlayerRequest, updatePlayerRequest } from './requests';
-import { type CreatePlayerMutation, type UpdatePlayerMutation } from './types';
+import {
+  type PlayerUpdateInfos,
+  type CreatePlayerMutation,
+  type UpdatePlayerMutation,
+} from './types';
 
 export function useUpdatePlayer(): UpdatePlayerMutation {
   const queryClient = useQueryClient();
 
-  const updatePlayer = useMutation({
+  const updatePlayer = useMutation<
+    void,
+    RequestError,
+    Partial<PlayerUpdateInfos>,
+    unknown
+  >({
     mutationFn: updatePlayerRequest,
     onSuccess: () => queryClient.invalidateQueries(['session']),
   });

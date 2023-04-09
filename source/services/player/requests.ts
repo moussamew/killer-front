@@ -6,7 +6,7 @@ import { type Player, type Session } from './types';
 
 const { GET, POST, PATCH } = Method;
 
-export function getSessionRequest(): Promise<Session | null> {
+export function getSessionRequest(): Promise<Session> {
   return request({ url: SESSION_ENDPOINT, method: GET });
 }
 

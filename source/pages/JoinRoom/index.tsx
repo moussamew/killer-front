@@ -1,21 +1,22 @@
-import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
 
 import Killerparty from '@/assets/images/killerparty.png';
 import { Loader } from '@/components/Loader';
-import { RoomErrorCode } from '@/constants/errors';
-import { RequestError } from '@/helpers/errors';
+import { ErrorCode } from '@/constants/errors';
 import { useUpdatePlayer } from '@/services/player/mutations';
-import { useSession } from '@/services/player/queries';
+import { type SessionQuery } from '@/services/player/types';
 
 import { CreatePlayer } from './CreatePlayer';
 import { LeaveCurrentRoom } from './LeaveCurrentRoom';
+import { UpdatePlayerPseudo } from './UpdatePlayerPseudo';
 
-const { NOT_FOUND, BAD_ROOMCODE } = RoomErrorCode;
+const { ROOM_NOT_FOUND, ALREADY_EXIST } = ErrorCode;
 
 export function JoinRoomPage(): JSX.Element {
+  const [isPlayerAlreadyExists, setPlayerAlreadyExists] = useState(false);
   const { roomCode } = useParams();
-  const { session } = useSession();
+  const { session } = useOutletContext<SessionQuery>();
   const { updatePlayer } = useUpdatePlayer();
 
   const navigate = useNavigate();
@@ -39,18 +40,15 @@ export function JoinRoomPage(): JSX.Element {
       updatePlayerMutate(
         { id: session.id, room: roomCode },
         {
-          onError: (error) => {
-            if (error instanceof RequestError) {
-              /**
-               * Show not found page if:
-               * - The room cannot be found.
-               * - The name of the room is incorrect.
-               */
-              if ([NOT_FOUND, BAD_ROOMCODE].includes(error.errorCode)) {
-                navigate(`/room/${roomCode}/error`, {
-                  state: error.message,
-                });
-              }
+          onError: ({ errorCode, message }) => {
+            if (errorCode === ROOM_NOT_FOUND) {
+              navigate(`/room/${roomCode}/error`, {
+                state: message,
+              });
+            }
+
+            if (errorCode === ALREADY_EXIST) {
+              setPlayerAlreadyExists(true);
             }
           },
         },
@@ -69,6 +67,7 @@ export function JoinRoomPage(): JSX.Element {
     <>
       <img alt="welcome" src={Killerparty} />
       {!session?.name && <CreatePlayer />}
+      {isPlayerAlreadyExists && <UpdatePlayerPseudo session={session} />}
       {session?.room?.code && <LeaveCurrentRoom />}
     </>
   );
