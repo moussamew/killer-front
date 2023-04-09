@@ -5,6 +5,7 @@ import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
+import { type Room } from '@/services/room/types';
 
 import { roomStatusToRoute } from './constants';
 
@@ -35,17 +36,17 @@ export function RoomPage(): JSX.Element | null {
     });
 
     roomEventSource.addEventListener('message', (event) => {
-      console.warn({ event });
+      const roomInfos: Room = JSON.parse(event.data);
 
-      const roomInfos = JSON.parse(event.data);
+      const isPlayerInRoom = roomInfos.players.some(
+        ({ id }) => id === session?.id,
+      );
 
-      console.warn({ roomInfos });
-
-      if (!roomInfos.id) {
-        return refetchSession();
+      if (isPlayerInRoom) {
+        return refetchRoom().then(refetchSession);
       }
 
-      return refetchRoom().then(refetchSession);
+      return refetchSession();
     });
 
     return () => roomEventSource.close();
