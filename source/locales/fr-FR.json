@@ -70,6 +70,7 @@
   "layout.user.update.pseudo.label": "Mettre à jour mon nom",
   "layout.user.update.pseudo.placeholder": "Nouveau nom",
   "layout.user.update.pseudo.confirm.button": "Sauvegarder",
+  "layout.user.update.pseudo.success.message": "Pseudo mis à jour avec succès.\n Votre nouveau pseudo est {{pseudo}}.",
   "layout.user.language.switch": "Changer la langue de l'interface",
   "webview.title": "Ouvert depuis {{webViewApp}}",
   "webview.restriction.message": "L'accès à Killer Party depuis une application tierce est limité pour des raisons d'expérience de jeu.",
