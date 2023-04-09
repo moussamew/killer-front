@@ -5,15 +5,16 @@
 
 .layout {
   width: 100%;
-  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: width 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  will-change: width;
 }
 
 .layoutWithSidebar {
   width: 75%;
 
   @media screen and (width <= 768px) {
+    display: none;
     width: 0%;
-    visibility: hidden;
   }
 }
 

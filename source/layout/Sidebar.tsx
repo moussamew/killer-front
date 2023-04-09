@@ -25,15 +25,19 @@ export function Sidebar({
         [styles.sidebarOpen]: isSidebarOpen,
       })}
     >
-      <div className={styles.sidebarHeader}>
-        <h2>{t('layout.user.settings.title')}</h2>
-        <Close
-          title={t('tooltip.user.settings')}
-          onClick={() => setSidebarOpen(false)}
-        />
-      </div>
-      {playerName && <UpdatePseudo />}
-      <SwitchLanguage />
+      {isSidebarOpen && (
+        <>
+          <div className={styles.sidebarHeader}>
+            <h2>{t('layout.user.settings.title')}</h2>
+            <Close
+              title={t('tooltip.user.settings')}
+              onClick={() => setSidebarOpen(false)}
+            />
+          </div>
+          {playerName && <UpdatePseudo />}
+          <SwitchLanguage />
+        </>
+      )}
     </section>
   );
 }
