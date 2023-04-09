@@ -35,7 +35,11 @@ export function RoomPage(): JSX.Element | null {
     });
 
     roomEventSource.addEventListener('message', (event) => {
+      console.warn({ event });
+
       const roomInfos = JSON.parse(event.data);
+
+      console.warn({ roomInfos });
 
       if (!roomInfos.id) {
         return refetchSession();
