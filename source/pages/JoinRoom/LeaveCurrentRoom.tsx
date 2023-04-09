@@ -5,6 +5,10 @@ import { Button } from '@/components/Button';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
+import commonStyles from '../../assets/styles/common.module.css';
+
+import styles from './styles/LeaveCurrentRoom.module.css';
+
 export function LeaveCurrentRoom(): JSX.Element {
   const { roomCode } = useParams();
   const { t } = useTranslation();
@@ -24,16 +28,18 @@ export function LeaveCurrentRoom(): JSX.Element {
           roomCode: session?.room?.code,
         })}
       </h1>
-      <p>{t('join.room.warning')}</p>
-      <Button color="primary" onClick={handleJoinNewRoom}>
-        {t('join.room.confirm.button')}
-      </Button>
-      <Button
-        color="secondary"
-        onClick={() => navigate(`/room/${session?.room?.code}`)}
-      >
-        {t('join.room.return.button')}
-      </Button>
+      <p className={styles.text}>{t('join.room.warning')}</p>
+      <div className={commonStyles.actions}>
+        <Button color="primary" onClick={handleJoinNewRoom}>
+          {t('join.room.confirm.button')}
+        </Button>
+        <Button
+          color="secondary"
+          onClick={() => navigate(`/room/${session?.room?.code}`)}
+        >
+          {t('join.room.return.button')}
+        </Button>
+      </div>
     </>
   );
 }

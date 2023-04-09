@@ -24,7 +24,7 @@
   "join.room.create.new.pseudo.placeholder": "Choisir un nouveau nom",
   "join.room.confirm.button": "Continuer et rejoindre la partie",
   "join.room.create.room": "Créer ma propre partie",
-  "join.room.already.inside.room": "Déjà à l'intérieur de la partie {{roomCode}} !",
+  "join.room.already.inside.room": "Déjà à l'intérieur de la partie {{roomCode}}",
   "join.room.warning": "Attention, si vous rejoignez cette partie, cela vous fera quitter la précédente",
   "join.room.return.button": "Retourner dans ma partie",
   "room.welcome.title": "Bienvenue à la fête !",

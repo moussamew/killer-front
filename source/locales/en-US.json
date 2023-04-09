@@ -24,7 +24,7 @@
   "join.room.create.new.pseudo.placeholder": "Choose a new pseudo",
   "join.room.confirm.button": "Continue and join the room",
   "join.room.create.room": "Create my own room",
-  "join.room.already.inside.room": "Already inside the room {{roomCode}}!",
+  "join.room.already.inside.room": "Already inside the room {{roomCode}}",
   "join.room.warning": "Be careful, if you join this room, this will make you leave the previous one.",
   "join.room.return.button": "Return to my current room",
   "room.welcome.title": "Welcome to the party!",
