@@ -1,9 +1,9 @@
-import { type ChangeEvent, useContext, useState } from 'react';
+import { type ChangeEvent, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
-import { ModalContext } from '@/context/modal';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
@@ -12,7 +12,6 @@ import styles from './styles/UpdatePseudo.module.css';
 export function UpdatePseudo(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
   const { t } = useTranslation();
-  const { closeModal } = useContext(ModalContext);
   const { updatePlayer } = useUpdatePlayer();
   const { session } = useSession();
 
@@ -23,7 +22,12 @@ export function UpdatePseudo(): JSX.Element {
   const updatePlayerPseudo = async (): Promise<void> => {
     await updatePlayer.mutateAsync(
       { id: session?.id, name: pseudo.toUpperCase() },
-      { onSuccess: () => closeModal() },
+      {
+        onSuccess: () =>
+          toast.success(
+            t('layout.user.update.pseudo.success.message', { pseudo }),
+          ),
+      },
     );
   };
 
