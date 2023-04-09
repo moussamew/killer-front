@@ -1,5 +1,5 @@
 :root {
-  background-color: var(--color-camel-97);
+  background-color: var(--color-body);
   font-family: Inter, sans-serif;
   letter-spacing: -0.05rem;
 }
@@ -47,4 +47,8 @@ p {
 
 svg {
   cursor: pointer;
+}
+
+input::placeholder {
+  font-size: var(--text-small);
 }
