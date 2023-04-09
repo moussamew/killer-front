@@ -93,5 +93,6 @@
   "errors.ROOM_NOT_FOUND": "The party you are trying to reach does not exist.",
   "errors.PLAYER_NAME_TOO_SHORT_CONTENT": "Your player name is too short.",
   "errors.MISSION_TOO_SHORT_CONTENT": "Please choose a explicit phrase for the mission you want to add.",
-  "errors.CAN_NOT_MOVE_TO_IN_GAME": "You cannot start a new game because the conditions are not met."
+  "errors.CAN_NOT_MOVE_TO_IN_GAME": "You cannot start a new game because the conditions are not met.",
+  "errors.ALREADY_EXIST": "This pseudo is already taken."
 }
