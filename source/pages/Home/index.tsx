@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
+import commonStyles from '@/assets/styles/common.module.css';
 import { type SessionQuery } from '@/services/player/types';
 
 import { CreateRoomButton } from './CreateRoomButton';
@@ -30,7 +31,7 @@ export function HomePage(): JSX.Element {
           <Trans t={t} i18nKey="home.description" />
         </p>
       </div>
-      <div className={styles.actions}>
+      <div className={commonStyles.actions}>
         <CreateRoomButton playerName={session?.name} />
         <JoinRoomButton />
       </div>

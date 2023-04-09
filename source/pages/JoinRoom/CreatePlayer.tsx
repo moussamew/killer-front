@@ -2,6 +2,7 @@ import { type ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import commonStyles from '@/assets/styles/common.module.css';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
@@ -42,12 +43,14 @@ export function CreatePlayer(): JSX.Element {
         value={pseudo}
         onChange={handlePseudo}
       />
-      <Button color="primary" onClick={handleJoinRoom}>
-        {t('home.join.room.confirm.button')}
-      </Button>
-      <Button color="secondary" onClick={handleCreateRoom}>
-        {t('home.create.room.confirm.button')}
-      </Button>
+      <div className={commonStyles.actions}>
+        <Button color="primary" onClick={handleJoinRoom}>
+          {t('home.join.room.confirm.button')}
+        </Button>
+        <Button color="secondary" onClick={handleCreateRoom}>
+          {t('home.create.room.confirm.button')}
+        </Button>
+      </div>
     </>
   );
 }

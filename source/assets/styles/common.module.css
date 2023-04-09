@@ -1,0 +1,11 @@
+.actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 30px;
+  gap: var(--spacing-small);
+
+  @media (width >= 720px) {
+    flex-direction: row;
+  }
+}
