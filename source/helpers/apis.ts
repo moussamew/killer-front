@@ -6,8 +6,14 @@ import { ErrorCode } from '@/constants/errors';
 import { RequestError } from './errors';
 import { type RequestParams } from './types';
 
-const { SERVER_ERROR, INVALID_TOKEN, EXPIRED_TOKEN, TOKEN_NOT_FOUND } =
-  ErrorCode;
+const {
+  SERVER_ERROR,
+  FORBIDDEN,
+  NOT_FOUND,
+  INVALID_TOKEN,
+  EXPIRED_TOKEN,
+  TOKEN_NOT_FOUND,
+} = ErrorCode;
 
 export async function request<T>({
   url,
@@ -30,8 +36,33 @@ export async function request<T>({
     throw new Error(error.message);
   });
 
+  // No content
   if (response.status === 204) {
-    return null as T;
+    return Promise.resolve() as Promise<T>;
+  }
+
+  // Forbidden
+  if (response.status === 403) {
+    const errorMessage = t(`errors.${FORBIDDEN}`);
+
+    toast.error(errorMessage);
+
+    throw new RequestError({
+      message: errorMessage,
+      errorCode: FORBIDDEN,
+    });
+  }
+
+  // Not found
+  if (response.status === 404) {
+    const errorMessage = t(`errors.${NOT_FOUND}`);
+
+    toast.error(errorMessage);
+
+    throw new RequestError({
+      message: errorMessage,
+      errorCode: NOT_FOUND,
+    });
   }
 
   const result = await response.json();
