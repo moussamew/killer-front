@@ -3,6 +3,7 @@ import { toast } from 'react-hot-toast';
 
 import { ErrorCode } from '@/constants/errors';
 
+import { RequestError } from './errors';
 import { type RequestParams } from './types';
 
 const { SERVER_ERROR, INVALID_TOKEN, EXPIRED_TOKEN, TOKEN_NOT_FOUND } =
@@ -44,14 +45,22 @@ export async function request<T>({
     const errorMessage = t(`errors.${result.message}`);
 
     toast.error(errorMessage);
-    throw new Error(errorMessage);
+
+    throw new RequestError({
+      message: errorMessage,
+      errorCode: result.message,
+    });
   }
 
   if (response.status >= 400) {
     const errorMessage = t(`errors.${result?.detail}`);
 
     toast.error(errorMessage);
-    throw new Error(errorMessage);
+
+    throw new RequestError({
+      message: errorMessage,
+      errorCode: result?.detail,
+    });
   }
 
   if (result?.token) {

@@ -3,6 +3,8 @@ import {
   type UseMutationResult,
 } from '@tanstack/react-query';
 
+import { type RequestError } from '@/helpers/errors';
+
 import { type Mission } from '../mission/types';
 import { type Room } from '../room/types';
 
@@ -33,15 +35,15 @@ export interface PlayerUpdateInfos {
 }
 
 export interface SessionQuery {
-  session: Session | null | undefined;
-  refetchSession(): Promise<QueryObserverResult<Session | null, unknown>>;
+  session: Session | undefined;
+  refetchSession(): Promise<QueryObserverResult<Session, unknown>>;
   isLoading: boolean;
 }
 
 export interface UpdatePlayerMutation {
   updatePlayer: UseMutationResult<
     void,
-    unknown,
+    RequestError,
     Partial<PlayerUpdateInfos>,
     unknown
   >;
