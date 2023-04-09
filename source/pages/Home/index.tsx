@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
-import commonStyles from '@/assets/styles/common.module.css';
 import { type SessionQuery } from '@/services/player/types';
+
+import commonStyles from '../../assets/styles/common.module.css';
 
 import { CreateRoomButton } from './CreateRoomButton';
 import { Gallery } from './Gallery';

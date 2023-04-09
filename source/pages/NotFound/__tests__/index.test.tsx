@@ -4,7 +4,7 @@ import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { PLAYER_ENDPOINT, SESSION_ENDPOINT } from '@/constants/endpoints';
-import { RoomErrorCode } from '@/constants/errors';
+import { ErrorCode } from '@/constants/errors';
 import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
 
@@ -28,7 +28,7 @@ describe('<NotFoundPage />', () => {
         res(
           ctx.status(400),
           ctx.json({
-            errorCode: RoomErrorCode.BAD_ROOMCODE,
+            errorCode: ErrorCode.ROOM_NOT_FOUND,
             message:
               'The roomCode need to be provided with a correct format (5 characters).',
           }),

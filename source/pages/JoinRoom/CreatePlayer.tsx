@@ -2,10 +2,11 @@ import { type ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import commonStyles from '@/assets/styles/common.module.css';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
+
+import commonStyles from '../../assets/styles/common.module.css';
 
 export function CreatePlayer(): JSX.Element {
   const { roomCode } = useParams();

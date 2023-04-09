@@ -7,7 +7,7 @@ import {
   SESSION_ENDPOINT,
   ROOM_ENDPOINT,
 } from '@/constants/endpoints';
-import { RoomErrorCode } from '@/constants/errors';
+import { ErrorCode } from '@/constants/errors';
 import {
   roomCode,
   pendingRoom,
@@ -64,10 +64,7 @@ describe('<JoinRoomPage />', () => {
         res(ctx.status(200), ctx.json(noRoomSession)),
       ),
       rest.patch(`${PLAYER_ENDPOINT}/${noRoomSession.id}`, (_, res, ctx) =>
-        res(
-          ctx.status(400),
-          ctx.json({ errorCode: RoomErrorCode.BAD_ROOMCODE }),
-        ),
+        res(ctx.status(400), ctx.json({ errorCode: ErrorCode.ROOM_NOT_FOUND })),
       ),
     );
 
