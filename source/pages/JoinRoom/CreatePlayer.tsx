@@ -1,15 +1,17 @@
 import { type ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
-import { useCreatePlayer } from '@/services/player/mutations';
+import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
 
 export function CreatePlayer(): JSX.Element {
+  const { roomCode } = useParams();
   const [pseudo, setPseudo] = useState('');
   const { t } = useTranslation();
   const { createPlayer } = useCreatePlayer();
+  const { updatePlayer } = useUpdatePlayer();
   const navigate = useNavigate();
 
   const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
@@ -17,7 +19,13 @@ export function CreatePlayer(): JSX.Element {
   };
 
   const handleJoinRoom = async (): Promise<void> => {
-    await createPlayer.mutateAsync(pseudo.toUpperCase());
+    await createPlayer.mutateAsync(pseudo.toUpperCase(), {
+      onSuccess: ({ id }) =>
+        updatePlayer.mutateAsync(
+          { id, room: roomCode },
+          { onSuccess: () => navigate(`/room/${roomCode}`) },
+        ),
+    });
   };
 
   const handleCreateRoom = (): void => {
