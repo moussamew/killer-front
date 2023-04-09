@@ -1,4 +1,9 @@
 :root {
+  /** Application colors */
+  --color-body: hsl(30deg 75% 97%);
+  --color-sidebar: hsl(28deg 89% 96%);
+  --color-loader: hsl(27deg 65% 90%);
+
   /** White colors */
   --color-white: hsl(255deg 100% 100%);
 
@@ -23,23 +28,19 @@
   --color-yellow-80: hsl(53deg 98% 80%);
   --color-yellow-90: hsl(53deg 100% 90%);
 
-  /** Camel colors */
-  --color-camel-97: hsl(30deg 75% 97%);
-  --color-camel-90: hsl(27deg 65% 90%);
-
   /** Blue colors */
   --color-blue-90: hsl(207deg 96% 90%);
   --color-blue-70: hsl(207deg 96% 70%);
 
-  /* Font sizes */
+  /** Font sizes */
   --text-small: 16px;
   --text-medium: 18px;
   --text-large: 20px;
 
-  /* Box shadows */
+  /** Box shadows */
   --shadow-small: var(--color-black-80) 0 2px 4px;
 
-  /* Spacing */
+  /** Spacing */
   --spacing-small: 10px;
   --spacing-medium: 15px;
   --spacing-large: 20px;

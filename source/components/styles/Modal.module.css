@@ -14,7 +14,7 @@
   margin: auto;
   margin-right: var(--spacing-medium);
   margin-left: var(--spacing-medium);
-  background-color: var(--color-camel-97);
+  background-color: var(--color-body);
 
   @media (width >= 720px) {
     margin-right: 25%;

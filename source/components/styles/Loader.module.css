@@ -9,6 +9,6 @@
   }
 
   & circle {
-    stroke: var(--color-camel-90);
+    stroke: var(--color-loader);
   }
 }
