@@ -85,7 +85,7 @@
   "tooltip.close": "Close",
   "tooltip.admin.room": "Admin of the room",
   "tooltip.leave.room": "Leave the current room",
-  "tooltip.kick.player": "Kick player",
+  "tooltip.kick.player": "Kick {{playerName}}",
   "tooltip.delete.mission": "Delete this mission",
   "tooltip.room.settings": "Room settings",
   "tooltip.user.settings": "User settings",

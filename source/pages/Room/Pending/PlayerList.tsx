@@ -8,10 +8,10 @@ import KickPlayer from '@/assets/icons/kickPlayer.svg';
 import LeaveRoom from '@/assets/icons/leaveRoom.svg';
 import Player from '@/assets/images/player.png';
 import { ModalContext } from '@/context/modal';
+import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 
-import { KickPlayerModal } from './KickPlayerModal';
 import { LeaveRoomModal } from './LeaveRoomModal';
 import { RoomSettings } from './RoomSettings';
 import styles from './styles/PlayerList.module.css';
@@ -20,6 +20,7 @@ export function PlayerList(): JSX.Element {
   const { roomCode } = useParams();
   const { room } = useRoom(roomCode!);
   const { session } = useSession();
+  const { updatePlayer } = useUpdatePlayer();
   const { openModal } = useContext(ModalContext);
   const { t } = useTranslation();
 
@@ -27,12 +28,9 @@ export function PlayerList(): JSX.Element {
     openModal(<LeaveRoomModal />);
   };
 
-  const handleKickPlayer =
-    (playerName: string, playerId: number) => (): void => {
-      openModal(
-        <KickPlayerModal playerName={playerName} playerId={playerId} />,
-      );
-    };
+  const handleKickPlayer = async (playerId: number): Promise<void> => {
+    await updatePlayer.mutateAsync({ id: playerId, room: null });
+  };
 
   return (
     <div className={styles.content}>
@@ -57,13 +55,15 @@ export function PlayerList(): JSX.Element {
               className={styles.icon}
             />
           )}
-          {room?.admin?.id !== id && session?.name !== name && (
-            <KickPlayer
-              title={t('tooltip.kick.player')}
-              onClick={handleKickPlayer(name, id)}
-              className={styles.icon}
-            />
-          )}
+          {room.admin.id === session?.id &&
+            room?.admin?.id !== id &&
+            session?.name !== name && (
+              <KickPlayer
+                title={t('tooltip.kick.player', { playerName: name })}
+                onClick={() => handleKickPlayer(id)}
+                className={styles.icon}
+              />
+            )}
         </div>
       ))}
     </div>
