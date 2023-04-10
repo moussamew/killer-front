@@ -1,27 +1,23 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { rest } from 'msw';
+import { t } from 'i18next';
 
-import { SESSION_ENDPOINT } from '@/constants/endpoints';
 import { Layout } from '@/layout/Layout';
+import { getPlayerSession } from '@/tests/mocks/services/player';
 import { noRoomSession } from '@/tests/mocks/sessions';
 import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
 
 describe('<Layout />', () => {
-  it.skip('should show the user settings when current player click on settings icon', async () => {
-    server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(noRoomSession)),
-      ),
-    );
+  it('should show the user settings when current player click on settings icon', async () => {
+    server.use(getPlayerSession(noRoomSession));
 
     renderWithProviders({ component: <Layout /> });
 
-    await userEvent.click(
-      await screen.findByTitle(`Paramètres de l'utilisateur`),
-    );
+    await userEvent.click(await screen.findByTitle(t('tooltip.user.settings')));
 
-    expect(screen.getByText('Paramètres')).toBeInTheDocument();
+    expect(
+      screen.getByText(t('layout.user.settings.title')),
+    ).toBeInTheDocument();
   });
 });
