@@ -11,7 +11,7 @@ import { CreatePlayer } from './CreatePlayer';
 import { LeaveCurrentRoom } from './LeaveCurrentRoom';
 import { UpdatePlayerPseudo } from './UpdatePlayerPseudo';
 
-const { ROOM_NOT_FOUND, ALREADY_EXIST } = ErrorCode;
+const { NOT_FOUND, ALREADY_EXIST } = ErrorCode;
 
 export function JoinRoomPage(): JSX.Element {
   const [isPlayerAlreadyExists, setPlayerAlreadyExists] = useState(false);
@@ -41,7 +41,7 @@ export function JoinRoomPage(): JSX.Element {
         { id: session.id, room: roomCode },
         {
           onError: ({ errorCode, message }) => {
-            if (errorCode === ROOM_NOT_FOUND) {
+            if (errorCode === NOT_FOUND) {
               navigate(`/room/${roomCode}/error`, {
                 state: message,
               });

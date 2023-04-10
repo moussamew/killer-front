@@ -1,16 +1,11 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { t } from 'i18next';
-import { rest } from 'msw';
 
-import {
-  MISSION_ENDPOINT,
-  SESSION_ENDPOINT,
-  ROOM_ENDPOINT,
-} from '@/constants/endpoints';
-import { CreateMission } from '@/pages/Room/Pending/CreateMission';
 import { fakeMissionThree } from '@/tests/mocks/missions';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
+import { getPlayerSession } from '@/tests/mocks/services/player';
+import { getRoomSession } from '@/tests/mocks/services/room';
 import { pendingRoomSession } from '@/tests/mocks/sessions';
 import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
@@ -18,12 +13,8 @@ import { server } from '@/tests/server';
 describe('<CreateMission />', () => {
   it('should add a new mission', async () => {
     server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(pendingRoomSession)),
-      ),
-      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(pendingRoom)),
-      ),
+      getPlayerSession(pendingRoomSession),
+      getRoomSession(roomCode, pendingRoom),
     );
 
     renderWithProviders({ route: `/room/${roomCode}` });
@@ -36,15 +27,10 @@ describe('<CreateMission />', () => {
     );
 
     server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(
-          ctx.status(200),
-          ctx.json({
-            ...pendingRoomSession,
-            authoredMissions: [fakeMissionThree],
-          }),
-        ),
-      ),
+      getPlayerSession({
+        ...pendingRoomSession,
+        authoredMissions: [fakeMissionThree],
+      }),
     );
 
     await userEvent.click(
@@ -56,32 +42,25 @@ describe('<CreateMission />', () => {
     ).toBeInTheDocument();
   });
 
-  it.skip('should show error message when adding a new mission has failed', async () => {
+  it.skip('should show error message if the mission is too short', async () => {
     server.use(
-      rest.post(MISSION_ENDPOINT, (_, res, ctx) =>
-        res(
-          ctx.status(400),
-          ctx.json({
-            errorCode: 'MISSION.BAD_MISSION',
-            message: 'Name must be longer than or equal to 1 characters',
-          }),
-        ),
-      ),
+      getPlayerSession(pendingRoomSession),
+      getRoomSession(roomCode, pendingRoom),
     );
 
-    renderWithProviders({ component: <CreateMission /> });
+    renderWithProviders();
 
     await userEvent.type(
-      screen.getByPlaceholderText('Make him drink his glass dry'),
-      'New mission',
+      await screen.findByPlaceholderText(t('room.mission.placeholder')),
+      'abc',
     );
 
-    await userEvent.click(screen.getByText('Add new mission in the room'));
+    await userEvent.click(
+      screen.getByText(t('room.create.new.mission.button')),
+    );
 
     expect(
-      await screen.findByText(
-        'Name must be longer than or equal to 1 characters',
-      ),
+      screen.getByText(t('errors.MISSION_TOO_SHORT_CONTENT')),
     ).toBeInTheDocument();
   });
 });

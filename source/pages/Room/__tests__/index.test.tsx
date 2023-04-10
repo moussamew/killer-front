@@ -1,21 +1,17 @@
 import { screen } from '@testing-library/react';
 import { sources } from 'eventsourcemock';
 import { t } from 'i18next';
-import { rest } from 'msw';
 
-import {
-  MISSION_ENDPOINT,
-  SESSION_ENDPOINT,
-  ROOM_ENDPOINT,
-  ROOM_TOPIC,
-} from '@/constants/endpoints';
-import { PlayerStatus } from '@/services/player/constants';
+import { fakePlayerOne, fakePlayerTwo } from '@/tests/mocks/players';
 import {
   endedRoom,
   playingRoom,
   pendingRoom,
   roomCode,
+  roomEventSource,
 } from '@/tests/mocks/rooms';
+import { getPlayerSession } from '@/tests/mocks/services/player';
+import { getRoomSession } from '@/tests/mocks/services/room';
 import {
   endedRoomSession,
   playingRoomSession,
@@ -26,16 +22,10 @@ import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
 
 describe('<RoomPage />', () => {
-  const roomEventSource = `${ROOM_TOPIC}/X7JKL`;
-
   it('should redirect player to pending room page if the status of the room is PENDING', async () => {
     server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(pendingRoomSession)),
-      ),
-      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(pendingRoom)),
-      ),
+      getPlayerSession(pendingRoomSession),
+      getRoomSession(roomCode, pendingRoom),
     );
 
     renderWithProviders({ route: `/room/${roomCode}` });
@@ -45,12 +35,8 @@ describe('<RoomPage />', () => {
 
   it('should redirect player to playing room page if the status of the room is IN_GAME', async () => {
     server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playingRoomSession)),
-      ),
-      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playingRoom)),
-      ),
+      getPlayerSession(playingRoomSession),
+      getRoomSession(roomCode, playingRoom),
     );
 
     renderWithProviders({ route: `/room/${roomCode}` });
@@ -60,12 +46,8 @@ describe('<RoomPage />', () => {
 
   it('should redirect player to ended room page if the status of the room is ENDED', async () => {
     server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(endedRoomSession)),
-      ),
-      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(endedRoom)),
-      ),
+      getPlayerSession(endedRoomSession),
+      getRoomSession(roomCode, endedRoom),
     );
 
     renderWithProviders({ route: `/room/${roomCode}` });
@@ -74,11 +56,7 @@ describe('<RoomPage />', () => {
   });
 
   it('should redirect player to join room page if the player did not have a player session', async () => {
-    server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(400), ctx.json(null)),
-      ),
-    );
+    server.use(getPlayerSession(null));
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
@@ -88,11 +66,7 @@ describe('<RoomPage />', () => {
   });
 
   it('should redirect the player to join room page if the user is already inside a room', async () => {
-    server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(pendingRoomSession)),
-      ),
-    );
+    server.use(getPlayerSession(pendingRoomSession));
 
     renderWithProviders({ route: '/room/P9LDG' });
 
@@ -101,226 +75,84 @@ describe('<RoomPage />', () => {
     ).toBeInTheDocument();
   });
 
-  it.skip('should refresh the room status when SSE emits a new message of type ROOM_UPDATED', async () => {
+  it('should navigate to new room page when SSE emits a new message with new room status', async () => {
     server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(pendingRoomSession)),
-      ),
-      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(pendingRoom)),
-      ),
+      getPlayerSession(pendingRoomSession),
+      getRoomSession(roomCode, pendingRoom),
     );
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText(`The code to join this room is ${roomCode}.`);
+    await screen.findByText(t('room.welcome.title'));
 
     server.use(
-      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(playingRoom)),
-      ),
+      getPlayerSession(playingRoomSession),
+      getRoomSession(roomCode, playingRoom),
     );
 
-    /*   const messageEvent = new MessageEvent('message', {
-      data: JSON.stringify({
-        type: ROOM_UPDATED,
+    sources[roomEventSource].emit(
+      'message',
+      new MessageEvent('message', {
+        data: JSON.stringify(playingRoom),
       }),
-    });
+    );
 
-    sources[roomEventSource].emit(messageEvent.type, messageEvent); */
-
-    expect(
-      await screen.findByText('Try to kill your target and survive!'),
-    ).toBeInTheDocument();
-
-    sources[roomEventSource].close();
+    expect(await screen.findByText(t('room.target.title'))).toBeInTheDocument();
   });
 
-  it.skip('should refresh the room players when SSE emits a new message of type PLAYER_UPDATED', async () => {
+  it('should refresh the room players when SSE emits a new message with new players infos', async () => {
     server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(
-          ctx.status(200),
-          ctx.json({
-            id: 0,
-            name: 'Trinity',
-            roomCode: 'X7JKL',
-          }),
-        ),
-      ),
-      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_, res, ctx) =>
-        res(
-          ctx.status(200),
-          ctx.json([
-            {
-              id: 0,
-              name: 'Trinity',
-              roomCode: 'X7JKL',
-            },
-            {
-              id: 1,
-              name: 'Neo',
-              passcode: null,
-              status: PlayerStatus.ALIVE,
-              target: null,
-              missionId: null,
-              roomCode: 'X7JKL',
-            },
-          ]),
-        ),
-      ),
+      getPlayerSession(pendingRoomSession),
+      getRoomSession(roomCode, pendingRoom),
     );
 
-    renderWithProviders({ route: `/room/${roomCode}` });
+    renderWithProviders();
 
-    await screen.findByText('Neo');
+    await screen.findByText(fakePlayerOne.name);
 
-    server.use(
-      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_, res, ctx) =>
-        res(
-          ctx.status(200),
-          ctx.json([
-            {
-              id: 0,
-              name: 'Trinity',
-              roomCode: 'X7JKL',
-            },
-            {
-              id: 1,
-              name: 'Morpheus',
-              passcode: null,
-              status: PlayerStatus.ALIVE,
-              target: null,
-              missionId: null,
-              roomCode: 'X7JKL',
-            },
-          ]),
-        ),
-      ),
-    );
-
-    /* const messageEvent = new MessageEvent('message', {
-      data: JSON.stringify({
-        type: ROOM_UPDATED,
-      }),
-    });
-
-    sources[roomEventSource].emit(messageEvent.type, messageEvent); */
-
-    expect(await screen.findByText('Morpheus')).toBeInTheDocument();
-    expect(screen.queryByText('Neo')).not.toBeInTheDocument();
-
-    sources[roomEventSource].close();
-  });
-
-  it.skip('should navigate to playing room page when SSE sends event of type ROOM_IN_GAME', async () => {
-    const mockPlayer = {
-      id: 0,
-      name: 'Trinity',
-      roomCode: 'X7JKL',
+    const newRoomInfos = {
+      ...pendingRoom,
+      players: [{ ...fakePlayerOne, name: fakePlayerTwo.name }],
     };
 
-    server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(mockPlayer)),
-      ),
-      rest.get(`${ROOM_ENDPOINT}/X7JKL/players`, async (_, res, ctx) =>
-        res(ctx.status(200), ctx.json([mockPlayer])),
-      ),
+    server.use(getRoomSession(roomCode, newRoomInfos));
+
+    sources[roomEventSource].emit(
+      'message',
+      new MessageEvent('message', {
+        data: JSON.stringify(newRoomInfos),
+      }),
     );
 
-    renderWithProviders({ route: `/room/${roomCode}` });
-
-    await screen.findByText('Welcome to the party!');
-
-    /*  const messageEvent = new MessageEvent('message', {
-      data: JSON.stringify({
-        type: ROOM_UPDATED,
-      }),
-    });
-
-    sources[roomEventSource].emit(messageEvent.type, messageEvent); */
-
-    expect(
-      await screen.findByText('Try to kill your target and survive!'),
-    ).toBeInTheDocument();
-    expect(screen.queryByText('Welcome to the party!')).not.toBeInTheDocument();
-
-    sources[roomEventSource].close();
+    expect(await screen.findByText(fakePlayerTwo.name)).toBeInTheDocument();
+    expect(screen.queryByText(fakePlayerOne.name)).not.toBeInTheDocument();
   });
 
-  it.skip('should redirect to home page when SSE sends event of type ROOM_DELETED', async () => {
+  it('should redirect to home page when SSE emits message with player outside of the room', async () => {
     server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(pendingRoomSession)),
-      ),
-      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(pendingRoom)),
-      ),
+      getPlayerSession(pendingRoomSession),
+      getRoomSession(roomCode, pendingRoom),
     );
 
-    renderWithProviders({ route: `/room/${roomCode}` });
+    renderWithProviders();
 
-    await screen.findByText(`The code to join this room is ${roomCode}.`);
+    await screen.findByText(t('room.welcome.title'));
+
+    const newRoomInfos = { ...pendingRoom, players: [] };
 
     server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(noRoomSession)),
-      ),
+      getPlayerSession(noRoomSession),
+      getRoomSession(roomCode, newRoomInfos),
     );
 
-    /*  const messageEvent = new MessageEvent('message', {
-      data: JSON.stringify({
-        type: ROOM_UPDATED,
+    sources[roomEventSource].emit(
+      'message',
+      new MessageEvent('message', {
+        data: JSON.stringify(newRoomInfos),
       }),
-    });
-
-    sources[roomEventSource].emit(messageEvent.type, messageEvent); */
+    );
 
     expect(await screen.findByText(t('home.title'))).toBeInTheDocument();
-    expect(screen.queryByText('Welcome to the party!')).not.toBeInTheDocument();
-
-    sources[roomEventSource].close();
-  });
-
-  it.skip('should refresh target informations when SSE sends event of type PLAYER_KILLED', async () => {
-    server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(
-          ctx.status(200),
-          ctx.json({
-            id: 0,
-            name: 'Trinity',
-            roomCode: 'X7JKL',
-          }),
-        ),
-      ),
-    );
-
-    renderWithProviders({ route: `/room/${roomCode}` });
-
-    await screen.findByText('Do something');
-
-    server.use(
-      rest.get(MISSION_ENDPOINT, async (_, res, ctx) =>
-        res(
-          ctx.status(200),
-          ctx.json({ id: 200, content: 'Do another thing' }),
-        ),
-      ),
-    );
-
-    /*    const messageEvent = new MessageEvent('message', {
-      data: JSON.stringify({
-        type: PLAYER_KILLED,
-      }),
-    });
-
-    sources[roomEventSource].emit(messageEvent.type, messageEvent); */
-
-    expect(await screen.findByText('Do another thing')).toBeInTheDocument();
-    expect(screen.queryByText('Do something')).not.toBeInTheDocument();
-
-    sources[roomEventSource].close();
+    expect(screen.queryByText('room.welcome.title')).not.toBeInTheDocument();
   });
 });

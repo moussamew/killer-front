@@ -1,4 +1,4 @@
-import { type ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -16,10 +16,6 @@ export function CreatePlayer(): JSX.Element {
   const { updatePlayer } = useUpdatePlayer();
   const navigate = useNavigate();
 
-  const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
-    setPseudo(target.value);
-  };
-
   const handleJoinRoom = async (): Promise<void> => {
     await createPlayer.mutateAsync(pseudo.toUpperCase(), {
       onSuccess: ({ id }) =>
@@ -30,10 +26,6 @@ export function CreatePlayer(): JSX.Element {
     });
   };
 
-  const handleCreateRoom = (): void => {
-    navigate('/');
-  };
-
   return (
     <>
       <h1>{t('join.room.no.pseudo')}</h1>
@@ -42,13 +34,13 @@ export function CreatePlayer(): JSX.Element {
         id="setPseudo"
         placeholder={t('home.create.pseudo.placeholder')}
         value={pseudo}
-        onChange={handlePseudo}
+        onChange={({ target }) => setPseudo(target.value)}
       />
       <div className={commonStyles.actions}>
         <Button color="primary" onClick={handleJoinRoom}>
           {t('home.join.room.confirm.button')}
         </Button>
-        <Button color="secondary" onClick={handleCreateRoom}>
+        <Button color="secondary" onClick={() => navigate('/')}>
           {t('home.create.room.confirm.button')}
         </Button>
       </div>
