@@ -1,4 +1,4 @@
-import { type ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/Button';
@@ -9,10 +9,6 @@ export function CreateMission(): JSX.Element {
   const [mission, setMission] = useState('');
   const { t } = useTranslation();
   const { createMission } = useCreateMission();
-
-  const handleMission = ({ target }: ChangeEvent<HTMLInputElement>): void => {
-    setMission(target.value);
-  };
 
   const handleCreateMission = async (): Promise<void> => {
     await createMission.mutateAsync(mission, {
@@ -25,7 +21,7 @@ export function CreateMission(): JSX.Element {
       <Input
         id="createMission"
         value={mission}
-        onChange={handleMission}
+        onChange={({ target }) => setMission(target.value)}
         label={t('room.create.new.mission.label')}
         placeholder={t('room.mission.placeholder')}
       />

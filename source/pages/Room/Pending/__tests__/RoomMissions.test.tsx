@@ -1,14 +1,15 @@
 import { screen } from '@testing-library/react';
 import { sources } from 'eventsourcemock';
 import { t } from 'i18next';
-import { rest } from 'msw';
 
+import { fakeMissionOne, fakeMissionTwo } from '@/tests/mocks/missions';
 import {
-  SESSION_ENDPOINT,
-  ROOM_ENDPOINT,
-  ROOM_TOPIC,
-} from '@/constants/endpoints';
-import { pendingRoomWithMissions, roomCode } from '@/tests/mocks/rooms';
+  pendingRoomWithMissions,
+  roomCode,
+  roomEventSource,
+} from '@/tests/mocks/rooms';
+import { getPlayerSession } from '@/tests/mocks/services/player';
+import { getRoomSession } from '@/tests/mocks/services/room';
 import { pendingRoomSession } from '@/tests/mocks/sessions';
 import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
@@ -16,15 +17,11 @@ import { server } from '@/tests/server';
 describe('<RoomMissions />', () => {
   it('should show the count of all missions in the room', async () => {
     server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(pendingRoomSession)),
-      ),
-      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(pendingRoomWithMissions)),
-      ),
+      getPlayerSession(pendingRoomSession),
+      getRoomSession(roomCode, pendingRoomWithMissions),
     );
 
-    renderWithProviders({ route: `/room/${roomCode}` });
+    renderWithProviders();
 
     await screen.findByText(t('room.welcome.title'));
 
@@ -37,30 +34,40 @@ describe('<RoomMissions />', () => {
     ).toBeInTheDocument();
   });
 
-  it.skip('should update the count of all missions in the room when SSE emits a new message', async () => {
+  it('should update the count of all missions in the room when SSE emits a new message', async () => {
     server.use(
-      rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(pendingRoomSession)),
-      ),
-      rest.get(`${ROOM_ENDPOINT}/${roomCode}`, (_, res, ctx) =>
-        res(ctx.status(200), ctx.json(pendingRoomWithMissions)),
-      ),
+      getPlayerSession(pendingRoomSession),
+      getRoomSession(roomCode, pendingRoomWithMissions),
     );
 
-    renderWithProviders({ route: `/room/${roomCode}` });
+    renderWithProviders();
 
-    await screen.findByText('There is currently 1 missions in this room.');
+    await screen.findByText(
+      t('room.missions.count', {
+        missions: pendingRoomWithMissions.missions.length,
+      }),
+    );
 
-    const messageEvent = new MessageEvent('message');
+    const newRoomInfos = {
+      ...pendingRoomWithMissions,
+      missions: [fakeMissionOne, fakeMissionTwo],
+    };
 
-    const missionsEventSource = `${ROOM_TOPIC}/X7JKL/mission/{id}`;
+    server.use(getRoomSession(roomCode, newRoomInfos));
 
-    sources[missionsEventSource].emit(messageEvent.type, messageEvent);
+    sources[roomEventSource].emit(
+      'message',
+      new MessageEvent('message', {
+        data: JSON.stringify(newRoomInfos),
+      }),
+    );
 
     expect(
-      await screen.findByText('There is currently 3 missions in this room.'),
+      await screen.findByText(
+        t('room.missions.count', {
+          missions: newRoomInfos.missions.length,
+        }),
+      ),
     ).toBeInTheDocument();
-
-    sources[missionsEventSource].close();
   });
 });

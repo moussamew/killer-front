@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/Button';
@@ -19,14 +18,10 @@ export function CreateRoomButton({ playerName }: Props): JSX.Element {
 
   const handleCreateRoom = async (): Promise<void> => {
     if (!playerName) {
-      openModal(<CreateRoomModal />);
-    } else {
-      await createRoom.mutateAsync(undefined, {
-        onError: () => {
-          toast.error(t('home.create.room.error'));
-        },
-      });
+      return openModal(<CreateRoomModal />);
     }
+
+    return void createRoom.mutateAsync();
   };
 
   return (
