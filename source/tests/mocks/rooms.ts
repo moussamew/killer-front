@@ -1,3 +1,4 @@
+import { ROOM_TOPIC } from '@/constants/endpoints';
 import { RoomStatus } from '@/services/room/constants';
 import { type Room } from '@/services/room/types';
 
@@ -5,6 +6,8 @@ import { fakeMissionOne, fakeMissionThree, fakeMissionTwo } from './missions';
 import { fakePlayerOne, fakePlayerThree, fakePlayerTwo } from './players';
 
 export const roomCode = 'SOSPC';
+
+export const roomEventSource = `${ROOM_TOPIC}/${roomCode}`;
 
 export const pendingRoom: Room = {
   id: 17,

@@ -85,7 +85,7 @@
   "tooltip.close": "Fermer",
   "tooltip.admin.room": "Administrateur de la partie",
   "tooltip.leave.room": "Quitter la partie en cours",
-  "tooltip.kick.player": "Expulser ce joueur",
+  "tooltip.kick.player": "Expulser {{playerName}}",
   "tooltip.delete.mission": "Supprimer la mission",
   "tooltip.room.settings": "Gérer la partie",
   "tooltip.user.settings": "Paramètres de l'utilisateur",
