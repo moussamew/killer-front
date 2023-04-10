@@ -24,6 +24,7 @@ export async function request<T>({
 
   const response = await fetch(url, {
     headers: {
+      Accept: 'application/json',
       'Content-Type': 'application/json',
       ...(token && { Authorization: `Bearer ${token}` }),
     },
