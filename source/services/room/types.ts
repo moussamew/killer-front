@@ -17,6 +17,7 @@ export interface Room {
   status: RoomStatus;
   admin: Player;
   players: Player[];
+  winner: Player | null;
 }
 
 export interface CreateRoomMutation {
