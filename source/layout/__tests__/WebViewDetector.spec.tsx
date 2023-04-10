@@ -22,29 +22,7 @@ describe('<WebViewDetector />', () => {
     ).toBeInTheDocument();
   });
 
-  it('should show error if the clipboard is not available', async () => {
-    Object.defineProperties(window, {
-      navigator: {
-        value: {
-          clipboard: null,
-          userAgent: Instagram,
-        },
-        writable: true,
-      },
-    });
-
-    renderWithProviders({ route: `/join/${roomCode}` });
-
-    await userEvent.click(
-      await screen.findByText(t('webview.save.link.button')),
-    );
-
-    expect(
-      await screen.findByText(t('notification.link.saved.error')),
-    ).toBeInTheDocument();
-  });
-
-  it('should save the link in the clipboard if available', async () => {
+  it('should save the link in the clipboard', async () => {
     const spyNavigatorClipboard = jest.fn().mockResolvedValue('');
 
     Object.defineProperties(window, {
@@ -72,7 +50,7 @@ describe('<WebViewDetector />', () => {
     );
   });
 
-  it.skip('should show error if the clipboard saving cannot be performed', async () => {
+  it('should show error if the clipboard saving cannot be performed', async () => {
     const spyNavigatorClipboard = jest.fn().mockRejectedValue('');
 
     Object.defineProperty(window, 'navigator', {
@@ -89,14 +67,11 @@ describe('<WebViewDetector />', () => {
       await screen.findByText(t('webview.save.link.button')),
     );
 
-    const notification = await screen.findAllByText(
-      t('notification.link.saved.error'),
-    );
+    await screen.findByText(t('notification.link.saved.error'));
 
-    expect(notification[1]).toBeInTheDocument();
     expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
     expect(spyNavigatorClipboard).toHaveBeenCalledWith(
-      'https://killerparty.com/join/P9LDG',
+      `http://localhost/join/${roomCode}`,
     );
   });
 

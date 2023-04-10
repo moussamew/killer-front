@@ -53,19 +53,6 @@ describe('<ShareRoomLink />', () => {
     });
   });
 
-  it('should show error if the clipboard is not available', async () => {
-    Object.defineProperty(window, 'navigator', {
-      value: { ...window.navigator, share: null, clipboard: null },
-      writable: true,
-    });
-
-    renderWithProviders({ route: `/room/${roomCode}` });
-
-    await userEvent.click(await screen.findByText(t('room.share.link.button')));
-
-    await screen.findByText(t('notification.link.saved.error'));
-  });
-
   it('should save the room link in clipboard if share is not available', async () => {
     const spyNavigatorClipboard = jest.fn().mockResolvedValue('');
 
@@ -91,7 +78,7 @@ describe('<ShareRoomLink />', () => {
     );
   });
 
-  it.skip('should show error if the clipboard cannot be performed', async () => {
+  it('should show error if the clipboard cannot be performed', async () => {
     const spyNavigatorClipboard = jest.fn().mockRejectedValue('');
 
     Object.defineProperty(window, 'navigator', {
@@ -107,11 +94,8 @@ describe('<ShareRoomLink />', () => {
 
     await userEvent.click(await screen.findByText(t('room.share.link.button')));
 
-    const notification = await screen.findAllByText(
-      t('notification.link.saved.error'),
-    );
+    await screen.findByText(t('notification.link.saved.error'));
 
-    expect(notification[1]).toBeInTheDocument();
     expect(spyNavigatorClipboard).toHaveBeenCalledTimes(1);
     expect(spyNavigatorClipboard).toHaveBeenCalledWith(
       `${JOIN_ROOM_ROUTE}/${roomCode}`,

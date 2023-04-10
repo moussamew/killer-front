@@ -5,6 +5,7 @@ import { type ReactNode } from 'react';
 import { Routes } from '@/app/routes';
 import { QueryConfig } from '@/constants/config';
 import { ModalProvider } from '@/context/modal';
+import { SidebarProvider } from '@/context/sidebar';
 
 import '../app/i18n';
 
@@ -27,7 +28,9 @@ export function renderWithProviders({
 
   return render(
     <QueryClientProvider client={queryClient}>
-      <ModalProvider>{component}</ModalProvider>
+      <ModalProvider>
+        <SidebarProvider>{component}</SidebarProvider>
+      </ModalProvider>
     </QueryClientProvider>,
   );
 }
