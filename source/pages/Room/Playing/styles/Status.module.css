@@ -32,11 +32,9 @@
   margin-bottom: var(--shadow-small);
   margin-left: var(--spacing-small);
   box-shadow: var(--shadow-small);
-  color: var(--color-white);
   font-size: var(--text-medium);
 }
 
 .missionContent {
   composes: targetName;
-  color: var(--color-black-70);
 }

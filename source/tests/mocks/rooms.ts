@@ -14,6 +14,7 @@ export const pendingRoom: Room = {
   players: [fakePlayerOne],
   missions: [],
   admin: fakePlayerOne,
+  winner: null,
 };
 
 export const pendingRoomWithMissions: Room = {
@@ -24,6 +25,7 @@ export const pendingRoomWithMissions: Room = {
   players: [fakePlayerOne],
   missions: [fakeMissionOne, fakeMissionTwo, fakeMissionThree],
   admin: fakePlayerOne,
+  winner: null,
 };
 
 export const pendingRoomWithMultiplePlayers: Room = {
@@ -34,6 +36,7 @@ export const pendingRoomWithMultiplePlayers: Room = {
   players: [fakePlayerOne, fakePlayerTwo, fakePlayerThree],
   missions: [],
   admin: fakePlayerOne,
+  winner: null,
 };
 
 export const playingRoom: Room = {
@@ -44,6 +47,7 @@ export const playingRoom: Room = {
   players: [fakePlayerOne],
   missions: [fakeMissionOne, fakeMissionTwo, fakeMissionThree],
   admin: fakePlayerOne,
+  winner: null,
 };
 
 export const endedRoom: Room = {
@@ -54,4 +58,5 @@ export const endedRoom: Room = {
   players: [fakePlayerOne],
   missions: [],
   admin: fakePlayerOne,
+  winner: fakePlayerOne,
 };
