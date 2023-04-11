@@ -169,8 +169,8 @@ devDependencies:
     specifier: ^5.0.4
     version: 5.0.4
   typescript-plugin-css-modules:
-    specifier: ^5.0.0
-    version: 5.0.0(typescript@5.0.4)
+    specifier: ^5.0.1
+    version: 5.0.1(typescript@5.0.4)
   vite:
     specifier: 4.2.1
     version: 4.2.1(@types/node@18.15.11)
@@ -8289,8 +8289,8 @@ packages:
       is-typed-array: 1.1.10
     dev: true
 
-  /typescript-plugin-css-modules@5.0.0(typescript@5.0.4):
-    resolution: {integrity: sha512-fWqguBTVLnV9Xto3maYByUt4rfJdmZ5Z66TQ6jOHpIiU/RPDf/DCCtJPNYyWLQflrbimSawag8zE6EmrkYmuZQ==}
+  /typescript-plugin-css-modules@5.0.1(typescript@5.0.4):
+    resolution: {integrity: sha512-hKXObfwfjx2/myRq4JeQ8D3xIWYTFqusi0hS/Aka7RFX1xQEoEkdOGDWyXNb8LmObawsUzbI30gQnZvqYXCrkA==}
     peerDependencies:
       typescript: '>=4.0.0'
     dependencies:
