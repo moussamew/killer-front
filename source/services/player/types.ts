@@ -34,6 +34,7 @@ export interface PlayerUpdateInfos {
   name: string;
   room: string | null;
   status: PlayerStatus;
+  avatar: string;
 }
 
 export interface SessionQuery {

@@ -70,6 +70,7 @@
   "notfound.reason": "Raison : {{reason}}",
   "notfound.back": "Retourner à l'accueil",
   "layout.user.settings.title": "Paramètres",
+  "layout.user.update.avatar.label": "Mettre à jour mon avatar",
   "layout.user.update.pseudo.label": "Mettre à jour mon nom",
   "layout.user.update.pseudo.placeholder": "Nouveau nom",
   "layout.user.update.pseudo.confirm.button": "Sauvegarder",

@@ -38,7 +38,7 @@ export function Layout(): JSX.Element {
         </section>
       </div>
       <Sidebar
-        playerName={session?.name}
+        session={session}
         isSidebarOpen={isSidebarOpen}
         setSidebarOpen={setSidebarOpen}
       />

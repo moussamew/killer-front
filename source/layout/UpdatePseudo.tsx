@@ -1,4 +1,4 @@
-import { type ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
@@ -14,10 +14,6 @@ export function UpdatePseudo(): JSX.Element {
   const { t } = useTranslation();
   const { updatePlayer } = useUpdatePlayer();
   const { session } = useSession();
-
-  const handlePseudo = ({ target }: ChangeEvent<HTMLInputElement>): void => {
-    setPseudo(target.value);
-  };
 
   const updatePlayerPseudo = async (): Promise<void> => {
     await updatePlayer.mutateAsync(
@@ -36,7 +32,7 @@ export function UpdatePseudo(): JSX.Element {
       <Input
         id="editPseudo"
         value={pseudo}
-        onChange={handlePseudo}
+        onChange={({ target }) => setPseudo(target.value)}
         label={t('layout.user.update.pseudo.label')}
         placeholder={t('layout.user.update.pseudo.placeholder')}
       />
