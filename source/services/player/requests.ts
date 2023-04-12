@@ -10,11 +10,14 @@ export function getSessionRequest(): Promise<Session> {
   return request({ url: SESSION_ENDPOINT, method: GET });
 }
 
-export async function createPlayerRequest(name: string): Promise<Player> {
+export async function createPlayerRequest({
+  name,
+  avatar,
+}: Pick<Player, 'name' | 'avatar'>): Promise<Player> {
   return request({
     url: PLAYER_ENDPOINT,
     method: POST,
-    requestInit: { body: JSON.stringify({ name }) },
+    requestInit: { body: JSON.stringify({ name, avatar }) },
   });
 }
 

@@ -9,7 +9,7 @@ import Pirate from '@/assets/images/avatars/pirate.svg';
 import Samurai from '@/assets/images/avatars/samurai.svg';
 import Surf from '@/assets/images/avatars/surf.svg';
 
-export const AVATARS: Record<string, JSX.Element> = {
+export const chooseAvatar: Record<string, JSX.Element> = {
   avenger: <Avenger />,
   beach: <Beach />,
   captain: <Captain />,
@@ -20,4 +20,10 @@ export const AVATARS: Record<string, JSX.Element> = {
   pirate: <Pirate />,
   samurai: <Samurai />,
   surf: <Surf />,
+};
+
+export const randomAvatar = (): string => {
+  const avatars = Object.keys(chooseAvatar);
+  const randomIndex = Math.floor(Math.random() * avatars.length);
+  return avatars[randomIndex];
 };

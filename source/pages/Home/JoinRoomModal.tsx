@@ -1,6 +1,7 @@
 import { type ChangeEvent, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { randomAvatar } from '@/components/Avatars';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { ModalContext } from '@/context/modal';
@@ -26,13 +27,16 @@ export function JoinRoomModal(): JSX.Element {
 
   const handleJoinRoom = async (): Promise<void> => {
     if (!session) {
-      await createPlayer.mutateAsync(pseudo.toUpperCase(), {
-        onSuccess: ({ id }) =>
-          updatePlayer.mutateAsync(
-            { id, room: roomCode },
-            { onSuccess: closeModal },
-          ),
-      });
+      await createPlayer.mutateAsync(
+        { name: pseudo, avatar: randomAvatar() },
+        {
+          onSuccess: ({ id }) =>
+            updatePlayer.mutateAsync(
+              { id, room: roomCode },
+              { onSuccess: closeModal },
+            ),
+        },
+      );
     } else {
       await updatePlayer.mutateAsync(
         { id: session?.id, room: roomCode },

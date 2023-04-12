@@ -22,7 +22,7 @@ export function UpdatePlayerPseudo({ session }: Props): JSX.Element {
 
   const handleJoinRoom = async (): Promise<void> => {
     await updatePlayer.mutateAsync(
-      { id: session?.id, room: roomCode, name: pseudo.toUpperCase() },
+      { id: session?.id, room: roomCode, name: pseudo },
       { onSuccess: () => navigate(`/room/${roomCode}`) },
     );
   };

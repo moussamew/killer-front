@@ -1,6 +1,7 @@
 import { type ChangeEvent, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { randomAvatar } from '@/components/Avatars';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { ModalContext } from '@/context/modal';
@@ -19,9 +20,13 @@ export function CreateRoomModal(): JSX.Element {
   };
 
   const handleCreateRoom = async (): Promise<void> => {
-    await createPlayer.mutateAsync(pseudo.toUpperCase(), {
-      onSuccess: () => createRoom.mutate(undefined, { onSuccess: closeModal }),
-    });
+    await createPlayer.mutateAsync(
+      { name: pseudo, avatar: randomAvatar() },
+      {
+        onSuccess: () =>
+          createRoom.mutate(undefined, { onSuccess: closeModal }),
+      },
+    );
   };
 
   return (

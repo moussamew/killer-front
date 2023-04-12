@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import Admin from '@/assets/icons/admin.svg';
 import KickPlayer from '@/assets/icons/kickPlayer.svg';
 import LeaveRoom from '@/assets/icons/leaveRoom.svg';
-import { AVATARS } from '@/constants/avatars';
+import { chooseAvatar } from '@/components/Avatars';
 import { ModalContext } from '@/context/modal';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
@@ -36,7 +36,7 @@ export function PlayerList(): JSX.Element {
       <RoomSettings />
       {room?.players.map(({ name, id, avatar }) => (
         <div key={name} className={styles.player}>
-          <div className={styles.avatar}>{AVATARS[avatar]}</div>
+          <div className={styles.avatar}>{chooseAvatar[avatar]}</div>
           <h3>{name}</h3>
           {room.admin.id === id && session?.id !== id && (
             <Admin title={t('tooltip.admin.room')} />
