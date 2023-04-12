@@ -51,5 +51,10 @@ export interface UpdatePlayerMutation {
   >;
 }
 export interface CreatePlayerMutation {
-  createPlayer: UseMutationResult<Player, unknown, string, unknown>;
+  createPlayer: UseMutationResult<
+    Player,
+    unknown,
+    Pick<Player, 'name' | 'avatar'>,
+    unknown
+  >;
 }

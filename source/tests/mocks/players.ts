@@ -5,7 +5,7 @@ export const fakePlayerOne: Player = {
   id: 1,
   name: 'TRINITY',
   status: PlayerStatus.ALIVE,
-  avatar: 'captain',
+  avatar: 'milk',
 };
 
 export const fakePlayerTwo: Player = {
@@ -19,5 +19,5 @@ export const fakePlayerThree: Player = {
   id: 3,
   name: 'NEO',
   status: PlayerStatus.ALIVE,
-  avatar: 'milk',
+  avatar: 'captain',
 };

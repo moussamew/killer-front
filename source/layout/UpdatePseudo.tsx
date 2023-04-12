@@ -21,7 +21,7 @@ export function UpdatePseudo(): JSX.Element {
 
   const updatePlayerPseudo = async (): Promise<void> => {
     await updatePlayer.mutateAsync(
-      { id: session?.id, name: pseudo.toUpperCase() },
+      { id: session?.id, name: pseudo },
       {
         onSuccess: () =>
           toast.success(

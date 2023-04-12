@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { randomAvatar } from '@/components/Avatars';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
@@ -17,13 +18,16 @@ export function CreatePlayer(): JSX.Element {
   const navigate = useNavigate();
 
   const handleJoinRoom = async (): Promise<void> => {
-    await createPlayer.mutateAsync(pseudo.toUpperCase(), {
-      onSuccess: ({ id }) =>
-        updatePlayer.mutateAsync(
-          { id, room: roomCode },
-          { onSuccess: () => navigate(`/room/${roomCode}`) },
-        ),
-    });
+    await createPlayer.mutateAsync(
+      { name: pseudo, avatar: randomAvatar() },
+      {
+        onSuccess: ({ id }) =>
+          updatePlayer.mutateAsync(
+            { id, room: roomCode },
+            { onSuccess: () => navigate(`/room/${roomCode}`) },
+          ),
+      },
+    );
   };
 
   return (
