@@ -70,6 +70,7 @@
   "notfound.reason": "Reason: {{reason}}",
   "notfound.back": "Back to home page",
   "layout.user.settings.title": "User Settings",
+  "layout.user.update.avatar.label": "Update my avatar",
   "layout.user.update.pseudo.label": "Update my pseudo",
   "layout.user.update.pseudo.placeholder": "New pseudo",
   "layout.user.update.pseudo.confirm.button": "Save changes",

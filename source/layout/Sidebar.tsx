@@ -3,19 +3,21 @@ import { t } from 'i18next';
 import { type Dispatch, type SetStateAction } from 'react';
 
 import Close from '@/assets/icons/close.svg';
+import { type Session } from '@/services/player/types';
 
 import styles from './styles/Sidebar.module.css';
 import { SwitchLanguage } from './SwitchLanguage';
+import { UpdateAvatar } from './UpdateAvatar';
 import { UpdatePseudo } from './UpdatePseudo';
 
 interface Props {
-  playerName: string | undefined;
+  session: Session | undefined;
   isSidebarOpen: boolean;
   setSidebarOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export function Sidebar({
-  playerName,
+  session,
   isSidebarOpen,
   setSidebarOpen,
 }: Props): JSX.Element {
@@ -34,8 +36,9 @@ export function Sidebar({
               onClick={() => setSidebarOpen(false)}
             />
           </div>
-          {playerName && <UpdatePseudo />}
+          {session?.name && <UpdatePseudo />}
           <SwitchLanguage />
+          {session?.avatar && <UpdateAvatar />}
         </>
       )}
     </section>

@@ -19,7 +19,7 @@ export function Dropdown({ items, activeItem, onClick }: Props): JSX.Element {
     setShowList(!showList);
   };
 
-  const handleClick = (item: string) => () => {
+  const handleClick = (item: string): void => {
     onClick(item);
     setShowList(false);
   };
@@ -44,8 +44,8 @@ export function Dropdown({ items, activeItem, onClick }: Props): JSX.Element {
               tabIndex={0}
               className={styles.item}
               key={item}
-              onClick={handleClick(item)}
-              onKeyDown={({ key }) => onEnterKey(key, handleClick(item))}
+              onClick={() => handleClick(item)}
+              onKeyDown={({ key }) => onEnterKey(key, () => handleClick(item))}
             >
               <p>{item}</p>
               {item === activeItem && <Active />}
