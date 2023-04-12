@@ -14,9 +14,11 @@ export interface Player {
   id: number;
   name: string;
   status: PlayerStatus;
+  avatar: string;
 }
 
 export interface Session {
+  avatar: string;
   id: number;
   name: string;
   killer: string | null;

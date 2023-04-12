@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
@@ -6,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import Admin from '@/assets/icons/admin.svg';
 import KickPlayer from '@/assets/icons/kickPlayer.svg';
 import LeaveRoom from '@/assets/icons/leaveRoom.svg';
-import Player from '@/assets/images/player.png';
+import { AVATARS } from '@/constants/avatars';
 import { ModalContext } from '@/context/modal';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
@@ -35,24 +34,17 @@ export function PlayerList(): JSX.Element {
   return (
     <div className={styles.content}>
       <RoomSettings />
-      {room?.players.map(({ name, id }) => (
+      {room?.players.map(({ name, id, avatar }) => (
         <div key={name} className={styles.player}>
-          <img alt={`player-${name}`} src={Player} className={styles.image} />
-          <p
-            className={clsx(styles.playerName, {
-              [styles.currentPlayerName]: session?.id === id,
-            })}
-          >
-            {name}
-          </p>
+          <div className={styles.avatar}>{AVATARS[avatar]}</div>
+          <h3>{name}</h3>
           {room.admin.id === id && session?.id !== id && (
-            <Admin title={t('tooltip.admin.room')} className={styles.icon} />
+            <Admin title={t('tooltip.admin.room')} />
           )}
           {session?.id === id && (
             <LeaveRoom
               title={t('tooltip.leave.room')}
               onClick={handleLeaveRoom}
-              className={styles.icon}
             />
           )}
           {room.admin.id === session?.id &&
@@ -61,7 +53,6 @@ export function PlayerList(): JSX.Element {
               <KickPlayer
                 title={t('tooltip.kick.player', { playerName: name })}
                 onClick={() => handleKickPlayer(id)}
-                className={styles.icon}
               />
             )}
         </div>
