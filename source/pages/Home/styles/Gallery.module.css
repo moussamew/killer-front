@@ -5,27 +5,38 @@
   padding: 20px var(--spacing-small);
   border-top: 1px solid var(--color-black-90);
   border-bottom: 1px solid var(--color-black-90);
-  gap: 20px;
+  gap: var(--spacing-medium);
 
   @media (width >= 720px) {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-left: 30px;
+    padding-top: var(--spacing-large);
+    padding-bottom: var(--spacing-large);
+    padding-left: var(--spacing-large);
   }
+}
 
-  & svg {
-    width: 100px;
-    min-width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    filter: drop-shadow(var(--shadow-small));
+.content {
+  position: relative;
+}
 
-    &:hover {
-      cursor: pointer;
+.avatar svg {
+  width: 100px;
+  min-width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  filter: drop-shadow(var(--shadow-small));
 
-      :global {
-        animation: grow 1s infinite;
-      }
+  &:hover {
+    cursor: pointer;
+
+    :global {
+      animation: grow 1s infinite;
     }
   }
+}
+
+.selected {
+  position: absolute;
+  top: 60%;
+  right: 0;
+  height: 30px;
 }
