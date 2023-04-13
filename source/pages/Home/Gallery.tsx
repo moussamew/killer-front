@@ -1,6 +1,7 @@
 import { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
+import Checked from '@/assets/icons/checked.svg';
 import { chooseAvatar } from '@/components/Avatars';
 import { onEnterKey } from '@/helpers/keys';
 import { useUpdatePlayer } from '@/services/player/mutations';
@@ -28,16 +29,19 @@ export function Gallery(): JSX.Element {
   return (
     <div className={styles.gallery}>
       {Object.entries(chooseAvatar).map(([name, avatar]) => (
-        <div
-          role="button"
-          key={name}
-          onClick={() => handleAvatarClick(name)}
-          onKeyDown={({ key }) =>
-            onEnterKey(key, () => handleAvatarClick(name))
-          }
-          tabIndex={0}
-        >
-          {avatar}
+        <div key={name} className={styles.content}>
+          <div
+            role="button"
+            onClick={() => handleAvatarClick(name)}
+            onKeyDown={({ key }) =>
+              onEnterKey(key, () => handleAvatarClick(name))
+            }
+            tabIndex={0}
+            className={styles.avatar}
+          >
+            {avatar}
+          </div>
+          {session?.avatar === name && <Checked className={styles.selected} />}
         </div>
       ))}
     </div>
