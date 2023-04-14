@@ -32,6 +32,9 @@
   --color-blue-90: hsl(207deg 96% 90%);
   --color-blue-70: hsl(207deg 96% 70%);
 
+  /** Green colors */
+  --color-green-40: hsl(151deg 63% 40%);
+
   /** Font sizes */
   --text-small: 16px;
   --text-medium: 18px;
