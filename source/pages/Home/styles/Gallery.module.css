@@ -18,6 +18,10 @@
   position: relative;
 }
 
+.selected svg {
+  box-shadow: var(--color-green-40) 0 0 0 5px;
+}
+
 .avatar svg {
   width: 100px;
   min-width: 100px;
@@ -27,16 +31,12 @@
 
   &:hover {
     cursor: pointer;
-
-    :global {
-      animation: grow 1s infinite;
-    }
   }
 }
 
-.selected {
+.checked {
   position: absolute;
-  top: 60%;
+  top: 70%;
   right: 0;
   height: 30px;
 }

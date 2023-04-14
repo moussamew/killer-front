@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
@@ -37,11 +38,13 @@ export function Gallery(): JSX.Element {
               onEnterKey(key, () => handleAvatarClick(name))
             }
             tabIndex={0}
-            className={styles.avatar}
+            className={clsx(styles.avatar, {
+              [styles.selected]: session?.avatar === name,
+            })}
           >
             {avatar}
           </div>
-          {session?.avatar === name && <Checked className={styles.selected} />}
+          {session?.avatar === name && <Checked className={styles.checked} />}
         </div>
       ))}
     </div>
