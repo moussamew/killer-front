@@ -7,6 +7,7 @@ import {
   type PlayerUpdateInfos,
   type CreatePlayerMutation,
   type UpdatePlayerMutation,
+  type Session,
 } from './types';
 
 export function useUpdatePlayer(): UpdatePlayerMutation {
@@ -19,7 +20,18 @@ export function useUpdatePlayer(): UpdatePlayerMutation {
     unknown
   >({
     mutationFn: updatePlayerRequest,
-    onSuccess: () => queryClient.invalidateQueries(['session']),
+    onMutate: async ({ avatar }) => {
+      // Optimistically update the session with the new avatar
+      if (avatar) {
+        await queryClient.cancelQueries({ queryKey: ['session'] });
+
+        queryClient.setQueryData<Session>(['session'], (oldSession) => ({
+          ...oldSession!,
+          ...(avatar && { avatar }),
+        }));
+      }
+    },
+    onSettled: () => queryClient.invalidateQueries(['session']),
   });
 
   return { updatePlayer };
