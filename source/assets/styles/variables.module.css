@@ -35,6 +35,9 @@
   /** Green colors */
   --color-green-40: hsl(151deg 63% 40%);
 
+  /** Red colors */
+  --color-red-70: hsl(360deg 100% 70%);
+
   /** Font sizes */
   --text-small: 16px;
   --text-medium: 18px;
