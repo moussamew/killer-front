@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { t } from 'i18next';
 import { type Dispatch, type SetStateAction } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Close from '@/assets/icons/close.svg';
 import { type Session } from '@/services/player/types';
@@ -21,6 +21,8 @@ export function Sidebar({
   isSidebarOpen,
   setSidebarOpen,
 }: Props): JSX.Element {
+  const { t } = useTranslation();
+
   return (
     <section
       className={clsx(styles.sidebar, {
