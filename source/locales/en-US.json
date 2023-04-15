@@ -78,7 +78,6 @@
   "layout.user.update.pseudo.label": "Update my pseudo",
   "layout.user.update.pseudo.placeholder": "New pseudo",
   "layout.user.update.pseudo.confirm.button": "Save changes",
-  "layout.user.update.avatar.success.message": "Avatar successfully updated.",
   "layout.user.update.pseudo.success.message": "Pseudo successfully updated. Your new pseudo is {{pseudo}}.",
   "layout.user.language.switch": "Change the interface language",
   "webview.title": "Opened from {{webViewApp}}",
