@@ -6,6 +6,7 @@ export const fakePlayerOne: Player = {
   name: 'TRINITY',
   status: PlayerStatus.ALIVE,
   avatar: 'milk',
+  hasAtLeastOneMission: false,
 };
 
 export const fakePlayerTwo: Player = {
@@ -13,6 +14,7 @@ export const fakePlayerTwo: Player = {
   name: 'MORPHEUS',
   status: PlayerStatus.ALIVE,
   avatar: 'beach',
+  hasAtLeastOneMission: false,
 };
 
 export const fakePlayerThree: Player = {
@@ -20,4 +22,5 @@ export const fakePlayerThree: Player = {
   name: 'NEO',
   status: PlayerStatus.ALIVE,
   avatar: 'captain',
+  hasAtLeastOneMission: false,
 };

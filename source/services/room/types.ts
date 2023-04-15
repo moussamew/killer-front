@@ -18,6 +18,8 @@ export interface Room {
   admin: Player;
   players: Player[];
   winner: Player | null;
+  hasEnoughMissions: boolean;
+  hasEnoughPlayers: boolean;
 }
 
 export interface CreateRoomMutation {
