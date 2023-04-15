@@ -23,6 +23,7 @@
   padding-right: var(--spacing-medium);
   padding-left: var(--spacing-medium);
   margin: auto;
+  margin-top: 50px;
   margin-bottom: var(--spacing-medium);
   inset: 0;
 }
