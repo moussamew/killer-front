@@ -2,9 +2,9 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import Island from '@/assets/images/island.png';
-import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 
+import { CanStartParty } from './CanStartParty';
 import { PlayerList } from './PlayerList';
 import { PlayerMissions } from './PlayerMissions';
 import { ShareRoomLink } from './ShareRoomLink';
@@ -14,7 +14,6 @@ import styles from './styles/index.module.css';
 export function PendingRoomPage(): JSX.Element | null {
   const { roomCode } = useParams();
   const { t } = useTranslation();
-  const { session } = useSession();
   const { room } = useRoom(roomCode!);
 
   const missions = room?.missions.length;
@@ -28,8 +27,9 @@ export function PendingRoomPage(): JSX.Element | null {
           <p>{t('room.join.room.code', { roomCode })}</p>
           {Boolean(missions) && <p>{t('room.missions.count', { missions })}</p>}
           <ShareRoomLink />
-          {session?.id === room?.admin.id && <StartPartyButton />}
+          <StartPartyButton />
         </div>
+        <CanStartParty />
       </div>
       <div className={styles.features}>
         <PlayerMissions />
