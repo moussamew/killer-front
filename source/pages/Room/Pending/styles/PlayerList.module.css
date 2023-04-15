@@ -22,6 +22,29 @@
   text-align: center;
 }
 
+.avatarContent {
+  position: relative;
+}
+
+.crown {
+  position: absolute;
+  top: -14%;
+  right: 12px;
+  height: 30px;
+}
+
+.currentPlayer svg {
+  box-shadow: var(--color-green-40) 0 0 0 5px;
+}
+
+.otherPlayer svg {
+  box-shadow: var(--color-black-70) 0 0 0 5px;
+}
+
+.adminPlayer svg {
+  box-shadow: #fed701 0 0 0 5px;
+}
+
 .avatar {
   & svg {
     width: 50px;

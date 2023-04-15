@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
@@ -26,6 +26,15 @@ export function PlayerList(): JSX.Element {
   const { updatePlayer } = useUpdatePlayer();
   const { t } = useTranslation();
 
+  useEffect(() => {
+    room?.players.forEach((player, index) => {
+      if (player.id === room.admin.id) {
+        room.players.splice(index, 1);
+        room.players.unshift(player);
+      }
+    });
+  }, [room?.players, room?.admin.id]);
+
   const handleLeaveRoom = (): void => {
     openModal(<LeaveRoomModal />);
   };
@@ -43,8 +52,8 @@ export function PlayerList(): JSX.Element {
             <div className={styles.avatarContent}>
               <div
                 className={clsx(styles.avatar, {
-                  [styles.playerReady]: hasAtLeastOneMission,
-                  [styles.playerNotReady]: !hasAtLeastOneMission,
+                  [styles.currentPlayer]: session?.id === id,
+                  [styles.otherPlayer]: session?.id !== id,
                   [styles.adminPlayer]: room.admin.id === id,
                 })}
               >
