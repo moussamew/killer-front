@@ -25,11 +25,7 @@ export function CreateMission(): JSX.Element {
         label={t('room.create.new.mission.label')}
         placeholder={t('room.mission.placeholder')}
       />
-      <Button
-        color="secondary"
-        disabled={!mission}
-        onClick={handleCreateMission}
-      >
+      <Button color="secondary" onClick={handleCreateMission}>
         {t('room.create.new.mission.button')}
       </Button>
     </>
