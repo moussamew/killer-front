@@ -2,10 +2,11 @@ import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
-import Admin from '@/assets/icons/admin.svg';
-import KickPlayer from '@/assets/icons/kickPlayer.svg';
-import LeaveRoom from '@/assets/icons/leaveRoom.svg';
+import Checked from '@/assets/icons/checked.svg';
+import Delete from '@/assets/icons/delete.svg';
+import Unchecked from '@/assets/icons/unchecked.svg';
 import { chooseAvatar } from '@/components/Avatars';
+import { Button } from '@/components/Button';
 import { ModalContext } from '@/context/modal';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
@@ -19,44 +20,48 @@ export function PlayerList(): JSX.Element {
   const { roomCode } = useParams();
   const { room } = useRoom(roomCode!);
   const { session } = useSession();
-  const { updatePlayer } = useUpdatePlayer();
   const { openModal } = useContext(ModalContext);
+  const { updatePlayer } = useUpdatePlayer();
   const { t } = useTranslation();
 
   const handleLeaveRoom = (): void => {
     openModal(<LeaveRoomModal />);
   };
 
-  const handleKickPlayer = async (playerId: number): Promise<void> => {
-    await updatePlayer.mutateAsync({ id: playerId, room: null });
+  const handleKickPlayer = (playerId: number): void => {
+    updatePlayer.mutate({ id: playerId, room: null });
   };
 
   return (
     <div className={styles.content}>
       <RoomSettings />
-      {room?.players.map(({ name, id, avatar }) => (
-        <div key={name} className={styles.player}>
-          <div className={styles.avatar}>{chooseAvatar[avatar]}</div>
-          <h3>{name}</h3>
-          {room.admin.id === id && session?.id !== id && (
-            <Admin title={t('tooltip.admin.room')} />
-          )}
-          {session?.id === id && (
-            <LeaveRoom
-              title={t('tooltip.leave.room')}
-              onClick={handleLeaveRoom}
+      {room?.players.map(({ id, name, avatar, hasAtLeastOneMission }) => (
+        <div key={name} className={styles.item}>
+          <div className={styles.player}>
+            <div className={styles.avatar}>{chooseAvatar[avatar]}</div>
+            <h3>{name}</h3>
+            {hasAtLeastOneMission ? (
+              <Checked className={styles.icon} />
+            ) : (
+              <Unchecked className={styles.icon} />
+            )}
+          </div>
+          {room.admin.id === session?.id && session?.name !== name && (
+            <Delete
+              className={styles.kickPlayer}
+              title={t('tooltip.kick.player', { playerName: name })}
+              onClick={() => handleKickPlayer(id)}
             />
           )}
-          {room.admin.id === session?.id &&
-            room?.admin?.id !== id &&
-            session?.name !== name && (
-              <KickPlayer
-                title={t('tooltip.kick.player', { playerName: name })}
-                onClick={() => handleKickPlayer(id)}
-              />
-            )}
         </div>
       ))}
+      <Button
+        color="primary"
+        onClick={handleLeaveRoom}
+        customStyle={styles.button}
+      >
+        {t('room.leave.current.room')}
+      </Button>
     </div>
   );
 }
