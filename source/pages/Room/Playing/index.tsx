@@ -11,11 +11,11 @@ export function PlayingRoomPage(): JSX.Element {
 
   return (
     <>
-      <div className={styles.content}>
-        <Status />
+      <Status />
+      <div className={styles.features}>
         {session?.status === PlayerStatus.ALIVE && <PlayerKilledButton />}
+        <PlayerList />
       </div>
-      <PlayerList />
     </>
   );
 }

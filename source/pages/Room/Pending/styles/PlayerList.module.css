@@ -1,5 +1,5 @@
 .content {
-  margin-bottom: var(--spacing-medium);
+  margin-bottom: var(--spacing-large);
 
   @media (width <= 1280px) {
     margin-top: var(--spacing-medium);

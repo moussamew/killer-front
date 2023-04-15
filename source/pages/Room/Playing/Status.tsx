@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 import Glasses from '@/assets/images/glasses.png';
 import { PlayerStatus } from '@/services/player/constants';
@@ -20,16 +20,22 @@ export function Status(): JSX.Element {
         </>
       ) : (
         <>
-          <h2>{t('room.target.title')}</h2>
+          <h2 className={styles.title}>{t('room.target.title')}</h2>
           <div className={styles.target}>
-            <p>{t('room.target.to.kill')}</p>
-            <div className={styles.targetName}>{session?.target?.name}</div>
+            <p>
+              <Trans
+                t={t}
+                i18nKey={t('room.target.to.kill', {
+                  pseudo: session?.target?.name,
+                })}
+              />
+            </p>
           </div>
           <div className={styles.mission}>
             <p>{t('room.target.mission')}</p>
-            <div className={styles.missionContent}>
-              {session?.assignedMission?.content}
-            </div>
+            <p>
+              <strong>{session?.assignedMission?.content}</strong>
+            </p>
           </div>
         </>
       )}
