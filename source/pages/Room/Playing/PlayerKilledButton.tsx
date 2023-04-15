@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Knife from '@/assets/images/knife.png';
 import { Button } from '@/components/Button';
 import { ModalContext } from '@/context/modal';
 
@@ -18,9 +17,10 @@ export function PlayerKilledButton(): JSX.Element {
 
   return (
     <div className={styles.content}>
-      <img alt="killed" src={Knife} className={styles.image} />
-      <h2>{t('room.killed.message')}</h2>
-      <p>{t('room.killed.notify')}</p>
+      <div className={styles.text}>
+        <h2 className={styles.title}>{t('room.killed.message')}</h2>
+        <p>{t('room.killed.notify')}</p>
+      </div>
       <Button color="primary" onClick={handleOpenModal}>
         {t('room.killed.button')}
       </Button>

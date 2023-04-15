@@ -1,8 +1,8 @@
-.content {
+.features {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
 
-  @media (width >= 720px) {
-    flex-direction: row;
+  @media (width <= 768px) {
+    flex-direction: column;
   }
 }
