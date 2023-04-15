@@ -15,6 +15,7 @@
 }
 
 .sidebarOpen {
+  z-index: 200;
   width: 25%;
   padding: var(--spacing-medium);
   border-left: 1px solid var(--color-black-90);

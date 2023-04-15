@@ -11,18 +11,20 @@ function Header(): JSX.Element {
   const { t } = useTranslation();
 
   return (
-    <header className={styles.header}>
-      <p className={styles.text}>Killer Party</p>
-      <div className={styles.settings}>
-        {!isSidebarOpen && (
-          <Menu
-            title={t('tooltip.user.settings')}
-            onClick={() => setSidebarOpen(true)}
-            className={styles.icon}
-          />
-        )}
-      </div>
-    </header>
+    <div className={styles.content}>
+      <header className={styles.header}>
+        <p className={styles.text}>Killer Party</p>
+        <div className={styles.settings}>
+          {!isSidebarOpen && (
+            <Menu
+              title={t('tooltip.user.settings')}
+              onClick={() => setSidebarOpen(true)}
+              className={styles.icon}
+            />
+          )}
+        </div>
+      </header>
+    </div>
   );
 }
 
