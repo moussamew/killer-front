@@ -1,7 +1,7 @@
 :root {
   /** Application colors */
   --color-body: hsl(30deg 75% 97%);
-  --color-sidebar: hsl(28deg 89% 96%);
+  --color-body-secondary: hsl(28deg 89% 96%);
   --color-loader: hsl(27deg 65% 90%);
 
   /** White colors */
@@ -37,6 +37,7 @@
 
   /** Red colors */
   --color-red-70: hsl(360deg 100% 70%);
+  --color-red-60: hsl(360deg 100% 60%);
 
   /** Font sizes */
   --text-small: 16px;
