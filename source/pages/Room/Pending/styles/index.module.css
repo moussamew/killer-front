@@ -35,6 +35,11 @@
   }
 }
 
+.infos {
+  display: flex;
+  flex-direction: column;
+}
+
 .features {
   display: flex;
   flex-direction: column;
