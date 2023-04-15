@@ -24,7 +24,7 @@ describe('<LeaveRoomModal />', () => {
 
     await screen.findByText(t('room.welcome.title'));
 
-    await userEvent.click(screen.getByTitle(t('tooltip.leave.room')));
+    await userEvent.click(screen.getByText(t('room.leave.current.room')));
 
     server.use(
       rest.get(SESSION_ENDPOINT, (_, res, ctx) =>
