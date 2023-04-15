@@ -2,7 +2,7 @@
   padding: var(--spacing-medium);
   border: 1px solid var(--color-black-90);
   margin-top: var(--spacing-medium);
-  background-color: var(--color-sidebar);
+  background-color: var(--color-body-secondary);
 
   @media (width <= 768px) {
     width: 100%;
