@@ -92,7 +92,7 @@
   "tooltip.room.settings": "Room settings",
   "tooltip.user.settings": "User settings",
   "errors.SERVER_ERROR": "A problem occurred while processing your request.",
-  "errors.FORBIDDEN": "You do not have the right to access this page.",
+  "errors.FORBIDDEN": "You do not have the right to do this action.",
   "errors.NOT_FOUND": "The party you are trying to reach does not exist.",
   "errors.EXPIRED_TOKEN": "Your session has expired.",
   "errors.INVALID_TOKEN": "The recovery of your session has failed.",
