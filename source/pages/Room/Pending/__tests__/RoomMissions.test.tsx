@@ -28,7 +28,7 @@ describe('<RoomMissions />', () => {
     expect(
       screen.getByText(
         t('room.missions.count', {
-          missions: pendingRoomWithMissions.missions.length,
+          count: pendingRoomWithMissions.missions.length,
         }),
       ),
     ).toBeInTheDocument();
@@ -44,7 +44,7 @@ describe('<RoomMissions />', () => {
 
     await screen.findByText(
       t('room.missions.count', {
-        missions: pendingRoomWithMissions.missions.length,
+        count: pendingRoomWithMissions.missions.length,
       }),
     );
 
@@ -65,7 +65,7 @@ describe('<RoomMissions />', () => {
     expect(
       await screen.findByText(
         t('room.missions.count', {
-          missions: newRoomInfos.missions.length,
+          count: newRoomInfos.missions.length,
         }),
       ),
     ).toBeInTheDocument();

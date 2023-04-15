@@ -4,6 +4,10 @@
   @media (width <= 1280px) {
     margin-top: var(--spacing-medium);
   }
+
+  @media (width >= 1280px) {
+    width: 400px;
+  }
 }
 
 .item {
