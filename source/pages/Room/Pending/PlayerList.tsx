@@ -1,8 +1,10 @@
+import clsx from 'clsx';
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import Checked from '@/assets/icons/checked.svg';
+import Crown from '@/assets/icons/crown.svg';
 import Delete from '@/assets/icons/delete.svg';
 import Unchecked from '@/assets/icons/unchecked.svg';
 import { chooseAvatar } from '@/components/Avatars';
@@ -38,7 +40,18 @@ export function PlayerList(): JSX.Element {
       {room?.players.map(({ id, name, avatar, hasAtLeastOneMission }) => (
         <div key={name} className={styles.item}>
           <div className={styles.player}>
-            <div className={styles.avatar}>{chooseAvatar[avatar]}</div>
+            <div className={styles.avatarContent}>
+              <div
+                className={clsx(styles.avatar, {
+                  [styles.playerReady]: hasAtLeastOneMission,
+                  [styles.playerNotReady]: !hasAtLeastOneMission,
+                  [styles.adminPlayer]: room.admin.id === id,
+                })}
+              >
+                {chooseAvatar[avatar]}
+              </div>
+              {room.admin.id === id && <Crown className={styles.crown} />}
+            </div>
             <h3>{name}</h3>
             {hasAtLeastOneMission ? (
               <Checked className={styles.icon} />
