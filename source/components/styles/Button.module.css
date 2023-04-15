@@ -12,7 +12,7 @@
   transition: background-color ease-in-out 500ms, opacity ease-in-out 500ms;
 
   &:disabled {
-    opacity: 0.8;
+    opacity: 0.5;
   }
 
   &:hover:not(:disabled) {
