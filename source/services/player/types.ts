@@ -15,6 +15,7 @@ export interface Player {
   name: string;
   status: PlayerStatus;
   avatar: string;
+  hasAtLeastOneMission: boolean;
 }
 
 export interface Session {
