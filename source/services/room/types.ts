@@ -10,9 +10,8 @@ import { type Mission } from '../mission/types';
 import { type RoomStatus } from './constants';
 
 export interface Room {
-  id: number;
+  id: string;
   missions: Mission[];
-  code: string;
   name: string;
   status: RoomStatus;
   admin: Player;

@@ -18,10 +18,10 @@ export function HomePage(): JSX.Element {
   const { session } = useOutletContext<SessionQuery>();
 
   useEffect(() => {
-    if (session?.room?.code) {
-      navigate(`/room/${session.room.code}`);
+    if (session?.room?.id) {
+      navigate(`/room/${session.room.id}`);
     }
-  }, [navigate, session?.room?.code]);
+  }, [navigate, session?.room?.id]);
 
   return (
     <>

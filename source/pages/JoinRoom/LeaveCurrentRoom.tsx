@@ -25,7 +25,7 @@ export function LeaveCurrentRoom(): JSX.Element {
     <>
       <h1>
         {t('join.room.already.inside.room', {
-          roomCode: session?.room?.code,
+          roomCode: session?.room?.id,
         })}
       </h1>
       <p className={styles.text}>{t('join.room.warning')}</p>
@@ -35,7 +35,7 @@ export function LeaveCurrentRoom(): JSX.Element {
         </Button>
         <Button
           color="secondary"
-          onClick={() => navigate(`/room/${session?.room?.code}`)}
+          onClick={() => navigate(`/room/${session?.room?.id}`)}
         >
           {t('join.room.return.button')}
         </Button>
