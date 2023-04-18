@@ -64,7 +64,7 @@ export function RoomPage(): JSX.Element | null {
         /* The player try to join the room without pseudo. */
         !session?.name ||
         /* The player try to join the room when he is already inside another room. */
-        (session?.room?.code && session?.room?.code !== roomCode)
+        (session?.room?.id && session?.room?.id !== roomCode)
       ) {
         return navigate(`/join/${roomCode}`);
       }
@@ -72,7 +72,7 @@ export function RoomPage(): JSX.Element | null {
       /**
        * Redirect player to home page if its roomCode is removed.
        */
-      if (!session?.room?.code) {
+      if (!session?.room?.id) {
         return navigate('/');
       }
     }

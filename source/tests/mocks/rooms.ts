@@ -10,8 +10,7 @@ export const roomCode = 'SOSPC';
 export const roomEventSource = `${ROOM_TOPIC}/${roomCode}`;
 
 export const pendingRoom: Room = {
-  id: 17,
-  code: roomCode,
+  id: roomCode,
   name: "TRINITY's room",
   status: RoomStatus.PENDING,
   players: [fakePlayerOne],
@@ -23,8 +22,7 @@ export const pendingRoom: Room = {
 };
 
 export const pendingRoomWithMissions: Room = {
-  id: 17,
-  code: roomCode,
+  id: roomCode,
   name: "TRINITY's room",
   status: RoomStatus.PENDING,
   players: [fakePlayerOne],
@@ -36,8 +34,7 @@ export const pendingRoomWithMissions: Room = {
 };
 
 export const pendingRoomWithMultiplePlayers: Room = {
-  id: 17,
-  code: roomCode,
+  id: roomCode,
   name: "TRINITY's room",
   status: RoomStatus.PENDING,
   players: [fakePlayerOne, fakePlayerTwo, fakePlayerThree],
@@ -49,8 +46,7 @@ export const pendingRoomWithMultiplePlayers: Room = {
 };
 
 export const playingRoom: Room = {
-  id: 17,
-  code: roomCode,
+  id: roomCode,
   name: "TRINITY's room",
   status: RoomStatus.IN_GAME,
   players: [fakePlayerOne],
@@ -62,8 +58,7 @@ export const playingRoom: Room = {
 };
 
 export const endedRoom: Room = {
-  id: 17,
-  code: roomCode,
+  id: roomCode,
   name: "TRINITY's room",
   status: RoomStatus.ENDED,
   players: [fakePlayerOne],
