@@ -35,10 +35,6 @@ export function PlayerList(): JSX.Element {
     });
   }, [room?.players, room?.admin.id]);
 
-  const handleLeaveRoom = (): void => {
-    openModal(<LeaveRoomModal />);
-  };
-
   const handleKickPlayer = (playerId: number): void => {
     updatePlayer.mutate({ id: playerId, room: null });
   };
@@ -77,11 +73,7 @@ export function PlayerList(): JSX.Element {
           )}
         </div>
       ))}
-      <Button
-        color="primary"
-        onClick={handleLeaveRoom}
-        customStyle={styles.button}
-      >
+      <Button color="primary" onClick={() => openModal(<LeaveRoomModal />)}>
         {t('room.leave.current.room')}
       </Button>
     </div>
