@@ -76,11 +76,3 @@
   left: -10px;
   cursor: pointer;
 }
-
-.button {
-  background-color: var(--color-red-70);
-
-  &:hover:not(:disabled) {
-    background-color: var(--color-red-60);
-  }
-}

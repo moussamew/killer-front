@@ -22,9 +22,9 @@ describe('<LeaveCurrentRoom />', () => {
     server.use(
       getPlayerSession({
         ...pendingRoomSession,
-        room: { ...pendingRoomSession.room!, code: newRoomCode },
+        room: { ...pendingRoomSession.room!, id: newRoomCode },
       }),
-      getRoomSession(newRoomCode, { ...pendingRoom, code: newRoomCode }),
+      getRoomSession(newRoomCode, { ...pendingRoom, id: newRoomCode }),
     );
 
     await userEvent.click(screen.getByText(t('join.room.confirm.button')));

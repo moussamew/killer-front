@@ -28,7 +28,7 @@ export function JoinRoomPage(): JSX.Element {
      * Let the player join automatically the room if
      * the player is already inside the same room that he want to join.
      */
-    if (session?.room?.code === roomCode) {
+    if (session?.room?.id === roomCode) {
       navigate(`/room/${roomCode}`);
     }
 
@@ -36,7 +36,7 @@ export function JoinRoomPage(): JSX.Element {
      * Let the player join automatically the room if the player name is already setted
      * and the player is not already inside a room.
      */
-    if (session?.name && !session?.room?.code) {
+    if (session?.name && !session?.room?.id) {
       updatePlayerMutate(
         { id: session.id, room: roomCode },
         {
@@ -68,7 +68,7 @@ export function JoinRoomPage(): JSX.Element {
       <img alt="welcome" src={Killerparty} />
       {!session?.name && <CreatePlayer />}
       {isPlayerAlreadyExists && <UpdatePlayerPseudo session={session} />}
-      {session?.room?.code && <LeaveCurrentRoom />}
+      {session?.room?.id && <LeaveCurrentRoom />}
     </>
   );
 }

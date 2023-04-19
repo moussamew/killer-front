@@ -17,8 +17,7 @@ export const noRoomSession: Session = {
 export const pendingRoomSession: Session = {
   ...fakePlayerOne,
   room: {
-    id: 17,
-    code: roomCode,
+    id: roomCode,
     name: "TRINITY's room",
     status: RoomStatus.PENDING,
     missions: [],
@@ -35,8 +34,7 @@ export const pendingRoomSession: Session = {
 export const playingRoomSession: Session = {
   ...fakePlayerTwo,
   room: {
-    id: 17,
-    code: roomCode,
+    id: roomCode,
     name: "TRINITY's room",
     status: RoomStatus.IN_GAME,
     missions: [fakeMissionOne, fakeMissionTwo, fakeMissionThree],
@@ -53,8 +51,7 @@ export const playingRoomSession: Session = {
 export const endedRoomSession: Session = {
   ...fakePlayerThree,
   room: {
-    id: 17,
-    code: roomCode,
+    id: roomCode,
     name: "TRINITY's room",
     status: RoomStatus.ENDED,
     missions: [],
@@ -71,8 +68,7 @@ export const endedRoomSession: Session = {
 export const adminSession: Session = {
   ...fakePlayerOne,
   room: {
-    id: 17,
-    code: roomCode,
+    id: roomCode,
     name: "TRINITY's room",
     status: RoomStatus.PENDING,
     missions: [],
