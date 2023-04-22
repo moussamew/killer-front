@@ -1,10 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-
-const prettierOptions = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'),
-);
-
 module.exports = {
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   extends: [
@@ -39,7 +32,6 @@ module.exports = {
     sourceType: 'module', // Allows for the use of imports
   },
   rules: {
-    'prettier/prettier': ['error', prettierOptions], // Enhance prettier with custom options
     '@typescript-eslint/explicit-function-return-type': [
       // Explicit types for function return
       'error',
