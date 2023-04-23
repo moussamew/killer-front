@@ -7,15 +7,8 @@ import { SidebarProvider } from '@/context/sidebar';
 
 import { Routes } from './routes';
 
-import '@killerparty/ui/assets/styles/fonts.module.css';
-import '@killerparty/ui/assets/styles/variables.module.css';
-
-/** Base CSS Files */
-import '@/assets/styles/preflight.module.css';
 import '@/assets/styles/app.module.css';
-import '@/assets/styles/animations.module.css';
 
-/** Internationalization */
 import './i18n';
 
 const NODE_APP = document.getElementById('app');
