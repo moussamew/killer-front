@@ -18,6 +18,8 @@
   --color-black-80: hsl(210deg 7% 80%);
   --color-black-90: hsl(210deg 7% 90%);
 
+  --color-test: red;
+
   /** Grey colors */
   --color-grey-40: hsl(20deg 3% 40%);
 

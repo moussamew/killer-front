@@ -23,9 +23,9 @@ config.resolver.disableHierarchicalLookup = true;
 module.exports = {
   ...config,
   transformer: {
-    babelTransformerPath: require.resolve('react-native-css-transformer'),
+    babelTransformerPath: require.resolve('./postcss-transformer.js'),
   },
   resolver: {
-    sourceExts: [...config.resolver.sourceExts, 'css'],
+    sourceExts: [...config.resolver.sourceExts, 'css', 'pcss'],
   },
 };
