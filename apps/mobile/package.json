@@ -10,13 +10,15 @@
     "clean": "rm -rf node_modules"
   },
   "dependencies": {
-    "expo": "~48.0.11",
-    "expo-status-bar": "~1.4.4",
+    "expo": "48.0.11",
+    "expo-status-bar": "1.4.4",
     "react": "18.2.0",
     "react-native": "0.71.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
-  },
-  "private": true
+    "@babel/core": "7.21.4",
+    "babel-plugin-react-native-classname-to-style": "1.2.2",
+    "babel-plugin-react-native-platform-specific-extensions": "1.1.1",
+    "react-native-css-transformer": "1.2.4"
+  }
 }
