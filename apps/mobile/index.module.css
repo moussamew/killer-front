@@ -1,7 +1,9 @@
+@import '@killerparty/ui/assets/styles/variables.module.css';
+
 .container {
   display: flex;
   flex: 1;
-  background-color: hsl(30, 75%, 97%);
   align-items: center;
   justify-content: center;
+  background-color: var(--color-body);
 }
