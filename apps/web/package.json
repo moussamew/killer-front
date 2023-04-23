@@ -12,7 +12,8 @@
     "test": "jest --coverage=false",
     "test:watch": "jest watch",
     "test:coverage": "jest --coverage",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "clean": "rm -rf node_modules"
   },
   "scripts-info": {
     "presinstall": "Script executed before installing dependencies",
@@ -24,7 +25,8 @@
     "test": "Run unit tests",
     "test:watch": "Run unit tests and listen to changes",
     "test:coverage": "Run unit tests with coverage stats",
-    "tsc": "Run typescript linting on all files"
+    "tsc": "Run typescript linting on all files",
+    "clean": "Remove node_modules folder"
   },
   "dependencies": {
     "clsx": "^1.2.1",
