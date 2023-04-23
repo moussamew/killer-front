@@ -5,6 +5,9 @@
     "dev": {},
     "tsc": {},
     "lint": {},
-    "test": {}
+    "test": {},
+    "clean": {
+      "cache": false
+    }
   }
 }
