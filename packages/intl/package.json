@@ -4,6 +4,13 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "tsup source/index.ts  --format cjs,esm --dts",
     "dev": "tsup source/index.ts --dts --format cjs,esm --watch",
