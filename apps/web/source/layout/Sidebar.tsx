@@ -1,6 +1,6 @@
+import { useTranslation } from '@killerparty/intl';
 import clsx from 'clsx';
 import { type Dispatch, type SetStateAction } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import Close from '@/assets/icons/close.svg';
 import { type Session } from '@/services/player/types';

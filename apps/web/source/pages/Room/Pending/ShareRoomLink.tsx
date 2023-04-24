@@ -1,5 +1,5 @@
+import { useTranslation } from '@killerparty/intl';
 import { toast } from 'react-hot-toast';
-import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import { Button } from '@/components/Button';

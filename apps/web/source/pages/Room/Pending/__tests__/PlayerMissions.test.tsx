@@ -1,6 +1,6 @@
+import { t } from '@killerparty/intl';
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { t } from 'i18next';
 import { rest } from 'msw';
 
 import { SESSION_ENDPOINT } from '@/constants/endpoints';

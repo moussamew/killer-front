@@ -1,5 +1,5 @@
+import { useTranslation } from '@killerparty/intl';
 import { type ChangeEvent, useContext, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { randomAvatar } from '@/components/Avatars';
 import { Button } from '@/components/Button';

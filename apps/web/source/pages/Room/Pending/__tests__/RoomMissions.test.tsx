@@ -1,6 +1,6 @@
+import { type TranslationKey, t } from '@killerparty/intl';
 import { screen } from '@testing-library/react';
 import { sources } from 'eventsourcemock';
-import { t } from 'i18next';
 
 import { fakeMissionOne, fakeMissionTwo } from '@/tests/mocks/missions';
 import {
@@ -27,7 +27,7 @@ describe('<RoomMissions />', () => {
 
     expect(
       screen.getByText(
-        t('room.missions.count', {
+        t('room.missions.count' as TranslationKey, {
           count: pendingRoomWithMissions.missions.length,
         }),
       ),
@@ -43,7 +43,7 @@ describe('<RoomMissions />', () => {
     renderWithProviders();
 
     await screen.findByText(
-      t('room.missions.count', {
+      t('room.missions.count' as TranslationKey, {
         count: pendingRoomWithMissions.missions.length,
       }),
     );
@@ -64,7 +64,7 @@ describe('<RoomMissions />', () => {
 
     expect(
       await screen.findByText(
-        t('room.missions.count', {
+        t('room.missions.count' as TranslationKey, {
           count: newRoomInfos.missions.length,
         }),
       ),

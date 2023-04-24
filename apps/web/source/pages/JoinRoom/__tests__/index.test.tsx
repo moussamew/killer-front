@@ -1,5 +1,5 @@
+import { t } from '@killerparty/intl';
 import { screen } from '@testing-library/react';
-import { t } from 'i18next';
 
 import {
   roomCode,

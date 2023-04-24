@@ -1,6 +1,6 @@
+import { t } from '@killerparty/intl';
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { t } from 'i18next';
 
 import { fakePlayerOne } from '@/tests/mocks/players';
 import { getPlayerSession } from '@/tests/mocks/services/player';

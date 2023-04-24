@@ -1,3 +1,4 @@
+import { setupIntl } from '@killerparty/intl';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, type RenderResult } from '@testing-library/react';
 import { type ReactNode } from 'react';
@@ -7,12 +8,12 @@ import { QueryConfig } from '@/constants/config';
 import { ModalProvider } from '@/context/modal';
 import { SidebarProvider } from '@/context/sidebar';
 
-import '../app/i18n';
-
 interface RenderParams {
   component?: ReactNode;
   route?: string;
 }
+
+setupIntl('fr-FR');
 
 export function renderWithProviders({
   component = <Routes />,

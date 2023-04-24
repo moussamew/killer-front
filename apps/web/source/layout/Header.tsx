@@ -1,5 +1,5 @@
+import { useTranslation } from '@killerparty/intl';
 import { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import Menu from '@/assets/icons/menu.svg';
 import { SidebarContext } from '@/context/sidebar';

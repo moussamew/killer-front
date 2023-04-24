@@ -1,5 +1,5 @@
+import { useTranslation } from '@killerparty/intl';
 import { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/Button';
 import { ModalContext } from '@/context/modal';

@@ -1,6 +1,6 @@
+import { useTranslation } from '@killerparty/intl';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';

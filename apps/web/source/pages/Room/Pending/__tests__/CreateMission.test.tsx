@@ -1,6 +1,6 @@
+import { t } from '@killerparty/intl';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { t } from 'i18next';
 
 import { fakeMissionThree } from '@/tests/mocks/missions';
 import { pendingRoom, roomCode } from '@/tests/mocks/rooms';

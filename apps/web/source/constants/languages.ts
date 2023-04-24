@@ -1,19 +1,11 @@
-import english from '@/locales/en-US.json';
-import french from '@/locales/fr-FR.json';
+import { Locale } from '@killerparty/intl';
 
-import { Locale } from './enums';
-
-export const translations = {
-  [Locale.FRENCH]: french,
-  [Locale.ENGLISH]: english,
-};
-
-export const languageToLocale: Record<string, Locale> = {
+export const languageToLocale: Record<string, string> = {
   '🇫🇷 Français': Locale.FRENCH,
   '🇬🇧 English': Locale.ENGLISH,
 };
 
-export const localeToLanguage: Record<Locale | string, string> = {
+export const localeToLanguage: Record<string, string> = {
   [Locale.FRENCH]: '🇫🇷 Français',
   [Locale.ENGLISH]: '🇬🇧 English',
 };

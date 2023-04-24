@@ -1,5 +1,5 @@
+import { useTranslation } from '@killerparty/intl';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
