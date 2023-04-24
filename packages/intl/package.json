@@ -1,0 +1,19 @@
+{
+  "name": "@killerparty/intl",
+  "version": "0.0.0",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup source/index.ts --format esm --dts",
+    "dev": "tsup source/index.ts --format esm --dts --watch",
+    "clean": "rm -rf node_modules"
+  },
+  "dependencies": {
+    "i18next": "^22.4.14",
+    "react-i18next": "^12.2.0"
+  },
+  "devDependencies": {
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4"
+  }
+}
