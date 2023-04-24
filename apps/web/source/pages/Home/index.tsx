@@ -1,5 +1,5 @@
+import { useTranslation } from '@killerparty/intl';
 import { useEffect } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
 import { type SessionQuery } from '@/services/player/types';
@@ -28,9 +28,7 @@ export function HomePage(): JSX.Element {
       <div className={styles.introduction}>
         <h1>{t('home.title')}</h1>
         <h2>{t('home.subtitle')}</h2>
-        <p>
-          <Trans t={t} i18nKey="home.description" />
-        </p>
+        <p>{t('home.description')}</p>
       </div>
       <div className={commonStyles.actions}>
         <CreateRoomButton playerName={session?.name} />

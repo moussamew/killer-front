@@ -1,3 +1,4 @@
+import { t } from '@killerparty/intl';
 import { screen } from '@testing-library/react';
 
 import { fakePlayerThree } from '@/tests/mocks/players';
@@ -17,6 +18,10 @@ describe('<PlayingRoomPage />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    expect(await screen.findByText(fakePlayerThree.name)).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        t('room.target.to.kill', { pseudo: fakePlayerThree.name }),
+      ),
+    ).toBeInTheDocument();
   });
 });

@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '@killerparty/intl';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import NotFoundSrc from '@/assets/images/not-found.jpg';

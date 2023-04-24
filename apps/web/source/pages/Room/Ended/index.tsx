@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '@killerparty/intl';
 import { useParams } from 'react-router-dom';
 
 import Winner from '@/assets/images/winner.png';

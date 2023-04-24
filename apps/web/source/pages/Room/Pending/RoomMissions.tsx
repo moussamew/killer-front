@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { type TranslationKey, useTranslation } from '@killerparty/intl';
 import { useParams } from 'react-router-dom';
 
 import { useRoom } from '@/services/room/queries';
@@ -14,7 +14,7 @@ export function RoomMissions(): JSX.Element {
 
   return (
     <div className={styles.missions}>
-      <h3>{t('room.missions.count', { count: missions })}</h3>
+      <h3>{t('room.missions.count' as TranslationKey, { count: missions })}</h3>
     </div>
   );
 }

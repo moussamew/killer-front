@@ -74,9 +74,6 @@ importers:
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
-      i18next:
-        specifier: ^22.4.14
-        version: 22.4.14
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -86,9 +83,6 @@ importers:
       react-hot-toast:
         specifier: ^2.4.0
         version: 2.4.0(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0)
-      react-i18next:
-        specifier: ^12.2.0
-        version: 12.2.0(i18next@22.4.14)(react-dom@18.2.0)(react@18.2.0)
       react-router-dom:
         specifier: ^6.10.0
         version: 6.10.0(react-dom@18.2.0)(react@18.2.0)

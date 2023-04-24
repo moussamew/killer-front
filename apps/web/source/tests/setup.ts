@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import '@testing-library/jest-dom';
+
 import EventSource from 'eventsourcemock';
 
 import { fakeLocalStorage } from './mocks/window';

@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '@killerparty/intl';
 
 import { Dropdown } from '@/components/Dropdown';
 import { languageToLocale, localeToLanguage } from '@/constants/languages';

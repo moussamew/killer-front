@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '@killerparty/intl';
 
 import Delete from '@/assets/icons/delete.svg';
 import Idea from '@/assets/images/idea.png';

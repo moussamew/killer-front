@@ -6,8 +6,3 @@ export enum Method {
   PATCH = 'PATCH',
   DELETE = 'DELETE',
 }
-
-export enum Locale {
-  FRENCH = 'fr-FR',
-  ENGLISH = 'en-US',
-}

@@ -1,11 +1,12 @@
 {
   "name": "@killerparty/intl",
   "version": "0.0.0",
-  "main": "./dist/index.mjs",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup source/index.ts --format esm --dts",
-    "dev": "tsup source/index.ts --format esm --dts --watch",
+    "build": "tsup source/index.ts  --format cjs,esm --dts",
+    "dev": "tsup source/index.ts --dts --format cjs,esm --watch",
     "clean": "rm -rf node_modules"
   },
   "dependencies": {

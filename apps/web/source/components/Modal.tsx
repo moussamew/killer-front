@@ -1,5 +1,5 @@
+import { useTranslation } from '@killerparty/intl';
 import { type ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import Close from '@/assets/icons/close.svg';
 

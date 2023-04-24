@@ -1,6 +1,6 @@
+import { t } from '@killerparty/intl';
 import { screen } from '@testing-library/react';
 import { sources } from 'eventsourcemock';
-import { t } from 'i18next';
 
 import { fakePlayerOne, fakePlayerTwo } from '@/tests/mocks/players';
 import {

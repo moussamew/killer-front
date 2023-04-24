@@ -1,4 +1,4 @@
-import { t } from 'i18next';
+import { type TranslationKey, t } from '@killerparty/intl';
 import { toast } from 'react-hot-toast';
 
 import { ErrorCode } from '@/constants/errors';
@@ -74,7 +74,7 @@ export async function request<T>({
   ) {
     localStorage.removeItem('token');
 
-    const errorMessage = t(`errors.${result.message}`);
+    const errorMessage = t(`errors.${result.message}` as TranslationKey);
 
     toast.error(errorMessage);
 
@@ -85,7 +85,7 @@ export async function request<T>({
   }
 
   if (response.status >= 400) {
-    const errorMessage = t(`errors.${result?.detail}`);
+    const errorMessage = t(`errors.${result?.detail}` as TranslationKey);
 
     toast.error(errorMessage);
 

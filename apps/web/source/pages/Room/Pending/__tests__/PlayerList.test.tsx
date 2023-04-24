@@ -1,7 +1,7 @@
+import { t } from '@killerparty/intl';
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { sources } from 'eventsourcemock';
-import { t } from 'i18next';
 
 import {
   fakePlayerOne,
