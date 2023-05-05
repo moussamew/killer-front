@@ -1,6 +1,6 @@
 import { useTranslation } from '@killerparty/intl';
 
-import { Gallery } from '@/pages/Home/Gallery';
+import { Gallery } from '@/components/Gallery';
 
 import styles from './styles/UpdateAvatar.module.css';
 

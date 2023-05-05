@@ -1,9 +1,9 @@
 import { useTranslation } from '@killerparty/intl';
 import { type ChangeEvent, useContext, useState } from 'react';
 
-import { randomAvatar } from '@/components/Avatars';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
+import { getRandomAvatar } from '@/constants/avatars';
 import { ModalContext } from '@/context/modal';
 import { useCreatePlayer } from '@/services/player/mutations';
 import { useCreateRoom } from '@/services/room/mutations';
@@ -21,7 +21,7 @@ export function CreateRoomModal(): JSX.Element {
 
   const handleCreateRoom = async (): Promise<void> => {
     await createPlayer.mutateAsync(
-      { name: pseudo, avatar: randomAvatar() },
+      { name: pseudo, avatar: getRandomAvatar() },
       {
         onSuccess: () =>
           createRoom.mutate(undefined, { onSuccess: closeModal }),

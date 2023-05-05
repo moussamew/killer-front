@@ -7,8 +7,8 @@ import Checked from '@/assets/icons/checked.svg';
 import Crown from '@/assets/icons/crown.svg';
 import Delete from '@/assets/icons/delete.svg';
 import Unchecked from '@/assets/icons/unchecked.svg';
-import { chooseAvatar } from '@/components/Avatars';
 import { Button } from '@/components/Button';
+import { avatarList } from '@/components/Gallery';
 import { ModalContext } from '@/context/modal';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
@@ -53,7 +53,7 @@ export function PlayerList(): JSX.Element {
                   [styles.adminPlayer]: room.admin.id === id,
                 })}
               >
-                {chooseAvatar[avatar]}
+                {avatarList[avatar]}
               </div>
               {room.admin.id === id && <Crown className={styles.crown} />}
             </div>

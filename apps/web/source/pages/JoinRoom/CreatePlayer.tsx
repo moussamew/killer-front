@@ -2,9 +2,9 @@ import { useTranslation } from '@killerparty/intl';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { randomAvatar } from '@/components/Avatars';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
+import { getRandomAvatar } from '@/constants/avatars';
 import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
 
 import commonStyles from '../../assets/styles/common.module.css';
@@ -19,7 +19,7 @@ export function CreatePlayer(): JSX.Element {
 
   const handleJoinRoom = async (): Promise<void> => {
     await createPlayer.mutateAsync(
-      { name: pseudo, avatar: randomAvatar() },
+      { name: pseudo, avatar: getRandomAvatar() },
       {
         onSuccess: ({ id }) =>
           updatePlayer.mutateAsync(

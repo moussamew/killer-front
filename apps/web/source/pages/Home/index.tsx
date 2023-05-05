@@ -2,12 +2,12 @@ import { useTranslation } from '@killerparty/intl';
 import { useEffect } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
+import { Gallery } from '@/components/Gallery';
 import { type SessionQuery } from '@/services/player/types';
 
 import commonStyles from '../../assets/styles/common.module.css';
 
 import { CreateRoomButton } from './CreateRoomButton';
-import { Gallery } from './Gallery';
 import { JoinRoomButton } from './JoinRoomButton';
 import { Rules } from './Rules';
 import styles from './styles/index.module.css';
