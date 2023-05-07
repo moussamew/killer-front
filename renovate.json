@@ -6,20 +6,6 @@
   "lockFileMaintenance": { "enabled": true },
   "packageRules": [
     {
-      "groupName": "Mobile dependencies",
-      "matchPackagePatterns": ["apps/mobile/"],
-      "updateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
-    },
-    {
-      "groupName": "Web dependencies",
-      "matchPackagePatterns": ["apps/web/"],
-      "updateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
-    },
-    {
-      "groupName": "Shared packages dependencies",
-      "matchPackagePatterns": ["packages/"],
       "updateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true
     }
