@@ -75,7 +75,7 @@
     "jest-transformer-svg": "2.0.1",
     "jsdom": "21.1.2",
     "msw": "1.2.1",
-    "postcss": "8.4.21",
+    "postcss": "8.4.23",
     "postcss-import": "15.1.0",
     "postcss-nesting": "11.2.2",
     "postcss-preset-env": "8.3.1",
