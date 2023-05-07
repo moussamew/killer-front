@@ -1,22 +1,12 @@
 {
+  "extends": "tsconfig/base.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "jsx": "react-jsx",
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "noEmit": true,
     "baseUrl": ".",
+    "jsx": "react-jsx",
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "paths": {
       "@/*": ["source/*"]
-    },
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    }
   },
-  "include": ["source"],
-  "exclude": ["node_modules"]
+  "include": ["source"]
 }
