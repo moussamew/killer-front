@@ -23,9 +23,10 @@ config.resolver.disableHierarchicalLookup = true;
 module.exports = {
   ...config,
   transformer: {
-    babelTransformerPath: require.resolve('./postcss-transformer.js'),
+    babelTransformerPath: require.resolve('./config/assets-transformer.js'),
   },
   resolver: {
-    sourceExts: [...config.resolver.sourceExts, 'css', 'pcss'],
+    assetExts: config.resolver.assetExts.filter((ext) => ext !== 'svg'),
+    sourceExts: [...config.resolver.sourceExts, 'css', 'pcss', 'svg'],
   },
 };
