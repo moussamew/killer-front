@@ -2,15 +2,15 @@ import { StatusBar } from 'expo-status-bar';
 import { Pressable, Text, ScrollView, View } from 'react-native';
 import {
   SafeAreaProvider,
-  SafeAreaView,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import { setupIntl, useTranslation } from '@killerparty/intl';
 
-import { Gallery } from './components/Gallery';
 import styles from './index.module.css';
 
 import { Rules } from './Rules';
+
+import { Gallery } from './components/Gallery';
 
 import 'intl-pluralrules';
 
