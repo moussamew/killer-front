@@ -1,6 +1,6 @@
 {
   "name": "@killerparty/intl",
-  "version": "0.0.0",
+  "description": "Internationalization for Killer Party",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -21,6 +21,8 @@
     "react-i18next": "12.2.2"
   },
   "devDependencies": {
+    "eslint-config-global": "workspace:*",
+    "tsconfig": "workspace:*",
     "tsup": "6.7.0",
     "typescript": "5.0.4"
   }

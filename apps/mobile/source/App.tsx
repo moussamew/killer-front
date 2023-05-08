@@ -1,32 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { Pressable, Text, ScrollView, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
 import { setupIntl, useTranslation } from '@killerparty/intl';
+import { Pressable, Text, ScrollView, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import styles from './index.module.css';
-
-import { Rules } from './Rules';
-
+import { CustomStatusBar } from './components/CustomStatusBar';
 import { Gallery } from './components/Gallery';
+import styles from './index.module.css';
+import { Rules } from './Rules';
 
 import 'intl-pluralrules';
 
 setupIntl('fr-FR');
 
-const CustomStatusBar = () => {
-  const insets = useSafeAreaInsets();
-
-  return (
-    <View style={{ height: insets.top, backgroundColor: '#fdf7f2' }}>
-      <StatusBar animated={true} backgroundColor="#fdf7f2" />
-    </View>
-  );
-};
-
-export default function App() {
+export default function App(): JSX.Element {
   const { t } = useTranslation();
 
   return (

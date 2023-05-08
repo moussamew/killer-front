@@ -6,6 +6,7 @@ import {
 
 import english from '../locales/en-US.json';
 import french from '../locales/fr-FR.json';
+
 import { Locale } from './constants';
 
 export type TranslationKey = keyof typeof french | keyof typeof english;
@@ -28,19 +29,20 @@ function setupIntl(userLocale: string | null): void {
 
 function t(
   key: TranslationKey,
-  interpolations: Record<string, unknown> = {}
+  interpolations: Record<string, unknown> = {},
 ): string {
   return i18nTranslate(key, interpolations);
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function useTranslation() {
-  const { t, ...i18nTranslation } = useI18nTranslation();
+  const { t: translateFunc, ...i18nTranslation } = useI18nTranslation();
 
   const translate = (
     key: TranslationKey,
-    interpolations: Record<string, unknown> = {}
-  ) => {
-    return t(key, interpolations);
+    interpolations: Record<string, unknown> = {},
+  ): string => {
+    return translateFunc(key, interpolations);
   };
 
   return { ...i18nTranslation, t: translate };
