@@ -21,6 +21,8 @@
     "react-native-svg": "13.9.0"
   },
   "devDependencies": {
+    "tsconfig": "workspace:*",
+    "eslint-config-global": "workspace:*",
     "@babel/core": "7.21.8",
     "autoprefixer": "10.4.14",
     "babel-plugin-react-native-classname-to-style": "1.2.2",
@@ -33,7 +35,6 @@
     "react-native-css-transformer": "1.2.4",
     "react-native-postcss-transformer": "1.3.1",
     "react-native-svg-transformer": "1.0.0",
-    "tsconfig": "workspace:*",
     "typescript": "5.0.4"
   }
 }
