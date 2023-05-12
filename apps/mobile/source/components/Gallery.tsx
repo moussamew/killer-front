@@ -26,9 +26,9 @@ export const avatarList = {
   surf: <Surf height="100" width="100" />,
 };
 
-export function Gallery() {
+export function Gallery(): JSX.Element {
   return (
-    <ScrollView horizontal={true}>
+    <ScrollView horizontal>
       <View style={styles.gallery}>
         {Object.entries(avatarList).map(([name, avatar]) => (
           <View key={name} style={styles.content}>
