@@ -1,9 +1,9 @@
 import { useTranslation } from '@killerparty/intl';
-
-import styles from './Rules.module.css';
 import { View, Text } from 'react-native';
 
-export function Rules() {
+import styles from './styles/Rules.module.css';
+
+export function Rules(): JSX.Element {
   const { t } = useTranslation();
 
   return (

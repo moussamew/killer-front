@@ -1,0 +1,91 @@
+@import '@killerparty/ui/assets/styles/variables.module.css';
+
+.view {
+  padding: var(--spacing-large);
+  background-color: var(--color-body);
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.scroll {
+  background-color: var(--color-body);
+}
+
+.title {
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: var(--spacing-medium);
+}
+
+.subtitle {
+  font-size: 22px;
+  margin-bottom: var(--spacing-medium);
+}
+
+.description {
+  font-size: 16px;
+  margin-bottom: var(--spacing-medium);
+  color: var(--color-black-40);
+}
+
+.button {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-medium);
+  border-radius: var(--radius-small);
+  box-shadow: var(--shadow-small);
+  transition: background-color ease-in-out 500ms, opacity ease-in-out 500ms;
+  margin-bottom: var(--spacing-small);
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &:hover:not(:disabled) {
+    cursor: pointer;
+  }
+
+  &:hover:is(:disabled) {
+    cursor: not-allowed;
+  }
+}
+
+.primary {
+  background-color: var(--color-black-30);
+
+  .spinner circle {
+    stroke: var(--color-black-50);
+  }
+}
+
+.primaryText {
+  color: var(--color-white);
+  font-size: var(--text-medium);
+}
+
+.primaryPressed {
+  background-color: var(--color-black-20);
+}
+
+.secondary {
+  background-color: var(--color-yellow-70);
+  color: var(--color-black-30);
+
+  .spinner circle {
+    stroke: var(--color-yellow-80);
+  }
+}
+
+.secondaryText {
+  color: var(--color-black-30);
+  font-size: var(--text-medium);
+}
+
+.secondaryPressed {
+  background-color: var(--color-yellow-60);
+}
