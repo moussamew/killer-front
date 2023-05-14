@@ -2,6 +2,8 @@ import { useTranslation } from '@killerparty/intl';
 import { useState } from 'react';
 import { View, Text, Pressable, TextInput } from 'react-native';
 
+import { CurrentAvatar } from '../../components/CurrentAvatar';
+
 import styles from './styles/index.module.css';
 
 export function CreateRoomPage(): JSX.Element {
@@ -10,6 +12,7 @@ export function CreateRoomPage(): JSX.Element {
 
   return (
     <View style={styles.view}>
+      <CurrentAvatar />
       <View style={styles.content}>
         <Text style={styles.label}>{t('home.create.pseudo.label')}</Text>
         <TextInput

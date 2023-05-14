@@ -1,4 +1,4 @@
-import { setupIntl } from '@killerparty/intl';
+import { setupIntl, useTranslation } from '@killerparty/intl';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
@@ -18,6 +18,8 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App(): JSX.Element {
+  const { t } = useTranslation();
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -34,7 +36,7 @@ export default function App(): JSX.Element {
         <Stack.Screen
           name="CreateRoom"
           component={CreateRoomPage}
-          options={{ title: 'Create new room' }}
+          options={{ title: t('create.room.page.title') }}
         />
       </Stack.Navigator>
       <StatusBar />

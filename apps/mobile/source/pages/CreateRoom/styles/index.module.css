@@ -5,8 +5,6 @@
   background-color: var(--color-body);
   display: flex;
   flex: 1;
-  justify-content: center;
-  align-items: center;
 }
 
 .button {
@@ -88,7 +86,6 @@
   border: 2px solid var(--color-blue-90);
   border-radius: var(--radius-small);
   font-size: var(--text-medium);
-  transition: ease-in-out 500ms;
   background-color: var(--color-white);
 
   &:focus-visible {
