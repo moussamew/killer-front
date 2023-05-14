@@ -1,7 +1,8 @@
 import { useTranslation } from '@killerparty/intl';
 import { useState } from 'react';
-import { View, Text, Pressable, TextInput } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 
+import { Button } from '../../components/Button';
 import { CurrentAvatar } from '../../components/CurrentAvatar';
 
 import styles from './styles/index.module.css';
@@ -22,17 +23,12 @@ export function CreateRoomPage(): JSX.Element {
           value={text}
         />
       </View>
-      <Pressable
-        style={({ pressed }) => [
-          styles.button,
-          styles.primary,
-          pressed && styles.primaryPressed,
-        ]}
-      >
-        <Text style={styles.primaryText}>
-          {t('home.create.room.confirm.button')}
-        </Text>
-      </Pressable>
+
+      <Button
+        color="primary"
+        onPress={() => {}}
+        text={t('home.create.room.confirm.button')}
+      />
     </View>
   );
 }

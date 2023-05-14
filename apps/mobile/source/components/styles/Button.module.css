@@ -1,3 +1,5 @@
+@import '@killerparty/ui/assets/styles/variables.module.css';
+
 .button {
   position: relative;
   display: flex;

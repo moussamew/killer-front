@@ -1,8 +1,9 @@
 import { useTranslation } from '@killerparty/intl';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
-import { View, Text, ScrollView, Pressable } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 import { type RootStackParamList } from '../../App';
+import { Button } from '../../components/Button';
 import { Gallery } from '../../components/Gallery';
 
 import { Rules } from './Rules';
@@ -19,25 +20,16 @@ export function HomePage({ navigation }: Props): JSX.Element {
         <Text style={styles.title}>{t('home.title')}</Text>
         <Text style={styles.subtitle}>{t('home.subtitle')}</Text>
         <Text style={styles.description}>{t('home.description')}</Text>
-        <Pressable
-          style={({ pressed }) => [
-            styles.button,
-            styles.primary,
-            pressed && styles.primaryPressed,
-          ]}
+        <Button
+          color="primary"
           onPress={() => navigation.navigate('CreateRoom')}
-        >
-          <Text style={styles.primaryText}>{t('home.create.room.button')}</Text>
-        </Pressable>
-        <Pressable
-          style={({ pressed }) => [
-            styles.button,
-            styles.secondary,
-            pressed && styles.secondaryPressed,
-          ]}
-        >
-          <Text style={styles.secondaryText}>{t('home.join.room')}</Text>
-        </Pressable>
+          text={t('home.create.room.button')}
+        />
+        <Button
+          color="secondary"
+          onPress={() => {}}
+          text={t('home.join.room')}
+        />
         <Gallery />
         <Rules />
       </View>
