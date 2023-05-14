@@ -1,9 +1,10 @@
 import { useTranslation } from '@killerparty/intl';
 import { useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import { avatarsList, getRandomAvatar } from '../helpers/avatars';
 
+import { Button } from './Button';
 import styles from './styles/CurrentAvatar.module.css';
 
 export function CurrentAvatar(): JSX.Element {
@@ -15,17 +16,11 @@ export function CurrentAvatar(): JSX.Element {
       <View style={styles.avatar}>
         {avatarsList({ height: 200, width: 200 })[currentAvatar]}
       </View>
-
-      <Pressable
-        style={({ pressed }) => [
-          styles.button,
-          styles.secondary,
-          pressed && styles.secondaryPressed,
-        ]}
+      <Button
+        color="secondary"
         onPress={() => updateCurrentAvatar(getRandomAvatar())}
-      >
-        <Text style={styles.secondaryText}>{t('avatar.refresh.title')}</Text>
-      </Pressable>
+        text={t('avatar.refresh.title')}
+      />
     </View>
   );
 }
