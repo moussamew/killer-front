@@ -19,6 +19,9 @@ importers:
       '@killerparty/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@killerparty/webservices':
+        specifier: workspace:*
+        version: link:../../packages/webservices
       '@react-navigation/native':
         specifier: 6.1.6
         version: 6.1.6(react-native@0.71.8)(react@18.2.0)
@@ -241,6 +244,21 @@ importers:
         specifier: 3.6.2
         version: 3.6.2
 
+  packages/config:
+    devDependencies:
+      eslint-config-global:
+        specifier: workspace:*
+        version: link:../eslint-config-global
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      tsup:
+        specifier: 6.7.0
+        version: 6.7.0(typescript@5.0.4)
+      typescript:
+        specifier: 5.0.4
+        version: 5.0.4
+
   packages/eslint-config-global:
     dependencies:
       '@typescript-eslint/eslint-plugin':
@@ -308,6 +326,40 @@ importers:
   packages/tsconfig: {}
 
   packages/ui: {}
+
+  packages/webservices:
+    dependencies:
+      '@killerparty/intl':
+        specifier: workspace:*
+        version: link:../intl
+      '@tanstack/react-query':
+        specifier: 4.29.7
+        version: 4.29.7(react-dom@18.2.0)(react@18.2.0)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+    devDependencies:
+      '@killerparty/config':
+        specifier: workspace:*
+        version: link:../config
+      '@types/react':
+        specifier: 18.2.6
+        version: 18.2.6
+      eslint-config-global:
+        specifier: workspace:*
+        version: link:../eslint-config-global
+      react-hot-toast:
+        specifier: 2.4.1
+        version: 2.4.1(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0)
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      tsup:
+        specifier: 6.7.0
+        version: 6.7.0(typescript@5.0.4)
+      typescript:
+        specifier: 5.0.4
+        version: 5.0.4
 
 packages:
 
@@ -6861,7 +6913,6 @@ packages:
       csstype: ^3.0.10
     dependencies:
       csstype: 3.1.2
-    dev: false
 
   /gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
@@ -10422,7 +10473,6 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
       - csstype
-    dev: false
 
   /react-i18next@12.2.2(i18next@22.4.15)(react@18.2.0):
     resolution: {integrity: sha512-KBB6buBmVKXUWNxXHdnthp+38gPyBT46hJCAIQ8rX19NFL/m2ahte2KARfIDf2tMnSAL7wwck6eDOd/9zn6aFg==}

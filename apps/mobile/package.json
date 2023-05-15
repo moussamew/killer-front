@@ -13,6 +13,7 @@
   "dependencies": {
     "@killerparty/intl": "workspace:*",
     "@killerparty/ui": "workspace:*",
+    "@killerparty/webservices": "workspace:*",
     "@react-navigation/native": "6.1.6",
     "@react-navigation/native-stack": "6.9.12",
     "expo": "48.0.16",
