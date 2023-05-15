@@ -1,0 +1,34 @@
+{
+  "name": "@killerparty/webservices",
+  "description": "Webservices for Killer Party",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup source/index.ts  --format cjs,esm --dts --external react ",
+    "dev": "tsup source/index.ts --format cjs,esm --watch --dts --external react",
+    "clean": "rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@killerparty/config": "workspace:*",
+    "@killerparty/intl": "workspace:*",
+    "@types/react": "18.2.6",
+    "eslint-config-global": "workspace:*",
+    "react-hot-toast": "2.4.1",
+    "tsconfig": "workspace:*",
+    "tsup": "6.7.0",
+    "typescript": "5.0.4"
+  },
+  "dependencies": {
+    "@killerparty/intl": "workspace:*",
+    "@tanstack/react-query": "4.29.7",
+    "react": "18.2.0"
+  }
+}
