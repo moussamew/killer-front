@@ -2,7 +2,7 @@ import { useTranslation } from '@killerparty/intl';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import { View, Text, ScrollView } from 'react-native';
 
-import { type RootStackParamList } from '../../App';
+import { type RootStackParamList } from '../../app/routes';
 import { Button } from '../../components/Button';
 import { Gallery } from '../../components/Gallery';
 
