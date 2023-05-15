@@ -1,0 +1,25 @@
+{
+  "name": "@killerparty/config",
+  "description": "Configuration for Killer Party",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup source/index.ts  --format cjs,esm --dts",
+    "dev": "tsup source/index.ts --dts --format cjs,esm --watch",
+    "clean": "rm -rf node_modules"
+  },
+  "devDependencies": {
+    "eslint-config-global": "workspace:*",
+    "tsconfig": "workspace:*",
+    "tsup": "6.7.0",
+    "typescript": "5.0.4"
+  }
+}
