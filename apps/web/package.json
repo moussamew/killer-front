@@ -67,7 +67,7 @@
     "postcss": "8.4.23",
     "postcss-import": "15.1.0",
     "postcss-nesting": "11.2.2",
-    "postcss-preset-env": "8.3.2",
+    "postcss-preset-env": "8.4.1",
     "stylelint": "15.6.2",
     "stylelint-config-css-modules": "4.2.0",
     "stylelint-config-idiomatic-order": "9.0.0",
