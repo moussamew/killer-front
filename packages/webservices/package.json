@@ -19,7 +19,7 @@
   "devDependencies": {
     "@killerparty/config": "workspace:*",
     "@killerparty/intl": "workspace:*",
-    "@types/react": "18.2.6",
+    "@types/react": "18.2.7",
     "eslint-config-global": "workspace:*",
     "react-hot-toast": "2.4.1",
     "tsconfig": "workspace:*",
