@@ -193,8 +193,8 @@ importers:
         specifier: 2.0.1
         version: 2.0.1(jest@29.5.0)(react@18.2.0)
       jsdom:
-        specifier: 22.0.0
-        version: 22.0.0
+        specifier: 22.1.0
+        version: 22.1.0
       msw:
         specifier: 1.2.1
         version: 1.2.1(typescript@5.0.4)
@@ -8582,8 +8582,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /jsdom@22.0.0:
-    resolution: {integrity: sha512-p5ZTEb5h+O+iU02t0GfEjAnkdYPrQSkfuTSMkMYyIoMvUNEHsbG0bHHbfXIcfTqD2UfvjQX7mmgiFsyRwGscVw==}
+  /jsdom@22.1.0:
+    resolution: {integrity: sha512-/9AVW7xNbsBv6GfWho4TTNjEo9fe6Zhf9O7s0Fhhr3u+awPwAJMKwAMXnkk5vBxflqLW9hTHX/0cs+P3gW+cQw==}
     engines: {node: '>=16'}
     peerDependencies:
       canvas: ^2.5.0
