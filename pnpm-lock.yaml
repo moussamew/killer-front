@@ -85,8 +85,8 @@ importers:
         specifier: 11.3.0
         version: 11.3.0(postcss@8.4.24)
       postcss-preset-env:
-        specifier: 8.4.2
-        version: 8.4.2(postcss@8.4.24)
+        specifier: 8.5.0
+        version: 8.5.0(postcss@8.4.24)
       react-native-css-transformer:
         specifier: 1.2.4
         version: 1.2.4(react-native@0.71.10)
@@ -212,8 +212,8 @@ importers:
         specifier: 11.3.0
         version: 11.3.0(postcss@8.4.24)
       postcss-preset-env:
-        specifier: 8.4.2
-        version: 8.4.2(postcss@8.4.24)
+        specifier: 8.5.0
+        version: 8.5.0(postcss@8.4.24)
       stylelint:
         specifier: 15.7.0
         version: 15.7.0
@@ -2073,8 +2073,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /@csstools/postcss-relative-color-syntax@1.0.1(postcss@8.4.24):
-    resolution: {integrity: sha512-IskxdQqAkx/pyyOEW3Lhn3nvOu5zlaZ8wQljFl5zc3ABl+gEFf2G42yWK3+wX+J0F4jm7OikOigXo9fAISFEmg==}
+  /@csstools/postcss-relative-color-syntax@1.0.2(postcss@8.4.24):
+    resolution: {integrity: sha512-juCoVInkgH2TZPfOhyx6tIal7jW37L/0Tt+Vcl1LoxqQA9sxcg3JWYZ98pl1BonDnki6s/M7nXzFQHWsWMeHgw==}
     engines: {node: ^14 || ^16 || >=18}
     peerDependencies:
       postcss: ^8.4
@@ -10294,8 +10294,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /postcss-preset-env@8.4.2(postcss@8.4.24):
-    resolution: {integrity: sha512-Bihxo+FsyVNjsRADiYYnj9Ez0WBSWSSHAe8WvxoMlqrw8H8m6gK9E0MkDd7P6ForoikRIF3I8grGg/pFM6ECRQ==}
+  /postcss-preset-env@8.5.0(postcss@8.4.24):
+    resolution: {integrity: sha512-aqAbT5dXqYX5ZvicGKQpaW/eDEZFRfnhV6Hn1Jn2bCKEB9L2MgsTdnIsXsZyFUQflIV2wIs9HTEQgkH5duMCNg==}
     engines: {node: ^14 || ^16 || >=18}
     peerDependencies:
       postcss: ^8.4
@@ -10317,7 +10317,7 @@ packages:
       '@csstools/postcss-normalize-display-values': 2.0.1(postcss@8.4.24)
       '@csstools/postcss-oklab-function': 2.2.3(postcss@8.4.24)
       '@csstools/postcss-progressive-custom-properties': 2.3.0(postcss@8.4.24)
-      '@csstools/postcss-relative-color-syntax': 1.0.1(postcss@8.4.24)
+      '@csstools/postcss-relative-color-syntax': 1.0.2(postcss@8.4.24)
       '@csstools/postcss-scope-pseudo-class': 2.0.2(postcss@8.4.24)
       '@csstools/postcss-stepped-value-functions': 2.1.1(postcss@8.4.24)
       '@csstools/postcss-text-decoration-shorthand': 2.2.4(postcss@8.4.24)
