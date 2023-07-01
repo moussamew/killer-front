@@ -1,5 +1,10 @@
-.infos {
+.winner {
+  margin-bottom: var(--spacing-large);
   text-align: center;
+}
+
+.playerList {
+  margin-bottom: var(--spacing-large);
 }
 
 .image {

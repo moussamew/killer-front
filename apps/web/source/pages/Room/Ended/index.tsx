@@ -1,12 +1,12 @@
 import { useTranslation } from '@killerparty/intl';
 import { useParams } from 'react-router-dom';
 
-import Winner from '@/assets/images/winner.png';
 import { Button } from '@/components/Button';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 
+import { CurrentAvatar } from './CurrentAvatar';
 import styles from './styles/index.module.css';
 
 export function EndedRoomPage(): JSX.Element {
@@ -22,11 +22,10 @@ export function EndedRoomPage(): JSX.Element {
 
   return (
     <>
-      <div className={styles.infos}>
+      <div className={styles.winner}>
         <h1>{t('room.winner.name', { playerName: room?.winner?.name })}</h1>
-        <p>{t('room.winner.congrats')}</p>
+        {room?.winner && <CurrentAvatar winner={room.winner} />}
       </div>
-      <img alt="notFound" src={Winner} className={styles.image} />
       <Button color="primary" onClick={handleLeaveRoom}>
         {t('room.play.another.party.button')}
       </Button>
