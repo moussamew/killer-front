@@ -72,6 +72,8 @@
   "room.player.killed.modal.warning": "You will not be able to play this party anymore and be considered as dead!",
   "room.player.killed.modal.confirm.button": "Kill me",
   "room.winner.name": "And the winner is.. {{playerName}}!",
+  "room.ended.ranking.title": "Ranking of the game",
+  "room.ended.ranking.description": "Score and player rankings for the game",
   "room.play.another.party.button": "Play another party",
   "notfound.title": "Oops, something goes wrong",
   "notfound.description": "The page you requested can not be found.",

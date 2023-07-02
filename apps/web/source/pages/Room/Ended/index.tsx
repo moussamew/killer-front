@@ -7,6 +7,7 @@ import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 
 import { CurrentAvatar } from './CurrentAvatar';
+import { Ranking } from './Ranking';
 import styles from './styles/index.module.css';
 
 export function EndedRoomPage(): JSX.Element {
@@ -26,6 +27,7 @@ export function EndedRoomPage(): JSX.Element {
         <h1>{t('room.winner.name', { playerName: room?.winner?.name })}</h1>
         {room?.winner && <CurrentAvatar winner={room.winner} />}
       </div>
+      <Ranking room={room} />
       <Button color="primary" onClick={handleLeaveRoom}>
         {t('room.play.another.party.button')}
       </Button>
