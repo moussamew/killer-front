@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .:
@@ -113,7 +109,7 @@ importers:
         version: link:../../packages/ui
       '@tanstack/react-query':
         specifier: 4.29.19
-        version: 4.29.19(react-dom@18.2.0)(react@18.2.0)
+        version: 4.29.19(react-dom@18.2.0)(react-native@0.72.1)(react@18.2.0)
       clsx:
         specifier: 1.2.1
         version: 1.2.1
@@ -338,10 +334,13 @@ importers:
         version: link:../intl
       '@tanstack/react-query':
         specifier: 4.29.19
-        version: 4.29.19(react-dom@18.2.0)(react@18.2.0)
+        version: 4.29.19(react-dom@18.2.0)(react-native@0.72.1)(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
+      react-native-toast-message:
+        specifier: 2.1.6
+        version: 2.1.6(react-native@0.72.1)(react@18.2.0)
     devDependencies:
       '@killerparty/config':
         specifier: workspace:*
@@ -3756,7 +3755,7 @@ packages:
     resolution: {integrity: sha512-uPe1DukeIpIHpQi6UzIgBcXsjjsDaLnc7hF+zLBKnaUlh7jFE/A+P8t4cU4VzKPMFB/C970n/9SxtpO5hmIRgw==}
     dev: false
 
-  /@tanstack/react-query@4.29.19(react-dom@18.2.0)(react@18.2.0):
+  /@tanstack/react-query@4.29.19(react-dom@18.2.0)(react-native@0.72.1)(react@18.2.0):
     resolution: {integrity: sha512-XiTIOHHQ5Cw1WUlHaD4fmVUMhoWjuNJlAeJGq7eM4BraI5z7y8WkZO+NR8PSuRnQGblpuVdjClQbDFtwxTtTUw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -3771,6 +3770,7 @@ packages:
       '@tanstack/query-core': 4.29.19
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+      react-native: 0.72.1(@babel/core@7.22.6)(@babel/preset-env@7.22.6)(react@18.2.0)
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
@@ -10569,6 +10569,16 @@ packages:
       react: 18.2.0
       react-native: 0.72.1(@babel/core@7.22.6)(@babel/preset-env@7.22.6)(react@18.2.0)
 
+  /react-native-toast-message@2.1.6(react-native@0.72.1)(react@18.2.0):
+    resolution: {integrity: sha512-VctXuq20vmRa9AE13acaNZhrLcS3FaBS2zEevS3+vhBsnVZYG0FIlWIis9tVnpnNxUb3ART+BWtwQjzSttXTng==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      react: 18.2.0
+      react-native: 0.72.1(@babel/core@7.22.6)(@babel/preset-env@7.22.6)(react@18.2.0)
+    dev: false
+
   /react-native@0.72.1(@babel/core@7.22.6)(@babel/preset-env@7.22.6)(react@18.2.0):
     resolution: {integrity: sha512-O9cIVD++kt2XQl0XLCUGUgwSKr8xp+yo0ho5QK6KYWJrCFnnvQLTKL0+HD0rZUcuqFfGknHQJh3h0moQO2EMDg==}
     engines: {node: '>=16'}
@@ -12749,3 +12759,7 @@ packages:
   /yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
