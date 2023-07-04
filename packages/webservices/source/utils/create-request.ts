@@ -1,6 +1,5 @@
 import { type TranslationKey, t } from '@killerparty/intl';
-
-/* import { toast } from 'react-hot-toast'; */
+import Toast from 'react-native-toast-message';
 
 import { type Method } from '../types';
 
@@ -17,7 +16,7 @@ export async function createRequest<T>({
   method,
   requestInit,
 }: RequestParams): Promise<T> {
-  /* const token = AsyncStorage.getItem('token'); */
+  /*   const token = AsyncStorage.getItem('token'); */
 
   const response = await fetch(url, {
     headers: {
@@ -29,7 +28,10 @@ export async function createRequest<T>({
     method,
     ...requestInit,
   }).catch((error) => {
-    /*     toast.error(t('errors.SERVER_ERROR')); */
+    Toast.show({
+      type: 'error',
+      text2: t('errors.SERVER_ERROR'),
+    });
 
     throw new Error(error.message);
   });
@@ -43,7 +45,10 @@ export async function createRequest<T>({
   if (response.status === 403) {
     const errorMessage = t('errors.FORBIDDEN');
 
-    /*     toast.error(errorMessage); */
+    Toast.show({
+      type: 'error',
+      text2: errorMessage,
+    });
 
     throw new RequestError({
       message: errorMessage,
@@ -55,7 +60,10 @@ export async function createRequest<T>({
   if (response.status === 404) {
     const errorMessage = t('errors.NOT_FOUND');
 
-    /*     toast.error(errorMessage); */
+    Toast.show({
+      type: 'error',
+      text2: errorMessage,
+    });
 
     throw new RequestError({
       message: errorMessage,
@@ -75,7 +83,10 @@ export async function createRequest<T>({
 
     const errorMessage = t(`errors.${result.message}` as TranslationKey);
 
-    /*     toast.error(errorMessage); */
+    Toast.show({
+      type: 'error',
+      text2: errorMessage,
+    });
 
     throw new RequestError({
       message: errorMessage,
@@ -86,8 +97,11 @@ export async function createRequest<T>({
   if (response.status >= 400) {
     const errorMessage = t(`errors.${result?.detail}` as TranslationKey);
 
-    /*   toast.error(errorMessage);
-     */
+    Toast.show({
+      type: 'error',
+      text2: errorMessage,
+    });
+
     throw new RequestError({
       message: errorMessage,
       errorCode: result?.detail,
