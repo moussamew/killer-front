@@ -1,4 +1,5 @@
 import { type TranslationKey, t } from '@killerparty/intl';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-toast-message';
 
 import { type Method } from '../types';
@@ -16,13 +17,13 @@ export async function createRequest<T>({
   method,
   requestInit,
 }: RequestParams): Promise<T> {
-  /*   const token = AsyncStorage.getItem('token'); */
+  const token = await AsyncStorage.getItem('token');
 
   const response = await fetch(url, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      /* ...(token && { Authorization: `Bearer ${token}` }), */
+      ...(token && { Authorization: `Bearer ${token}` }),
     },
     credentials: 'include',
     method,
@@ -79,7 +80,7 @@ export async function createRequest<T>({
       result.message,
     )
   ) {
-    /* localStorage.removeItem('token'); */
+    await AsyncStorage.removeItem('token');
 
     const errorMessage = t(`errors.${result.message}` as TranslationKey);
 
@@ -109,7 +110,7 @@ export async function createRequest<T>({
   }
 
   if (result?.token) {
-    /*  localStorage.setItem('token', result.token); */
+    await AsyncStorage.setItem('token', result.token);
   }
 
   return result;
