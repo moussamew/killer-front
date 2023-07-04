@@ -32,3 +32,4 @@ export {
   startPartyRequest,
 } from './services/room/requests';
 export { WebServicesProvider } from './provider';
+export { useSession } from './services/player/queries';
