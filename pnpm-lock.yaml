@@ -39,8 +39,8 @@ importers:
         specifier: 1.6.0
         version: 1.6.0
       intl-pluralrules:
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.0.1
+        version: 2.0.1
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -7404,8 +7404,8 @@ packages:
       has: 1.0.3
       side-channel: 1.0.4
 
-  /intl-pluralrules@2.0.0:
-    resolution: {integrity: sha512-YlHi/pve75R2kyvGFyDvmL+zECVrEONSbdeGwXtDXHulvNgcmT1rhwyfMCX/BPzBRuW7b2Uu4oQqnYs7ti8WIA==}
+  /intl-pluralrules@2.0.1:
+    resolution: {integrity: sha512-astxTLzIdXPeN0K9Rumi6LfMpm3rvNO0iJE+h/k8Kr/is+wPbRe4ikyDjlLr6VTh/mEfNv8RjN+gu3KwDiuhqg==}
     dev: false
 
   /invariant@2.2.4:
