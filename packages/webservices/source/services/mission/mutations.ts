@@ -14,7 +14,11 @@ export function useCreateMission(): CreateMissionMutation {
   const createMission = useMutation({
     context,
     mutationFn: createMissionRequest,
-    onSuccess: () => queryClient.invalidateQueries(['session']),
+    onSuccess: () =>
+      Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['session'] }),
+        queryClient.invalidateQueries({ queryKey: ['room'] }),
+      ]),
   });
 
   return { createMission };
@@ -26,7 +30,11 @@ export function useDeleteMission(): DeleteMissionMutation {
   const deleteMission = useMutation({
     context,
     mutationFn: deleteMissionRequest,
-    onSuccess: () => queryClient.invalidateQueries(['session']),
+    onSuccess: () =>
+      Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['session'] }),
+        queryClient.invalidateQueries({ queryKey: ['room'] }),
+      ]),
   });
 
   return { deleteMission };
