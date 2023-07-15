@@ -13,10 +13,6 @@
   transition: background-color ease-in-out 500ms, opacity ease-in-out 500ms;
   margin-bottom: var(--spacing-small);
 
-  &:disabled {
-    opacity: 0.5;
-  }
-
   &:hover:not(:disabled) {
     cursor: pointer;
   }
@@ -24,6 +20,10 @@
   &:hover:is(:disabled) {
     cursor: not-allowed;
   }
+}
+
+.disabled {
+  opacity: 0.5;
 }
 
 .primary {
