@@ -2,13 +2,12 @@
 
 .container {
   background-color: var(--color-body);
-  padding: var(--spacing-large);
-  display: flex;
-  flex: 1;
-  width: 100%;
 }
 
 .content {
+  background-color: var(--color-body);
+  padding-left: var(--spacing-large);
+  padding-right: var(--spacing-large);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -29,7 +28,7 @@
 }
 
 .image {
-  height: 100px;
-  width: 100px;
+  height: 125px;
+  width: 125px;
   align-self: center;
 }
