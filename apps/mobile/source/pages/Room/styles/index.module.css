@@ -5,7 +5,6 @@
   padding: var(--spacing-large);
   display: flex;
   flex: 1;
-  align-items: center;
 }
 
 .content {
@@ -22,6 +21,11 @@
   font-size: 26px;
   text-align: center;
   margin-bottom: var(--spacing-medium);
+}
+
+.joinRoomCode {
+  text-align: center;
+  margin-bottom: var(--spacing-small);
 }
 
 .image {
