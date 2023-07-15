@@ -6,8 +6,9 @@ import { type RootStackParamList } from '../../app/routes';
 
 import { CanStartParty } from './CanStartParty';
 import { CreateMission } from './CreateMission';
+import { PlayerList } from './PlayerList';
 import { PlayerMissions } from './PlayerMissions';
-import { RoomMissions } from './RoomMissions';
+/* import { RoomMissions } from './RoomMissions'; */
 import { ShareRoomLink } from './ShareRoomLink';
 import { StartPartyButton } from './StartPartyButton';
 import styles from './styles/index.module.css';
@@ -32,12 +33,12 @@ export function PendingRoomPage({ route }: Props): JSX.Element | null {
         </Text>
         <ShareRoomLink />
         <StartPartyButton />
-        <RoomMissions roomCode={roomCode} />
+        <CanStartParty roomCode={roomCode} />
+        {/* <RoomMissions roomCode={roomCode} /> */}
         <PlayerMissions />
         <CreateMission />
-        <CanStartParty roomCode={roomCode} />
+        <PlayerList roomCode={roomCode} />
       </View>
-      {/*  <PlayerList /> */}
     </ScrollView>
   );
 }
