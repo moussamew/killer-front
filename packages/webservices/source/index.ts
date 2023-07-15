@@ -33,3 +33,4 @@ export {
 } from './services/room/requests';
 export { WebServicesProvider } from './provider';
 export { useSession } from './services/player/queries';
+export { useRoom } from './services/room/queries';
