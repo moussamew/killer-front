@@ -1,4 +1,7 @@
 {
   "root": true,
-  "extends": ["global"]
+  "extends": ["global"],
+  "rules": {
+    "global-require": "off"
+  }
 }
