@@ -1,5 +1,13 @@
 @import '@killerparty/ui/assets/styles/variables.module.css';
 
+.container {
+  background-color: var(--color-body);
+  padding: var(--spacing-large);
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -7,6 +15,12 @@
   justify-content: space-between;
   padding-bottom: var(--spacing-medium);
   border-bottom: 1px solid var(--color-black-90);
+  margin-bottom: var(--spacing-medium);
+}
+
+.title {
+  font-size: 26px;
+  text-align: center;
   margin-bottom: var(--spacing-medium);
 }
 

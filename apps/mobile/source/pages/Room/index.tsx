@@ -1,9 +1,6 @@
 import { useTranslation } from '@killerparty/intl';
 import { useSession } from '@killerparty/webservices';
-import { Text, View } from 'react-native';
-/* import { useParams } from 'react-router-dom'; */
-
-/* import Island from '@/assets/images/island.png'; */
+import { Text, View, Image } from 'react-native';
 
 import styles from './styles/index.module.css';
 
@@ -12,11 +9,12 @@ export function PendingRoomPage(): JSX.Element | null {
   const { t } = useTranslation();
 
   return (
-    <>
+    <View style={styles.container}>
       <View style={styles.content}>
-        {/*         <img alt="island" src={Island} className={styles.image} /> */}
+        {/* eslint-disable-next-line global-require */}
+        <Image source={require('../../assets/images/island.png')} />
         <View style={styles.description}>
-          <Text>{t('room.welcome.title')}</Text>
+          <Text style={styles.title}>{t('room.welcome.title')}</Text>
           <Text>
             {t('room.join.room.code', { roomCode: session?.room?.id })}
           </Text>
@@ -33,6 +31,6 @@ export function PendingRoomPage(): JSX.Element | null {
         {/* <PlayerMissions />
         <PlayerList /> */}
       </View>
-    </>
+    </View>
   );
 }
