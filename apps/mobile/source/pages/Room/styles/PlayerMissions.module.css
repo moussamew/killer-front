@@ -23,12 +23,13 @@
 
 .cards {
   display: flex;
+  flex-direction: row;
+  margin-bottom: var(--spacing-small);
   flex-wrap: wrap;
 }
 
 .card {
   position: relative;
-  max-width: fit-content;
   padding: var(--spacing-small);
   border: 1px solid var(--color-black-60);
   border-radius: var(--radius-small);
