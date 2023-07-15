@@ -6,7 +6,7 @@ export function CustomErrorToast(props: BaseToastProps): JSX.Element {
       {...props}
       style={{
         backgroundColor: '#F87171',
-        height: 60,
+        height: 80,
         borderRadius: 10,
         width: '90%',
       }}
