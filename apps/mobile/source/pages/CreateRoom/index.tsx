@@ -34,7 +34,6 @@ export function CreateRoomPage(): JSX.Element {
           value={pseudo}
         />
       </View>
-
       <Button
         color="primary"
         onPress={handleCreateRoom}

@@ -30,6 +30,7 @@ export function Routes(): JSX.Element {
     <Stack.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: '#fdf7f2' },
+        headerBackTitleVisible: false,
       }}
     >
       {session?.room?.id ? (
