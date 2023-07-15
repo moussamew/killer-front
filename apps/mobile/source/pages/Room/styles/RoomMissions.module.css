@@ -1,0 +1,8 @@
+@import '@killerparty/ui/assets/styles/variables.module.css';
+
+.missions {
+  padding: var(--spacing-medium);
+  border: 1px solid var(--color-black-90);
+  background-color: var(--color-body-secondary);
+  align-items: center;
+}
