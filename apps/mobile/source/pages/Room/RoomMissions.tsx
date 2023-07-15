@@ -8,11 +8,15 @@ interface Props {
   roomCode: string;
 }
 
-export function RoomMissions({ roomCode }: Props): JSX.Element {
+export function RoomMissions({ roomCode }: Props): JSX.Element | null {
   const { room } = useRoom(roomCode);
   const { t } = useTranslation();
 
   const missions = room?.missions.length;
+
+  if (!missions) {
+    return null;
+  }
 
   return (
     <View style={styles.missions}>
