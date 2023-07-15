@@ -1,10 +1,11 @@
 import { useTranslation } from '@killerparty/intl';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, ScrollView } from 'react-native';
 
 import { type RootStackParamList } from '../../app/routes';
 
 import { CanStartParty } from './CanStartParty';
+import { CreateMission } from './CreateMission';
 import { PlayerMissions } from './PlayerMissions';
 import { RoomMissions } from './RoomMissions';
 import { ShareRoomLink } from './ShareRoomLink';
@@ -19,7 +20,7 @@ export function PendingRoomPage({ route }: Props): JSX.Element | null {
   const { roomCode } = route.params;
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.content}>
         <Image
           source={require('../../assets/images/island.png')}
@@ -32,11 +33,11 @@ export function PendingRoomPage({ route }: Props): JSX.Element | null {
         <ShareRoomLink />
         <StartPartyButton />
         <RoomMissions roomCode={roomCode} />
-        <CanStartParty roomCode={roomCode} />
         <PlayerMissions />
+        <CreateMission />
+        <CanStartParty roomCode={roomCode} />
       </View>
-      {/* <PlayerMissions />
-        <PlayerList /> */}
-    </View>
+      {/*  <PlayerList /> */}
+    </ScrollView>
   );
 }
