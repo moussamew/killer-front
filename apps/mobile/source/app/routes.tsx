@@ -10,7 +10,7 @@ import { PendingRoomPage } from '../pages/Room';
 export type RootStackParamList = {
   Home: undefined;
   CreateRoom: undefined;
-  Room: undefined;
+  Room: { roomCode: string };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -32,11 +32,12 @@ export function Routes(): JSX.Element {
         headerStyle: { backgroundColor: '#fdf7f2' },
       }}
     >
-      {session ? (
+      {session?.room?.id ? (
         <Stack.Screen
           name="Room"
           component={PendingRoomPage}
           options={{ title: t('room.welcome.title') }}
+          initialParams={{ roomCode: session.room.id }}
         />
       ) : (
         <>
