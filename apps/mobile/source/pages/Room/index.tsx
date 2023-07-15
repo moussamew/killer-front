@@ -3,6 +3,7 @@ import { useSession } from '@killerparty/webservices';
 import { Text, View, Image } from 'react-native';
 
 import { ShareRoomLink } from './ShareRoomLink';
+import { StartPartyButton } from './StartPartyButton';
 import styles from './styles/index.module.css';
 
 export function PendingRoomPage(): JSX.Element | null {
@@ -20,8 +21,7 @@ export function PendingRoomPage(): JSX.Element | null {
             {t('room.join.room.code', { roomCode: session?.room?.id })}
           </Text>
           <ShareRoomLink />
-          {/* <ShareRoomLink />
-          <StartPartyButton /> */}
+          <StartPartyButton />
         </View>
         <View style={styles.infos}>
           {/*  <RoomMissions />
