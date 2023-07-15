@@ -6,7 +6,7 @@
   "lockFileMaintenance": { "enabled": true },
   "packageRules": [
     {
-      "updateTypes": ["minor", "patch", "pin", "digest"],
+      "updateTypes": ["major", "minor", "patch", "pin", "digest"],
       "automerge": true
     }
   ]
