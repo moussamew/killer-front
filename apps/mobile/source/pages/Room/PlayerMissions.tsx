@@ -33,7 +33,7 @@ export function PlayerMissions(): JSX.Element {
             <Text>{content}</Text>
             <Delete
               title={t('tooltip.delete.mission')}
-              onClick={() => handleDeleteMission(id)}
+              onPress={() => handleDeleteMission(id)}
               className={styles.deleteMission}
             />
           </View>

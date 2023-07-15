@@ -12,7 +12,7 @@ interface Props {
 }
 
 export function CanStartParty({ roomCode }: Props): JSX.Element {
-  const { room } = useRoom(roomCode!);
+  const { room } = useRoom(roomCode);
   const { t } = useTranslation();
 
   const allPlayersHasProposedMission = room?.players.every(
