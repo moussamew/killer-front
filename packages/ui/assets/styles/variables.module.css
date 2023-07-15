@@ -41,6 +41,7 @@
   --color-red-60: hsl(360deg 100% 60%);
 
   /** Font sizes */
+  --text-very-small: 14px;
   --text-small: 16px;
   --text-medium: 18px;
   --text-large: 20px;
