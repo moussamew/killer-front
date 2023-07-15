@@ -39,7 +39,6 @@ export function PlayerMissions(): JSX.Element {
           </View>
         ))}
       </View>
-      {/* <CreateMission /> */}
     </View>
   );
 }
