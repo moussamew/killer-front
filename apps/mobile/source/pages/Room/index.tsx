@@ -4,6 +4,7 @@ import { Text, View, Image } from 'react-native';
 
 import { type RootStackParamList } from '../../app/routes';
 
+import { CanStartParty } from './CanStartParty';
 import { RoomMissions } from './RoomMissions';
 import { ShareRoomLink } from './ShareRoomLink';
 import { StartPartyButton } from './StartPartyButton';
@@ -30,8 +31,7 @@ export function PendingRoomPage({ route }: Props): JSX.Element | null {
         <ShareRoomLink />
         <StartPartyButton />
         <RoomMissions roomCode={roomCode} />
-        {/*  
-          <CanStartParty /> */}
+        <CanStartParty roomCode={roomCode} />
       </View>
       <View style={styles.features}>
         {/* <PlayerMissions />
