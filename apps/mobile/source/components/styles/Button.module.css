@@ -36,7 +36,7 @@
 
 .primaryText {
   color: var(--color-white);
-  font-size: var(--text-medium);
+  font-size: var(--text-small);
 }
 
 .primaryPressed {
@@ -54,7 +54,7 @@
 
 .secondaryText {
   color: var(--color-black-30);
-  font-size: var(--text-medium);
+  font-size: var(--text-small);
 }
 
 .secondaryPressed {
