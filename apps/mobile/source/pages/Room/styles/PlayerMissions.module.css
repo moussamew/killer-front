@@ -6,8 +6,6 @@
   align-items: center;
   padding-top: var(--spacing-medium);
   padding-bottom: var(--spacing-medium);
-  border-bottom: 1px solid var(--color-black-90);
-  border-top: 1px solid var(--color-black-90);
 }
 
 .image {
