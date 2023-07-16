@@ -4,6 +4,7 @@
   padding: var(--spacing-medium);
   border: 1px solid var(--color-black-90);
   margin-top: var(--spacing-medium);
+  margin-bottom: var(--spacing-medium);
   background-color: var(--color-body-secondary);
 }
 
