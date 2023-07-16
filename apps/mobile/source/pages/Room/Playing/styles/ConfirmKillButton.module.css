@@ -1,0 +1,13 @@
+@import '@killerparty/ui/assets/styles/variables.module.css';
+
+.title {
+  font-size: var(--text-large);
+  margin-bottom: var(--spacing-small);
+  text-align: center;
+}
+
+.subtitle {
+  margin-bottom: var(--spacing-medium);
+  margin-bottom: var(--spacing-large);
+  text-align: center;
+}
