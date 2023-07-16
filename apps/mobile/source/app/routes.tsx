@@ -5,7 +5,8 @@ import { Text, View } from 'react-native';
 
 import { CreateRoomPage } from '../pages/CreateRoom';
 import { HomePage } from '../pages/Home';
-import { PendingRoomPage } from '../pages/Room';
+import { PendingRoomPage } from '../pages/Room/Pending';
+import { PlayingRoomPage } from '../pages/Room/Playing';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -36,7 +37,11 @@ export function Routes(): JSX.Element {
       {session?.room?.id ? (
         <Stack.Screen
           name="Room"
-          component={PendingRoomPage}
+          component={
+            session.room.status === 'PENDING'
+              ? PendingRoomPage
+              : PlayingRoomPage
+          }
           options={{ title: t('room.welcome.title') }}
           initialParams={{ roomCode: session.room.id }}
         />

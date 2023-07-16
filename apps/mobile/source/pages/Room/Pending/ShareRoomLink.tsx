@@ -1,6 +1,6 @@
 import { useTranslation } from '@killerparty/intl';
 
-import { Button } from '../../components/Button';
+import { Button } from '../../../components/Button';
 
 export function ShareRoomLink(): JSX.Element {
   const { t } = useTranslation();

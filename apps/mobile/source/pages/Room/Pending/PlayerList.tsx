@@ -3,11 +3,11 @@ import { useRoom, useSession, useUpdatePlayer } from '@killerparty/webservices';
 import { useEffect } from 'react';
 import { View, Text } from 'react-native';
 
-import Checked from '../../assets/icons/checked.svg';
+import Checked from '../../../assets/icons/checked.svg';
 /* import Crown from '../../assets/icons/crown.svg'; */
-import Delete from '../../assets/icons/delete.svg';
-import { Button } from '../../components/Button';
-import { avatarsList } from '../../helpers/avatars';
+import Delete from '../../../assets/icons/delete.svg';
+import { Button } from '../../../components/Button';
+import { avatarsList } from '../../../helpers/avatars';
 
 import styles from './styles/PlayerList.module.css';
 

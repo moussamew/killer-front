@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import { Text, View, Image, ScrollView } from 'react-native';
 import EventSource from 'react-native-sse';
 
-import { type RootStackParamList } from '../../app/routes';
+import { type RootStackParamList } from '../../../app/routes';
 
 import { CanStartParty } from './CanStartParty';
 import { CreateMission } from './CreateMission';
@@ -58,7 +58,7 @@ export function PendingRoomPage({ route }: Props): JSX.Element | null {
     <ScrollView style={styles.container}>
       <View style={styles.content}>
         <Image
-          source={require('../../assets/images/island.png')}
+          source={require('../../../assets/images/island.png')}
           style={styles.image}
         />
         <Text style={styles.title}>{t('room.welcome.title')}</Text>
