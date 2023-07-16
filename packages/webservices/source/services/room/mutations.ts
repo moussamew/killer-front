@@ -38,7 +38,13 @@ export function useDeleteRoom(): DeleteRoomMutation {
 }
 
 export function useStartParty(): StartPartyMutation {
-  const startParty = useMutation({ context, mutationFn: startPartyRequest });
+  const queryClient = useQueryClient({ context });
+
+  const startParty = useMutation({
+    context,
+    mutationFn: startPartyRequest,
+    onSuccess: () => queryClient.invalidateQueries(['session']),
+  });
 
   return { startParty };
 }

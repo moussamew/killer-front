@@ -1,7 +1,7 @@
 import { useTranslation } from '@killerparty/intl';
 import { useRoom, useStartParty } from '@killerparty/webservices';
 
-import { Button } from '../../components/Button';
+import { Button } from '../../../components/Button';
 
 interface Props {
   roomCode: string;
@@ -13,7 +13,7 @@ export function StartPartyButton({ roomCode }: Props): JSX.Element {
   const { room } = useRoom(roomCode);
 
   const handleStartParty = (): void => {
-    startParty.mutateAsync(roomCode!);
+    startParty.mutate(roomCode);
   };
 
   const allPlayersHasProposedMission = room?.players.every(
