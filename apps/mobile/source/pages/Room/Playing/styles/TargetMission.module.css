@@ -1,0 +1,15 @@
+@import '@killerparty/ui/assets/styles/variables.module.css';
+
+.mission {
+  align-items: center;
+  width: 100%;
+  padding: var(--spacing-small);
+  border: 1px solid var(--color-black-90);
+  margin-bottom: var(--spacing-large);
+  background-color: var(--color-body-secondary);
+}
+
+.targetMission {
+  font-size: var(--text-large);
+  font-weight: 500;
+}
