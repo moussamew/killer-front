@@ -2,7 +2,6 @@
 
 .view {
   padding: var(--spacing-large);
-  background-color: var(--color-body);
   display: flex;
   flex: 1;
   align-items: center;
