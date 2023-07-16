@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .:
@@ -53,6 +49,9 @@ importers:
       react-native-screens:
         specifier: 3.22.1
         version: 3.22.1(react-native@0.72.3)(react@18.2.0)
+      react-native-sse:
+        specifier: 1.1.0
+        version: 1.1.0
       react-native-svg:
         specifier: 13.10.0
         version: 13.10.0(react-native@0.72.3)(react@18.2.0)
@@ -10920,6 +10919,10 @@ packages:
       warn-once: 0.1.1
     dev: false
 
+  /react-native-sse@1.1.0:
+    resolution: {integrity: sha512-qPhZwuVg7ry0Cw8Q2+0VH90on223obZcfB5a/2ktoD3951zWx7HXAtrqQtDfLGjv7ncSJoswd+efn2k0uoR5lw==}
+    dev: false
+
   /react-native-svg-transformer@1.0.0(react-native-svg@13.10.0)(react-native@0.72.3):
     resolution: {integrity: sha512-ALHU5VvLLyKM/BvyEG7VYJmqglvaXtU7mGRCxrEwwpJO/GBf1ZMUzc4AeJAjSodj7yYtlDYRxNSt9ySWpaa6JQ==}
     peerDependencies:
@@ -13162,3 +13165,7 @@ packages:
   /yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
