@@ -1,5 +1,5 @@
-import { t } from '@killerparty/intl';
-import { useSession } from '@killerparty/webservices';
+import { useTranslation } from '@killerparty/intl';
+import { type RoomStatus, useSession } from '@killerparty/webservices';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Text, View } from 'react-native';
 
@@ -11,13 +11,53 @@ import { PlayingRoomPage } from '../pages/Room/Playing';
 export type RootStackParamList = {
   Home: undefined;
   CreateRoom: undefined;
-  Room: { roomCode: string };
+  PendingRoom: { roomCode: string };
+  PlayingRoom: { roomCode: string };
+  EndedRoom: { roomCode: string };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+interface Props {
+  roomCode: string;
+  t: ReturnType<typeof useTranslation>['t'];
+}
+
+function GenerateRoomPageScreen({
+  roomCode,
+  t,
+}: Props): Record<RoomStatus, JSX.Element> {
+  return {
+    PENDING: (
+      <Stack.Screen
+        name="PendingRoom"
+        component={PendingRoomPage}
+        options={{ title: 'Killer Party' }}
+        initialParams={{ roomCode }}
+      />
+    ),
+    IN_GAME: (
+      <Stack.Screen
+        name="PlayingRoom"
+        component={PlayingRoomPage}
+        options={{ title: t('room.playing.title') }}
+        initialParams={{ roomCode }}
+      />
+    ),
+    ENDED: (
+      <Stack.Screen
+        name="EndedRoom"
+        component={() => <View>Finito</View>}
+        options={{ title: '' }}
+        initialParams={{ roomCode }}
+      />
+    ),
+  };
+}
+
 export function Routes(): JSX.Element {
   const { isLoading, session } = useSession();
+  const { t } = useTranslation();
 
   if (isLoading) {
     return (
@@ -35,22 +75,15 @@ export function Routes(): JSX.Element {
       }}
     >
       {session?.room?.id ? (
-        <Stack.Screen
-          name="Room"
-          component={
-            session.room.status === 'PENDING'
-              ? PendingRoomPage
-              : PlayingRoomPage
-          }
-          options={{ title: t('room.welcome.title') }}
-          initialParams={{ roomCode: session.room.id }}
-        />
+        GenerateRoomPageScreen({ roomCode: session.room.id, t })[
+          session.room.status
+        ]
       ) : (
         <>
           <Stack.Screen
             name="Home"
             component={HomePage}
-            options={{ title: 'KILLER PARTY' }}
+            options={{ title: t('home.title') }}
           />
           <Stack.Screen
             name="CreateRoom"

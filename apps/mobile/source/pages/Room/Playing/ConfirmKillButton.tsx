@@ -13,7 +13,7 @@ export function ConfirmKillButton(): JSX.Element {
       <Text style={styles.title}>{t('room.killed.message')}</Text>
       <Text style={styles.subtitle}>{t('room.killed.notify')}</Text>
       <Button
-        color="primary"
+        color="secondary"
         onPress={() => {}}
         text={t('room.killed.button')}
       />

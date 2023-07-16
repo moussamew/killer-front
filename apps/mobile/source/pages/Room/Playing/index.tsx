@@ -11,7 +11,7 @@ import { ConfirmKillButton } from './ConfirmKillButton';
 import styles from './styles/index.module.css';
 import { TargetMission } from './TargetMission';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Room'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'PlayingRoom'>;
 
 export function PlayingRoomPage({ route }: Props): JSX.Element {
   const { roomCode } = route.params;

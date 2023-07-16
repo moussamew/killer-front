@@ -24,7 +24,7 @@ export function CreateRoomPage(): JSX.Element {
 
   return (
     <View style={styles.view}>
-      <CurrentAvatar />
+      <CurrentAvatar canUpdateAvatar />
       <View style={styles.content}>
         <Text style={styles.label}>{t('home.create.pseudo.label')}</Text>
         <TextInput

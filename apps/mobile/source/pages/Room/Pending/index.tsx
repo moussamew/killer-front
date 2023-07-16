@@ -21,7 +21,7 @@ import { ShareRoomLink } from './ShareRoomLink';
 import { StartPartyButton } from './StartPartyButton';
 import styles from './styles/index.module.css';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Room'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'PendingRoom'>;
 
 export function PendingRoomPage({ route }: Props): JSX.Element | null {
   const { t } = useTranslation();
