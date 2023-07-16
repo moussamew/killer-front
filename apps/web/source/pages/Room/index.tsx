@@ -50,7 +50,7 @@ export function RoomPage(): JSX.Element | null {
     });
 
     return () => roomEventSource.close();
-  }, [roomCode, session?.id, navigate, refetchSession, refetchRoom]);
+  }, [roomCode, session?.id, refetchSession, refetchRoom]);
 
   /**
    * Redirect player to the correct route by checking its session.
