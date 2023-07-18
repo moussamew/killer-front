@@ -248,8 +248,8 @@ importers:
         specifier: 3.2.0
         version: 3.2.0(vite@4.4.4)
       whatwg-fetch:
-        specifier: 3.6.2
-        version: 3.6.2
+        specifier: 3.6.16
+        version: 3.6.16
 
   packages/config:
     devDependencies:
@@ -12647,6 +12647,10 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       iconv-lite: 0.6.3
+    dev: true
+
+  /whatwg-fetch@3.6.16:
+    resolution: {integrity: sha512-83avoGbZ0qtjtNrU3UTT3/Xd3uZ7DyfSYLuc1fL5iYs+93P+UkIVF6/6xpRVWeQcvbc7kSnVybSAVbd6QFW5Fg==}
     dev: true
 
   /whatwg-fetch@3.6.2:
