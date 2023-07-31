@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "i18next": "23.4.1",
-    "react-i18next": "13.0.2"
+    "react-i18next": "13.0.3"
   },
   "devDependencies": {
     "eslint-config-global": "workspace:*",
