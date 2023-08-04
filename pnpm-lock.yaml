@@ -176,8 +176,8 @@ importers:
         specifier: 3.1.0
         version: 3.1.0
       babel-plugin-transform-import-meta:
-        specifier: 2.2.0
-        version: 2.2.0(@babel/core@7.22.9)
+        specifier: 2.2.1
+        version: 2.2.1(@babel/core@7.22.9)
       babel-plugin-transform-vite-meta-env:
         specifier: 1.0.3
         version: 1.0.3
@@ -4701,13 +4701,13 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
 
-  /babel-plugin-transform-import-meta@2.2.0(@babel/core@7.22.9):
-    resolution: {integrity: sha512-+DNF2SJAj2Pd0b1sObz+hyzNgUlI9DccPtMcF7ulMM0BxPrMF83ERjvPQwcQ9FRFSddWcC7DOw0FuyWgkQRoqg==}
+  /babel-plugin-transform-import-meta@2.2.1(@babel/core@7.22.9):
+    resolution: {integrity: sha512-AxNh27Pcg8Kt112RGa3Vod2QS2YXKKJ6+nSvRtv7qQTJAdx0MZa4UHZ4lnxHUWA2MNbLuZQv5FVab4P1CoLOWw==}
     peerDependencies:
       '@babel/core': ^7.10.0
     dependencies:
       '@babel/core': 7.22.9
-      '@babel/template': 7.21.9
+      '@babel/template': 7.22.5
       tslib: 2.5.2
     dev: true
 
