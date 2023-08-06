@@ -11,20 +11,21 @@ import styles from './styles/index.module.css';
 
 export function CreateRoomPage(): JSX.Element {
   const [pseudo, setPseudo] = useState('');
+  const [avatar, setAvatar] = useState(getRandomAvatar());
   const { t } = useTranslation();
   const { createRoom } = useCreateRoom();
   const { createPlayer } = useCreatePlayer();
 
   const handleCreateRoom = async (): Promise<void> => {
     await createPlayer.mutateAsync(
-      { name: pseudo, avatar: getRandomAvatar() },
+      { name: pseudo, avatar },
       { onSuccess: () => createRoom.mutate() },
     );
   };
 
   return (
     <View style={styles.view}>
-      <CurrentAvatar canUpdateAvatar />
+      <CurrentAvatar updateAvatarCallback={setAvatar} avatar={avatar} />
       <View style={styles.content}>
         <Text style={styles.label}>{t('home.create.pseudo.label')}</Text>
         <TextInput
