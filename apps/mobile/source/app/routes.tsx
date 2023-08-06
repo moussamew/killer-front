@@ -5,12 +5,14 @@ import { Text, View } from 'react-native';
 
 import { CreateRoomPage } from '../pages/CreateRoom';
 import { HomePage } from '../pages/Home';
+import { JoinRoomPage } from '../pages/JoinRoom';
 import { PendingRoomPage } from '../pages/Room/Pending';
 import { PlayingRoomPage } from '../pages/Room/Playing';
 
 export type RootStackParamList = {
   Home: undefined;
   CreateRoom: undefined;
+  JoinRoom: undefined;
   PendingRoom: { roomCode: string };
   PlayingRoom: { roomCode: string };
   EndedRoom: { roomCode: string };
@@ -89,6 +91,11 @@ export function Routes(): JSX.Element {
             name="CreateRoom"
             component={CreateRoomPage}
             options={{ title: t('create.room.page.title') }}
+          />
+          <Stack.Screen
+            name="JoinRoom"
+            component={JoinRoomPage}
+            options={{ title: t('home.join.room') }}
           />
         </>
       )}

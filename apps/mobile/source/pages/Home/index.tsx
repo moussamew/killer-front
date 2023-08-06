@@ -26,7 +26,7 @@ export function HomePage({ navigation }: Props): JSX.Element {
         />
         <Button
           color="secondary"
-          onPress={() => {}}
+          onPress={() => navigation.navigate('JoinRoom')}
           text={t('home.join.room')}
         />
         <Gallery />
