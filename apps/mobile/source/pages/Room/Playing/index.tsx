@@ -1,8 +1,14 @@
 import { useTranslation } from '@killerparty/intl';
-import { useRoom, useSession } from '@killerparty/webservices';
+import {
+  type Room,
+  ROOM_TOPIC,
+  useRoom,
+  useSession,
+} from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
 import { ScrollView, Text } from 'react-native';
+import EventSource from 'react-native-sse';
 
 import { type RootStackParamList } from '../../../app/routes';
 import { CurrentAvatar } from '../../../components/CurrentAvatar';
@@ -19,8 +25,33 @@ export function PlayingRoomPage({ route }: Props): JSX.Element {
   const { roomCode } = route.params;
   const { t } = useTranslation();
   const [targetAvatar, setTargetAvatar] = useState(getRandomAvatar());
-  const { session } = useSession();
-  const { room } = useRoom(roomCode);
+  const { session, refetchSession } = useSession();
+  const { room, refetchRoom } = useRoom(roomCode);
+
+  /**
+   * Listen to SSE events emits in the Room page.
+   */
+  useEffect(() => {
+    const roomEventSource = new EventSource(`${ROOM_TOPIC}/${roomCode}`);
+
+    roomEventSource.addEventListener('message', (event) => {
+      if (event.type === 'message' && event.data) {
+        const roomInfos: Room = JSON.parse(event.data);
+
+        const isPlayerInRoom = roomInfos.players.some(
+          ({ id }) => id === session?.id,
+        );
+
+        if (isPlayerInRoom) {
+          refetchRoom().then(refetchSession);
+        } else {
+          refetchSession();
+        }
+      }
+    });
+
+    return () => roomEventSource.close();
+  }, [roomCode, session?.id, refetchSession, refetchRoom]);
 
   // Temporary useEffect to retrieve the avatar of the target because BE doesn't prove it yet.
   useEffect(() => {
