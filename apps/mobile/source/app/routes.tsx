@@ -6,6 +6,7 @@ import { Text, View } from 'react-native';
 import { CreateRoomPage } from '../pages/CreateRoom';
 import { HomePage } from '../pages/Home';
 import { JoinRoomPage } from '../pages/JoinRoom';
+import { EndedRoomPage } from '../pages/Room/Ended';
 import { PendingRoomPage } from '../pages/Room/Pending';
 import { PlayingRoomPage } from '../pages/Room/Playing';
 
@@ -49,8 +50,8 @@ function GenerateRoomPageScreen({
     ENDED: (
       <Stack.Screen
         name="EndedRoom"
-        component={() => <View>Finito</View>}
-        options={{ title: '' }}
+        component={EndedRoomPage}
+        options={{ title: 'Killer Party' }}
         initialParams={{ roomCode }}
       />
     ),
