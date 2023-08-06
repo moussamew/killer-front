@@ -65,7 +65,7 @@
   "room.target.to.kill": "The target to kill is {{pseudo}}",
   "room.target.mission": "In order to kill your target, it must do:",
   "room.killed.message": "Someone managed to kill you?",
-  "room.killed.notify": "Click on the button above to notify other players that you have been killed.",
+  "room.killed.notify": "Click on the button below to notify other players that you have been killed.",
   "room.killed.button": "I have been killed",
   "room.player.killed.title": "Too bad! You are dead.",
   "room.player.killed.resume": "Dead men tell no tales.. You just have to wait for the end of the game.",
