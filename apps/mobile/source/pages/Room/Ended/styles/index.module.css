@@ -1,0 +1,7 @@
+@import '@killerparty/ui/assets/styles/variables.module.css';
+
+.container {
+  flex: 1;
+  padding: var(--spacing-large);
+  background-color: var(--color-body);
+}
