@@ -10,6 +10,6 @@
   },
   "devDependencies": {
     "turbo": "1.10.12",
-    "prettier": "3.0.1"
+    "prettier": "3.0.2"
   }
 }
