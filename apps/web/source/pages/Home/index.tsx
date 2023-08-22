@@ -1,7 +1,9 @@
 import { useTranslation } from '@killerparty/intl';
+import Lottie from 'lottie-react';
 import { useEffect } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
+import HomeLottie from '@/assets/lotties/home.json';
 import { Gallery } from '@/components/Gallery';
 import { type SessionQuery } from '@/services/player/types';
 
@@ -25,14 +27,19 @@ export function HomePage(): JSX.Element {
 
   return (
     <>
-      <div className={styles.introduction}>
-        <h1>{t('home.title')}</h1>
-        <h2>{t('home.subtitle')}</h2>
-        <p>{t('home.description')}</p>
-      </div>
-      <div className={commonStyles.actions}>
-        <CreateRoomButton playerName={session?.name} />
-        <JoinRoomButton />
+      <div className={styles.content}>
+        <div>
+          <div className={styles.resume}>
+            <h1>{t('home.title')}</h1>
+            <p>{t('home.description')}</p>
+          </div>
+          <Lottie className={styles.mobileLottie} animationData={HomeLottie} />
+          <div className={commonStyles.actions}>
+            <CreateRoomButton playerName={session?.name} />
+            <JoinRoomButton />
+          </div>
+        </div>
+        <Lottie className={styles.webLottie} animationData={HomeLottie} />
       </div>
       <Gallery />
       <Rules />

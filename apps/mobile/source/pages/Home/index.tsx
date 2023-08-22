@@ -17,7 +17,6 @@ export function HomePage({ navigation }: Props): JSX.Element {
   return (
     <ScrollView style={styles.scroll}>
       <View style={styles.view}>
-        <Text style={styles.subtitle}>{t('home.subtitle')}</Text>
         <Text style={styles.description}>{t('home.description')}</Text>
         <Button
           color="primary"
