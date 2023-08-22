@@ -16,7 +16,6 @@
   border: 2px solid var(--color-blue-90);
   border-radius: var(--radius-small);
   font-size: var(--text-medium);
-  outline: none;
   transition: ease-in-out 500ms;
 
   &:focus-visible {

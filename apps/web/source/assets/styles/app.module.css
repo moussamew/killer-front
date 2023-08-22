@@ -54,6 +54,11 @@ svg {
   cursor: pointer;
 }
 
+input {
+  outline: none;
+}
+
 input::placeholder {
+  color: var(--color-black-60);
   font-size: var(--text-small);
 }
