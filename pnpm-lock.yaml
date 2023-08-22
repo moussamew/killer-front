@@ -194,8 +194,16 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       jest:
+<<<<<<< HEAD
         specifier: 29.6.3
         version: 29.6.3(@types/node@18.17.7)(babel-plugin-macros@3.1.0)
+=======
+        specifier: 29.6.2
+        version: 29.6.2(@types/node@18.17.6)(babel-plugin-macros@3.1.0)
+      jest-canvas-mock:
+        specifier: ^2.5.2
+        version: 2.5.2
+>>>>>>> ff381fa (Add jest-canvas dependency to list of dependencies)
       jest-environment-jsdom:
         specifier: 29.6.3
         version: 29.6.3
@@ -5509,6 +5517,10 @@ packages:
     hasBin: true
     dev: true
 
+  /cssfontparser@1.2.1:
+    resolution: {integrity: sha512-6tun4LoZnj7VN6YeegOVb67KBX/7JJsqvj+pv3ZA7F878/eN33AbGa5b/S/wXxS/tcp8nc40xRUrsPlxIyNUPg==}
+    dev: true
+
   /csso@5.0.5:
     resolution: {integrity: sha512-0LrrStPOdJj+SPCCrGhzryycLjwcgUSHBtxNA8aIDxf0GLsRh1cKYhB00Gd1lDOS4yGH69+SNn13+TWbVHETFQ==}
     engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0'}
@@ -7880,8 +7892,20 @@ packages:
       reflect.getprototypeof: 1.0.3
     dev: false
 
+<<<<<<< HEAD
   /jest-changed-files@29.6.3:
     resolution: {integrity: sha512-G5wDnElqLa4/c66ma5PG9eRjE342lIbF6SUnTJi26C3J28Fv2TVY2rOyKB9YGbSA5ogwevgmxc4j4aVjrEK6Yg==}
+=======
+  /jest-canvas-mock@2.5.2:
+    resolution: {integrity: sha512-vgnpPupjOL6+L5oJXzxTxFrlGEIbHdZqFU+LFNdtLxZ3lRDCl17FlTMM7IatoRQkrcyOTMlDinjUguqmQ6bR2A==}
+    dependencies:
+      cssfontparser: 1.2.1
+      moo-color: 1.0.3
+    dev: true
+
+  /jest-changed-files@29.5.0:
+    resolution: {integrity: sha512-IFG34IUMUaNBIxjQXF/iu7g6EcdMrGRRxaUSw92I/2g2YC6vCdTltl4nHvt7Ci5nSJwXIkCu8Ka1DKF+X7Z1Ag==}
+>>>>>>> ff381fa (Add jest-canvas dependency to list of dependencies)
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
       execa: 5.1.1
@@ -9525,6 +9549,12 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dev: false
+
+  /moo-color@1.0.3:
+    resolution: {integrity: sha512-i/+ZKXMDf6aqYtBhuOcej71YSlbjT3wCO/4H1j8rPvxDJEifdwgg5MaFyu6iYAT8GBZJg2z0dkgK4YMzvURALQ==}
+    dependencies:
+      color-name: 1.1.4
+    dev: true
 
   /ms@2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
