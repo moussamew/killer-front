@@ -1,4 +1,11 @@
 {
   "root": true,
-  "extends": ["global"]
+  "extends": ["global"],
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+       "project": "apps/web/tsconfig.json" 
+      }
+    }
+  }
 }
