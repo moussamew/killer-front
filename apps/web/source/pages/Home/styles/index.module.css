@@ -1,3 +1,12 @@
+.content {
+  display: flex;
+  align-items: center;
+
+  @media (width <= 720px) {
+    flex-direction: column;
+  }
+}
+
 .spacing {
   padding-top: var(--spacing-large);
   padding-bottom: var(--spacing-large);
@@ -8,13 +17,8 @@
   }
 }
 
-.introduction {
+.resume {
   composes: spacing;
-  text-align: center;
-
-  @media (width <= 720px) {
-    text-align: left;
-  }
 
   & h1,
   h2 {
@@ -23,5 +27,17 @@
     @media (width <= 720px) {
       margin-bottom: 20px;
     }
+  }
+}
+
+.mobileLottie {
+  @media (width >= 720px) {
+    display: none;
+  }
+}
+
+.webLottie {
+  @media (width <= 720px) {
+    display: none;
   }
 }
