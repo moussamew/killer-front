@@ -346,8 +346,8 @@ importers:
         specifier: workspace:*
         version: link:../intl
       '@react-native-async-storage/async-storage':
-        specifier: 1.19.2
-        version: 1.19.2(react-native@0.72.4)
+        specifier: 1.19.3
+        version: 1.19.3(react-native@0.72.4)
       '@tanstack/react-query':
         specifier: 4.33.0
         version: 4.33.0(react-dom@18.2.0)(react-native@0.72.4)(react@18.2.0)
@@ -3276,8 +3276,8 @@ packages:
       tslib: 2.5.2
     dev: false
 
-  /@react-native-async-storage/async-storage@1.19.2(react-native@0.72.4):
-    resolution: {integrity: sha512-7jTQKbT3BdhFHQMnfElsLeeyVqNICv72lPKbeNHnNgLP9eH3+Yk1GFMWWb7A8qRMYianSmwmx1cYofNe9H9hLQ==}
+  /@react-native-async-storage/async-storage@1.19.3(react-native@0.72.4):
+    resolution: {integrity: sha512-CwGfoHCWdPOTPS+2fW6YRE1fFBpT9++ahLEroX5hkgwyoQ+TkmjOaUxixdEIoVua9Pz5EF2pGOIJzqOTMWfBlA==}
     peerDependencies:
       react-native: ^0.0.0-0 || 0.60 - 0.72 || 1000.0.0
     dependencies:
