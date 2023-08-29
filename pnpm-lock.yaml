@@ -320,8 +320,8 @@ importers:
         specifier: 23.4.6
         version: 23.4.6
       react-i18next:
-        specifier: 13.2.0
-        version: 13.2.0(i18next@23.4.6)(react@18.2.0)
+        specifier: 13.2.1
+        version: 13.2.1(i18next@23.4.6)(react@18.2.0)
     devDependencies:
       eslint-config-global:
         specifier: workspace:*
@@ -10935,8 +10935,8 @@ packages:
     transitivePeerDependencies:
       - csstype
 
-  /react-i18next@13.2.0(i18next@23.4.6)(react@18.2.0):
-    resolution: {integrity: sha512-YD8xMc+I0jkHHLotd8ERMzZ53hMaCBVLCndbcbBveJn3FbppRP4jyYOAkmR8XItN01sTD9ilAjoEjpH1i42IgA==}
+  /react-i18next@13.2.1(i18next@23.4.6)(react@18.2.0):
+    resolution: {integrity: sha512-XhMsnGgJnytWfi2Q70HMYfm+zysPUu1Pz+It6I87WwaeclGY+W8W1c11uENEMNg+Xb+mNrGuo8GEDuQDOgO+oQ==}
     peerDependencies:
       i18next: '>= 23.2.3'
       react: '>= 16.8.0'
