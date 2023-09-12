@@ -36,8 +36,8 @@ importers:
         specifier: 49.0.10
         version: 49.0.10(@babel/core@7.22.17)
       expo-status-bar:
-        specifier: 1.6.0
-        version: 1.6.0
+        specifier: 1.7.1
+        version: 1.7.1
       intl-pluralrules:
         specifier: 2.0.1
         version: 2.0.1
@@ -6693,8 +6693,8 @@ packages:
       invariant: 2.2.4
     dev: false
 
-  /expo-status-bar@1.6.0:
-    resolution: {integrity: sha512-e//Oi2WPdomMlMDD3skE4+1ZarKCJ/suvcB4Jo/nO427niKug5oppcPNYO+csR6y3ZglGuypS+3pp/hJ+Xp6fQ==}
+  /expo-status-bar@1.7.1:
+    resolution: {integrity: sha512-Wkm9uCmuQQBSU+l/AekWAQ1d0FYw560yL116+OAKJDyKBOUpPURoWkFbabM1EDxv+5scTuSThr/CvsA0nsSCow==}
     dev: false
 
   /expo@49.0.10(@babel/core@7.22.17):
