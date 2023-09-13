@@ -115,8 +115,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
       '@tanstack/react-query':
-        specifier: 4.35.0
-        version: 4.35.0(react-dom@18.2.0)(react-native@0.72.4)(react@18.2.0)
+        specifier: 4.35.3
+        version: 4.35.3(react-dom@18.2.0)(react-native@0.72.4)(react@18.2.0)
       clsx:
         specifier: 2.0.0
         version: 2.0.0
@@ -349,8 +349,8 @@ importers:
         specifier: 1.19.3
         version: 1.19.3(react-native@0.72.4)
       '@tanstack/react-query':
-        specifier: 4.35.0
-        version: 4.35.0(react-dom@18.2.0)(react-native@0.72.4)(react@18.2.0)
+        specifier: 4.35.3
+        version: 4.35.3(react-dom@18.2.0)(react-native@0.72.4)(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -3780,12 +3780,12 @@ packages:
       svgo: 3.0.2
     dev: true
 
-  /@tanstack/query-core@4.35.0:
-    resolution: {integrity: sha512-4GMcKQuLZQi6RFBiBZNsLhl+hQGYScRZ5ZoVq8QAzfqz9M7vcGin/2YdSESwl7WaV+Qzsb5CZOAbMBes4lNTnA==}
+  /@tanstack/query-core@4.35.3:
+    resolution: {integrity: sha512-PS+WEjd9wzKTyNjjQymvcOe1yg8f3wYc6mD+vb6CKyZAKvu4sIJwryfqfBULITKCla7P9C4l5e9RXePHvZOZeQ==}
     dev: false
 
-  /@tanstack/react-query@4.35.0(react-dom@18.2.0)(react-native@0.72.4)(react@18.2.0):
-    resolution: {integrity: sha512-LLYDNnM9ewYHgjm2rzhk4KG/puN2rdoqCUD+N9+V7SwlsYwJk5ypX58rpkoZAhFyZ+KmFUJ7Iv2lIEOoUqydIg==}
+  /@tanstack/react-query@4.35.3(react-dom@18.2.0)(react-native@0.72.4)(react@18.2.0):
+    resolution: {integrity: sha512-UgTPioip/rGG3EQilXfA2j4BJkhEQsR+KAbF+KIuvQ7j4MkgnTCJF01SfRpIRNtQTlEfz/+IL7+jP8WA8bFbsw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -3796,7 +3796,7 @@ packages:
       react-native:
         optional: true
     dependencies:
-      '@tanstack/query-core': 4.35.0
+      '@tanstack/query-core': 4.35.3
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-native: 0.72.4(@babel/core@7.22.17)(@babel/preset-env@7.22.15)(react@18.2.0)
