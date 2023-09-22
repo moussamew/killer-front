@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom';
 import Checked from '@/assets/icons/checked.svg';
 import Crown from '@/assets/icons/crown.svg';
 import Delete from '@/assets/icons/delete.svg';
-import Unchecked from '@/assets/icons/unchecked.svg';
 import { Button } from '@/components/Button';
 import { avatarList } from '@/components/Gallery';
 import { ModalContext } from '@/context/modal';
@@ -58,11 +57,11 @@ export function PlayerList(): JSX.Element {
               {room.admin.id === id && <Crown className={styles.crown} />}
             </div>
             <h3>{name}</h3>
-            {hasAtLeastOneMission ? (
-              <Checked className={styles.icon} />
-            ) : (
-              <Unchecked className={styles.icon} />
-            )}
+            <Checked
+              className={clsx(styles.icon, {
+                [styles.playerReady]: hasAtLeastOneMission,
+              })}
+            />
           </div>
           {room.admin.id === session?.id && session?.name !== name && (
             <Delete

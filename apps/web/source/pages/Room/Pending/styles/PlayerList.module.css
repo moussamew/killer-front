@@ -67,7 +67,13 @@
 }
 
 .icon {
+  width: 25px;
   height: 25px;
+  opacity: 0.2;
+}
+
+.playerReady {
+  opacity: 1;
 }
 
 .kickPlayer {
