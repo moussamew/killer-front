@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 
 import { SESSION_ENDPOINT, ROOM_ENDPOINT } from '@/constants/endpoints';
+import { fakePlayerThree } from '@/tests/mocks/players';
 import { playingRoom, roomCode } from '@/tests/mocks/rooms';
 import { playingRoomSession } from '@/tests/mocks/sessions';
 import { renderWithProviders } from '@/tests/render';
@@ -22,7 +23,9 @@ describe('<PlayerKilledButton />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText(t('room.target.title'));
+    await screen.findByText(
+      t('room.target.to.kill', { pseudo: fakePlayerThree.name }),
+    );
 
     await userEvent.click(screen.getByText(t('room.killed.button')));
 

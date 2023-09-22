@@ -21,7 +21,7 @@ export function PlayerKilledButton(): JSX.Element {
         <h2 className={styles.title}>{t('room.killed.message')}</h2>
         <p>{t('room.killed.notify')}</p>
       </div>
-      <Button color="primary" onClick={handleOpenModal}>
+      <Button color="secondary" onClick={handleOpenModal}>
         {t('room.killed.button')}
       </Button>
     </div>
