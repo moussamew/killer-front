@@ -7,6 +7,8 @@ import { PlayerStatus } from '@/services/player/constants';
 import { useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
+import styles from './styles/PlayerKilledModal.module.css';
+
 export function PlayerKilledModal(): JSX.Element {
   const { t } = useTranslation();
   const { updatePlayer } = useUpdatePlayer();
@@ -21,12 +23,12 @@ export function PlayerKilledModal(): JSX.Element {
   };
 
   return (
-    <>
+    <div className={styles.content}>
       <h2>{t('room.player.killed.modal.title')}</h2>
       <p>{t('room.player.killed.modal.warning')}</p>
       <Button color="primary" onClick={handleKillPlayer}>
         {t('room.player.killed.modal.confirm.button')}
       </Button>
-    </>
+    </div>
   );
 }

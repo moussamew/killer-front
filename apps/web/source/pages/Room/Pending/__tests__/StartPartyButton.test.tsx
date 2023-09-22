@@ -3,6 +3,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { sources } from 'eventsourcemock';
 
+import { fakePlayerThree } from '@/tests/mocks/players';
 import {
   pendingRoom,
   playingRoom,
@@ -24,9 +25,8 @@ describe('<StartPartyButton />', () => {
 
     renderWithProviders();
 
-    await userEvent.click(
-      await screen.findByText(t('room.start.party.button')),
-    );
+    await screen.findByText(t('room.start.party.button'));
+    await userEvent.click(screen.getByText(t('room.start.party.button')));
 
     server.use(
       getPlayerSession(playingRoomSession),
@@ -40,6 +40,10 @@ describe('<StartPartyButton />', () => {
       }),
     );
 
-    expect(await screen.findByText(t('room.target.title'))).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        t('room.target.to.kill', { pseudo: fakePlayerThree.name }),
+      ),
+    ).toBeInTheDocument();
   });
 });

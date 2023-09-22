@@ -39,7 +39,7 @@ describe('<PlayerKilledModal />', () => {
     );
 
     expect(
-      await screen.findByText(t('room.player.killed.resume')),
+      await screen.findByText(t('room.player.killed.title')),
     ).toBeInTheDocument();
   });
 });

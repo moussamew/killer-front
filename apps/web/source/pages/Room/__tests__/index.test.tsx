@@ -2,7 +2,11 @@ import { t } from '@killerparty/intl';
 import { screen } from '@testing-library/react';
 import { sources } from 'eventsourcemock';
 
-import { fakePlayerOne, fakePlayerTwo } from '@/tests/mocks/players';
+import {
+  fakePlayerOne,
+  fakePlayerThree,
+  fakePlayerTwo,
+} from '@/tests/mocks/players';
 import {
   endedRoom,
   playingRoom,
@@ -41,7 +45,9 @@ describe('<RoomPage />', () => {
 
     renderWithProviders({ route: `/room/${roomCode}` });
 
-    await screen.findByText(t('room.target.title'));
+    await screen.findByText(
+      t('room.target.to.kill', { pseudo: fakePlayerThree.name }),
+    );
   });
 
   it('should redirect player to ended room page if the status of the room is ENDED', async () => {
@@ -97,7 +103,11 @@ describe('<RoomPage />', () => {
       }),
     );
 
-    expect(await screen.findByText(t('room.target.title'))).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        t('room.target.to.kill', { pseudo: fakePlayerThree.name }),
+      ),
+    ).toBeInTheDocument();
   });
 
   it('should refresh the room players when SSE emits a new message with new players infos', async () => {

@@ -25,7 +25,7 @@ export function EndedRoomPage(): JSX.Element {
     <>
       <div className={styles.winner}>
         <h1>{t('room.winner.name', { playerName: room?.winner?.name })}</h1>
-        {room?.winner && <CurrentAvatar winner={room.winner} />}
+        {room?.winner && <CurrentAvatar avatar={room.winner.avatar} />}
       </div>
       <Ranking room={room} />
       <Button color="primary" onClick={handleLeaveRoom}>
