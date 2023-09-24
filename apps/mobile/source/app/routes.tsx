@@ -1,7 +1,7 @@
 import { useTranslation } from '@killerparty/intl';
 import { type RoomStatus, useSession } from '@killerparty/webservices';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 
 import { CreateRoomPage } from '../pages/CreateRoom';
 import { HomePage } from '../pages/Home';
@@ -65,7 +65,7 @@ export function Routes(): JSX.Element {
   if (isLoading) {
     return (
       <View>
-        <Text>Loading</Text>
+        <Image source={require('../assets/splash.png')} />
       </View>
     );
   }
