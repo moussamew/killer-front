@@ -65,7 +65,7 @@ export function PendingRoomPage({ route }: Props): JSX.Element | null {
         <Text style={styles.joinRoomCode}>
           {t('room.join.room.code', { roomCode })}
         </Text>
-        <ShareRoomLink />
+        <ShareRoomLink roomCode={roomCode} />
         <StartPartyButton roomCode={roomCode} />
         <CanStartParty roomCode={roomCode} />
         <RoomMissions roomCode={roomCode} />
