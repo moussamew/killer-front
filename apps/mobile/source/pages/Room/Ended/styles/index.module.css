@@ -5,3 +5,9 @@
   padding: var(--spacing-large);
   background-color: var(--color-body);
 }
+
+.title {
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: var(--spacing-medium);
+}
