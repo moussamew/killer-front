@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { View, Text } from 'react-native';
 
 import Checked from '../../../assets/icons/checked.svg';
-/* import Crown from '../../assets/icons/crown.svg'; */
 import Delete from '../../../assets/icons/delete.svg';
 import { Button } from '../../../components/Button';
 import { avatarsList } from '../../../helpers/avatars';
@@ -40,7 +39,6 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
 
   return (
     <View style={styles.content}>
-      {/*      <RoomSettings /> */}
       {room?.players.map(({ id, name, avatar, hasAtLeastOneMission }) => (
         <View key={name} style={styles.item}>
           <View style={styles.player}>
@@ -55,7 +53,6 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
               >
                 {avatarsList({ height: 50, width: 50 })[avatar]}
               </View>
-              {/* {room.admin.id === id && <Crown style={styles.crown} />} */}
             </View>
             <Text>{name}</Text>
             <Checked

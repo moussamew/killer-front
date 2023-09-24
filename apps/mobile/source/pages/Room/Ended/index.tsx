@@ -1,14 +1,22 @@
 import { useTranslation } from '@killerparty/intl';
-import { useSession, useUpdatePlayer } from '@killerparty/webservices';
-import { View } from 'react-native';
+import { useRoom, useSession, useUpdatePlayer } from '@killerparty/webservices';
+import { type NativeStackScreenProps } from '@react-navigation/native-stack';
+import { View, Text } from 'react-native';
 
+import { type RootStackParamList } from '../../../app/routes';
 import { Button } from '../../../components/Button';
+import { CurrentAvatar } from '../../../components/CurrentAvatar';
 
+import { Ranking } from './Ranking';
 import styles from './styles/index.module.css';
 
-export function EndedRoomPage(): JSX.Element {
+type Props = NativeStackScreenProps<RootStackParamList, 'EndedRoom'>;
+
+export function EndedRoomPage({ route }: Props): JSX.Element {
+  const { roomCode } = route.params;
   const { updatePlayer } = useUpdatePlayer();
   const { session } = useSession();
+  const { room } = useRoom(roomCode!);
   const { t } = useTranslation();
 
   const handleLeaveRoom = (): void => {
@@ -17,6 +25,11 @@ export function EndedRoomPage(): JSX.Element {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>
+        {t('room.winner.name', { playerName: room?.winner?.name })}
+      </Text>
+      {room?.winner && <CurrentAvatar avatar={room.winner.avatar} />}
+      <Ranking room={room} />
       <Button
         color="secondary"
         onPress={handleLeaveRoom}
