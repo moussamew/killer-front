@@ -42,22 +42,28 @@ export function JoinRoomPage(): JSX.Element {
     <View style={styles.view}>
       <CurrentAvatar updateAvatarCallback={setAvatar} avatar={avatar} />
       <View style={styles.inputContent}>
-        <Text style={styles.label}>{t('home.create.pseudo.label')}</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setPseudo}
-          placeholder={t('home.create.pseudo.placeholder')}
-          value={pseudo}
-        />
-      </View>
-      <View style={styles.inputContent}>
-        <Text style={styles.label}>{t('home.join.room.code.label')}</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setRoomCode}
-          placeholder={t('home.join.room.code.placeholder')}
-          value={roomCode}
-        />
+        <View>
+          <Text style={styles.label}>{t('home.create.pseudo.label')}</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={setPseudo}
+            placeholder={t('home.create.pseudo.placeholder')}
+            value={pseudo}
+            clearButtonMode="always"
+            enterKeyHint="done"
+          />
+        </View>
+        <View>
+          <Text style={styles.label}>{t('home.join.room.code.label')}</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={setRoomCode}
+            placeholder={t('home.join.room.code.placeholder')}
+            value={roomCode}
+            clearButtonMode="always"
+            enterKeyHint="done"
+          />
+        </View>
       </View>
       <Button
         color="primary"

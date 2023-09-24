@@ -33,6 +33,8 @@ export function CreateRoomPage(): JSX.Element {
           onChangeText={setPseudo}
           placeholder={t('home.create.pseudo.placeholder')}
           value={pseudo}
+          clearButtonMode="always"
+          enterKeyHint="done"
         />
       </View>
       <Button

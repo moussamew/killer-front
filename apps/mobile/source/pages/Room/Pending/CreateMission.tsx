@@ -26,6 +26,8 @@ export function CreateMission(): JSX.Element {
         onChangeText={setMission}
         placeholder={t('room.mission.placeholder')}
         value={mission}
+        clearButtonMode="always"
+        enterKeyHint="done"
       />
       <Button
         color="secondary"
