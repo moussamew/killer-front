@@ -1,3 +1,3 @@
-export const API_URL = 'http://localhost:3000';
-export const FRONT_URL = 'http://localhost:4000';
-export const MERCURE_URL = 'https://localhost/.well-known/mercure';
+export const API_URL = 'https://api.killerparty.app';
+export const MERCURE_URL =
+  'https://mercure.killerparty.app/.well-known/mercure';
