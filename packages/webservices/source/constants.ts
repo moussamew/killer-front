@@ -1,4 +1,4 @@
-import { API_URL, MERCURE_URL, FRONT_URL } from '@killerparty/config';
+import { API_URL, MERCURE_URL } from '@killerparty/config';
 
 /**
  * --- ENDPOINTS ---
@@ -12,8 +12,3 @@ export const MISSION_ENDPOINT = `${API_URL}/mission`;
  * --- TOPICS (SSE)  ---
  */
 export const ROOM_TOPIC = `${MERCURE_URL}?topic=room`;
-
-/**
- * --- ROUTES ---
- */
-export const JOIN_ROOM_ROUTE = `${FRONT_URL}/join`;
