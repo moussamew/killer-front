@@ -16,7 +16,7 @@
     "@killerparty/webservices": "workspace:*",
     "@react-navigation/native": "6.1.8",
     "@react-navigation/native-stack": "6.9.14",
-    "expo": "49.0.11",
+    "expo": "49.0.13",
     "expo-status-bar": "1.7.1",
     "intl-pluralrules": "2.0.1",
     "react": "18.2.0",
