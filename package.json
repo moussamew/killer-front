@@ -9,7 +9,7 @@
     "clean": "turbo run clean"
   },
   "devDependencies": {
-    "turbo": "1.10.14",
+    "turbo": "1.10.15",
     "prettier": "3.0.3"
   }
 }
