@@ -1,9 +1,9 @@
 {
   "name": "@killerparty/webservices",
   "description": "Webservices for Killer Party",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/index.js",
@@ -12,8 +12,8 @@
     }
   },
   "scripts": {
-    "build": "tsup source/index.ts  --format cjs,esm --dts --external react ",
-    "dev": "tsup source/index.ts --format cjs,esm --watch --dts --external react",
+    "build": "tsup source/index.ts --format cjs,esm --dts --external react ",
+    "dev": "tsup source/index.ts --format cjs,esm --dts --external --watch react",
     "clean": "rm -rf node_modules"
   },
   "devDependencies": {
