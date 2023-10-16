@@ -251,8 +251,8 @@ importers:
         specifier: 5.2.2
         version: 5.2.2
       typescript-plugin-css-modules:
-        specifier: 5.0.1
-        version: 5.0.1(typescript@5.2.2)
+        specifier: 5.0.2
+        version: 5.0.2(typescript@5.2.2)
       vite:
         specifier: 4.4.11
         version: 4.4.11(@types/node@18.18.5)
@@ -12272,8 +12272,8 @@ packages:
       is-typed-array: 1.1.12
     dev: false
 
-  /typescript-plugin-css-modules@5.0.1(typescript@5.2.2):
-    resolution: {integrity: sha512-hKXObfwfjx2/myRq4JeQ8D3xIWYTFqusi0hS/Aka7RFX1xQEoEkdOGDWyXNb8LmObawsUzbI30gQnZvqYXCrkA==}
+  /typescript-plugin-css-modules@5.0.2(typescript@5.2.2):
+    resolution: {integrity: sha512-ej/Og4Y8mF+43P14P9Ik1MGqNXcXBVgO1TltkESegdnZsaaRXnaJ5CoJmTPRkg25ysQlOV6P94wNhI4VxIzlkw==}
     peerDependencies:
       typescript: '>=4.0.0'
     dependencies:
