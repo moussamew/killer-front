@@ -30,11 +30,11 @@ importers:
         specifier: 1.19.3
         version: 1.19.3(react-native@0.72.6)
       '@react-navigation/native':
-        specifier: 6.1.8
-        version: 6.1.8(react-native@0.72.6)(react@18.2.0)
+        specifier: 6.1.9
+        version: 6.1.9(react-native@0.72.6)(react@18.2.0)
       '@react-navigation/native-stack':
-        specifier: 6.9.14
-        version: 6.9.14(@react-navigation/native@6.1.8)(react-native-safe-area-context@4.7.3)(react-native-screens@3.26.0)(react-native@0.72.6)(react@18.2.0)
+        specifier: 6.9.15
+        version: 6.9.15(@react-navigation/native@6.1.9)(react-native-safe-area-context@4.7.3)(react-native-screens@3.26.0)(react-native@0.72.6)(react@18.2.0)
       expo:
         specifier: 49.0.15
         version: 49.0.15(@babel/core@7.23.2)
@@ -3335,8 +3335,8 @@ packages:
       nullthrows: 1.1.1
       react-native: 0.72.6(@babel/core@7.23.2)(@babel/preset-env@7.23.2)(react@18.2.0)
 
-  /@react-navigation/core@6.4.9(react@18.2.0):
-    resolution: {integrity: sha512-G9GH7bP9x0qqupxZnkSftnkn4JoXancElTvFc8FVGfEvxnxP+gBo3wqcknyBi7M5Vad4qecsYjCOa9wqsftv9g==}
+  /@react-navigation/core@6.4.10(react@18.2.0):
+    resolution: {integrity: sha512-oYhqxETRHNHKsipm/BtGL0LI43Hs2VSFoWMbBdHK9OqgQPjTVUitslgLcPpo4zApCcmBWoOLX2qPxhsBda644A==}
     peerDependencies:
       react: '*'
     dependencies:
@@ -3346,25 +3346,25 @@ packages:
       query-string: 7.1.3
       react: 18.2.0
       react-is: 16.13.1
-      use-latest-callback: 0.1.6(react@18.2.0)
+      use-latest-callback: 0.1.7(react@18.2.0)
     dev: false
 
-  /@react-navigation/elements@1.3.19(@react-navigation/native@6.1.8)(react-native-safe-area-context@4.7.3)(react-native@0.72.6)(react@18.2.0):
-    resolution: {integrity: sha512-7hLvSYKPuDS070pza5gd43WDX7QgfuEmuTWNbCJhKdWlLudYmq3qzxGCBwCfO2dEI6+p8tla5wruaWiGKAbTYw==}
+  /@react-navigation/elements@1.3.20(@react-navigation/native@6.1.9)(react-native-safe-area-context@4.7.3)(react-native@0.72.6)(react@18.2.0):
+    resolution: {integrity: sha512-/9YT9tp1R4ejXt+5cqcQnShTIv790sAAxeqizF1zLnSldmbHmb2kxxbCW6UhyhqRnTLF3UFpZwwgy4A8AP/MzA==}
     peerDependencies:
       '@react-navigation/native': ^6.0.0
       react: '*'
       react-native: '*'
       react-native-safe-area-context: '>= 3.0.0'
     dependencies:
-      '@react-navigation/native': 6.1.8(react-native@0.72.6)(react@18.2.0)
+      '@react-navigation/native': 6.1.9(react-native@0.72.6)(react@18.2.0)
       react: 18.2.0
       react-native: 0.72.6(@babel/core@7.23.2)(@babel/preset-env@7.23.2)(react@18.2.0)
       react-native-safe-area-context: 4.7.3(react-native@0.72.6)(react@18.2.0)
     dev: false
 
-  /@react-navigation/native-stack@6.9.14(@react-navigation/native@6.1.8)(react-native-safe-area-context@4.7.3)(react-native-screens@3.26.0)(react-native@0.72.6)(react@18.2.0):
-    resolution: {integrity: sha512-7RiZkvMFN6f0kmANc63B/0m9ttQ2JpDIPWQwPU93FP698s19KTOyu7uxgl7Oi3bvsqHFO5JfiR7B+4h8lh9dxw==}
+  /@react-navigation/native-stack@6.9.15(@react-navigation/native@6.1.9)(react-native-safe-area-context@4.7.3)(react-native-screens@3.26.0)(react-native@0.72.6)(react@18.2.0):
+    resolution: {integrity: sha512-eq4z1sBZEYQ5hONiQW/Azgpy5EyLwYbSTw+jqPGp3As9daZjdwbA5x1/7mmZK5UnYLtIS0LbYGrgRm0QAd8ekw==}
     peerDependencies:
       '@react-navigation/native': ^6.0.0
       react: '*'
@@ -3372,8 +3372,8 @@ packages:
       react-native-safe-area-context: '>= 3.0.0'
       react-native-screens: '>= 3.0.0'
     dependencies:
-      '@react-navigation/elements': 1.3.19(@react-navigation/native@6.1.8)(react-native-safe-area-context@4.7.3)(react-native@0.72.6)(react@18.2.0)
-      '@react-navigation/native': 6.1.8(react-native@0.72.6)(react@18.2.0)
+      '@react-navigation/elements': 1.3.20(@react-navigation/native@6.1.9)(react-native-safe-area-context@4.7.3)(react-native@0.72.6)(react@18.2.0)
+      '@react-navigation/native': 6.1.9(react-native@0.72.6)(react@18.2.0)
       react: 18.2.0
       react-native: 0.72.6(@babel/core@7.23.2)(@babel/preset-env@7.23.2)(react@18.2.0)
       react-native-safe-area-context: 4.7.3(react-native@0.72.6)(react@18.2.0)
@@ -3381,13 +3381,13 @@ packages:
       warn-once: 0.1.1
     dev: false
 
-  /@react-navigation/native@6.1.8(react-native@0.72.6)(react@18.2.0):
-    resolution: {integrity: sha512-0alti852nV+8oCVm9H80G6kZvrHoy51+rXBvVCRUs2rNDDozC/xPZs8tyeCJkqdw3cpxZDK8ndXF22uWq28+0Q==}
+  /@react-navigation/native@6.1.9(react-native@0.72.6)(react@18.2.0):
+    resolution: {integrity: sha512-AMuJDpwXE7UlfyhIXaUCCynXmv69Kb8NzKgKJO7v0k0L+u6xUTbt6xvshmJ79vsvaFyaEH9Jg5FMzek5/S5qNw==}
     peerDependencies:
       react: '*'
       react-native: '*'
     dependencies:
-      '@react-navigation/core': 6.4.9(react@18.2.0)
+      '@react-navigation/core': 6.4.10(react@18.2.0)
       escape-string-regexp: 4.0.0
       fast-deep-equal: 3.1.3
       nanoid: 3.3.6
@@ -12443,8 +12443,8 @@ packages:
       querystringify: 2.2.0
       requires-port: 1.0.0
 
-  /use-latest-callback@0.1.6(react@18.2.0):
-    resolution: {integrity: sha512-VO/P91A/PmKH9bcN9a7O3duSuxe6M14ZoYXgA6a8dab8doWNdhiIHzEkX/jFeTTRBsX0Ubk6nG4q2NIjNsj+bg==}
+  /use-latest-callback@0.1.7(react@18.2.0):
+    resolution: {integrity: sha512-Hlrl0lskgZZpo2vIpZ4rA7qA/rAGn2PcDvDH1M47AogqMPB0qlGEdsa66AVkIUiEEDpfxA9/N6hY6MqtaNoqWA==}
     peerDependencies:
       react: '>=16.8'
     dependencies:
