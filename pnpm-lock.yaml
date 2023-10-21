@@ -60,8 +60,8 @@ importers:
         specifier: 3.26.0
         version: 3.26.0(react-native@0.72.6)(react@18.2.0)
       react-native-sse:
-        specifier: 1.1.0
-        version: 1.1.0
+        specifier: 1.2.0
+        version: 1.2.0
       react-native-svg:
         specifier: 13.14.0
         version: 13.14.0(react-native@0.72.6)(react@18.2.0)
@@ -10657,8 +10657,8 @@ packages:
       warn-once: 0.1.1
     dev: false
 
-  /react-native-sse@1.1.0:
-    resolution: {integrity: sha512-qPhZwuVg7ry0Cw8Q2+0VH90on223obZcfB5a/2ktoD3951zWx7HXAtrqQtDfLGjv7ncSJoswd+efn2k0uoR5lw==}
+  /react-native-sse@1.2.0:
+    resolution: {integrity: sha512-+A1CcxkpR4cpxFzqYB1bg4CL7Yy+XjD258LmasJPBWMdwpMknQxabknSZWzoMgk2MEgmc0uFfbHssk3fZyr+vQ==}
     dev: false
 
   /react-native-svg-transformer@1.1.0(react-native-svg@13.14.0)(react-native@0.72.6)(typescript@5.2.2):
