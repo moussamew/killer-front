@@ -4,7 +4,7 @@
   "description": "Global ESLint configuration",
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "6.9.0",
-    "@typescript-eslint/parser": "6.9.0",
+    "@typescript-eslint/parser": "6.9.1",
     "eslint": "8.52.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-prettier": "9.0.0",
