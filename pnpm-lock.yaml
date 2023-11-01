@@ -27,8 +27,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/webservices
       '@react-native-async-storage/async-storage':
-        specifier: 1.19.3
-        version: 1.19.3(react-native@0.72.6)
+        specifier: 1.19.4
+        version: 1.19.4(react-native@0.72.6)
       '@react-navigation/native':
         specifier: 6.1.9
         version: 6.1.9(react-native@0.72.6)(react@18.2.0)
@@ -352,8 +352,8 @@ importers:
         specifier: workspace:*
         version: link:../intl
       '@react-native-async-storage/async-storage':
-        specifier: 1.19.3
-        version: 1.19.3(react-native@0.72.6)
+        specifier: 1.19.4
+        version: 1.19.4(react-native@0.72.6)
       '@tanstack/react-query':
         specifier: 4.36.1
         version: 4.36.1(react-dom@18.2.0)(react-native@0.72.6)(react@18.2.0)
@@ -3131,8 +3131,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@react-native-async-storage/async-storage@1.19.3(react-native@0.72.6):
-    resolution: {integrity: sha512-CwGfoHCWdPOTPS+2fW6YRE1fFBpT9++ahLEroX5hkgwyoQ+TkmjOaUxixdEIoVua9Pz5EF2pGOIJzqOTMWfBlA==}
+  /@react-native-async-storage/async-storage@1.19.4(react-native@0.72.6):
+    resolution: {integrity: sha512-Stj6Q1v5knTMaYOinEEJl030SzJWEhqW+IYI5uA9Nl9Olo+vDUecmQXqpIxELucwOGDJ8KwvI0UL22UHudwZeQ==}
     peerDependencies:
       react-native: ^0.0.0-0 || 0.60 - 0.72 || 1000.0.0
     dependencies:
