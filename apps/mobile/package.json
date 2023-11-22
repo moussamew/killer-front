@@ -17,7 +17,7 @@
     "@killerparty/webservices": "workspace:*",
     "@react-navigation/native": "6.1.9",
     "@react-navigation/native-stack": "6.9.17",
-    "@react-native-async-storage/async-storage": "1.19.6",
+    "@react-native-async-storage/async-storage": "1.19.7",
     "expo": "49.0.20",
     "expo-dev-client": "2.4.12",
     "expo-status-bar": "1.7.1",
