@@ -31,11 +31,9 @@ export function renderWithProviders({
   return render(
     <QueryClientProvider client={queryClient}>
       <ModalProvider>
-        <SidebarProvider>
-          {component}
-          <Notification />
-        </SidebarProvider>
+        <SidebarProvider>{component}</SidebarProvider>
       </ModalProvider>
+      <Notification />
     </QueryClientProvider>,
   );
 }
