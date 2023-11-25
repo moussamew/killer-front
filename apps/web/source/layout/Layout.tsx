@@ -4,7 +4,6 @@ import { Outlet } from 'react-router-dom';
 
 import { Loader } from '@/components/Loader';
 import { Modal } from '@/components/Modal';
-import { Notification } from '@/components/Notification';
 import { ModalContext } from '@/context/modal';
 import { SidebarContext } from '@/context/sidebar';
 import { useSession } from '@/services/player/queries';
@@ -43,7 +42,6 @@ export function Layout(): JSX.Element {
         setSidebarOpen={setSidebarOpen}
       />
       {modal && <Modal closeModal={closeModal}>{modal}</Modal>}
-      <Notification />
     </div>
   );
 }

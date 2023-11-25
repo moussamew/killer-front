@@ -4,6 +4,7 @@ import { render, type RenderResult } from '@testing-library/react';
 import { type ReactNode } from 'react';
 
 import { Routes } from '@/app/routes';
+import { Notification } from '@/components/Notification';
 import { QueryConfig } from '@/constants/config';
 import { ModalProvider } from '@/context/modal';
 import { SidebarProvider } from '@/context/sidebar';
@@ -30,7 +31,10 @@ export function renderWithProviders({
   return render(
     <QueryClientProvider client={queryClient}>
       <ModalProvider>
-        <SidebarProvider>{component}</SidebarProvider>
+        <SidebarProvider>
+          {component}
+          <Notification />
+        </SidebarProvider>
       </ModalProvider>
     </QueryClientProvider>,
   );
