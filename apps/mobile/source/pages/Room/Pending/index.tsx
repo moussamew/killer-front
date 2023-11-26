@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import { Text, View, Image, ScrollView } from 'react-native';
 import EventSource from 'react-native-sse';
 
-import { type RootStackParamList } from '../../../app/routes';
+import { type RootStackParamList } from '../../../types/navigation';
 
 import { CanStartParty } from './CanStartParty';
 import { CreateMission } from './CreateMission';
@@ -21,7 +21,8 @@ import { ShareRoomLink } from './ShareRoomLink';
 import { StartPartyButton } from './StartPartyButton';
 import styles from './styles/index.module.css';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'PendingRoom'>;
+interface Props
+  extends NativeStackScreenProps<RootStackParamList, 'PendingRoom'> {}
 
 export function PendingRoomPage({ route }: Props): JSX.Element | null {
   const { t } = useTranslation();

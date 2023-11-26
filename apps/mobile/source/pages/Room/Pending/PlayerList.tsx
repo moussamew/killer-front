@@ -1,5 +1,6 @@
 import { useTranslation } from '@killerparty/intl';
 import { useRoom, useSession, useUpdatePlayer } from '@killerparty/webservices';
+import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { View, Text } from 'react-native';
 
@@ -7,6 +8,7 @@ import Checked from '../../../assets/icons/checked.svg';
 import Delete from '../../../assets/icons/delete.svg';
 import { Button } from '../../../components/Button';
 import { avatarsList } from '../../../helpers/avatars';
+import { type StackNavigation } from '../../../types/navigation';
 
 import styles from './styles/PlayerList.module.css';
 
@@ -19,6 +21,7 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
   const { session } = useSession();
   const { updatePlayer } = useUpdatePlayer();
   const { t } = useTranslation();
+  const { replace } = useNavigation<StackNavigation>();
 
   useEffect(() => {
     room?.players.forEach((player, index) => {
@@ -34,7 +37,10 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
   };
 
   const handleLeaveRoom = (): void => {
-    updatePlayer.mutate({ id: session?.id, room: null });
+    updatePlayer.mutate(
+      { id: session?.id, room: null },
+      { onSuccess: () => replace('Home') },
+    );
   };
 
   return (

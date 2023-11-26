@@ -3,9 +3,9 @@ import { useRoom, useSession, useUpdatePlayer } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import { View, Text } from 'react-native';
 
-import { type RootStackParamList } from '../../../app/routes';
 import { Button } from '../../../components/Button';
 import { CurrentAvatar } from '../../../components/CurrentAvatar';
+import { type RootStackParamList } from '../../../types/navigation';
 
 import { Ranking } from './Ranking';
 import styles from './styles/index.module.css';
