@@ -16,7 +16,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.killerparty.mobile"
+      "bundleIdentifier": "com.killerparty.mobile",
+      "buildNumber": "2"
     },
     "android": {
       "adaptiveIcon": {
