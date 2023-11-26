@@ -4,12 +4,14 @@ import {
   useSession,
   useUpdatePlayer,
 } from '@killerparty/webservices';
+import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { View, Text, TextInput } from 'react-native';
 
 import { Button } from '../../components/Button';
 import { CurrentAvatar } from '../../components/CurrentAvatar';
 import { getRandomAvatar } from '../../helpers/avatars';
+import { type StackNavigation } from '../../types/navigation';
 
 import styles from './styles/index.module.css';
 
@@ -21,15 +23,19 @@ export function JoinRoomPage(): JSX.Element {
   const { createPlayer } = useCreatePlayer();
   const { updatePlayer } = useUpdatePlayer();
   const { session } = useSession();
+  const { replace } = useNavigation<StackNavigation>();
 
   const handleJoinRoom = (): void => {
     if (session) {
-      updatePlayer.mutate({
-        id: session?.id,
-        room: roomCode,
-        name: pseudo,
-        avatar,
-      });
+      updatePlayer.mutate(
+        {
+          id: session?.id,
+          room: roomCode,
+          name: pseudo,
+          avatar,
+        },
+        { onSuccess: () => replace('PendingRoom', { roomCode }) },
+      );
     } else {
       createPlayer.mutate(
         { name: pseudo, avatar },

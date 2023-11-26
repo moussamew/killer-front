@@ -10,9 +10,9 @@ import { useEffect, useState } from 'react';
 import { ScrollView, Text } from 'react-native';
 import EventSource from 'react-native-sse';
 
-import { type RootStackParamList } from '../../../app/routes';
 import { CurrentAvatar } from '../../../components/CurrentAvatar';
 import { getRandomAvatar } from '../../../helpers/avatars';
+import { type RootStackParamList } from '../../../types/navigation';
 import { PlayerList } from '../Pending/PlayerList';
 
 import { ConfirmKillButton } from './ConfirmKillButton';
