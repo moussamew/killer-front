@@ -1,5 +1,6 @@
 import { useTranslation } from '@killerparty/intl';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
+import LottieView from 'lottie-react-native';
 import { View, Text, ScrollView } from 'react-native';
 
 import { Button } from '../../components/Button';
@@ -18,6 +19,12 @@ export function HomePage({ navigation }: Props): JSX.Element {
     <ScrollView style={styles.scroll}>
       <View style={styles.view}>
         <Text style={styles.description}>{t('home.description')}</Text>
+        <LottieView
+          source={require('../../assets/lotties/home.json')}
+          autoPlay
+          style={styles.lottie}
+          loop
+        />
         <Button
           color="primary"
           onPress={() => navigation.navigate('CreateRoom')}
