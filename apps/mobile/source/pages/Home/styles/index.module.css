@@ -7,6 +7,12 @@
   align-items: center;
 }
 
+.lottie {
+  margin-top: -50px;
+  height: 300px;
+  width: 100%;
+  margin-bottom: 50px;
+}
 .scroll {
   background-color: var(--color-body);
 }
@@ -19,7 +25,6 @@
 
 .description {
   font-size: 16px;
-  margin-bottom: var(--spacing-medium);
   color: var(--color-black-40);
 }
 
@@ -33,7 +38,9 @@
   padding: var(--spacing-medium);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow-small);
-  transition: background-color ease-in-out 500ms, opacity ease-in-out 500ms;
+  transition:
+    background-color ease-in-out 500ms,
+    opacity ease-in-out 500ms;
   margin-bottom: var(--spacing-small);
 
   &:disabled {
