@@ -10,7 +10,6 @@ export function useRoom(roomCode: string): RoomQuery {
     context,
     queryKey: ['room', roomCode],
     queryFn: () => getRoomRequest(roomCode),
-    /* enabled: Boolean(localStorage.getItem('token')), */
   });
 
   return { room, refetchRoom };

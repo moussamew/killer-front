@@ -6,24 +6,20 @@ import { getSessionRequest } from './requests';
 import { type SessionQuery } from './types';
 
 export function useSession(): SessionQuery {
-  /* const isSessionEnabled = Boolean(localStorage.getItem('token')); */
-
   const {
     data: session,
     refetch: refetchSession,
-    /*  isInitialLoading, */
     isLoading,
+    fetchStatus,
   } = useQuery({
     context,
     queryKey: ['session'],
     queryFn: getSessionRequest,
-    /* enabled: isSessionEnabled, */
   });
 
   return {
     session,
     refetchSession,
-    isLoading,
-    /*   isLoading: isSessionEnabled ? isLoading : isInitialLoading, */
+    isLoading: isLoading && fetchStatus !== 'idle',
   };
 }
