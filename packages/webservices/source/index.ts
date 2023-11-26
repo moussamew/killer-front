@@ -35,3 +35,4 @@ export { useSession } from './services/player/queries';
 export { useRoom } from './services/room/queries';
 export type { Room } from './services/room/types';
 export type { RoomStatus, PlayerStatus } from './types';
+export type { Session } from './services/player/types';
