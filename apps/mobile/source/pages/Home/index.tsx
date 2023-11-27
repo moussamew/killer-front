@@ -1,43 +1,56 @@
 import { useTranslation } from '@killerparty/intl';
-import { type NativeStackScreenProps } from '@react-navigation/native-stack';
-import LottieView from 'lottie-react-native';
-import { View, Text, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Text, View, Pressable } from 'react-native';
 
+import KillerParty from '../../assets/images/killerparty.svg';
 import { Button } from '../../components/Button';
-import { type RootStackParamList } from '../../types/navigation';
+import { FadeInView } from '../../components/FadeInView';
+import { type StackNavigation } from '../../types/navigation';
 
-import { Rules } from './Rules';
 import styles from './styles/index.module.css';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
-
-export function HomePage({ navigation }: Props): JSX.Element {
+export function HomePage(): JSX.Element {
+  const { navigate } = useNavigation<StackNavigation>();
   const { t } = useTranslation();
 
   return (
-    <ScrollView style={styles.scroll}>
-      <View style={styles.view}>
-        <Text style={styles.description}>{t('home.description')}</Text>
-        <LottieView
-          source={require('../../assets/lotties/home.json')}
-          autoPlay
-          style={styles.lottie}
-          loop
-        />
+    <View style={styles.container}>
+      <FadeInView style={styles.fadeInView}>
+        <View style={styles.howToPlayView}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.howToPlay,
+              pressed && styles.howToPlayPressed,
+            ]}
+            onPress={() => navigate('CreateRoom')}
+          >
+            <Text style={styles.howToPlayText}>Règles du jeu</Text>
+          </Pressable>
+        </View>
+        <View style={styles.header}>
+          <View style={styles.image}>
+            <KillerParty height={200} width={200} />
+          </View>
+          <View style={styles.banner}>
+            <Text style={styles.title}>KILLER PARTY</Text>
+          </View>
+          <Text style={styles.headline}>
+            Ça vous tente un petit meurtre.. entre amis ?
+          </Text>
+        </View>
         <View style={styles.actions}>
           <Button
             color="primary"
-            onPress={() => navigation.navigate('CreateRoom')}
+            onPress={() => navigate('CreateRoom')}
             text={t('home.create.room.button')}
           />
           <Button
             color="secondary"
-            onPress={() => navigation.navigate('JoinRoom')}
+            onPress={() => navigate('JoinRoom')}
             text={t('home.join.room')}
           />
         </View>
-        <Rules />
-      </View>
-    </ScrollView>
+      </FadeInView>
+    </View>
   );
 }

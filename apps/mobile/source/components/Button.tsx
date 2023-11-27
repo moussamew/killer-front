@@ -22,14 +22,7 @@ export function Button({ onPress, color, text, disabled }: Props): JSX.Element {
       ]}
       onPress={onPress}
     >
-      <Text
-        style={[
-          color === 'primary' && styles.primaryText,
-          color === 'secondary' && styles.secondaryText,
-        ]}
-      >
-        {text}
-      </Text>
+      <Text style={styles.text}>{text}</Text>
     </Pressable>
   );
 }

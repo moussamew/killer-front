@@ -1,98 +1,68 @@
 @import '@killerparty/ui/assets/styles/variables.module.css';
 
-.view {
-  padding: var(--spacing-large);
-  display: flex;
+.container {
   flex: 1;
-  align-items: center;
 }
 
-.lottie {
-  margin-top: -50px;
-  height: 300px;
-  width: 100%;
-  margin-right: 20px;
-  margin-bottom: 50px;
+.fadeInView {
+  flex: 1;
 }
-.scroll {
-  background-color: var(--color-body);
+
+.howToPlayView {
+  display: flex;
+  align-items: flex-end;
+}
+
+.header {
+  flex: 1;
+  justify-content: center;
+}
+
+.image {
+  margin: 0 auto;
+  margin-bottom: -30px;
+}
+
+.banner {
+  margin: 0 auto;
+  margin-bottom: 10px;
+  background-color: bisque;
+  box-shadow: var(--shadow-small);
 }
 
 .title {
-  font-size: 26px;
-  text-align: center;
-  margin-bottom: var(--spacing-medium);
+  font-size: 35px;
+  font-weight: 600;
+  margin: 0 5%;
+  padding: 10px;
+  color: var(--color-black-30);
 }
 
-.description {
-  font-size: 16px;
+.headline {
+  text-align: center;
   color: var(--color-black-40);
 }
 
-.button {
-  position: relative;
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-medium);
-  border-radius: var(--radius-small);
-  box-shadow: var(--shadow-small);
-  transition:
-    background-color ease-in-out 500ms,
-    opacity ease-in-out 500ms;
-  margin-bottom: var(--spacing-small);
-
-  &:disabled {
-    opacity: 0.5;
-  }
-
-  &:hover:not(:disabled) {
-    cursor: pointer;
-  }
-
-  &:hover:is(:disabled) {
-    cursor: not-allowed;
-  }
-}
-
-.primary {
-  background-color: var(--color-black-30);
-
-  .spinner circle {
-    stroke: var(--color-black-50);
-  }
-}
-
-.primaryText {
-  color: var(--color-white);
-  font-size: var(--text-medium);
-}
-
-.primaryPressed {
-  background-color: var(--color-black-20);
-}
-
-.secondary {
-  background-color: var(--color-yellow-70);
-  color: var(--color-black-30);
-
-  .spinner circle {
-    stroke: var(--color-yellow-80);
-  }
-}
-
-.secondaryText {
-  color: var(--color-black-30);
-  font-size: var(--text-medium);
-}
-
-.secondaryPressed {
-  background-color: var(--color-yellow-60);
-}
-
 .actions {
-  width: 100%;
-  margin-bottom: var(--spacing-large);
+  bottom: 0;
+  margin: 20px;
+}
+
+.howToPlay {
+  margin-top: 70px;
+  margin-right: 20px;
+  background-color: var(--color-black-20);
+  box-shadow: var(--shadow-large);
+  border-radius: 50px;
+}
+
+.howToPlayText {
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-white);
+}
+
+.howToPlayPressed {
+  background-color: var(--color-black-40);
 }
