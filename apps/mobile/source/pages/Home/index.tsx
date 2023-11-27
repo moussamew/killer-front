@@ -4,7 +4,6 @@ import LottieView from 'lottie-react-native';
 import { View, Text, ScrollView } from 'react-native';
 
 import { Button } from '../../components/Button';
-import { Gallery } from '../../components/Gallery';
 import { type RootStackParamList } from '../../types/navigation';
 
 import { Rules } from './Rules';
@@ -25,17 +24,18 @@ export function HomePage({ navigation }: Props): JSX.Element {
           style={styles.lottie}
           loop
         />
-        <Button
-          color="primary"
-          onPress={() => navigation.navigate('CreateRoom')}
-          text={t('home.create.room.button')}
-        />
-        <Button
-          color="secondary"
-          onPress={() => navigation.navigate('JoinRoom')}
-          text={t('home.join.room')}
-        />
-        <Gallery />
+        <View style={styles.actions}>
+          <Button
+            color="primary"
+            onPress={() => navigation.navigate('CreateRoom')}
+            text={t('home.create.room.button')}
+          />
+          <Button
+            color="secondary"
+            onPress={() => navigation.navigate('JoinRoom')}
+            text={t('home.join.room')}
+          />
+        </View>
         <Rules />
       </View>
     </ScrollView>
