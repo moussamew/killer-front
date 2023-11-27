@@ -11,13 +11,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#FDF7F2"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.killerparty.mobile",
-      "buildNumber": "7",
+      "buildNumber": "8",
       "config": {
         "usesNonExemptEncryption": false
       }
@@ -33,12 +31,7 @@
     },
     "packagerOpts": {
       "config": "metro.config.js",
-      "sourceExts": [
-        "js",
-        "jsx",
-        "css",
-        "pcss"
-      ]
+      "sourceExts": ["js", "jsx", "css", "pcss"]
     },
     "extra": {
       "eas": {
