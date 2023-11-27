@@ -2,6 +2,7 @@ import { useTranslation } from '@killerparty/intl';
 import { type Session } from '@killerparty/webservices';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import { ROOM_PAGE_NAME } from '../constants/routes';
 import { CreateRoomPage } from '../pages/CreateRoom';
 import { HomePage } from '../pages/Home';
 import { JoinRoomPage } from '../pages/JoinRoom';
@@ -9,12 +10,6 @@ import { EndedRoomPage } from '../pages/Room/Ended';
 import { PendingRoomPage } from '../pages/Room/Pending';
 import { PlayingRoomPage } from '../pages/Room/Playing';
 import { type RootStackParamList } from '../types/navigation';
-
-const ROOM_PAGE_NAME = {
-  PENDING: 'PendingRoom',
-  IN_GAME: 'PlayingRoom',
-  ENDED: 'EndedRoom',
-};
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
