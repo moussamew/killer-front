@@ -1,11 +1,15 @@
 import { useTranslation } from '@killerparty/intl';
 import { useRoom, useSession, useUpdatePlayer } from '@killerparty/webservices';
+import { useNavigation } from '@react-navigation/native';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import { View, Text } from 'react-native';
 
 import { Button } from '../../../components/Button';
 import { CurrentAvatar } from '../../../components/CurrentAvatar';
-import { type RootStackParamList } from '../../../types/navigation';
+import {
+  type StackNavigation,
+  type RootStackParamList,
+} from '../../../types/navigation';
 
 import { Ranking } from './Ranking';
 import styles from './styles/index.module.css';
@@ -18,9 +22,13 @@ export function EndedRoomPage({ route }: Props): JSX.Element {
   const { session } = useSession();
   const { room } = useRoom(roomCode!);
   const { t } = useTranslation();
+  const { replace } = useNavigation<StackNavigation>();
 
   const handleLeaveRoom = (): void => {
-    updatePlayer.mutate({ id: session?.id, room: null });
+    updatePlayer.mutate(
+      { id: session?.id, room: null },
+      { onSuccess: () => replace('Home') },
+    );
   };
 
   return (
