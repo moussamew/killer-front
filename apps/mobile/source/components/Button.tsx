@@ -17,7 +17,7 @@ export function Button({ onPress, color, text, disabled }: Props): JSX.Element {
         styles.button,
         styles[color],
         pressed && color === 'primary' && styles.primaryPressed,
-        pressed && color === 'secondary' && styles.secondaryText,
+        pressed && color === 'secondary' && styles.secondaryPressed,
         disabled && styles.disabled,
       ]}
       onPress={onPress}

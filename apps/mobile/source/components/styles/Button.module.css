@@ -10,7 +10,9 @@
   padding: var(--spacing-medium);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow-small);
-  transition: background-color ease-in-out 500ms, opacity ease-in-out 500ms;
+  transition:
+    background-color ease-in-out 500ms,
+    opacity ease-in-out 500ms;
   margin-bottom: var(--spacing-small);
 
   &:hover:not(:disabled) {
@@ -58,5 +60,5 @@
 }
 
 .secondaryPressed {
-  background-color: var(--color-yellow-60);
+  background-color: var(--color-yellow-50);
 }
