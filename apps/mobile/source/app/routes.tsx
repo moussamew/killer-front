@@ -36,7 +36,7 @@ export function Routes({ session }: Props): JSX.Element {
       <Stack.Screen
         name="Home"
         component={HomePage}
-        options={{ title: t('home.title') }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="CreateRoom"

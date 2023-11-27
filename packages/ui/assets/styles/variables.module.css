@@ -39,7 +39,7 @@
   /** Red colors */
   --color-red-80: hsl(360deg 100% 80%);
   --color-red-70: hsl(360deg 100% 70%);
-  --color-red-60: hsl(360deg 100% 60%);
+  --color-red-65: hsl(360deg 100% 65%);
 
   /** Font sizes */
   --text-very-small: 14px;
@@ -49,6 +49,7 @@
 
   /** Box shadows */
   --shadow-small: var(--color-black-80) 0 2px 4px;
+  --shadow-large: var(--color-black-40) 0 2px 4px;
 
   /** Spacing */
   --spacing-small: 10px;
@@ -57,4 +58,11 @@
 
   /** Radius */
   --radius-small: 5px;
+
+  /** Colors for mobile */
+  --button-primary: hsl(210deg 7% 30%);
+  --button-primary-pressed: hsl(210deg 7% 20%);
+
+  --button-secondary: hsl(231deg 15% 60%);
+  --button-secondary-pressed: hsl(231deg 15% 50%);
 }

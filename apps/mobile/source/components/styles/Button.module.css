@@ -10,18 +10,12 @@
   padding: var(--spacing-medium);
   border-radius: var(--radius-small);
   box-shadow: var(--shadow-small);
-  transition:
-    background-color ease-in-out 500ms,
-    opacity ease-in-out 500ms;
   margin-bottom: var(--spacing-small);
+}
 
-  &:hover:not(:disabled) {
-    cursor: pointer;
-  }
-
-  &:hover:is(:disabled) {
-    cursor: not-allowed;
-  }
+.text {
+  color: var(--color-white);
+  font-size: var(--text-small);
 }
 
 .disabled {
@@ -29,36 +23,17 @@
 }
 
 .primary {
-  background-color: var(--color-black-30);
-
-  .spinner circle {
-    stroke: var(--color-black-50);
-  }
-}
-
-.primaryText {
-  color: var(--color-white);
-  font-size: var(--text-small);
-}
-
-.primaryPressed {
-  background-color: var(--color-black-20);
+  background-color: var(--button-primary);
 }
 
 .secondary {
-  background-color: var(--color-yellow-70);
-  color: var(--color-black-30);
-
-  .spinner circle {
-    stroke: var(--color-yellow-80);
-  }
+  background-color: var(--button-secondary);
 }
 
-.secondaryText {
-  color: var(--color-black-30);
-  font-size: var(--text-small);
+.primaryPressed {
+  background-color: var(--button-primary-pressed);
 }
 
 .secondaryPressed {
-  background-color: var(--color-yellow-50);
+  background-color: var(--button-secondary-pressed);
 }
