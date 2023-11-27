@@ -11,6 +11,7 @@
   margin-top: -50px;
   height: 300px;
   width: 100%;
+  margin-right: 20px;
   margin-bottom: 50px;
 }
 .scroll {
@@ -89,4 +90,9 @@
 
 .secondaryPressed {
   background-color: var(--color-yellow-60);
+}
+
+.actions {
+  width: 100%;
+  margin-bottom: var(--spacing-large);
 }
