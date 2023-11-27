@@ -61,11 +61,11 @@ export function App(): JSX.Element | null {
 
   return (
     <>
-      <NavigationContainer onReady={onLayoutRootView}>
-        <WebServicesProvider>
+      <WebServicesProvider>
+        <NavigationContainer onReady={onLayoutRootView}>
           <Routes session={session} />
-        </WebServicesProvider>
-      </NavigationContainer>
+        </NavigationContainer>
+      </WebServicesProvider>
       <StatusBar />
     </>
   );
