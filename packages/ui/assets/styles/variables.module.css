@@ -22,6 +22,7 @@
   --color-grey-40: hsl(20deg 3% 40%);
 
   /** Yellow colors */
+  --color-yellow-40: hsl(53deg 100% 40%);
   --color-yellow-50: hsl(53deg 100% 50%);
   --color-yellow-60: hsl(53deg 100% 60%);
   --color-yellow-70: hsl(53deg 98% 70%);
