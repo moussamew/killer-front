@@ -1,5 +1,6 @@
 import { useTranslation } from '@killerparty/intl';
 import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 import { Text, View, Pressable } from 'react-native';
 
 import KillerParty from '../../assets/images/killerparty.svg';
@@ -7,14 +8,21 @@ import { Button } from '../../components/Button';
 import { FadeInView } from '../../components/FadeInView';
 import { type StackNavigation } from '../../types/navigation';
 
+import { RulesModal } from './RulesModal';
 import styles from './styles/index.module.css';
 
 export function HomePage(): JSX.Element {
   const { navigate } = useNavigation<StackNavigation>();
   const { t } = useTranslation();
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = (): void => {
+    setModalVisible(!isModalVisible);
+  };
 
   return (
     <View style={styles.container}>
+      <RulesModal isModalVisible={isModalVisible} toggleModal={toggleModal} />
       <FadeInView style={styles.fadeInView}>
         <View style={styles.howToPlayView}>
           <Pressable
@@ -22,7 +30,7 @@ export function HomePage(): JSX.Element {
               styles.howToPlay,
               pressed && styles.howToPlayPressed,
             ]}
-            onPress={() => navigate('CreateRoom')}
+            onPress={toggleModal}
           >
             <Text style={styles.howToPlayText}>Règles du jeu</Text>
           </Pressable>

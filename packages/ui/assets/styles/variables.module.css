@@ -65,4 +65,6 @@
 
   --button-secondary: hsl(231deg 15% 60%);
   --button-secondary-pressed: hsl(231deg 15% 50%);
+
+  --primary-subtitle: hsl(231deg 15% 50%);
 }
