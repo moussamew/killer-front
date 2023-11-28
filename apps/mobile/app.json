@@ -17,9 +17,9 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.killerparty.mobile",
-      "buildNumber": "6",
+      "buildNumber": "7",
       "config": {
-        "usesNonExemptEncryption": true
+        "usesNonExemptEncryption": false
       }
     },
     "android": {
