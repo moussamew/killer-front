@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { Text, View, Pressable } from 'react-native';
 
+import InfosIcon from '../../assets/icons/infos.svg';
 import KillerParty from '../../assets/images/killerparty.svg';
 import { Button } from '../../components/Button';
 import { FadeInView } from '../../components/FadeInView';
@@ -32,7 +33,8 @@ export function HomePage(): JSX.Element {
             ]}
             onPress={toggleModal}
           >
-            <Text style={styles.howToPlayText}>Règles du jeu</Text>
+            <InfosIcon height={14} width={14} />
+            <Text style={styles.howToPlayText}>Régles du jeu</Text>
           </Pressable>
         </View>
         <View style={styles.header}>
