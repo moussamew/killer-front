@@ -34,9 +34,9 @@ export function RoomGuard({
    */
   useEffect(
     function redirectPlayerToCorrectRoutePage() {
-      if (room?.status) {
+      if (room?.status && session) {
         const newRouteName = (
-          session?.room?.status ? ROOM_PAGE_NAME[session.room.status] : 'Home'
+          session.room?.status ? ROOM_PAGE_NAME[session.room.status] : 'Home'
         ) as keyof RootStackParamList;
 
         if (newRouteName !== currentRouteName) {

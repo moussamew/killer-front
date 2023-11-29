@@ -1,47 +1,35 @@
 import { useTranslation } from '@killerparty/intl';
-import {
-  useCreatePlayer,
-  useSession,
-  useUpdatePlayer,
-} from '@killerparty/webservices';
-import { useNavigation } from '@react-navigation/native';
+import { useCreatePlayer, useUpdatePlayer } from '@killerparty/webservices';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { View, Text, TextInput } from 'react-native';
 
 import { Button } from '../../components/Button';
 import { CurrentAvatar } from '../../components/CurrentAvatar';
 import { getRandomAvatar } from '../../helpers/avatars';
-import { type StackNavigation } from '../../types/navigation';
+import { type RootStackParamList } from '../../types/navigation';
 
 import styles from './styles/index.module.css';
 
-export function JoinRoomPage(): JSX.Element {
+type Props = NativeStackScreenProps<RootStackParamList, 'JoinRoom'>;
+
+export function JoinRoomPage({ navigation }: Props): JSX.Element {
   const [pseudo, setPseudo] = useState('');
   const [avatar, setAvatar] = useState(getRandomAvatar());
   const [roomCode, setRoomCode] = useState('');
   const { t } = useTranslation();
   const { createPlayer } = useCreatePlayer();
   const { updatePlayer } = useUpdatePlayer();
-  const { session } = useSession();
-  const { replace } = useNavigation<StackNavigation>();
 
-  const handleJoinRoom = (): void => {
-    if (session) {
-      updatePlayer.mutate(
-        {
-          id: session?.id,
-          room: roomCode,
-          name: pseudo,
-          avatar,
-        },
-        { onSuccess: () => replace('PendingRoom', { roomCode }) },
-      );
-    } else {
-      createPlayer.mutate(
-        { name: pseudo, avatar },
-        { onSuccess: ({ id }) => updatePlayer.mutate({ id, room: roomCode }) },
-      );
-    }
+  const handleJoinRoom = async (): Promise<void> => {
+    const { id } = await createPlayer.mutateAsync({ name: pseudo, avatar });
+
+    await updatePlayer.mutateAsync({ id, room: roomCode });
+
+    navigation.reset({
+      routes: [{ name: 'PendingRoom', params: { roomCode } }],
+    });
   };
 
   return (
@@ -75,6 +63,11 @@ export function JoinRoomPage(): JSX.Element {
         color="primary"
         onPress={handleJoinRoom}
         text={t('home.join.room.confirm.button')}
+      />
+      <Button
+        color="secondary"
+        onPress={() => AsyncStorage.clear()}
+        text="Clear storage"
       />
     </View>
   );
