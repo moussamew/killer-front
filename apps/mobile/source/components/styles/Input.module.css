@@ -1,0 +1,19 @@
+@import '@killerparty/ui/assets/styles/variables.module.css';
+
+.content {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.label {
+  font-weight: 600;
+}
+
+.input {
+  padding: var(--spacing-small) 0;
+  border-bottom-width: 2;
+  font-weight: 500;
+  font-size: var(--text-large);
+}
