@@ -21,18 +21,13 @@ export function CreateRoomPage({ navigation }: Props): JSX.Element {
   const { createPlayer } = useCreatePlayer();
 
   const handleCreateRoom = async (): Promise<void> => {
-    await createPlayer.mutateAsync(
-      { name: pseudo, avatar },
-      {
-        onSuccess: () =>
-          createRoom.mutate(undefined, {
-            onSuccess: ({ id }) =>
-              navigation.reset({
-                routes: [{ name: 'PendingRoom', params: { roomCode: id } }],
-              }),
-          }),
-      },
-    );
+    await createPlayer.mutateAsync({ name: pseudo, avatar });
+
+    const { id } = await createRoom.mutateAsync();
+
+    navigation.reset({
+      routes: [{ name: 'PendingRoom', params: { roomCode: id } }],
+    });
   };
 
   return (

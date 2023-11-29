@@ -45,7 +45,7 @@ export function useCreatePlayer(): CreatePlayerMutation {
   const createPlayer = useMutation({
     context,
     mutationFn: createPlayerRequest,
-    onSuccess: () => queryClient.invalidateQueries(['session']),
+    onSuccess: () => queryClient.resetQueries(['session']),
   });
 
   return { createPlayer };
