@@ -1,16 +1,18 @@
 @import '@killerparty/ui/assets/styles/variables.module.css';
 
+.content {
+  padding: var(--spacing-medium);
+  border-radius: var(--radius-small);
+  box-shadow: var(--shadow-small);
+  margin-bottom: var(--spacing-small);
+}
+
 .button {
-  position: relative;
   display: flex;
   width: 100%;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-medium);
-  border-radius: var(--radius-small);
-  box-shadow: var(--shadow-small);
-  margin-bottom: var(--spacing-small);
 }
 
 .text {
