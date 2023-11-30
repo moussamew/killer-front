@@ -6,7 +6,6 @@ import { ROOM_PAGE_NAME } from '../constants/routes';
 import { ChooseAvatar } from '../pages/ChooseAvatar';
 import { ChoosePseudo } from '../pages/ChoosePseudo';
 import { ChooseRoom } from '../pages/ChooseRoom';
-import { CreateRoomPage } from '../pages/CreateRoom';
 import { HomePage } from '../pages/Home';
 import { EndedRoomPage } from '../pages/Room/Ended';
 import { PendingRoomPage } from '../pages/Room/Pending';
@@ -41,11 +40,7 @@ export function Routes({ session }: Props): JSX.Element {
         component={HomePage}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="CreateRoom"
-        component={CreateRoomPage}
-        options={{ title: t('create.room.page.title') }}
-      />
+
       <Stack.Screen
         name="ChoosePseudo"
         component={ChoosePseudo}
