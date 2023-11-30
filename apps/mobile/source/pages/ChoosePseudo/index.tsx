@@ -14,7 +14,7 @@ import styles from './styles/index.module.css';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ChoosePseudo'>;
 
-export function ChoosePseudo({ navigation }: Props): JSX.Element {
+export function ChoosePseudo({ navigation, route }: Props): JSX.Element {
   const [pseudo, setPseudo] = useState('');
   const { createPlayer } = useCreatePlayer();
   const inputRef = createRef<TextInput>();
@@ -25,7 +25,10 @@ export function ChoosePseudo({ navigation }: Props): JSX.Element {
       avatar: getRandomAvatar(),
     });
 
-    navigation.navigate('ChooseAvatar', { playerId });
+    navigation.navigate('ChooseAvatar', {
+      playerId,
+      shouldCreateRoom: route.params?.shouldCreateRoom ?? false,
+    });
   };
 
   return (
@@ -47,7 +50,7 @@ export function ChoosePseudo({ navigation }: Props): JSX.Element {
           />
           <Button
             disabled={!pseudo}
-            color="secondary"
+            color="primary"
             onPress={handleNextPage}
             text="Suivant"
           />

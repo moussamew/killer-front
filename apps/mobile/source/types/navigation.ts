@@ -4,9 +4,9 @@ export type RootStackParamList = {
   Home: undefined;
   CreateRoom: undefined;
   JoinRoom: undefined;
-  ChoosePseudo: undefined;
+  ChoosePseudo?: { shouldCreateRoom: boolean };
   ChooseRoom: { playerId: number };
-  ChooseAvatar: { playerId: number };
+  ChooseAvatar: { playerId: number; shouldCreateRoom: boolean };
   PendingRoom: { roomCode: string };
   PlayingRoom: { roomCode: string };
   EndedRoom: { roomCode: string };

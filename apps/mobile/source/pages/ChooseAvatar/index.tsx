@@ -1,9 +1,8 @@
 import { useTranslation } from '@killerparty/intl';
-import { useUpdatePlayer } from '@killerparty/webservices';
+import { useCreateRoom, useUpdatePlayer } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
-import LottieView from 'lottie-react-native';
 import { useState } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View } from 'react-native';
 
 import { Button } from '../../components/Button';
 import { CurrentAvatar } from '../../components/CurrentAvatar';
@@ -17,15 +16,24 @@ type Props = NativeStackScreenProps<RootStackParamList, 'ChooseAvatar'>;
 
 export function ChooseAvatar({ navigation, route }: Props): JSX.Element {
   const [avatar, setAvatar] = useState(getRandomAvatar());
-
   const { updatePlayer } = useUpdatePlayer();
+  const { createRoom } = useCreateRoom();
+  const { t } = useTranslation();
 
-  const handleJoinRoom = async (): Promise<void> => {
-    const { playerId } = route.params;
+  const { playerId, shouldCreateRoom } = route.params;
 
+  const handleNextPage = async (): Promise<void> => {
     await updatePlayer.mutateAsync({ id: playerId, avatar });
 
-    navigation.navigate('ChooseRoom', { playerId });
+    if (shouldCreateRoom) {
+      const { id } = await createRoom.mutateAsync();
+
+      return navigation.reset({
+        routes: [{ name: 'PendingRoom', params: { roomCode: id } }],
+      });
+    }
+
+    return navigation.navigate('ChooseRoom', { playerId });
   };
 
   return (
@@ -33,7 +41,13 @@ export function ChooseAvatar({ navigation, route }: Props): JSX.Element {
       <Header shouldHandlePreviousPage title="Choisir un avatar" />
       <View style={styles.view}>
         <CurrentAvatar updateAvatarCallback={setAvatar} avatar={avatar} />
-        <Button color="secondary" onPress={handleJoinRoom} text="Suivant" />
+        <Button
+          color="primary"
+          onPress={handleNextPage}
+          text={
+            shouldCreateRoom ? t('home.create.room.confirm.button') : 'Suivant'
+          }
+        />
       </View>
     </>
   );
