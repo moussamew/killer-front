@@ -33,7 +33,7 @@ export function useUpdatePlayer(): UpdatePlayerMutation {
         }));
       }
     },
-    onSettled: () => queryClient.invalidateQueries(['session']),
+    onSettled: () => queryClient.resetQueries(['session']),
   });
 
   return { updatePlayer };

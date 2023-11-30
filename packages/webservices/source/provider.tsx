@@ -17,8 +17,8 @@ export function WebServicesProvider({ children }: Props): JSX.Element {
       {children}
       <Toast
         config={{ error: CustomErrorToast }}
-        topOffset={60}
-        visibilityTime={5000}
+        topOffset={50}
+        visibilityTime={2500}
       />
     </QueryClientProvider>
   );

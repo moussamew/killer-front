@@ -1,0 +1,12 @@
+@import '@killerparty/ui/assets/styles/variables.module.css';
+
+.view {
+  margin: var(--spacing-large);
+  background-color: var(--color-body);
+  display: flex;
+  flex: 1;
+}
+
+.lottie {
+  height: 350px;
+}

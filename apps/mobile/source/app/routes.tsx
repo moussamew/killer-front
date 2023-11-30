@@ -3,9 +3,11 @@ import { type Session } from '@killerparty/webservices';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { ROOM_PAGE_NAME } from '../constants/routes';
+import { ChooseAvatar } from '../pages/ChooseAvatar';
+import { ChoosePseudo } from '../pages/ChoosePseudo';
+import { ChooseRoom } from '../pages/ChooseRoom';
 import { CreateRoomPage } from '../pages/CreateRoom';
 import { HomePage } from '../pages/Home';
-import { JoinRoomPage } from '../pages/JoinRoom';
 import { EndedRoomPage } from '../pages/Room/Ended';
 import { PendingRoomPage } from '../pages/Room/Pending';
 import { PlayingRoomPage } from '../pages/Room/Playing';
@@ -44,14 +46,28 @@ export function Routes({ session }: Props): JSX.Element {
         options={{ title: t('create.room.page.title') }}
       />
       <Stack.Screen
-        name="JoinRoom"
-        component={JoinRoomPage}
-        options={{ title: t('home.join.room') }}
+        name="ChoosePseudo"
+        component={ChoosePseudo}
+        options={{
+          headerShown: false,
+          animation: 'slide_from_bottom',
+          gestureDirection: 'vertical',
+        }}
+      />
+      <Stack.Screen
+        name="ChooseRoom"
+        component={ChooseRoom}
+        options={{ headerShown: false, animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="ChooseAvatar"
+        component={ChooseAvatar}
+        options={{ headerShown: false, animation: 'slide_from_right' }}
       />
       <Stack.Screen
         name="PendingRoom"
         component={PendingRoomPage}
-        options={{ title: 'Killer Party' }}
+        options={{ headerShown: false }}
         initialParams={{ roomCode: session?.room?.id }}
       />
       <Stack.Screen

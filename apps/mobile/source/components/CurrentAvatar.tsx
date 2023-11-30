@@ -21,11 +21,11 @@ export function CurrentAvatar({
   return (
     <View style={styles.content}>
       <View style={styles.avatar}>
-        {avatarsList({ height: 200, width: 200 })[avatar ?? getRandomAvatar()]}
+        {avatarsList({ height: 250, width: 250 })[avatar ?? getRandomAvatar()]}
       </View>
       {updateAvatarCallback && (
         <Button
-          color="secondary"
+          color="primary"
           onPress={() => updateAvatarCallback(getRandomAvatar())}
           text={t('avatar.refresh.title')}
         />
