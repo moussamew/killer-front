@@ -25,7 +25,7 @@ export function CurrentAvatar({
       </View>
       {updateAvatarCallback && (
         <Button
-          color="primary"
+          color="secondary"
           onPress={() => updateAvatarCallback(getRandomAvatar())}
           text={t('avatar.refresh.title')}
         />

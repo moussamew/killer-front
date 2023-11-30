@@ -43,7 +43,7 @@ export function HomePage(): JSX.Element {
         <View style={styles.actions}>
           <Button
             color="primary"
-            onPress={() => navigate('CreateRoom')}
+            onPress={() => navigate('ChoosePseudo', { shouldCreateRoom: true })}
             text={t('home.create.room.button')}
           />
           <Button
