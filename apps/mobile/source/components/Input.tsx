@@ -70,6 +70,8 @@ export function Input({
         clearButtonMode="always"
         enterKeyHint="done"
         keyboardAppearance="dark"
+        autoCorrect={false}
+        spellCheck={false}
       />
     </View>
   );
