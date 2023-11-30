@@ -58,14 +58,7 @@ importers:
         version: 18.2.0
       react-native:
         specifier: 0.72.7
-<<<<<<< HEAD
         version: 0.72.7(@babel/core@7.23.5)(@babel/preset-env@7.23.5)(react@18.2.0)
-      react-native-modal:
-        specifier: 13.0.1
-        version: 13.0.1(react-native@0.72.7)(react@18.2.0)
-=======
-        version: 0.72.7(@babel/core@7.23.3)(@babel/preset-env@7.23.3)(react@18.2.0)
->>>>>>> 71314f9 (Uninstall react-native-modal as it's now inactive)
       react-native-safe-area-context:
         specifier: 4.7.4
         version: 4.7.4(react-native@0.72.7)(react@18.2.0)
@@ -11271,21 +11264,6 @@ packages:
       semver: 5.7.2
     dev: true
 
-<<<<<<< HEAD
-  /react-native-modal@13.0.1(react-native@0.72.7)(react@18.2.0):
-    resolution: {integrity: sha512-UB+mjmUtf+miaG/sDhOikRfBOv0gJdBU2ZE1HtFWp6UixW9jCk/bhGdHUgmZljbPpp0RaO/6YiMmQSSK3kkMaw==}
-    peerDependencies:
-      react: '*'
-      react-native: '>=0.65.0'
-    dependencies:
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-native: 0.72.7(@babel/core@7.23.5)(@babel/preset-env@7.23.5)(react@18.2.0)
-      react-native-animatable: 1.3.3
-    dev: false
-
-=======
->>>>>>> 71314f9 (Uninstall react-native-modal as it's now inactive)
   /react-native-postcss-transformer@1.3.1(postcss@8.4.31)(react-native@0.72.7):
     resolution: {integrity: sha512-GcnsIiOQWIFjlh0JibHitnmkVMgHTa5f63+kTCeWbhj/AKAeVekXiIqO/9eaKPMHs2s0jAWO9FVDcS+KJxStlw==}
     peerDependencies:
