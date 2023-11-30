@@ -28,7 +28,7 @@ export function PlayerMissions(): JSX.Element {
         </View>
       </View>
       <View style={styles.cards}>
-        {session?.authoredMissions.map(({ id, content }) => (
+        {session?.authoredMissions?.map(({ id, content }) => (
           <View key={`${id}-${content}`} style={styles.card}>
             <Text>{content}</Text>
             <Delete

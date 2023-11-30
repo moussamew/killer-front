@@ -56,7 +56,7 @@ export function HomePage(): JSX.Element {
           />
           <Button
             color="secondary"
-            onPress={() => navigate('JoinRoom')}
+            onPress={() => navigate('ChoosePseudo')}
             text={t('home.join.room')}
           />
         </View>
