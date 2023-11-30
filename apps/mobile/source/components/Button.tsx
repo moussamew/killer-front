@@ -1,4 +1,5 @@
-import { Pressable, Text } from 'react-native';
+import { useRef } from 'react';
+import { Animated, Pressable, Text } from 'react-native';
 
 import styles from './styles/Button.module.css';
 
@@ -10,19 +11,43 @@ interface Props {
 }
 
 export function Button({ onPress, color, text, disabled }: Props): JSX.Element {
+  const focusAnim = useRef(new Animated.Value(0)).current;
+
+  const handlePressIn = (): void => {
+    Animated.timing(focusAnim, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const handlePressOut = (): void => {
+    Animated.timing(focusAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const backgroundColor = focusAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange:
+      color === 'primary' ? ['#474D52', '#2F3337'] : ['#8A8EA8', '#6C7294'],
+  });
+
   return (
-    <Pressable
-      disabled={disabled}
-      style={({ pressed }) => [
-        styles.button,
-        styles[color],
-        pressed && color === 'primary' && styles.primaryPressed,
-        pressed && color === 'secondary' && styles.secondaryPressed,
-        disabled && styles.disabled,
-      ]}
-      onPress={onPress}
+    <Animated.View
+      style={[styles.content, disabled && styles.disabled, { backgroundColor }]}
     >
-      <Text style={styles.text}>{text}</Text>
-    </Pressable>
+      <Pressable
+        style={styles.button}
+        onPress={onPress}
+        disabled={disabled}
+        onPressIn={handlePressIn}
+        onPressOut={handlePressOut}
+      >
+        <Text style={styles.text}>{text}</Text>
+      </Pressable>
+    </Animated.View>
   );
 }
