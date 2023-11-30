@@ -10,6 +10,7 @@ export type RootStackParamList = {
   PendingRoom: { roomCode: string };
   PlayingRoom: { roomCode: string };
   EndedRoom: { roomCode: string };
+  Rules: undefined;
 };
 
 export type StackNavigation = NativeStackNavigationProp<RootStackParamList>;

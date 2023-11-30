@@ -11,6 +11,7 @@ import { HomePage } from '../pages/Home';
 import { EndedRoomPage } from '../pages/Room/Ended';
 import { PendingRoomPage } from '../pages/Room/Pending';
 import { PlayingRoomPage } from '../pages/Room/Playing';
+import { Rules } from '../pages/Rules';
 import { type RootStackParamList } from '../types/navigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -81,6 +82,11 @@ export function Routes({ session }: Props): JSX.Element {
         component={EndedRoomPage}
         options={{ title: 'Killer Party' }}
         initialParams={{ roomCode: session?.room?.id }}
+      />
+      <Stack.Screen
+        name="Rules"
+        component={Rules}
+        options={{ headerShown: false, presentation: 'modal' }}
       />
     </Stack.Navigator>
   );
