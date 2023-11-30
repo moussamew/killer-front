@@ -1,0 +1,49 @@
+@import '@killerparty/ui/assets/styles/variables.module.css';
+
+.header {
+  display: flex;
+  margin: var(--spacing-small) var(--spacing-small) 0 var(--spacing-large);
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content {
+  margin: 0 var(--spacing-large);
+}
+
+.closeIcon {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.closeIconPressed {
+  background-color: var(--color-black-80);
+}
+
+.howToPlay {
+  font-size: 16px;
+  color: var(--primary-subtitle);
+  margin-bottom: var(--spacing-small);
+}
+
+.step {
+  composes: spacing from './index.module.css';
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--color-black-90);
+  flex-direction: column;
+  margin-bottom: var(--spacing-large);
+}
+
+.title {
+  font-size: 18px;
+  margin-bottom: var(--spacing-small);
+  font-weight: 500;
+}
+
+.text {
+  font-size: 16px;
+  color: var(--color-black-40);
+}

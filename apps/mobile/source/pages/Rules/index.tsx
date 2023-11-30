@@ -1,23 +1,23 @@
 import { useTranslation } from '@killerparty/intl';
-import { View, Text, Pressable } from 'react-native';
+import { type NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Pressable, Text, View } from 'react-native';
 
 import CloseIcon from '../../assets/icons/close.svg';
+import { type RootStackParamList } from '../../types/navigation';
 
-import styles from './styles/Rules.module.css';
+import styles from './styles/index.module.css';
 
-interface Props {
-  toggleModal: () => void;
-}
+type Props = NativeStackScreenProps<RootStackParamList, 'Rules'>;
 
-export function Rules({ toggleModal }: Props): JSX.Element {
+export function Rules({ navigation }: Props): JSX.Element {
   const { t } = useTranslation();
 
   return (
-    <View>
+    <>
       <View style={styles.header}>
         <Text style={styles.howToPlay}>Comment jouer à Killer Party</Text>
         <Pressable
-          onPress={toggleModal}
+          onPress={() => navigation.popToTop()}
           style={({ pressed }) => [
             styles.closeIcon,
             pressed && styles.closeIconPressed,
@@ -46,6 +46,6 @@ export function Rules({ toggleModal }: Props): JSX.Element {
           </View>
         </View>
       </View>
-    </View>
+    </>
   );
 }
