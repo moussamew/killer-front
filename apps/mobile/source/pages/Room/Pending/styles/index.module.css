@@ -1,6 +1,7 @@
 @import '@killerparty/ui/assets/styles/variables.module.css';
 
 .container {
+  margin-top: 50px;
   background-color: var(--color-body);
 }
 
@@ -28,7 +29,5 @@
 }
 
 .image {
-  height: 125px;
-  width: 125px;
   align-self: center;
 }

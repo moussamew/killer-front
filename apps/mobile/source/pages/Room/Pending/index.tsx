@@ -1,7 +1,8 @@
 import { useTranslation } from '@killerparty/intl';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Text, View, Image, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 
+import KillerParty from '../../../assets/images/killerparty.svg';
 import { RoomGuard } from '../../../components/RoomGuard';
 import { type RootStackParamList } from '../../../types/navigation';
 
@@ -27,10 +28,7 @@ export function PendingRoomPage({ route }: Props): JSX.Element | null {
     <RoomGuard roomCode={roomCode} currentRouteName={routeName}>
       <ScrollView style={styles.container}>
         <View style={styles.content}>
-          <Image
-            source={require('../../../assets/images/island.png')}
-            style={styles.image}
-          />
+          <KillerParty height={200} width={200} style={styles.image} />
           <Text style={styles.title}>{t('room.welcome.title')}</Text>
           <Text style={styles.joinRoomCode}>
             {t('room.join.room.code', { roomCode })}
