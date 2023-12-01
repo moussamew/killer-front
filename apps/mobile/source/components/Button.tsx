@@ -1,17 +1,34 @@
-import { useRef } from 'react';
-import { Animated, Pressable, Text } from 'react-native';
+import { useRef, useState } from 'react';
+import { ActivityIndicator, Animated, Pressable, Text } from 'react-native';
 
 import styles from './styles/Button.module.css';
 
 interface Props {
-  onPress: () => void;
+  onPress: () => void | Promise<void>;
   color: 'primary' | 'secondary';
   text: string;
   disabled?: boolean;
+  isAsyncAction?: boolean;
 }
 
-export function Button({ onPress, color, text, disabled }: Props): JSX.Element {
+export function Button({
+  onPress,
+  color,
+  text,
+  disabled,
+  isAsyncAction,
+}: Props): JSX.Element {
+  const [isLoading, setLoading] = useState(false);
   const focusAnim = useRef(new Animated.Value(0)).current;
+
+  const handlePress = async (): Promise<void> => {
+    if (isAsyncAction) {
+      setLoading(true);
+      return (onPress() as Promise<void>).finally(() => setLoading(false));
+    }
+
+    return onPress();
+  };
 
   const handlePressIn = (): void => {
     Animated.timing(focusAnim, {
@@ -37,16 +54,26 @@ export function Button({ onPress, color, text, disabled }: Props): JSX.Element {
 
   return (
     <Animated.View
-      style={[styles.content, disabled && styles.disabled, { backgroundColor }]}
+      style={[
+        styles.content,
+        (disabled || isLoading) && styles.disabled,
+        { backgroundColor },
+      ]}
     >
       <Pressable
         style={styles.button}
-        onPress={onPress}
-        disabled={disabled}
+        onPress={handlePress}
+        disabled={disabled || isLoading}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
       >
-        <Text style={styles.text}>{text}</Text>
+        {isLoading ? (
+          <Animated.View>
+            <ActivityIndicator />
+          </Animated.View>
+        ) : (
+          <Text style={styles.text}>{text}</Text>
+        )}
       </Pressable>
     </Animated.View>
   );
