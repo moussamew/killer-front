@@ -28,12 +28,13 @@ export function PendingRoomPage({ route }: Props): JSX.Element | null {
     <RoomGuard roomCode={roomCode} currentRouteName={routeName}>
       <ScrollView style={styles.container}>
         <View style={styles.content}>
+          <ShareRoomLink roomCode={roomCode} />
           <KillerParty height={200} width={200} style={styles.image} />
           <Text style={styles.title}>{t('room.welcome.title')}</Text>
           <Text style={styles.joinRoomCode}>
             {t('room.join.room.code', { roomCode })}
           </Text>
-          <ShareRoomLink roomCode={roomCode} />
+
           <StartPartyButton roomCode={roomCode} />
           <CanStartParty roomCode={roomCode} />
           <RoomMissions roomCode={roomCode} />

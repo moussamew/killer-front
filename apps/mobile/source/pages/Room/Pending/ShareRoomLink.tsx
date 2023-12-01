@@ -1,7 +1,9 @@
 import { useTranslation } from '@killerparty/intl';
-import { Share } from 'react-native';
+import { Text, Pressable, Share, View } from 'react-native';
 
-import { Button } from '../../../components/Button';
+import ShareIcon from '../../../assets/icons/share.svg';
+
+import styles from './styles/ShareRoomLink.module.css';
 
 interface Props {
   roomCode: string;
@@ -18,10 +20,11 @@ export function ShareRoomLink({ roomCode }: Props): JSX.Element {
   };
 
   return (
-    <Button
-      color="secondary"
-      onPress={shareRoomLink}
-      text={t('room.share.link.button')}
-    />
+    <View style={styles.content}>
+      <Pressable style={styles.button} onPress={shareRoomLink}>
+        <ShareIcon height={14} width={14} />
+        <Text style={styles.text}>{t('room.share.link.button')}</Text>
+      </Pressable>
+    </View>
   );
 }
