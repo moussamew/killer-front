@@ -48,9 +48,10 @@ export function ChooseRoom({ navigation, route }: Props): JSX.Element {
           />
           <Button
             disabled={!roomCode}
-            color="secondary"
+            color="primary"
             onPress={handleNextPage}
             text="Suivant"
+            isAsyncAction
           />
         </View>
       </TouchableWithoutFeedback>

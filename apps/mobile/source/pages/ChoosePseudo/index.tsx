@@ -53,6 +53,7 @@ export function ChoosePseudo({ navigation, route }: Props): JSX.Element {
             color="primary"
             onPress={handleNextPage}
             text="Suivant"
+            isAsyncAction
           />
         </View>
       </TouchableWithoutFeedback>
