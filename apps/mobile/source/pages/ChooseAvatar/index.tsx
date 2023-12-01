@@ -47,6 +47,7 @@ export function ChooseAvatar({ navigation, route }: Props): JSX.Element {
           text={
             shouldCreateRoom ? t('home.create.room.confirm.button') : 'Suivant'
           }
+          isAsyncAction
         />
       </View>
     </>
