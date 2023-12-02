@@ -12,8 +12,8 @@ export function StartPartyButton({ roomCode }: Props): JSX.Element {
   const { startParty } = useStartParty();
   const { room } = useRoom(roomCode);
 
-  const handleStartParty = (): void => {
-    startParty.mutate(roomCode);
+  const handleStartParty = async (): Promise<void> => {
+    await startParty.mutateAsync(roomCode);
   };
 
   const allPlayersHasProposedMission = room?.players.every(
@@ -30,6 +30,7 @@ export function StartPartyButton({ roomCode }: Props): JSX.Element {
         !allPlayersHasProposedMission
       }
       text={t('room.start.party.button')}
+      isAsyncAction
     />
   );
 }
