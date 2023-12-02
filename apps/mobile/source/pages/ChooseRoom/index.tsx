@@ -30,7 +30,7 @@ export function ChooseRoom({ navigation, route }: Props): JSX.Element {
   };
 
   return (
-    <>
+    <View style={styles.content}>
       <Header shouldHandlePreviousPage title="Rejoindre une partie" />
       <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
         <View style={styles.view}>
@@ -55,6 +55,6 @@ export function ChooseRoom({ navigation, route }: Props): JSX.Element {
           />
         </View>
       </TouchableWithoutFeedback>
-    </>
+    </View>
   );
 }

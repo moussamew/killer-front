@@ -37,7 +37,7 @@ export function ChooseAvatar({ navigation, route }: Props): JSX.Element {
   };
 
   return (
-    <>
+    <View style={styles.content}>
       <Header shouldHandlePreviousPage title="Choisir un avatar" />
       <View style={styles.view}>
         <CurrentAvatar updateAvatarCallback={setAvatar} avatar={avatar} />
@@ -50,6 +50,6 @@ export function ChooseAvatar({ navigation, route }: Props): JSX.Element {
           isAsyncAction
         />
       </View>
-    </>
+    </View>
   );
 }
