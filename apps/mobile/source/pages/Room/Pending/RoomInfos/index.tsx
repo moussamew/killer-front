@@ -1,8 +1,9 @@
 import { useTranslation } from '@killerparty/intl';
 import { useSession } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 
+import InfosIcon from '../../../../assets/icons/infos.svg';
 import KillerParty from '../../../../assets/images/killerparty.svg';
 import { Player } from '../../../../components/Player';
 import { RoomGuard } from '../../../../components/RoomGuard';
@@ -10,13 +11,12 @@ import { type RootStackParamList } from '../../../../types/navigation';
 
 import { CanStartParty } from './CanStartParty';
 import { RoomMissions } from './RoomMissions';
-import { ShareRoomLink } from './ShareRoomLink';
 import { StartPartyButton } from './StartPartyButton';
 import styles from './styles/index.module.css';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'RoomInfos'>;
 
-export function RoomInfos({ route }: Props): JSX.Element | null {
+export function RoomInfos({ route, navigation }: Props): JSX.Element | null {
   const { t } = useTranslation();
   const { session } = useSession();
 
@@ -27,7 +27,18 @@ export function RoomInfos({ route }: Props): JSX.Element | null {
   return (
     <RoomGuard roomCode={roomCode} currentRouteName={routeName}>
       <View style={styles.content}>
-        <ShareRoomLink roomCode={roomCode} />
+        <View style={styles.howToPlayView}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.howToPlay,
+              pressed && styles.howToPlayPressed,
+            ]}
+            onPress={() => navigation.navigate('Rules')}
+          >
+            <InfosIcon height={14} width={14} />
+            <Text style={styles.howToPlayText}>Régles du jeu</Text>
+          </Pressable>
+        </View>
         <KillerParty height={200} width={200} style={styles.image} />
         <Text style={styles.title}>{t('room.welcome.title')}</Text>
         <Text style={styles.joinRoomCode} selectable>

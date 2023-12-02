@@ -3,6 +3,7 @@
 .content {
   display: flex;
   align-items: flex-end;
+  z-index: 1;
 }
 
 .button {
@@ -11,11 +12,14 @@
   justify-content: center;
   align-items: center;
   margin-top: var(--spacing-large);
-  margin-bottom: var(--spacing-large);
   background-color: var(--button-secondary);
   box-shadow: var(--shadow-large);
   border-radius: 50px;
   padding: 10px 15px;
+}
+
+.buttonPressed {
+  background-color: var(--button-secondary-pressed);
 }
 
 .text {

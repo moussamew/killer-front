@@ -21,9 +21,15 @@ export function ShareRoomLink({ roomCode }: Props): JSX.Element {
 
   return (
     <View style={styles.content}>
-      <Pressable style={styles.button} onPress={shareRoomLink}>
+      <Pressable
+        style={({ pressed }) => [
+          styles.button,
+          pressed && styles.buttonPressed,
+        ]}
+        onPress={shareRoomLink}
+      >
         <ShareIcon height={14} width={14} />
-        <Text style={styles.text}>{t('room.share.link.button')}</Text>
+        <Text style={styles.text}>Inviter des joueurs à la partie</Text>
       </Pressable>
     </View>
   );
