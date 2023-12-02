@@ -10,18 +10,26 @@ import styles from './styles/CurrentAvatar.module.css';
 interface Props {
   avatar?: string;
   updateAvatarCallback?: Dispatch<SetStateAction<string>>;
+  height?: number;
+  width?: number;
 }
 
 export function CurrentAvatar({
   avatar,
   updateAvatarCallback,
+  height,
+  width,
 }: Props): JSX.Element {
   const { t } = useTranslation();
 
   return (
     <View style={styles.content}>
       <View style={styles.avatar}>
-        {avatarsList({ height: 250, width: 250 })[avatar ?? getRandomAvatar()]}
+        {
+          avatarsList({ height: height ?? 250, width: width ?? 250 })[
+            avatar ?? getRandomAvatar()
+          ]
+        }
       </View>
       {updateAvatarCallback && (
         <Button
