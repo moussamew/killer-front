@@ -19,7 +19,7 @@ export function RoomMissions({ route }: Props): JSX.Element {
     <RoomGuard roomCode={roomCode} currentRouteName={routeName}>
       <View style={styles.container}>
         <LottieView
-          source={require('../../../../assets/lotties/choose-pseudo.json')}
+          source={require('../../../../assets/lotties/create-mission.json')}
           autoPlay
           style={styles.lottie}
           loop
