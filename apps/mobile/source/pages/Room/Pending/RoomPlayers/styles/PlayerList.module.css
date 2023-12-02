@@ -2,7 +2,6 @@
 
 .content {
   margin: var(--spacing-large);
-  margin-top: 70px;
   justify-content: center;
 }
 
@@ -38,7 +37,7 @@
 .icon {
   height: 25px;
   width: 25px;
-  opacity: 0.2;
+  opacity: 1;
 }
 
 .playerReady {

@@ -30,6 +30,7 @@ export type RootStackParamList = {
       avatar: string;
       hasAtLeastOneMission: boolean;
       roomCode: string;
+      status: string;
     };
   };
   PlayingRoomInfos: { roomCode: string; routeName: keyof RootStackParamList };
