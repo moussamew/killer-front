@@ -1,44 +1,54 @@
-import { useTranslation } from '@killerparty/intl';
 import { useDeleteMission, useSession } from '@killerparty/webservices';
-import { View, Image, Text } from 'react-native';
+import { useState } from 'react';
+import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 
-import Delete from '../../../../assets/icons/delete.svg';
+import Delete from '../../../../assets/icons/close-small.svg';
 
 import styles from './styles/PlayerMissions.module.css';
 
 export function PlayerMissions(): JSX.Element {
-  const { t } = useTranslation();
+  const [isLoading, setLoading] = useState(false);
+  const [missionIdToDelete, setMissionIdToDelete] = useState<number | null>(
+    null,
+  );
   const { session } = useSession();
   const { deleteMission } = useDeleteMission();
 
-  const handleDeleteMission = (missionId: number): void => {
-    deleteMission.mutate(missionId);
+  const handleDeleteMission = async (missionId: number): Promise<void> => {
+    setLoading(true);
+    setMissionIdToDelete(missionId);
+
+    await deleteMission.mutateAsync(missionId).finally(() => {
+      setLoading(false);
+      setMissionIdToDelete(null);
+    });
   };
 
   return (
-    <View>
-      <View style={styles.missions}>
-        <Image
-          style={styles.image}
-          source={require('../../../../assets/images/idea.png')}
-        />
-        <View>
-          <Text style={styles.title}>{t('room.manage.missions')}</Text>
-          <Text>{t('room.missions.description')}</Text>
-        </View>
-      </View>
-      <View style={styles.cards}>
-        {session?.authoredMissions?.map(({ id, content }) => (
-          <View key={`${id}-${content}`} style={styles.card}>
-            <Text>{content}</Text>
+    <View style={styles.cards}>
+      {session?.authoredMissions?.map(({ id, content }) => (
+        <TouchableOpacity
+          key={`${id}-${content}`}
+          onPress={() => handleDeleteMission(id)}
+        >
+          <View style={styles.card}>
+            {isLoading && missionIdToDelete === id ? (
+              <View style={styles.loading}>
+                <ActivityIndicator size={14} color="white" />
+                <Text style={styles.text}>{content}</Text>
+              </View>
+            ) : (
+              <Text style={styles.text}>{content}</Text>
+            )}
             <Delete
-              title={t('tooltip.delete.mission')}
-              onPress={() => handleDeleteMission(id)}
+              height={16}
+              width={16}
+              fill="white"
               className={styles.deleteMission}
             />
           </View>
-        ))}
-      </View>
+        </TouchableOpacity>
+      ))}
     </View>
   );
 }

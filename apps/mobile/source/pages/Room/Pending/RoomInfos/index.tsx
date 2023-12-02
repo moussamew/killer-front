@@ -3,13 +3,11 @@ import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Text, View, ScrollView } from 'react-native';
 
 import KillerParty from '../../../../assets/images/killerparty.svg';
+import { Input } from '../../../../components/Input';
 import { RoomGuard } from '../../../../components/RoomGuard';
 import { type RootStackParamList } from '../../../../types/navigation';
 
 import { CanStartParty } from './CanStartParty';
-import { CreateMission } from './CreateMission';
-import { PlayerList } from './PlayerList';
-import { PlayerMissions } from './PlayerMissions';
 import { RoomMissions } from './RoomMissions';
 import { ShareRoomLink } from './ShareRoomLink';
 import { StartPartyButton } from './StartPartyButton';
@@ -37,9 +35,6 @@ export function RoomInfos({ route }: Props): JSX.Element | null {
           <StartPartyButton roomCode={roomCode} />
           <CanStartParty roomCode={roomCode} />
           <RoomMissions roomCode={roomCode} />
-          <PlayerMissions />
-          <CreateMission />
-          <PlayerList roomCode={roomCode} />
         </View>
       </ScrollView>
     </RoomGuard>

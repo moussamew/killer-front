@@ -1,8 +1,8 @@
 @import '@killerparty/ui/assets/styles/variables.module.css';
 
 .content {
-  margin-top: var(--spacing-medium);
-  margin-bottom: 50px;
+  margin: 50px var(--spacing-large) var(--spacing-small) var(--spacing-large);
+  flex: 1;
 }
 
 .item {
