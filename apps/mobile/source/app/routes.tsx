@@ -1,4 +1,3 @@
-import { useTranslation } from '@killerparty/intl';
 import { type Session } from '@killerparty/webservices';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 

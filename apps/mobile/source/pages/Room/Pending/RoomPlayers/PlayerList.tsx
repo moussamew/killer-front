@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 
 import Checked from '../../../../assets/icons/checked.svg';
+import Dead from '../../../../assets/icons/dead.svg';
 import { avatarsList } from '../../../../helpers/avatars';
 import { type StackNavigation } from '../../../../types/navigation';
 
@@ -30,8 +31,10 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
     });
   }, [room?.players, room?.admin.id]);
 
+  const isPendingRoom = room?.status === 'PENDING';
+
   return (
-    <View style={styles.content}>
+    <View style={{ ...styles.content, marginTop: isPendingRoom ? 40 : 70 }}>
       {room?.status === 'PENDING' && <ShareRoomLink roomCode={roomCode} />}
       <LottieView
         source={require('../../../../assets/lotties/players.json')}
@@ -41,34 +44,41 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
       />
       <Text style={styles.title}>Liste des joueurs</Text>
       <ScrollView style={styles.scrollContent} contentInset={{ bottom: 50 }}>
-        {room?.players.map(({ id, name, avatar, hasAtLeastOneMission }) => (
-          <TouchableOpacity
-            disabled={session?.id === id || room.admin.id !== session?.id}
-            key={name}
-            onPress={() =>
-              navigate('PlayerModal', {
-                player: {
-                  id,
-                  name,
-                  avatar,
-                  hasAtLeastOneMission,
-                  roomCode,
-                },
-              })
-            }
-          >
-            <View style={styles.player}>
-              {avatarsList({ height: 50, width: 50 })[avatar]}
-              <Text>{name}</Text>
-              <Checked
-                style={[
-                  styles.icon,
-                  hasAtLeastOneMission && styles.playerReady,
-                ]}
-              />
-            </View>
-          </TouchableOpacity>
-        ))}
+        {room?.players.map(
+          ({ id, name, avatar, hasAtLeastOneMission, status }) => (
+            <TouchableOpacity
+              disabled={session?.id === id || room.admin.id !== session?.id}
+              key={name}
+              onPress={() =>
+                navigate('PlayerModal', {
+                  player: {
+                    id,
+                    name,
+                    avatar,
+                    hasAtLeastOneMission,
+                    roomCode,
+                    status,
+                  },
+                })
+              }
+            >
+              <View style={styles.player}>
+                {avatarsList({ height: 50, width: 50 })[avatar]}
+                <Text>{name}</Text>
+                {status === 'ALIVE' ? (
+                  <Checked
+                    style={[
+                      styles.icon,
+                      hasAtLeastOneMission && styles.playerReady,
+                    ]}
+                  />
+                ) : (
+                  <Dead style={styles.icon} fill="red" />
+                )}
+              </View>
+            </TouchableOpacity>
+          ),
+        )}
       </ScrollView>
     </View>
   );

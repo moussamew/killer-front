@@ -55,6 +55,7 @@ export function RoomInfos({ route, navigation }: Props): JSX.Element | null {
               avatar: session.avatar,
               roomCode,
               hasAtLeastOneMission: Boolean(session.authoredMissions.length),
+              status: session.status,
             }}
           />
         )}

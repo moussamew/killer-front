@@ -57,6 +57,7 @@ export function RoomSettings({ route }: Props): JSX.Element {
               avatar: session.avatar,
               roomCode,
               hasAtLeastOneMission: Boolean(session.authoredMissions.length),
+              status: session.status,
             }}
           />
         )}
