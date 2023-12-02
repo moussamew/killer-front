@@ -16,6 +16,11 @@
   flex: 1;
 }
 
+.content {
+  margin-top: 40px;
+  flex: 1;
+}
+
 .title {
   font-size: 16px;
   font-weight: 500;
