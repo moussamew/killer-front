@@ -33,20 +33,15 @@ export function Routes({ session }: Props): JSX.Element {
         headerBackTitleVisible: false,
         headerStyle: { backgroundColor: '#fdf7f2' },
         contentStyle: { backgroundColor: '#fdf7f2' },
+        headerShown: false,
       }}
       initialRouteName={currentRouteName}
     >
-      <Stack.Screen
-        name="Home"
-        component={HomePage}
-        options={{ headerShown: false }}
-      />
-
+      <Stack.Screen name="Home" component={HomePage} />
       <Stack.Screen
         name="ChoosePseudo"
         component={ChoosePseudo}
         options={{
-          headerShown: false,
           animation: 'slide_from_bottom',
           gestureDirection: 'vertical',
         }}
@@ -54,40 +49,37 @@ export function Routes({ session }: Props): JSX.Element {
       <Stack.Screen
         name="ChooseRoom"
         component={ChooseRoom}
-        options={{ headerShown: false, animation: 'slide_from_right' }}
+        options={{ animation: 'slide_from_right' }}
       />
       <Stack.Screen
         name="ChooseAvatar"
         component={ChooseAvatar}
-        options={{ headerShown: false, animation: 'slide_from_right' }}
+        options={{ animation: 'slide_from_right' }}
       />
       <Stack.Screen
         name="PendingRoom"
         component={PendingRoomTabs}
-        options={{ headerShown: false }}
         initialParams={{ roomCode: session?.room?.id }}
       />
       <Stack.Screen
         name="PlayingRoom"
         component={PlayingRoomPage}
-        options={{ title: t('room.playing.title') }}
         initialParams={{ roomCode: session?.room?.id }}
       />
       <Stack.Screen
         name="EndedRoom"
         component={EndedRoomPage}
-        options={{ title: 'Killer Party' }}
         initialParams={{ roomCode: session?.room?.id }}
       />
       <Stack.Screen
         name="Rules"
         component={Rules}
-        options={{ headerShown: false, presentation: 'modal' }}
+        options={{ presentation: 'modal' }}
       />
       <Stack.Screen
         name="PlayerModal"
         component={PlayerModal}
-        options={{ headerShown: false, presentation: 'modal' }}
+        options={{ presentation: 'modal' }}
       />
     </Stack.Navigator>
   );
