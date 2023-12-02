@@ -1,48 +1,46 @@
-import { useTranslation } from '@killerparty/intl';
+/* eslint-disable react/no-unstable-nested-components */
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Text, View, ScrollView } from 'react-native';
 
-import KillerParty from '../../../assets/images/killerparty.svg';
-import { RoomGuard } from '../../../components/RoomGuard';
+import InfosIcon from '../../../assets/icons/infos.svg';
 import { type RootStackParamList } from '../../../types/navigation';
 
-import { CanStartParty } from './CanStartParty';
-import { CreateMission } from './CreateMission';
-import { PlayerList } from './PlayerList';
-import { PlayerMissions } from './PlayerMissions';
-import { RoomMissions } from './RoomMissions';
-import { ShareRoomLink } from './ShareRoomLink';
-import { StartPartyButton } from './StartPartyButton';
-import styles from './styles/index.module.css';
+import { RoomInfos } from './RoomInfos';
+
+const Tab = createBottomTabNavigator<RootStackParamList>();
 
 type Props = NativeStackScreenProps<RootStackParamList, 'PendingRoom'>;
 
-export function PendingRoomPage({ route }: Props): JSX.Element | null {
-  const { t } = useTranslation();
-  const {
-    name: routeName,
-    params: { roomCode },
-  } = route;
-
+export function PendingRoomTabs({ route }: Props): JSX.Element {
   return (
-    <RoomGuard roomCode={roomCode} currentRouteName={routeName}>
-      <ScrollView style={styles.container}>
-        <View style={styles.content}>
-          <ShareRoomLink roomCode={roomCode} />
-          <KillerParty height={200} width={200} style={styles.image} />
-          <Text style={styles.title}>{t('room.welcome.title')}</Text>
-          <Text style={styles.joinRoomCode}>
-            {t('room.join.room.code', { roomCode })}
-          </Text>
-
-          <StartPartyButton roomCode={roomCode} />
-          <CanStartParty roomCode={roomCode} />
-          <RoomMissions roomCode={roomCode} />
-          <PlayerMissions />
-          <CreateMission />
-          <PlayerList roomCode={roomCode} />
-        </View>
-      </ScrollView>
-    </RoomGuard>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: '#FDF1E6',
+          borderTopWidth: 1,
+        },
+        tabBarItemStyle: {
+          marginTop: 20,
+        },
+        tabBarLabelStyle: { fontSize: 12, marginTop: 15 },
+        tabBarActiveTintColor: '#474D52',
+      }}
+      initialRouteName="RoomInfos"
+      sceneContainerStyle={{ backgroundColor: '#fdf7f2' }}
+    >
+      <Tab.Screen
+        name="RoomInfos"
+        component={RoomInfos}
+        initialParams={{
+          roomCode: route.params.roomCode,
+          routeName: 'PendingRoom',
+        }}
+        options={{
+          tabBarIcon: ({ color }) => <InfosIcon fill={color} />,
+          tabBarLabel: 'Informations',
+        }}
+      />
+    </Tab.Navigator>
   );
 }

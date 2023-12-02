@@ -8,7 +8,7 @@ import { ChoosePseudo } from '../pages/ChoosePseudo';
 import { ChooseRoom } from '../pages/ChooseRoom';
 import { HomePage } from '../pages/Home';
 import { EndedRoomPage } from '../pages/Room/Ended';
-import { PendingRoomPage } from '../pages/Room/Pending';
+import { PendingRoomTabs } from '../pages/Room/Pending';
 import { PlayingRoomPage } from '../pages/Room/Playing';
 import { Rules } from '../pages/Rules';
 import { type RootStackParamList } from '../types/navigation';
@@ -62,7 +62,7 @@ export function Routes({ session }: Props): JSX.Element {
       />
       <Stack.Screen
         name="PendingRoom"
-        component={PendingRoomPage}
+        component={PendingRoomTabs}
         options={{ headerShown: false }}
         initialParams={{ roomCode: session?.room?.id }}
       />
