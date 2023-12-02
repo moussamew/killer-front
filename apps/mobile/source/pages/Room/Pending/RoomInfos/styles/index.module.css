@@ -1,11 +1,7 @@
 @import '@killerparty/ui/assets/styles/variables.module.css';
 
-.container {
-  margin-top: 50px;
-  background-color: var(--color-body);
-}
-
 .content {
+  margin-top: 40px;
   background-color: var(--color-body);
   padding-left: var(--spacing-large);
   padding-right: var(--spacing-large);
@@ -30,4 +26,5 @@
 
 .image {
   align-self: center;
+  margin-bottom: -20px;
 }
