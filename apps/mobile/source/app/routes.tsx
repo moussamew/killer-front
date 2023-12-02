@@ -9,6 +9,7 @@ import { ChooseRoom } from '../pages/ChooseRoom';
 import { HomePage } from '../pages/Home';
 import { EndedRoomPage } from '../pages/Room/Ended';
 import { PendingRoomTabs } from '../pages/Room/Pending';
+import { PlayerModal } from '../pages/Room/Pending/RoomPlayers/PlayerModal';
 import { PlayingRoomPage } from '../pages/Room/Playing';
 import { Rules } from '../pages/Rules';
 import { type RootStackParamList } from '../types/navigation';
@@ -81,6 +82,11 @@ export function Routes({ session }: Props): JSX.Element {
       <Stack.Screen
         name="Rules"
         component={Rules}
+        options={{ headerShown: false, presentation: 'modal' }}
+      />
+      <Stack.Screen
+        name="PlayerModal"
+        component={PlayerModal}
         options={{ headerShown: false, presentation: 'modal' }}
       />
     </Stack.Navigator>

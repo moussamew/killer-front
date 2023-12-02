@@ -36,7 +36,17 @@ export function RoomInfos({ route }: Props): JSX.Element | null {
         <StartPartyButton roomCode={roomCode} />
         <CanStartParty roomCode={roomCode} />
         <RoomMissions roomCode={roomCode} />
-        {session && <Player session={session} />}
+        {session && (
+          <Player
+            player={{
+              id: session.id,
+              name: session.name,
+              avatar: session.avatar,
+              roomCode,
+              hasAtLeastOneMission: Boolean(session.authoredMissions.length),
+            }}
+          />
+        )}
       </View>
     </RoomGuard>
   );

@@ -1,11 +1,12 @@
-import { useRoom, useSession, useUpdatePlayer } from '@killerparty/webservices';
+import { useRoom, useSession } from '@killerparty/webservices';
+import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import { useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 
 import Checked from '../../../../assets/icons/checked.svg';
-import Delete from '../../../../assets/icons/delete.svg';
 import { avatarsList } from '../../../../helpers/avatars';
+import { type StackNavigation } from '../../../../types/navigation';
 
 import styles from './styles/PlayerList.module.css';
 
@@ -16,7 +17,8 @@ interface Props {
 export function PlayerList({ roomCode }: Props): JSX.Element {
   const { room } = useRoom(roomCode!);
   const { session } = useSession();
-  const { updatePlayer } = useUpdatePlayer();
+
+  const { navigate } = useNavigation<StackNavigation>();
 
   useEffect(() => {
     room?.players.forEach((player, index) => {
@@ -27,14 +29,10 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
     });
   }, [room?.players, room?.admin.id]);
 
-  const handleKickPlayer = (playerId: number): void => {
-    updatePlayer.mutate({ id: playerId, room: null });
-  };
-
   return (
     <View style={styles.content}>
       <LottieView
-        source={require('../../../../assets/lotties/players.json')}
+        source={require('../../../../assets/lotties/players-list.json')}
         autoPlay
         style={styles.lottie}
         loop
@@ -45,7 +43,17 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
           <TouchableOpacity
             disabled={session?.id === id || room.admin.id !== session?.id}
             key={name}
-            onPress={() => {}}
+            onPress={() =>
+              navigate('PlayerModal', {
+                player: {
+                  id,
+                  name,
+                  avatar,
+                  hasAtLeastOneMission,
+                  roomCode,
+                },
+              })
+            }
           >
             <View style={styles.player}>
               {avatarsList({ height: 50, width: 50 })[avatar]}
@@ -57,12 +65,6 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
                 ]}
               />
             </View>
-            {room.admin.id === session?.id && session?.name !== name && (
-              <Delete
-                style={styles.kickPlayer}
-                onClick={() => handleKickPlayer(id)}
-              />
-            )}
           </TouchableOpacity>
         ))}
       </ScrollView>

@@ -1,4 +1,3 @@
-import { type Session } from '@killerparty/webservices';
 import { useNavigation } from '@react-navigation/native';
 import { Text, TouchableOpacity } from 'react-native';
 
@@ -9,10 +8,16 @@ import { type StackNavigation } from '../types/navigation';
 import styles from './styles/Player.module.css';
 
 interface Props {
-  session: Session;
+  player: {
+    id: number;
+    name: string;
+    avatar: string;
+    hasAtLeastOneMission: boolean;
+    roomCode: string;
+  };
 }
 
-export function Player({ session }: Props): JSX.Element {
+export function Player({ player }: Props): JSX.Element {
   const { navigate } = useNavigation<StackNavigation>();
 
   return (
@@ -22,19 +27,16 @@ export function Player({ session }: Props): JSX.Element {
         navigate('PendingRoom', {
           screen: 'RoomPlayers',
           params: {
-            roomCode: session.room?.id,
+            roomCode: player.roomCode,
             routeName: 'PendingRoom',
           },
         })
       }
     >
-      {avatarsList({ height: 50, width: 50 })[session.avatar]}
-      <Text>{session?.name}</Text>
+      {avatarsList({ height: 50, width: 50 })[player.avatar]}
+      <Text>{player.name}</Text>
       <Checked
-        style={[
-          styles.icon,
-          session.authoredMissions.length && styles.playerReady,
-        ]}
+        style={[styles.icon, player.hasAtLeastOneMission && styles.playerReady]}
       />
     </TouchableOpacity>
   );
