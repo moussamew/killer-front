@@ -1,0 +1,23 @@
+@import '@killerparty/ui/assets/styles/variables.module.css';
+
+.player {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-small);
+  border: 1px solid var(--color-black-90);
+  margin-bottom: var(--spacing-small);
+  background-color: var(--color-body-secondary);
+  text-align: center;
+}
+
+.icon {
+  height: 25px;
+  width: 25px;
+  opacity: 0.2;
+}
+
+.playerReady {
+  opacity: 1;
+}
