@@ -7,9 +7,11 @@ export type RootStackParamList = {
   ChoosePseudo?: { shouldCreateRoom: boolean };
   ChooseRoom: { playerId: number };
   ChooseAvatar: { playerId: number; shouldCreateRoom: boolean };
-  PendingRoom:
-    | { roomCode: string }
-    | { screen: string; params: Record<string, unknown> };
+  PendingRoom: {
+    screen: string;
+    params: Record<string, unknown>;
+    roomCode?: string;
+  };
   PlayingRoom: { roomCode: string };
   EndedRoom: { roomCode: string };
   Rules: undefined;
@@ -17,6 +19,15 @@ export type RootStackParamList = {
   RoomPlayers: { roomCode: string; routeName: keyof RootStackParamList };
   RoomMissions: { roomCode: string; routeName: keyof RootStackParamList };
   RoomSettings: { roomCode: string; routeName: keyof RootStackParamList };
+  PlayerModal: {
+    player: {
+      id: number;
+      name: string;
+      avatar: string;
+      hasAtLeastOneMission: boolean;
+      roomCode: string;
+    };
+  };
 };
 
 export type StackNavigation = NativeStackNavigationProp<RootStackParamList>;
