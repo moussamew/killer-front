@@ -3,9 +3,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import InfosIcon from '../../../assets/icons/infos.svg';
+import MissionIcon from '../../../assets/icons/mission.svg';
+import PlayersIcon from '../../../assets/icons/players.svg';
+import SettingsIcon from '../../../assets/icons/settings.svg';
 import { type RootStackParamList } from '../../../types/navigation';
 
 import { RoomInfos } from './RoomInfos';
+import { RoomMissions } from './RoomMissions';
+import { RoomPlayers } from './RoomPlayers';
+import { RoomSettings } from './RoomSettings';
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
@@ -25,6 +31,7 @@ export function PendingRoomTabs({ route }: Props): JSX.Element {
         },
         tabBarLabelStyle: { fontSize: 12, marginTop: 15 },
         tabBarActiveTintColor: '#474D52',
+        tabBarInactiveTintColor: '#9299A0',
       }}
       initialRouteName="RoomInfos"
       sceneContainerStyle={{ backgroundColor: '#fdf7f2' }}
@@ -39,6 +46,42 @@ export function PendingRoomTabs({ route }: Props): JSX.Element {
         options={{
           tabBarIcon: ({ color }) => <InfosIcon fill={color} />,
           tabBarLabel: 'Informations',
+        }}
+      />
+      <Tab.Screen
+        name="RoomMissions"
+        component={RoomMissions}
+        initialParams={{
+          roomCode: route.params.roomCode,
+          routeName: 'PendingRoom',
+        }}
+        options={{
+          tabBarIcon: ({ color }) => <MissionIcon fill={color} />,
+          tabBarLabel: 'Missions',
+        }}
+      />
+      <Tab.Screen
+        name="RoomPlayers"
+        component={RoomPlayers}
+        initialParams={{
+          roomCode: route.params.roomCode,
+          routeName: 'PendingRoom',
+        }}
+        options={{
+          tabBarIcon: ({ color }) => <PlayersIcon fill={color} />,
+          tabBarLabel: 'Joueurs',
+        }}
+      />
+      <Tab.Screen
+        name="RoomSettings"
+        component={RoomSettings}
+        initialParams={{
+          roomCode: route.params.roomCode,
+          routeName: 'PendingRoom',
+        }}
+        options={{
+          tabBarIcon: ({ color }) => <SettingsIcon fill={color} />,
+          tabBarLabel: 'Paramètres',
         }}
       />
     </Tab.Navigator>

@@ -33,14 +33,27 @@
   border-radius: var(--radius-small);
   margin-top: var(--spacing-small);
   margin-right: var(--spacing-small);
-  background-color: var(--color-yellow-80);
+  background-color: var(--button-secondary);
   box-shadow: var(--shadow-small);
   font-size: var(--text-medium);
 }
 
+.loading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.text {
+  color: var(--color-white);
+  margin: 0 10px;
+  font-size: 16px;
+}
+
 .deleteMission {
+  background-color: var(--color-red-70);
   position: absolute;
-  top: -10px;
-  right: -10px;
+  top: -5px;
+  right: -5px;
   cursor: pointer;
 }

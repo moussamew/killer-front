@@ -106,7 +106,7 @@
   "errors.INVALID_TOKEN": "La récupération de votre session a échoué.",
   "errors.TOKEN_NOT_FOUND": "Vous ne pouvez pas accéder à cette page sans session.",
   "errors.PLAYER_NAME_TOO_SHORT_CONTENT": "Votre nom de joueur est trop court.",
-  "errors.MISSION_TOO_SHORT_CONTENT": "Veuillez choisir une phrase (explicite) pour la mission que vous souhaitez ajouter.",
+  "errors.MISSION_TOO_SHORT_CONTENT": "Mission trop courte.",
   "errors.CAN_NOT_MOVE_TO_IN_GAME": "Vous ne pouvez pas lancer une nouvelle partie car les conditions ne sont pas remplis.",
   "errors.ALREADY_EXIST": "Ce nom est déjà utilisé."
 }

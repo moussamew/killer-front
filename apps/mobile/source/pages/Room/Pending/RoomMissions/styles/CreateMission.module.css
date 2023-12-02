@@ -1,0 +1,7 @@
+@import '@killerparty/ui/assets/styles/variables.module.css';
+
+.content {
+  display: flex;
+  flex: 1;
+  margin-top: var(--spacing-small);
+}

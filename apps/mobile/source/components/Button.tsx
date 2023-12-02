@@ -24,7 +24,7 @@ export function Button({
   const handlePress = async (): Promise<void> => {
     if (isAsyncAction) {
       setLoading(true);
-      return (onPress() as Promise<void>).finally(() => setLoading(false));
+      return (onPress() as Promise<void>)?.finally(() => setLoading(false));
     }
 
     return onPress();

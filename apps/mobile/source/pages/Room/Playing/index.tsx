@@ -8,7 +8,7 @@ import { CurrentAvatar } from '../../../components/CurrentAvatar';
 import { RoomGuard } from '../../../components/RoomGuard';
 import { getRandomAvatar } from '../../../helpers/avatars';
 import { type RootStackParamList } from '../../../types/navigation';
-import { PlayerList } from '../Pending/RoomInfos/PlayerList';
+import { PlayerList } from '../Pending/RoomPlayers/PlayerList';
 
 import { ConfirmKillButton } from './ConfirmKillButton';
 import styles from './styles/index.module.css';
