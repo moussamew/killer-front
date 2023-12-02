@@ -1,0 +1,34 @@
+@import '@killerparty/ui/assets/styles/variables.module.css';
+
+.container {
+  flex: 1;
+  background-color: var(--color-body);
+  margin: var(--spacing-large);
+  margin-top: 80px;
+}
+
+.title {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.target {
+  flex: 1;
+  font-size: 24px;
+  border-radius: 5px;
+  background-color: var(--color-red-70);
+  padding: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+
+.targetName {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  text-transform: capitalize;
+  text-align: center;
+}

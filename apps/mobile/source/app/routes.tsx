@@ -10,7 +10,7 @@ import { HomePage } from '../pages/Home';
 import { EndedRoomPage } from '../pages/Room/Ended';
 import { PendingRoomTabs } from '../pages/Room/Pending';
 import { PlayerModal } from '../pages/Room/Pending/RoomPlayers/PlayerModal';
-import { PlayingRoomPage } from '../pages/Room/Playing';
+import { PlayingRoomTabs } from '../pages/Room/Playing';
 import { Rules } from '../pages/Rules';
 import { type RootStackParamList } from '../types/navigation';
 
@@ -21,8 +21,6 @@ interface Props {
 }
 
 export function Routes({ session }: Props): JSX.Element {
-  const { t } = useTranslation();
-
   const currentRouteName = (
     session?.room?.status ? ROOM_PAGE_NAME[session.room.status] : 'Home'
   ) as keyof RootStackParamList;
@@ -63,7 +61,7 @@ export function Routes({ session }: Props): JSX.Element {
       />
       <Stack.Screen
         name="PlayingRoom"
-        component={PlayingRoomPage}
+        component={PlayingRoomTabs}
         initialParams={{ roomCode: session?.room?.id }}
       />
       <Stack.Screen

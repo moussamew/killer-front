@@ -2,7 +2,7 @@ import { useTranslation } from '@killerparty/intl';
 import { useSession, useUpdatePlayer } from '@killerparty/webservices';
 import { View, Text } from 'react-native';
 
-import { Button } from '../../../components/Button';
+import { Button } from '../../../../components/Button';
 
 import styles from './styles/ConfirmKillButton.module.css';
 
@@ -11,8 +11,8 @@ export function ConfirmKillButton(): JSX.Element {
   const { updatePlayer } = useUpdatePlayer();
   const { session } = useSession();
 
-  const handleKillPlayer = (): void => {
-    updatePlayer.mutate({ id: session?.id, status: 'KILLED' });
+  const handleKillPlayer = async (): Promise<void> => {
+    await updatePlayer.mutateAsync({ id: session?.id, status: 'KILLED' });
   };
 
   return (

@@ -32,7 +32,7 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
 
   return (
     <View style={styles.content}>
-      <ShareRoomLink roomCode={roomCode} />
+      {room?.status === 'PENDING' && <ShareRoomLink roomCode={roomCode} />}
       <LottieView
         source={require('../../../../assets/lotties/players.json')}
         autoPlay

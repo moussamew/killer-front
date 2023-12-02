@@ -14,11 +14,8 @@ export function Ranking({ room }: Props): JSX.Element {
   const { t } = useTranslation();
 
   return (
-    <View>
+    <>
       <View style={styles.rankingTextContent}>
-        <Text style={styles.rankingSubtitle}>
-          {t('room.ended.ranking.title')}
-        </Text>
         <Text style={styles.rankingDescription}>
           {t('room.ended.ranking.description')}
         </Text>
@@ -37,6 +34,6 @@ export function Ranking({ room }: Props): JSX.Element {
           </View>
         ))}
       </View>
-    </View>
+    </>
   );
 }

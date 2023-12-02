@@ -1,51 +1,80 @@
-import { useTranslation } from '@killerparty/intl';
-import { useRoom, useSession } from '@killerparty/webservices';
+/* eslint-disable react/no-unstable-nested-components */
+import { useSession } from '@killerparty/webservices';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useEffect, useState } from 'react';
-import { ScrollView, Text } from 'react-native';
 
-import { CurrentAvatar } from '../../../components/CurrentAvatar';
-import { RoomGuard } from '../../../components/RoomGuard';
-import { getRandomAvatar } from '../../../helpers/avatars';
+import InfosIcon from '../../../assets/icons/infos.svg';
+import PlayersIcon from '../../../assets/icons/players.svg';
+import SettingsIcon from '../../../assets/icons/settings.svg';
 import { type RootStackParamList } from '../../../types/navigation';
-import { PlayerList } from '../Pending/RoomPlayers/PlayerList';
+import { RoomPlayers } from '../Pending/RoomPlayers';
+import { RoomSettings } from '../Pending/RoomSettings';
 
-import { ConfirmKillButton } from './ConfirmKillButton';
-import styles from './styles/index.module.css';
-import { TargetMission } from './TargetMission';
+import { PlayingRoomInfos } from './RoomInfos';
+
+const Tab = createBottomTabNavigator<RootStackParamList>();
 
 type Props = NativeStackScreenProps<RootStackParamList, 'PlayingRoom'>;
 
-export function PlayingRoomPage({ route }: Props): JSX.Element {
-  const {
-    name: routeName,
-    params: { roomCode },
-  } = route;
-  const { t } = useTranslation();
-  const [targetAvatar, setTargetAvatar] = useState(getRandomAvatar());
+export function PlayingRoomTabs({ route }: Props): JSX.Element {
   const { session } = useSession();
-  const { room } = useRoom(roomCode);
-
-  // Temporary useEffect to retrieve the avatar of the target because BE doesn't prove it yet.
-  useEffect(() => {
-    const target = room?.players.find(({ id }) => id === session?.target?.id);
-
-    if (target?.avatar) {
-      setTargetAvatar(target.avatar);
-    }
-  }, [room?.players, session?.target?.id]);
 
   return (
-    <RoomGuard roomCode={roomCode} currentRouteName={routeName}>
-      <ScrollView style={styles.container}>
-        <Text style={styles.title}>
-          {t('room.target.to.kill', { pseudo: session?.target?.name })}
-        </Text>
-        <CurrentAvatar avatar={targetAvatar} />
-        <TargetMission />
-        {session?.status === 'ALIVE' && <ConfirmKillButton />}
-        <PlayerList roomCode={roomCode} />
-      </ScrollView>
-    </RoomGuard>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: '#FDF1E6',
+          borderTopWidth: 1,
+        },
+        tabBarItemStyle: {
+          marginTop: 20,
+        },
+        tabBarLabelStyle: { fontSize: 12, marginTop: 15 },
+        tabBarActiveTintColor: '#474D52',
+        tabBarInactiveTintColor: '#9299A0',
+      }}
+      initialRouteName="RoomInfos"
+      sceneContainerStyle={{ backgroundColor: '#fdf7f2' }}
+    >
+      {session && session.status === 'ALIVE' && (
+        <Tab.Screen
+          name="PlayingRoomInfos"
+          component={PlayingRoomInfos}
+          initialParams={{
+            roomCode: route.params.roomCode,
+            routeName: 'PlayingRoom',
+          }}
+          options={{
+            tabBarIcon: ({ color }) => <InfosIcon fill={color} />,
+            tabBarLabel: 'Informations',
+          }}
+        />
+      )}
+      <Tab.Screen
+        name="RoomPlayers"
+        component={RoomPlayers}
+        initialParams={{
+          roomCode: route.params.roomCode,
+          routeName: 'PlayingRoom',
+        }}
+        options={{
+          tabBarIcon: ({ color }) => <PlayersIcon fill={color} />,
+          tabBarLabel: 'Joueurs',
+        }}
+      />
+      <Tab.Screen
+        name="RoomSettings"
+        component={RoomSettings}
+        initialParams={{
+          roomCode: route.params.roomCode,
+          routeName: 'PlayingRoom',
+        }}
+        options={{
+          tabBarIcon: ({ color }) => <SettingsIcon fill={color} />,
+          tabBarLabel: 'Paramètres',
+        }}
+      />
+    </Tab.Navigator>
   );
 }
