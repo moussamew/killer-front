@@ -61,11 +61,10 @@
 
   /** Colors for mobile */
   --button-primary: hsl(210deg 7% 30%);
-  --button-primary: hsl(210deg 7% 60%);
   --button-primary-pressed: hsl(210deg 7% 20%);
 
-  --button-secondary: hsl(231deg 15% 60%);
-  --button-secondary-pressed: hsl(231deg 15% 50%);
+  --button-secondary: hsl(231deg 15% 50%);
+  --button-secondary-pressed: hsl(231deg 15% 40%);
 
   --primary-subtitle: hsl(231deg 15% 50%);
 }

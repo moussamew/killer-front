@@ -49,7 +49,7 @@ export function Button({
   const backgroundColor = focusAnim.interpolate({
     inputRange: [0, 1],
     outputRange:
-      color === 'primary' ? ['#474D52', '#2F3337'] : ['#8A8EA8', '#6C7294'],
+      color === 'primary' ? ['#474D52', '#2F3337'] : ['#6C7294', '#575B75'],
   });
 
   return (

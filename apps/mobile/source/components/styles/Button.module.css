@@ -23,19 +23,3 @@
 .disabled {
   opacity: 0.5;
 }
-
-.primary {
-  background-color: var(--button-primary);
-}
-
-.secondary {
-  background-color: var(--button-secondary);
-}
-
-.primaryPressed {
-  background-color: var(--button-primary-pressed);
-}
-
-.secondaryPressed {
-  background-color: var(--button-secondary-pressed);
-}

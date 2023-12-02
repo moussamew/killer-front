@@ -8,6 +8,7 @@ import Checked from '../../../../assets/icons/checked.svg';
 import { avatarsList } from '../../../../helpers/avatars';
 import { type StackNavigation } from '../../../../types/navigation';
 
+import { ShareRoomLink } from './ShareRoomLink';
 import styles from './styles/PlayerList.module.css';
 
 interface Props {
@@ -31,13 +32,14 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
 
   return (
     <View style={styles.content}>
+      <ShareRoomLink roomCode={roomCode} />
       <LottieView
-        source={require('../../../../assets/lotties/players-list.json')}
+        source={require('../../../../assets/lotties/players.json')}
         autoPlay
         style={styles.lottie}
         loop
       />
-      <Text style={styles.title}>Liste des joueurs de la partie</Text>
+      <Text style={styles.title}>Liste des joueurs</Text>
       <ScrollView style={styles.scrollContent} contentInset={{ bottom: 50 }}>
         {room?.players.map(({ id, name, avatar, hasAtLeastOneMission }) => (
           <TouchableOpacity

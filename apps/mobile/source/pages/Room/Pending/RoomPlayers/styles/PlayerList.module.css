@@ -2,13 +2,13 @@
 
 .content {
   margin: var(--spacing-large);
-  margin-top: 50px;
+  margin-top: 40px;
   justify-content: center;
 }
 
 .lottie {
-  margin-bottom: var(--spacing-large);
-  height: 200px;
+  margin-top: -25px;
+  height: 300px;
 }
 
 .title {
