@@ -11,6 +11,7 @@ export type RootStackParamList = {
   PlayingRoom: { roomCode: string };
   EndedRoom: { roomCode: string };
   Rules: undefined;
+  RoomInfos: { roomCode: string; routeName: keyof RootStackParamList };
 };
 
 export type StackNavigation = NativeStackNavigationProp<RootStackParamList>;

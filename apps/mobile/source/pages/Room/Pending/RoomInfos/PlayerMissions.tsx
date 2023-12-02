@@ -2,7 +2,7 @@ import { useTranslation } from '@killerparty/intl';
 import { useDeleteMission, useSession } from '@killerparty/webservices';
 import { View, Image, Text } from 'react-native';
 
-import Delete from '../../../assets/icons/delete.svg';
+import Delete from '../../../../assets/icons/delete.svg';
 
 import styles from './styles/PlayerMissions.module.css';
 
@@ -20,7 +20,7 @@ export function PlayerMissions(): JSX.Element {
       <View style={styles.missions}>
         <Image
           style={styles.image}
-          source={require('../../../assets/images/idea.png')}
+          source={require('../../../../assets/images/idea.png')}
         />
         <View>
           <Text style={styles.title}>{t('room.manage.missions')}</Text>
