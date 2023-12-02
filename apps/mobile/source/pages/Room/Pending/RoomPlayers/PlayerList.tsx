@@ -1,7 +1,7 @@
-import { useTranslation } from '@killerparty/intl';
 import { useRoom, useSession, useUpdatePlayer } from '@killerparty/webservices';
+import LottieView from 'lottie-react-native';
 import { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 
 import Checked from '../../../../assets/icons/checked.svg';
 import Delete from '../../../../assets/icons/delete.svg';
@@ -17,7 +17,6 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
   const { room } = useRoom(roomCode!);
   const { session } = useSession();
   const { updatePlayer } = useUpdatePlayer();
-  const { t } = useTranslation();
 
   useEffect(() => {
     room?.players.forEach((player, index) => {
@@ -34,22 +33,22 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
 
   return (
     <View style={styles.content}>
-      <View style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+      <LottieView
+        source={require('../../../../assets/lotties/players.json')}
+        autoPlay
+        style={styles.lottie}
+        loop
+      />
+      <Text style={styles.title}>Liste des joueurs de la partie</Text>
+      <ScrollView style={styles.scrollContent} contentInset={{ bottom: 50 }}>
         {room?.players.map(({ id, name, avatar, hasAtLeastOneMission }) => (
-          <View key={name} style={styles.item}>
+          <TouchableOpacity
+            disabled={session?.id === id || room.admin.id !== session?.id}
+            key={name}
+            onPress={() => {}}
+          >
             <View style={styles.player}>
-              <View style={styles.avatarContent}>
-                <View
-                  style={[
-                    styles.avatar,
-                    session?.id === id && styles.currentPlayer,
-                    session?.id !== id && styles.otherPlayer,
-                    room.admin.id === id && styles.adminPlayer,
-                  ]}
-                >
-                  {avatarsList({ height: 50, width: 50 })[avatar]}
-                </View>
-              </View>
+              {avatarsList({ height: 50, width: 50 })[avatar]}
               <Text>{name}</Text>
               <Checked
                 style={[
@@ -61,13 +60,12 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
             {room.admin.id === session?.id && session?.name !== name && (
               <Delete
                 style={styles.kickPlayer}
-                title={t('tooltip.kick.player', { playerName: name })}
                 onClick={() => handleKickPlayer(id)}
               />
             )}
-          </View>
+          </TouchableOpacity>
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 }
