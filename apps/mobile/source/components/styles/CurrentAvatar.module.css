@@ -1,7 +1,6 @@
 @import '@killerparty/ui/assets/styles/variables.module.css';
 
 .content {
-  flex: 1;
   display: flex;
   justify-content: space-between;
 }
@@ -10,11 +9,9 @@
   align-items: center;
   border-width: 2px;
   border-color: var(--color-black-80);
-  margin-top: 100px;
-  margin-left: 30px;
-  margin-right: 30px;
+
   box-shadow: var(--shadow-small);
-  padding: 20px;
+  padding: 30px;
   background-color: bisque;
   margin-bottom: var(--spacing-medium);
 }

@@ -12,7 +12,11 @@ export type RootStackParamList = {
     params: Record<string, unknown>;
     roomCode?: string;
   };
-  PlayingRoom: { roomCode: string };
+  PlayingRoom: {
+    screen: string;
+    params: Record<string, unknown>;
+    roomCode?: string;
+  };
   EndedRoom: { roomCode: string };
   Rules: undefined;
   RoomInfos: { roomCode: string; routeName: keyof RootStackParamList };
@@ -28,6 +32,7 @@ export type RootStackParamList = {
       roomCode: string;
     };
   };
+  PlayingRoomInfos: { roomCode: string; routeName: keyof RootStackParamList };
 };
 
 export type StackNavigation = NativeStackNavigationProp<RootStackParamList>;

@@ -4,13 +4,9 @@
   margin-bottom: var(--spacing-large);
 }
 
-.rankingSubtitle {
-  font-size: var(--text-large);
-  margin-bottom: var(--spacing-small);
-}
-
 .rankingDescription {
   font-size: var(--text-small);
+  text-align: center;
 }
 
 .rankingPlayerContent {

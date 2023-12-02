@@ -38,6 +38,8 @@ export function RoomSettings({ route }: Props): JSX.Element {
     });
   };
 
+  const isPendingRoom = routeName === 'PendingRoom';
+
   return (
     <RoomGuard roomCode={roomCode} currentRouteName={routeName}>
       <View style={styles.content}>
@@ -58,20 +60,23 @@ export function RoomSettings({ route }: Props): JSX.Element {
             }}
           />
         )}
-
-        <Input
-          innerRef={inputRef}
-          label="Modifier le pseudo de votre joueur"
-          value={pseudo}
-          setValue={setPseudo}
-        />
-        <Button
-          disabled={!pseudo}
-          color="secondary"
-          onPress={handleUpdatePseudo}
-          text="Mettre à jour mon pseudo"
-          isAsyncAction
-        />
+        {isPendingRoom && (
+          <>
+            <Input
+              innerRef={inputRef}
+              label="Modifier le pseudo de votre joueur"
+              value={pseudo}
+              setValue={setPseudo}
+            />
+            <Button
+              disabled={!pseudo}
+              color="secondary"
+              onPress={handleUpdatePseudo}
+              text="Mettre à jour mon pseudo"
+              isAsyncAction
+            />
+          </>
+        )}
         <Button
           color="primary"
           onPress={handleLeaveRoom}
