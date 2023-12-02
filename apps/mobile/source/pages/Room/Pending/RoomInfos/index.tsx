@@ -3,7 +3,6 @@ import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Text, View, ScrollView } from 'react-native';
 
 import KillerParty from '../../../../assets/images/killerparty.svg';
-import { Input } from '../../../../components/Input';
 import { RoomGuard } from '../../../../components/RoomGuard';
 import { type RootStackParamList } from '../../../../types/navigation';
 
