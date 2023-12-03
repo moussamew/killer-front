@@ -1,0 +1,15 @@
+.content {
+  padding: 100px 0;
+
+  & > p {
+    color: var(--color-black-20);
+  }
+
+  & > * {
+    margin-bottom: var(--spacing-large);
+  }
+}
+
+.list {
+  list-style: inside;
+}

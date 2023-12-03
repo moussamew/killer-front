@@ -4,6 +4,7 @@ import { Layout } from '@/layout/Layout';
 import { HomePage } from '@/pages/Home';
 import { JoinRoomPage } from '@/pages/JoinRoom';
 import { NotFoundPage } from '@/pages/NotFound';
+import { PrivacyPage } from '@/pages/Privacy';
 import { RoomPage } from '@/pages/Room';
 import { EndedRoomPage } from '@/pages/Room/Ended';
 import { PendingRoomPage } from '@/pages/Room/Pending';
@@ -36,6 +37,7 @@ export function Routes(): JSX.Element {
                 },
               ],
             },
+            { path: '/privacy', element: <PrivacyPage /> },
             { path: '*', element: <NotFoundPage /> },
           ],
         },
