@@ -37,11 +37,10 @@
 .icon {
   height: 25px;
   width: 25px;
-  opacity: 1;
 }
 
-.playerReady {
-  opacity: 1;
+.playerNotReady {
+  opacity: 0.2;
 }
 
 .kickPlayer {
