@@ -69,7 +69,7 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
                   <Checked
                     style={[
                       styles.icon,
-                      hasAtLeastOneMission && styles.playerReady,
+                      !hasAtLeastOneMission && styles.playerNotReady,
                     ]}
                   />
                 ) : (
