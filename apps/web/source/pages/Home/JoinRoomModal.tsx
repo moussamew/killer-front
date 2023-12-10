@@ -26,23 +26,20 @@ export function JoinRoomModal(): JSX.Element {
   };
 
   const handleJoinRoom = async (): Promise<void> => {
-    if (!session) {
-      await createPlayer.mutateAsync(
-        { name: pseudo, avatar: getRandomAvatar() },
-        {
-          onSuccess: ({ id }) =>
-            updatePlayer.mutateAsync(
-              { id, room: roomCode },
-              { onSuccess: closeModal },
-            ),
-        },
-      );
-    } else {
-      await updatePlayer.mutateAsync(
-        { id: session?.id, room: roomCode },
-        { onSuccess: closeModal },
-      );
+    if (session) {
+      await updatePlayer.mutateAsync({ id: session?.id, room: roomCode });
+
+      return closeModal();
     }
+
+    const { id } = await createPlayer.mutateAsync({
+      name: pseudo,
+      avatar: getRandomAvatar(),
+    });
+
+    await updatePlayer.mutateAsync({ id, room: roomCode });
+
+    return closeModal();
   };
 
   return (
