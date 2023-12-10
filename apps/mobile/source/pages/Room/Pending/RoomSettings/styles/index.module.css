@@ -5,6 +5,10 @@
   flex: 1;
 }
 
+.scrollContent {
+  flex-grow: 1;
+}
+
 .lottie {
-  height: 300px;
+  height: 250px;
 }

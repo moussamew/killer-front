@@ -1,7 +1,7 @@
 import { useTranslation } from '@killerparty/intl';
 import { useSession } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 
 import InfosIcon from '../../../../assets/icons/infos.svg';
 import KillerParty from '../../../../assets/images/killerparty.svg';
@@ -26,40 +26,42 @@ export function RoomInfos({ route, navigation }: Props): JSX.Element | null {
 
   return (
     <RoomGuard roomCode={roomCode} currentRouteName={routeName}>
-      <View style={styles.content}>
-        <View style={styles.howToPlayView}>
-          <Pressable
-            style={({ pressed }) => [
-              styles.howToPlay,
-              pressed && styles.howToPlayPressed,
-            ]}
-            onPress={() => navigation.navigate('Rules')}
-          >
-            <InfosIcon height={14} width={14} />
-            <Text style={styles.howToPlayText}>Régles du jeu</Text>
-          </Pressable>
+      <ScrollView>
+        <View style={styles.content}>
+          <View style={styles.howToPlayView}>
+            <Pressable
+              style={({ pressed }) => [
+                styles.howToPlay,
+                pressed && styles.howToPlayPressed,
+              ]}
+              onPress={() => navigation.navigate('Rules')}
+            >
+              <InfosIcon height={14} width={14} />
+              <Text style={styles.howToPlayText}>Régles du jeu</Text>
+            </Pressable>
+          </View>
+          <KillerParty height={200} width={200} style={styles.image} />
+          <Text style={styles.title}>{t('room.welcome.title')}</Text>
+          <Text style={styles.joinRoomCode} selectable>
+            {t('room.join.room.code', { roomCode })}
+          </Text>
+          <StartPartyButton roomCode={roomCode} />
+          <CanStartParty roomCode={roomCode} />
+          <RoomMissions roomCode={roomCode} />
+          {session && (
+            <Player
+              player={{
+                id: session.id,
+                name: session.name,
+                avatar: session.avatar,
+                roomCode,
+                hasAtLeastOneMission: Boolean(session.authoredMissions.length),
+                status: session.status,
+              }}
+            />
+          )}
         </View>
-        <KillerParty height={200} width={200} style={styles.image} />
-        <Text style={styles.title}>{t('room.welcome.title')}</Text>
-        <Text style={styles.joinRoomCode} selectable>
-          {t('room.join.room.code', { roomCode })}
-        </Text>
-        <StartPartyButton roomCode={roomCode} />
-        <CanStartParty roomCode={roomCode} />
-        <RoomMissions roomCode={roomCode} />
-        {session && (
-          <Player
-            player={{
-              id: session.id,
-              name: session.name,
-              avatar: session.avatar,
-              roomCode,
-              hasAtLeastOneMission: Boolean(session.authoredMissions.length),
-              status: session.status,
-            }}
-          />
-        )}
-      </View>
+      </ScrollView>
     </RoomGuard>
   );
 }

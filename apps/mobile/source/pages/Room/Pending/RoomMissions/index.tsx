@@ -1,6 +1,6 @@
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import LottieView from 'lottie-react-native';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import { RoomGuard } from '../../../../components/RoomGuard';
 import { type RootStackParamList } from '../../../../types/navigation';
@@ -17,15 +17,17 @@ export function RoomMissions({ route }: Props): JSX.Element {
 
   return (
     <RoomGuard roomCode={roomCode} currentRouteName={routeName}>
-      <View style={styles.container}>
-        <LottieView
-          source={require('../../../../assets/lotties/create-mission.json')}
-          autoPlay
-          style={styles.lottie}
-          loop
-        />
-        <CreateMission />
-      </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <LottieView
+            source={require('../../../../assets/lotties/create-mission.json')}
+            autoPlay
+            style={styles.lottie}
+            loop
+          />
+          <CreateMission />
+        </View>
+      </ScrollView>
     </RoomGuard>
   );
 }

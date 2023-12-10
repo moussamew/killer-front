@@ -34,16 +34,16 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
   const isPendingRoom = room?.status === 'PENDING';
 
   return (
-    <View style={{ ...styles.content, marginTop: isPendingRoom ? 40 : 70 }}>
-      {room?.status === 'PENDING' && <ShareRoomLink roomCode={roomCode} />}
-      <LottieView
-        source={require('../../../../assets/lotties/players.json')}
-        autoPlay
-        style={styles.lottie}
-        loop
-      />
-      <Text style={styles.title}>Liste des joueurs</Text>
-      <ScrollView style={styles.scrollContent} contentInset={{ bottom: 50 }}>
+    <ScrollView>
+      <View style={{ ...styles.content, marginTop: isPendingRoom ? 40 : 70 }}>
+        {room?.status === 'PENDING' && <ShareRoomLink roomCode={roomCode} />}
+        <LottieView
+          source={require('../../../../assets/lotties/players.json')}
+          autoPlay
+          style={styles.lottie}
+          loop
+        />
+        <Text style={styles.title}>Liste des joueurs</Text>
         {room?.players.map(
           ({ id, name, avatar, hasAtLeastOneMission, status }) => (
             <TouchableOpacity
@@ -79,7 +79,7 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
             </TouchableOpacity>
           ),
         )}
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 }

@@ -3,7 +3,7 @@ import { useSession, useUpdatePlayer } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import LottieView from 'lottie-react-native';
 import { createRef, useState } from 'react';
-import { type TextInput, View } from 'react-native';
+import { type TextInput, View, ScrollView } from 'react-native';
 
 import { Button } from '../../../../components/Button';
 import { Input } from '../../../../components/Input';
@@ -43,47 +43,52 @@ export function RoomSettings({ route }: Props): JSX.Element {
   return (
     <RoomGuard roomCode={roomCode} currentRouteName={routeName}>
       <View style={styles.content}>
-        <LottieView
-          source={require('../../../../assets/lotties/settings.json')}
-          autoPlay
-          style={styles.lottie}
-          loop
-        />
-        {session && (
-          <Player
-            player={{
-              id: session.id,
-              name: session.name,
-              avatar: session.avatar,
-              roomCode,
-              hasAtLeastOneMission: Boolean(session.authoredMissions.length),
-              status: session.status,
-            }}
+        <ScrollView contentContainerStyle={styles.scrollContent}>
+          <LottieView
+            source={require('../../../../assets/lotties/settings.json')}
+            autoPlay
+            style={styles.lottie}
+            loop
           />
-        )}
-        {isPendingRoom && (
-          <>
+          {session && (
+            <Player
+              player={{
+                id: session.id,
+                name: session.name,
+                avatar: session.avatar,
+                roomCode,
+                hasAtLeastOneMission: Boolean(session.authoredMissions.length),
+                status: session.status,
+              }}
+            />
+          )}
+
+          {isPendingRoom && (
             <Input
               innerRef={inputRef}
               label="Modifier le pseudo de votre joueur"
               value={pseudo}
               setValue={setPseudo}
             />
+          )}
+          <>
+            {isPendingRoom && (
+              <Button
+                disabled={!pseudo}
+                color="secondary"
+                onPress={handleUpdatePseudo}
+                text="Mettre à jour mon pseudo"
+                isAsyncAction
+              />
+            )}
             <Button
-              disabled={!pseudo}
-              color="secondary"
-              onPress={handleUpdatePseudo}
-              text="Mettre à jour mon pseudo"
+              color="primary"
+              onPress={handleLeaveRoom}
+              text={t('room.leave.current.room')}
               isAsyncAction
             />
           </>
-        )}
-        <Button
-          color="primary"
-          onPress={handleLeaveRoom}
-          text={t('room.leave.current.room')}
-          isAsyncAction
-        />
+        </ScrollView>
       </View>
     </RoomGuard>
   );
