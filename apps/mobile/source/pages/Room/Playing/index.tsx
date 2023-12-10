@@ -26,12 +26,9 @@ export function PlayingRoomTabs({ route }: Props): JSX.Element {
         tabBarStyle: {
           backgroundColor: '#FDF1E6',
           borderTopWidth: 1,
-          height: 70,
+          height: 80,
         },
-        tabBarItemStyle: {
-          marginTop: 10,
-          height: 40,
-        },
+        tabBarItemStyle: { marginTop: 10, height: 40 },
         tabBarLabelStyle: { fontSize: 12 },
         tabBarActiveTintColor: '#474D52',
         tabBarInactiveTintColor: '#9299A0',
