@@ -2,10 +2,12 @@ name: Deployment
 on:
   push:
     branches: [main]
-    paths-ignore: ['apps/mobile/*']
+    paths-ignore:
+      - 'apps/mobile/**'
   pull_request:
     types: [opened, synchronize, reopened]
-    paths-ignore: ['apps/mobile/*']
+    paths-ignore:
+      - 'apps/mobile/**'
 jobs:
   deploy:
     runs-on: ubuntu-latest
