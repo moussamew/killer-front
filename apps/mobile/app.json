@@ -2,7 +2,7 @@
   "expo": {
     "name": "Killerparty",
     "slug": "killerparty",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./source/assets/icon.png",
     "userInterfaceStyle": "light",
@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.killerparty.mobile",
-      "buildNumber": "13",
+      "buildNumber": "22",
       "config": {
         "usesNonExemptEncryption": false
       }
