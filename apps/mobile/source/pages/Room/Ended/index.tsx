@@ -1,7 +1,7 @@
 import { useTranslation } from '@killerparty/intl';
 import { useRoom, useSession, useUpdatePlayer } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 import { Button } from '../../../components/Button';
 import { CurrentAvatar } from '../../../components/CurrentAvatar';
@@ -29,19 +29,21 @@ export function EndedRoomPage({ route }: Props): JSX.Element {
 
   return (
     <RoomGuard roomCode={roomCode} currentRouteName={routeName}>
-      <View style={styles.container}>
-        <Text style={styles.title}>
-          {t('room.winner.name', { playerName: room?.winner?.name })}
-        </Text>
-        {room?.winner && <CurrentAvatar avatar={room.winner.avatar} />}
-        <Ranking room={room} />
-        <Button
-          color="primary"
-          onPress={handleLeaveRoom}
-          text={t('room.play.another.party.button')}
-          isAsyncAction
-        />
-      </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.title}>
+            {t('room.winner.name', { playerName: room?.winner?.name })}
+          </Text>
+          {room?.winner && <CurrentAvatar avatar={room.winner.avatar} />}
+          <Ranking room={room} />
+          <Button
+            color="primary"
+            onPress={handleLeaveRoom}
+            text={t('room.play.another.party.button')}
+            isAsyncAction
+          />
+        </View>
+      </ScrollView>
     </RoomGuard>
   );
 }

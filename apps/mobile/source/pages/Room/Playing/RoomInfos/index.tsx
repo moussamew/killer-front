@@ -1,6 +1,6 @@
 import { useSession } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 
 import { CurrentAvatar } from '../../../../components/CurrentAvatar';
 import { RoomGuard } from '../../../../components/RoomGuard';
@@ -21,15 +21,17 @@ export function PlayingRoomInfos({ route }: Props): JSX.Element {
 
   return (
     <RoomGuard roomCode={roomCode} currentRouteName={routeName}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Votre cible est..</Text>
-        <View style={styles.target}>
-          <Text style={styles.targetName}>{session?.target?.name}</Text>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.title}>Votre cible est..</Text>
+          <View style={styles.target}>
+            <Text style={styles.targetName}>{session?.target?.name}</Text>
+          </View>
+          <CurrentAvatar avatar={session?.target?.avatar} />
+          <TargetMission />
+          {session?.status === 'ALIVE' && <ConfirmKillButton />}
         </View>
-        <CurrentAvatar avatar={session?.target?.avatar} />
-        <TargetMission />
-        {session?.status === 'ALIVE' && <ConfirmKillButton />}
-      </View>
+      </ScrollView>
     </RoomGuard>
   );
 }

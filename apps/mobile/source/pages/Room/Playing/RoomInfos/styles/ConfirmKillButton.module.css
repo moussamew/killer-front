@@ -7,7 +7,6 @@
 }
 
 .subtitle {
-  margin-bottom: var(--spacing-medium);
   margin-bottom: var(--spacing-large);
   text-align: center;
 }
