@@ -18,10 +18,6 @@
   color: var(--color-black-40);
 }
 
-.scrollContent {
-  padding: var(--spacing-small);
-}
-
 .player {
   display: flex;
   flex-direction: row;
