@@ -4,10 +4,12 @@ on:
     branches: [main]
     paths-ignore:
       - 'apps/mobile/**'
+      - 'pnpm-lock.yaml'
   pull_request:
     types: [opened, synchronize, reopened]
     paths-ignore:
       - 'apps/mobile/**'
+      - 'pnpm-lock.yaml'
 jobs:
   deploy:
     runs-on: ubuntu-latest
