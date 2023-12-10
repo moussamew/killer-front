@@ -31,7 +31,7 @@ export function useUpdatePlayer(): UpdatePlayerMutation {
         }));
       }
     },
-    onSettled: () => queryClient.invalidateQueries(['session']),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ['session'] }),
   });
 
   return { updatePlayer };
@@ -42,7 +42,7 @@ export function useCreatePlayer(): CreatePlayerMutation {
 
   const createPlayer = useMutation({
     mutationFn: createPlayerRequest,
-    onSuccess: () => queryClient.invalidateQueries(['session']),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['session'] }),
   });
 
   return { createPlayer };

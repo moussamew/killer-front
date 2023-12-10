@@ -39,7 +39,6 @@ export interface PlayerUpdateInfos {
 export interface SessionQuery {
   session: Session | undefined;
   refetchSession(): Promise<QueryObserverResult<Session, unknown>>;
-  isLoading: boolean;
 }
 
 export interface UpdatePlayerMutation {
