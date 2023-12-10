@@ -10,7 +10,7 @@ Entirely written in **TypeScript**, from the balls to the bones.
 
 Install dependencies by using pnpm:
 
-_(Be sure to be in a correct node version (at least >= 20.10.0) before using pnpm)_
+_(Be sure to be in a correct node version (at least >= 18.18.0) before using pnpm)_
 
 ```bash
 pnpm install
