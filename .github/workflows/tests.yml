@@ -1,5 +1,11 @@
 name: Testing
-on: [push]
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['apps/mobile/*']
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths-ignore: ['apps/mobile/*']
 env:
   FRONT_URL: ${{ secrets.FRONT_URL }}
 jobs:
