@@ -9,7 +9,7 @@ export function useSession(): SessionQuery {
   const {
     data: session,
     refetch: refetchSession,
-    isInitialLoading,
+    isPending,
     isLoading,
   } = useQuery({
     queryKey: ['session'],
@@ -20,6 +20,6 @@ export function useSession(): SessionQuery {
   return {
     session,
     refetchSession,
-    isLoading: isSessionEnabled ? isLoading : isInitialLoading,
+    isLoading: isSessionEnabled ? isPending : isLoading,
   };
 }

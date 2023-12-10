@@ -22,11 +22,7 @@ export function renderWithProviders({
 }: RenderParams = {}): RenderResult {
   window.history.pushState({}, '', route);
 
-  const queryClient = new QueryClient({
-    ...QueryConfig,
-    // eslint-disable-next-line no-console
-    logger: { log: console.log, warn: console.warn, error: () => {} },
-  });
+  const queryClient = new QueryClient(QueryConfig);
 
   return render(
     <QueryClientProvider client={queryClient}>

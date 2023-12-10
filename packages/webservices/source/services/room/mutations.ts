@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { context } from '../../provider';
-
 import {
   createRoomRequest,
   deleteRoomRequest,
@@ -14,36 +12,33 @@ import {
 } from './types';
 
 export function useCreateRoom(): CreateRoomMutation {
-  const queryClient = useQueryClient({ context });
+  const queryClient = useQueryClient();
 
   const createRoom = useMutation({
-    context,
     mutationFn: createRoomRequest,
-    onSuccess: () => queryClient.invalidateQueries(['session']),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['session'] }),
   });
 
   return { createRoom };
 }
 
 export function useDeleteRoom(): DeleteRoomMutation {
-  const queryClient = useQueryClient({ context });
+  const queryClient = useQueryClient();
 
   const deleteRoom = useMutation({
-    context,
     mutationFn: deleteRoomRequest,
-    onSuccess: () => queryClient.invalidateQueries(['session']),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['session'] }),
   });
 
   return { deleteRoom };
 }
 
 export function useStartParty(): StartPartyMutation {
-  const queryClient = useQueryClient({ context });
+  const queryClient = useQueryClient();
 
   const startParty = useMutation({
-    context,
     mutationFn: startPartyRequest,
-    onSuccess: () => queryClient.invalidateQueries(['session']),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['session'] }),
   });
 
   return { startParty };

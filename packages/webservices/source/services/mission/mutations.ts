@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { context } from '../../provider';
-
 import { createMissionRequest, deleteMissionRequest } from './requests';
 import {
   type CreateMissionMutation,
@@ -9,10 +7,9 @@ import {
 } from './types';
 
 export function useCreateMission(): CreateMissionMutation {
-  const queryClient = useQueryClient({ context });
+  const queryClient = useQueryClient();
 
   const createMission = useMutation({
-    context,
     mutationFn: createMissionRequest,
     onSuccess: () =>
       Promise.all([
@@ -25,10 +22,9 @@ export function useCreateMission(): CreateMissionMutation {
 }
 
 export function useDeleteMission(): DeleteMissionMutation {
-  const queryClient = useQueryClient({ context });
+  const queryClient = useQueryClient();
 
   const deleteMission = useMutation({
-    context,
     mutationFn: deleteMissionRequest,
     onSuccess: () =>
       Promise.all([

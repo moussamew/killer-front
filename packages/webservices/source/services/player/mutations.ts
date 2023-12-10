@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { context } from '../../provider';
 import { type RequestError } from '../../utils/request-error';
 
 import { createPlayerRequest, updatePlayerRequest } from './requests';
@@ -12,7 +11,7 @@ import {
 } from './types';
 
 export function useUpdatePlayer(): UpdatePlayerMutation {
-  const queryClient = useQueryClient({ context });
+  const queryClient = useQueryClient();
 
   const updatePlayer = useMutation<
     void,
@@ -20,7 +19,6 @@ export function useUpdatePlayer(): UpdatePlayerMutation {
     Partial<PlayerUpdateInfos>,
     unknown
   >({
-    context,
     mutationFn: updatePlayerRequest,
     onMutate: async ({ avatar }) => {
       // Optimistically update the session with the new avatar
@@ -33,19 +31,18 @@ export function useUpdatePlayer(): UpdatePlayerMutation {
         }));
       }
     },
-    onSettled: () => queryClient.resetQueries(['session']),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['session'] }),
   });
 
   return { updatePlayer };
 }
 
 export function useCreatePlayer(): CreatePlayerMutation {
-  const queryClient = useQueryClient({ context });
+  const queryClient = useQueryClient();
 
   const createPlayer = useMutation({
-    context,
     mutationFn: createPlayerRequest,
-    onSuccess: () => queryClient.resetQueries(['session']),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['session'] }),
   });
 
   return { createPlayer };

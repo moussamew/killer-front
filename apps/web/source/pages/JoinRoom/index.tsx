@@ -21,7 +21,7 @@ export function JoinRoomPage(): JSX.Element {
 
   const navigate = useNavigate();
 
-  const { mutate: updatePlayerMutate, isLoading } = updatePlayer;
+  const { mutate: updatePlayerMutate, isPending } = updatePlayer;
 
   useEffect(() => {
     /**
@@ -59,7 +59,7 @@ export function JoinRoomPage(): JSX.Element {
   /**
    * Returns loading spinner while the player is currently added to the room;
    */
-  if (isLoading) {
+  if (isPending) {
     return <Loader />;
   }
 

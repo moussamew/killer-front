@@ -11,7 +11,7 @@ export function useCreateMission(): CreateMissionMutation {
 
   const createMission = useMutation({
     mutationFn: createMissionRequest,
-    onSuccess: () => queryClient.invalidateQueries(['session']),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['session'] }),
   });
 
   return { createMission };
@@ -22,7 +22,7 @@ export function useDeleteMission(): DeleteMissionMutation {
 
   const deleteMission = useMutation({
     mutationFn: deleteMissionRequest,
-    onSuccess: () => queryClient.invalidateQueries(['session']),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['session'] }),
   });
 
   return { deleteMission };
