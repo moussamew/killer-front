@@ -31,7 +31,7 @@ describe('<HomePage />', () => {
     await screen.findByText(t('room.welcome.title'));
 
     expect(
-      screen.getByText(t('room.join.room.code', { roomCode })),
+      screen.getByText(t('room.join.room.code', { roomCode: 'test' })),
     ).toBeInTheDocument();
   });
 
