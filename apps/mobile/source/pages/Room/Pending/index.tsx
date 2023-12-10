@@ -25,7 +25,7 @@ export function PendingRoomTabs({ route }: Props): JSX.Element {
         tabBarStyle: {
           backgroundColor: '#FDF1E6',
           borderTopWidth: 1,
-          height: 70,
+          height: 80,
         },
         tabBarItemStyle: { marginTop: 10, height: 40 },
         tabBarLabelStyle: { fontSize: 12 },
