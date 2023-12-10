@@ -11,6 +11,7 @@
 
 .input {
   padding: var(--spacing-small) 0;
+  margin-bottom: var(--spacing-medium);
   border-bottom-width: 2px;
   font-weight: 500;
   font-size: var(--text-large);
