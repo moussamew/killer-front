@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { Layout } from '@/layout/Layout';
+import { ContactPage } from '@/pages/Contact';
 import { HomePage } from '@/pages/Home';
 import { JoinRoomPage } from '@/pages/JoinRoom';
 import { NotFoundPage } from '@/pages/NotFound';
@@ -38,6 +39,7 @@ export function Routes(): JSX.Element {
               ],
             },
             { path: '/privacy', element: <PrivacyPage /> },
+            { path: '/contact', element: <ContactPage /> },
             { path: '*', element: <NotFoundPage /> },
           ],
         },
