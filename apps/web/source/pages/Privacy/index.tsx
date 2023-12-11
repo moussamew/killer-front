@@ -47,7 +47,7 @@ export function PrivacyPage(): JSX.Element {
       <h2>{t('privacy.policy.contact.title')}</h2>
       <p>
         {t('privacy.policy.contact.description')}&nbsp;
-        <strong>{t('privacy.policy.contact.email')}</strong>.
+        <strong>{t('contact.email')}</strong>.
       </p>
       <p>{t('privacy.policy.terms.validation')}</p>
       <p>{t('privacy.policy.last.update')}</p>

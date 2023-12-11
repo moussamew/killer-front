@@ -134,7 +134,10 @@
   "privacy.policy.confidential.edition.description": "We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.",
   "privacy.policy.contact.title": "Contact Us",
   "privacy.policy.contact.description": "If you have any questions or concerns about our Privacy Policy, please contact us at",
-  "privacy.policy.contact.email": "hello@killerparty.app",
   "privacy.policy.terms.validation": "By using our App, you agree to the terms of our Privacy Policy.",
-  "privacy.policy.last.update": "Last Updated: 03/12/2023"
+  "privacy.policy.last.update": "Last Updated: 11/12/2023",
+  "contact.title": "Contact Us",
+  "contact.description": "If you have any questions or suggestions about Killerparty, do not hesitate to contact us at:",
+  "contact.last.update": "Last Updated: 11/12/2023",
+  "contact.email": "contact@killerparty.app"
 }
