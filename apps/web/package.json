@@ -78,6 +78,6 @@
     "typescript-plugin-css-modules": "5.0.2",
     "vite": "5.0.8",
     "vite-plugin-svgr": "3.3.0",
-    "whatwg-fetch": "3.6.19"
+    "whatwg-fetch": "3.6.20"
   }
 }
