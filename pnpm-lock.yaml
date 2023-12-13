@@ -370,8 +370,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       react-native-toast-message:
-        specifier: 2.1.8
-        version: 2.1.8(react-native@0.72.7)(react@18.2.0)
+        specifier: 2.1.9
+        version: 2.1.9(react-native@0.72.7)(react@18.2.0)
     devDependencies:
       '@killerparty/config':
         specifier: workspace:*
@@ -11197,8 +11197,8 @@ packages:
       react: 18.2.0
       react-native: 0.72.7(@babel/core@7.23.6)(@babel/preset-env@7.23.6)(react@18.2.0)
 
-  /react-native-toast-message@2.1.8(react-native@0.72.7)(react@18.2.0):
-    resolution: {integrity: sha512-vlDQVkvpSq9L3/GRfoKaxVQyenj/A7yHToC9M0nrSCTR9XPXzoc2AOgRQnM6GVvDhetDld9ZfGtFcucyWcGQNA==}
+  /react-native-toast-message@2.1.9(react-native@0.72.7)(react@18.2.0):
+    resolution: {integrity: sha512-nL6Jgl6DaF0PQ9hbuD05Cp3mM1SPSAULptBeH7t8Md0G+0LYjtHAIX5i3TqWV9PnOx5QGJ9WJkSvVmUPbBDyLA==}
     peerDependencies:
       react: '*'
       react-native: '*'
