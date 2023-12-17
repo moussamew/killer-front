@@ -35,7 +35,7 @@ export function HomePage(): JSX.Element {
           </div>
           <Lottie className={styles.mobileLottie} animationData={HomeLottie} />
           <div className={commonStyles.actions}>
-            <CreateRoomButton playerName={session?.name} />
+            <CreateRoomButton />
             <JoinRoomButton />
           </div>
         </div>

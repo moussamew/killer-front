@@ -30,13 +30,17 @@ export const avatarList: Record<string, JSX.Element> = {
   surf: <Surf />,
 };
 
-export function Gallery(): JSX.Element {
+interface Props {
+  playerId?: number;
+}
+
+export function Gallery({ playerId }: Props): JSX.Element {
   const { session } = useSession();
   const { updatePlayer } = useUpdatePlayer();
 
   const handleAvatarClick = (avatar: string): void => {
-    if (session) {
-      updatePlayer.mutate({ id: session?.id, avatar });
+    if (session || playerId) {
+      updatePlayer.mutate({ id: playerId ?? session?.id, avatar });
     }
   };
 
