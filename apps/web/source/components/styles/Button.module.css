@@ -50,7 +50,7 @@
   }
 
   .spinner circle {
-    stroke: var(--color-white);
+    stroke: var(--color-black-80);
   }
 }
 

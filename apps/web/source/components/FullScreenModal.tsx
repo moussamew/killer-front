@@ -79,6 +79,6 @@ export function FullScreenModal({
       </div>
       <div className={styles.content}>{children}</div>
     </div>,
-    document.getElementById('modal')!,
+    document.body,
   );
 }
