@@ -3,6 +3,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Layout } from '@/layout/Layout';
 import { ContactPage } from '@/pages/Contact';
 import { HomePage } from '@/pages/Home';
+import { ChooseAvatar } from '@/pages/Home/ChooseAvatar';
+import { ChooseMode } from '@/pages/Home/ChooseMode';
+import { ChoosePseudo } from '@/pages/Home/ChoosePseudo';
 import { JoinRoomPage } from '@/pages/JoinRoom';
 import { NotFoundPage } from '@/pages/NotFound';
 import { PrivacyPage } from '@/pages/Privacy';
@@ -43,6 +46,9 @@ export function Routes(): JSX.Element {
             { path: '*', element: <NotFoundPage /> },
           ],
         },
+        { path: '/create-room/choose-pseudo', element: <ChoosePseudo /> },
+        { path: '/create-room/choose-avatar', element: <ChooseAvatar /> },
+        { path: '/create-room/choose-mode', element: <ChooseMode /> },
       ])}
     />
   );

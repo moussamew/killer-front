@@ -1,27 +1,14 @@
 import { useTranslation } from '@killerparty/intl';
-import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/Button';
-import { ModalContext } from '@/context/modal';
-import { useCreateRoom } from '@/services/room/mutations';
 
-import { CreateRoomModal } from './CreateRoomModal';
-
-interface Props {
-  playerName?: string;
-}
-
-export function CreateRoomButton({ playerName }: Props): JSX.Element {
+export function CreateRoomButton(): JSX.Element {
   const { t } = useTranslation();
-  const { openModal } = useContext(ModalContext);
-  const { createRoom } = useCreateRoom();
+  const navigate = useNavigate();
 
-  const handleCreateRoom = async (): Promise<void> => {
-    if (!playerName) {
-      return openModal(<CreateRoomModal />);
-    }
-
-    return void createRoom.mutateAsync();
+  const handleCreateRoom = (): void => {
+    navigate('/create-room/choose-pseudo');
   };
 
   return (

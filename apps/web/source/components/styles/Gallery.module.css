@@ -8,6 +8,7 @@
   gap: var(--spacing-medium);
 
   @media (width >= 720px) {
+    justify-content: center;
     padding-top: var(--spacing-large);
     padding-bottom: var(--spacing-large);
     padding-left: var(--spacing-large);
