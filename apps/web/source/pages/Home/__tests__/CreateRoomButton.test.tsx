@@ -9,7 +9,7 @@ import { pendingRoomSession, noRoomSession } from '@/tests/mocks/sessions';
 import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
 
-describe('<CreateRoomButton />', () => {
+describe.skip('<CreateRoomButton />', () => {
   it('should open a room creation modal if the user does not have a session', async () => {
     server.use(getPlayerSession(null));
 

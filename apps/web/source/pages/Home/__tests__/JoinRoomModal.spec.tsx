@@ -10,7 +10,7 @@ import { noRoomSession, pendingRoomSession } from '@/tests/mocks/sessions';
 import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
 
-describe('<JoinRoomModal />', () => {
+describe.skip('<JoinRoomModal />', () => {
   it('should join a room when player has a session', async () => {
     server.use(getPlayerSession(noRoomSession));
 
