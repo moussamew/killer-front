@@ -1,5 +1,6 @@
 {
   "avatar.refresh.title": "Changer d'avatar",
+  "action.next.button": "Suivant",
   "create.room.page.title": "Créer une nouvelle partie",
   "room.playing.title": "Place au massacre !",
   "home.title": "Ça vous tente un petit meurtre entre amis ?",
@@ -7,12 +8,15 @@
   "home.create.room.button": "Créer une nouvelle partie",
   "home.create.room.error": "Une erreur s'est produite lors de la création d'une nouvelle partie. Veuillez réessayer plus tard.",
   "home.create.room.confirm.button": "Créer ma partie",
+  "home.create.room.choose.mode": "Choisir le mode de jeu",
   "home.join.room": "Rejoindre une partie",
   "home.join.room.code.label": "Saisir le code de la partie à rejoindre",
   "home.join.room.code.placeholder": "Code de la partie",
   "home.join.room.confirm.button": "Rejoindre cette partie",
-  "home.create.pseudo.label": "Avant de commencer, veuillez choisir un nom",
-  "home.create.pseudo.placeholder": "Choisir un nom",
+  "home.create.pseudo.title": "Choisir votre pseudo",
+  "home.create.pseudo.label": "Avant de commencer, veuillez choisir un pseudo",
+  "home.create.pseudo.placeholder": "Choisir un pseudo",
+  "home.create.avatar.title": "Choisir votre avatar",
   "home.first.rule.title": "Élaborez vos contrats d'assasinat",
   "home.first.rule.text": "Les contrats d'assasinats sont distribués aléatoirement entre les joueurs.\nDans la salle d'attente, vous pouvez ajouter vos propres contrats qui seront distribués aux autres joueurs !",
   "home.second.rule.title": "Recevez un contrat d'assasinat et éliminez vos cibles pour progresser.",
@@ -139,5 +143,11 @@
   "contact.title": "Contactez nous",
   "contact.description": "Si vous avez des questions ou des suggestions concernant Killerparty, n'hésitez pas à nous contacter à l'adresse suivante :",
   "contact.last.update": "Dernière mise à jour le 11/12/2023",
-  "contact.email": "contact@killerparty.app"
+  "contact.email": "contact@killerparty.app",
+  "create.room.game.master.mode.title": "Mode « Maître de Jeu »",
+  "create.room.game.master.mode.description": "Le mode maître de jeu désigne un maître (en l'occurence vous) pour créer toutes les missions.\n Les joueurs devront alors réaliser les missions que vous aurez créées.",
+  "create.room.game.master.mode.confirm.button": "Ce mode sera bientôt disponible",
+  "create.room.free.for.all.mode.title": "Mode « Chacun pour Soi »",
+  "create.room.free.for.all.mode.description": "Le mode chacun pour soi désigne un mode où chaque joueur peut créer ses propres missions.\n La partie se lance lorsque chaque joueur a créé au moins une mission.",
+  "create.room.free.for.all.mode.confirm.button": "Choisir le mode « Chacun pour Soi »"
 }

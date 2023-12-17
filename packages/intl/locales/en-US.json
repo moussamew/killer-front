@@ -1,5 +1,6 @@
 {
   "avatar.refresh.title": "Update avatar",
+  "action.next.button": "Continue",
   "create.room.page.title": "Create a new room",
   "room.playing.title": "And now the game begins!",
   "home.title": "The right way to kill your friends..",
@@ -7,12 +8,15 @@
   "home.create.room.button": "Create new room",
   "home.create.room.error": "An error has occured while creating a new room. Please retry later.",
   "home.create.room.confirm.button": "Create my room",
+  "home.create.room.choose.mode": "Choose the game mode",
   "home.join.room": "Join a room",
   "home.join.room.code.label": "Type the code of the room to join",
   "home.join.room.code.placeholder": "Code of the room",
   "home.join.room.confirm.button": "Join this room",
+  "home.create.pseudo.title": "Create your pseudo",
   "home.create.pseudo.label": "Before starting, create your pseudo",
   "home.create.pseudo.placeholder": "Choose a pseudo",
+  "home.create.avatar.title": "Choose your avatar",
   "home.first.rule.title": "Create your assassination contracts",
   "home.first.rule.text": "Assassination contracts are distributed randomly among players.\nIn the waiting room, you can add your own contracts that will be distributed to other players!",
   "home.second.rule.title": "Get an assassination contract and eliminate your targets to progress.",
@@ -139,5 +143,11 @@
   "contact.title": "Contact Us",
   "contact.description": "If you have any questions or suggestions about Killerparty, do not hesitate to contact us at:",
   "contact.last.update": "Last Updated: 11/12/2023",
-  "contact.email": "contact@killerparty.app"
+  "contact.email": "contact@killerparty.app",
+  "create.room.game.master.mode.title": "« Game Master »",
+  "create.room.game.master.mode.description": "The game master mode designates a master (in this case, you) to create all the missions.\n Players must then carry out the missions you have created.",
+  "create.room.game.master.mode.confirm.button": "This mode will soon be available",
+  "create.room.free.for.all.mode.title": "« Free for All »",
+  "create.room.free.for.all.mode.description": "The free-for-all mode is a mode in which each player can create his own missions..\n The game starts when each player has created at least one mission..",
+  "create.room.free.for.all.mode.confirm.button": "Choose the « Free for All » mode"
 }

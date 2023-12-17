@@ -35,7 +35,7 @@ export function JoinRoom(): JSX.Element {
 
   return (
     <FullScreenModal
-      title="Rejoindre une partie"
+      title={t('home.join.room')}
       onClose={() => navigate('/')}
       hideBackButton={false}
     >

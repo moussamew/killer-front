@@ -15,7 +15,7 @@ import styles from './styles/ChoosePseudo.module.css';
 
 export function ChoosePseudo(): JSX.Element {
   const navigate = useNavigate();
-  const { state: playerRoute } = useLocation();
+  const { state: route } = useLocation();
   const { t } = useTranslation();
   const [pseudo, setPseudo] = useState('');
   const { createPlayer } = useCreatePlayer();
@@ -34,11 +34,14 @@ export function ChoosePseudo(): JSX.Element {
     // Refetch session to update the player infos.
     await refetchSession();
 
-    navigate('/choose-avatar', { state: { playerRoute } });
+    navigate('/choose-avatar', { state: route });
   };
 
   return (
-    <FullScreenModal title="Choisir un pseudo" onClose={() => navigate('/')}>
+    <FullScreenModal
+      title={t('home.create.pseudo.title')}
+      onClose={() => navigate('/')}
+    >
       <div>
         <Lottie className={styles.lottie} animationData={Pumpkin} />
         <div className={styles.selectPseudo}>
@@ -51,7 +54,7 @@ export function ChoosePseudo(): JSX.Element {
             onChange={handlePseudo}
           />
           <Button color="secondary" onClick={goToNextStep}>
-            Choisir ce pseudo
+            {t('action.next.button')}
           </Button>
         </div>
       </div>
