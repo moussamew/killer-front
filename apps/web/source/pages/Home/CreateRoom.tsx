@@ -26,7 +26,6 @@ export function CreateRoom(): JSX.Element {
       title={t('home.create.room.choose.mode')}
       onClose={() => navigate('/')}
       hideBackButton={false}
-      shouldDisableBodyScroll={false}
     >
       <div className={styles.content}>
         <div className={styles.mode}>
