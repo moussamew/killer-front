@@ -4,13 +4,12 @@ import { useEffect } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
 import HomeLottie from '@/assets/lotties/home.json';
+import { Button } from '@/components/Button';
 import { Gallery } from '@/components/Gallery';
 import { type SessionQuery } from '@/services/player/types';
 
 import commonStyles from '../../assets/styles/common.module.css';
 
-import { CreateRoomButton } from './CreateRoomButton';
-import { JoinRoomButton } from './JoinRoomButton';
 import { Rules } from './Rules';
 import styles from './styles/index.module.css';
 
@@ -25,6 +24,14 @@ export function HomePage(): JSX.Element {
     }
   }, [navigate, session?.room?.id]);
 
+  const handleCreateRoom = (): void => {
+    navigate('/choose-pseudo', { state: 'create-room' });
+  };
+
+  const handleJoinRoom = (): void => {
+    navigate('/choose-pseudo', { state: 'join-room' });
+  };
+
   return (
     <>
       <div className={styles.content}>
@@ -35,8 +42,12 @@ export function HomePage(): JSX.Element {
           </div>
           <Lottie className={styles.mobileLottie} animationData={HomeLottie} />
           <div className={commonStyles.actions}>
-            <CreateRoomButton />
-            <JoinRoomButton />
+            <Button color="primary" onClick={handleCreateRoom}>
+              {t('home.create.room.button')}
+            </Button>
+            <Button color="secondary" onClick={handleJoinRoom}>
+              {t('home.join.room')}
+            </Button>
           </div>
         </div>
         <Lottie className={styles.webLottie} animationData={HomeLottie} />
