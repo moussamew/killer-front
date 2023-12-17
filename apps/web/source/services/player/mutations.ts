@@ -31,7 +31,7 @@ export function useUpdatePlayer(): UpdatePlayerMutation {
         }));
       }
     },
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ['session'] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['session'] }),
   });
 
   return { updatePlayer };

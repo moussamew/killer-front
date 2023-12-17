@@ -1,17 +1,14 @@
 import { useTranslation } from '@killerparty/intl';
-import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/Button';
-import { ModalContext } from '@/context/modal';
-
-import { JoinRoomModal } from './JoinRoomModal';
 
 export function JoinRoomButton(): JSX.Element {
   const { t } = useTranslation();
-  const { openModal } = useContext(ModalContext);
+  const navigate = useNavigate();
 
   const handleJoinRoom = (): void => {
-    openModal(<JoinRoomModal />);
+    navigate('/choose-pseudo', { state: 'join-room' });
   };
 
   return (

@@ -8,7 +8,7 @@ export function CreateRoomButton(): JSX.Element {
   const navigate = useNavigate();
 
   const handleCreateRoom = (): void => {
-    navigate('/create-room/choose-pseudo');
+    navigate('/choose-pseudo', { state: 'create-room' });
   };
 
   return (
