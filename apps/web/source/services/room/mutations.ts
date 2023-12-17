@@ -16,7 +16,7 @@ export function useCreateRoom(): CreateRoomMutation {
 
   const createRoom = useMutation({
     mutationFn: createRoomRequest,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['session'] }),
+    onSuccess: () => queryClient.resetQueries({ queryKey: ['session'] }),
   });
 
   return { createRoom };
