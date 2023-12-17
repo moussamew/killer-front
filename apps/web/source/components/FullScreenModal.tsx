@@ -14,6 +14,7 @@ interface Props {
   children: JSX.Element | JSX.Element[];
   onClose: () => void;
   hideBackButton?: boolean;
+  shouldDisableBodyScroll?: boolean;
 }
 
 export function FullScreenModal({
@@ -21,15 +22,20 @@ export function FullScreenModal({
   title,
   onClose,
   hideBackButton = true,
+  shouldDisableBodyScroll = true,
 }: Props): JSX.Element {
   const navigate = useNavigate();
 
   useEffect(function disableBodyScrollOnModalOpen() {
     const body = document.querySelector('body');
 
-    disableBodyScroll(body!);
+    if (shouldDisableBodyScroll) {
+      disableBodyScroll(body!);
 
-    return () => enableBodyScroll(body!);
+      return () => enableBodyScroll(body!);
+    }
+
+    return () => {};
   });
 
   useEffect(function listenKeyboardEvent() {

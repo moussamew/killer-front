@@ -1,3 +1,4 @@
+import { useTranslation } from '@killerparty/intl';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/Button';
@@ -8,16 +9,14 @@ import { useSession } from '@/services/player/queries';
 import styles from './styles/ChooseAvatar.module.css';
 
 export function ChooseAvatar(): JSX.Element {
+  const { t } = useTranslation();
   const { session } = useSession();
-  const {
-    state: { playerRoute },
-  } = useLocation();
-
+  const { state: route } = useLocation();
   const navigate = useNavigate();
 
   return (
     <FullScreenModal
-      title="Choisir un avatar"
+      title={t('home.create.avatar.title')}
       onClose={() => navigate('/')}
       hideBackButton={false}
     >
@@ -28,10 +27,10 @@ export function ChooseAvatar(): JSX.Element {
         <Gallery />
         <Button
           color="secondary"
-          onClick={() => navigate(`/${playerRoute}`)}
+          onClick={() => navigate(`/${route}`)}
           customStyle={styles.button}
         >
-          Sauvegarder cet avatar
+          {t('action.next.button')}
         </Button>
       </>
     </FullScreenModal>

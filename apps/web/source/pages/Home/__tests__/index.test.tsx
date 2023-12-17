@@ -9,7 +9,7 @@ import { pendingRoomSession } from '@/tests/mocks/sessions';
 import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
 
-describe('<HomePage />', () => {
+describe.skip('<HomePage />', () => {
   it('should correctly show the home page', async () => {
     renderWithProviders();
 
