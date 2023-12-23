@@ -2,6 +2,9 @@ import { useTranslation } from '@killerparty/intl';
 import { useParams } from 'react-router-dom';
 
 import Island from '@/assets/images/island.png';
+import { PlayerStatus } from '@/services/player/constants';
+import { useSession } from '@/services/player/queries';
+import { useRoom } from '@/services/room/queries';
 
 import { CanStartParty } from './CanStartParty';
 import { PlayerList } from './PlayerList';
@@ -13,7 +16,14 @@ import styles from './styles/index.module.css';
 
 export function PendingRoomPage(): JSX.Element | null {
   const { roomCode } = useParams();
+  const { room } = useRoom(roomCode!);
+  const { session } = useSession();
+
   const { t } = useTranslation();
+
+  const canAddMissionsToRoom =
+    !room?.isGameMastered ||
+    (room?.isGameMastered && session?.status === PlayerStatus.SPECTATING);
 
   return (
     <>
@@ -32,7 +42,7 @@ export function PendingRoomPage(): JSX.Element | null {
         </div>
       </div>
       <div className={styles.features}>
-        <PlayerMissions />
+        {canAddMissionsToRoom && <PlayerMissions />}
         <PlayerList />
       </div>
     </>
