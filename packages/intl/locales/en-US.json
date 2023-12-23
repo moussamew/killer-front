@@ -63,6 +63,7 @@
   "room.start.party.same.missions.as.players.condition": "As many missions as players",
   "room.start.party.each.player.has.mission.condition": "Each player has proposed a mission",
   "room.start.party.button": "Start the party",
+  "room.game.master.title": "You are the game master, keep an eye on the party!",
   "room.leave.confirmed.message": "Party successfully left.",
   "room.target.title": "Try to kill your target and survive!",
   "room.target.to.kill": "The target to kill is {{pseudo}}",
