@@ -19,10 +19,15 @@ export interface Room {
   winner: Player | null;
   hasEnoughMissions: boolean;
   hasEnoughPlayers: boolean;
+  isGameMastered: boolean;
+}
+
+export interface CreateRoomParams {
+  isGameMasteredRoom?: boolean;
 }
 
 export interface CreateRoomMutation {
-  createRoom: UseMutationResult<Room, unknown, void, unknown>;
+  createRoom: UseMutationResult<Room, unknown, CreateRoomParams, unknown>;
 }
 
 export interface DeleteRoomMutation {

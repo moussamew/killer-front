@@ -6,6 +6,7 @@ import {
   startPartyRequest,
 } from './requests';
 import {
+  type CreateRoomParams,
   type CreateRoomMutation,
   type DeleteRoomMutation,
   type StartPartyMutation,
@@ -15,7 +16,9 @@ export function useCreateRoom(): CreateRoomMutation {
   const queryClient = useQueryClient();
 
   const createRoom = useMutation({
-    mutationFn: createRoomRequest,
+    mutationFn: (mutationVariables: CreateRoomParams) => {
+      return createRoomRequest(mutationVariables);
+    },
     onSuccess: () => queryClient.resetQueries({ queryKey: ['session'] }),
   });
 

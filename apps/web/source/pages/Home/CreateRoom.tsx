@@ -15,8 +15,10 @@ export function CreateRoom(): JSX.Element {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const handleCreateRoom = async (): Promise<void> => {
-    const { id } = await createRoom.mutateAsync();
+  const handleCreateRoom = async ({
+    isGameMasteredRoom = false,
+  }): Promise<void> => {
+    const { id } = await createRoom.mutateAsync({ isGameMasteredRoom });
 
     navigate(`/room/${id}/pending`);
   };
@@ -32,7 +34,10 @@ export function CreateRoom(): JSX.Element {
           <div className={styles.description}>
             <h1>{t('create.room.game.master.mode.title')}</h1>
             <p>{t('create.room.game.master.mode.description')}</p>
-            <Button color="primary" onClick={handleCreateRoom} disabled>
+            <Button
+              color="primary"
+              onClick={() => handleCreateRoom({ isGameMasteredRoom: true })}
+            >
               {t('create.room.game.master.mode.confirm.button')}
             </Button>
           </div>
@@ -43,7 +48,10 @@ export function CreateRoom(): JSX.Element {
           <div className={styles.description}>
             <h1>{t('create.room.free.for.all.mode.title')}</h1>
             <p>{t('create.room.free.for.all.mode.description')}</p>
-            <Button color="secondary" onClick={handleCreateRoom}>
+            <Button
+              color="secondary"
+              onClick={() => handleCreateRoom({ isGameMasteredRoom: false })}
+            >
               {t('create.room.free.for.all.mode.confirm.button')}
             </Button>
           </div>

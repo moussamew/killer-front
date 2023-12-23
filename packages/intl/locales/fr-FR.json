@@ -146,7 +146,7 @@
   "contact.email": "contact@killerparty.app",
   "create.room.game.master.mode.title": "Mode « Maître de Jeu »",
   "create.room.game.master.mode.description": "Le mode maître de jeu désigne un maître (en l'occurence vous) pour créer toutes les missions.\n Les joueurs devront alors réaliser les missions que vous aurez créées.",
-  "create.room.game.master.mode.confirm.button": "Ce mode sera bientôt disponible",
+  "create.room.game.master.mode.confirm.button": "Choisir le mode « Maître de Jeu »",
   "create.room.free.for.all.mode.title": "Mode « Chacun pour Soi »",
   "create.room.free.for.all.mode.description": "Le mode chacun pour soi désigne un mode où chaque joueur peut créer ses propres missions.\n La partie se lance lorsque chaque joueur a créé au moins une mission.",
   "create.room.free.for.all.mode.confirm.button": "Choisir le mode « Chacun pour Soi »"
