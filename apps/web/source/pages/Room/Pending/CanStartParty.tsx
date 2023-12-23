@@ -30,7 +30,11 @@ export function CanStartParty(): JSX.Element {
         ) : (
           <Unchecked className={styles.icon} />
         )}
-        <p>{t('room.start.party.three.players.condition')}</p>
+        <p>
+          {room?.isGameMastered
+            ? t('room.start.party.three.players.with.game.master.condition')
+            : t('room.start.party.three.players.condition')}
+        </p>
       </div>
       <div
         className={clsx(styles.condition, {
@@ -44,18 +48,20 @@ export function CanStartParty(): JSX.Element {
         )}
         <p>{t('room.start.party.same.missions.as.players.condition')}</p>
       </div>
-      <div
-        className={clsx(styles.condition, {
-          [styles.checked]: allPlayersHasProposedMission,
-        })}
-      >
-        {allPlayersHasProposedMission ? (
-          <Checked className={styles.icon} />
-        ) : (
-          <Unchecked className={styles.icon} />
-        )}
-        <p>{t('room.start.party.each.player.has.mission.condition')}</p>
-      </div>
+      {!room?.isGameMastered && (
+        <div
+          className={clsx(styles.condition, {
+            [styles.checked]: allPlayersHasProposedMission,
+          })}
+        >
+          {allPlayersHasProposedMission ? (
+            <Checked className={styles.icon} />
+          ) : (
+            <Unchecked className={styles.icon} />
+          )}
+          <p>{t('room.start.party.each.player.has.mission.condition')}</p>
+        </div>
+      )}
     </div>
   );
 }

@@ -59,7 +59,8 @@ export function PlayerList(): JSX.Element {
             <h3>{name}</h3>
             <Checked
               className={clsx(styles.icon, {
-                [styles.playerReady]: hasAtLeastOneMission,
+                [styles.playerReady]:
+                  room?.isGameMastered || hasAtLeastOneMission,
               })}
             />
           </div>
