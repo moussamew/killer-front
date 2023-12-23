@@ -3,12 +3,20 @@ import { Method } from '@/constants/enums';
 import { request } from '@/helpers/apis';
 
 import { RoomStatus } from './constants';
-import { type Room } from './types';
+import { type CreateRoomParams, type Room } from './types';
 
 const { POST, GET, DELETE, PATCH } = Method;
 
-export function createRoomRequest(): Promise<Room> {
-  return request({ url: ROOM_ENDPOINT, method: POST });
+export function createRoomRequest({
+  isGameMasteredRoom,
+}: CreateRoomParams): Promise<Room> {
+  return request({
+    url: ROOM_ENDPOINT,
+    method: POST,
+    requestInit: {
+      body: JSON.stringify({ isGameMasteredRoom }),
+    },
+  });
 }
 
 export function deleteRoomRequest(roomCode: string): Promise<void> {

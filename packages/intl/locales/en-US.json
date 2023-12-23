@@ -146,7 +146,7 @@
   "contact.email": "contact@killerparty.app",
   "create.room.game.master.mode.title": "« Game Master »",
   "create.room.game.master.mode.description": "The game master mode designates a master (in this case, you) to create all the missions.\n Players must then carry out the missions you have created.",
-  "create.room.game.master.mode.confirm.button": "This mode will soon be available",
+  "create.room.game.master.mode.confirm.button": "Choose the « Game Master » mode",
   "create.room.free.for.all.mode.title": "« Free for All »",
   "create.room.free.for.all.mode.description": "The free-for-all mode is a mode in which each player can create his own missions..\n The game starts when each player has created at least one mission..",
   "create.room.free.for.all.mode.confirm.button": "Choose the « Free for All » mode"
