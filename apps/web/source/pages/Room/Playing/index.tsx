@@ -31,7 +31,7 @@ export function PlayingRoomPage(): JSX.Element {
 
   return (
     <div className={styles.content}>
-      {session?.status === PlayerStatus.ALIVE ? (
+      {session?.status === PlayerStatus.ALIVE && (
         <>
           <h1 className={styles.title}>
             {t('room.target.to.kill', { pseudo: session?.target?.name })}
@@ -39,9 +39,16 @@ export function PlayingRoomPage(): JSX.Element {
           <CurrentAvatar avatar={targetAvatar} />
           <TargetMission />
         </>
-      ) : (
+      )}
+      {session?.status === PlayerStatus.KILLED && (
         <>
           <h1 className={styles.title}>{t('room.player.killed.title')}</h1>
+          <CurrentAvatar avatar={session?.avatar} />
+        </>
+      )}
+      {session?.status === PlayerStatus.SPECTATING && (
+        <>
+          <h1 className={styles.title}>{t('room.game.master.title')}</h1>
           <CurrentAvatar avatar={session?.avatar} />
         </>
       )}
