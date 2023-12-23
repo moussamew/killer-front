@@ -60,6 +60,7 @@
   "room.delete.current.room.confirm.button": "Delete the room",
   "room.start.party.conditions": "Conditions to start the party",
   "room.start.party.three.players.condition": "Three players minimum",
+  "room.start.party.three.players.with.game.master.condition": "Three players minimum (without game master)",
   "room.start.party.same.missions.as.players.condition": "As many missions as players",
   "room.start.party.each.player.has.mission.condition": "Each player has proposed a mission",
   "room.start.party.button": "Start the party",

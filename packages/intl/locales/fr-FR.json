@@ -61,6 +61,7 @@
   "room.delete.current.room.confirm.button": "Supprimer",
   "room.start.party.conditions": "Conditions de lancement de partie",
   "room.start.party.three.players.condition": "Trois joueurs minimum",
+  "room.start.party.three.players.with.game.master.condition": "Trois joueurs minimum (sans le maître de jeu)",
   "room.start.party.same.missions.as.players.condition": "Au moins autant de missions que de joueurs",
   "room.start.party.each.player.has.mission.condition": "Chaque joueur a proposé une mission",
   "room.start.party.button": "Lancer la partie",
