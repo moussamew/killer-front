@@ -1,9 +1,15 @@
 import { t } from '@killerparty/intl';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { sources } from 'eventsourcemock';
 
 import { fakeMissionThree } from '@/tests/mocks/missions';
-import { pendingRoom, roomCode } from '@/tests/mocks/rooms';
+import {
+  pendingRoom,
+  pendingRoomWithMultiplePlayers,
+  roomCode,
+  roomEventSource,
+} from '@/tests/mocks/rooms';
 import { getPlayerSession } from '@/tests/mocks/services/player';
 import { getRoomSession } from '@/tests/mocks/services/room';
 import { pendingRoomSession } from '@/tests/mocks/sessions';
@@ -30,6 +36,16 @@ describe('<CreateMission />', () => {
       getPlayerSession({
         ...pendingRoomSession,
         authoredMissions: [fakeMissionThree],
+      }),
+    );
+
+    sources[roomEventSource].emit(
+      'message',
+      new MessageEvent('message', {
+        data: JSON.stringify({
+          ...pendingRoomWithMultiplePlayers,
+          missions: [fakeMissionThree],
+        }),
       }),
     );
 
