@@ -19,6 +19,7 @@ export const pendingRoom: Room = {
   winner: null,
   hasEnoughMissions: false,
   hasEnoughPlayers: false,
+  isGameMastered: false,
 };
 
 export const pendingRoomWithMissions: Room = {
@@ -31,6 +32,7 @@ export const pendingRoomWithMissions: Room = {
   winner: null,
   hasEnoughMissions: true,
   hasEnoughPlayers: false,
+  isGameMastered: false,
 };
 
 export const pendingRoomWithMultiplePlayers: Room = {
@@ -43,6 +45,7 @@ export const pendingRoomWithMultiplePlayers: Room = {
   winner: null,
   hasEnoughMissions: false,
   hasEnoughPlayers: true,
+  isGameMastered: false,
 };
 
 export const playingRoom: Room = {
@@ -55,6 +58,7 @@ export const playingRoom: Room = {
   winner: null,
   hasEnoughMissions: true,
   hasEnoughPlayers: false,
+  isGameMastered: false,
 };
 
 export const endedRoom: Room = {
@@ -67,4 +71,5 @@ export const endedRoom: Room = {
   winner: fakePlayerOne,
   hasEnoughMissions: false,
   hasEnoughPlayers: false,
+  isGameMastered: false,
 };
