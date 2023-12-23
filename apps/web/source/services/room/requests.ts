@@ -8,13 +8,13 @@ import { type CreateRoomParams, type Room } from './types';
 const { POST, GET, DELETE, PATCH } = Method;
 
 export function createRoomRequest({
-  isGameMasteredRoom,
+  isGameMastered,
 }: CreateRoomParams): Promise<Room> {
   return request({
     url: ROOM_ENDPOINT,
     method: POST,
     requestInit: {
-      body: JSON.stringify({ isGameMasteredRoom }),
+      body: JSON.stringify({ isGameMastered }),
     },
   });
 }
