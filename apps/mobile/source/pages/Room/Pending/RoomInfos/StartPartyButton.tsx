@@ -16,19 +16,28 @@ export function StartPartyButton({ roomCode }: Props): JSX.Element {
     await startParty.mutateAsync(roomCode);
   };
 
-  const allPlayersHasProposedMission = room?.players.every(
-    ({ hasAtLeastOneMission }) => hasAtLeastOneMission,
-  );
+  const shouldDisableStartPartyButton = (): boolean => {
+    const { hasEnoughMissions, hasEnoughPlayers, isGameMastered, players } =
+      room ?? {};
+
+    if (isGameMastered) {
+      return !hasEnoughPlayers || !hasEnoughMissions;
+    }
+
+    const allPlayersHasProposedMission = players?.every(
+      ({ hasAtLeastOneMission }) => hasAtLeastOneMission,
+    );
+
+    return (
+      !hasEnoughPlayers || !hasEnoughMissions || !allPlayersHasProposedMission
+    );
+  };
 
   return (
     <Button
       onPress={handleStartParty}
       color="primary"
-      disabled={
-        !room?.hasEnoughMissions ||
-        !room?.hasEnoughPlayers ||
-        !allPlayersHasProposedMission
-      }
+      disabled={shouldDisableStartPartyButton()}
       text={t('room.start.party.button')}
       isAsyncAction
     />

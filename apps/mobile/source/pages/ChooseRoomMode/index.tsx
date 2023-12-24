@@ -16,8 +16,8 @@ export function ChooseRoomMode({ navigation }: Props): JSX.Element {
   const { createRoom } = useCreateRoom();
   const { t } = useTranslation();
 
-  const handleNextPage = async (): Promise<void> => {
-    const { id } = await createRoom.mutateAsync();
+  const handleNextPage = async ({ isGameMastered = false }): Promise<void> => {
+    const { id } = await createRoom.mutateAsync({ isGameMastered });
 
     return navigation.reset({
       routes: [{ name: 'PendingRoom', params: { roomCode: id } }],
@@ -47,7 +47,7 @@ export function ChooseRoomMode({ navigation }: Props): JSX.Element {
             </Text>
             <Button
               color="primary"
-              onPress={handleNextPage}
+              onPress={() => handleNextPage({ isGameMastered: true })}
               text={t('create.room.game.master.mode.confirm.button')}
               isAsyncAction
             />
@@ -67,7 +67,7 @@ export function ChooseRoomMode({ navigation }: Props): JSX.Element {
             </Text>
             <Button
               color="secondary"
-              onPress={handleNextPage}
+              onPress={() => handleNextPage({ isGameMastered: false })}
               text={t('create.room.free.for.all.mode.confirm.button')}
               isAsyncAction
             />

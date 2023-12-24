@@ -37,7 +37,9 @@ export function CanStartParty({ roomCode }: Props): JSX.Element {
               : styles.conditionUnchecked,
           ]}
         >
-          {t('room.start.party.three.players.condition')}
+          {room?.isGameMastered
+            ? t('room.start.party.three.players.with.game.master.condition')
+            : t('room.start.party.three.players.condition')}
         </Text>
       </View>
       <View
@@ -58,27 +60,29 @@ export function CanStartParty({ roomCode }: Props): JSX.Element {
           {t('room.start.party.same.missions.as.players.condition')}
         </Text>
       </View>
-      <View
-        style={[
-          styles.condition,
-          allPlayersHasProposedMission && styles.checked,
-        ]}
-      >
-        {allPlayersHasProposedMission ? (
-          <Checked style={styles.icon} />
-        ) : (
-          <Unchecked style={styles.icon} />
-        )}
-        <Text
+      {!room?.isGameMastered && (
+        <View
           style={[
-            allPlayersHasProposedMission
-              ? styles.conditionChecked
-              : styles.conditionUnchecked,
+            styles.condition,
+            allPlayersHasProposedMission && styles.checked,
           ]}
         >
-          {t('room.start.party.each.player.has.mission.condition')}
-        </Text>
-      </View>
+          {allPlayersHasProposedMission ? (
+            <Checked style={styles.icon} />
+          ) : (
+            <Unchecked style={styles.icon} />
+          )}
+          <Text
+            style={[
+              allPlayersHasProposedMission
+                ? styles.conditionChecked
+                : styles.conditionUnchecked,
+            ]}
+          >
+            {t('room.start.party.each.player.has.mission.condition')}
+          </Text>
+        </View>
+      )}
     </View>
   );
 }
