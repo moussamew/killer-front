@@ -1,3 +1,4 @@
+import { useRoom } from '@killerparty/webservices';
 import { useNavigation } from '@react-navigation/native';
 import { Text, TouchableOpacity } from 'react-native';
 
@@ -21,6 +22,7 @@ interface Props {
 
 export function Player({ player }: Props): JSX.Element {
   const { navigate } = useNavigation<StackNavigation>();
+  const { room } = useRoom(player.roomCode);
 
   return (
     <TouchableOpacity
@@ -37,15 +39,16 @@ export function Player({ player }: Props): JSX.Element {
     >
       {avatarsList({ height: 50, width: 50 })[player.avatar]}
       <Text>{player.name}</Text>
-      {player.status === 'ALIVE' ? (
+      {player.status === 'DEAD' ? (
+        <Dead style={styles.playerReady} fill="red" />
+      ) : (
         <Checked
           style={[
             styles.icon,
-            player.hasAtLeastOneMission && styles.playerReady,
+            (room?.isGameMastered || player.hasAtLeastOneMission) &&
+              styles.playerReady,
           ]}
         />
-      ) : (
-        <Dead style={styles.playerReady} fill="red" />
       )}
     </TouchableOpacity>
   );
