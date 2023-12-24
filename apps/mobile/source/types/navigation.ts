@@ -7,6 +7,7 @@ export type RootStackParamList = {
   ChoosePseudo?: { shouldCreateRoom: boolean };
   ChooseRoom: { playerId: number };
   ChooseAvatar: { playerId: number; shouldCreateRoom: boolean };
+  ChooseRoomMode: undefined;
   PendingRoom: {
     screen: string;
     params: Record<string, unknown>;

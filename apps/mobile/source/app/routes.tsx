@@ -5,6 +5,7 @@ import { ROOM_PAGE_NAME } from '../constants/routes';
 import { ChooseAvatar } from '../pages/ChooseAvatar';
 import { ChoosePseudo } from '../pages/ChoosePseudo';
 import { ChooseRoom } from '../pages/ChooseRoom';
+import { ChooseRoomMode } from '../pages/ChooseRoomMode';
 import { HomePage } from '../pages/Home';
 import { EndedRoomPage } from '../pages/Room/Ended';
 import { PendingRoomTabs } from '../pages/Room/Pending';
@@ -51,6 +52,11 @@ export function Routes({ session }: Props): JSX.Element {
       <Stack.Screen
         name="ChooseAvatar"
         component={ChooseAvatar}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="ChooseRoomMode"
+        component={ChooseRoomMode}
         options={{ animation: 'slide_from_right' }}
       />
       <Stack.Screen

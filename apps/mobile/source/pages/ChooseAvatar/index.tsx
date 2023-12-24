@@ -1,5 +1,4 @@
-import { useTranslation } from '@killerparty/intl';
-import { useCreateRoom, useUpdatePlayer } from '@killerparty/webservices';
+import { useUpdatePlayer } from '@killerparty/webservices';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { View } from 'react-native';
@@ -17,8 +16,6 @@ type Props = NativeStackScreenProps<RootStackParamList, 'ChooseAvatar'>;
 export function ChooseAvatar({ navigation, route }: Props): JSX.Element {
   const [avatar, setAvatar] = useState(getRandomAvatar());
   const { updatePlayer } = useUpdatePlayer();
-  const { createRoom } = useCreateRoom();
-  const { t } = useTranslation();
 
   const { playerId, shouldCreateRoom } = route.params;
 
@@ -26,11 +23,7 @@ export function ChooseAvatar({ navigation, route }: Props): JSX.Element {
     await updatePlayer.mutateAsync({ id: playerId, avatar });
 
     if (shouldCreateRoom) {
-      const { id } = await createRoom.mutateAsync();
-
-      return navigation.reset({
-        routes: [{ name: 'PendingRoom', params: { roomCode: id } }],
-      });
+      return navigation.navigate('ChooseRoomMode');
     }
 
     return navigation.navigate('ChooseRoom', { playerId });
@@ -44,9 +37,7 @@ export function ChooseAvatar({ navigation, route }: Props): JSX.Element {
         <Button
           color="primary"
           onPress={handleNextPage}
-          text={
-            shouldCreateRoom ? t('home.create.room.confirm.button') : 'Suivant'
-          }
+          text="Suivant"
           isAsyncAction
         />
       </View>
