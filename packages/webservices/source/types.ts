@@ -25,4 +25,4 @@ export type ErrorCode =
  * PlayerStatus is a type that represents the player status.
  *
  */
-export type PlayerStatus = 'ALIVE' | 'KILLED';
+export type PlayerStatus = 'ALIVE' | 'KILLED' | 'SPECTATING';
