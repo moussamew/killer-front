@@ -23,7 +23,7 @@ export interface Room {
 }
 
 export interface CreateRoomParams {
-  isGameMastered?: boolean;
+  isGameMastered: boolean;
 }
 
 export interface CreateRoomMutation {
