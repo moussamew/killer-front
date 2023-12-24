@@ -1,7 +1,7 @@
 @import '@killerparty/ui/assets/styles/variables.module.css';
 
 .content {
-  margin: 10px var(--spacing-large);
+  margin: var(--spacing-large);
   flex: 1;
 }
 
@@ -10,5 +10,5 @@
 }
 
 .lottie {
-  height: 250px;
+  height: 300px;
 }

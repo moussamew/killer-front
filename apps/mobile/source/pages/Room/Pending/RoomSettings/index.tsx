@@ -45,7 +45,7 @@ export function RoomSettings({ route }: Props): JSX.Element {
       <View style={styles.content}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <LottieView
-            source={require('../../../../assets/lotties/settings.json')}
+            source={require('../../../../assets/lotties/game-master.json')}
             autoPlay
             style={styles.lottie}
             loop
