@@ -1,0 +1,29 @@
+@import '@killerparty/ui/assets/styles/variables.module.css';
+
+.view {
+  padding: var(--spacing-large);
+  background-color: var(--color-body);
+  display: flex;
+  flex: 1;
+}
+
+.modeTitle {
+  margin-bottom: var(--spacing-large);
+  text-align: center;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.modeDescription {
+  margin-bottom: var(--spacing-large);
+  text-align: center;
+}
+
+.content {
+  margin-top: 40px;
+  flex: 1;
+}
+
+.lottie {
+  height: 150px;
+}
