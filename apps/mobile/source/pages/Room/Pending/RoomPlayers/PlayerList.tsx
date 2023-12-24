@@ -65,15 +65,15 @@ export function PlayerList({ roomCode }: Props): JSX.Element {
               <View style={styles.player}>
                 {avatarsList({ height: 50, width: 50 })[avatar]}
                 <Text>{name}</Text>
-                {status === 'ALIVE' ? (
+                {status === 'KILLED' ? (
+                  <Dead style={styles.icon} fill="red" />
+                ) : (
                   <Checked
                     style={[
                       styles.icon,
                       !hasAtLeastOneMission && styles.playerNotReady,
                     ]}
                   />
-                ) : (
-                  <Dead style={styles.icon} fill="red" />
                 )}
               </View>
             </TouchableOpacity>
