@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
+import { useRoom, useSession } from '@killerparty/webservices';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -18,6 +19,14 @@ const Tab = createBottomTabNavigator<RootStackParamList>();
 type Props = NativeStackScreenProps<RootStackParamList, 'PendingRoom'>;
 
 export function PendingRoomTabs({ route }: Props): JSX.Element {
+  const { roomCode } = route.params;
+  const { room } = useRoom(roomCode!);
+  const { session } = useSession();
+
+  const shouldDisplayRoomMissions =
+    !room?.isGameMastered ||
+    (room?.isGameMastered && session?.status === 'SPECTATING');
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -47,18 +56,20 @@ export function PendingRoomTabs({ route }: Props): JSX.Element {
           tabBarLabel: 'Informations',
         }}
       />
-      <Tab.Screen
-        name="RoomMissions"
-        component={RoomMissions}
-        initialParams={{
-          roomCode: route.params.roomCode,
-          routeName: 'PendingRoom',
-        }}
-        options={{
-          tabBarIcon: ({ color }) => <MissionIcon fill={color} />,
-          tabBarLabel: 'Missions',
-        }}
-      />
+      {shouldDisplayRoomMissions && (
+        <Tab.Screen
+          name="RoomMissions"
+          component={RoomMissions}
+          initialParams={{
+            roomCode: route.params.roomCode,
+            routeName: 'PendingRoom',
+          }}
+          options={{
+            tabBarIcon: ({ color }) => <MissionIcon fill={color} />,
+            tabBarLabel: 'Missions',
+          }}
+        />
+      )}
       <Tab.Screen
         name="RoomPlayers"
         component={RoomPlayers}
