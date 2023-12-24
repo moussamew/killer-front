@@ -1,10 +1,18 @@
 import { ROOM_ENDPOINT } from '../../constants';
 import { createRequest } from '../../utils/create-request';
 
-import { type Room } from './types';
+import { type CreateRoomParams, type Room } from './types';
 
-export function createRoomRequest(): Promise<Room> {
-  return createRequest({ url: ROOM_ENDPOINT, method: 'POST' });
+export function createRoomRequest({
+  isGameMastered,
+}: CreateRoomParams): Promise<Room> {
+  return createRequest({
+    url: ROOM_ENDPOINT,
+    method: 'POST',
+    requestInit: {
+      body: JSON.stringify({ isGameMastered }),
+    },
+  });
 }
 
 export function deleteRoomRequest(roomCode: string): Promise<void> {
