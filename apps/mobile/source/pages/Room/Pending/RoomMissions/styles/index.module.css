@@ -1,10 +1,18 @@
 @import '@killerparty/ui/assets/styles/variables.module.css';
 
 .container {
-  margin: 50px var(--spacing-large) var(--spacing-small) var(--spacing-large);
+  margin: 50px 20px;
   flex: 1;
 }
 
 .lottie {
   height: 230px;
+  margin-bottom: 20px;
+}
+
+.text {
+  margin-top: 20px;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
 }

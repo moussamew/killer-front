@@ -22,7 +22,6 @@ export function CreateMission(): JSX.Element {
 
   return (
     <View style={styles.content}>
-      <PlayerMissions />
       <Input
         label="Ajouter une mission à la partie"
         value={mission}
@@ -35,6 +34,7 @@ export function CreateMission(): JSX.Element {
         text={t('room.create.new.mission.button')}
         isAsyncAction
       />
+      <PlayerMissions />
     </View>
   );
 }
