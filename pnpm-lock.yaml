@@ -133,8 +133,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
       '@tanstack/react-query':
-        specifier: 5.15.4
-        version: 5.15.4(react@18.2.0)
+        specifier: 5.15.5
+        version: 5.15.5(react@18.2.0)
       body-scroll-lock:
         specifier: 4.0.0-beta.0
         version: 4.0.0-beta.0
@@ -370,8 +370,8 @@ importers:
         specifier: 1.21.0
         version: 1.21.0(react-native@0.73.1)
       '@tanstack/react-query':
-        specifier: 5.15.4
-        version: 5.15.4(react@18.2.0)
+        specifier: 5.15.5
+        version: 5.15.5(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -4057,16 +4057,16 @@ packages:
       - typescript
     dev: true
 
-  /@tanstack/query-core@5.15.4:
-    resolution: {integrity: sha512-PuvNIBhdnLsGZCtqHljDDmvbny8Tt5xqye/KYMLqTa0HTDvD+kNEocAahCXvx1T7AKp4ycgqbSflR8l/0cP+7Q==}
+  /@tanstack/query-core@5.15.5:
+    resolution: {integrity: sha512-GDwVfu8RPswqVu27+zuIkZINru6CN++zzBbBK+OnAgzxK8N4Obdi+sG2P0EO8rJAOw0fLyQTsO4GCZ1djwaUCg==}
     dev: false
 
-  /@tanstack/react-query@5.15.4(react@18.2.0):
-    resolution: {integrity: sha512-B2ql0Hny6CVMMW+EUuM0eAH0TGLj21CzG6CeyXUaWGI8wxxMBKI5iMpty6AGfT2lD5kGuhwgi2EKT+Dk8nAo0A==}
+  /@tanstack/react-query@5.15.5(react@18.2.0):
+    resolution: {integrity: sha512-JSPpzsJPqpNySgjMhAvBpF3gVhtlI/0bZrBmwmcD/ewYYOExll+tIz13gkgnCfNA1qTJQnbv7vdc2gw594vq9Q==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
-      '@tanstack/query-core': 5.15.4
+      '@tanstack/query-core': 5.15.5
       react: 18.2.0
     dev: false
 
