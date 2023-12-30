@@ -33,7 +33,7 @@
     "@killerparty/ui": "workspace:*",
     "@tanstack/react-query": "5.15.5",
     "body-scroll-lock": "4.0.0-beta.0",
-    "clsx": "2.0.0",
+    "clsx": "2.1.0",
     "lottie-react": "2.4.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
