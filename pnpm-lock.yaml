@@ -54,8 +54,8 @@ importers:
         specifier: 2.0.1
         version: 2.0.1
       lottie-react-native:
-        specifier: 6.4.1
-        version: 6.4.1(react-native@0.73.1)(react@18.2.0)
+        specifier: 6.5.0
+        version: 6.5.0(react-native@0.73.1)(react@18.2.0)
       metro-react-native-babel-transformer:
         specifier: 0.77.0
         version: 0.77.0(@babel/core@7.23.7)
@@ -9369,8 +9369,8 @@ packages:
     dependencies:
       js-tokens: 4.0.0
 
-  /lottie-react-native@6.4.1(react-native@0.73.1)(react@18.2.0):
-    resolution: {integrity: sha512-DPsUPSxLc3ZffeRQ/AtKtcUl4PzmJEEPt965tNpWSE4vhDkoGFxRe0TPZ45xX8/3HbGsUl48aMdLlAu28MEDsQ==}
+  /lottie-react-native@6.5.0(react-native@0.73.1)(react@18.2.0):
+    resolution: {integrity: sha512-5KA5eAlMYsvcczR5JbJp1JjK3i56Oeilb/5RPs/QmFcn99HVHK+FzxrzGQxyxowaO/jkZkIwR8ccyu0fIsemBA==}
     peerDependencies:
       '@dotlottie/react-player': ^1.6.1
       '@lottiefiles/react-lottie-player': ^3.5.3
