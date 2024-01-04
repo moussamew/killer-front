@@ -338,11 +338,11 @@ importers:
   packages/intl:
     dependencies:
       i18next:
-        specifier: 23.7.15
-        version: 23.7.15
+        specifier: 23.7.16
+        version: 23.7.16
       react-i18next:
         specifier: 13.5.0
-        version: 13.5.0(i18next@23.7.15)(react@18.2.0)
+        version: 13.5.0(i18next@23.7.16)(react@18.2.0)
     devDependencies:
       eslint-config-global:
         specifier: workspace:*
@@ -7874,8 +7874,8 @@ packages:
     engines: {node: '>=14.18.0'}
     dev: false
 
-  /i18next@23.7.15:
-    resolution: {integrity: sha512-WukNgiqkUgU7xSaY8k2B4nXNesD+O8O4ta5g344U5B6Ag7mG61A1EBcDmktFgc4aL447V0cmpjw5l18v58KUfg==}
+  /i18next@23.7.16:
+    resolution: {integrity: sha512-SrqFkMn9W6Wb43ZJ9qrO6U2U4S80RsFMA7VYFSqp7oc7RllQOYDCdRfsse6A7Cq/V8MnpxKvJCYgM8++27n4Fw==}
     dependencies:
       '@babel/runtime': 7.23.2
     dev: false
@@ -11274,7 +11274,7 @@ packages:
     transitivePeerDependencies:
       - csstype
 
-  /react-i18next@13.5.0(i18next@23.7.15)(react@18.2.0):
+  /react-i18next@13.5.0(i18next@23.7.16)(react@18.2.0):
     resolution: {integrity: sha512-CFJ5NDGJ2MUyBohEHxljOq/39NQ972rh1ajnadG9BjTk+UXbHLq4z5DKEbEQBDoIhUmmbuS/fIMJKo6VOax1HA==}
     peerDependencies:
       i18next: '>= 23.2.3'
@@ -11289,7 +11289,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.23.2
       html-parse-stringify: 3.0.1
-      i18next: 23.7.15
+      i18next: 23.7.16
       react: 18.2.0
     dev: false
 
