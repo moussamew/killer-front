@@ -133,8 +133,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
       '@tanstack/react-query':
-        specifier: 5.17.4
-        version: 5.17.4(react@18.2.0)
+        specifier: 5.17.5
+        version: 5.17.5(react@18.2.0)
       body-scroll-lock:
         specifier: 4.0.0-beta.0
         version: 4.0.0-beta.0
@@ -370,8 +370,8 @@ importers:
         specifier: 1.21.0
         version: 1.21.0(react-native@0.73.1)
       '@tanstack/react-query':
-        specifier: 5.17.4
-        version: 5.17.4(react@18.2.0)
+        specifier: 5.17.5
+        version: 5.17.5(react@18.2.0)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -4057,8 +4057,8 @@ packages:
     resolution: {integrity: sha512-1J2vINgJ6OH1/qgN/ouDjnRZc67TnKQ2mlIODKQr36Aa2vjMdH6Fb3pIbCRh5N6u95q6z1olp90n22eTlp9Ykg==}
     dev: false
 
-  /@tanstack/react-query@5.17.4(react@18.2.0):
-    resolution: {integrity: sha512-9lvY5HDeJ93bfrTgb7Eokh1qyQdwgXATQqOCnh6GNyLkdV83y9ThRbsIHw3jOcNYCnI0YjNGPRv5YvOB/MFWLQ==}
+  /@tanstack/react-query@5.17.5(react@18.2.0):
+    resolution: {integrity: sha512-TwVmK2YHW/aG6eM5Xre7akBSZHrWWa5frwQR5Kg9ERIttlVWzUHrRcsMOlB5QsMgHtlauzzr6Rm6M8a0T9Iwdg==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
