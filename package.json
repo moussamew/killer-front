@@ -13,6 +13,6 @@
   },
   "devDependencies": {
     "turbo": "1.11.3",
-    "prettier": "3.2.1"
+    "prettier": "3.2.2"
   }
 }
