@@ -6,7 +6,10 @@
 }
 
 .lottie {
-  height: 230px;
+  height: 200px;
+  width: 200px;
+  margin: 0 auto;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
