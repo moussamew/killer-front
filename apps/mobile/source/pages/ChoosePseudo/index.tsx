@@ -37,7 +37,7 @@ export function ChoosePseudo({ navigation, route }: Props): JSX.Element {
       <TouchableWithoutFeedback onPress={() => inputRef.current?.blur()}>
         <View style={styles.view}>
           <LottieView
-            source={require('../../assets/lotties/choose-pseudo.json')}
+            source={require('../../assets/lotties/players.json')}
             autoPlay
             style={styles.lottie}
             loop

@@ -32,6 +32,7 @@ export function PlayingRoomTabs({ route }: Props): JSX.Element {
         tabBarLabelStyle: { fontSize: 12 },
         tabBarActiveTintColor: '#474D52',
         tabBarInactiveTintColor: '#9299A0',
+        tabBarHideOnKeyboard: true,
       }}
       initialRouteName="RoomInfos"
       sceneContainerStyle={{ backgroundColor: '#fdf7f2' }}
