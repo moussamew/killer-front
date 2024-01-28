@@ -8,6 +8,10 @@
       "distribution": "internal",
       "ios": {
         "simulator": true
+      },
+      "android": {
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease"
       }
     },
     "preview": {
@@ -16,9 +20,7 @@
         "simulator": true
       }
     },
-    "production": {
-      "autoIncrement": true
-    }
+    "production": {}
   },
   "submit": {
     "production": {}

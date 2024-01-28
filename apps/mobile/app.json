@@ -26,7 +26,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./source/assets/adaptive-icon.png",
         "backgroundColor": "#FDF7F2"
-      }
+      },
+      "package": "com.killerparty.mobile"
     },
     "web": {
       "favicon": "./source/assets/favicon.png"
