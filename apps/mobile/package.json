@@ -4,13 +4,23 @@
   "main": "index.js",
   "scripts": {
     "dev:mobile": "expo start",
-    "build:ios:dev": "eas build --platform ios --profile preview --local",
+    "build:ios:dev": "eas build --platform ios --profile development --local",
     "build:ios:prod": "eas build --platform ios --profile production",
-    "build:android:dev": "eas build --platform android --profile preview --local",
+    "build:android:dev": "eas build --platform android --profile development --local",
     "build:android:prod": "eas build --platform android --profile production",
     "clean": "rm -rf node_modules",
     "tsc": "tsc",
     "postinstall": "cd ../.. && turbo build"
+  },
+  "scripts-info": {
+    "dev:mobile": "Start the expo development server",
+    "build:ios:dev": "Build the iOS app in development mode",
+    "build:ios:prod": "Build the iOS app in production mode",
+    "build:android:dev": "Build the Android app in development mode",
+    "build:android:prod": "Build the Android app in production mode",
+    "clean": "Removes the node_modules folder",
+    "tsc": "Runs the typescript compiler",
+    "postinstall": "Build all shared packages in the monorepo"
   },
   "dependencies": {
     "@killerparty/intl": "workspace:*",
@@ -22,7 +32,7 @@
     "@react-navigation/native-stack": "6.9.17",
     "expo": "49.0.22",
     "expo-dev-client": "2.4.12",
-    "expo-splash-screen": "0.26.4",
+    "expo-splash-screen": "0.20.5",
     "expo-status-bar": "1.11.1",
     "intl-pluralrules": "2.0.1",
     "lottie-react-native": "5.1.6",
