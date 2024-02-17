@@ -17,7 +17,7 @@
     "clean": "rm -rf node_modules"
   },
   "dependencies": {
-    "i18next": "23.8.2",
+    "i18next": "23.8.3",
     "react-i18next": "13.5.0"
   },
   "devDependencies": {
