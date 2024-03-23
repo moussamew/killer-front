@@ -341,8 +341,8 @@ importers:
         specifier: 23.10.1
         version: 23.10.1
       react-i18next:
-        specifier: 13.5.0
-        version: 13.5.0(i18next@23.10.1)(react@18.2.0)
+        specifier: 14.1.0
+        version: 14.1.0(i18next@23.10.1)(react@18.2.0)
     devDependencies:
       eslint-config-global:
         specifier: workspace:*
@@ -2089,6 +2089,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
+
+  /@babel/runtime@7.24.1:
+    resolution: {integrity: sha512-+BIznRzyqBf+2wCTxcKE3wDjfGeCoVE61KSHGpkzqrLi8qxqFwBeUFyId2cxkTmm55fzDGnm0+yCxaxygrLUnQ==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.0
+    dev: false
 
   /@babel/template@7.22.15:
     resolution: {integrity: sha512-QPErUVm4uyJa60rkI73qneDacvdvzxshT3kksGqlGWYdOTIUOwJ7RDUL8sGqslY1uXWSL6xMFKEXDS3ox2uF0w==}
@@ -12808,8 +12815,8 @@ packages:
     transitivePeerDependencies:
       - csstype
 
-  /react-i18next@13.5.0(i18next@23.10.1)(react@18.2.0):
-    resolution: {integrity: sha512-CFJ5NDGJ2MUyBohEHxljOq/39NQ972rh1ajnadG9BjTk+UXbHLq4z5DKEbEQBDoIhUmmbuS/fIMJKo6VOax1HA==}
+  /react-i18next@14.1.0(i18next@23.10.1)(react@18.2.0):
+    resolution: {integrity: sha512-3KwX6LHpbvGQ+sBEntjV4sYW3Zovjjl3fpoHbUwSgFHf0uRBcbeCBLR5al6ikncI5+W0EFb71QXZmfop+J6NrQ==}
     peerDependencies:
       i18next: '>= 23.2.3'
       react: '>= 16.8.0'
@@ -12821,7 +12828,7 @@ packages:
       react-native:
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.2
+      '@babel/runtime': 7.24.1
       html-parse-stringify: 3.0.1
       i18next: 23.10.1
       react: 18.2.0
