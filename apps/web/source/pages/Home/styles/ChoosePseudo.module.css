@@ -1,9 +1,8 @@
 .lottie {
-  height: 600px;
-  margin: 100px auto;
+  height: 50vh;
 
   @media (width <= 720px) {
-    height: 250px;
+    height: 30vh;
   }
 }
 
