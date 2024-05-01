@@ -52,6 +52,7 @@ export function ChoosePseudo(): JSX.Element {
             placeholder={t('home.create.pseudo.placeholder')}
             value={pseudo}
             onChange={handlePseudo}
+            onEnter={goToNextStep}
           />
           <Button color="secondary" onClick={goToNextStep}>
             {t('action.next.button')}
