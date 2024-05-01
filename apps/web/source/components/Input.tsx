@@ -11,6 +11,7 @@ interface Props {
   placeholder?: string;
   label?: string;
   uppercase?: boolean;
+  onEnter?: () => void;
 }
 
 export function Input({
@@ -21,7 +22,14 @@ export function Input({
   placeholder,
   label,
   uppercase = false,
+  onEnter,
 }: Props): JSX.Element {
+  const handleOnEnter = (key: string): void => {
+    if (key === 'Enter') {
+      onEnter?.();
+    }
+  };
+
   return (
     <div className={styles.content}>
       {label && (
@@ -33,6 +41,7 @@ export function Input({
         id={id}
         value={value}
         onChange={onChange}
+        onKeyDown={({ key }) => handleOnEnter(key)}
         type={type}
         placeholder={placeholder}
         autoComplete="off"
