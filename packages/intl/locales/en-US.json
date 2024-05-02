@@ -13,6 +13,8 @@
   "home.join.room.code.label": "Type the code of the room to join",
   "home.join.room.code.placeholder": "Code of the room",
   "home.join.room.confirm.button": "Join this room",
+  "home.disclaimer.mobile.app": "For a best gaming experience, we recommend you to use the mobile app!",
+  "home.android.app.coming.soon": "The Android app is coming soon!",
   "home.create.pseudo.title": "Create your pseudo",
   "home.create.pseudo.label": "Before starting, create your pseudo",
   "home.create.pseudo.placeholder": "Choose a pseudo",
@@ -151,5 +153,7 @@
   "create.room.game.master.mode.confirm.button": "Choose the « Game Master » mode",
   "create.room.free.for.all.mode.title": "« Free for All »",
   "create.room.free.for.all.mode.description": "The free-for-all mode is a mode in which each player can create his own missions..\n The game starts when each player has created at least one mission..",
-  "create.room.free.for.all.mode.confirm.button": "Choose the « Free for All » mode"
+  "create.room.free.for.all.mode.confirm.button": "Choose the « Free for All » mode",
+  "menu.language.french": "French (France)",
+  "menu.language.english": "English (US)"
 }

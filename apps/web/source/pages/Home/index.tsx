@@ -61,10 +61,12 @@ export function HomePage(): JSX.Element {
               <Redo className="ml-2 h-4 w-4" />
             </Button>
           </div>
-          <Typography.Blockquote>
-            Notre application est aussi disponible sur mobile !
-          </Typography.Blockquote>
-          <div className="flex items-center mt-4">
+          <div>
+            <Typography.Blockquote>
+              {t('home.disclaimer.mobile.app')}
+            </Typography.Blockquote>
+          </div>
+          <div className="flex items-center mt-2">
             <a
               href="https://apps.apple.com/fr/app/killerparty/id6468843961"
               target="_blank"
@@ -83,7 +85,7 @@ export function HomePage(): JSX.Element {
                   />
                 </TooltipTrigger>
                 <TooltipContent>
-                  <span>Bientôt disponible</span>
+                  <span>{t('home.android.app.coming.soon')}</span>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

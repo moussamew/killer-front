@@ -13,6 +13,8 @@
   "home.join.room.code.label": "Saisir le code de la partie à rejoindre",
   "home.join.room.code.placeholder": "Code de la partie",
   "home.join.room.confirm.button": "Rejoindre cette partie",
+  "home.disclaimer.mobile.app": "Pour une meilleure expérience de jeu, nous vous conseillons d'utiliser l'app mobile !",
+  "home.android.app.coming.soon": "L'application Android arrive bientôt !",
   "home.create.pseudo.title": "Choisir votre pseudo",
   "home.create.pseudo.label": "Avant de commencer, veuillez choisir un pseudo",
   "home.create.pseudo.placeholder": "Choisir un pseudo",
@@ -151,5 +153,7 @@
   "create.room.game.master.mode.confirm.button": "Choisir le mode « Maître de Jeu »",
   "create.room.free.for.all.mode.title": "Mode « Chacun pour Soi »",
   "create.room.free.for.all.mode.description": "Le mode chacun pour soi désigne un mode où chaque joueur peut créer ses propres missions.\n La partie se lance lorsque chaque joueur a créé au moins une mission.",
-  "create.room.free.for.all.mode.confirm.button": "Choisir le mode « Chacun pour Soi »"
+  "create.room.free.for.all.mode.confirm.button": "Choisir le mode « Chacun pour Soi »",
+  "menu.language.french": "French (France)",
+  "menu.language.english": "English (US)"
 }
