@@ -12,7 +12,7 @@ function H1({ children }: Props) {
 
 function Blockquote({ children }: Props) {
   return (
-    <blockquote className="mt-6 border-l-4 pl-4 italic border-zinc-400 text-slate-500">
+    <blockquote className="border-l-4 pl-4 italic border-zinc-400 text-slate-500">
       {children}
     </blockquote>
   );
