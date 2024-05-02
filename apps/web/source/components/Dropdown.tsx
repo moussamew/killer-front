@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import Active from '@/assets/icons/active.svg';
 import Expand from '@/assets/icons/expand.svg';
-import { onEnterKey } from '@/helpers/keys';
+import { onEnter } from '@/helpers/keys';
 
 import styles from './styles/Dropdown.module.css';
 
@@ -31,7 +31,7 @@ export function Dropdown({ items, activeItem, onClick }: Props): JSX.Element {
         tabIndex={0}
         className={styles.dropdown}
         onClick={handleShowList}
-        onKeyDown={({ key }) => onEnterKey(key, handleShowList)}
+        onKeyDown={({ key }) => onEnter({ key, fn: handleShowList })}
       >
         <p>{activeItem}</p>
         <Expand />
@@ -45,7 +45,9 @@ export function Dropdown({ items, activeItem, onClick }: Props): JSX.Element {
               className={styles.item}
               key={item}
               onClick={() => handleClick(item)}
-              onKeyDown={({ key }) => onEnterKey(key, () => handleClick(item))}
+              onKeyDown={({ key }) =>
+                onEnter({ key, fn: () => handleClick(item) })
+              }
             >
               <p>{item}</p>
               {item === activeItem && <Active />}
