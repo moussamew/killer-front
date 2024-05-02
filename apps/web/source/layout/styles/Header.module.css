@@ -10,10 +10,11 @@
 
 .header {
   display: flex;
-  height: 65px;
+  max-width: 1280px;
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-medium);
+  margin: auto;
 }
 
 .text {
