@@ -38,6 +38,7 @@
 
 .webLottie {
   height: 70vh;
+  margin-top: -15px;
 
   @media (width <= 720px) {
     display: none;
