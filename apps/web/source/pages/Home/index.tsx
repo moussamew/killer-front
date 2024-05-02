@@ -5,9 +5,16 @@ import { useEffect } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
 import AppleStore from '@/assets/images/apple-store.svg';
+import GooglePlayStore from '@/assets/images/google-play-store.png';
 import HomeLottie from '@/assets/lotties/home.json';
 import { Gallery } from '@/components/Gallery';
 import { Button } from '@/components/ui/Button';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/Tooltip';
 import { Typography } from '@/components/ui/Typography';
 import { type SessionQuery } from '@/services/player/types';
 
@@ -54,7 +61,33 @@ export function HomePage(): JSX.Element {
               <Redo className="ml-2 h-4 w-4" />
             </Button>
           </div>
-          <AppleStore />
+          <Typography.Blockquote>
+            Notre application est aussi disponible sur mobile !
+          </Typography.Blockquote>
+          <div className="flex items-center mt-4">
+            <a
+              href="https://apps.apple.com/fr/app/killerparty/id6468843961"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Download on the Apple Store"
+            >
+              <AppleStore />
+            </a>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <img
+                    src={GooglePlayStore}
+                    alt="Download on the Google Play Store"
+                    className="h-20"
+                  />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <span>Bientôt disponible</span>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
         </div>
         <Lottie className={styles.webLottie} animationData={HomeLottie} />
       </div>
