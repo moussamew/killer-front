@@ -3,6 +3,7 @@
     "postcss-import": {},
     "postcss-nesting": {},
     "autoprefixer": {},
-    "postcss-preset-env": {}
+    "postcss-preset-env": {},
+    "tailwindcss": {}
   }
 }
