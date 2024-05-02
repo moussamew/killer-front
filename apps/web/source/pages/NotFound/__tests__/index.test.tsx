@@ -12,6 +12,8 @@ describe('<NotFoundPage />', () => {
 
     await userEvent.click(screen.getByText(t('notfound.back')));
 
-    expect(await screen.findByText(t('home.title'))).toBeInTheDocument();
+    expect(
+      await screen.findByText(t('home.title'), { collapseWhitespace: false }),
+    ).toBeInTheDocument();
   });
 });

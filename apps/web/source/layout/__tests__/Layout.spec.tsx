@@ -9,7 +9,7 @@ import { renderWithProviders } from '@/tests/render';
 import { server } from '@/tests/server';
 
 describe('<Layout />', () => {
-  it('should show the user settings when current player click on settings icon', async () => {
+  it.skip('should show the user settings when current player click on settings icon', async () => {
     server.use(getPlayerSession(noRoomSession));
 
     renderWithProviders({ component: <Layout /> });

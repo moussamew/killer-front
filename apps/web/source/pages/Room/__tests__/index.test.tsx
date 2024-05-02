@@ -162,7 +162,9 @@ describe('<RoomPage />', () => {
       }),
     );
 
-    expect(await screen.findByText(t('home.title'))).toBeInTheDocument();
+    expect(
+      await screen.findByText(t('home.title'), { collapseWhitespace: false }),
+    ).toBeInTheDocument();
     expect(screen.queryByText('room.welcome.title')).not.toBeInTheDocument();
   });
 });

@@ -41,6 +41,8 @@ describe('<RoomSettingsModal />', () => {
       screen.getByText(t('room.delete.current.room.confirm.button')),
     );
 
-    expect(await screen.findByText(t('home.title'))).toBeInTheDocument();
+    expect(
+      await screen.findByText(t('home.title'), { collapseWhitespace: false }),
+    ).toBeInTheDocument();
   });
 });
