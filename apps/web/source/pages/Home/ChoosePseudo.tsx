@@ -1,13 +1,15 @@
 import { useTranslation } from '@killerparty/intl';
 import Lottie from 'lottie-react';
+import { LoaderCircle } from 'lucide-react';
 import { useState, type ChangeEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import Pumpkin from '@/assets/lotties/pumpkin.json';
-import { Button } from '@/components/Button';
 import { FullScreenModal } from '@/components/FullScreenModal';
-import { Input } from '@/components/Input';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
 import { getRandomAvatar } from '@/constants/avatars';
+import { onEnter } from '@/helpers/keys';
 import { useCreatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
 
@@ -46,15 +48,16 @@ export function ChoosePseudo(): JSX.Element {
         <Lottie className={styles.lottie} animationData={Pumpkin} />
         <div className={styles.selectPseudo}>
           <Input
-            id="pseudo"
             type="text"
-            label={t('home.create.pseudo.label')}
-            placeholder={t('home.create.pseudo.placeholder')}
             value={pseudo}
             onChange={handlePseudo}
-            onEnter={goToNextStep}
+            placeholder={t('home.create.pseudo.placeholder')}
+            onKeyDown={({ key }) => onEnter({ key, fn: goToNextStep })}
           />
-          <Button color="secondary" onClick={goToNextStep}>
+          <Button disabled={createPlayer.isPending} onClick={goToNextStep}>
+            {createPlayer.isPending && (
+              <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
+            )}
             {t('action.next.button')}
           </Button>
         </div>
