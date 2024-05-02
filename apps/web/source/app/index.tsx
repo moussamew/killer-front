@@ -10,6 +10,7 @@ import { SidebarProvider } from '@/context/sidebar';
 import { Routes } from './routes';
 
 import '@/assets/styles/app.module.css';
+import '@/assets/styles/tailwind.css';
 
 const NODE_APP = document.getElementById('app');
 
