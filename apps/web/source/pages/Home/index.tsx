@@ -1,11 +1,14 @@
 import { useTranslation } from '@killerparty/intl';
 import Lottie from 'lottie-react';
+import { PlusCircle, Redo } from 'lucide-react';
 import { useEffect } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
+import AppleStore from '@/assets/images/apple-store.svg';
 import HomeLottie from '@/assets/lotties/home.json';
-import { Button } from '@/components/Button';
 import { Gallery } from '@/components/Gallery';
+import { Button } from '@/components/ui/Button';
+import { Typography } from '@/components/ui/Typography';
 import { type SessionQuery } from '@/services/player/types';
 
 import commonStyles from '../../assets/styles/common.module.css';
@@ -37,18 +40,21 @@ export function HomePage(): JSX.Element {
       <div className={styles.content}>
         <div>
           <div className={styles.resume}>
-            <h1>{t('home.title')}</h1>
+            <Typography.H1>{t('home.title')}</Typography.H1>
             <p>{t('home.description')}</p>
           </div>
           <Lottie className={styles.mobileLottie} animationData={HomeLottie} />
           <div className={commonStyles.actions}>
-            <Button color="primary" onClick={handleCreateRoom}>
+            <Button onClick={handleCreateRoom}>
               {t('home.create.room.button')}
+              <PlusCircle className="ml-2 h-4 w-4" />
             </Button>
-            <Button color="secondary" onClick={handleJoinRoom}>
+            <Button variant="secondary" onClick={handleJoinRoom}>
               {t('home.join.room')}
+              <Redo className="ml-2 h-4 w-4" />
             </Button>
           </div>
+          <AppleStore />
         </div>
         <Lottie className={styles.webLottie} animationData={HomeLottie} />
       </div>
