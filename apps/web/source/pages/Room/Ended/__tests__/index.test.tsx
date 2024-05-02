@@ -26,6 +26,8 @@ describe('<EndedRoomPage />', () => {
       screen.getByText(t('room.play.another.party.button')),
     );
 
-    expect(await screen.findByText(t('home.title'))).toBeInTheDocument();
+    expect(
+      await screen.findByText(t('home.title'), { collapseWhitespace: false }),
+    ).toBeInTheDocument();
   });
 });

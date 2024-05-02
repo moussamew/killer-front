@@ -13,7 +13,9 @@ describe.skip('<HomePage />', () => {
   it('should correctly show the home page', async () => {
     renderWithProviders();
 
-    expect(await screen.findByText(t('home.title'))).toBeInTheDocument();
+    expect(
+      await screen.findByText(t('home.title'), { collapseWhitespace: false }),
+    ).toBeInTheDocument();
   });
 
   it('should navigate to the room page if a room code exist inside the player session', async () => {

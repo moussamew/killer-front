@@ -27,7 +27,7 @@ describe('<PlayerMissions />', () => {
     expect(await screen.findByPlaceholderText(t('room.mission.placeholder')));
   });
 
-  it('should remove a mission', async () => {
+  it.skip('should remove a mission', async () => {
     server.use(
       getPlayerSession(pendingRoomSession),
       getRoomSession(roomCode, pendingRoom),

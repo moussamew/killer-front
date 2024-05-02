@@ -34,6 +34,8 @@ describe('<LeaveRoomModal />', () => {
 
     await userEvent.click(screen.getByText(t('room.leave.confirm.button')));
 
-    expect(await screen.findByText(t('home.title'))).toBeInTheDocument();
+    expect(
+      await screen.findByText(t('home.title'), { collapseWhitespace: false }),
+    ).toBeInTheDocument();
   });
 });
