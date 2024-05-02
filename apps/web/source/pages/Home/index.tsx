@@ -52,11 +52,11 @@ export function HomePage(): JSX.Element {
           </div>
           <Lottie className={styles.mobileLottie} animationData={HomeLottie} />
           <div className={commonStyles.actions}>
-            <Button onClick={handleCreateRoom}>
+            <Button onClick={handleCreateRoom} size="lg">
               {t('home.create.room.button')}
               <PlusCircle className="ml-2 h-4 w-4" />
             </Button>
-            <Button variant="secondary" onClick={handleJoinRoom}>
+            <Button variant="secondary" onClick={handleJoinRoom} size="lg">
               {t('home.join.room')}
               <Redo className="ml-2 h-4 w-4" />
             </Button>
