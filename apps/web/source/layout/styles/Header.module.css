@@ -23,11 +23,3 @@
   font-weight: 600;
   text-transform: uppercase;
 }
-
-.settings {
-  display: flex;
-}
-
-.icon {
-  cursor: pointer;
-}
