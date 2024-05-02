@@ -32,11 +32,6 @@ module.exports = {
     sourceType: 'module', // Allows for the use of imports
   },
   rules: {
-    '@typescript-eslint/explicit-function-return-type': [
-      // Explicit types for function return
-      'error',
-      { allowExpressions: true },
-    ],
     '@typescript-eslint/no-empty-function': 'off', // Disable this rule to make empty function for testing case or default props
     '@typescript-eslint/no-var-requires': 'off', // Disable this rule to enable ES5 imports (const something = require('something');)
     'react/jsx-fragments': ['error', 'syntax'], // Enforce the use of Fragment|React.Fragment instead of <></>
