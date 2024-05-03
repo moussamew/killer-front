@@ -20,6 +20,7 @@ import { type SessionQuery } from '@/services/player/types';
 
 import commonStyles from '../../assets/styles/common.module.css';
 
+import { CreatePlayer } from './CreatePlayer';
 import { Rules } from './Rules';
 import styles from './styles/index.module.css';
 
@@ -52,10 +53,7 @@ export function HomePage(): JSX.Element {
           </div>
           <Lottie className={styles.mobileLottie} animationData={HomeLottie} />
           <div className={commonStyles.actions}>
-            <Button onClick={handleCreateRoom} size="lg">
-              {t('home.create.room.button')}
-              <PlusCircle className="ml-2 h-4 w-4" />
-            </Button>
+            <CreatePlayer />
             <Button variant="secondary" onClick={handleJoinRoom} size="lg">
               {t('home.join.room')}
               <Redo className="ml-2 h-4 w-4" />
