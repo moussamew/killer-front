@@ -1,18 +1,63 @@
+import { cn } from '@/lib/utils';
+
 interface Props {
   children: JSX.Element | string;
+  className?: string;
 }
 
-function H1({ children }: Props) {
+function H1({ children, className }: Props) {
   return (
-    <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl whitespace-pre-line">
+    <h1
+      className={cn(
+        'scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl whitespace-pre-line',
+        className,
+      )}
+    >
       {children}
     </h1>
   );
 }
 
-function Blockquote({ children }: Props) {
+function H2({ children, className }: Props) {
   return (
-    <blockquote className="border-l-4 pl-4 italic border-zinc-400 text-slate-500">
+    <h2
+      className={cn(
+        'scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0',
+        className,
+      )}
+    >
+      {children}
+    </h2>
+  );
+}
+
+interface H3Props extends React.ComponentPropsWithoutRef<'h3'> {
+  children: JSX.Element | string;
+  className?: string;
+}
+
+function H3({ children, className, ...props }: H3Props) {
+  return (
+    <h3
+      className={cn(
+        'scroll-m-20 text-2xl font-semibold tracking-tight',
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </h3>
+  );
+}
+
+function Blockquote({ children, className }: Props) {
+  return (
+    <blockquote
+      className={cn(
+        'border-l-4 pl-4 italic border-zinc-400 text-slate-500',
+        className,
+      )}
+    >
       {children}
     </blockquote>
   );
@@ -20,5 +65,7 @@ function Blockquote({ children }: Props) {
 
 export const Typography = {
   H1,
+  H2,
+  H3,
   Blockquote,
 };
