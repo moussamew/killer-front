@@ -2,7 +2,7 @@ import { setupIntl } from '@killerparty/intl';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createRoot } from 'react-dom/client';
 
-import { Notification } from '@/components/Notification';
+import { Toaster } from '@/components/ui/Toaster';
 import { QueryConfig } from '@/constants/config';
 import { ModalProvider } from '@/context/modal';
 import { SidebarProvider } from '@/context/sidebar';
@@ -28,7 +28,7 @@ function App(): JSX.Element {
           <Routes />
         </SidebarProvider>
       </ModalProvider>
-      <Notification />
+      <Toaster />
     </QueryClientProvider>
   );
 }

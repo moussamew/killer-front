@@ -1,6 +1,6 @@
 import { useTranslation } from '@killerparty/intl';
 import { useEffect, useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/Button';
 import { AppLogo, TWITTER_WEBVIEW_URL, WebViewApp } from '@/constants/webview';

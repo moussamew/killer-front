@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useMemo } from 'react';
 
 import Checked from '@/assets/icons/checked.svg';
 import Avenger from '@/assets/images/avatars/avenger.svg';
@@ -32,17 +33,30 @@ export const avatarList: Record<string, JSX.Element> = {
 
 interface Props {
   playerId?: number;
+  currentAvatar?: string | null;
+  setCurrentAvatar?: (avatar: string) => void;
 }
 
-export function Gallery({ playerId }: Props): JSX.Element {
+export function Gallery({
+  playerId,
+  currentAvatar,
+  setCurrentAvatar,
+}: Props): JSX.Element {
   const { session } = useSession();
   const { updatePlayer } = useUpdatePlayer();
 
-  const handleAvatarClick = (avatar: string): void => {
+  const handleAvatarClick = (avatar: string) => {
+    setCurrentAvatar?.(avatar);
+
     if (session || playerId) {
       updatePlayer.mutate({ id: playerId ?? session?.id, avatar });
     }
   };
+
+  const selectedAvatar = useMemo(
+    () => session?.avatar ?? currentAvatar,
+    [session, currentAvatar],
+  );
 
   return (
     <div className={styles.gallery}>
@@ -56,12 +70,12 @@ export function Gallery({ playerId }: Props): JSX.Element {
             }
             tabIndex={0}
             className={clsx(styles.avatar, {
-              [styles.selected]: session?.avatar === name,
+              [styles.selected]: selectedAvatar === name,
             })}
           >
             {avatar}
           </div>
-          {session?.avatar === name && <Checked className={styles.checked} />}
+          {selectedAvatar === name && <Checked className={styles.checked} />}
         </div>
       ))}
     </div>

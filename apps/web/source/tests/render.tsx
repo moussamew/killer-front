@@ -2,9 +2,9 @@ import { setupIntl } from '@killerparty/intl';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, type RenderResult } from '@testing-library/react';
 import { type ReactNode } from 'react';
+import { Toaster } from 'sonner';
 
 import { Routes } from '@/app/routes';
-import { Notification } from '@/components/Notification';
 import { QueryConfig } from '@/constants/config';
 import { ModalProvider } from '@/context/modal';
 import { SidebarProvider } from '@/context/sidebar';
@@ -29,7 +29,8 @@ export function renderWithProviders({
       <ModalProvider>
         <SidebarProvider>{component}</SidebarProvider>
       </ModalProvider>
-      <Notification />
+
+      <Toaster />
     </QueryClientProvider>,
   );
 }

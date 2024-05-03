@@ -1,5 +1,5 @@
 import { type TranslationKey, t } from '@killerparty/intl';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 
 import { ErrorCode } from '@/constants/errors';
 
@@ -76,7 +76,9 @@ export async function request<T>({
 
     const errorMessage = t(`errors.${result.message}` as TranslationKey);
 
-    toast.error(errorMessage);
+    toast.error(errorMessage, {
+      cancel: { label: 'X', onClick: () => {} },
+    });
 
     throw new RequestError({
       message: errorMessage,
@@ -87,7 +89,9 @@ export async function request<T>({
   if (response.status >= 400) {
     const errorMessage = t(`errors.${result?.detail}` as TranslationKey);
 
-    toast.error(errorMessage);
+    toast.error(errorMessage, {
+      cancel: { label: 'X', onClick: () => {} },
+    });
 
     throw new RequestError({
       message: errorMessage,
