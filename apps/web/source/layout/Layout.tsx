@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Loader } from '@/components/Loader';
 import { Modal } from '@/components/Modal';
 import { ModalContext } from '@/context/modal';
 import { SidebarContext } from '@/context/sidebar';
@@ -17,10 +16,6 @@ export function Layout(): JSX.Element {
   const { modal, closeModal } = useContext(ModalContext);
   const { isLoading, session, refetchSession } = useSession();
   const { isSidebarOpen, setSidebarOpen } = useContext(SidebarContext);
-
-  if (isLoading) {
-    return <Loader />;
-  }
 
   return (
     <div className={styles.application}>

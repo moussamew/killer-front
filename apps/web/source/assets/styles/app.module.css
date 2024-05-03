@@ -17,7 +17,11 @@ html {
 
 * {
   font-size: var(--text-small);
+}
 
+p,
+span,
+input {
   @media (width >= 720px) {
     font-size: var(--text-medium);
   }

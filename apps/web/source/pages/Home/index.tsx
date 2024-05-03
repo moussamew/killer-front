@@ -1,6 +1,6 @@
 import { useTranslation } from '@killerparty/intl';
 import Lottie from 'lottie-react';
-import { PlusCircle, Redo } from 'lucide-react';
+import { Redo, PlusCircle } from 'lucide-react';
 import { useEffect } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
@@ -16,11 +16,12 @@ import {
   TooltipTrigger,
 } from '@/components/ui/Tooltip';
 import { Typography } from '@/components/ui/Typography';
+import { isMobile } from '@/helpers/utils';
 import { type SessionQuery } from '@/services/player/types';
 
 import commonStyles from '../../assets/styles/common.module.css';
 
-import { CreatePlayer } from './CreatePlayer';
+import { CreateRoomV2 } from './CreateRoomV2';
 import { Rules } from './Rules';
 import styles from './styles/index.module.css';
 
@@ -53,7 +54,13 @@ export function HomePage(): JSX.Element {
           </div>
           <Lottie className={styles.mobileLottie} animationData={HomeLottie} />
           <div className={commonStyles.actions}>
-            <CreatePlayer />
+            {!isMobile() && <CreateRoomV2 />}
+            {isMobile() && (
+              <Button onClick={handleCreateRoom} size="lg">
+                {t('home.create.room.button')}
+                <PlusCircle className="ml-2 h-4 w-4" />
+              </Button>
+            )}
             <Button variant="secondary" onClick={handleJoinRoom} size="lg">
               {t('home.join.room')}
               <Redo className="ml-2 h-4 w-4" />

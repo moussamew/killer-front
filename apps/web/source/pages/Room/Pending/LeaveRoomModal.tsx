@@ -1,6 +1,6 @@
 import { useTranslation } from '@killerparty/intl';
 import { useContext } from 'react';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/Button';
 import { ModalContext } from '@/context/modal';
@@ -20,7 +20,9 @@ export function LeaveRoomModal(): JSX.Element {
       { id: session?.id, room: null },
       {
         onSuccess: () => {
-          toast.success(t('room.leave.confirmed.message'));
+          toast.success(t('room.leave.confirmed.message'), {
+            cancel: { label: 'X', onClick: () => {} },
+          });
           closeModal();
         },
       },

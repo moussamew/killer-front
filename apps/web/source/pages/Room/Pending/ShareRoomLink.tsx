@@ -1,6 +1,6 @@
 import { useTranslation } from '@killerparty/intl';
-import { toast } from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/Button';
 import { JOIN_ROOM_ROUTE } from '@/constants/endpoints';
