@@ -10,6 +10,7 @@ function Drawer({
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) {
   return (
     <DrawerPrimitive.Root
+      modal={false}
       shouldScaleBackground={shouldScaleBackground}
       {...props}
     />
@@ -44,7 +45,7 @@ const DrawerContent = React.forwardRef<
     <DrawerPrimitive.Content
       ref={ref}
       className={cn(
-        'fixed inset-0 bottom-0 z-50 mt-8 flex h-auto flex-col rounded-t-[10px] border bg-brand',
+        'fixed inset-0 bottom-0 z-50 flex h-auto flex-col border bg-brand',
         className,
       )}
       {...props}
@@ -62,6 +63,7 @@ const DrawerContent = React.forwardRef<
     </DrawerPrimitive.Content>
   </DrawerPortal>
 ));
+
 DrawerContent.displayName = 'DrawerContent';
 
 function DrawerHeader({
