@@ -1,90 +1,56 @@
-import { Popover, PopoverTrigger } from '@radix-ui/react-popover';
-import { Check, ChevronsUpDown } from 'lucide-react';
-import { type Dispatch, type SetStateAction } from 'react';
+import { useTranslation } from '@killerparty/intl';
+import { useEffect, useState, type Dispatch, type SetStateAction } from 'react';
 
-import { Button } from '@/components/ui/Button';
-import {
-  Command,
-  CommandGroup,
-  CommandItem,
-  CommandList,
-} from '@/components/ui/Command';
-import { PopoverContent } from '@/components/ui/Popover';
-import { cn } from '@/lib/utils';
+import { type CarouselApi } from '@/components/ui/Carousel';
+import { Typography } from '@/components/ui/Typography';
 
-import { type Mode } from './constants';
-
-const modes = [
-  {
-    id: 0,
-    value: 'game master',
-    label: 'Mode « Maître de Jeu »',
-  },
-  {
-    id: 1,
-    value: 'player',
-    label: 'Mode « Chacun pour Soi »',
-  },
-];
+import { modes, type Mode } from './constants';
+import { GameCarousel } from './GameCarousel';
+import { GameModeSelector } from './GameModeSelector';
 
 interface Props {
-  isModeOpen: boolean;
   mode: Mode;
-  setIsModeOpen: Dispatch<SetStateAction<boolean>>;
   setMode: Dispatch<SetStateAction<Mode>>;
 }
 
-export function ChooseGameMode({
-  isModeOpen,
-  mode,
-  setIsModeOpen,
-  setMode,
-}: Props) {
-  return (
-    <Popover open={isModeOpen} onOpenChange={setIsModeOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={isModeOpen}
-          className="justify-between w-1/2"
-        >
-          {modes.find(({ value }) => value === mode.value)?.label}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="p-0">
-        <Command>
-          <CommandList>
-            <CommandGroup>
-              {modes.map(({ value, label }) => (
-                <CommandItem
-                  key={value}
-                  value={value}
-                  onSelect={(currentValue) => {
-                    const selectedMode = modes.find(
-                      (m) => m.value === currentValue,
-                    );
+export function ChooseGameMode({ mode, setMode }: Props) {
+  const { t } = useTranslation();
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
-                    if (selectedMode) {
-                      setMode(selectedMode);
-                      setIsModeOpen(false);
-                    }
-                  }}
-                >
-                  <Check
-                    className={cn(
-                      'mr-2 h-4 w-4',
-                      mode.value === value ? 'opacity-100' : 'opacity-0',
-                    )}
-                  />
-                  {label}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
+  useEffect(() => {
+    if (carouselApi) {
+      carouselApi.scrollTo(mode.id);
+
+      carouselApi.on('select', ({ selectedScrollSnap }) => {
+        const selectedScroll = selectedScrollSnap();
+
+        if (mode.id !== selectedScroll) {
+          setMode(modes[selectedScroll]);
+        }
+      });
+    }
+  }, [carouselApi, setMode, mode]);
+
+  return (
+    <div className="shadow-md rounded-lg p-8 bg-brand grid">
+      {mode.value === 'game master' && (
+        <div className="text-center">
+          <Typography.H3 className="my-4">
+            {t('create.room.game.master.mode.title')}
+          </Typography.H3>
+          <p>{t('create.room.game.master.mode.description')}</p>
+        </div>
+      )}
+      {mode.value === 'player' && (
+        <div className=" text-center">
+          <Typography.H3 className="my-4">
+            {t('create.room.free.for.all.mode.title')}
+          </Typography.H3>
+          <p>{t('create.room.free.for.all.mode.description')}</p>
+        </div>
+      )}
+      <GameCarousel setApi={setCarouselApi} />
+      <GameModeSelector mode={mode} setMode={setMode} />
+    </div>
   );
 }
