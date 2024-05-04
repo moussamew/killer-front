@@ -9,16 +9,21 @@ import { type GameMode } from '@/constants/types';
 
 import { ChooseGameMode } from './ChooseGameMode';
 import { CreatePlayer } from './CreatePlayer';
-import { CreateRoomButton } from './CreateRoomButton';
 
-interface Props {
+interface CreateRoomDrawerProps {
   defaultAvatar: string;
   setDefaultAvatar: (avatar: string) => void;
+  pseudo?: string | null;
+  setPseudo: (pseudo: string) => void;
 }
 
-export function CreateRoomDrawer({ defaultAvatar, setDefaultAvatar }: Props) {
+export function CreateRoomDrawer({
+  defaultAvatar,
+  setDefaultAvatar,
+  pseudo,
+  setPseudo,
+}: CreateRoomDrawerProps) {
   const { t } = useTranslation();
-
   const [mode, setMode] = useState<GameMode>(modes[0]);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -35,10 +40,15 @@ export function CreateRoomDrawer({ defaultAvatar, setDefaultAvatar }: Props) {
           <CreatePlayer
             defaultAvatar={defaultAvatar}
             setDefaultAvatar={setDefaultAvatar}
-            mode={mode}
-            actionButton={CreateRoomButton}
+            pseudo={pseudo}
+            setPseudo={setPseudo}
           />
-          <ChooseGameMode mode={mode} setMode={setMode} />
+          <ChooseGameMode
+            defaultAvatar={defaultAvatar}
+            pseudo={pseudo}
+            mode={mode}
+            setMode={setMode}
+          />
         </div>
       </DrawerContent>
     </Drawer>

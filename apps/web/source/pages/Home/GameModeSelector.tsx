@@ -41,7 +41,7 @@ export function GameModeSelector({ mode, setMode }: Props) {
           size="lg"
           role="combobox"
           aria-expanded={isModeOpen}
-          className="justify-between w-full text-center"
+          className="justify-between mb-4"
         >
           {modes.find(({ value }) => value === mode.value)?.label}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />

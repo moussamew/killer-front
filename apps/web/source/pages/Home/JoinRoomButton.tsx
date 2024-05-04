@@ -5,9 +5,11 @@ import { Button } from '@/components/ui/Button';
 import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
 import { useCreateRoom } from '@/services/room/mutations';
 
-import { type ActionButtonProps } from './CreatePlayer';
+interface JoinRoomButtonProps {
+  pseudo?: string | null;
+}
 
-export function JoinRoomButton({ pseudo }: ActionButtonProps) {
+export function JoinRoomButton({ pseudo }: JoinRoomButtonProps) {
   const { t } = useTranslation();
   const { createPlayer } = useCreatePlayer();
   const { updatePlayer } = useUpdatePlayer();
@@ -22,8 +24,9 @@ export function JoinRoomButton({ pseudo }: ActionButtonProps) {
     <Button
       disabled={!pseudo || isCreationRoomPending}
       onClick={handleJoinRoom}
+      variant="secondary"
       size="lg"
-      className="transition-opacity ease-in duration-500"
+      className="w-full transition-opacity ease-in duration-500"
     >
       {isCreationRoomPending ? (
         <>

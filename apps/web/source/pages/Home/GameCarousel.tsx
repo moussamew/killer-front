@@ -17,7 +17,7 @@ interface Props {
 
 export function GameCarousel({ setApi }: Props) {
   return (
-    <Carousel setApi={setApi} className="w-2/3 m-auto">
+    <Carousel setApi={setApi} className="w-1/2 m-auto">
       <CarouselContent defaultValue={1}>
         <CarouselItem>
           <Lottie
