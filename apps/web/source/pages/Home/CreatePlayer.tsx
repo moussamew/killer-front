@@ -22,15 +22,15 @@ export interface ActionButtonProps {
 interface CreatePlayerProps {
   defaultAvatar: string;
   setDefaultAvatar: (avatar: string) => void;
-  mode: GameMode;
   actionButton: (actionButtonProps: ActionButtonProps) => JSX.Element;
+  mode?: GameMode;
 }
 
 export function CreatePlayer({
   defaultAvatar,
   setDefaultAvatar,
-  mode,
   actionButton,
+  mode,
 }: CreatePlayerProps) {
   const { session } = useSession();
   const { t } = useTranslation();
@@ -43,7 +43,7 @@ export function CreatePlayer({
   );
 
   return (
-    <div className="flex flex-col justify-between w-1/2 shadow-md rounded-lg p-8 bg-brand mx-auto">
+    <div className="flex flex-col justify-between w-1/2 gap-8 shadow-md rounded-lg p-8 bg-brand mx-auto">
       <div className={styles.avatar}>{avatarList[currentAvatar]}</div>
       <Typography.H3
         className={cn(
