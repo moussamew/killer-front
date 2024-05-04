@@ -3,14 +3,15 @@ import { useEffect, useState, type Dispatch, type SetStateAction } from 'react';
 
 import { type CarouselApi } from '@/components/ui/Carousel';
 import { Typography } from '@/components/ui/Typography';
+import { modes } from '@/constants/app';
+import { type GameMode } from '@/constants/types';
 
-import { modes, type Mode } from './constants';
 import { GameCarousel } from './GameCarousel';
 import { GameModeSelector } from './GameModeSelector';
 
 interface Props {
-  mode: Mode;
-  setMode: Dispatch<SetStateAction<Mode>>;
+  mode: GameMode;
+  setMode: Dispatch<SetStateAction<GameMode>>;
 }
 
 export function ChooseGameMode({ mode, setMode }: Props) {
