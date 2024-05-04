@@ -31,6 +31,7 @@ export function HomePage(): JSX.Element {
   const { t } = useTranslation();
   const { session } = useOutletContext<SessionQuery>();
   const [defaultAvatar, setDefaultAvatar] = useState('captain');
+  const [pseudo, setPseudo] = useState<string | null>(session?.name ?? null);
 
   useEffect(() => {
     if (session?.room?.id) {
@@ -61,10 +62,14 @@ export function HomePage(): JSX.Element {
                 <CreateRoomDrawer
                   defaultAvatar={defaultAvatar}
                   setDefaultAvatar={setDefaultAvatar}
+                  pseudo={pseudo}
+                  setPseudo={setPseudo}
                 />
                 <JoinRoomDrawer
                   defaultAvatar={defaultAvatar}
                   setDefaultAvatar={setDefaultAvatar}
+                  pseudo={pseudo}
+                  setPseudo={setPseudo}
                 />
               </>
             )}

@@ -1,41 +1,33 @@
 import { useTranslation } from '@killerparty/intl';
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef } from 'react';
 
 import { avatarList, Gallery } from '@/components/Gallery';
 import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
 import { Typography } from '@/components/ui/Typography';
-import { type GameMode } from '@/constants/types';
 import { cn } from '@/lib/utils';
 import { useSession } from '@/services/player/queries';
-import { type Session } from '@/services/player/types';
 
 import styles from './styles/CreateRoomV2.module.css';
-
-export interface ActionButtonProps {
-  currentAvatar: string;
-  pseudo?: string | null;
-  session?: Session | null;
-  mode?: GameMode;
-}
 
 interface CreatePlayerProps {
   defaultAvatar: string;
   setDefaultAvatar: (avatar: string) => void;
-  actionButton: (actionButtonProps: ActionButtonProps) => JSX.Element;
-  mode?: GameMode;
+
+  pseudo?: string | null;
+  setPseudo: (pseudo: string) => void;
 }
 
 export function CreatePlayer({
   defaultAvatar,
   setDefaultAvatar,
-  actionButton,
-  mode,
+
+  pseudo,
+  setPseudo,
 }: CreatePlayerProps) {
   const { session } = useSession();
   const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
-  const [pseudo, setPseudo] = useState<string | null>(session?.name ?? null);
 
   const currentAvatar = useMemo(
     () => session?.avatar ?? defaultAvatar,
@@ -59,7 +51,7 @@ export function CreatePlayer({
         setCurrentAvatar={setDefaultAvatar}
       />
       <div className="flex flex-col">
-        <div className="flex flex-col gap-4 mb-4">
+        <div className="flex flex-col gap-4">
           <Label htmlFor="pseudo">{t('home.create.pseudo.placeholder')}</Label>
           <Input
             ref={inputRef}
@@ -71,7 +63,6 @@ export function CreatePlayer({
             onChange={(e) => setPseudo(e.target.value)}
           />
         </div>
-        {actionButton({ pseudo, session, currentAvatar, mode })}
       </div>
     </div>
   );

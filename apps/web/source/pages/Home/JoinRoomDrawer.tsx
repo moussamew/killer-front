@@ -12,11 +12,17 @@ import { JoinRoomButton } from './JoinRoomButton';
 interface Props {
   defaultAvatar: string;
   setDefaultAvatar: (avatar: string) => void;
+  pseudo?: string | null;
+  setPseudo: (pseudo: string) => void;
 }
 
-export function JoinRoomDrawer({ defaultAvatar, setDefaultAvatar }: Props) {
+export function JoinRoomDrawer({
+  defaultAvatar,
+  setDefaultAvatar,
+  pseudo,
+  setPseudo,
+}: Props) {
   const { t } = useTranslation();
-
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
@@ -33,8 +39,10 @@ export function JoinRoomDrawer({ defaultAvatar, setDefaultAvatar }: Props) {
             defaultAvatar={defaultAvatar}
             setDefaultAvatar={setDefaultAvatar}
             actionButton={JoinRoomButton}
+            pseudo={pseudo}
+            setPseudo={setPseudo}
           />
-          <ChooseRoom />
+          <ChooseRoom pseudo={pseudo} />
         </div>
       </DrawerContent>
     </Drawer>
