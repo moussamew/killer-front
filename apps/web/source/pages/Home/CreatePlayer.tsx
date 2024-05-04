@@ -1,46 +1,39 @@
 import { useTranslation } from '@killerparty/intl';
-import { LoaderCircle, SquarePen } from 'lucide-react';
-import {
-  type Dispatch,
-  type SetStateAction,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { toast } from 'sonner';
+import { useMemo, useRef, useState } from 'react';
 
 import { avatarList, Gallery } from '@/components/Gallery';
-import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
 import { Typography } from '@/components/ui/Typography';
+import { type GameMode } from '@/constants/types';
 import { cn } from '@/lib/utils';
-import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
 import { useSession } from '@/services/player/queries';
-import { useCreateRoom } from '@/services/room/mutations';
+import { type Session } from '@/services/player/types';
 
-import { type Mode } from './constants';
 import styles from './styles/CreateRoomV2.module.css';
+
+export interface ActionButtonProps {
+  currentAvatar: string;
+  pseudo?: string | null;
+  session?: Session | null;
+  mode?: GameMode;
+}
 
 interface CreatePlayerProps {
   defaultAvatar: string;
   setDefaultAvatar: (avatar: string) => void;
-  mode: Mode;
-  setDrawerOpen: (open: boolean) => void;
+  mode: GameMode;
+  actionButton: (actionButtonProps: ActionButtonProps) => JSX.Element;
 }
 
 export function CreatePlayer({
   defaultAvatar,
   setDefaultAvatar,
   mode,
-  setDrawerOpen,
+  actionButton,
 }: CreatePlayerProps) {
   const { session } = useSession();
-  const { createPlayer } = useCreatePlayer();
-  const { updatePlayer } = useUpdatePlayer();
-  const { createRoom } = useCreateRoom();
   const { t } = useTranslation();
-
   const inputRef = useRef<HTMLInputElement>(null);
   const [pseudo, setPseudo] = useState<string | null>(session?.name ?? null);
 
@@ -48,34 +41,6 @@ export function CreatePlayer({
     () => session?.avatar ?? defaultAvatar,
     [session, defaultAvatar],
   );
-
-  const handleCreateRoom = async (): Promise<void> => {
-    if (!pseudo) return;
-
-    if (session) {
-      await updatePlayer.mutateAsync({
-        id: session.id,
-        name: pseudo,
-        avatar: currentAvatar,
-      });
-    } else {
-      await createPlayer.mutateAsync({
-        name: pseudo,
-        avatar: currentAvatar,
-      });
-    }
-
-    await createRoom.mutateAsync({
-      isGameMastered: Boolean(mode.value === 'game master'),
-    });
-
-    toast.success('Nouvelle partie créée avec succès');
-
-    setDrawerOpen(false);
-  };
-
-  const isCreationRoomPending =
-    createPlayer.isPending || updatePlayer.isPending || createRoom.isPending;
 
   return (
     <div className="flex flex-col justify-between w-1/2 shadow-md rounded-lg p-8 bg-brand mx-auto">
@@ -106,21 +71,7 @@ export function CreatePlayer({
             onChange={(e) => setPseudo(e.target.value)}
           />
         </div>
-        <Button
-          disabled={!pseudo || isCreationRoomPending}
-          onClick={handleCreateRoom}
-          size="lg"
-          className="transition-opacity ease-in duration-500"
-        >
-          {isCreationRoomPending ? (
-            <>
-              <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
-              Création en cours..
-            </>
-          ) : (
-            t('home.create.room.confirm.button')
-          )}
-        </Button>
+        {actionButton({ pseudo, session, currentAvatar, mode })}
       </div>
     </div>
   );

@@ -10,9 +10,8 @@ import {
   CommandList,
 } from '@/components/ui/Command';
 import { PopoverContent } from '@/components/ui/Popover';
+import { type GameMode } from '@/constants/types';
 import { cn } from '@/lib/utils';
-
-import { type Mode } from './constants';
 
 const modes = [
   {
@@ -28,8 +27,8 @@ const modes = [
 ];
 
 interface Props {
-  mode: Mode;
-  setMode: Dispatch<SetStateAction<Mode>>;
+  mode: GameMode;
+  setMode: Dispatch<SetStateAction<GameMode>>;
 }
 
 export function GameModeSelector({ mode, setMode }: Props) {

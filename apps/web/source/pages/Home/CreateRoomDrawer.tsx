@@ -4,10 +4,12 @@ import { useState } from 'react';
 
 import { Button } from '@/components/ui/Button';
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/Drawer';
+import { modes } from '@/constants/app';
+import { type GameMode } from '@/constants/types';
 
 import { ChooseGameMode } from './ChooseGameMode';
-import { type Mode, modes } from './constants';
 import { CreatePlayer } from './CreatePlayer';
+import { CreateRoomButton } from './CreateRoomButton';
 
 interface Props {
   defaultAvatar: string;
@@ -17,7 +19,7 @@ interface Props {
 export function CreateRoomDrawer({ defaultAvatar, setDefaultAvatar }: Props) {
   const { t } = useTranslation();
 
-  const [mode, setMode] = useState<Mode>(modes[0]);
+  const [mode, setMode] = useState<GameMode>(modes[0]);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
@@ -34,7 +36,7 @@ export function CreateRoomDrawer({ defaultAvatar, setDefaultAvatar }: Props) {
             defaultAvatar={defaultAvatar}
             setDefaultAvatar={setDefaultAvatar}
             mode={mode}
-            setDrawerOpen={setDrawerOpen}
+            actionButton={CreateRoomButton}
           />
           <ChooseGameMode mode={mode} setMode={setMode} />
         </div>
