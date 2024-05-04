@@ -19,7 +19,12 @@ import { type Mode, modes } from './constants';
 import { GameCarousel } from './GameCarousel';
 import styles from './styles/CreateRoomV2.module.css';
 
-export function CreateRoomV2() {
+interface Props {
+  defaultAvatar: string;
+  setDefaultAvatar: (avatar: string) => void;
+}
+
+export function CreateRoomV2({ defaultAvatar, setDefaultAvatar }: Props) {
   const { t } = useTranslation();
   const { session } = useSession();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -28,7 +33,6 @@ export function CreateRoomV2() {
   const [mode, setMode] = useState<Mode>(modes[0]);
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [open, setOpen] = useState(false);
-  const [defaultAvatar, setDefaultAvatar] = useState('captain');
   const { createPlayer } = useCreatePlayer();
   const { updatePlayer } = useUpdatePlayer();
   const { createRoom } = useCreateRoom();

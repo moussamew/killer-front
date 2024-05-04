@@ -1,7 +1,7 @@
 import { useTranslation } from '@killerparty/intl';
 import Lottie from 'lottie-react';
 import { Redo, PlusCircle } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
 import AppleStore from '@/assets/images/apple-store.svg';
@@ -29,6 +29,7 @@ export function HomePage(): JSX.Element {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { session } = useOutletContext<SessionQuery>();
+  const [defaultAvatar, setDefaultAvatar] = useState('captain');
 
   useEffect(() => {
     if (session?.room?.id) {
@@ -54,7 +55,12 @@ export function HomePage(): JSX.Element {
           </div>
           <Lottie className={styles.mobileLottie} animationData={HomeLottie} />
           <div className={commonStyles.actions}>
-            {!isMobile() && <CreateRoomV2 />}
+            {!isMobile() && (
+              <CreateRoomV2
+                defaultAvatar={defaultAvatar}
+                setDefaultAvatar={setDefaultAvatar}
+              />
+            )}
             {isMobile() && (
               <Button onClick={handleCreateRoom} size="lg">
                 {t('home.create.room.button')}
@@ -98,7 +104,10 @@ export function HomePage(): JSX.Element {
         </div>
         <Lottie className={styles.webLottie} animationData={HomeLottie} />
       </div>
-      <Gallery />
+      <Gallery
+        currentAvatar={defaultAvatar}
+        setCurrentAvatar={setDefaultAvatar}
+      />
       <Rules />
     </>
   );

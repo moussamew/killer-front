@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useMemo } from 'react';
+import { toast } from 'sonner';
 
 import Checked from '@/assets/icons/checked.svg';
 import Avenger from '@/assets/images/avatars/avenger.svg';
@@ -47,6 +48,8 @@ export function Gallery({
 
   const handleAvatarClick = (avatar: string) => {
     setCurrentAvatar?.(avatar);
+
+    toast.success('Avatar mis à jour');
 
     if (session || playerId) {
       updatePlayer.mutate({ id: playerId ?? session?.id, avatar });
