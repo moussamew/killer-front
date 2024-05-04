@@ -32,7 +32,7 @@ function H2({ children, className }: Props) {
 }
 
 interface H3Props extends React.ComponentPropsWithoutRef<'h3'> {
-  children: JSX.Element | string;
+  children: string | JSX.Element | JSX.Element[];
   className?: string;
 }
 

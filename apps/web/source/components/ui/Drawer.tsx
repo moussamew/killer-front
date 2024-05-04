@@ -4,13 +4,14 @@ import { Drawer as DrawerPrimitive } from 'vaul';
 import Close from '@/assets/icons/close.svg';
 import { cn } from '@/lib/utils';
 
+import { Typography } from './Typography';
+
 function Drawer({
   shouldScaleBackground = true,
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) {
   return (
     <DrawerPrimitive.Root
-      modal={false}
       shouldScaleBackground={shouldScaleBackground}
       {...props}
     />
@@ -36,16 +37,22 @@ const DrawerOverlay = React.forwardRef<
 ));
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
+interface DrawerContentProps {
+  title: string;
+  children: React.ReactNode;
+}
+
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> &
+    DrawerContentProps
+>(({ className, children, title, ...props }, ref) => (
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content
       ref={ref}
       className={cn(
-        'fixed inset-0 bottom-0 z-50 flex h-auto flex-col border bg-brand',
+        'fixed inset-0 bottom-0 z-50 flex h-auto flex-col border bg-brand-foreground',
         className,
       )}
       {...props}
@@ -54,8 +61,10 @@ const DrawerContent = React.forwardRef<
         <div
           role="button"
           aria-label="Close Modal"
-          className="p-4 cursor-pointer flex justify-end"
+          className="p-4 cursor-pointer flex items-center justify-between border-b-[1px] border-border"
         >
+          <div aria-hidden />
+          <Typography.H3>{title}</Typography.H3>
           <Close className="hover:fill-slate-600 cursor-pointer" />
         </div>
       </DrawerClose>

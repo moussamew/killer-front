@@ -29,7 +29,6 @@ export function renderWithProviders({
       <ModalProvider>
         <SidebarProvider>{component}</SidebarProvider>
       </ModalProvider>
-
       <Toaster />
     </QueryClientProvider>,
   );
