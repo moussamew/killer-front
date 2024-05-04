@@ -250,6 +250,9 @@ importers:
       identity-obj-proxy:
         specifier: 3.0.0
         version: 3.0.0
+      input-otp:
+        specifier: ^1.2.4
+        version: 1.2.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       jest:
         specifier: 29.7.0
         version: 29.7.0(@types/node@20.10.4)(babel-plugin-macros@3.1.0)
@@ -5296,6 +5299,12 @@ packages:
 
   ini@1.3.8:
     resolution: {integrity: sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==}
+
+  input-otp@1.2.4:
+    resolution: {integrity: sha512-md6rhmD+zmMnUh5crQNSQxq3keBRYvE3odbr4Qb9g2NWzQv9azi+t1a3X4TBTbh98fsGHgEEJlzbe1q860uGCA==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
 
   inquirer@8.2.6:
     resolution: {integrity: sha512-M1WuAmb7pn9zdFRtQYk26ZBoY043Sse0wVDdk4Bppr+JOXyQYybdtvK+l9wUibhtjdjvtoiNy8tk+EgsYIUqKg==}
@@ -14651,6 +14660,11 @@ snapshots:
   inherits@2.0.4: {}
 
   ini@1.3.8: {}
+
+  input-otp@1.2.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
 
   inquirer@8.2.6:
     dependencies:
