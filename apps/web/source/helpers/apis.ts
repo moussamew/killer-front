@@ -76,9 +76,7 @@ export async function request<T>({
 
     const errorMessage = t(`errors.${result.message}` as TranslationKey);
 
-    toast.error(errorMessage, {
-      cancel: { label: 'X', onClick: () => {} },
-    });
+    toast.error(errorMessage);
 
     throw new RequestError({
       message: errorMessage,
@@ -89,9 +87,7 @@ export async function request<T>({
   if (response.status >= 400) {
     const errorMessage = t(`errors.${result?.detail}` as TranslationKey);
 
-    toast.error(errorMessage, {
-      cancel: { label: 'X', onClick: () => {} },
-    });
+    toast.error(errorMessage);
 
     throw new RequestError({
       message: errorMessage,
