@@ -22,6 +22,7 @@ import { type SessionQuery } from '@/services/player/types';
 import commonStyles from '../../assets/styles/common.module.css';
 
 import { CreateRoomDrawer } from './CreateRoomDrawer';
+import { JoinRoomDrawer } from './JoinRoomDrawer';
 import { Rules } from './Rules';
 import styles from './styles/index.module.css';
 
@@ -56,21 +57,29 @@ export function HomePage(): JSX.Element {
           <Lottie className={styles.mobileLottie} animationData={HomeLottie} />
           <div className={commonStyles.actions}>
             {!isMobile() && (
-              <CreateRoomDrawer
-                defaultAvatar={defaultAvatar}
-                setDefaultAvatar={setDefaultAvatar}
-              />
+              <>
+                <CreateRoomDrawer
+                  defaultAvatar={defaultAvatar}
+                  setDefaultAvatar={setDefaultAvatar}
+                />
+                <JoinRoomDrawer
+                  defaultAvatar={defaultAvatar}
+                  setDefaultAvatar={setDefaultAvatar}
+                />
+              </>
             )}
             {isMobile() && (
-              <Button onClick={handleCreateRoom} size="lg">
-                {t('home.create.room.button')}
-                <PlusCircle className="ml-2 h-4 w-4" />
-              </Button>
+              <>
+                <Button onClick={handleCreateRoom} size="lg">
+                  {t('home.create.room.button')}
+                  <PlusCircle className="ml-2 h-4 w-4" />
+                </Button>
+                <Button variant="secondary" onClick={handleJoinRoom} size="lg">
+                  {t('home.join.room')}
+                  <Redo className="ml-2 h-4 w-4" />
+                </Button>
+              </>
             )}
-            <Button variant="secondary" onClick={handleJoinRoom} size="lg">
-              {t('home.join.room')}
-              <Redo className="ml-2 h-4 w-4" />
-            </Button>
           </div>
           <div>
             <Typography.Blockquote>
