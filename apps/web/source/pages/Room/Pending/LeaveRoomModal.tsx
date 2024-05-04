@@ -20,9 +20,7 @@ export function LeaveRoomModal(): JSX.Element {
       { id: session?.id, room: null },
       {
         onSuccess: () => {
-          toast.success(t('room.leave.confirmed.message'), {
-            cancel: { label: 'X', onClick: () => {} },
-          });
+          toast.success(t('room.leave.confirmed.message'));
           closeModal();
         },
       },

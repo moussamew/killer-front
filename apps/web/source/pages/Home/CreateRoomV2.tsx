@@ -1,5 +1,5 @@
 import { useTranslation } from '@killerparty/intl';
-import { LoaderCircle, PlusCircle } from 'lucide-react';
+import { LoaderCircle, PlusCircle, SquarePen } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -72,9 +72,7 @@ export function CreateRoomV2() {
       isGameMastered: Boolean(mode.value === 'game master'),
     });
 
-    toast.success('Nouvelle partie créée avec succès', {
-      cancel: { label: 'X', onClick: () => {} },
-    });
+    toast.success('Nouvelle partie créée avec succès');
 
     setOpen(false);
   };
@@ -90,20 +88,23 @@ export function CreateRoomV2() {
           <PlusCircle className="ml-2 h-4 w-4" />
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
-        <div className="lg:grid lg:min-h-[600px] mx-8 lg:grid-cols-2 xl:min-h-[800px]">
-          <div className="flex mt-16 items-start justify-center">
+      <DrawerContent title="Création de partie">
+        <div className="lg:grid mx-8 m-auto lg:grid-cols-2 gap-8">
+          <div className="flex items-start justify-center shadow-md rounded-lg p-8 bg-brand">
             <div className="mx-auto grid gap-6">
               <div className="grid gap-2 text-center" />
               <div className={styles.avatar}>{avatarList[currentAvatar]}</div>
               <Typography.H3
                 className={cn(
-                  'text-center text-slate-500 cursor-pointer hover:text-slate-800 transition duration-500 hover:scale-105',
+                  'text-center text-slate-500 cursor-pointer hover:text-slate-800 transition duration-500 hover:scale-105 flex items-center justify-center',
                   { 'text-slate-800': pseudo },
                 )}
                 onClick={() => inputRef.current?.focus()}
               >
-                {pseudo || '[Choisir un nom..]'}
+                <>
+                  {pseudo || '[Choisir un nom..]'}
+                  {pseudo && <SquarePen className="ml-2" />}
+                </>
               </Typography.H3>
               <Gallery
                 currentAvatar={currentAvatar}
@@ -146,11 +147,10 @@ export function CreateRoomV2() {
               </div>
             </div>
           </div>
-          <div className="m-12">
-            <GameCarousel setApi={setCarouselApi} />
+          <div className="shadow-md rounded-lg p-8 bg-brand">
             {mode.value === 'game master' && (
-              <div className=" text-center">
-                <Typography.H3 className="mb-4">
+              <div className="text-center">
+                <Typography.H3 className="my-4">
                   {t('create.room.game.master.mode.title')}
                 </Typography.H3>
                 <p>{t('create.room.game.master.mode.description')}</p>
@@ -158,12 +158,13 @@ export function CreateRoomV2() {
             )}
             {mode.value === 'player' && (
               <div className=" text-center">
-                <Typography.H3 className="mb-4">
+                <Typography.H3 className="my-4">
                   {t('create.room.free.for.all.mode.title')}
                 </Typography.H3>
                 <p>{t('create.room.free.for.all.mode.description')}</p>
               </div>
             )}
+            <GameCarousel setApi={setCarouselApi} />
           </div>
         </div>
       </DrawerContent>
