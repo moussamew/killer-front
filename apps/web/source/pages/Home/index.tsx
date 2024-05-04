@@ -21,7 +21,7 @@ import { type SessionQuery } from '@/services/player/types';
 
 import commonStyles from '../../assets/styles/common.module.css';
 
-import { CreateRoomV2 } from './CreateRoomV2';
+import { CreateRoomDrawer } from './CreateRoomDrawer';
 import { Rules } from './Rules';
 import styles from './styles/index.module.css';
 
@@ -56,7 +56,7 @@ export function HomePage(): JSX.Element {
           <Lottie className={styles.mobileLottie} animationData={HomeLottie} />
           <div className={commonStyles.actions}>
             {!isMobile() && (
-              <CreateRoomV2
+              <CreateRoomDrawer
                 defaultAvatar={defaultAvatar}
                 setDefaultAvatar={setDefaultAvatar}
               />
