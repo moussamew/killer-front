@@ -14,7 +14,7 @@ interface Props {
   setDefaultAvatar: (avatar: string) => void;
 }
 
-export function CreateRoomV2({ defaultAvatar, setDefaultAvatar }: Props) {
+export function CreateRoomDrawer({ defaultAvatar, setDefaultAvatar }: Props) {
   const { t } = useTranslation();
 
   const [mode, setMode] = useState<Mode>(modes[0]);
