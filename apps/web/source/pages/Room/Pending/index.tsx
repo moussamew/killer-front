@@ -28,11 +28,9 @@ export function PendingRoomPage(): JSX.Element | null {
   return (
     <>
       <div className={styles.content}>
-        <img alt="island" src={Island} className={styles.image} />
         <div className={styles.description}>
           <h1>{t('room.welcome.title')}</h1>
           <p>{t('room.join.room.code', { roomCode })}</p>
-
           <ShareRoomLink />
           <StartPartyButton />
         </div>

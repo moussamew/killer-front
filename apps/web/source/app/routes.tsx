@@ -13,6 +13,7 @@ import { PrivacyPage } from '@/pages/Privacy';
 import { RoomPage } from '@/pages/Room';
 import { EndedRoomPage } from '@/pages/Room/Ended';
 import { PendingRoomPage } from '@/pages/Room/Pending';
+import { PendingRoomPageV2 } from '@/pages/Room/PendingV2';
 import { PlayingRoomPage } from '@/pages/Room/Playing';
 
 export function Routes(): JSX.Element {
@@ -31,6 +32,10 @@ export function Routes(): JSX.Element {
                 {
                   path: '/room/:roomCode/pending',
                   element: <PendingRoomPage />,
+                },
+                {
+                  path: '/room/:roomCode/pending/v2',
+                  element: <PendingRoomPageV2 />,
                 },
                 {
                   path: '/room/:roomCode/playing',
