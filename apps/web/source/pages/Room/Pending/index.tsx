@@ -1,7 +1,6 @@
 import { useTranslation } from '@killerparty/intl';
 import { useParams } from 'react-router-dom';
 
-import Island from '@/assets/images/island.png';
 import { PlayerStatus } from '@/services/player/constants';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
