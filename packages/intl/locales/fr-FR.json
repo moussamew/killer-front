@@ -99,7 +99,7 @@
   "webview.how.to.play": "Comment peut-on jouer ?",
   "webview.click.button.message": "En cliquant sur le bouton ci-dessous, vous pouvez copier et coller le lien directement dans votre navigateur.",
   "webview.save.link.button": "Enregistrer le lien",
-  "notification.link.saved.success": "Lien enregistré !",
+  "notification.link.saved.success": "Lien enregistré dans le presse-papier",
   "notification.link.saved.error": "Impossible de copier le lien automatiquement, veuillez le copier manuellement.",
   "tooltip.close": "Fermer",
   "tooltip.admin.room": "Administrateur de la partie",
