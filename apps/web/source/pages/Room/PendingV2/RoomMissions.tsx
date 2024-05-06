@@ -27,7 +27,7 @@ export function RoomMissions() {
           <CardDescription>All missions added to the room.</CardDescription>
         </div>
         <Button variant="secondary" className="ml-auto">
-          Créer une mission
+          Écrire une mission
         </Button>
       </CardHeader>
       <CardContent>

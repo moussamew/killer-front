@@ -1,4 +1,8 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
+import clsx from 'clsx';
+import { Crown } from 'lucide-react';
+import { useParams } from 'react-router-dom';
+
+import { avatarList } from '@/components/Gallery';
 import { Button } from '@/components/ui/Button';
 import {
   Card,
@@ -7,81 +11,57 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/Card';
+import { useSession } from '@/services/player/queries';
+import { useRoom } from '@/services/room/queries';
+
+import { AlertKickPlayer } from './AlertKickPlayer';
+import styles from './PlayerList.module.css';
 
 export default function PlayerList() {
+  const { roomCode } = useParams();
+  const { room } = useRoom(roomCode!);
+  const { session } = useSession();
+
   return (
     <Card className="w-1/3 bg-brand-foreground">
       <CardHeader>
         <CardTitle>Liste des joueurs</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-8">
-        <div className="flex items-center gap-4">
-          <Avatar className="hidden h-9 w-9 sm:flex">
-            <AvatarImage src="/avatars/01.png" alt="Avatar" />
-            <AvatarFallback>OM</AvatarFallback>
-          </Avatar>
-          <div className="grid gap-1">
-            <p className="text-sm font-medium leading-none">Olivia Martin</p>
-            <p className="text-sm text-muted-foreground">
-              olivia.martin@email.com
-            </p>
+        {room?.players.map(({ id, name, avatar }) => (
+          <div key={id} className="flex items-center gap-4">
+            <div
+              className={clsx(styles.avatar, {
+                [styles.currentPlayer]: session?.id === id,
+                [styles.otherPlayer]: session?.id !== id,
+              })}
+            >
+              {avatarList[avatar]}
+            </div>
+            <div className="grid gap-1">
+              <p className="text-sm font-medium leading-none">{name}</p>
+              <p className="text-sm text-muted-foreground">
+                À écrit 10 missions
+              </p>
+            </div>
+            <div className="flex ml-auto gap-2">
+              {(room.admin.id === session?.id || session?.id === id) && (
+                <AlertKickPlayer playerId={id} playerName={name} />
+              )}
+              {room.admin.id !== session?.id && room.admin.id === id && (
+                <Button
+                  className="h-8 w-8 bg-yellow-300 border-yellow-300 hover:bg-yellow-400"
+                  variant="outline"
+                  size="icon"
+                >
+                  <Crown className="h-4 fill-yellow-400 stroke-yellow-600" />
+                </Button>
+              )}
+            </div>
           </div>
-          <div className="ml-auto font-medium">+$1,999.00</div>
-        </div>
-        <div className="flex items-center gap-4">
-          <Avatar className="hidden h-9 w-9 sm:flex">
-            <AvatarImage src="/avatars/02.png" alt="Avatar" />
-            <AvatarFallback>JL</AvatarFallback>
-          </Avatar>
-          <div className="grid gap-1">
-            <p className="text-sm font-medium leading-none">Jackson Lee</p>
-            <p className="text-sm text-muted-foreground">
-              jackson.lee@email.com
-            </p>
-          </div>
-          <div className="ml-auto font-medium">+$39.00</div>
-        </div>
-        <div className="flex items-center gap-4">
-          <Avatar className="hidden h-9 w-9 sm:flex">
-            <AvatarImage src="/avatars/03.png" alt="Avatar" />
-            <AvatarFallback>IN</AvatarFallback>
-          </Avatar>
-          <div className="grid gap-1">
-            <p className="text-sm font-medium leading-none">Isabella Nguyen</p>
-            <p className="text-sm text-muted-foreground">
-              isabella.nguyen@email.com
-            </p>
-          </div>
-          <div className="ml-auto font-medium">+$299.00</div>
-        </div>
-        <div className="flex items-center gap-4">
-          <Avatar className="hidden h-9 w-9 sm:flex">
-            <AvatarImage src="/avatars/04.png" alt="Avatar" />
-            <AvatarFallback>WK</AvatarFallback>
-          </Avatar>
-          <div className="grid gap-1">
-            <p className="text-sm font-medium leading-none">William Kim</p>
-            <p className="text-sm text-muted-foreground">will@email.com</p>
-          </div>
-          <div className="ml-auto font-medium">+$99.00</div>
-        </div>
-        <div className="flex items-center gap-4">
-          <Avatar className="hidden h-9 w-9 sm:flex">
-            <AvatarImage src="/avatars/05.png" alt="Avatar" />
-            <AvatarFallback>SD</AvatarFallback>
-          </Avatar>
-          <div className="grid gap-1">
-            <p className="text-sm font-medium leading-none">Sofia Davis</p>
-            <p className="text-sm text-muted-foreground">
-              sofia.davis@email.com
-            </p>
-          </div>
-          <div className="ml-auto font-medium">+$39.00</div>
-        </div>
+        ))}
       </CardContent>
-      <CardFooter>
-        <Button variant="destructive">Quitter la partie</Button>
-      </CardFooter>
+      <CardFooter />
     </Card>
   );
 }

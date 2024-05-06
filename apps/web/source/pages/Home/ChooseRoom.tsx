@@ -38,14 +38,21 @@ export function ChooseRoom({ pseudo, defaultAvatar }: ChooseRoomProps) {
 
     try {
       if (session) {
-        await updatePlayer.mutateAsync({ id: session?.id, room: roomCode });
+        await updatePlayer.mutateAsync({
+          id: session?.id,
+          room: roomCode,
+          name: pseudo,
+        });
       } else {
         const { id: playerId } = await createPlayer.mutateAsync({
           name: pseudo,
           avatar: defaultAvatar,
         });
 
-        await updatePlayer.mutateAsync({ id: playerId, room: roomCode });
+        await updatePlayer.mutateAsync({
+          id: playerId,
+          room: roomCode,
+        });
       }
 
       toast.success('Vous avez rejoint la partie avec succès');
