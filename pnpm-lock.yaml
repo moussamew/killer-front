@@ -142,7 +142,7 @@ importers:
         specifier: 2.1.0
         version: 2.1.0
       cmdk:
-        specifier: ^1.0.0
+        specifier: 1.0.0
         version: 1.0.0(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       lottie-react:
         specifier: 2.4.0
@@ -169,18 +169,24 @@ importers:
       '@babel/preset-typescript':
         specifier: 7.24.1
         version: 7.24.1(@babel/core@7.23.9)
+      '@radix-ui/react-avatar':
+        specifier: 1.0.4
+        version: 1.0.4(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@radix-ui/react-dialog':
-        specifier: ^1.0.5
+        specifier: 1.0.5
         version: 1.0.5(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@radix-ui/react-label':
-        specifier: ^2.0.2
+        specifier: 2.0.2
         version: 2.0.2(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@radix-ui/react-navigation-menu':
         specifier: 1.1.4
         version: 1.1.4(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@radix-ui/react-popover':
-        specifier: ^1.0.7
+        specifier: 1.0.7
         version: 1.0.7(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@radix-ui/react-progress':
+        specifier: 1.0.3
+        version: 1.0.3(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@radix-ui/react-select':
         specifier: 2.0.0
         version: 2.0.0(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -188,7 +194,7 @@ importers:
         specifier: 1.0.2
         version: 1.0.2(@types/react@18.2.69)(react@18.2.0)
       '@radix-ui/react-switch':
-        specifier: ^1.0.3
+        specifier: 1.0.3
         version: 1.0.3(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@radix-ui/react-tooltip':
         specifier: 1.0.7
@@ -239,7 +245,7 @@ importers:
         specifier: 0.7.0
         version: 0.7.0
       embla-carousel-react:
-        specifier: ^8.0.2
+        specifier: 8.0.2
         version: 8.0.2(react@18.2.0)
       eslint-config-global:
         specifier: workspace:*
@@ -251,7 +257,7 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       input-otp:
-        specifier: ^1.2.4
+        specifier: 1.2.4
         version: 1.2.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       jest:
         specifier: 29.7.0
@@ -275,7 +281,7 @@ importers:
         specifier: 1.3.3
         version: 1.3.3(typescript@5.4.3)
       next-themes:
-        specifier: ^0.3.0
+        specifier: 0.3.0
         version: 0.3.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       postcss:
         specifier: 8.4.38
@@ -290,7 +296,7 @@ importers:
         specifier: 9.5.2
         version: 9.5.2(postcss@8.4.38)
       sonner:
-        specifier: ^1.4.41
+        specifier: 1.4.41
         version: 1.4.41(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       stylelint:
         specifier: 16.2.1
@@ -323,7 +329,7 @@ importers:
         specifier: 5.1.0
         version: 5.1.0(typescript@5.4.3)
       vaul:
-        specifier: ^0.9.0
+        specifier: 0.9.0
         version: 0.9.0(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       vite:
         specifier: 5.1.7
@@ -2369,6 +2375,19 @@ packages:
       '@types/react-dom':
         optional: true
 
+  '@radix-ui/react-avatar@1.0.4':
+    resolution: {integrity: sha512-kVK2K7ZD3wwj3qhle0ElXhOjbezIgyl2hVvgwfIdexL3rN6zJmy5AqqIf+D31lxVppdzV8CjAfZ6PklkmInZLw==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+
   '@radix-ui/react-collection@1.0.3':
     resolution: {integrity: sha512-3SzW+0PW7yBBoQlT8wNcGtaxaD0XSu0uLUFgrtHY08Acx05TaHaOmVLR73c0j/cqpDy53KBMO7s0dx2wmOIDIA==}
     peerDependencies:
@@ -2546,6 +2565,19 @@ packages:
 
   '@radix-ui/react-primitive@1.0.3':
     resolution: {integrity: sha512-yi58uVyoAcK/Nq1inRY56ZSjKypBNKTa/1mcL8qdl6oJeEaDbOldlzrGn7P6Q3Id5d+SYNGc5AJgc4vGhjs5+g==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+
+  '@radix-ui/react-progress@1.0.3':
+    resolution: {integrity: sha512-5G6Om/tYSxjSeEdrb1VfKkfZfn/1IlPWd731h2RfPuSbIfNUgfqAwbKfJCg/PP6nuUCTrYzalwHSpSinoWoCag==}
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
@@ -11084,6 +11116,19 @@ snapshots:
       '@types/react': 18.2.69
       '@types/react-dom': 18.2.22
 
+  '@radix-ui/react-avatar@1.0.4(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@babel/runtime': 7.24.5
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.69)(react@18.2.0)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.69)(react@18.2.0)
+      '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.69)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    optionalDependencies:
+      '@types/react': 18.2.69
+      '@types/react-dom': 18.2.22
+
   '@radix-ui/react-collection@1.0.3(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@babel/runtime': 7.24.5
@@ -11283,6 +11328,17 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.24.5
       '@radix-ui/react-slot': 1.0.2(@types/react@18.2.69)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    optionalDependencies:
+      '@types/react': 18.2.69
+      '@types/react-dom': 18.2.22
+
+  '@radix-ui/react-progress@1.0.3(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@babel/runtime': 7.24.5
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.69)(react@18.2.0)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.22)(@types/react@18.2.69)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     optionalDependencies:
