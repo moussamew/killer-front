@@ -13,18 +13,7 @@ import { PopoverContent } from '@/components/ui/Popover';
 import { type GameMode } from '@/constants/types';
 import { cn } from '@/lib/utils';
 
-const modes = [
-  {
-    id: 0,
-    value: 'game master',
-    label: 'Mode « Maître de Jeu »',
-  },
-  {
-    id: 1,
-    value: 'player',
-    label: 'Mode « Chacun pour Soi »',
-  },
-];
+import { GAME_MODES } from './constants';
 
 interface Props {
   mode: GameMode;
@@ -41,9 +30,9 @@ export function GameModeSelector({ mode, setMode }: Props) {
           size="lg"
           role="combobox"
           aria-expanded={isModeOpen}
-          className="justify-between mb-4"
+          className="px-4 justify-between w-[fit-content] mb-4"
         >
-          {modes.find(({ value }) => value === mode.value)?.label}
+          {GAME_MODES.find(({ value }) => value === mode.value)?.label}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -51,12 +40,12 @@ export function GameModeSelector({ mode, setMode }: Props) {
         <Command>
           <CommandList>
             <CommandGroup>
-              {modes.map(({ value, label }) => (
+              {GAME_MODES.map(({ value, label }) => (
                 <CommandItem
                   key={value}
                   value={value}
                   onSelect={(currentValue) => {
-                    const selectedMode = modes.find(
+                    const selectedMode = GAME_MODES.find(
                       (m) => m.value === currentValue,
                     );
 

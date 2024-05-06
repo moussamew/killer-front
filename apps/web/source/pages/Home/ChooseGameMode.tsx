@@ -3,12 +3,11 @@ import { useEffect, useState, type Dispatch, type SetStateAction } from 'react';
 
 import { type CarouselApi } from '@/components/ui/Carousel';
 import { Typography } from '@/components/ui/Typography';
-import { modes } from '@/constants/app';
 import { type GameMode } from '@/constants/types';
 
+import { GAME_MODES } from './constants';
 import { CreateRoomButton } from './CreateRoomButton';
 import { GameCarousel } from './GameCarousel';
-import { GameModeSelector } from './GameModeSelector';
 
 interface Props {
   mode: GameMode;
@@ -34,7 +33,7 @@ export function ChooseGameMode({
         const selectedScroll = selectedScrollSnap();
 
         if (mode.id !== selectedScroll) {
-          setMode(modes[selectedScroll]);
+          setMode(GAME_MODES[selectedScroll]);
         }
       });
     }
@@ -59,12 +58,14 @@ export function ChooseGameMode({
         </div>
       )}
       <GameCarousel setApi={setCarouselApi} />
-      <GameModeSelector mode={mode} setMode={setMode} />
-      <CreateRoomButton
-        currentAvatar={defaultAvatar}
-        pseudo={pseudo}
-        mode={mode}
-      />
+      <div className="flex flex-col items-center">
+        {/*     <GameModeSelector mode={mode} setMode={setMode} /> */}
+        <CreateRoomButton
+          currentAvatar={defaultAvatar}
+          pseudo={pseudo}
+          mode={mode}
+        />
+      </div>
     </div>
   );
 }
