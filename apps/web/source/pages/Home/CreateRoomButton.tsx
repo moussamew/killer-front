@@ -3,21 +3,28 @@ import { LoaderCircle } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/Button';
+import { type GameMode } from '@/constants/types';
 import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
+import { useSession } from '@/services/player/queries';
 import { useCreateRoom } from '@/services/room/mutations';
 
-import { type ActionButtonProps } from './CreatePlayer';
+interface CreateRoomButtonProps {
+  pseudo?: string | null;
+
+  currentAvatar: string;
+  mode?: GameMode;
+}
 
 export function CreateRoomButton({
   pseudo,
-  session,
   currentAvatar,
   mode,
-}: ActionButtonProps) {
+}: CreateRoomButtonProps) {
   const { t } = useTranslation();
   const { createPlayer } = useCreatePlayer();
   const { updatePlayer } = useUpdatePlayer();
   const { createRoom } = useCreateRoom();
+  const { session } = useSession();
 
   const handleCreateRoom = async (): Promise<void> => {
     if (!pseudo) return;
@@ -50,7 +57,7 @@ export function CreateRoomButton({
       disabled={!pseudo || isCreationRoomPending}
       onClick={handleCreateRoom}
       size="lg"
-      className="transition-opacity ease-in duration-500"
+      className="w-[fit-content] transition-opacity ease-in duration-500"
     >
       {isCreationRoomPending ? (
         <>
@@ -58,7 +65,7 @@ export function CreateRoomButton({
           Création en cours..
         </>
       ) : (
-        t('home.create.room.confirm.button')
+        t('home.create.room.button')
       )}
     </Button>
   );

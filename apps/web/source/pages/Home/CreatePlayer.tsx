@@ -13,7 +13,6 @@ import styles from './styles/CreateRoomV2.module.css';
 interface CreatePlayerProps {
   defaultAvatar: string;
   setDefaultAvatar: (avatar: string) => void;
-
   pseudo?: string | null;
   setPseudo: (pseudo: string) => void;
 }
@@ -21,7 +20,6 @@ interface CreatePlayerProps {
 export function CreatePlayer({
   defaultAvatar,
   setDefaultAvatar,
-
   pseudo,
   setPseudo,
 }: CreatePlayerProps) {

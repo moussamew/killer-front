@@ -1,13 +1,12 @@
 import { useTranslation } from '@killerparty/intl';
-import { PlusCircle } from 'lucide-react';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/Button';
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/Drawer';
-import { modes } from '@/constants/app';
 import { type GameMode } from '@/constants/types';
 
 import { ChooseGameMode } from './ChooseGameMode';
+import { GAME_MODES } from './constants';
 import { CreatePlayer } from './CreatePlayer';
 
 interface CreateRoomDrawerProps {
@@ -24,16 +23,13 @@ export function CreateRoomDrawer({
   setPseudo,
 }: CreateRoomDrawerProps) {
   const { t } = useTranslation();
-  const [mode, setMode] = useState<GameMode>(modes[0]);
+  const [mode, setMode] = useState<GameMode>(GAME_MODES[0]);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
     <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
       <DrawerTrigger asChild>
-        <Button size="lg">
-          {t('home.create.room.button')}
-          <PlusCircle className="ml-2 h-4 w-4" />
-        </Button>
+        <Button size="lg">{t('home.create.room.button')}</Button>
       </DrawerTrigger>
       <DrawerContent title="Création de partie">
         <div className="flex mx-8 m-auto gap-8">

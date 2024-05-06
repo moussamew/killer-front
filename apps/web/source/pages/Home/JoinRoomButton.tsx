@@ -2,33 +2,31 @@ import { useTranslation } from '@killerparty/intl';
 import { LoaderCircle } from 'lucide-react';
 
 import { Button } from '@/components/ui/Button';
-import { useCreatePlayer, useUpdatePlayer } from '@/services/player/mutations';
-import { useCreateRoom } from '@/services/room/mutations';
 
 interface JoinRoomButtonProps {
   pseudo?: string | null;
+  roomCode: string;
+  handleJoinRoom: () => Promise<void>;
+  isLoading: boolean;
 }
 
-export function JoinRoomButton({ pseudo }: JoinRoomButtonProps) {
+export function JoinRoomButton({
+  pseudo,
+  roomCode,
+  handleJoinRoom,
+  isLoading,
+}: JoinRoomButtonProps) {
   const { t } = useTranslation();
-  const { createPlayer } = useCreatePlayer();
-  const { updatePlayer } = useUpdatePlayer();
-  const { createRoom } = useCreateRoom();
-
-  const handleJoinRoom = async () => {};
-
-  const isCreationRoomPending =
-    createPlayer.isPending || updatePlayer.isPending || createRoom.isPending;
 
   return (
     <Button
-      disabled={!pseudo || isCreationRoomPending}
+      disabled={!pseudo || isLoading || roomCode.length < 5}
       onClick={handleJoinRoom}
       variant="secondary"
       size="lg"
-      className="w-full transition-opacity ease-in duration-500"
+      className="transition-opacity ease-in duration-500"
     >
-      {isCreationRoomPending ? (
+      {isLoading ? (
         <>
           <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
           Chargement de la partie..
