@@ -22,7 +22,11 @@ export function RoomPage(): JSX.Element | null {
     if (room?.status) {
       const roomStatusRoute = roomStatusToRoute[room.status];
 
-      navigate(`/room/${roomCode}/${roomStatusRoute}`);
+      if (roomStatusRoute === 'pending') {
+        navigate(`/room/${roomCode}/${roomStatusRoute}/v2`);
+      } else {
+        navigate(`/room/${roomCode}/${roomStatusRoute}`);
+      }
     }
   }, [room, navigate, roomCode]);
 
