@@ -11,7 +11,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from '@/components/ui/Alert';
 import { Button } from '@/components/ui/Button';
 import { useUpdatePlayer } from '@/services/player/mutations';
@@ -47,11 +46,14 @@ export function AlertKickPlayer({
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger>
-        <Button className="h-8 w-8" variant="destructive" size="icon">
-          <X className="h-4" />
-        </Button>
-      </AlertDialogTrigger>
+      <Button
+        onClick={() => setOpen(true)}
+        className="h-8 w-8"
+        variant="destructive"
+        size="icon"
+      >
+        <X className="h-4" />
+      </Button>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
