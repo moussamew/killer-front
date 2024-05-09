@@ -56,9 +56,11 @@ export function LaunchGameButton({ room }: LaunchGameButtonProps) {
       </CardHeader>
       <CardContent>
         <div className="text-xs text-muted-foreground">
-          {t('room.players.missing.count' as TranslationKey, {
-            count: 3 - room.players.length,
-          })}
+          {room.players.length >= 3
+            ? t('room.players.enough.count')
+            : t('room.players.missing.count' as TranslationKey, {
+                count: 3 - room.players.length,
+              })}
         </div>
       </CardContent>
       <CardFooter>
