@@ -1,6 +1,6 @@
 import { useTranslation } from '@killerparty/intl';
 import Lottie from 'lottie-react';
-import { Loader2, LoaderCircle, Trash2 } from 'lucide-react';
+import { LoaderCircle, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -18,7 +18,6 @@ import {
 } from '@/components/ui/Table';
 import { useDeleteMission } from '@/services/mission/mutations';
 import { useSession } from '@/services/player/queries';
-import { type Session } from '@/services/player/types';
 
 import styles from './MissionsTable.module.css';
 
