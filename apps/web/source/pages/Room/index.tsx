@@ -3,6 +3,7 @@ import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
+import { isMobile } from '@/helpers/utils';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 import { type Room } from '@/services/room/types';
@@ -22,7 +23,7 @@ export function RoomPage(): JSX.Element | null {
     if (room?.status) {
       const roomStatusRoute = roomStatusToRoute[room.status];
 
-      if (roomStatusRoute === 'pending') {
+      if (roomStatusRoute === 'pending' && !isMobile()) {
         navigate(`/room/${roomCode}/${roomStatusRoute}/v2`);
       } else {
         navigate(`/room/${roomCode}/${roomStatusRoute}`);
