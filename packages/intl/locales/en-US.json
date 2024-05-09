@@ -37,14 +37,15 @@
   "join.room.return.button": "Return to my current room",
   "room.welcome.title": "Welcome to the party!",
   "room.join.room.code": "The code to join this room is {{roomCode}}.",
-  "room.missions.count_zero": "No mission in the party",
-  "room.missions.count_one": "One mission in the party",
   "room.players.card.title": "Number of players",
-  "room.missions.count_other": "Number of missions in the party : {{count}}",
+  "room.missions.count_zero": "{{count}} missions",
+  "room.missions.count_one": "{{count}} mission",
+  "room.missions.count_other": "{{count}} missions",
   "room.players.count_one": "{{count}} player",
   "room.players.count_other": "{{count}} players",
   "room.players.missing.count_one": "{{count}} player needed to start the game",
   "room.players.missing.count_other": "{{count}} players needed to start the game",
+  "room.players.enough.count": "Enough players to start the game",
   "room.manage.missions": "Manage my missions",
   "room.missions.description": "Specify your informations and add new missions to the room.",
   "room.create.new.mission.label": "Create a new mission to add in the room",
@@ -167,5 +168,7 @@
   "create.room.free.for.all.mode.description": "The free-for-all mode is a mode in which each player can create his own missions..\n The game starts when each player has created at least one mission..",
   "create.room.free.for.all.mode.confirm.button": "Choose the « Free for All » mode",
   "menu.language.french": "French (France)",
-  "menu.language.english": "English (US)"
+  "menu.language.english": "English (US)",
+  "toast.mission.created": "Mission créée avec succès",
+  "toast.mission.deleted": "Mission successfully deleted"
 }
