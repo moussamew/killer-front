@@ -16,7 +16,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/Tooltip';
 import { Typography } from '@/components/ui/Typography';
-import { isMobile } from '@/helpers/utils';
+import { useIsMobile } from '@/hooks/useWindowSize';
 import { type SessionQuery } from '@/services/player/types';
 
 import commonStyles from '../../assets/styles/common.module.css';
@@ -32,6 +32,7 @@ export function HomePage(): JSX.Element {
   const { session } = useOutletContext<SessionQuery>();
   const [defaultAvatar, setDefaultAvatar] = useState('captain');
   const [pseudo, setPseudo] = useState<string | null>(session?.name ?? null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (session?.room?.id) {
@@ -57,7 +58,7 @@ export function HomePage(): JSX.Element {
           </div>
           <Lottie className={styles.mobileLottie} animationData={HomeLottie} />
           <div className={commonStyles.actions}>
-            {!isMobile() && (
+            {!isMobile && (
               <>
                 <CreateRoomDrawer
                   defaultAvatar={defaultAvatar}
@@ -73,7 +74,7 @@ export function HomePage(): JSX.Element {
                 />
               </>
             )}
-            {isMobile() && (
+            {isMobile && (
               <>
                 <Button onClick={handleCreateRoom} size="lg">
                   {t('home.create.room.button')}

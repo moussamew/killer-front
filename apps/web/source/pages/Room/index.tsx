@@ -3,7 +3,7 @@ import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
 import { PROD_ENV } from '@/constants/app';
 import { ROOM_TOPIC } from '@/constants/endpoints';
-import { isMobile } from '@/helpers/utils';
+import { useIsMobile } from '@/hooks/useWindowSize';
 import { useSession } from '@/services/player/queries';
 import { useRoom } from '@/services/room/queries';
 import { type Room } from '@/services/room/types';
@@ -15,6 +15,7 @@ export function RoomPage(): JSX.Element | null {
   const { roomCode } = useParams();
   const { isLoading, session, refetchSession } = useSession();
   const { room, refetchRoom } = useRoom(roomCode!);
+  const isMobile = useIsMobile();
 
   /**
    * Redirect player to the correct route related to the room status.
@@ -23,13 +24,13 @@ export function RoomPage(): JSX.Element | null {
     if (room?.status) {
       const roomStatusRoute = roomStatusToRoute[room.status];
 
-      if (roomStatusRoute === 'pending' && !isMobile()) {
+      if (roomStatusRoute === 'pending' && !isMobile) {
         navigate(`/room/${roomCode}/${roomStatusRoute}/v2`);
       } else {
         navigate(`/room/${roomCode}/${roomStatusRoute}`);
       }
     }
-  }, [room, navigate, roomCode]);
+  }, [room, navigate, roomCode, isMobile]);
 
   /**
    * Listen to SSE events emits in the Room page.

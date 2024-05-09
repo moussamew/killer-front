@@ -31,7 +31,7 @@ export function RoomMissions() {
   };
 
   return (
-    <Card className="bg-brand-foreground">
+    <Card className="w-1/2 lg:w-full bg-brand-foreground">
       <CardHeader className="flex flex-row items-center">
         <div className="grid gap-2">
           <CardTitle>Missions</CardTitle>
