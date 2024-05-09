@@ -25,7 +25,7 @@ export default function PlayerList() {
   const { session } = useSession();
 
   return (
-    <Card className="w-1/3 bg-brand-foreground">
+    <Card className="w-1/2 lg:w-1/3 bg-brand-foreground">
       <CardHeader>
         <CardTitle>Liste des joueurs</CardTitle>
       </CardHeader>

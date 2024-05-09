@@ -76,7 +76,10 @@ export function MissionsTable() {
   if (!session.authoredMissions.length) {
     return (
       <div className="flex flex-col justify-center items-center">
-        <Lottie className="h-[200px]" animationData={EmptyMissions} />
+        <Lottie
+          className="h-[150px] lg:h-[200px]"
+          animationData={EmptyMissions}
+        />
         <p className="text-primary text-sm mb-8">{t('room.missions.empty')}</p>
       </div>
     );

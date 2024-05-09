@@ -47,7 +47,8 @@ export default function ShareRoomButton() {
       </CardHeader>
       <CardContent>
         <div className="text-xs text-muted-foreground">
-          Une partie se joue à trois minimum
+          Inviter de nouveaux joueurs en partageant le code ou en utilisant le
+          lien de partage.
         </div>
       </CardContent>
       <CardFooter>
@@ -56,7 +57,7 @@ export default function ShareRoomButton() {
           onClick={saveRoomLink}
           onKeyDown={({ key }) => onEnter({ key, fn: saveRoomLink })}
         >
-          Partager le lien de la partie
+          {t('room.share.link.button')}
         </Button>
       </CardFooter>
     </Card>
