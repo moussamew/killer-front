@@ -21,7 +21,7 @@ export function PendingRoomPageV2() {
             <MissionProgress room={room} />
             <LaunchGameButton room={room} />
           </div>
-          <RoomMissions room={room} />
+          <RoomMissions />
         </div>
         <PlayerList />
       </div>

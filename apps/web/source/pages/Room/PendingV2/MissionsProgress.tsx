@@ -1,3 +1,5 @@
+import { type TranslationKey, useTranslation } from '@killerparty/intl';
+
 import {
   Card,
   CardContent,
@@ -42,7 +44,11 @@ interface MissionsProgressProps {
 }
 
 export function MissionProgress({ room }: MissionsProgressProps) {
-  if (!room) return <Placeholder />;
+  const { t } = useTranslation();
+
+  if (!room) {
+    return <Placeholder />;
+  }
 
   const percentage = (room.missions.length / room.players.length) * 100;
 
@@ -51,7 +57,9 @@ export function MissionProgress({ room }: MissionsProgressProps) {
       <CardHeader className="pb-2">
         <CardDescription>Nombre de missions</CardDescription>
         <CardTitle className="text-4xl">
-          {room?.missions.length} missions
+          {t('room.missions.count' as TranslationKey, {
+            count: room.missions.length,
+          })}
         </CardTitle>
       </CardHeader>
       <CardContent>

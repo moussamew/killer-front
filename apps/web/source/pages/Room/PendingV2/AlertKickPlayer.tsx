@@ -83,7 +83,7 @@ export function AlertKickPlayer({
             {!updatePlayer.isPending &&
               isCurrentPlayer &&
               t('room.leave.confirm.button')}
-            {updatePlayer.isPending &&
+            {!updatePlayer.isPending &&
               !isCurrentPlayer &&
               t('room.kick.confirm.button', { playerName })}
           </Button>
