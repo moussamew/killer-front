@@ -1,3 +1,4 @@
+import { useTranslation, type TranslationKey } from '@killerparty/intl';
 import clsx from 'clsx';
 import { Crown } from 'lucide-react';
 import { useParams } from 'react-router-dom';
@@ -18,6 +19,7 @@ import { AlertKickPlayer } from './AlertKickPlayer';
 import styles from './PlayerList.module.css';
 
 export default function PlayerList() {
+  const { t } = useTranslation();
   const { roomCode } = useParams();
   const { room } = useRoom(roomCode!);
   const { session } = useSession();
@@ -41,7 +43,9 @@ export default function PlayerList() {
             <div className="grid gap-1">
               <p className="text-sm font-medium leading-none">{name}</p>
               <p className="text-sm text-muted-foreground">
-                À écrit 10 missions
+                {t('room.missions.authored.count' as TranslationKey, {
+                  count: session?.authoredMissions.length,
+                })}
               </p>
             </div>
             <div className="flex ml-auto gap-2">
