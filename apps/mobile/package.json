@@ -31,7 +31,7 @@
     "@react-navigation/native": "6.1.9",
     "@react-navigation/native-stack": "6.9.17",
     "expo": "49.0.22",
-    "expo-dev-client": "2.4.12",
+    "expo-dev-client": "2.4.13",
     "expo-splash-screen": "0.20.5",
     "expo-status-bar": "1.11.1",
     "intl-pluralrules": "2.0.1",
